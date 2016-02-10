@@ -1,0 +1,197 @@
+\documentclass[french,a4paper,12pt]{article}
+\usepackage{currfile} % <-- sans cela, la macro \fichierPreambule ne marche pas.
+\input{preambule.tex}
+
+
+%\href{http://www.google.fr}{Google}
+%\url{http://www.google.fr}
+%\email{francois.lafont@crdp.ac-versailles.fr}
+% Nous sommes le \today et il est \HeureCompilation.
+\hyphenation{con-nexion}
+
+
+%\usepackage{draftwatermark}
+%\usepackage[firstpage]{draftwatermark}
+%\SetWatermarkLightness{0.8}
+%\SetWatermarkAngle{45}
+%\SetWatermarkScale{1}
+%\SetWatermarkFontSize{5cm}
+%\SetWatermarkText{Pas à jour !}
+
+
+
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{center}
+\fbox{%
+\begin{minipage}{0.7\linewidth}
+\larger[3]\bfseries\centering
+Intégration de stations de travail\\
+Debian ou Ubuntu\\
+dans un domaine \Sedu\\
+avec le paquet se3-clients-linux\\
+(version \version)
+\end{minipage}%
+}
+\end{center}
+
+\vspace{\fill}
+
+\begin{center}
+\includegraphics[width=0.6\linewidth]{squeeze}%
+\par
+Bureau du compte \verbtexte{admin} du domaine sur
+une machine cliente Debian Squeeze.
+\end{center}
+
+\vspace{\fill}
+\label{capture}
+
+\begin{center}
+\includegraphics[width=0.6\linewidth]{precise}%
+\par
+Bureau d'un compte professeur sur
+une machine cliente Ubuntu Precise Pangolin.
+\end{center}
+
+\newpage
+
+
+\vspace*{\fill}
+
+
+\begin{center}
+\begin{minipage}{0.8\linewidth}
+\begin{center}
+\Large
+\textbf{Résumé et avertissement}
+\end{center}
+\setlength{\parindent}{2em}
+
+Le but de ce document est de décrire un mode opératoire
+d'intégration de stations clientes Debian ou
+Ubuntu dans un domaine \Sedu (avec un serveur en version Lenny ou Squeeze)
+par l'intermédiaire du paquet \verbtexte{se3-clients-linux}.
+Les distributions GNU/Linux qui ont été testées sont :
+%
+\begin{itemize}
+\item Debian Squeeze (version 6)
+\item Debian Wheezy (version 7)
+\item Ubuntu Precise Pangolin (version 12.04)
+\item Xubuntu Precise Pangolin (version 12.04)
+\end{itemize}
+%
+Sur le long terme, l'idée serait de se borner au moins%
+%
+\footnote{Et ce serait déjà pas si mal...}
+%
+à la prise en charge de
+toutes les versions de Debian à partir de Squeeze et de toutes les versions LTS
+d'Ubuntu à partir de Precise Pangolin.
+
+En pratique, l'objectif est de pouvoir ouvrir une session sur un client Linux
+avec un compte du domaine et d'avoir accès à l'essentiel des
+partages offerts par le serveur \Sedu en fonction du compte.
+
+Le fonctionnement de l'ensemble du paquet a été écrit de manière
+à tenter de minimiser le trafic réseau entre un client Linux et
+le serveur, notamment au moment de l'ouverture de session où
+la gestion des profils est très différente de celle mise en place pour les
+clients Windows (voir la documentation pour plus de précisions).
+
+\textbf{Avertissement :} l'intégration est censée fonctionner avec les
+distributions ci-desssus \textbf{dans leur configuration proposée par défaut},
+notamment au niveau du « display manager »%
+%
+\footnote{Le « \href{https://fr.wikipedia.org/wiki/X_display_manager}{display manager} » est le programme qui se lance au démarrage et
+qui affiche une fenêtre de connexion permettant d'ouvrir une session après
+authentification via un identifiant et un mot de passe. Sous Squeeze par exemple, le
+programme remplissant cette fonction s'appelle Gdm3 et sous Precise il s'agit
+de Lightdm etc…}
+%
+et de l'environnement de bureau%
+%
+\footnote{L'environnement de bureau est le programme qui est lancé par le
+« display manager » une fois que vous vous êtes bien authentifié(e). C'est ce
+programme qui vous fournit le bureau que vous avez sous les yeux, un
+gestionnaire de fenêtres, une barre de menus etc… Les plus
+connus sont \href{https://fr.wikipedia.org/wiki/Environnement_de_bureau}{Gnome, KDE, Xfce, Unity, LXDE…}}. %
+%
+Tout au long de la documentation, il est supposé que c'est bien le
+cas.
+
+Si jamais vous tenez à changer de « display manager » sur votre distribution,
+il est quasiment certain que vous devrez modifier le script d'intégration
+de la distribution parce que celui-ci ne fonctionnera pas en l'état.
+Si vous tenez à changer uniquement l'environnement de bureau, il est
+possible que le script d'intégration fonctionne en l'état malgré tout
+mais nous ne pouvons en rien vous garantir le résultat
+final. L'apparition de régressions ici ou là par rapport à ce qui
+est annoncé dans ce document n'est pas à exclure.
+\bigskip
+
+%\hspace{2em}Le \today~à~\HeureCompilation\par
+\hspace{2em}Le \today\par
+\hspace{2em}François Lafont\par
+\hspace{2em}Louis-Maurice De Sousa\par
+\hspace{2em}Michel Suquet\par
+
+\end{minipage}
+\end{center}
+
+
+\vspace{\fill}
+
+\newpage
+
+
+\tableofcontents%
+
+\listoftables%
+
+\newpage
+
+
+\section{Avertissement : lisez-vous la bonne documentation ?}
+
+\begin{alerte}
+Il est important de vous assurer que vous lisez bien la bonne documentation
+correspondant à la version du paquet \verbtexte{se3-clients-linux} 
+qui est ou qui va être utilisée sur votre serveur. En effet, d'une
+version à une autre, les choses évoluent, des fonctionnalités nouvelles peuvent
+apparaître etc.
+\end{alerte}
+
+
+\subsection{Si le paquet est déjà installé sur votre serveur}
+
+Dans ce cas, sur votre serveur en tant que \verbtexte{root},
+il vous suffit de lancer la commande suivante :
+%
+\begin{lstlisting}
+cat /home/netlogon/clients-linux/doc/LISEZMOI.TXT
+\end{lstlisting}
+%
+Cela affichera le contenu du fichier \verbtexte{LISEZMOI.TXT} dans
+lequel vous trouverez l'adresse URL vers la documentation associée à la version
+du paquet qui est déjà installée sur votre serveur.
+
+
+\subsection{Si le paquet n'est pas encore installé sur votre serveur}
+
+Et bien installez-le comme cela est expliqué à la section~\ref{installation}
+page~\pageref{installation} puis procédez comme ci-dessus.
+
+
+
+\include{SE3_clients_linux}
+
+
+
+
+\end{document}
+
+
+

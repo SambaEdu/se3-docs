@@ -1,0 +1,44 @@
+\BOOKMARK [1][-]{section.1}{Avertissement : lisez-vous la bonne documentation ?}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Si le paquet est d\351j\340 install\351 sur votre serveur}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Si le paquet n'est pas encore install\351 sur votre serveur}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Pour les impatients qui veulent tester rapidement}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Installation du paquet se3-clients-linux sur le serveur}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Int\351gration d'un client GNU/Linux}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Visite rapide du r\351pertoire clients-linux/ du serveur}{}% 7
+\BOOKMARK [1][-]{section.4}{Les options des scripts d'int\351gration}{}% 8
+\BOOKMARK [1][-]{section.5}{La \253 d\351sint\351gration \273}{}% 9
+\BOOKMARK [1][-]{section.6}{Les partages des utilisateurs}{}% 10
+\BOOKMARK [2][-]{subsection.6.1}{Liste par d\351faut des partages accessibles suivant le type de compte}{section.6}% 11
+\BOOKMARK [2][-]{subsection.6.2}{Le lien symbolique clients-linux}{section.6}% 12
+\BOOKMARK [1][-]{section.7}{La gestion des profils}{}% 13
+\BOOKMARK [2][-]{subsection.7.1}{Une pr\351cision \340 avoir en t\352te}{section.7}% 14
+\BOOKMARK [2][-]{subsection.7.2}{Les diff\351rentes copies du profil par d\351faut}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.3}{Le m\351canisme des profils}{section.7}% 16
+\BOOKMARK [2][-]{subsection.7.4}{Exemple de modification du profil par d\351faut avec Firefox}{section.7}% 17
+\BOOKMARK [2][-]{subsection.7.5}{Personnaliser le profil en fonction de l'utilisateur}{section.7}% 18
+\BOOKMARK [1][-]{section.8}{Le r\351pertoire unefois/}{}% 19
+\BOOKMARK [2][-]{subsection.8.1}{Principe de base}{section.8}% 20
+\BOOKMARK [2][-]{subsection.8.2}{Le m\351canisme en d\351tail}{section.8}% 21
+\BOOKMARK [2][-]{subsection.8.3}{R\351glage de la locale durant l'ex\351cution des scripts \253 unefois \273}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.4}{Des variables et des fonctions pr\352tes \340 l'emploi}{section.8}% 23
+\BOOKMARK [1][-]{section.9}{Le script de logon}{}% 24
+\BOOKMARK [2][-]{subsection.9.1}{Phases d'ex\351cution du script de logon}{section.9}% 25
+\BOOKMARK [2][-]{subsection.9.2}{Emplacement du script de logon}{section.9}% 26
+\BOOKMARK [2][-]{subsection.9.3}{Personnaliser le script de logon}{section.9}% 27
+\BOOKMARK [2][-]{subsection.9.4}{Quelques variables et fonctions pr\352tes \340 l'emploi}{section.9}% 28
+\BOOKMARK [2][-]{subsection.9.5}{Gestion du montage des partages r\351seau}{section.9}% 29
+\BOOKMARK [2][-]{subsection.9.6}{Quelques bricoles pour les perfectionnistes}{section.9}% 30
+\BOOKMARK [3][-]{subsubsection.9.6.1}{Changer les ic\364nes repr\351sentants les liens pour faire plus joli}{subsection.9.6}% 31
+\BOOKMARK [3][-]{subsubsection.9.6.2}{Changer le papier peint en fonction des utilisateurs}{subsection.9.6}% 32
+\BOOKMARK [3][-]{subsubsection.9.6.3}{L'activation du pav\351 num\351rique}{subsection.9.6}% 33
+\BOOKMARK [3][-]{subsubsection.9.6.4}{Incruster un message sur le bureau des utilisateurs pour faire classe}{subsection.9.6}% 34
+\BOOKMARK [3][-]{subsubsection.9.6.5}{Ex\351cuter des commandes au d\351marrage tous les 30 jours}{subsection.9.6}% 35
+\BOOKMARK [1][-]{section.10}{Les logs pour d\351tecter un probl\350me}{}% 36
+\BOOKMARK [1][-]{section.11}{Le cas des classes nomades}{}% 37
+\BOOKMARK [1][-]{section.12}{Un mot sur les imprimantes}{}% 38
+\BOOKMARK [1][-]{section.13}{D\351sinstallation/r\351installation du paquet se3-clients-linux}{}% 39
+\BOOKMARK [2][-]{subsection.13.1}{D\351sinstallation compl\350te}{section.13}% 40
+\BOOKMARK [2][-]{subsection.13.2}{D\351sinstallation partielle en vue d'une r\351installation}{section.13}% 41
+\BOOKMARK [1][-]{section.14}{Signaler un probl\350me, faire une remarque etc.}{}% 42
+\BOOKMARK [1][-]{section.15}{Contribuer \340 am\351liorer le paquet}{}% 43
+\BOOKMARK [1][-]{section.16}{Les \351volutions du paquet}{}% 44

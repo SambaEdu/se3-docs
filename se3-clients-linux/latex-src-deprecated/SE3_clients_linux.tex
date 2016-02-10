@@ -1,0 +1,3053 @@
+\section{Pour les impatients qui veulent tester rapidement}
+
+
+\subsection{Installation du paquet se3-clients-linux sur le serveur}
+\label{installation}
+
+Il faut que votre réseau local dispose d'une connexion Internet.
+Pour commencer, il faut préparer votre serveur Samba en
+y installant le paquet \verbtexte{se3-clients-linux}.
+Pour ce faire :
+
+\begin{itemize}
+\item Si votre serveur est sous Lenny, il faut ouvrir une
+console en tant que \verbtexte{root} et lancer :
+%
+\begin{lstlisting}
+apt-get update
+apt-get install se3-clients-linux
+\end{lstlisting}
+%
+\item Si votre serveur est sous Squeeze, vous pouvez :
+\begin{itemize}
+\item ou bien faire l'installation comme sur un serveur 
+Lenny (en mode console donc);
+\item ou bien faire l'installation en passant
+par l'interface d'administration Web du serveur via les
+menus \verbtexte{Configuration générale} \Vers
+\verbtexte{Modules}. Dans le tableau des modules,
+le paquet \verbtexte{se3-clients-linux} correspond à
+la ligne avec l'intitulé \verbtexte{Support des clients linux}.
+
+\end{itemize}
+\end{itemize}
+
+\begin{alerte}
+Attention, dans les versions précédentes du paquet, il fallait
+éditer le fichier \verbtexte{/etc/apt/sources.list}%
+%
+\footnote{ou mieux, créer un fichier \verbtexte{/etc/apt/sources.list.d/se3-clients-linux.list}
+car le fichier \verbtexte{/etc/apt/sources.list} peut être réédité à votre insu
+lors de mises à jour du serveur.}
+%
+et ajouter une des deux lignes suivantes :
+%
+\begin{lstlisting}
+# Pour un serveur en version Lenny.
+deb http://francois-lafont.ac-versailles.fr/debian lenny se3
+
+# Pour un serveur en version Squeeze.
+deb http://francois-lafont.ac-versailles.fr/debian squeeze se3
+\end{lstlisting}
+%
+Désormais ce n'est plus nécessaire. Le paquet est
+maintenant inclus dans le dépôt
+officiel du projet SambaÉdu, il n'est donc plus indispensable d'ajouter un dépôt
+supplémentaire. 
+
+\textbf{Mais si vous souhaitez utiliser la toute dernière version disponible du paquet},
+alors il faudra dans ce cas utiliser le dépôt \url{http://francois-lafont.ac-versailles.fr}
+comme indiqué ci-dessus.
+\end{alerte}
+
+L'installation ne fait rien de bien méchant sur votre
+serveur. Vous pouvez parfaitement désinstaller le
+paquet du serveur afin que celui-ci retrouve très exactement
+le même état qu'avant l'installation (voir la section~\ref{desinstallation}
+page~\pageref{desinstallation}).
+L'installation se borne uniquement à effectuer les tâches suivantes :
+%
+\begin{itemize}
+\item Création d'un nouveau répertoire : le répertoire \verbtexte{/home/netlogon/clients-linux/}.
+
+\item Création d'un partage Samba supplémentaire sur le serveur à travers
+le fichier de configuration \verbtexte{/etc/samba/smb\_CIFSFS.conf} : il s'agit du
+partage CIFS nommé \verbtexte{netlogon-linux} correspondant au répertoire
+\verbtexte{/home/netlogon/clients-linux/} du serveur.
+
+\item Lecture de certains paramètres du serveur afin d'adapter certains scripts
+contenus dans le
+paquet \verbtexte{se3-clients-linux} à l'environnement
+de votre domaine local. En fait, ces fameux paramètres récupérés lors
+de l'installation du paquet sont au
+nombre de trois :
+\begin{enumerate}
+\item l'adresse IP du serveur ;
+\item le suffixe de base de l'annuaire LDAP ;
+\item l'adresse du serveur de temps NTP.
+\end{enumerate}
+\end{itemize}
+
+\begin{alerte}
+Lors de l'installation du paquet, si jamais vous obtenez un message
+vous indiquant que le serveur NTP ne semble pas fonctionner, avant
+de passer à la suite, vous devez vous rendre sur la console d'administration
+Web de votre serveur (dans \verbtexte{Configuration générale}
+\Vers \verbtexte{Paramètres serveur}) afin de spécifier l'adresse d'un
+serveur de temps qui fonctionne correctement
+(chose que l'on peut vérifier ensuite dans la page de diagnostic du serveur).
+Une fois le paramétrage effectué il vous suffit de reconfigurer le paquet
+en lançant, en tant que \verbtexte{root} sur une console du serveur,
+la commande suivante :
+%
+\begin{lstlisting}
+dpkg-reconfigure se3-clients-linux
+\end{lstlisting}
+%
+Si tout se passe bien, vous ne devriez plus obtenir d'avertissement
+à propos du serveur NTP.
+\end{alerte}
+
+Votre serveur Samba possède donc un nouveau partage CIFS qui, au
+passage, ne sera pas visible par les machines clientes sous Windows.
+Attention, le nom du partage CIFS n'est pas le même que le nom
+du répertoire correspondant dans l'arborescence locale du serveur :
+%
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+Nom du partage & Chemin réseau & Chemin dans l'arborescence locale du serveur \\\hline
+\verbtexte{netlogon-linux} & \verbtexte{//SERVEUR/netlogon-linux} &
+\verbtexte{/home/netlogon/clients-linux/}\\\hline
+\end{tabular}
+\end{center}
+%
+Au niveau de l'installation du paquet proprement dite, côté serveur,
+plus aucune manipulation supplémentaire n'est nécessaire désormais.
+
+Sachez enfin que si, pour une raison ou pour une autre, il vous est nécessaire
+de reconfigurer le paquet pour restaurer des droits corrects sur les fichiers,
+ou bien pour réadapter les scripts à l'environnement de votre
+serveur (parce que par exemple son IP a changé),
+il vous suffit de lancer la commande suivante
+en tant que \verbtexte{root} sur une console du serveur :
+%
+\begin{lstlisting}
+dpkg-reconfigure se3-clients-linux
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+\subsection{Intégration d'un client GNU/Linux}
+
+Le répertoire \verbtexte{/home/netlogon/clients-linux/} de votre serveur contient
+un script d'intégration par type de distribution GNU/Linux. 
+Par exemple, le script d'intégration
+pour des Debian Squeeze se trouve dans le répertoire :
+%
+\begin{center}
+\verbtexte{/home/netlogon/clients-linux/distribs/squeeze/integration/}
+\end{center}
+%
+et il s'appelle \verbtexte{integration\_squeeze.bash}.
+Il faudra exécuter l'un de ces scripts,
+en tant que \verbtexte{root},
+\textbf{en local} sur le client GNU/Linux que vous souhaitez intégrer.
+
+\begin{RQ}
+pour copier en local sur un client GNU/Linux le script d'intégration 
+qui se trouve sur le serveur, on
+pourra utiliser la bonne vieille clé USB des familles,
+mais on pourra aussi user et abuser de
+la commande \verbtexte{scp} (très pratique) qui permet d'effectuer
+très simplement des copies
+entre deux machines (sous GNU/Linux) distantes. Par exemple, sur
+le terminal d'un client Debian Squeeze, vous pourriez exécuter
+les commandes suivantes :
+%
+\begin{lstlisting}
+# Chemin du fichier sur le serveur. Le joker * nous permet simplement 
+# d'économiser la saisie de quelques touches sur le clavier (à
+# condition d'en saisir suffisamment pour éviter toute ambiguïté 
+# sur le nom du fichier).
+SOURCE="/home/netlogon/clients-linux/dist*/squ*/int*/int*"
+
+# Répertoire de destination sur le client GNU/Linux en local. Par
+# exemple le bureau, histoire de voir apparaître le fichier
+# sous nos yeux.
+DESTINATION="/home/toto/Bureau/"
+
+# Et enfin la copie du fichier du serveur vers le client GNU/Linux en local.
+# Il faudra alors saisir le mot de passe du compte root du serveur.
+scp root@IP-SERVEUR:"$SOURCE" "$DESTINATION"
+\end{lstlisting}
+%
+\end{RQ}
+
+\begin{RQ}
+si jamais vous avez un doute sur le type de distribution
+de votre client GNU/Linux, vous pouvez lancer dans un terminal
+la commande suivante (pas forcément en tant que \verbtexte{root}) :
+%
+\begin{lstlisting}
+lsb_release --codename
+\end{lstlisting}
+%
+Le résultat vous affichera le nom de code de la distribution
+(\verbtexte{squeeze} ou \verbtexte{precise} etc.) ce
+qui vous indiquera le script d'intégration à utiliser.
+\end{RQ}
+
+Supposons par exemple que vous avez copié le script d'intégration
+\verbtexte{integration\_squeeze.bash} sur une Debian Squeeze et
+que celui-ci se trouve sur votre bureau.
+Alors, \textbf{en tant que \verbtexte{root}}, vous
+pouvez lancer l'intégration ainsi :
+%
+\begin{lstlisting}
+# D'abord, on se place sur le bureau (ici, il s'agit du bureau de toto).
+cd /home/toto/Bureau
+
+# Ensuite, on rend le script exécutable.
+chmod u+x integration_squeeze.bash
+
+# Enfin, on lance l'intégration.
+./integration_squeeze.bash --nom-client="toto-04" --is --ivl --rc
+\end{lstlisting}
+%
+Les explications sur les options se trouvent plus loin dans le
+document à la section~\ref{options-integration} 
+page~\pageref{options-integration}.
+Si tout se passe bien, le client finira par lancer un redémarrage. Une
+fois celui-ci terminé, vous devriez être en mesure d'ouvrir une
+session avec un compte du domaine (comme le compte \verbtexte{admin}
+ou un compte de type professeur ou de type élève).
+
+\begin{alerte}
+Il est préférable qu'aucun compte local du client n'ait le même
+login qu'un compte du domaine. Or, lorsqu'on installe un client 
+GNU/Linux, on est en général amené à créer au moins un compte local
+(en plus du compte \verbtexte{root}).
+Si cela vous arrive, arrangez-vous pour que le login de ce
+compte ne risque pas de rentrer en conflit avec le login d'un
+compte du domaine. 
+Vous pouvez utiliser \verbtexte{userlocal} comme login par exemple,
+ou autre chose\ldots
+\end{alerte}
+
+
+
+\section{Visite rapide du répertoire clients-linux/ du serveur}
+\label{arborescence}
+
+Afin de faire un rapide tour d'horizon du paquet
+\verbtexte{se3-clients-linux}, voici ci-dessous un 
+schéma du contenu du répertoire
+\verbtexte{/home/netlogon/clients-linux/} du serveur.
+Les noms des répertoires possèdent un slash à la fin,
+sinon il s'agit de fichiers standards. Certains fichiers ou
+répertoires, dont vous n'avez pas à vous préoccuper,
+ont été omis afin d'alléger le schéma et les explications
+qui vont avec. Les fichiers ou répertoires que vous avez
+le droit de modifier pour les adapter à vos besoins sont en
+\textbf{\textcolor{green}{vert}}. À l'inverse, vous ne devez
+pas modifier tous les autres fichiers ou répertoires
+%
+\footnote{En fait, vous pouvez le faire bien sûr car vous
+êtes \verbtexte{root} sur le serveur. Mais les modifications
+effectuées sur les fichiers/répertoires qui ne sont pas en vert
+sur le schéma ne survivront pas à une réinstallation ou à une mise à jour
+du paquet \verbtexte{se3-clients-linux}.}%
+.
+%
+\begin{lstlisting}[emph={logon_perso,skel,unefois,divers},emphstyle={\color{green}\textbf}]
+-- clients-linux/
+   |-- bin/
+   |   |-- connexion_ssh_serveur.bash
+   |   |-- logon
+   |   |-- logon_perso
+   |   `-- reconfigure.bash
+   |-- distribs/
+   |   |-- precise/
+   |   |   |-- integration/
+   |   |   |   |-- desintegration_precise.bash
+   |   |   |   `-- integration_precise.bash
+   |   |   `-- skel/
+   |   `-- squeeze/
+   |       |-- integration/
+   |       |   |-- desintegration_squeeze.bash
+   |       |   `-- integration_squeeze.bash
+   |       `-- skel/
+   |-- divers/
+   |-- doc/
+   |   `-- LISEZMOI.TXT
+   `-- unefois/
+
+\end{lstlisting}
+%
+Voici quelques commentaires rapides :
+%
+\begin{itemize}
+\item Le répertoire \verbtexte{bin/} contient en premier lieu
+le fichier \verbtexte{logon} qui est le script de logon. Ce
+script est véritablement le chef d'orchestre de tous les clients
+GNU/Linux intégrés au domaine. C'est lui
+qui contient les instructions exécutées
+systématiquement par les
+clients GNU/Linux juste avant l'affichage de la fenêtre de connexion,
+au moment de l'ouverture de session et au moment de la fermeture
+de session. Ce script de logon sera expliqué à la 
+section~\ref{logon-script} page~\pageref{logon-script}.
+En principe, vous ne devez pas modifier ce fichier.
+En revanche, vous pourrez modifier le fichier \verbtexte{logon\_perso}
+juste à côté.
+Ce fichier vous permettra d'affiner le comportement du script
+\verbtexte{logon} afin de l'adapter à vos besoins.
+Vous trouverez toutes les explications nécessaires
+dans la section~\ref{personnalisation} page~\pageref{personnalisation}.
+
+Le répertoire \verbtexte{bin/} contient également le fichier
+\verbtexte{connexion\_ssh\_serveur.bash}. Il s'agit simplement
+d'un petit script exécutable qui, lorsque sous serez connecté(e)
+avec le compte \verbtexte{admin} sur un client GNU/Linux et que vous 
+double-cliquerez dessus, vous permettra d'ouvrir une connexion SSH
+sur le serveur en tant que \verbtexte{root} (autrement dit une 
+console à distance sur le serveur en tant que \verbtexte{root}).
+C'est une simple commodité. Bien sûr, il vous
+sera demandé de fournir le mot de passe du compte \verbtexte{root}
+sur le serveur. Pour fermer proprement la connexion SSH, il vous
+suffira de taper sur la console la commande \verbtexte{exit}.
+
+Enfin, le répertoire \verbtexte{bin/} contient le fichier
+\verbtexte{reconfigure.bash}. Il s'agit d'un fichier exécutable
+très pratique qui vous permettra de remettre les droits par défaut
+sur l'ensemble des fichiers du paquet \verbtexte{se3-clients-linux}
+se trouvant sur le serveur et d'insérer le contenu du fichier 
+\verbtexte{logon\_perso} (votre fichier personnel que vous pouvez
+modifier afin d'ajuster le comportement des clients GNU/Linux selon vos préférences)
+à l'intérieur du fichier \verbtexte{logon} qui est le seul fichier lu par
+les clients GNU/Linux. Vous pourrez lancer cet exécutable
+à partir du compte \verbtexte{admin} du domaine sur un client GNU/Linux
+intégré. Cet exécutable utilise une connexion SSH en tant que
+\verbtexte{root} et à chaque fois il faudra donc saisir le mot de
+passe \verbtexte{root} du serveur.
+
+
+\item Le répertoire \verbtexte{distribs/} contient
+un sous-répertoire par distribution GNU/Linux prise en
+charge par le paquet. Par exemple, dans le sous-répertoire
+\verbtexte{squeeze/}, il y a les dossiers suivants :
+
+\begin{itemize}
+
+\item Un dossier 
+\verbtexte{integration/} qui contient
+notamment le script d'intégration.
+C'est ce script qu'il faudra exécuter en tant que \verbtexte{root}
+sur chaque client Squeeze que l'on souhaite intégrer au domaine
+du serveur. Les options disponibles dans ce scripts sont
+décrites dans la section~\ref{options-integration} à la
+page~\pageref{options-integration}.
+Le script de \og désintégration \fg{} se trouve
+également dans ce dossier, mais ce script est copié sur chaque
+client GNU/Linux en local au moment de l'intégration. Voir la
+section~\ref{desintegration} page~\pageref{desintegration}
+pour plus d'explications sur le script de \og désintégration \fg.
+
+
+\item Un dossier \verbtexte{skel/} qui contient le profil
+par défaut (c'est-à-dire le home par défaut) de tous les utilisateurs
+du domaine sur la distribution concernée. Si vous voulez
+modifier la page d'accueil du navigateur de tous les
+utilisateurs du domaine ou bien si vous voulez ajouter
+des icônes sur le bureau, c'est dans ce dossier qu'il
+faudra faire des modifications. Vous trouverez toutes
+les explications nécessaires dans la section~\ref{profils} à la
+page~\pageref{profils}.
+
+\end{itemize}
+
+\item Le répertoire \verbtexte{divers/} ne contient
+pas grand chose par défaut et vous pourrez a priori y mettre
+ce que vous voulez. L'intérêt de ce répertoire
+est que, si vous y placez des fichiers (ou des
+répertoires), ceux-ci seront accessibles uniquement
+par le compte
+\verbtexte{root} local de chaque client GNU/Linux et par le
+compte \verbtexte{admin} du domaine. 
+En particulier, vous aurez accès au contenu du
+répertoire \verbtexte{divers/}
+à travers le script de logon et à travers les scripts
+\og unefois \fg{} (évoqués ci-dessous) 
+qui sont tous les deux exécutés par le
+compte \verbtexte{root} local de chaque client GNU/Linux.
+Vous trouverez
+un exemple d'utilisation possible de ce répertoire
+dans la section~\ref{imprimante} à la page~\pageref{imprimante}.
+
+\item Le répertoire \verbtexte{doc/} contient un fichier
+texte qui vous indiquera l'adresse URL de la documentation
+en ligne que vous êtes en train
+de lire actuellement (à savoir le fichier \verbtexte{\currfilebase.pdf})
+ainsi que l'adresse URL
+des sources au format \LaTeX{} de cette documentation.
+
+
+\item Le répertoire \verbtexte{unefois/} sert à exécuter des scripts
+une seule fois sur toute une \og famille \fg{} de clients
+GNU/Linux intégrés au domaine. Ce répertoire peut s'avérer utile pour
+effectuer des tâches administratives sur les clients GNU/Linux.
+Toutes les explications nécessaires sur ce répertoire
+se trouvent dans la section~\ref{unefois} page~\pageref{unefois}.
+
+
+\end{itemize}
+
+
+
+
+
+\section{Les options des scripts d'intégration}
+\label{options-integration}
+
+Les deux scripts d'intégration \verbtexte{integration\_squeeze.bash} et
+\verbtexte{integration\_precise.bash}, qui doivent être exécutés en
+tant que \verbtexte{root} en local sur chaque client GNU/Linux à intégrer, 
+utilisent exactement le même jeu d'options. En voici la liste.
+
+
+
+\begin{itemize}
+\item L'option \verbtexte{{-}{-}nom-client} ou \verbtexte{{-}{-}nc} :
+cette option vous permet de modifier le nom
+d'hôte\footnote{Celui qui se trouve dans le fichier \verbtexte{/etc/hostname}.
+Ce n'est pas un nom DNS pleinement qualifié.} du client. Si l'option n'est pas
+spécifiée, alors le client gardera le nom d'hôte qu'il possède déjà.
+Si l'option est spécifiée sans paramètre, alors le script d'intégration
+stoppera son exécution pour vous demander de saisir le nom de la machine.
+Si l'option est spécifiée avec un paramètre, comme dans :
+%
+\begin{lstlisting}
+./integration_squeeze.bash --nom-client="toto-04"
+\end{lstlisting}
+%
+alors le script ne stoppera pas son exécution et effectuera directement
+le changement de nom en prenant comme nom le paramètre fourni (ici
+\verbtexte{toto-04}). Les caractères autorisés pour le choix du nom
+sont :
+%
+\begin{itemize}
+\item les 26 lettres de l'alphabet en minuscules ou en majuscules, \textbf{sans accents} ;
+\item les chiffres ;
+\item le \og tiret du 6 \fg{} (-) ;
+\item et c'est tout !
+\end{itemize}
+%
+De plus, \textbf{le nom de la machine ne soit pas faire plus de 15 caractères}.
+
+\item L'option \verbtexte{{-}{-}mdp-grub} ou \verbtexte{{-}{-}mg} :
+cette option vous permet d'ajouter un mot de passe dès qu'un utilisateur
+souhaite éditer un des items du menu Grub au démarrage. 
+En effet, en général, sur
+un système GNU/Linux fraîchement installé et utilisant Grub comme chargeur de
+boot, il est possible de sélectionner un des items du menu Grub et de 
+l'éditer en appuyant sur la touche \verbtexte{e} sans devoir saisir le moindre
+mot de passe. Cela constitue une faille de sécurité potentielle car, dans ce cas,
+l'utilisateur peut très facilement éditer un des item du menu Grub et démarrer
+ensuite via cet item modifié
+de manière à devenir \verbtexte{root} sur la machine \textbf{sans avoir à saisir
+le moindre mot de passe}. Avec l'option \verbtexte{{-}{-}mg}, quand l'utilisateur voudra
+éditer un des items du menu Gub, il devra saisir les identifiants suivants :
+%
+\begin{itemize}
+\item login : \verbtexte{admin} ;
+\item mot de passe : celui spécifié avec l'option \verbtexte{{-}{-}mg}.
+\end{itemize}
+%
+Si l'option \verbtexte{{-}{-}mg} n'est pas spécifiée, alors la configuration
+de Grub est inchangée et a priori la faille de sécurité sera toujours présente.
+Si l'option est spécifié sans paramètre, alors le script d'intégration
+stoppera son exécution pour vous demander de saisir (deux fois) le futur mot 
+de passe Grub (votre saisie ne s'affichera pas à l'écran). Si l'option est
+spécifiée avec un paramètre comme dans :
+%
+\begin{lstlisting}
+./integration_squeeze.bash --mdp-grub="1234"
+\end{lstlisting}
+%
+alors le script ne stoppera pas son exécution et effectuera directement
+le changement de configuration de Grub en prenant comme mot de passe
+le paramètre fourni (ici \verbtexte{1234}).
+
+\item L'option \verbtexte{{-}{-}mdp-root} ou \verbtexte{{-}{-}mr} :
+cette option vous permet de modifier le mot de passe du compte
+\verbtexte{root}. Si vous ne spécifiez pas cette option, le mot
+de passe du compte \verbtexte{root} sera inchangé. Si vous spécifiez
+cette option sans paramètre, alors le script d'intégration
+stoppera son exécution pour vous demander de saisir (deux fois)
+le futur mot de passe du compte \verbtexte{root} (votre saisie
+ne s'affichera pas sur l'écran). Si l'option est spécifiée avec 
+un paramètre comme dans :
+%
+\begin{lstlisting}
+./integration_squeeze.bash --mdp-root="abcd"
+\end{lstlisting}
+%
+alors le script ne stoppera pas son exécution et effectuera directement
+le changement de mot de passe en utilisant la valeur fournie en
+paramètre (ici \verbtexte{abcd}).
+
+\item L'option \verbtexte{{-}{-}ignorer-verification-ldap} ou \verbtexte{{-}{-}ivl} :
+cette option, qui ne prend aucun paramètre, vous permet de 
+continuer l'intégration sans faire de pause après la vérification
+LDAP. En effet, lors de l'exécution du script d'intégration, quel que soit
+le jeu d'options choisi, une recherche
+dans l'annuaire du serveur est effectuée. Le script lancera une recherche
+de toutes les entrées dans l'annuaire correspondant à des machines susceptibles
+d'avoir un lien avec la machine qui est en train d'exécuter 
+le script d'intégration au domaine. Plus précisément la recherche porte sur
+toutes les entrées dans l'annuaire correspondant à des machines qui ont :
+%
+\begin{itemize}
+\item même nom que la machine exécutant le script  ;
+\item \textbf{ou} même adresse IP que la carte réseau de la machine exécutant le script ;
+\item \textbf{ou} même adresse MAC que la carte réseau de la machine exécutant le script.
+\end{itemize}
+%
+Dans tous les cas, le résultat de cette recherche sera affiché. Si vous n'avez
+pas spécifié l'option \verbtexte{{-}{-}ivl}, alors le script s'arrêtera à ce
+moment là et vous demandera si vous voulez continuer l'intégration. Si par exemple
+vous vous apercevez que le nom d'hôte que vous avez choisi pour votre
+client GNU/Linux existe déjà dans l'annuaire du serveur, il faudra peut-être
+arrêter l'intégration (sauf si le système GNU/Linux est installé en dual boot
+avec Windows sur la machine et que le système Windows, lui,
+a déjà été intégré au domaine avec ce même nom). Mais si vous avez spécifié
+l'option \verbtexte{{-}{-}ivl}, alors après avoir affiché le résultat de
+la recherche LDAP, le script continuera automatiquement
+l'intégration sans vous demander de confirmation.
+
+\item L'option \verbtexte{{-}{-}installer-samba} ou \verbtexte{{-}{-}is} :
+cette option, qui ne prend aucun paramètre, provoquera l'installation de Samba
+sur le client GNU/Linux. Si vous ne spécifiez pas cette option, alors
+Samba ne sera pas installé sur le client GNU/Linux. Actuellement, il est
+conseillé de spécifier cette option. En effet, lorsqu'un client GNU/Linux
+essaye de monter un partage Samba du serveur (notamment le partage \verbtexte{homes}),
+des scripts sont exécutés en amont côté serveur et le montage ne sera effectué qu'une
+fois ces scripts terminés. Or, l'un d'entre eux peut mettre un certain temps
+(environ 4 ou 5 secondes) à se terminer si Samba n'est pas installé
+sur la machine cliente. Par conséquent, si vous ne spécifiez pas l'option
+\verbtexte{{-}{-}is}, vous risquez d'avoir des ouvertures de sessions
+un peu lentes (lors du montage des partages Samba).
+Donc pour l'instant, utilisez cette option lors de vos
+intégrations.
+
+\begin{alerte}
+Pour l'instant, il faut utiliser l'option \verbtexte{{-}{-}is}
+systématiquement.
+\end{alerte}
+
+
+\item L'option \verbtexte{{-}{-}redemarrer-client} ou \verbtexte{{-}{-}rc} :
+cette option permet de lancer automatiquement un redémarrage du client GNU/Linux
+à la fin de l'exécution du script d'intégration. Si vous ne spécifiez pas cette option,
+il n'y aura pas de redémarrage à la fin de l'exécution du script.
+Sachez que le redémarrage après intégration est nécessaire pour avoir un système 
+opérationnel. Si les intégrations se déroulent sans erreur sur vos machines
+Linux, vous aurez donc tout intérêt à spécifier à chaque fois l'option
+\verbtexte{{-}{-}rc}.
+
+\end{itemize}
+
+
+Précisons enfin que, quel que soit le jeu d'options que vous aurez choisi,
+\textbf{aucun enregistrement dans l'annuaire du serveur ne sera effectué par le
+script d'intégration}. Par conséquent, si vous souhaitez que votre client GNU/Linux
+fraîchement intégré figure dans l'annuaire du serveur, il faudra passer par une
+réservation d'adresse IP de la carte réseau du client
+via le module DHCP du serveur.
+
+
+\begin{alerte}
+Une fois un client intégré au domaine, évitez de monter un disque
+ou un partage dans le répertoire \verbtexte{/mnt/}. En effet, le
+répertoire \verbtexte{/mnt/} est utilisé constamment par le client
+GNU/Linux (une fois que celui-ci est
+intégré au domaine)
+pour y effectuer des montages de partages, notamment au moment
+de l'ouverture de session d'un utilisateur du domaine, et ce
+répertoire est aussi constamment \og nettoyé \fg{}, notamment juste
+après une fermeture de session. Afin d'éviter le \og nettoyage \fg{}
+intempestif d'un de vos disques ou d'un partage réseau de votre cru,
+utilisez un autre répertoire
+pour procéder au montage. Utilisez par exemple le répertoire \verbtexte{/media/}
+à la place. En fait, utilisez ce que vous voulez sauf \verbtexte{/mnt/}.
+\end{alerte}
+
+
+
+\section{La \og désintégration \fg}
+\label{desintegration}
+
+Une fois un client GNU/Linux intégré au domaine, celui-ci
+possédera \textbf{localement} un script
+permettant de le faire \og sortir \fg{} du domaine et de lui redonner (quasiment)
+son état avant l'intégration. Il s'agit du script :
+%
+\begin{center}
+\verbtexte{/etc/se3/bin/desintegration\_<nom-de-code>.bash} 
+\end{center}
+%
+où vous pouvez remplacer \verbtexte{<nom-de-code>} par \verbtexte{squeeze},
+par \verbtexte{precise} etc. Ce script admet une unique option (qui ne
+prend pas de paramètre) : il s'agit de l'option 
+\verbtexte{{-}{-}redemarrer-client} ou \verbtexte{{-}{-}rc} qui, comme
+son nom l'indique, redémarre la machine à la fin du script de \og désintégration \fg{}.
+Sans cette option, la machine ne redémarrera pas automatiquement. Tout comme pour
+les scripts d'intégration, après \og désintégration \fg{}, un redémarrage est 
+nécessaire pour que le système soit opérationnel. Autre point commun : aucune
+modification sur l'annuaire du serveur n'est effectuée lors de l'exécution du
+script de \og désintégration \fg{}. En particulier, après avoir \og sorti \fg{}
+un client GNU/Linux du domaine,
+il faudra effacer vous-même toute trace de ce client dans l'annuaire du serveur.
+
+
+
+
+
+
+\section{Les partages des utilisateurs}
+
+
+\subsection{Liste par défaut des partages accessibles suivant le type de compte}
+
+Attention, cette liste (décrite ci-dessous)
+est une liste proposée \textbf{par défaut} par le
+paquet. Vous verrez plus loin, à la section~\ref{gestion-montage}
+page~\pageref{gestion-montage}, que vous pourrez définir vous-même
+la liste des partages disponibles en fonction du compte qui 
+se connecte, en fonction de son appartenance à tel ou tel
+groupe etc. \textbf{Cette liste est donc tout à fait modifiable}.
+
+\begin{alerte}
+\begin{center}
+\textbf{Avertissement valable uniquement pour ceux qui ont déjà
+installé une version $\bm{n}$ du paquet avec
+$\bm{n < 1.1}$}
+\end{center}
+
+Attention, depuis la version $1.1$ du paquet, la gestion des
+partages accessibles se fait exclusivement dans le fichier
+\verbtexte{logon\_perso}. Cela a une conséquence importante
+si une version antérieure à la version $1.1$ du paquet est déjà
+installée sur votre serveur. En effet, lors de la mise à jour 
+du paquet vers une version
+$\geq 1.1$, plus aucun partage réseau ne devrait être
+monté à l'ouverture de session sur vos clients GNU/Linux
+et cela pour tout utilisateur du domaine. 
+
+C'est parfaitement normal car,
+lors de la mise à jour du paquet, votre fichier 
+\verbtexte{logon\_perso} a été conservé et c'est désormais dans
+ce fichier que les commandes de montage des partages sont
+effectuées. Or, a priori, votre fichier \verbtexte{logon\_perso}
+ne contient pas encore ces commandes de montage.
+
+Il est cependant très facile de retrouver le comportement
+par défaut (comme décrit ci-dessous)
+au niveau du montage des partages réseau à l'ouverture de session.
+Sur une console du serveur, en tant que \verbtexte{root}, il
+vous suffit de faire :
+%
+\begin{lstlisting}
+# On se place dans le répertoire bin/.
+cd /home/netlogon/clients-linux/bin/
+
+# On met dans un coin votre fichier logon_perso en le renommant
+# logon_perso.SAVE (si jamais vous n'avez jamais touché à ce fichier
+# alors vous pouvez même le supprimer avec la commande rm logon_perso).
+mv logon_perso logon_perso.SAVE
+
+# On reconfigure le paquet. L'absence du fichier logon_perso sera
+# détectée et vous retrouverez ainsi la version par défaut de ce 
+# fichier.
+dpkg-reconfigure se3-clients-linux
+\end{lstlisting}
+%
+Vous retrouverez un comportement par défaut dès que les clients GNU/Linux
+auront mis à jour leur script de logon local, c'est-à-dire au plus tard
+après un redémarrage des clients (en fait, après une simple
+fermeture de session, la mise à jour devrait se produire).
+\end{alerte}
+
+Voici la liste, par défaut, des partages
+accessibles en fonction du type de compte lors d'une session.
+
+\begin{enumerate}
+\item \textbf{Un compte élève} aura accès :
+\begin{itemize}
+\item Au partage \verbtexte{//SERVEUR/homes/Docs/} via deux liens
+symboliques. Tous les deux possèdent le même nom : 
+\og \verbtexte{Documents de <login> sur le réseau} \fg{}.
+L'un se trouve dans le répertoire \verbtexte{/home/<login>/} et l'autre
+dans le répertoire \verbtexte{/home/<login>/Bureau/}.
+
+\item Au partage \verbtexte{//SERVEUR/Classes/} via deux liens
+symboliques. Tous les deux possèdent le même nom : 
+\og \verbtexte{Classes sur le réseau} \fg{}.
+L'un se trouve dans le répertoire \verbtexte{/home/<login>/} et l'autre
+dans le répertoire \verbtexte{/home/<login>/Bureau/}.
+\end{itemize}
+
+\item \textbf{Un compte professeur} aura accès :
+\begin{itemize}
+\item Aux mêmes partages qu'un compte élève.
+\item Mais il aura accès en plus au 
+partage \verbtexte{//SERVEUR/Docs/} via deux liens
+symboliques. Tous les deux possèdent le même nom : 
+\og \verbtexte{Public sur le réseau} \fg{}.
+L'un se trouve dans le répertoire \verbtexte{/home/<login>/} et l'autre
+dans le répertoire \verbtexte{/home/<login>/Bureau/}.
+\end{itemize}
+
+\item \textbf{Le compte \verbtexte{admin}} aura accès :
+\begin{itemize}
+\item Aux mêmes partages qu'un compte professeur.
+\item Mais il aura accès en plus au 
+partage \verbtexte{//SERVEUR/admhomes/} via deux liens
+symboliques. Tous les deux possèdent le même nom : 
+\og \verbtexte{admhomes} \fg{}.
+L'un se trouve dans le répertoire \verbtexte{/home/admin/} et l'autre
+dans le répertoire \verbtexte{/home/admin/Bureau/}.
+\item Et il aura accès en plus au 
+partage \verbtexte{//SERVEUR/netlogon-linux/} via deux liens
+symboliques. Tous les deux possèdent le même nom : 
+\og \verbtexte{clients-linux} \fg{}.
+L'un se trouve dans le répertoire \verbtexte{/home/admin/} et l'autre
+dans le répertoire \verbtexte{/home/admin/Bureau/}.
+\end{itemize}
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\subsection{Le lien symbolique clients-linux}
+
+Rien de nouveau donc au niveau des partages disponibles, à part
+le partage \verbtexte{netlogon-linux} accessible via le
+compte \verbtexte{admin} du domaine à travers le lien symbolique
+\verbtexte{clients-linux} situé sur le bureau. Ce lien symbolique vous permet
+d'avoir accès, en lecture et en écriture, au répertoire 
+\verbtexte{/home/netlogon/clients-linux/} du serveur.
+Techniquement, une modification de ce répertoire est aussi
+possible via le lien symbolique \verbtexte{admhomes} puisque celui-ci
+donne accès à tout le répertoire \verbtexte{/home/} du serveur.
+
+\subsubsection*{Avertissement : toujours reconfigurer les droits
+après modifications du contenu du répertoire clients-linux/}
+\label{reconfigurer-droits}
+
+\begin{alerte}
+Lors de certains paramétrages du paquet \verbtexte{se3-clients-linux}, vous serez
+parfois amené(e) à modifier le contenu du répertoire 
+\verbtexte{/home/netlogon/clients-linux/} du serveur :
+%
+\begin{itemize}
+\item soit via une console sur le serveur si vous êtes un(e) adepte de la ligne de commandes ;
+\item soit via le lien symbolique \verbtexte{clients-linux} situé sur le bureau du compte
+\verbtexte{admin} lorsque vous est connecté(e) sur un client GNU/Linux intégré au domaine.
+\end{itemize}
+%
+Dans un cas comme dans l'autre, une fois vos modifications terminées, il faudra \textbf{TOUJOURS}
+reconfigurer les droits du paquet \verbtexte{se3-clients-linux} sans quoi vous
+risquez ensuite de rencontrer des erreurs incompréhensibles. Pour ce faire il faudra :
+%
+\begin{itemize}
+\item ou bien, \textbf{si vous êtes connecté(e) en mode console sur le serveur},
+exécuter en tant que \verbtexte{root} la commande :
+\begin{lstlisting}
+dpkg-reconfigure se3-clients-linux
+\end{lstlisting}
+\item ou bien, \textbf{si vous êtes connecté(e) en tant qu'\verbtexte{admin} sur un
+client GNU/Linux}, double-cliquer sur le fichier \verbtexte{reconfigure.bash}
+accessible en passant par le lien symbolique \verbtexte{clients-linux} sur
+le bureau puis par le répertoire \verbtexte{bin/}
+(le mot de passe \verbtexte{root} du serveur sera demandé).
+\end{itemize}
+%
+\textbf{Remarque :} en réalité, ces deux procédures ne font pas que reconfigurer les droits
+sur les fichiers, elles permettent aussi d'injecter le contenu du fichier
+\verbtexte{logon\_perso} dans le fichier \verbtexte{logon}. Ce point sera abordé
+dans la section~\ref{personnalisation} page~\pageref{personnalisation}.
+\end{alerte}
+
+
+
+
+
+
+
+
+
+\section{La gestion des profils}
+\label{profils}
+
+
+
+\subsection{Une précision à avoir en tête}
+
+Dans cette documentation, on appellera \og profil \fg{} 
+le contenu \textbf{ou une copie du contenu}
+du home d'un utilisateur (par exemple le profil de \verbtexte{toto} est le contenu du répertoire
+\verbtexte{/home/toto/}). Pour bien comprendre le mécanisme des profils, il faut avoir
+en tête ces deux éléments :
+%
+\begin{enumerate}
+\item Le serveur Samba offre un partage CIFS dont le chemin réseau
+est \verbtexte{//SERVEUR/netlogon-linux/} et qui correspond sur le serveur
+au répertoire \verbtexte{/home/netlogon/clients-linux/}.
+\item Sur chaque client GNU/Linux intégré au domaine, le répertoire
+\verbtexte{/mnt/netlogon/} est un point de montage (en lecture seule)
+du partage CIFS \verbtexte{//SERVEUR/netlogon-linux/}.
+\end{enumerate}
+%
+\textbf{Conclusion à bien avoir en tête :} sur un client GNU/Linux
+intégré au domaine, visiter le
+répertoire local \verbtexte{/mnt/netlogon/} revient en fin de compte
+à visiter le répertoire
+\verbtexte{/home/netlogon/clients-linux/} du serveur Samba. Dans le
+tableau ci-dessous, les trois \og adresses \fg{} suivantes
+désignent finalement la même zone de stockage qui se
+trouve sur le serveur :
+%
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+Chemin réseau & Chemin local sur le serveur & Chemin local sur un client GNU/Linux \\\hline
+\verbtexte{//SE3/netlogon-linux} & \verbtexte{/home/netlogon/clients-linux/}
+& \verbtexte{/mnt/netlogon/} \\\hline
+\end{tabular}
+\end{center}
+
+
+
+\subsection{Les différentes copies du profil par défaut}
+
+
+Revenons maintenant à nos profils. En fin de compte, pour un client GNU/Linux donné
+qui a été intégré au domaine, il existe plusieurs copies du profil par défaut des
+utilisateurs. \textbf{Dans le cas des clients sur Debian Squeeze} par exemple, il y a :
+%
+\begin{enumerate}
+
+\item Le profil par défaut \textbf{distant} qui est unique
+et centralisé sur le serveur. Il est
+accessible de plusieurs manières. Les trois \og adresses \fg ci-dessous accèdent
+toutes à ce même profil par défaut \textbf{distant} :
+
+\begin{itemize}
+
+\item à travers le réseau via le partage CIFS :
+\begin{flushright}
+\verbtexte{\textcolor{red}{//SERVEUR/netlogon-linux/}distribs/squeeze/skel/}\hspace*{10em}
+\end{flushright}
+
+\item sur le serveur directement à l'adresse :
+\begin{flushright}
+\verbtexte{\textcolor{red}{/home/netlogon/clients-linux/}distribs/squeeze/skel/}\hspace*{10em}
+\end{flushright}
+
+\item sur chaque client Squeeze intégré au domaine via le chemin :
+\begin{flushright}
+\verbtexte{\textcolor{red}{/mnt/netlogon/}distribs/squeeze/skel/}\hspace*{10em}
+\end{flushright}
+
+\end{itemize}
+
+\item Le profil par défaut \textbf{local} qui se trouve sur chaque client intégré au domaine
+dans le \textbf{répertoire local} \verbtexte{/etc/se3/skel/} (ce répertoire n'est pas
+un point de montage, c'est un répertoire local au client GNU/Linux).
+
+\end{enumerate}
+
+
+
+
+\subsection{Le mécanisme des profils}
+\label{mecanisme-profils}
+
+Voici comment fonctionne le mécanisme des profils du point de vue d'un client GNU/Linux 
+sous Debian Squeeze (sous une autre distribution, c'est exactement la
+même chose) :
+\begin{enumerate}
+\item \textbf{Au moment de l'affichage de la fenêtre de connexion} du système
+(c'est-à-dire soit juste après le démarrage
+du système ou soit juste après chaque fermeture de session),
+le client GNU/Linux va comparer le contenu de deux fichiers :
+%
+\begin{enumerate}
+\item le fichier \verbtexte{/etc/se3/skel/.VERSION} de son profil par défaut \textbf{local}
+\item le fichier \verbtexte{/mnt/netlogon/distribs/squeeze/skel/.VERSION} du profil par défaut \textbf{distant}.
+\end{enumerate}
+%
+Si ces deux fichiers ont un contenu totalement identique,
+alors le client GNU/Linux ne fait rien car il estime
+que son profil par défaut \textbf{local} et le profil par défaut \textbf{distant} 
+sont identiques. Si en revanche les deux fichiers ont un contenu différent,
+alors le client va modifier son profil par défaut \textbf{local}
+afin qu'il soit identique au profil par défaut \textbf{distant}.
+Autrement dit, il va synchroniser%
+\footnote{Le terme de synchronisation est bien adapté car c'est
+justement la commande \verbtexte{rsync} qui est utilisée pour
+effectuer cette tâche.}
+son profil par défaut \textbf{local} par rapport au
+profil par défaut \textbf{distant}.
+
+\item \textbf{Au moment de l'ouverture de session} d'un compte du domaine,
+c'est-à-dire juste après une saisie correcte du login et du mot de passe d'un
+compte du domaine, appelons ce compte \verbtexte{toto}, le client GNU/Linux va créer
+le répertoire (local) vide \verbtexte{/home/toto/} et le remplir 
+en y copiant dedans le contenu de son
+profil par défaut \textbf{local} (c'est-à-dire le contenu du répertoire \verbtexte{/etc/se3/skel/})
+afin de compléter le home de \verbtexte{toto}.
+
+\item \textbf{Au moment de la fermeture de session}, tous les liens
+symboliques situés dans \verbtexte{/home/toto/} qui permettent d'atteindre
+les différents partages auxquels \verbtexte{toto} peut prétendre sont
+supprimés.
+
+\item \textbf{Au moment du prochain affichage de la fenêtre
+de connexion}, c'est-à-dire ou bien juste après la fermeture de session de
+\verbtexte{toto} s'il n'a pas
+choisi d'éteindre le poste client ou bien au prochain démarrage du système, 
+\textbf{le répertoire \verbtexte{/home/toto/} est tout simplement effacé}.
+\end{enumerate}
+
+
+
+\subsection{Exemple de modification du profil par défaut avec Firefox}
+\label{modifier-profil}
+
+Du point de vue de l'utilisateur, cette gestion des profils 
+est assez contraignante : par exemple notre cher \verbtexte{toto} 
+aura beau modifier son profil durant
+sa session (changer le fond d'écran, ajouter un lanceur sur le bureau),
+après une fermeture puis réouverture de session, il retrouvera
+inlassablement le même profil par défaut et toutes ses modifications
+auront disparu. De plus, tous les comptes du
+domaine (que ce soit les comptes professeur ou les comptes
+élève) possèdent exactement le même profil par défaut\footnote{Cette restriction
+pourra, dans une certaine mesure, être levée lorsqu'on abordera la personnalisation du
+script de logon à la section \ref{personnalisation} page \pageref{personnalisation}.}.
+Seule la liste des partages réseau accessibles sera différente d'un compte à l'autre.
+Mais ceci étant dit, cette gestion des profils présente
+tout de même deux avantages importants :
+
+\begin{enumerate}
+\item \textbf{Ouverture de session rapide :} en effet, au moment de l'ouverture
+de session d'un compte du domaine, la création du home ne sollicite pas le
+réseau puisqu'elle passe par une simple copie locale du contenu de \verbtexte{/etc/se3/skel/}
+qui est copié dans \verbtexte{/home/toto/}.
+
+\item \textbf{Modification du profil par défaut (pour tous les
+utilisateurs) simple et rapide :} en effet, il devient très facile de modifier
+le profil par défaut des utilisateurs, car, si vous avez bien
+suivi, c'est le profil par défaut \textbf{distant}
+(celui sur le serveur) qui sert de modèle à tous les profils par défaut \textbf{locaux}
+des clients GNU/Linux. Une modification du profil par défaut \textbf{distant} accompagnée
+d'une modification du fichier \verbtexte{.VERSION} associé sera impactée
+sur chaque profil par défaut \textbf{local} de tous les clients GNU/Linux.
+\end{enumerate}
+
+
+Prenons un exemple avec le navigateur Firefox :
+vous souhaitez imposer un profil par défaut particulier au niveau 
+de Firefox pour tous les utilisateurs du domaine sur
+les clients GNU/Linux de type Precise Pangolin.
+Pour commencer, vous devez
+ouvrir une session sur un client GNU/Linux Precise Pangolin
+et lancer Firefox afin de le configurer exactement comme vous
+souhaitez qu'il le soit pour tous les utilisateurs (page d'accueil,
+proxy, etc).
+Une fois le paramétrage effectué,
+pensez bien sûr à fermer l'application Firefox. Ensuite, il vous
+suffit de suivre la procédure ci-dessous.
+Pour la suite, on admettra que la session utilisée pour fabriquer
+le profil Firefox par défaut est celle du compte \verbtexte{toto}.
+%
+\begin{enumerate}
+\item Il faut copier le répertoire \verbtexte{/home/toto/.mozilla/}%
+%
+\footnote{Car c'est ce répertoire qui contient tous les réglages
+concernant Firefox que vous avez effectués.}
+%
+(et tout son contenu bien sûr)
+dans le profil par défaut \textbf{distant} du serveur, et cela
+tout en veillant à ce que les droits sur la copie soient corrects.
+Pour ce faire, vous avez deux méthodes possibles :
+%
+\begin{itemize}
+
+\item \textbf{Méthode graphique :} vous copiez le répertoire
+\verbtexte{/home/toto/.mozilla/} sous une clé USB puis vous fermez la
+session de \verbtexte{toto} pour en rouvrir une avec le compte \verbtexte{admin}
+du domaine. Ensuite, vous double-cliquez sur le lien symbolique
+\verbtexte{clients-linux} qui se trouve sur le bureau puis vous
+vous rendez successivement dans \verbtexte{distribs/} \Vers \verbtexte{precise/}
+\Vers \verbtexte{skel/} pour enfin, via un glisser-déposer,
+copier dans \verbtexte{skel/}
+le répertoire \verbtexte{.mozilla/} qui se trouve dans la clé USB
+(le dossier \verbtexte{skel/} devra
+donc contenir un répertoire \verbtexte{.mozilla/}).
+
+Attention, en général, les répertoires dont le nom commence par un point
+sont cachés par défaut et pour qu'ils s'affichent dans l'explorateur
+de fichiers il faudra sans doute activer une option du genre
+\og \verbtexte{afficher les fichiers cachés} \fg{}.
+
+Enfin, comme vous avez ajouté des fichiers dans le répertoire
+\verbtexte{clients-linux/} du serveur, il faut reconfigurer les droits
+des fichiers. Pour ce faire, vous double-cliquez sur le lien symbolique
+\verbtexte{clients-linux} qui se trouve sur le bureau puis vous
+vous rendez dans \verbtexte{bin/} et vous double-cliquez sur
+le fichier \verbtexte{reconfigure.bash} (vous devrez saisir le mot de
+passe \verbtexte{root} du serveur).
+
+
+\item \textbf{Méthode via la ligne de commandes :}
+sur la session de \verbtexte{toto} restée ouverte, vous ouvrez
+un terminal et vous lancez les commandes suivantes :
+%
+\begin{lstlisting}
+# Répertoire du client GNU/Linux à copier sur le serveur.
+SOURCE="/home/toto/.mozilla/"
+
+# Destination sur le serveur.
+DESTINATION="/home/netlogon/clients-linux/distribs/precise/skel/"
+
+# Copie du répertoire local (et de tout son contenu) vers le serveur.
+scp -r "$SOURCE" root@IP-SERVEUR:"$DESTINATION"
+\end{lstlisting}
+%
+À ce stade, le répertoire \verbtexte{.mozilla/} a bien été
+copié sur le serveur mais les droits Unix sur la copie ne sont pas encore corrects.
+Pour les reconfigurer, il faut exécuter la commande
+\og \verbtexte{dpkg-reconfigure se3-clients-linux} \fg{} en tant que
+\verbtexte{root} sur le serveur. Là aussi, cela peut se faire
+directement du client GNU/Linux, sans bouger, via ssh avec la commande :
+%
+\begin{lstlisting}
+# Avec ssh, en étant sur le client GNU/Linux, on peut exécuter notre commande
+# à distance sur le serveur tant que root.
+ssh -t root@IP-SERVEUR "dpkg-reconfigure se3-clients-linux"
+\end{lstlisting}
+
+\end{itemize}
+
+
+\item Modifiez le fichier
+\verbtexte{.VERSION}%
+\footnote{Ne pas oublier cette étape, sans quoi les clients GNU/Linux 
+estimeront que le profil par défaut \textbf{distant}
+n'a pas été modifié et la mise à jour du profil
+par défaut \textbf{local} n'aura pas lieu}
+du profil par défaut \textbf{distant}. 
+Ce fichier \verbtexte{.VERSION} est un simple fichier texte, vous pouvez le modifier
+avec un simple éditeur. S'il contient la chaîne \og 1 \fg{} par exemple, alors
+éditez-le et écrivez \og 2 \fg{} à la place. Si vous préférez, vous 
+pouvez très bien indiquer la date du moment comme dans \og Le \today~à~15h04 \fg{}.
+Le but est simplement, qu'une fois modifié, le fichier \verbtexte{.VERSION} du
+serveur possède un contenu différent de chacun des fichiers \verbtexte{.VERSION}
+locaux aux machines clientes.
+Dans notre exemple, le fichier 
+se trouve dans le répertoire 
+\verbtexte{/home/netlogon/clients-linux/precise/skel/} du serveur.
+Là aussi, deux méthodes s'offrent à vous pour le modifier :
+
+\begin{itemize}
+
+\item \textbf{La méthode graphique} : si ce n'est pas déjà fait,
+vous fermez la session de \verbtexte{toto} pour vous connecter sur le
+client GNU/Linux avec le compte \verbtexte{admin} du domaine.
+Ensuite, vous double-cliquez sur le lien symbolique
+\verbtexte{clients-linux} qui se trouve sur le bureau puis vous
+vous rendez successivement dans \verbtexte{distribs/} \Vers \verbtexte{precise/}
+\Vers \verbtexte{skel/}. Faites en sorte d'activer l'option
+\og \verbtexte{afficher les fichiers cachés} \fg{} afin de voir apparaître
+le fichier \verbtexte{.VERSION} qui se trouve à l'intérieur
+du dossier \verbtexte{skel/}. Éditez ce fichier
+afin simplement de modifier son contenu.
+Bien sûr, pensez à enregistrer la modification. Pas besoin ici
+de reconfigurer les droits car le fait de modifier le contenu du fichier
+\verbtexte{.VERSION} ne change pas les droits sur ce fichier
+qui, a priori, étaient déjà corrects.
+
+\item \textbf{Méthode via la ligne de commandes :} 
+sur la session de \verbtexte{toto} restée ouverte, vous ouvrez
+un terminal et vous lancez les commandes suivantes :
+%
+\begin{lstlisting}
+# Le fichier sur le serveur qu'il faut modifier.
+CIBLE="/home/netlogon/clients-linux/distribs/precise/skel/.VERSION"
+
+ssh root@IP-SERVEUR "echo Version du 10 janvier 2012 à 15h04 > $CIBLE"
+# Maintenant le fichier contient "Version du 10 janvier 2012 à 15h04".
+\end{lstlisting} % $
+
+\end{itemize}
+
+\end{enumerate}
+
+
+
+Dès le prochain affichage de la fenêtre de connexion,
+les profils par défaut \textbf{locaux} de tous les clients Precise Pangolin
+seront modifiés afin d'être identiques au profil par défaut \textbf{distant}
+du serveur. Dès lors, les utilisateurs bénéficieront des paramétrages
+de Firefox que vous avez effectués.
+
+De la même manière que précédemment, sur le profil par défaut \textbf{distant},
+vous pouvez parfaitement définir le contenu du bureau des utilisateurs :
+au lieu de copier un répertoire \verbtexte{.mozilla/} sur le serveur, ce
+sera un répertoire \verbtexte{Bureau/}, mais le principe reste le même.
+
+
+\begin{alerte}
+D'une distribution à une autre, les versions des logiciels n'étant
+pas forcément identiques, chaque distribution prise en charge possède
+son propre profil par défaut \textbf{distant}. Sur le serveur Samba, on a donc :
+\begin{itemize}
+\item le répertoire \verbtexte{/home/netlogon/clients-linux/distribs/squeeze/skel/} pour les
+Debian Squeeze.
+\item le répertoire \verbtexte{/home/netlogon/clients-linux/distribs/precise/skel/} pour les
+Ubuntu Precise Pangolin.
+\end{itemize}
+\end{alerte}
+
+\subsection{Personnaliser le profil en fonction de l'utilisateur}
+\label{personnaliser-profil}
+
+La rigidité de la gestion du profil telle qu'elle est décrite à la section~\ref{modifier-profil} 
+peut cependant être contournée en modifiant le script de logon\footnote{Le fonctionnement du script 
+de logon est décrit dans la section~\ref{logon-script}, page~\pageref{logon-script}.}. Pour comprendre 
+cela, poursuivons avec l'exemple de la modification du profil par défaut de Mozilla. Imaginons que vous 
+souhaitiez que les enseignants disposent d'un navigateur dont la configuration diffère de celle à laquelle 
+accèdent les élèves (extensions particulières, favoris différents, etc.).
+
+Dans ce cas, vous copierez sur le répertoire \verbtexte{/skel} du serveur le répertoire 
+\verbtexte{/home/toto/.mozilla} après l'avoir renommé en \verbtexte{/.mozilla-prof}.
+
+Évidemment, dans ce cas, si un enseignant ouvre une session et lance son navigateur, la 
+configuration prise en compte par le système sera toujours celle du répertoire \verbtexte{/.mozilla}. 
+Il faut donc, pour achever ce processus, modifier le fichier \verbtexte{logon\_perso} pour 
+qu'au moment de l'ouverture de session, le répertoire \verbtexte{/.mozilla} soit remplacé 
+par \verbtexte{/.mozilla-prof} si et seulement si c'est un(e) enseignant(e) qui se connecte.
+
+Pour ce faire, vous utiliserez les variables prêtes à l'emploi (voir section~\ref{fonctions-utiles}), 
+et indiquerez dans la fonction \verbtexte{ouverture\_perso} les lignes suivantes:
+
+\begin{lstlisting}
+     # chargement du profil mozilla pour les profs
+    if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"; then
+        rm -rf "$REP_HOME/.mozilla"
+        mv "$REP_HOME/.mozilla-prof" "$REP_HOME/.mozilla"
+    fi
+\end{lstlisting}
+
+Ainsi, à l'ouverture de session, si l'utilisateur qui se connecte est un(e) enseignant(e), 
+le \verbtexte{logon\_perso} commencera par supprimer le répertoire \verbtexte{.mozilla}, 
+puis renommera \verbtexte{/.mozilla-prof} en \verbtexte{/.mozilla}, permettant ainsi au 
+système de prendre en compte ce répertoire pour la configuration du navigateur.
+
+Vous imaginez la suite: on peut, avec cette méthode, personnaliser la configuration de 
+tous les logiciels et de l'environnemnet de bureau pour chaque profil, voire pour chaque utilisateur.
+
+\section{Le répertoire unefois/}
+\label{unefois}
+
+\subsection{Principe de base}
+
+Si vous souhaitez faire des interventions ponctuelles sur les clients
+GNU/Linux sans vous déplacer devant les postes, alors le répertoire 
+\verbtexte{/home/netlogon/clients-linux/unefois/} du serveur Samba
+peut vous intéresser. En effet, des fichiers exécutables
+placés dans ce répertoire seront susceptibles d'être lancés une
+seule fois
+sur les clients GNU/Linux lors du démarrage.
+En pratique, vous allez créer un sous-répertoire à la racine
+du répertoire \verbtexte{unefois/} du serveur. Par exemple :
+%
+\begin{itemize}
+\item Si le nom de ce sous-répertoire est \verbtexte{dell740},
+alors les exécutables se trouvant dans ce sous-répertoire
+seront lancés une fois au démarrage de tous les clients GNU/Linux dont le
+nom de machine \textbf{contient à la casse près} 
+la chaîne de caractères \verbtexte{dell740}.
+
+\item Si le nom de ce sous-répertoire est \verbtexte{\string^S121-}%
+\footnote{Oui, il s'agit bien d'un répertoire dont le nom commence par un accent circonflexe.},
+alors les exécutables se trouvant dans ce sous-répertoire
+seront lancés une fois au démarrage de tous les clients GNU/Linux dont le
+nom de machine \textbf{commence à la casse près par}
+la chaîne de caractères \verbtexte{S121-}.
+
+\item Si le nom de ce sous-répertoire est \verbtexte{prof\$},
+alors les exécutables se trouvant dans ce sous-répertoire
+seront lancés une fois au démarrage de tous les clients GNU/Linux dont le
+nom de machine \textbf{se termine à la casse près par}
+la chaîne de caractères \verbtexte{prof}.
+
+
+\item Si le nom de ce sous-répertoire est \verbtexte{\string^S121-HP-P\$},
+alors les exécutables se trouvant dans ce sous-répertoire
+seront lancés une fois au démarrage du client GNU/Linux dont le
+nom de machine \textbf{est identique à la casse près à}
+la chaîne de caractères \verbtexte{S121-HP-P}.
+
+\end{itemize}
+%
+Si jamais cela évoque quelque chose pour vous, sachez qu'en réalité le
+nom des sous-répertoires est interprété par le client GNU/Linux comme une
+\href{http://fr.wikipedia.org/wiki/Expression_rationnelle}{expression régulière étendue}.
+Vous pouvez donc choisir comme nom de sous-répertoire n'importe quelle
+expression régulière étendue pour filtrer les noms de machines qui
+sont censées exécuter une fois vos scripts ou vos fichiers binaires.
+
+Voici un dernier exemple de nom de sous-répertoire possible (et donc d'expression
+régulière possible) :
+\verbtexte{\string^.} (le nom de ce sous-répertoire est
+constitué d'un accent circonflexe puis d'un point).
+Cette expression régulière signifie : \og n'importe quelle
+chaîne de caractères qui commence par un caractère quelconque \fg{}.
+Autrement dit, les exécutables se trouvant dans ce sous-répertoire
+seront lancés une fois au démarrage de \textbf{tous les clients GNU/Linux sans exception}.
+Bien sûr, le répertoire \verbtexte{unefois/} du serveur peut parfaitement
+contenir plusieurs sous-répertoires. Dans ce cas, si le nom de machine d'un client
+correspond par exemple avec trois noms de sous-répertoires
+\verbtexte{regex1/}, \verbtexte{regex2/} et \verbtexte{regex3/}, alors le client devra
+lancer une seule fois au démarrage tous les exécutables contenus dans chacun des
+sous-répertoires \verbtexte{regex1/}, \verbtexte{regex2/} et \verbtexte{regex3/}.
+
+\begin{alerte}
+Après avoir créé vos sous-répertoires et vos fichiers
+exécutables dans le répertoire \verbtexte{unefois/} du serveur,
+n'oubliez pas de réajuster les droits sur les fichiers comme expliqué
+à la section~\ref{reconfigurer-droits} page~\pageref{reconfigurer-droits}.
+\end{alerte}
+
+
+Attention, les fichiers exécutables d'un sous-répertoire donné doivent
+vérifier certains critères :
+%
+\begin{itemize}
+\item Le nom d'un exécutable \textbf{ne doit pas commencer par un point}.
+\item Le nom d'un exécutable \textbf{doit se terminer par \verbtexte{.unefois}}
+(comme dans \verbtexte{mon-script.unefois}).
+\item Si le fichier exécutable est un script (autrement dit si ce n'est pas un fichier
+binaire), \textbf{il doit impérativement comporter un shebang}\footnote{Le shebang est la
+première ligne d'un script qui commence par \verbtexte{\#!} comme
+dans \og \verbtexte{\#! /bin/bash} \fg{} ou dans \og \verbtexte{\#! /usr/bin/python} \fg{}.} : 
+cela peut-être un script Bash, Perl, Python peu importe
+(du moment que l'interpréteur du langage est installé sur les
+clients GNU/Linux)
+mais il faut que le shebang soit présent.
+\end{itemize}
+%
+\textbf{Le critère pour que les clients GNU/Linux se
+souviennent d'avoir exécuté un fichier donné (afin de l'exécuter une seule fois) est le
+nom de ce fichier}
+et rien que le nom (pas le contenu). 
+Par exemple, si un client GNU/Linux a exécuté le script \verbtexte{toto.unefois},
+alors ce client n'exécutera plus jamais%
+%
+\footnote{En fait, comme vous allez le voir juste après,
+cette règle n'est pas complètement immuable.}
+%
+de fichier s'appellant \verbtexte{toto.unefois}.
+Si vous avez un script que vous souhaitez exécuter
+non pas une seule fois, mais quelques fois de manière très ponctuelle
+(une fois par an par exemple), pensez à
+insérer la date du jour dans le nom du script (comme dans \verbtexte{1sept2012-maj.unefois})
+et le cas échéant, en modifiant la date dans le nom du fichier
+(par exemple en le renommant \verbtexte{3sept2013-maj.unefois}),
+celui-ci sera à nouveau
+candidat à l'exécution du côté des clients GNU/Linux.
+
+
+
+\subsection{Le mécanisme en détail}
+
+Voici le mécanisme effectué par les clients GNU/Linux
+au niveau du répertoire \verbtexte{unefois/}
+\textbf{au moment du démarrage du système} uniquement (le démarrage
+est le seul instant où les clients GNU/Linux se préoccupent du répertoire
+\verbtexte{unefois/}) :
+%
+\begin{enumerate}
+\item Le client regarde le contenu de tous les sous-répertoires de
+\verbtexte{/mnt/netlogon/unefois/}%
+%
+\footnote{Rappelons à nouveau
+que le répertoire \verbtexte{/mnt/netlogon/unefois/} sur les clients GNU/Linux correspond
+en réalité au répertoire \verbtexte{/home/netlogon/clients-linux/unefois/} du serveur Samba.}
+%
+dont les noms correspondent à son nom de machine. Par exemple, si le client
+s'appelle \verbtexte{S18-DELL-03}, il va regarder le contenu du sous-répertoire
+\verbtexte{\string^S18-} mais il va ignorer le sous-répertoire \verbtexte{-HP-}.
+Dans chaque sous-répertoire qu'il n'a pas ignoré (s'il en existe),
+le client va y chercher tous les fichiers de la forme \verbtexte{*.unefois},
+afin d'obtenir toute une liste (éventuellement vide) de fichier \verbtexte{*.unefois}.
+
+
+\item Si, dans cette liste de fichiers \verbtexte{*.unefois},
+certains noms figurent déjà dans le répertoire local
+\verbtexte{/etc/se3/unefois/}, c'est que les fichiers en question ont déjà
+été exécutés par le client GNU/Linux et ils ne le sont donc pas une deuxième fois.
+En revanche, les fichiers de cette liste dont le nom%
+\footnote{Les clients GNU/Linux ne tiennent compte que du nom des
+fichiers, pas de leur contenu. La casse dans le nom des fichiers est prise en compte.}
+ne figure pas dans
+\verbtexte{/etc/se3/unefois/} sont copiés dans ce répertoire local puis
+les copies locales sont exécutées.
+\end{enumerate}
+
+C'est donc le répertoire \verbtexte{/etc/se3/unefois/}
+qui constitue la \og mémoire \fg{}
+du client GNU/Linux : il contient la liste des noms de fichiers déjà exécutés. Il y
+a toutefois deux exceptions au mécanisme décrit ci-dessus :
+%
+\begin{enumerate}
+
+\item Au moment du démarrage du système, si le client détecte la
+présence d'un fichier nommé \verbtexte{PAUSE}%
+%
+\footnote{Le nom du fichier doit être
+en majuscules uniquement et peu importe le contenu de ce fichier qui peut être
+totalement vide. Attention, les droits de ce fichier doivent être corrects une fois
+celui-ci créé.}
+%
+à la racine du répertoire \verbtexte{/mnt/netlogon/unefois/},
+alors le client ne fait strictement
+rien au niveau des fichiers \verbtexte{*.unefois}
+et donc il n'exécute absolument rien, quoi qu'il arrive.
+
+\item Au moment du démarrage du système, si le client
+ne repère pas la présence du fichier \verbtexte{PAUSE} précédent mais qu'en
+revanche il détecte la présence du fichier \verbtexte{BLACKOUT}%
+%
+\footnote{Même
+remarque que pour le fichier \verbtexte{PAUSE}.},
+%
+toujours à la racine
+du répertoire local \verbtexte{/mnt/netlogon/unefois/}, alors le client GNU/Linux efface
+le contenu du répertoire \verbtexte{/etc/se3/unefois/}. Ainsi, au prochain
+démarrage,
+si les fichiers \verbtexte{PAUSE} et \verbtexte{BLACKOUT} ne sont pas présents,
+le client exécutera tous les exécutables \verbtexte{*.unefois} qui le concerne,
+peu importe leur nom
+étant donné que la \og mémoire \fg{} du client GNU/Linux
+concernant tout ce qui a déjà été exécuté a été effacée.
+\end{enumerate}
+
+
+\begin{alerte}
+Au moment du démarrage, la recherche par les clients GNU/Linux
+des fichiers \verbtexte{*.unefois} à exécuter (ainsi que leur 
+copie en local le cas échéant) entraîne(nt) forcément du trafic réseau.
+Lorsque vous ne souhaitez pas faire usage de ce mécanisme (ce qui en principe
+sera le cas $90\%$ du temps),
+n'hésitez pas à placer le fichier \verbtexte{PAUSE} à la racine
+du répertoire \verbtexte{unefois/} du serveur afin d'éviter ce travail
+de recherche aux clients GNU/Linux qui solliciteraient inutilement le
+réseau.
+
+Là encore, lorsque vous créerez ce fichier \verbtexte{PAUSE}, attention
+de bien reconfigurer les droits des fichiers comme expliqué
+à section~\ref{reconfigurer-droits} page~\pageref{reconfigurer-droits}.
+\end{alerte}
+
+
+
+
+
+Les scripts \verbtexte{*.unefois} sont
+tous exécutés, en tant que \verbtexte{root}, \textbf{en arrière-plan}
+et cela dès l'affichage de la fenêtre de connexion
+lors du démarrage.
+Si vous souhaitez qu'un script \verbtexte{*.unefois} se lance un peu après 
+(parce que, par
+exemple, vous avez besoin d'attendre que certains services soient
+lancés), vous pouvez parfaitement utiliser des instructions comme
+\og \verbtexte{sleep 20} \fg{} afin de forcer le script à attendre
+pendant $20$ secondes avant de
+commencer réellement son travail. 
+Enfin sachez que dans le répertoire
+local \verbtexte{/etc/se3/unefois/}, chaque exécutable \verbtexte{truc.unefois}
+est accompagné de son homologue nommé \verbtexte{truc.unefois.log} qui contient
+simplement l'ensemble des messages (d'erreur ou non) du fichier l'exécutable.
+
+
+
+
+\subsection{Réglage de la locale durant l'exécution des scripts \og unefois \fg}
+
+Avant de déployer un script bash via le répertoire \verbtexte{unefois/}
+du serveur, il sera sans doute
+nécessaire de le tester sur un client localement.
+Sachez que les scripts bash, lorsqu'ils sont exécutés par le client
+GNU/Linux au démarrage, ont la variable d'environnement \verbtexte{LC\_ALL}
+définie comme étant égale à \verbtexte{C}%
+\footnote{Cette valeur règle le système, le temps de l'exécution des scripts,
+sur la locale standard \verbtexte{C} qui est la seule locale parfaitement
+normalisée et a priori disponible sur n'importe quel système de type Unix.}
+et non pas égale
+à \verbtexte{fr\_FR.utf8}. Cela implique que tous les messages de sortie
+des commandes système lancées dans le script
+seront en anglais avec des caractères ASCII uniquement.
+Pour avoir une idée de l'influence de la locale sur les commandes système,
+vous pouvez ouvrir un terminal bash et tester ceci :
+%
+\begin{lstlisting}
+# On paramètre le terminal sur une locale française qui doit être très
+# probablement la locale par défaut déjà définie sur votre système.
+export LC_ALL="fr_FR.utf8"
+# Puis on teste une commande. En principe, l'entête du résultat de la
+# commande est en français.
+df -h
+
+# Maintenant, on paramètre le terminal sur la locale C.
+export LC_ALL="C"
+
+# Et on teste à nouveau la même commande. Cette fois-ci, l'entête du
+# résultat de la commande est en anglais.
+df -h
+\end{lstlisting}
+%
+Par conséquent, si jamais vous souhaitez exploiter le résultat de certaines
+commandes système dans vos scripts bash \verbtexte{*.unefois}, sachez que la
+locale peut avoir une incidence sur le comportement du script.
+Si jamais vous
+tenez à avoir une locale française lors de l'exécution de votre
+script, alors il vous suffit de placer juste en dessous du shebang
+l'instruction :
+%
+\begin{lstlisting}
+export LC_ALL="fr_FR.utf8"
+\end{lstlisting}
+%
+En revanche, si vous ne souhaitez pas forcer le réglage sur une
+locale particulière et préférez conserver la valeur par défaut
+(avec la locale standard \verbtexte{C}), alors durant vos tests afin
+de valider un script bash à déployer, il faudra le lancer
+de la manière suivante :
+%
+\begin{lstlisting}
+LC_ALL="C" ./monscript.bash.unefois
+\end{lstlisting}
+%
+De cette manière, le script héritera de la locale \verbtexte{C} et il
+se comportera de la même manière que lors d'une exécution via le mécanisme
+\og unefois \fg{}. Alors que si vous lancez le script ainsi :
+%
+\begin{lstlisting}
+./monscript.bash.unefois
+\end{lstlisting}
+%
+celui-ci hériterait de la locale du système, qui est très probablement
+\verbtexte{fr\_FR.utf8}, et il se comporterait légèrement différemment que
+lors d'une exécution via la mécanisme \og unefois \fg{}, si bien que vos 
+tests seraient légèrement biaisés.
+
+
+\subsection{Des variables et des fonctions prêtes à l'emploi}
+
+Si jamais vous utilisez le langage Bash pour écrire des
+script de la forme \verbtexte{*.unefois}, vous pouvez alors 
+utiliser certaines variables ou fonctions prédéfinies
+qui pourront peut-être vous faciliter le travail d'écriture
+des scripts. Voici tableau listant toutes ces variables et
+fonctions :
+%
+\begin{center}
+\setlength{\LTcapwidth}{0.8\linewidth}
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|>{\small}c|>{\small}m{0.7\linewidth}|} \hline
+\large \bfseries Nom & \centering \large \bfseries Commentaire \tabularnewline\hline
+\endhead \hline
+\caption{Variables et fonctions disponibles dans les scripts \og unefois \fg.}
+\endfoot
+\caption{Variables et fonctions disponibles dans les scripts \og unefois \fg.}
+\label{tableau-unefois}
+\endlastfoot
+%
+%
+\verbtexte{SE3}
+& 
+Cette variable stocke l'adresse
+IP du serveur récupérée automatiquement lors
+de l'installation du paquet \verbtexte{se3-clients-linux}.
+\\\hline
+%
+%
+\verbtexte{NOM\_DE\_CODE} & 
+Cette variable stocke ce qu'on appelle le
+\og nom de code \fg{} de la distribution (\verbtexte{squeeze} dans
+le cas d'une Debian Squeeze, \verbtexte{precise} dans le
+cas d'une Ubuntu Precise Pangolin etc).
+\\\hline
+%
+%
+\verbtexte{ARCHITECTURE} &
+Cette variable stocke l'architecture du système. Par exemple,
+si le système repose sur une architecture $64$ bits, alors
+la variable stockera la chaîne de caractères \verbtexte{x86\_64}.
+\\\hline
+%
+%
+\verbtexte{BASE\_DN} &
+Cette variable contient le suffixe de base LDAP de l'annuaire
+du serveur. Elle pourra vous être utile si vous souhaitez faire
+vous-même des requêtes LDAP particulières sur les clients
+à l'aide de la commande \verbtexte{ldapsearch}.
+%
+%
+\\\hline
+\verbtexte{NOM\_HOTE} &
+Cette variable stocke le nom
+du client GNU/Linux (celui qui se trouve dans le fichier
+de configuration \verbtexte{/etc/hostname}).
+Par exemple,
+si vous avez pris l'habitude de choisir des noms de
+machines de la forme \verbtexte{<salle>-xxx} (comme dans 
+\verbtexte{S121-PC04} ou même comme dans \verbtexte{S18-DELL-02}), alors
+vous pourrez récupérer le nom de la salle où se trouve le client
+GNU/Linux par l'intermédiaire de la variable \verbtexte{NOM\_HOTE}
+comme ceci :
+%
+\begin{lstlisting}
+SALLE=$(echo "$NOM_HOTE" | cut -d'-' -f1)
+
+if [ "$SALLE" = "S121" ]; then
+   # Les trucs à faire si on est dans la salle 121.
+fi
+
+if [ "$SALLE" = "S18" ]; then
+   # Les trucs à faire si on est dans la salle 18.
+fi
+# etc.
+\end{lstlisting}
+\\\hline
+%
+%
+\verbtexte{appartient\_au\_parc} &
+Cette fonction permet de savoir si une machine
+appartient à un parc donné. Pour ce faire,
+la fonction \verbtexte{appartient\_au\_parc} interroge l'annuaire
+du serveur via une requête LDAP. Voici un exemple d'utilisation :
+\begin{lstlisting}
+if appartient_au_parc "S121" "$NOM_HOTE"; then
+   # La machine appartient au parc S121
+else
+   # La machine n'appartient pas au parc S121
+fi
+\end{lstlisting}
+% $
+\\\hline
+%
+%
+\verbtexte{afficher\_liste\_parcs} &
+Un exemple vaudra mieux qu'un long discours :
+\begin{lstlisting}
+liste_parcs=$(afficher_liste_parcs "S121-LS-P")
+\end{lstlisting}
+% $
+Dans cet exemple, la fonction effectue une requête LDAP
+auprès du serveur afin de connaître le nom de tous les parcs
+auxquels appartient la machine \verbtexte{S121-LS-P}.
+Si la
+machine \verbtexte{S121-LS-P} appartient aux parcs \verbtexte{S121}
+et \verbtexte{PostesProfs}, alors la variable \verbtexte{liste\_parcs}
+contiendra deux lignes, la première contenant \verbtexte{S121} et la
+deuxième contenant \verbtexte{PostesProfs}. L'idée est de stocker tous
+les parcs d'une machine dans une variable, le tout en une seule requête
+LDAP. Enfin, à la place de \verbtexte{S121-LS-P} comme argument de la
+fonction, on aurait pu utiliser \verbtexte{\$NOM\_HOTE}, comme dans
+l'exemple ci-dessous qui sera plus éclairant sur la manière dont
+on peut exploiter de telles listes.
+\\\hline
+%
+%
+\verbtexte{est\_dans\_liste} &
+Là aussi, illustrons cette fonction par un exemple :
+\begin{lstlisting}
+# On récupère la liste des parcs auxquels 
+# appartient la machine cliente.
+liste_parcs=$(afficher_liste_parcs "$NOM_HOTE")
+
+if est_dans_liste "$liste_parcs" "PostesProfs"; then
+    # Si la machine est dans le parc "PostesProfs"
+    # alors faire ceci...
+elif est_dans_liste "$liste_parcs" "CDI"; then
+    # Si la machine est dans le parc "CDI" 
+    # alors faire ceci...
+else
+    # Sinon faire cela...
+fi
+\end{lstlisting}
+% $
+L'idée ici est qu'une seule requête LDAP est effectuée (lors de la
+première instruction). Ensuite, les tests \verbtexte{if} ne sollicitent
+pas le réseau puisque la liste des parcs est déjà stockée dans la
+variable \verbtexte{liste\_parcs}.
+\\\hline
+%
+%
+\multicolumn{2}{|c|}{}\\
+\multicolumn{2}{|c|}{%
+\begin{minipage}{0.8\textwidth}
+%\smaller[1]
+Les fonctions suivantes sont moins pertinentes dans les scripts \verbtexte{*.unefois}
+qui, rappelons-le, sont exécutés juste après le démarrage du système.
+Mais elles restent toutefois disponibles également et donc figurent quand
+même dans ce tableau. En revanche, nous verrons plus loin
+(à la section~\ref{fonctions-utiles} page~\pageref{fonctions-utiles})
+que ces fonctions
+sont également disponibles à des moments beaucoup plus pertinents, comme
+par exemple au moment de l'ouverture de session d'un utilisateur sur le système.
+\end{minipage}
+}\\
+\multicolumn{2}{|c|}{}
+\\\hline
+%
+%
+\verbtexte{appartient\_au\_groupe} &
+Cette fonction permet de savoir si le login d'un utilisateur
+correspond à un compte qui appartient à un groupe donné. Pour ce faire,
+la fonction \verbtexte{appartient\_au\_groupe} interroge l'annuaire
+du serveur via une requête LDAP. Voici un exemple :
+\begin{lstlisting}
+if appartient_au_groupe "Classe_1ES2" "toto"; then
+   # Le compte toto appartient à la classe 1ES2.
+else
+   # Le compte toto n'appartient pas à la classe 1ES2.
+fi
+\end{lstlisting}
+% $
+\\\hline
+%
+%
+\verbtexte{afficher\_liste\_groupes} &
+Un exemple vaudra mieux qu'un long discours :
+\begin{lstlisting}
+liste_groupes_toto=$(afficher_liste_groupes "toto")
+if est_dans_liste "$liste_groupes_toto" "Eleves"; then
+    # toto est un élève alors faire ceci...
+fi
+\end{lstlisting}
+% $
+Dans cet exemple, la fonction effectue une requête LDAP
+auprès du serveur afin de connaître le nom des groupes auxquels
+compte utilisateur \verbtexte{toto} appartient. Si par exemple ce
+compte appartient aux groupes \verbtexte{Eleves}
+et \verbtexte{Classe\_1ES2}, alors la variable \verbtexte{liste\_groupes\_toto}
+contiendra deux lignes, la première contenant \verbtexte{Eleves} et la
+deuxième contenant \verbtexte{Classe\_1ES2}. L'idée est de stocker tous
+les groupes d'un compte donné dans une variable, le tout en une seule requête
+LDAP. 
+\\\hline
+%
+%
+\verbtexte{est\_utilisateur\_local} &
+Cette fonction permet de tester si un compte est local (c'est-à-dire
+contenu dans le fichier \verbtexte{/etc/passwd} du client GNU/Linux) ou non (c'est-à-dire
+un compte du domaine contenu dans l'annuaire du serveur).
+\begin{lstlisting}
+if est_utilisateur_local "toto"; then
+    # toto est un compte local, alors faire ceci...
+fi
+\end{lstlisting}
+\\\hline
+%
+%
+\verbtexte{est\_connecte} &
+Cette fonction permet de tester si un compte est actuellement
+connecté au système (c'est-à-dire s'il a ouvert une session).
+\begin{lstlisting}
+if est_connecte "toto"; then
+    # toto est actuellement connecté au système,
+    # alors faire ceci...
+fi
+\end{lstlisting}
+\\\hline
+%
+%
+\verbtexte{activer\_pave\_numerique} &
+Cette fonction, qui ne prend pas d'argument, permet simplement
+d'activer le pavé numérique du client GNU/Linux.
+\\\hline
+%
+%
+\end{longtable}
+\end{center}
+
+
+
+
+
+
+
+\section{Le script de logon}
+\label{logon-script}
+
+\subsection{Phases d'exécution du script de logon}
+\label{phase}
+
+Le script de logon est un script bash qui est exécuté
+par les clients GNU/Linux lors de trois phases
+différentes. Pour plus de commodité dans les explications,
+nous allons donner un nom à chacune de ces trois
+phases une bonne fois pour toutes :
+%
+\begin{enumerate}
+\item \textbf{L'initialisation :} cette phase se produit juste avant
+l'affichage de la fenêtre de connexion. Attention, cela
+correspond en particulier au démarrage du système, certes, mais pas seulement. 
+L'initialisation se produit aussi
+juste après la fermeture de session d'un utilisateur, avant que
+la fenêtre de connexion n'apparaisse à nouveau  (sauf si, bien sûr,
+l'utilisateur a choisi d'éteindre ou de redémarrer la machine).
+\label{initialisation}
+\smallskip
+
+\textbf{Description rapide des tâches exécutées par le script lors de cette phase :}
+le script efface les homes (s'il en existe)
+de tous utilisateurs qui ne correspondent pas à des comptes locaux%
+\footnote{Un compte local est un compte figurant dans le fichier
+\verbtexte{/etc/passwd} du client GNU/Linux.}, vérifie si
+le partage CIFS \verbtexte{//SERVEUR/netlgon-linux} du serveur
+est bien monté sur le répertoire \verbtexte{/mnt/netlogon/} du client GNU/Linux et,
+si ce n'est pas le cas, le script exécute ce montage. Ensuite,
+le cas écheant, le script procède à la synchronisation
+du profil par défaut local sur le profil par défaut distant et
+lance les exécutions des \verbtexte{*.unefois} si l'initialisation
+correspond en fait à un redémarrage du système.
+
+
+\item \textbf{L'ouverture :} cette phase se produit à l'ouverture de 
+session d'un utilisateur juste après que celui-ci ait saisi ses identifiants.
+\label{ouverture}
+\smallskip
+
+\textbf{Description rapide des tâches exécutées par le script lors de cette phase :}
+le script procède à la création
+du home de l'utilisateur qui se connecte (via une
+copie du profil par défaut local), exécute le montage
+de certains partages du serveur auxquels l'utilisateur peut prétendre
+(comme par exemple le partage correspondant aux données personnelles de
+l'utilisateur).
+
+\item \textbf{La fermeture :} cette phase se produit à 
+la fermeture de session d'un utilisateur.
+\label{fermeture}
+\smallskip
+
+\textbf{Description rapide des tâches exécutées par le script lors de cette phase :}
+le script ne fait rien qui mérite d'être signalé dans cette documentation.
+\end{enumerate}
+%
+Comme vous pouvez le constater, le script de logon est un peu le \og chef
+d'orchestre \fg{} de chacun des clients GNU/Linux.
+
+\subsection{Emplacement du script de logon}
+
+À la base, le script de logon se trouve localement
+à l'adresse \verbtexte{/etc/se3/bin/logon}
+de chaque client GNU/Linux. Mais il existe une version centralisée
+de ce script sur le serveur à l'adresse :
+%
+\begin{enumerate}
+\item \verbtexte{\textcolor{red}{/home/netlogon/clients-linux/}bin/logon} si on est sur le serveur
+\item \verbtexte{\textcolor{red}{/mnt/netlogon/}bin/logon} si on est sur un client GNU/Linux
+\end{enumerate}
+%
+Nous avons donc, comme pour le profil par défaut, des versions
+locales du script de logon (sur chaque client GNU/Linux)
+et une unique version distante (sur le serveur).
+Et au niveau de la synchronisation,
+les choses fonctionnent de manière très similaire aux profils par défaut.
+\textbf{Lors de l'initialisation d'un client GNU/Linux} :
+%
+\begin{itemize}
+\item Si le contenu du script de logon local est identique au contenu
+du script de logon distant, alors c'est le script de logon local qui est
+exécuté par le client GNU/Linux.
+\item Si en revanche les contenus diffèrent (ne serait-ce que d'un seul
+caractère), alors c'est le script de logon distant qui est exécuté. Mais
+dans la foulée, le script de logon local est écrasé puis remplacé par une
+copie de la version
+distante. Du coup, il est très probable qu'à la prochaine initialisation
+du client GNU/Linux ce soit à nouveau le script de logon local qui soit exécuté
+parce que identique à la version distante (on retombe dans le cas précédent).
+\end{itemize}
+
+A priori, cela signifie donc que, pour peu que vous sachiez parler (et écrire) le
+langage du script de logon (il s'agit du Bash), vous pouvez modifier
+\textbf{uniquement} le script de logon distant (celui du serveur donc)
+afin de l'adapter à vos
+besoins. Vos modifications seraient alors impactées sur \textbf{tous les clients}
+GNU/Linux dès la prochaine phase d'initialisation.
+Seulement, \textbf{il ne faudra pas procéder ainsi}
+et cela pour une raison simple :
+après la moindre mise à jour du paquet \verbtexte{se3-clients-linux} ou
+éventuellement après une réinstallation, toutes vos modifications sur
+le script de logon seront effacées. Pour pouvoir modifier le comportement du script
+de logon de manière pérenne, il faudra utiliser le fichier
+\verbtexte{logon\_perso} qui se trouve dans le même répertoire que le
+script de logon.
+
+
+
+\subsection{Personnaliser le script de logon}
+\label{personnalisation}
+
+Le fichier \verbtexte{logon\_perso} va vous permettre
+d'affiner le comportement du script de logon afin de l'adapter
+à vos besoins, et cela de manière pérenne dans le temps
+(les modifications persisteront notamment après une mise
+à jour du paquet \verbtexte{se3-clients-linux}). À la
+base, le fichier \verbtexte{logon\_perso} est un fichier
+texte encodé en UTF-8 avec des fins de ligne de type
+Unix%
+%
+\footnote{Attention d'utiliser un éditeur de texte respectueux de l'encodage
+et des fins de ligne lorsque vous modifierez le fichier \verbtexte{logon\_perso}.}.
+%
+Il contient du code bash et possède, par défaut, la structure suivante :
+%
+\begin{lstlisting}
+function initialisation_perso ()
+{
+   # ...
+}
+
+function ouverture_perso ()
+{
+   # ...
+}
+
+function fermeture_perso ()
+{
+   # ...
+}
+\end{lstlisting}
+%
+Ce code sera ni plus ni moins inclus, tel quel, dans le script de logon.
+En fait, après une modification du fichier \verbtexte{logon\_perso}, il
+faudra donc \textbf{toujours} penser à reconfigurer le paquet
+\verbtexte{se3-clients-linux} comme décrit dans la section~\ref{reconfigurer-droits}
+page~\pageref{reconfigurer-droits} ce qui aura pour effet, entre autres,
+d'insérer le contenu de la nouvelle version de \verbtexte{logon\_perso}
+dans le fichier \verbtexte{logon}. Si vous oubliez de faire cette manipulation
+après modification du fichier \verbtexte{logon\_perso}, le fichier \verbtexte{logon}
+sera inchangé et vos modifications ne seront tout simplement pas prises en compte.
+
+\begin{alerte}
+\begin{center}
+\textbf{Procédure à suivre quand on modifie le fichier \verbtexte{logon\_perso}}
+\end{center}
+
+Pour modifier le script de logon afin de l'adapter à vos besoins,
+vous devez :
+\begin{enumerate}
+\item Modifier le fichier \verbtexte{logon\_perso}.
+\item Puis lancer la reconfiguration du paquet \verbtexte{se3-clients-linux} en effectuant
+une des deux procédures décrites dans la section~\ref{reconfigurer-droits}
+page~\pageref{reconfigurer-droits}, afin que le contenu de la nouvelle version de
+\verbtexte{logon\_perso} soit inséré dans le fichier \verbtexte{logon}.
+\end{enumerate}
+\end{alerte}
+
+
+Revenons au contenu du fichier \verbtexte{logon\_perso} pour comprendre
+de quelle manière il permet de modifier le comportement du script
+\verbtexte{logon}. Dans le fichier \verbtexte{logon\_perso},
+on peut distinguer trois fonctions :
+
+
+\begin{enumerate}
+\item Tout le code que vous mettrez dans la fonction \verbtexte{initialisation\_perso}
+sera exécuté lors de la phase d'initialisation des clients, \textbf{en dernier}, c'est-à-dire
+après que le script de logon ait effectué toutes les tâches
+liées à la phase d'initialisation qui sont décrites
+brièvement au point \ref{initialisation} de la section \ref{phase}.
+
+\item Tout le code que vous mettrez dans la fonction \verbtexte{ouverture\_perso}
+sera exécuté lors de la phase d'ouverture des clients uniquement lorsqu'un
+utilisateur du domaine se connecte. Le code est exécuté \textbf{juste après}
+la création du \og home \fg{} de l'utilisateur qui se connecte. 
+Typiquement, c'est dans cette fonction que vous allez gérer les montages
+de partages réseau en fonction du type de compte qui se connecte (son
+appartenance à tel ou tel groupe etc).
+
+Pour la gestion des montages de partages réseau à l'ouverture de session,
+tout se trouve à la section~\ref{gestion-montage} page~\pageref{gestion-montage}.
+
+
+\item Tout le code que vous mettrez dans la fonction \verbtexte{fermeture\_perso}
+sera exécuté lors de la phase de fermeture des clients, \textbf{en dernier}, c'est-à-dire
+après que le script de logon ait effectué toutes les tâches
+liées à la phase de fermeture qui sont décrites
+brièvement au point \ref{fermeture} de la section \ref{phase}.
+
+\end{enumerate}
+
+Vous pouvez bien sûr définir dans le fichier \verbtexte{logon\_perso}
+des fonctions supplémentaires, mais, pour que celles-ci soient
+au bout du compte exécutées
+par le script de logon, il
+faudra les appeler dans le corps d'une des trois
+fonctions \verbtexte{initialisation\_perso}, \verbtexte{ouverture\_perso}
+ou \verbtexte{fermeture\_perso}.
+
+Il faut bien avoir en tête que le contenu de \verbtexte{logon\_perso}
+est ni plus ni moins inséré dans le script \verbtexte{logon} et donc, après
+modification de \verbtexte{logon\_perso}, il faut toujours mettre à jour
+le fichier \verbtexte{logon} via la commande 
+\og \verbtexte{dpkg-reconfigure se3-clients-linux} \fg{}.
+
+
+
+\subsection{Quelques variables et fonctions prêtes à l'emploi}
+\label{fonctions-utiles}
+
+Voici la liste des variables et des fonctions que vous
+pourrez utiliser dans le fichier \verbtexte{logon\_perso} et qui
+seront susceptibles de vous aider à affiner le comportement
+du script de logon :
+%
+\begin{center}
+\setlength{\LTcapwidth}{0.8\linewidth}
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|>{\small}c|>{\small}m{0.7\linewidth}|} \hline
+\large \bfseries Nom & \centering \large \bfseries Commentaire \tabularnewline\hline
+\endhead \hline
+\caption{Variables et fonctions disponibles dans le fichier logon\_perso.}
+\endfoot
+\caption{Variables et fonctions disponibles dans le fichier logon\_perso.}
+\endlastfoot
+%
+%
+\multicolumn{2}{|c|}{}\\
+\multicolumn{2}{|c|}{%
+\begin{minipage}{0.8\textwidth}
+Pour commencer, toutes les variables et les fonctions présentées dans le
+tableau~\ref{tableau-unefois} à la page~\pageref{tableau-unefois} sont
+utilisables.
+\end{minipage}
+}\\
+\multicolumn{2}{|c|}{}\\\hline
+%
+%
+\verbtexte{LOGIN} &
+Cette variable stocke le login
+de l'utilisateur qui a ouvert une session. Cette
+variable n'a de sens que lors de la phase d'ouverture
+et de fermeture (c'est-à-dire uniquement à l'intérieur
+des fonctions \verbtexte{ouverture\_perso} et \verbtexte{fermeture\_perso}),
+pas lors de la phase d'initialisation (c'est-à-dire à l'intérieur de la fonction
+\verbtexte{initialisation\_perso}) puisque 
+personne n'a encore ouvert de session à ce moment là.
+\\\hline
+%
+%
+\verbtexte{NOM\_COMPLET\_LOGIN} &
+Cette variable stocke le nom complet (sous la forme \og prénom nom \fg{})
+de l'utilisateur qui a ouvert une session. Cette
+variable n'a de sens que lors de la phase d'ouverture et de fermeture.
+\\\hline
+%
+%
+\verbtexte{REP\_HOME} &
+Cette variable stocke le chemin absolu du répertoire home 
+de l'utilisateur qui se connecte. Par exemple, si le compte
+\verbtexte{toto} ouvre une session, la variable contiendra
+la chaîne \verbtexte{/home/toto}. Remarquez que cette variable
+est un simple raccourci pour écrire \verbtexte{"/home/\$LOGIN"}.
+Cette variable n'a de sens que lors de la phase d'ouverture et de fermeture.
+\\\hline
+%
+%
+\verbtexte{LISTE\_GROUPES\_LOGIN} &
+Cette variable, qui n'a de sens \textbf{que lors de la phase d'ouverture},
+stocke la liste des groupes auxquels appartient l'utilisateur qui a
+ouvert une session (le format étant un nom de groupe par ligne). Une
+utilisation typique de cette variable est :
+\begin{lstlisting}
+if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"; then
+    # L'utilisateur qui se connecte appartient au
+    # groupe Profs, alors faire ceci...
+elif est_dans_liste "$LISTE_GROUPES_LOGIN" "Eleves"; then
+    # L'utilisateur qui se connecte appartient au
+    # groupe Eleves, alors faire cela...
+fi
+\end{lstlisting} %$
+Au passage, dans ce code, aucune requête LDAP n'est effectuée
+puisque la variable \verbtexte{LISTE\_GROUPES\_LOGIN} contient
+déjà la liste des groupes auxquels appartient l'utilisateur qui
+vient de se connecter (la requête LDAP permettant de définir
+la variable \verbtexte{LISTE\_GROUPES\_LOGIN} a été faite 
+par le script de logon en amont, une fois pour toute).
+\\\hline
+%
+%
+\verbtexte{DEMARRAGE} &
+Cette variable stocke toujours la valeur \verbtexte{false},
+sauf lorsqu'on se trouve lors d'une phase d'initialisation
+qui correspond à un démarrage du système où elle stocke alors
+la valeur \verbtexte{true}. Cette variable n'a
+donc d'intérêt que lorsqu'elle est utilisée dans la fonction
+\verbtexte{initialisation\_perso}. Voici un exemple :
+\begin{lstlisting}
+if "$DEMARRAGE"; then
+    # On est lors d'une phase de démarrage
+    # alors faire ceci...
+fi
+\end{lstlisting} %$
+\\\hline
+%
+%
+\verbtexte{monter\_partage} &
+Si vous voulez que les utilisateurs du domaine puissent avoir
+accès à des partages réseau sur le serveur, il faudra forcément
+faire usage de cette fonction qui est donc très importante.
+Toutes les explications sur cette fonction se trouvent
+à la section~\ref{gestion-montage} page~\pageref{gestion-montage}.
+Cette fonction n'a de sens que lors de la phase d'ouverture.
+\\\hline
+%
+%
+\verbtexte{creer\_lien} &
+Cette fonction, qui va de pair avec la précédente, sera
+détaillée à la section~\ref{gestion-montage}
+page~\pageref{gestion-montage}.
+Cette fonction n'a de sens que lors de la phase d'ouverture.
+\\\hline
+%
+%
+\verbtexte{changer\_icone} &
+Cette fonction sera
+détaillée à la section~\ref{changer-icone}
+page~\pageref{changer-icone}.
+Cette fonction n'a de sens que lors de la phase d'ouverture.
+\\\hline
+%
+%
+\verbtexte{changer\_papier\_peint} &
+Cette fonction, utilisable uniquement pendant la phase d'ouverture,
+permet de changer le fond d'écran de l'utilisateur qui se connecte.
+Elle prend un argument qui correspond au chemin absolu (sur le
+client) du fichier image à utiliser en guise de fond d'écran.
+Un exemple de l'utilisation de cette fonction sera
+donné à la section~\ref{papier-peint}
+page~\pageref{papier-peint}.
+\\\hline
+%
+%
+\verbtexte{activer\_pave\_numerique} &
+Cette fonction, qui fait exactement ce à quoi on pense naturellement, sera
+détaillée à la section~\ref{pave-num} page~\pageref{pave-num}.
+\\\hline
+%
+%
+\verbtexte{executer\_a\_la\_fin} &
+Parfois certaines commandes nécessitent d'être exécutées un fois le script
+de logon terminé (c'est-à-dire une fois l'initialisation, l'ouverture
+ou la fermeture terminée). C'est ce que permet cette fonction. Avec
+par exemple :
+\begin{lstlisting}
+executer_a_la_fin "5" "commande" "arg1" "arg2"
+\end{lstlisting}
+la commande \verbtexte{commande} (avec ses arguments)
+sera lancée 5 secondes après que
+le script de logon ait terminé son exécution.
+Un exemple de l'usage de cette fonction sera
+donné à la section~\ref{conky} page~\pageref{conky}.
+Attention, l'exécution se faisant une fois le script de logon terminé,
+il y aura aucune trace dans les fichiers de log de l'exécution
+de la commande \verbtexte{commande}.
+\\\hline
+%
+%
+\end{longtable}
+\end{center}
+
+
+
+
+\subsection{Gestion du montage des partages réseau}
+\label{gestion-montage}
+
+Comme cela a déjà été expliqué, c'est vous qui allez gérer
+les montages de partages réseau en éditant le contenu de la
+fonction \verbtexte{ouverture\_perso} qui se trouve dans le fichier
+\verbtexte{logon\_perso}. Évidemment, si la gestion par défaut
+des montages vous convient telle quelle, alors vous n'avez pas besoin
+de toucher à ce fichier.
+Commençons par un exemple simple :
+%
+\begin{lstlisting}
+function ouverture_perso ()
+{
+    monter_partage "//$SE3/Classes" "Classes" "$REP_HOME/Bureau/Répertoire Classes"
+}
+\end{lstlisting}
+%
+Ici la fonction \verbtexte{monter\_partage}
+possède trois \textbf{arguments qui devront être délimités
+par des doubles quotes} (\verbtexte{"}) :
+%
+\begin{enumerate}
+\item Le premier représente le chemin UNC du partage à monter.
+Vous reconnaissez sans doute la variable \verbtexte{SE3} qui
+stocke l'adresse IP du serveur. Par exemple si l'adresse IP
+du serveur est \verbtexte{172.20.0.2}, alors le premier argument 
+sera automatiquement développé en :
+%
+\begin{center}
+\verbtexte{//172.20.0.2/Classes}.
+\end{center}
+%
+Cela signifie que c'est le partage \verbtexte{Classes} du serveur
+\verbtexte{172.20.0.2} qui va être monté sur le clients GNU/Linux.
+Attention, sous GNU/Linux un chemin UNC de partage s'écrit avec des
+slashs (\verbtexte{/}) et non avec des antislashs 
+(\verbtexte{$\backslash$}) comme c'est le cas
+sous Windows.
+
+\item Maintenant, il faut un répertoire local pour monter un partage.
+C'est le rôle du deuxième argument. Quoi qu'il arrive (vous n'avez pas
+le choix sur ce point), le partage
+sera monté dans un sous-répertoire du répertoire \verbtexte{/mnt/\_\$LOGIN/}.
+Par exemple si c'est \verbtexte{toto} qui se connecte sur le poste
+client, le montage sera fait dans un sous répertoire de \verbtexte{/mnt/\_toto/}.
+Le deuxième argument spécifie le nom de ce sous-répertoire. Ici nous
+avons décidé assez logiquement de l'appeler \verbtexte{Classes}.
+Par conséquent, en visitant le répertoire \verbtexte{/mnt/\_toto/Classes/}
+sur le poste client, notre cher \verbtexte{toto} aura accès au
+contenu du partage \verbtexte{Classes} du serveur.
+
+Attention, dans le choix du nom de ce sous-répertoire, vous êtes
+limité(e) aux \textbf{caractères a-z, A-Z, 0-9, le tiret (\verbtexte{-})
+et le tiret bas (\verbtexte{\_})}.
+C'est tout. En particulier \textbf{pas d'espace ni accent}.
+Si vous ne respectez pas cette consigne le partage ne sera tout
+simplement pas monté et une fenêtre d'erreur s'affichera à l'ouverture
+de session.
+
+Vous serez sans doute amené(e) à monter plusieurs partages réseau
+pour un même utilisateur (via plusieurs appels de la fonction
+\verbtexte{monter\_partage} au sein de la fonction 
+\verbtexte{ouverture\_perso}). Donc il y aura plusieurs sous-répertoires
+dans \verbtexte{/mnt/\_\$LOGIN/}. Charge à vous d'éviter les doublons
+dans les noms des sous-répertoires, sans quoi certains partages ne
+seront pas montés.
+
+
+\item À ce stade, notre cher \verbtexte{toto} pourra accéder au
+partage \verbtexte{Classes} du serveur en passant par
+\verbtexte{/mnt/\_toto/Classes/}. Mais cela n'est pas très pratique.
+L'idéal serait d'avoir accès à ce partage directement via un dossier
+sur le bureau de \verbtexte{toto}. C'est exactement ce que fait
+le troisième argument. Si \verbtexte{toto} ouvre
+une session, l'argument \verbtexte{"\$REP\_HOME/Bureau/Répertoire Classes"}
+va se développer en \verbtexte{"/home/toto/Bureau/Répertoire Classes"}
+si bien qu'un raccourci (sous GNU/Linux on appelle ça un lien symbolique)
+portant le nom \verbtexte{Répertoire Classes}
+sera créé sur le bureau de \verbtexte{toto}. Donc en double-cliquant sur
+ce raccourci (vous pouvez voir à la page~\pageref{captureic} 
+via une capture d'écran que ce
+genre de raccourci ressemble à un simple dossier), sans même
+le savoir, \verbtexte{toto} visitera le répertoire
+\verbtexte{/mnt/\_toto/Classes/} qui correspondra au contenu du 
+partage \verbtexte{Classes} du serveur. Vous n'êtes pas limité(e)
+dans le choix du nom de ce raccourci. Les espaces et les accents
+sont parfaitement autorisés (évitez par contre le caractère double-quote).
+En revanche, ce raccourci doit forcément être créé dans le home
+de l'utilisateur qui se connecte. \textbf{Donc ce troisième argument devra
+toujours commencer par \verbtexte{"\$REP\_HOME/..."}} sans quoi le lien
+ne sera tout simplement pas créé.
+\end{enumerate}
+
+
+Tout n'a pas encore été dévoilé concernant cette fonction 
+\verbtexte{monter\_partage}. En fait, vous pouvez créer autant
+de raccourcis que vous voulez. Il suffit pour cela d'ajouter un
+quatrième argument, puis un cinquième , puis un sixième etc.
+Voici un exemple :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+function ouverture_perso ()
+{
+    monter_partage "//$SE3/Classes" "Classes" \ENTREE
+        "$REP_HOME/Bureau/Lecteur réseau Classes" \ENTREE
+        "$REP_HOME/Lecteur réseau Classes"
+}
+\end{lstlisting}
+%$
+%
+\begin{RQ}
+normalement il faut mettre une fonction avec ses arguments sur une
+même ligne car un saut de ligne signifie la fin d'une instruction
+aux yeux de l'interpréteur Bash. Mais ici la ligne serait bien longue à écrire
+et dépasserait la largeur de la page de ce document.
+La combinaison antislash (\verbtexte{$\backslash$}) puis ENTRÉE permet simplement
+de passer à la ligne tout en signifiant à l'interpréteur Bash que l'instruction
+entamée n'est pas terminée et qu'elle se prolonge sur la ligne suivante.
+\end{RQ}
+%
+Le premier argument correspond toujours au chemin UNC du partage
+réseau et le deuxième argument au nom du sous-répertoire 
+dans \verbtexte{/mnt/\_\$LOGIN/} associé à ce partage. Ensuite, nous
+avons cette fois-ci un troisième \textbf{et un quatrième argument} qui
+correspondent aux raccourcis pointant vers le partage : l'un
+est créé sur le bureau et l'autre est créé à
+la racine du home de l'utilisateur qui se connecte.
+Il est possible de créer autant de raccourcis que l'on souhaite,
+il suffit d'empiler les arguments $3$, $4$, $5$ etc. 
+les uns à la suite des autres.
+
+La syntaxe de la fonction \verbtexte{monter\_partage} est donc
+la suivante :
+%
+\begin{lstlisting}
+monter_partage "<partage>" "<répertoire>" ["<raccourci>"]...
+\end{lstlisting}
+%
+où seuls les deux premiers arguments sont obligatoires :
+\begin{itemize}
+\item \verbtexte{<partage>} est le chemin UNC du partage à monter.
+Il est possible de se limiter à un sous-répertoire du partage,
+par exemple comme dans \verbtexte{//\$SE3//administration/docs} où l'on
+montera uniquement le sous-répertoire \verbtexte{docs/} du
+partage \verbtexte{administration} du serveur.
+
+\item \verbtexte{<répertoire>} est le nom du sous-répertoire
+de \verbtexte{/mnt/\_\$LOGIN/} qui sera créé et sur lequel le
+partage sera monté. Seuls les caractères \verbtexte{-\_a-zA-Z0-9}
+sont autorisés.
+
+\item Les arguments \verbtexte{<raccourci>} sont optionnels. Ils
+représentent les chemins absolus des raccourcis qui seront créés
+et qui pointeront vers le partage. Ils doivent toujours se situer
+dans le home de l'utilisateur qui se connecte, donc ils doivent
+toujours commencer par \verbtexte{"\$REP\_HOME/..."}. Si ces arguments
+ne sont pas présents, alors le partage sera monté mais 
+aucun raccourci ne sera créé.
+\end{itemize}
+
+\begin{alerte}
+Attention, le montage du partage réseau se fait avec les droits
+de l'utilisateur qui est en train de se connecter. Si l'utilisateur
+n'a pas les droits suffisants pour accéder à ce partage, ce dernier
+ne sera tout simplement pas monté.
+\end{alerte}
+
+\begin{RQ}
+au final, si vous placez bien vos raccourcis, l'utilisateur
+n'aura que faire du répertoire \verbtexte{"/mnt/\_\$LOGIN/"}. Il
+utilisera uniquement les raccourcis qui se trouvent dans son home. Peu importe
+pour lui de savoir qu'ils pointent en réalité vers un sous-répertoire
+de \verbtexte{"/mnt/\_\$LOGIN/"}, il n'a pas à s'en préoccuper.
+\end{RQ}
+
+\begin{RQ}
+je vous conseille de toujours créer au moins un raccourci à
+la racine du home de l'utilisateur qui se connecte. En effet,
+lorsqu'un utilisateur souhaite enregistrer un fichier via une application quelconque,
+très souvent l'explorateur de fichiers s'ouvre au départ à la racine de son
+home. C'est donc un
+endroit privilégié pour placer les raccourcis vers les partages réseau.
+Il me semble que doubler les raccourcis à la fois à la racine du home
+et sur le bureau de l'utilisateur est une bonne chose.
+Mais bien sûr, tout cela est une question de goût...
+\end{RQ}
+
+
+Étant donné que le montage d'un partage se fait
+avec les droits de l'utilisateur qui se connecte, certains partages
+devront être montés uniquement dans certains cas.
+Prenons l'exemple du partage \verbtexte{netlogon-linux}
+du serveur. Celui-ci n'est accessible qu'au compte \verbtexte{admin} du
+domaine. Pour pouvoir monter ce partage seulement quand c'est
+le compte \verbtexte{admin} qui se connecte, il va falloir
+ajouter ce bout de code dans la fonction
+\verbtexte{ouverture\_perso} du fichier \verbtexte{logon\_perso} :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+function ouverture_perso ()
+{
+    # Montage du partage "netlogon-linux" seulement dans le cas 
+    # où c'est le compte "admin" qui se connecte.
+    if [ "$LOGIN" = "admin" ]; then
+        # Cette partie là ne sera exécutée qui si c'est admin qui se connecte.
+        monter_partage "//$SE3/netlogon-linux" "clients-linux" \ENTREE
+            "$REP_HOME/clients-linux" \ENTREE
+            "$REP_HOME/Bureau/clients-linux"
+    fi
+}
+\end{lstlisting}
+%$
+%
+\begin{RQ}
+attention, en Bash, le crochet ouvrant au niveau du \verbtexte{if} doit
+absolument être précédé et suivi d'un espace et le crochet fermant doit
+absolument être précédé d'un espace.
+\end{RQ}
+%
+Autre cas très classique, celui d'un partage \textbf{accessible uniquement à
+un groupe}. Là aussi, une structure avec un \verbtexte{if} s'impose :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+function ouverture_perso ()
+{
+    # On décide que le montage du partage "administration" sera seulement effectué si
+    # c'est un compte qui appartient au groupe "Profs" qui se connecte.
+    if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"; then
+        monter_partage "//$SE3/administration" "administration" \ENTREE
+            "$REP_HOME/administration sur le réseau" \ENTREE
+            "$REP_HOME/Bureau/administration sur le réseau"
+    fi
+}
+\end{lstlisting}
+%
+L'instruction \og \verbtexte{if est\_dans\_liste "\$LISTE\_GROUPES\_LOGIN" "Profs"; then} \fg{}
+doit s'interpréter ainsi : \og si dans la liste des groupes dont est membre le compte qui
+se connecte actuellement il y a le groupe \verbtexte{Profs}, autrement dit si
+le compte qui se connecte actuellement appartient au groupe \verbtexte{Profs},
+alors... \fg{}
+
+\begin{alerte}
+Attention, le test \verbtexte{if} ci-dessus est sensible à la casse
+si bien que le résultat ne sera pas le même si vous mettez \verbtexte{"Profs"}
+ou \verbtexte{"profs"}. Par conséquent, prenez bien la peine de regarder
+le nom du groupe qui vous intéresse avant de l'insérer dans un test \verbtexte{if}
+comme ci-dessus afin de bien respecter les minuscules et les majuscules.
+\end{alerte}
+
+Si vous voulez savoir le nom des partages disponibles pour
+un utilisateur donné, par exemple \verbtexte{toto}, il vous
+suffit de lancer la commande suivante sur le serveur en tant
+que \verbtexte{root} :
+%
+%
+\begin{lstlisting}
+smbclient --list localhost -U toto
+# Il faudra alors saisir le mot de passe de toto.
+\end{lstlisting}
+%
+Parmi la liste des partages, l'un d'eux est affiché sous le nom
+de \verbtexte{home}. Il correspond au home de \verbtexte{toto}
+sur le serveur. Ce partage est un peu particulier car il pointera
+vers un répertoire différent en fonction du compte qui tente d'y
+accéder. Par exemple, si \verbtexte{titi} veut accéder à ce partage,
+alors il sera rédirigé vers le répertoire \verbtexte{/home/titi/} du serveur.
+Chaque utilisateur a le droit de monter ce partage,
+mais attention le chemin UNC est en fait
+\verbtexte{//SERVEUR/homes} (avec un \og s \fg{} à la fin et d'ailleurs
+dans le fichier de configuration Samba ce partage est bien défini
+par la section \verbtexte{homes}).
+A priori, on pourra monter ce partage pour tous les comptes
+du domaine donc pas besoin de structure \verbtexte{if} pour
+ce partage :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+function ouverture_perso ()
+{
+    # Montage du sous-répertoire "Docs" du partage "homes" pour tout le monde.
+    monter_partage "//$SE3/homes/Docs" "Docs" \ENTREE
+        "$REP_HOME/Documents de $LOGIN sur le réseau" \ENTREE
+        "$REP_HOME/Bureau/Documents de $LOGIN sur le réseau"
+}
+\end{lstlisting}
+%$
+%
+Dans l'exemple ci-dessus, on ne monte pas le partage \verbtexte{homes}
+mais uniquement le sous-répertoire \verbtexte{Docs} de ce partage.
+Comme d'habitude sous GNU/Linux, respectez bien la casse des noms de
+partages et de répertoires.
+
+Pour l'instant, de par la manière dont la fonction
+\verbtexte{monter\_partage} est définie, on peut créer uniquement
+des liens qui pointent vers la racine du partage associé. Mais on
+peut vouloir  par exemple monter un partage et créer des liens uniquement
+vers des sous-répertoires de ce partage (et non vers sa racine). C'est tout
+à fait possible avec la fonction \verbtexte{creer\_lien}. Voici un exemple :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+function ouverture_perso ()
+{
+    # Montage du partage "homes" pour tout le monde, mais ici on ne créé pas de
+    # lien vers la racine de ce partage (appel de la fonction avec seulement deux
+    # arguments).
+    monter_partage "//$SE3/homes" "home"
+    
+    # Ensuite on crée des liens mais ceux-ci ne pointent pas à la racine du partage.
+    creer_lien "home/Docs" "$REP_HOME/Documents de $LOGIN sur le réseau"
+    creer_lien "home/Bureau" "$REP_HOME/Bureau de $LOGIN sous Windows"
+}
+\end{lstlisting}
+%$
+%
+Le premier argument de la fonction \verbtexte{creer\_lien} est la cible
+du ou des liens à créer. Cette cible peut s'écrire sous la forme
+d'un chemin absolu, c'est-a-dire un chemin qui commence par un antislash (ce qui
+n'est pas le cas ci-dessus). Si le chemin ne commence pas par un antislash,
+alors la fonction part du principe que c'est un chemin relatif qui part
+de \verbtexte{/mnt/\_\$LOGIN/}%
+%
+\footnote{Du coup, mettre \verbtexte{"home/Docs"} ou mettre
+\verbtexte{/mnt/\_\$LOGIN/home/Docs} comme premier argument
+revient exactement au même.}.
+%
+Ensuite, le deuxième argument et les
+suivants (autant qu'on veut) sont les chemins absolus du ou des
+liens qui seront
+créés. Ces chemins doivent impérativement tous commencer par
+\verbtexte{"\$REP\_HOME/..."}.
+
+
+
+
+
+
+
+\subsection{Quelques bricoles pour les perfectionnistes}
+
+
+
+
+
+
+
+\subsubsection{Changer les icônes représentants les liens pour faire plus joli}
+\label{changer-icone}
+
+C'est quand même plus joli quand on a des icônes évocateurs%
+%
+\footnote{En informatique, le masculin est autorisé pour le mot icône.}
+%
+comme ci-dessous pour nos liens vers les partages, non ?
+%
+\begin{center}
+\includegraphics[width=0.2\linewidth]{icones_jolis1}
+\label{captureic}
+\end{center}
+%
+Et bien ça tombe bien car 
+c'est facile à faire avec la fonction \verbtexte{changer\_icone}.
+Voici un exemple :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+function ouverture_perso ()
+{
+    # On suppose que le partage "Classe" est déjà monté et qu'un
+    # lien vers ce partage a déjà été créé sur le bureau...
+    changer_icone "$REP_HOME/Bureau/Classes sur le réseau" \ENTREE
+                  "$REP_HOME/.mes_icones/classe.jpg"
+}
+\end{lstlisting}
+%
+La fonction prend toujours deux arguments. Le premier est le chemin absolu
+du fichier dont on veut changer l'icône. Cela peut être n'importe
+quel fichier (ce n'est pas forcément un des raccourcis qu'on a créé),
+mais par contre il doit impérativement se trouver dans le home
+de l'utilisateur qui se connecte (donc il devra toujours commencer
+par \verbtexte{"\$REP\_HOME/..."}). Ensuite, le deuxième argument
+est le chemin absolu de n'importe quel fichier image (du moment
+que le compte qui se connecte peut y avoir accès en lecture).
+
+Une idée possible (parmi d'autres) est de modifier le profil par
+défaut des d'utilisateurs et d'y placer un répertoire 
+\verbtexte{.mes\_icones/} dans lequel vous mettez tous les icônes
+dont vous avez besoin pour habiller vos liens. Ensuite, vous
+pourrez aller chercher vos icônes dans le home de l'utilisateur
+qui se connecte (dans \verbtexte{"\$REP\_HOME/.mes\_icones/"} précisément)
+de manière similaire à ce qui est fait dans exemple
+ci-dessus.
+
+\begin{alerte}
+Attention, la fonction \verbtexte{changer\_icone} n'a aucun effet
+sous la distribution Xubuntu qui utilise l'environnement de bureau
+Xfce. Cela vient du fait que personnellement je ne sais pas
+changer l'image d'un icône en ligne de commandes sous Xfce. Si vous
+savez, n'hésitez pas à me donner l'information par mail
+car je pourrais ainsi étendre la fonction \verbtexte{changer\_icone}
+à l'environnement de bureau Xfce.
+\end{alerte}
+
+
+
+
+\subsubsection{Changer le papier peint en fonction des utilisateurs}
+\label{papier-peint}
+
+Ça pourrait être sympathique d'avoir un papier différent
+suivant le type de compte... Et bien c'est possible avec la
+fonction \verbtexte{changer\_papier\_peint}. Voici un exemple :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+function ouverture_perso ()
+{
+    if [ "$LOGIN" = "admin" ]; then
+        changer_papier_peint "$REP_HOME/.backgrounds/admin.jpg"
+    fi
+}
+\end{lstlisting} %$
+%
+Le seul et unique argument de cette fonction est le chemin absolu
+(sur la machine cliente) du fichier image servant pour le fond d'écran.
+Il faut bien sûr que ce fichier image soit au moins accessible en
+lecture pour l'utilisateur qui se connecte.
+
+Là aussi, comme pour les icônes, l'idée est de placer dans le
+profil par défaut distant un répertoire \verbtexte{.backgrounds/}
+(par exemple) qui contiendra les deux ou trois fichiers images
+dont vous avez besoin pour faire vos fonds d'écran. Voici un
+exemple dans le cas d'un compte professeur :
+%
+\begin{center}
+\includegraphics[width=0.8\linewidth]{bureau-message}
+\end{center}
+%
+En plus du changement de fond d'écran, il y a un petit message
+personnalisé qui s'affiche en haut à droite du bureau.
+Pour mettre en place ce genre de message, voir la
+section~\ref{conky} page~\pageref{conky}.
+
+\subsubsection{L'activation du pavé numérique}
+\label{pave-num}
+
+Pour activer le pavé numérique du client GNU/Linux
+au moment de l'affichage de la
+fenêtre de connexion du système, en principe ceci devrait
+fonctionner :
+%
+\begin{lstlisting}
+function initialisation_perso ()
+{
+    # On active le pavé numérique au moment de la phase d'initialisation.
+    activer_pave_numerique
+}
+\end{lstlisting}
+%
+Vous pouvez remarquer que, cette fois-ci, c'est le contenu
+de la fonction \verbtexte{initialisation\_perso} qui a été
+édité.
+
+En revanche, pour activer le pavé numérique au moment de
+l'ouverture de session, procéder exactement de la même façon à l'intérieur
+de la fonction \verbtexte{ouverture\_perso} risque de ne pas
+fonctionner, et cela pour une raison de timing.
+En effet, au moment où la fonction \verbtexte{ouverture\_perso}
+sera lancée, l'ouverture de session ne sera pas complètement
+terminée%
+%
+\footnote{Et c'est normal qu'il en soit ainsi puisque l'ouverture
+de session de termine \textbf{après} l'exécution du script de logon, même
+pas immédiatement après mais 1 ou 2 secondes après selon la
+rapidité de la machine hôte.}
+%
+et l'activation du pavé numérique risque d'être
+annulée lors de la fin de l'ouverture de session. L'idée est
+donc de programmer l'appel de la fonction \verbtexte{activer\_pave\_numerique}
+\textbf{après} l'exécution du script de logon,
+seulement au bout de quelques secondes (par exemple $5$), afin de
+lancer l'activation du pavé numérique une fois l'ouverture de session
+achevée :
+%
+\begin{lstlisting}
+function ouverture_perso ()
+{
+    # On ajoute un argument à l'appel de la fonction activer_pave_numerique.
+    # Ici, cela signifie que l'activation du pavé numérique sera lancée 5
+    # secondes après que le script de logon soit terminé, ce qui laissera
+    # le temps à l'ouverture de session de se terminer.
+    activer_pave_numerique "5"
+}
+\end{lstlisting}
+%
+
+
+\subsubsection{Incruster un message sur le bureau des utilisateurs pour faire classe}
+\label{conky}
+
+Pour incruster un message sur le bureau des utilisateurs, il
+faudra d'abord que le paquet \verbtexte{conky} soit installé%
+\footnote{Vous pouvez par exemple lancer l'installation via
+un script \verbtexte{*.unefois} qui contiendrait à peu de
+choses près l'instruction \verbtexte{apt-get install {-}{-}yes conky}.}
+sur le client GNU/Linux.
+Ensuite, tentez de mettre ceci dans
+la fonction \verbtexte{ouverture\_perso} :
+%
+\begin{lstlisting}
+function ouverture_perso ()
+{
+    # On crée un fichier de configuration .conkyrc dans le home de l'utilisateur.
+    # précisant le contenu du message ainsi que certains paramètres (comme la
+    # taille de la police par exemple).
+    cat > "$REP_HOME/.conkyrc" <<FIN
+use_xft yes
+xftfont Arial:size=10
+double_buffer yes
+alignment top_right
+update_interval 1
+own_window yes
+own_window_transparent yes
+override_utf8_locale yes
+text_buffer_size 1024
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+TEXT
+Bonjour $NOM_COMPLET_LOGIN,
+Pensez bien à enregistrer vos données personnelles
+dans le dossier :
+
+     Documents de $LOGIN sur le réseau
+     
+qui se trouve sur le bureau, et uniquement dans ce
+dossier, sans quoi vos données seront perdues une
+fois votre session fermée.
+
+   Cordialement.
+   Les administrateurs du réseau pédagogique.
+FIN
+
+    # On fait de "$LOGIN" le propriétaire du fichier .conkyrc.
+    chown "$LOGIN:" "$REP_HOME/.conkyrc"
+    chmod 644 "$REP_HOME/.conkyrc"
+    
+    # On lancera conky à la fin, une fois l'exécution du script logon terminée.
+    # Pour être sûr que l'ouverture de session est achevée, on laisse un délai
+    # de 5 secondes entre la fin du script de logon et le lancement de la
+    # commande conky (avec ses arguments).
+    executer_a_la_fin "5" conky --config "$REP_HOME/.conkyrc"
+}
+\end{lstlisting} %$
+%
+En principe, vous devriez voir apparaître un message incrusté
+sur le bureau des utilisateurs en haut à droite. Ce message
+sera légèrement personnalisé puisqu'il contiendra le nom
+de l'utilisateur connecté.
+
+
+
+
+
+
+\subsubsection{Exécuter des commandes au démarrage tous les 30 jours}
+
+Toutes les commandes que vous mettrez à l'intérieur de la fonction
+\verbtexte{initialisation\_perso} du fichier \verbtexte{logon\_perso} seront
+exécutées à chaque phase d'initialisation du système ce qui
+peut parfois s'avérer un peu trop fréquent à votre goût.
+Voici un exemple de fonction \verbtexte{initialisation\_perso}
+qui vous permettra d'exécuter des commandes (peu importe
+lesquelles ici) au démarrage du système tous les 30 jours
+(pour peu que le système ne reste pas éteint indéfiniment bien sûr) :
+%
+\begin{lstlisting}
+function initialisation_perso ()
+{
+    local indicateur
+    indicateur="/etc/se3/action_truc"
+    # Si le fichier n'existe pas alors il faut le créer.
+    [ ! -e "$indicateur" ] && touch "$indicateur"
+
+    # On teste si la phase d'initialisation correspond à un démarrage du système.
+    if "$DEMARRAGE"; then
+        # On teste si la date de dernière modification du fichier est > 29 jours.
+        if find "$indicateur" -mtime +29 | grep -q "^$indicateur$"; then
+            echo "Les conditions sont vérifiées, on lance les actions souhaitées."
+            action1
+            action2
+            # etc. 
+            
+            # Si tout s'est bien déroulé, alors on peut mettre à jour la date
+            # de dernière modification du fichier avec la commande touch.
+            if [ "$?" = "0"  ]; then
+                touch "$indicateur"
+            fi
+        fi
+    fi
+}
+\end{lstlisting}
+%
+L'idée de ce code est plus simple qu'il n'y paraît. Chaque client GNU/Linux
+intégré au domaine possède un répertoire local \verbtexte{/etc/se3/}
+(accessible en lecture et en écriture au compte \verbtexte{root}
+uniquement). Dans ce répertoire, le script y place un fichier texte
+vide qui se nomme \verbtexte{action\_truc} (c'est un exemple) et
+dont le seul but est de fournir une date de dernière modification.
+Au départ, cette date de dernière modification coïncide au
+moment où le fichier est créé. Si, lors d'un prochain
+démarrage, cette date de dernière modification est vieille de
+30 jours ou plus, alors les actions sont exécutées et la date
+de dernière modification du fichier \verbtexte{action\_truc}
+est modifiée artificiellement en la date du jour avec la
+commande \verbtexte{touch}.
+
+
+
+
+
+\section{Les logs pour détecter un problème}
+
+Après modification du script de logon, vous n'obtiendrez
+peut-être pas le comportement souhaité. Peut-être parce que vous
+aurez tout simplement commis des erreurs. Afin de faire un diagnostic, il
+vous sera toujours possible de consulter, \textbf{sur un client
+GNU/Linux}, quelques fichiers log qui se trouvent tous dans le répertoire
+\verbtexte{/etc/se3/log/}. Voici la liste des fichiers log
+disponibles : 
+
+
+%
+\begin{itemize}
+
+\item \verbtexte{0.maj\_logon.log} : la mise à jour du script de
+logon local (via son remplacement par une copie de la version distante) est
+un moment important et ce fichier indiquera si cette mise à jour
+a marché ou non. La date de la mise à jour y est indiquée.
+
+
+\item \verbtexte{1.initialisation.log} : ce fichier contiendra
+tous les messages (d'erreur ou non) suite à l'exécution du script
+de logon \textbf{local} lors de la phase d'initialisation.
+
+\item \verbtexte{1.initialisation\_distant.log} : ce fichier contiendra
+tous les messages (d'erreur ou non) suite à l'exécution, lors
+de la phase d'initialisation, du script
+de logon \textbf{distant} (celui qui se trouve sur le serveur) et non
+celui qui se trouve en local sur le client GNU/Linux.
+Rappelez-vous que cela se produit quand les deux versions du script
+de logon (la version locale et la version et distante) sont différentes
+(ce qui est censé se produire ponctuellement seulement puisque la version locale
+est ensuite mise à jour).
+
+\item \verbtexte{1.initialisation\_perso.log} : ce fichier contiendra
+tous les messages (d'erreur ou non) suite à l'exécution, lors
+de la phase d'initialisation, de votre fonction \verbtexte{initialisation\_perso}.
+
+\item \verbtexte{2.ouverture.log} : ce fichier contiendra
+tous les messages (d'erreur ou non) suite à l'exécution du script
+de logon local lors de la phase d'ouverture.
+
+\item \verbtexte{2.ouverture\_perso.log} : ce fichier contiendra
+tous les messages (d'erreur ou non) suite à l'exécution, lors
+de la phase d'ouverture, de votre fonction \verbtexte{ouverture\_perso}.
+
+\item \verbtexte{3.fermeture.log} : ce fichier contiendra
+tous les messages (d'erreur ou non) suite à l'exécution du script
+de logon local lors de la phase de fermeture.
+
+\item \verbtexte{3.fermeture\_perso.log} : ce fichier contiendra
+tous les messages (d'erreur ou non) suite à l'exécution, lors
+de la phase de fermeture, de votre fonction \verbtexte{fermeture\_perso}.
+
+\end{itemize}
+
+À chaque fois que le script de logon s'exécute, avant d'écrire
+sur le fichier \verbtexte{xxx.log} adapté à la situation du moment,
+le fichier \verbtexte{xxx.log}, s'il existe déjà,
+est d'abord vidé de son contenu. Donc les fichiers log ne seront
+jamais très gros. Par exemple, dans le fichier 
+\verbtexte{1.initialisation.log}, vous aurez des informations
+portant uniquement sur la dernière phase d'initialisation effectuée par
+le client GNU/Linux (pas sur les phases d'initialisation précédentes).
+
+\section{Le cas des classes nomades}
+\label{classes-nomades}
+
+Utiliser GNU/Linux sur des ordinateurs portables dans un domaine Se3 présente un
+atout extraordinaire: le mécanisme des profils (voir
+section~\ref{mecanisme-profils}, page~\pageref{mecanisme-profils}) limite au
+maximum les échanges entre le serveur et le client une fois la session ouverte.
+Autrement dit, il n'y a aucun risque de voir la session ouverte «~planter~» en
+raison d'une micro-coupure wifi.
+
+L'intégration au domaine d'un ordinateur issu d'une classe nomade ne présente
+qu'une spécificité: le client doit, avant l'ouverture de session, déjà être
+connecté au réseau sans fil. Pour ce faire, il suffira d'indiquer dans le
+fichier \verbtexte{/etc/network/interfaces} le SSID et le mot de passe du réseau
+sans fil auquel le client est censé se connecter.. Il est également recommandé,
+par la même occasion, de désactiver l'interface ethernet, sans quoi le processus
+de boot se trouvera allongé de plusieurs secondes voire dizaines de secondes
+(durant lesquelles le client cherchera à obtenir une IP du serveur sur toutes
+les interfaces activées).
+
+Un moyen extrêmement simple et rapide de réaliser cette manipulation est bien
+sûr d'utiliser \verbtexte{unefois/}. Ainsi, admettons que les clients de votre
+classe nomade soit nommés \verbtexte{nomade-01}, \verbtexte{nomade-02}, jusqu'à
+\verbtexte{nomade-15}. Avant leur intégration au domaine, vous pouvez par
+exemple:
+\begin{itemize}
+ \item déposer dans le répertoire \verbtexte{/var/www/} de votre Se3 le fichier
+\verbtexte{interfaces} configuré par vos soins
+ \item préparer un script intitulé \verbtexte{reseau-nomade.unefois} contenant
+les lignes suivantes\footnote{Changez bien sûr \verbtexte{IP\_DE\_VOTRE\_SE3}...
+par l'IP réelle de votre Se3...} :
+
+\begin{lstlisting}
+#!/bin/bash
+wget http://IP_DE_VOTRE_SE3/interfaces
+mv /etc/network/interfaces /etc/network/interfaces.old
+mv interfaces /etc/network/
+/etc/init.d networking restart
+\end{lstlisting}
+
+ \item déposer dans le répertoire
+\verbtexte{/home/netlogon/clients-linux/unefois/\string^nomade-/} du serveur ledit
+script
+ \item lancer l'intégration au domaine de vos clients
+\end{itemize}
+
+Les ordinateurs de la classe nomade redémarreront une première fois après
+l'intégration au domaine: laissez les branchés en filaire. Lors de leur premier
+boot en version «~intégrés~», les clients récupéreront le fichier de
+configuration du réseau et se connecteront automatiquement au réseau wifi
+adéquat.
+
+Le jour où vous aurez besoin de faire d'importantes mises à jour, vous pourrez
+tout aussi facilement refaire momentanément basculer ces postes en filaire...
+
+
+\section{Un mot sur les imprimantes}
+\label{imprimante}
+
+Ne disposant personnellement d'aucune imprimante réseau, je n'ai jamais pu tester
+ce qui suit%
+\footnote{Si vous avez du code bash à me proposer pour automatiser
+l'installation des imprimantes sur les clients GNU/Linux via par exemple la fonction
+\verbtexte{initialisation\_perso}, je suis preneur
+(\email{francois.lafont@crdp.ac-versailles.fr}).}%
+%
+.
+Je suis donc loin de maîtriser l'aspect \og gestion des imprimantes \fg{} sur les
+clients GNU/Linux. Ceci étant, il faut bien évoquer ce point très important.
+
+Sur un client GNU/Linux, le répertoire \verbtexte{/mnt/netlogon/divers/}
+contient un sous-répertoire nommé \verbtexte{imprimantes/}  qui vous permettra
+de stocker de manière centralisée des fichiers \verbtexte{.ppd}
+(pour \og PostScript Printer Description \fg) qui sont des sortes
+de drivers permettant d'installer
+des imprimantes sur les clients GNU/Linux. Vous pouvez télécharger de tels
+fichiers (qui dépendent du modèle de l'imprimante) sur ce site par exemple :
+%
+\begin{center}
+\url{http://www.openprinting.org/printers}
+\end{center}
+%
+Supposons que, dans le répertoire \verbtexte{/mnt/netlogon/divers/imprimantes/},
+se trouve  le fichier \verbtexte{.ppd} d'un modèle d'imprimante réseau donné,
+vous pouvez alors
+lancer son installation sur un client GNU/Linux via la commande suivante
+(en tant que \verbtexte{root}) :
+%
+\begin{lstlisting}[emph={ENTREE},emphstyle={\return}]
+lpadmin -p NOM-IMPRIMANTE -v socket://IP-IMPRIMANTE:9100 \ENTREE
+    -E -P /mnt/netlogon/divers/imprimantes/fichier.ppd
+\end{lstlisting}
+%
+Cette commande doit être en principe exécutée une seule fois sur le client
+GNU/Linux. Si tout va bien, vous devriez ensuite%
+%
+\footnote{Même après redémarrage du système.}
+%
+être en mesure d'imprimer
+tout ce que vous souhaitez à travers vos applications favorites
+(navigateur Web, traitement de texte, lecteur de PDF etc).
+Si plusieurs imprimantes sont installées sur un client, 
+pour faire en sorte que l'imprimante \verbtexte{NOM-IMPRIMANTE}
+soit l'imprimante par défaut, il faut exécuter en tant que \verbtexte{root} :
+%
+\begin{lstlisting}
+lpadmin -d NOM-IMPRIMANTE 
+\end{lstlisting}
+%
+Et pour supprimer l'imprimante :
+%
+\begin{lstlisting}
+lpadmin -x NOM-IMPRIMANTE 
+\end{lstlisting}
+
+
+
+
+
+
+\section{Désinstallation/réinstallation du paquet se3-clients-linux}
+\label{desinstallation}
+
+
+\subsection{Désinstallation complète}
+
+Si jamais vous souhaitez désinstaller complètement le paquet \verbtexte{se3-clients-linux}
+de votre serveur, rien de plus simple. En tant que \verbtexte{root} sur le serveur,
+il suffit de lancer la commande suivante :
+%
+\begin{lstlisting}
+apt-get purge se3-clients-linux
+\end{lstlisting}
+%
+Et c'est tout. Une fois la commande ci-dessus exécutée,
+votre serveur ne garde \textbf{plus la moindre trace} d'installation du
+paquet \verbtexte{se3-clients-linux}.
+
+\begin{alerte}
+Attention, en désinstallant le paquet de la sorte (avec \verbtexte{apt-get purge}),
+tout le répertoire \verbtexte{/home/netlogon/clients-linux/}
+du serveur (et tout ce qu'il contient) sera effacé.
+Si vous aviez pris la peine de vous concocter un fichier
+\verbtexte{logon\_perso} à votre sauce, d'écrire de nombreux
+scripts dans le répertoire \verbtexte{unefois/} etc., tout sera
+purement et simplement effacé.
+\end{alerte}
+
+\subsection{Désinstallation partielle en vue d'une réinstallation}
+\label{reinstallation}
+
+
+Avec la commande ci-dessous (où l'instruction \verbtexte{purge}
+est remplacée par \verbtexte{remove}), les choses se passent un peu différemment :
+%
+\begin{lstlisting}
+apt-get remove se3-clients-linux
+\end{lstlisting}
+%
+Le paquet \verbtexte{se3-clients-linux} est bien désinstallé
+comme dans le cas précédent, sauf que le répertoire 
+\verbtexte{/home/netlogon/clients-linux/} du serveur n'est
+pas totalement effacé. Tous les fichiers/répertoires que
+vous avez le droit de modifier seront conservés, si
+bien que l'arborescence du répertoire ressemblera à ceci :
+%
+\begin{lstlisting}[emph={logon_perso,skel,unefois,divers},emphstyle={\color{green}\textbf}]
+-- clients-linux/
+   |-- bin/
+   |   `-- logon_perso
+   |-- distribs/
+   |   |-- precise/
+   |   |   `-- skel/
+   |   `-- squeeze/
+   |       `-- skel/
+   |-- divers/
+   `-- unefois/
+\end{lstlisting}
+%
+Ainsi, après réinstallation du paquet, vous retrouverez inchangés :
+%
+\begin{itemize}
+\item le fichier \verbtexte{logon\_perso} ;
+\item tous les profils distants de chaque distribution 
+prise en charge ;
+\item le contenu du répertoire \verbtexte{divers/} ;
+\item le contenu du répertoire \verbtexte{unefois/}.
+\end{itemize}
+%
+En résumé, une réinstallation du paquet \verbtexte{se3-clients-linux}
+avec conservation des fichiers/dossiers modifiables se fait ainsi :
+%
+\begin{lstlisting}
+apt-get remove se3-clients-linux
+apt-get install se3-clients-linux
+\end{lstlisting}
+%
+Une telle réinstallation du paquet peut être utile si jamais,
+pour une raison ou pour une autre,
+vous avez commis un certain nombre de modifications malheureuses 
+en voulant \og hacker \fg{} certains fichiers du paquet et que vous souhaitez
+repartir de zéro sans pour autant perdre vos fichiers \og personnels%
+%
+\footnote{Ce qu'on appelle les fichiers \og personnels \fg{}, 
+ce sont les fichiers que vous avez le droit de modifier, ceux qui
+sont en vert dans l'arborescence située à la section~\ref{arborescence}
+page~\pageref{arborescence}.}
+%
+\fg{}.
+Autre cas où la réinstallation peut être utile : lors d'une mise à jour
+du paquet (auquel cas d'ailleurs il sera plus naturel d'exécuter la commande
+\og \verbtexte{apt-get dist-upgrade} \fg{}). Dans ce cas aussi, les
+fichiers \og personnels \fg{} seront conservés en l'état.
+
+
+\begin{RQ}
+ici, la notion de fichiers/répertoires \og modifiables \fg{} ou
+\og personnels \fg{} n'est pas à prendre
+au pied de la lettre. Dans l'absolu, vous pouvez tenter de modifier ce que vous
+voulez dans les fichiers du paquet \verbtexte{se3-clients-linux}.
+Simplement, sont considérés comme
+\og modifiables \fg{} (ou \og personnels \fg{})
+seulement les fichiers/répertoires \textbf{conservés}
+lors d'une réinstallation ou d'une mise à jour du paquet.
+\end{RQ}
+
+
+\section{Signaler un problème, faire une remarque etc.}
+
+Étant donné que le paquet \verbtexte{se3-clients-linux} fait partie du
+projet SambaÉdu, le mieux à faire pour signaler un problème, faire
+une remarque etc. est de passer par la liste de diffusion SambaÉdu
+\email{samba-edu@mailinglistes.tice.ac-caen.fr}%
+%
+\footnote{Attention, pour pouvoir écrire à cette liste de diffusion,
+il faut d'abord s'y inscrire :
+\url{http://listes.tice.ac-caen.fr/mailman/listinfo/samba-edu}.}.
+%
+N'hésitez pas à me signaler toute erreur.
+Si vous envoyez un message sur cette liste avec un objet assez évocateur (par exemple
+avec l'expression \og clients GNU/Linux \fg{} dedans), il y a peu de chance
+que je passe à côté. J'essayerai alors de vous répondre et, dans la mesure
+du possible, de rectifier le problème.
+
+
+
+\section{Contribuer à améliorer le paquet}
+
+Dans votre coin, vous avez réussi à modifier le paquet (un script d'intégration,
+le script de logon etc.) afin d'en étendre les fonctionnalités
+(par exemple afin de prendre en charge une nouvelle distribution, un
+autre gestionnaire de bureau qui a votre faveur et qui n'est pas actuellement
+pris en charge par le paquet etc. etc. etc.) ? Si c'est le cas, n'hésitez surtout
+pas à nous en faire part sur la liste de diffusion
+\email{se3-devel@listes.tice.ac-caen.fr}. Nous serons ravis d'intégrer au paquet
+vos contributions pour peu que vous les ayez déjà testées avant%
+%
+\footnote{Car tester une fonctionnalité prend du temps (la coder aussi d'ailleurs),
+et c'est le temps qui nous limite dans l'élaboration du paquet et
+non un manque de volonté bien sûr.}.
+
+
+
+
+
+\section{Les évolutions du paquet}
+
+Ci-dessous, vous trouverez le contenu du fichier \verbtexte{changelog}
+du paquet. C'est une sorte de journal qui décrit les modifications
+du paquet au fur et à mesure du temps :
+
+\begin{center}
+\noindent\hrulefill\par
+\verbatiminput{../se3-clients-linux/DEBIAN/changelog}
+\noindent\hrulefill
+\end{center}

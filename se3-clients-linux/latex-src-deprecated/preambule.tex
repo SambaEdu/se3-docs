@@ -1,0 +1,169 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{relsize}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{manfnt}
+\usepackage{wasysym}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xstring}
+\usepackage{currfile}
+\usepackage{xspace}
+\usepackage{verbatim}
+\usepackage[vscale=0.85,hscale=0.87]{geometry}
+\usepackage{babel}
+\usepackage{hyperref}
+
+
+\graphicspath{{./images/}}
+
+\edef\fichierPreambule{\currfilename}
+
+% La version du paquet. Il faut que le fichier de documentation
+% respecte la nomenclateur doc_v<version>.<extension>.
+\def\version{\StrBehind*{\currfilebase}{doc_v}}
+
+
+\setlength{\parindent}{0.8em}
+
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[LCR]{}
+\fancyfoot[R]{\thepage/\pageref{LastPage}}
+\fancyfoot[LC]{}
+
+\hypersetup{%
+  colorlinks,% colorie les liens
+  urlcolor=cyan,% couleur des \url ou \href
+  linkcolor=red,% couleur des liens internes (titres de section etc.)
+}
+
+
+\makeatletter
+\renewcommand{\LT@makecaption}[3]{%
+\LT@mcol\LT@cols c{\hbox to\z@{%
+\hss\parbox[t]\LTcapwidth{\sbox\@tempboxa{#1{#2\CaptionSeparator}#3}%
+\ifdim\wd\@tempboxa>\hsize #1{#2\CaptionSeparator}#3\else%
+\hbox to\hsize{\hfil\box\@tempboxa\hfil}\fi\endgraf\vskip\baselineskip}\hss}}}
+\makeatother 
+
+
+
+% L'environnement alerte                        
+\newsavebox{\boiteBrouillon}
+\newcommand{\virageDanger}{\textdbend}
+
+\newlength{\LargeurBouleAlerte}
+\settowidth{\LargeurBouleAlerte}{%
+  \begin{tikzpicture}%
+    \node{\virageDanger};%
+  \end{tikzpicture}%
+}
+
+% Style pour la boîte alerte
+\tikzstyle{boitealerte}=[draw=red,rounded corners,inner xsep=1em,inner ysep=1ex]
+
+% Style pour la boule alerte
+\tikzstyle{boulealerte}=[circle,ball color=red,text=white] 
+
+\newenvironment{alerte}{%
+  \begin{lrbox}{\boiteBrouillon}% On sauve dans \boiteBrouillon le contenu
+    \begin{minipage}{.8\linewidth}%  
+      \color{red}%
+      \setlength{\parskip}{1ex plus 0.2ex minus 0.2ex}%
+}{%
+    \end{minipage}%
+  \end{lrbox}% Fin. Attention lrbox stocke du contenu sur 1 ligne (pas de paragrpahe)
+  % La boîte peut être utilisée via \usebox{\boiteBrouillon}
+  \vspace{1.75ex}% Si on met 1.5ex comme en bas, alors visuellement l'espace semble plus petit qu'en bas.
+  \begin{tikzpicture}%
+    \node [boitealerte] (cadre) {%
+      \hspace{0.5\LargeurBouleAlerte}%
+      \usebox{\boiteBrouillon}%
+    };%
+    \node [boulealerte] (alerte) at (cadre.west) {\virageDanger};%
+  \end{tikzpicture}%
+  \vspace{1.5ex}%
+}   
+
+
+% L'indentation des listes (ainsi que le réglage du label)
+\setenumerate[1]{label=\arabic*.,ref=\arabic*,leftmargin=2em}
+\setenumerate[2]{label=\alph*.,ref=\theenumi.\alph*,leftmargin=2em}
+\setitemize[1]{label=\textbullet,leftmargin=2em}
+\setitemize[2]{label=--,leftmargin=2em}
+
+% Pour citer verbatim du texte comme les noms de menu etc.
+% Les caractères spéciaux comme _, $ etc. doivent être échappés.
+\newcommand{\verbtexte}[1]{%
+  \begingroup%
+  \bfseries%
+  \color{teal}
+  %\smaller%
+  \texttt{#1}%
+  \endgroup%
+}
+
+\lstset{language=bash,%
+        basicstyle=\ttfamily,%
+        commentstyle=\color{gray}\small,%
+        showspaces=false,%
+        showstringspaces=false,
+        numbers=none,%left
+        frame=single,%
+        keepspaces=true,%
+        flexiblecolumns=true,%
+        morekeywords={elif},
+        literate={é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {à}{{\`a}}1 %
+                 {î}{{\^i}}1 {É}{{\'E}}1 {ç}{{\c c}}1 {ù}{{\`u}}1 %
+                 {ï}{{\"i}}1 {â}{{\^a}}1 {û}{{\^u}}1,%
+}
+
+\newcommand{\return}[1]{\color{orange}\textbf{<Touche ENTR\'EE>}}
+
+\newcommand{\Sedu}{SambaÉdu3\xspace}
+\newcommand{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
+\newenvironment{RQ}{%
+  \begin{center}%
+  \begin{minipage}{0.85\linewidth}%
+  \smaller%
+  \textbf{Remarque :}%
+}{%
+  \end{minipage}%
+  \end{center}%
+}
+
+
+%% La macro \HeureCompilation donne l'heure de la compilation sous
+%% la forme 21h37
+\newcount\Heure
+\newcount\Minute
+\newcommand{\HeureCompilation}{%
+  \Heure=\time %
+  \divide \Heure by 60 %
+  \multiply \Heure by 60 %
+  \Minute=\time %
+  \advance\Minute by -\Heure %
+  \divide\Heure by 60 %
+  \the\Heure h% ou bien heure\ifnum\Heure>1 s\fi
+  \ifnum\Minute<10 %
+     0\the\Minute %  ou bien minute\ifnum\Minute>1 s\fi
+   \else %
+     \the\Minute %
+   \fi %
+}
+
+
+%\newcommand{\Vers}{\rightarrow}
+\newcommand{\Vers}{$\rightarrow$\xspace}
