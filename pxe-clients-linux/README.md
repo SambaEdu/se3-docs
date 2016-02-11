@@ -57,7 +57,7 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 ## Ressources externes
 
 * [la documentation de Sébastien Muller](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
-* [la documentation du module `se3-clients-linux`](https://github.com/flaf/se3-clients-linux/blob/master/doc/README.md)
+* [la documentation du module `se3-clients-linux`](../se3-clients-linux/README.md)
 * [amorçage via `pxe`](https://fr.wikipedia.org/wiki/Preboot_Execution_Environment)
 * [installation de `Debian` par préconfiguration](https://www.debian.org/releases/jessie/amd64/apb.html.fr)
 

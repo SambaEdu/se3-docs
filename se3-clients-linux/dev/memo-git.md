@@ -85,7 +85,7 @@ sûr, vous validez en cliquant avec `Add key`.
 
 
 Tout cela doit être fait avant de lancer
-la commande `git clone git@github.com:flaf/se3-clients-linux.git`
+la commande `git clone git@github.com:SambaEdu/se3-clients-linux.git`
 (voir ci-dessous). Ensuite, les différentes commandes de gestion
 se font en étant dans le répertoire `se3-clients-linux` (voir
 ci-dessous).
@@ -129,7 +129,7 @@ sa machine. On se rend quelque part dans son home où on va créer un
 répertoire, qui contiendra le dépôt, à l'aide de la commande suivante :
 
 ```sh
-git clone git@github.com:flaf/se3-clients-linux.git
+git clone git@github.com:SambaEdu/se3-clients-linux.git
 ```
 
 À partir de là, on a un répertoire `se3-clients-linux` qui vient de se
@@ -396,7 +396,7 @@ vous utilisez à la place (si vous avez pushé un commit avec
 le compte root, Github estimera que le commit provient de
 l'utilisateur `root`). Du coup, votre commit ne vous sera
 pas comptabilisé dans la page des contributeurs qui se
-trouve [ici](https://github.com/flaf/se3-clients-linux/graphs/contributors)
+trouve [ici](https://github.com/SambaEdu/se3-clients-linux/graphs/contributors)
 ce qui serait tellement dommage... ;)
 
 Si vous voulez suivre un peu les commits des autres, une
@@ -433,7 +433,7 @@ git config --global color.branch auto
 ```
 
 Voir les commits est également possible sur Github bien sûr.
-Vous allez sur la page du [dépôt](https://github.com/flaf/se3-clients-linux).
+Vous allez sur la page du [dépôt](https://github.com/SambaEdu/se3-clients-linux).
 Ensuite vous cliquez sur l'onglet `commits` en haut au
 dessus de la barre verte. Là, vous avez l'historique des
 commits. Au niveau d'un commit, vous pouvez cliquer sur le
@@ -443,7 +443,7 @@ en ligne de commandes).
 
 Un lien qui peut être intéressant également, c'est le bouton
 `<>` en face de chaque commit au niveau de la page de
-[l'historique des commits](https://github.com/flaf/se3-clients-linux/commits/master).
+[l'historique des commits](https://github.com/SambaEdu/se3-clients-linux/commits/master).
 Ce bouton vous permet de naviguer dans l'arborescence des
 fichiers tels qu'ils étaient au moment du commit en
 question.
