@@ -3,7 +3,7 @@
 Ce dépôt contient la documentation de certains composants de
 la solution SambaÉdu3 dont le code est hébergé sur Github.
 
-* [Pour la documentation de se3-clients-linux c'est ici](se3-clients-linux/README.md)
-* [Pour la documentation de pxe-clients-linux c'est ici](pxe-clients-linux/README.md)
+* Documentation de [se3-clients-linux](se3-clients-linux/README.md)
+* Documentation de [pxe-clients-linux](pxe-clients-linux/README.md)
 
 
