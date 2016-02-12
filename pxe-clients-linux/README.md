@@ -52,6 +52,7 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 ## Annexes
 
 * [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](testing.md)
+* [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md)
 
 
 ## Ressources externes
