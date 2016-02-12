@@ -21,7 +21,7 @@ La méthode est la même que celle décrite pour le paquet `se3-clients-linux` :
 nano /etc/apt/sources.list.d/se3.list
 ```
 Décommentez la ligne associée au dépôt `se3testing`
-![decommenter ligne](/doc/images/pxe_tftp_05.png)
+![decommenter ligne](images/pxe_tftp_05.png)
 
 Sauvegardez cette modification (combinaison de touches `Ctrl+o`) et fermer le fichier (combinaison de touches `Ctrl+x`)
 
@@ -41,7 +41,7 @@ apt-get install se3-clonage se3-clients-linux
 nano /etc/apt/sources.list.d/se3.list
 ```
 Commentez la ligne associée au dépôt `se3testing`
-![commenter ligne](/doc/images/pxe_tftp_04.png)
+![commenter ligne](images/pxe_tftp_04.png)
 
 Sauvegardez cette modification (combinaison de touches `Ctrl+o`) et fermer le fichier (combinaison de touches `Ctrl+x`)
 
