@@ -88,7 +88,7 @@ Dans le second cas, il faudra laisser **un espace libre** à côté des partitio
 ### Le mot de passe
 
 Nous en avons déjà parlé dans les prérequis : indispensable !
-![module tftp mot de passe](/doc/images/pxe_tftp_01.png)
+![module tftp mot de passe](images/pxe_tftp_01.png)
 
 ### Les environnements de Bureau
 
@@ -99,7 +99,7 @@ Choisissez votre environnement de Bureau parmi ceux proposés dans l'interface w
 * `Xfce`
 
 Vous pouvez en choisir plusieurs mais nous vous conseillons de n'en choisir qu'un seul. La plus utilisée est `Gnome`, les autres étant plus légères : votre choix tiendra compte du matériel sur lequel vous faite l'installation et de votre familiarité avec l'un ou l'autre de ces environnements de Bureau. Vous pourrez bien entendu revenir sur ce choix autant de fois que vous le désirez, en n'oubliant pas de valider.
-![module tftp mot de passe](/doc/images/pxe_tftp_02.png)
+![module tftp mot de passe](images/pxe_tftp_02.png)
 
 Vous pouvez aussi choisir **une installation manuelle** : il faudra alors répondre aux questions posées lors de l'installation du système d'exploitation ; l'intégration et la post-installation ne sera pas faite non plus dans ce cas-là.
 
@@ -125,7 +125,7 @@ Le serveur `se3`, s'il est à jour, propose un miroir local par le biais du paqu
 Ce système permet une gestion souple et efficace des paquets.
 
 Cependant, si vous désirez gérer votre propre miroir local sur un autre serveur, cela est possible en cochant la case correspondante, en indiquant son adresse `IP` et le chemin du miroir sur ce serveur distant.
-![module tftp mot de passe](/doc/images/pxe_tftp_03.png)
+![module tftp mot de passe](images/pxe_tftp_03.png)
 
 Dans ce cas là, il faudra redéclencher la mise en place du dispositif comme cela est indiqué ci-dessus.
 
