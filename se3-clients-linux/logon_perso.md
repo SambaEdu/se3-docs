@@ -432,7 +432,7 @@ function ouverture_perso ()
 
 C'est quand même plus joli quand on a des icônes évocateurs comme ci-dessous pour nos liens vers les partages, non ?
 
-![Jolies icônes](/doc/images/jessie_01.png)
+![Jolies icônes](images/jessie_01.png)
 
 Et bien, ça tombe bien, car c'est facile à faire avec la fonction `changer_icone`.
 
@@ -481,7 +481,7 @@ Là aussi, comme pour les icônes, l'idée est de placer dans le profil par déf
 
 [Ci-dessus](#changer-les-icônes-représentants-les-liens-pour-faire-plus-joli), vous avez un exemple, dans le cas de `Debian/Jessie` pour le compte `admin`, voici un exemple dans le cas d'un compte de type `professeur` et pour `Ubuntu` :
 
-![Exemple bureau prof](/doc/images/bureau-message.png)
+![Exemple bureau prof](images/bureau-message.png)
 
 En plus du changement de fond d'écran, il y a un petit message personnalisé qui s'affiche en haut à droite du bureau. Pour mettre en place ce genre de message, voir la section [incruster un message sur le Bureau](#incruster-un-message-sur-le-bureau-des-utilisateurs-pour-faire-classe).
 
