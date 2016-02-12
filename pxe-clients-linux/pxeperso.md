@@ -49,7 +49,7 @@ apt-get install se3-clonage
 ```
 
 Dans le menu `maintenance.menu`, il apparaîtra maintenant une entrée vers votre menu perso.
-![menu pxe maintenance](/doc/images/menu_pxe_maintenance.png)
+![menu pxe maintenance](images/menu_pxe_maintenance.png)
 
 
 **Menu de base :**
@@ -147,25 +147,25 @@ Lors de la mise en place de `GParted`, il est demandé quelques précisions :
 
 * le clavier
 
-![gparted keymap](/doc/images/gparted_01.png)
+![gparted keymap](images/gparted_01.png)
 
 Il suffira de taper sur la touche `Entrée`.
 
 * la langue d'usage
 
-![gparted langue](/doc/images/gparted_02.png)
+![gparted langue](images/gparted_02.png)
 
 Pour le français, indiquez `08`.
 
 * mode d'utilisation
 
-![gparted mode](/doc/images/gparted_03.png)
+![gparted mode](images/gparted_03.png)
 
 Il suffira de taper sur la touche `Entrée`.
 
 Enfin, on obtient l'interface de gestion des partitions du client.
 
-![gparted interface](/doc/images/gparted_04.png)
+![gparted interface](images/gparted_04.png)
 
 
 ### Installer `Debian Stretch`
