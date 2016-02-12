@@ -42,7 +42,7 @@ On obtient ainsi un client `Gnu/Linux` sur lequel on peut ouvrir une session ave
 ## Démarrage en `PXE`
 
 Pour amorcer une machine via le réseau, avec `PXE`, appuyez sur la touche `F12` lors du démarrage de cet ordinateur.
-![menu pxe demmarage](/doc/images/menu_pxe_demarrage.png)
+![menu pxe demmarage](images/menu_pxe_demarrage.png)
 
 **Remarque :** il faut que le mode `PXE` soit activé dans le `Bios` de l'ordinateur. Voir [les prérequis](misenplace.md#prérequis) concernant les clients linux.
 
@@ -52,24 +52,24 @@ Pour amorcer une machine via le réseau, avec `PXE`, appuyez sur la touche `F12`
 **Remarque :** la navigation dans les menus `PXE` se fait à l'aide des touches `↑` et `↓` ; pour sélectionner une des entrées du menu, il suffit d'utiliser la touche `Entrée`.
 
 Une 1ère étape est proposée afin de sécuriser ce mode de fonctionnement : après avoir choisi l'entrée `Maintenance`…
-![menu pxe entrée](/doc/images/menu_pxe_entree.png)
+![menu pxe entrée](images/menu_pxe_entree.png)
 … un mot de passe est requis.
 
 Ensuite, choisissez l'entrée `Installation`…
-![menu pxe maintenance](/doc/images/menu_pxe_maintenance.png)
+![menu pxe maintenance](images/menu_pxe_maintenance.png)
 
 … et enfin une des entrées `Installation Debian` ou `Installation Ubuntu`.
-![menu pxe installation](/doc/images/menu_pxe_installation.png)
+![menu pxe installation](images/menu_pxe_installation.png)
 
 Vous pourrez alors choisir `l'environnement de Bureau` à installer, selon les architectures `i386` et `amd64` et selon qu'un système d'exploitation est déjà installé (à condition d'avoir laissé un espace vide non formaté) pour obtenir un `double-boot`.
-![menu pxe debian](/doc/images/menu_pxe_debian.png)
+![menu pxe debian](images/menu_pxe_debian.png)
 → dans ce menu, `Gnome` est l'environnement de Bureau proposé.
 
 
 ## Installation du système (phase 1)
 
 L'installation du système choisi se fait automatiquement.
-![menu pxe preseed](/doc/images/menu_pxe_preseed.png)
+![menu pxe preseed](images/menu_pxe_preseed.png)
 
 **Remarque :** la première utilisation de ce mécanisme peut être assez longue mais les installations suivantes seront nettement plus rapides. En effet, l'installation utilise le miroir local géré par le paquet `apt-caher-ng` du serveur `se3` qui doit récupérer (et par la suite mettre à jour si nécessaire) les paquets utiles à l'installation via les dépôts officiels. Une fois ces paquets récupérés, ils sont alors disponibles localement et on profite alors du débit du réseau interne qui est nettement plus rapide.
 
@@ -114,13 +114,13 @@ C'est donc un problème concernant un des firmwares à fournir qui est pourtant 
 
 
 **Problème :** l'installation s'arrête sur le message d'erreur suivant :
-![probleme-installation](/doc/images/probleme_netboot.png)
+![probleme-installation](images/probleme_netboot.png)
 
 **Solution :** mettre à jour les archives netboot `Ubuntu` ou `Debian`, qui ont dû changer lors d'une évolution de version, en revalidant le choix de l'environnement du Bureau (Voir le module `Serveur TFTP` de l'interface du `se3`).
 
 
 **Problème :** l'installation s'arrête sur un message de corruption du miroir
-![probleme-miroir](/doc/images/probleme_miroir.png)
+![probleme-miroir](images/probleme_miroir.png)
 
 **Solution :** rétablir la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation.
 
@@ -148,7 +148,7 @@ Si vous voulez changer le nom ou l'`IP` inscrits dans l'annuaire `Ldap` du serve
 ### Après le redémmarage
 
 Une fois le système installé, la machine redémarre et la post-installation est lancée automatiquement.
-![menu pxe post-installation](/doc/images/menu_pxe_post_installation.png)
+![menu pxe post-installation](images/menu_pxe_post_installation.png)
 
 Au redémarrage suivant, le client `GNU∕Linux` est prêt ;-) et son administration se fait via le paquet `se3-clients-linux`.
 
