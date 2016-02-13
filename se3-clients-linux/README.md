@@ -26,6 +26,7 @@
 * [Désinstallation/réinstallation du paquet `se3-clients-linux`](desinstall_reinstall_paquet.md)
 * [Annexes](#annexes)
 * [Ressources externes](#ressources-externes)
+* [Les contributeurs](#lescontributeurs)
 
 
 
@@ -102,3 +103,17 @@ exclure.
 
 * [Installation de clients `Debian Wheezy` via `Se3` avec intégration automatique](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
 * [Transformer votre client Debian `Jessie` en serveur `LTSP`](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
+
+
+## Les contributeurs
+
+Les personnes qui ont contribué à la rédaction de cette documentation sont :
+
+* Nicolas Aldegheri
+* Louis-Maurice de Sousa
+* Laurent Joëts
+* François Lafont
+* Arnaud Malpeyre
+* Franck Molle
+* Michel Suquet
+
