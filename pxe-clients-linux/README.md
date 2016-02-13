@@ -62,3 +62,9 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 * [amorçage via `pxe`](https://fr.wikipedia.org/wiki/Preboot_Execution_Environment)
 * [installation de `Debian` par préconfiguration](https://www.debian.org/releases/jessie/amd64/apb.html.fr)
 
+
+## Les contributeurs
+
+Les personnes qui ont contribué à la rédaction de cette documentation sont :
+
+* Michel Suquet
