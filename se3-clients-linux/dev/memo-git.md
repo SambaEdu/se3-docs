@@ -363,7 +363,8 @@ trouve à la racine du dépôt local et qui contient toutes les informations
 nécessaires afin que git se débrouille pour que l'arborescence locale soit
 en phase avec la branche sur laquelle on se trouve).
 
-
+Pour plus d'infos sur les branches : création d'une branche local, distante, etc... 
+Voir [cette url](https://ensiwiki.ensimag.fr/index.php/G%C3%A9rer_des_branches_avec_Git#Cr.C3.A9ation_d.27une_branche_locale)
 
 
 ## Voir les pushs des autres avec Git et Gihub
