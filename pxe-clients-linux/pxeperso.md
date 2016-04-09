@@ -2,6 +2,8 @@
 
 * [Vue d'ensemble](#vue-densemble)
 * [Mise en place](#mise-en-place)
+* [Démarrage en `PXE`](#démarrage-en-pxe)
+* [Accès au menu `Perso`](#accès-au-menu-perso)
 * [Exemples d'utilisation](#exemples-dutilisation)
     * [Gparted](#gparted)
         * [Mise en place des fichiers de `GParted`](#mise-en-place-des-fichiers-de-gparted)
@@ -68,6 +70,26 @@ LABEL #####
 ```
 
 Par la suite, vous compléterez ce fichier `perso.menu` par les entrées nécessaires aux applications que vous souhaitez utiliser. Quelques exemples sont donnés ci-dessous.
+
+
+## Démarrage en `PXE`
+
+Pour amorcer une machine via le réseau, avec `PXE`, appuyez sur la touche `F12` lors du démarrage de cet ordinateur.
+![menu pxe demmarage](images/menu_pxe_demarrage.png)
+
+**Remarque :** il faut que le mode `PXE` soit activé dans le `Bios` de l'ordinateur. Voir [les prérequis](misenplace.md#prérequis) concernant les clients linux.
+
+
+## Accès au menu `Perso`
+
+**Remarque :** la navigation dans les menus `PXE` se fait à l'aide des touches `↑` et `↓` ; pour sélectionner une des entrées du menu, il suffit d'utiliser la touche `Entrée`.
+
+Une 1ère étape est proposée afin de sécuriser ce mode de fonctionnement : après avoir choisi l'entrée `Maintenance`…
+![menu pxe entrée](images/menu_pxe_entree.png)
+… un mot de passe est requis.
+
+Il suffit ensuite de choisir l'entrée `Perso` pour avoir accès aux diverses utilisations que vous mettrez en place (voir des exemples ci-dessous).
+![menu pxe perso](images/menu_pxe_maintenance_perso.png)
 
 
 ## Exemples d'utilisation
@@ -141,7 +163,10 @@ LABEL GParted
 
 #### Utilisation
 
-Il suffit de démarrer le client via le mode `pxe` (touche `F12`) et ensuite de choisir le menu `perso` et l'entrée `Gparted`.
+Il suffit de démarrer le client via le mode `pxe` (touche `F12`) et ensuite de choisir le menu `perso` comme cela a été décrit ci-dessus.
+
+Vous choisissez alors l'entrée `Gparted`.
+![menu pxe entrée](images/lancement_pxe_gparted.png)
 
 Lors de la mise en place de `GParted`, il est demandé quelques précisions :
 
