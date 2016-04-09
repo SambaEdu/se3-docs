@@ -88,8 +88,11 @@ Une 1ère étape est proposée afin de sécuriser ce mode de fonctionnement : ap
 ![menu pxe entrée](images/menu_pxe_entree.png)
 … un mot de passe est requis.
 
-Il suffit ensuite de choisir l'entrée `Perso` pour avoir accès aux diverses utilisations que vous mettrez en place (voir des exemples ci-dessous).
+Il suffit ensuite de choisir l'entrée `Perso`…
 ![menu pxe perso](images/menu_pxe_maintenance_perso.png)
+
+…pour avoir accès aux diverses utilisations que vous mettrez en place (voir des exemples ci-dessous).
+
 
 
 ## Exemples d'utilisation
@@ -165,7 +168,10 @@ LABEL GParted
 
 Il suffit de démarrer le client via le mode `pxe` (touche `F12`) et ensuite de choisir le menu `perso` comme cela a été décrit ci-dessus.
 
-Vous choisissez alors l'entrée `Gparted`.
+Vous choisissez alors l'entrée `Gparted` :
+![menu pxe entrée](images/menu_perso_gparted.png)
+
+Et c'est parti :
 ![menu pxe entrée](images/lancement_pxe_gparted.png)
 
 Lors de la mise en place de `GParted`, il est demandé quelques précisions :
