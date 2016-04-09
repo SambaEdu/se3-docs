@@ -51,7 +51,7 @@ apt-get install se3-clonage
 ```
 
 Dans le menu `maintenance.menu`, il apparaîtra maintenant une entrée vers votre menu perso.
-![menu pxe maintenance](images/menu_pxe_maintenance.png)
+![menu pxe maintenance perso](images/menu_pxe_maintenance_perso.png)
 
 
 **Menu de base :**
