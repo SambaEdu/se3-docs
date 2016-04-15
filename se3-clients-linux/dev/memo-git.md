@@ -2,7 +2,7 @@
 
 On suppose ici que vous avez déjà procédé à la création d'un
 compte Github et que vous êtes déjà membre du projet
-`se3-clients-linux`.
+`SambaEdu`.
 
 Si ce n'est pas le cas, avant de lire
 la suite, procédez aux démarches expliquées
