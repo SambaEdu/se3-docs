@@ -17,13 +17,13 @@ une adresse email, on reçoit un mail de confirmation pour
 activer son compte Github etc.
 
 2. Faites savoir que vous voulez devenir membre du projet
-`se3-clients-linux` en écrivant à l'adresse mail indiquée dans
-[ce fichier](../../src/DEBIAN/control) (au niveau du champ
-`Maintainer:`). Dans votre mail, indiquez bien le login de
-votre compte Github afin que l'on sache le nom du compte qui
-doit être intégré au projet. Nous vous répondrons par mail dès
-que possible pour vous indiquer que vous êtes bien désormais
-habilité(e) à contribuer au projet.
+`SambaEdu` en écrivant à l'adresse mail indiquée dans
+[ce fichier](https://github.com/SambaEdu/se3-clients-linux/blob/master/src/DEBIAN/control#L7)
+au niveau du champ `Maintainer:`. Dans votre mail, indiquez
+bien le login de votre compte Github afin que l'on sache le
+nom du compte qui doit être intégré au projet. Nous vous
+répondrons par mail dès que possible pour vous indiquer que
+vous êtes bien désormais habilité(e) à contribuer au projet.
 
 
 ## Memo sur Git
