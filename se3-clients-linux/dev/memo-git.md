@@ -13,7 +13,14 @@ contribuer en pratique au projet à travers d'utilisation du
 programme Git en ligne de commandes (en fait le programme
 Git est éclaté en plusieurs commandes). On suppose que vous
 vous trouvez sur une distribution (pas trop ancienne) Debian
-ou Ubuntu.
+ou Ubuntu. Dans ce tutoriel, on donnera des exemples de
+commandes basées sur le dépôt `se3-clients-linux`. En effet,
+SambaEdu est un projet éclaté en plusieurs dépôts Git distincts
+dont la liste est disponible [ici](https://github.com/SambaEdu?tab=repositories).
+Le dépôt `se3-clients-linux` n'est qu'un dépôt parmi d'autres
+dans cette liste et c'est celui qu'on prendra en exemple
+ci-dessous. Vous pourrez adapter facilement les commandes
+ci-dessous pour le dépôt qui vous intéresse dans la liste.
 
 **Mémo Git**
 * [Installation](#installation)
