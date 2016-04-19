@@ -15,6 +15,7 @@
     * [Les environnements de Bureau](#les-environnements-de-bureau)
     * [Mise en place du mécanisme](#mise-en-place-du-mécanisme)
     * [Mise à jour](#mise-à-jour)
+    * [Fichier de log de la mise en place](#fichier-de-log-de-la-mise-en-place)
     * [Le miroir local](#le-miroir-local)
 
 
@@ -118,13 +119,18 @@ Si une nouvelle version du paquet `pxe-client-linux` est proposée, il suffira d
 De même, si les archives netboot `Ubuntu` ou `Debian` ont changé, cliquez à nouveau sur ce bouton de la partie concernant le choix de l'environnement de Bureau pour mettre à jour les fichiers d'amorce de l'installation via le mode `PXE`.
 
 
+### Fichier de log de la mise en place
+
+Un fichier de log concernant la mise en place du mécanisme est disponible : `/root/compte_rendu_install_client_linux_mise_en_place_${ladate}.txt`.
+
+
 ### Le miroir local
 
 Le serveur `se3`, s'il est à jour, propose un miroir local par le biais du paquet `apt-cacher-ng`.
 
 Ce système permet une gestion souple et efficace des paquets.
 
-Cependant, si vous désirez gérer votre propre miroir local sur un autre serveur, cela est possible en cochant la case correspondante, en indiquant son adresse `IP` et le chemin du miroir sur ce serveur distant.
+Cependant, **si vous désirez gérer votre propre miroir local sur un autre serveur**, cela est possible en cochant la case correspondante, en indiquant son adresse `IP` et le chemin du miroir sur ce serveur distant.
 ![module tftp mot de passe](images/pxe_tftp_03.png)
 
 Dans ce cas là, il faudra redéclencher la mise en place du dispositif comme cela est indiqué ci-dessus.
