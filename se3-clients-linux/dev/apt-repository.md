@@ -1,4 +1,4 @@
-# Utiliser une branche git puis tester le package
+# Utiliser une branche git puis tester le package `se3-clients-linux`
 
 Vous pouvez créer une branche git afin de tester des modifications.
 Un package sera automatiquement créé afin que vous puissiez tester

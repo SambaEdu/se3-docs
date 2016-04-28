@@ -1,9 +1,10 @@
 # Construire le package
 
-Une fois que vous avez cloné ce dépôt, pour construire le
-package, il suffit de lancer le script `./build/build.sh`
-où que vous soyez. Typiquement, si vous vous trouvez à la
-racine de ce dépôt git, il vous suffit de lancer la commande :
+Une fois que vous avez cloné le dépôt `se3-clients-linux`,
+pour construire le package, il suffit de lancer le script
+`./build/build.sh` où que vous soyez. Typiquement, si vous
+vous trouvez à la racine de ce dépôt git, il vous suffit de
+lancer la commande :
 
 ```sh
 ./build/build.sh
