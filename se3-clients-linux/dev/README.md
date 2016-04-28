@@ -78,11 +78,11 @@ fraîchement installé et ensuite il vous suffira de suivre
 les instructions indiquées dans la vidéo ci-dessous (qui
 dure 1 minute environ) :
 
-- la vidéo est disponible [ici](irc-one-minute.mp4) au format
+- la vidéo est [disponible ici](irc-one-minute.mp4) au format
 mp4. Vous pouvez la télécharger (la vidéo ne fait que 4 Mo
 environ) en faisant un clic droit + "enregistrer sous" au
 niveau du bouton `Raw` (à droite de la page).
-- la vidéo est disponible [ici](irc-one-minute.ogv) au format
+- la vidéo est [disponible ici](irc-one-minute.ogv) au format
 ogv. Vous pouvez la télécharger (la vidéo ne fait que 1 Mo
 environ) en faisant un clic droit + "enregistrer sous" au
 niveau du bouton `Raw` (à droite de la page).
