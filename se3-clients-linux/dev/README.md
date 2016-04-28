@@ -14,7 +14,11 @@ L'inscription se fait [à cette page](https://github.com/join).
 Cela prend 5 minutes, c'est une inscription on ne peut plus
 classique : on fournit un identifiant, un mot de passe et
 une adresse email, on reçoit un mail de confirmation pour
-activer son compte Github etc.
+activer son compte Github etc. Si vous êtes inscrit(e) sur
+la liste de diffusion `gnu-linux_et_se3`, choisissez comme
+adresse email sur Github l'adresse email sur laquelle vous
+recevez les messages de la liste de diffusion (voir plus
+bas les explications sur ce point).
 
 2. Faites savoir que vous voulez devenir membre du projet
 `SambaEdu` en écrivant à l'adresse mail indiquée dans
@@ -46,22 +50,64 @@ un [petit memo ici](memo-git.md) qui devrait vous permettre
 de bien débuter.
 
 
-## Comment construire le package `.deb` ?
+## Le channel IRC `#se3`
 
-Vous trouverez toutes les explications nécessaires à [cette page](build-package.md).
+Si vous êtes motivé(e)s pour contribuer mais que rencontrez
+des difficultés techniques, n'hésitez pas à demander de
+l'aide sur IRC (protocole de communication par messages
+instantanés). Une discussion en directe est parfois plus
+rapide et plus efficace qu'un échange par mails pour
+dépanner quelqu'un. Un channel `#se3` est disponible sur le
+serveur `irc.crdp.ac-versailles.fr` (port 6667).
 
+Pour vous connecter, il faut d'abord que vous installiez un
+client IRC sur votre machine. Voici un guide très rapide
+pour y arriver si vous êtes sur un système d'exploitation de
+type Debian ou Ubuntu. D'abord vous installez le client IRC
+`pidgin` (il existe plein d'autres clients IRC) en lançant
+les deux commandes suivantes :
 
-## Dépôt APT de test et branche Git
+```sh
+# Soit en tant que root ou alors avec sudo devant chaque commande.
+apt-get update
+apt-get install pidgin
+```
 
-Il existe un dépôt Debian APT de test qui vous permet de
-tester le paquet dans sa dernière version. Le dépôt est mis
-à jour toutes les 5 minutes. Évidemment c'est pour du test,
-aucune stabilité n'est garantie. Vous trouverez toutes les
-explications nécessaires à [cette page](apt-repository.md).
+Vous pouvez alors lancer alors le programme pidgin
+fraîchement installé et ensuite il vous suffira de suivre
+les instructions indiquées dans la vidéo ci-dessous (qui
+dure 1 minute environ) :
+
+- la vidéo est disponible [ici](irc-one-minute.mp4) au format
+mp4. Vous pouvez la télécharger (la vidéo ne fait que 4 Mo
+environ) en faisant un clic droit + "enregistrer sous" au
+niveau du bouton `Raw` (à droite de la page).
+- la vidéo est disponible [ici](irc-one-minute.ogv) au format
+ogv. Vous pouvez la télécharger (la vidéo ne fait que 1 Mo
+environ) en faisant un clic droit + "enregistrer sous" au
+niveau du bouton `Raw` (à droite de la page).
 
 
 ## Envoyer une notification de ses commits sur la liste `gnu-linux_et_se3`
 
 Vous trouverez toutes les explications nécessaires à [cette page](notification.md).
+
+
+
+
+## Points annexes spécifiques au package `se3-clients-linux`
+
+### Comment construire le package `se3-clients-linux.deb` ?
+
+Vous trouverez toutes les explications nécessaires à [cette page](build-package.md).
+
+### Dépôt APT de test pour le paquet `se3-clients-linux` et branche Git
+
+Il existe un dépôt Debian APT de test qui vous permet de
+tester le paquet `se3-clients-linux` dans sa dernière
+version. Le dépôt est mis à jour toutes les 5 minutes.
+Évidemment c'est pour du test, aucune stabilité n'est
+garantie. Vous trouverez toutes les explications nécessaires
+à [cette page](apt-repository.md).
 
 
