@@ -68,8 +68,14 @@ Ensuite, pour installer ou mettre à jour le paquet dans sa
 toute nouvelle version (celle correspondant à votre dernier commit) :
 
 ```sh
-# Remplacer 0.$epoch~$commit_id par la version à installer.
-apt-get update && apt-get install se3-clients-linux=0.$epoch~$commit_id
+# Remplacer $epoch~$commit_id par la version à installer.
+apt-get update && apt-get install se3-clients-linux=$epoch~$commit_id
+
+# Ou bien plus simplement encore, étant donné que le numéro
+# de version de développement est toujours plus grand que le
+# numéro de la version stable du paquet, vous pouvez
+# simplement mettre à jour le paquet comme ceci :
+apt-get update && apt-get install se3-clients-linux
 ```
 
 Penser à vérifier que le paquet installé sur votre serveur de test
@@ -79,7 +85,7 @@ correspond bien à la version de votre dernier commit :
 dpkg-query -W se3-clients-linux
 ```
 
-La version du paquet sera toujours de la forme `0.<epoch>~<commit-id>`
+La version du paquet sera toujours de la forme `<epoch>~<commit-id>`
 sachant que :
 
 * `<epoch>` est simplement le nombre de secondes écoulées
