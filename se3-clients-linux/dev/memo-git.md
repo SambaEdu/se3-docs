@@ -29,7 +29,7 @@ Si c'est votre première visite, lisez d'abord les préliminaires.
 * [Insérer une image](#insérer-une-image)
 
 
-## Préliminaires
+# Préliminaires
 
 On suppose ici que vous avez déjà procédé à la création d'un
 compte Github et que vous êtes déjà membre du projet
@@ -58,7 +58,7 @@ ci-dessous. Vous pourrez adapter facilement les commandes
 ci-dessous pour le dépôt qui vous intéresse dans la liste.
 
 
-## Utiliser Git
+# Utiliser Git
 
 ## Installation
 
