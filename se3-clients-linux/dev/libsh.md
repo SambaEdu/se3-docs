@@ -6,14 +6,18 @@
 Afin d'éviter autant que possible la duplication de code, le
 fichier `src/home/netlogon/clients-linux/lib.sh` est une
 petite boîte à outils de fonctions shell réutilisables dans
-d'autres scripts shell, sous deux conditions. En effet, lors
-du build du package :
+d'autres scripts shell, sous deux conditions.
+
+En effet, lors du build du package :
 
 - si un script shell se trouve dans `src/`,
 - et s'il contient la ligne `###LIBSH###`
 
 alors cette ligne sera ni plus ni moins remplacée par le
 contenu du fichier `lib.sh`.
+
+Et ainsi, toutes fonctions de cette boîte à outils
+seront disponibles pour le script shell.
 
 
 
@@ -31,8 +35,9 @@ faire **uniquement des déclarations** de fonctions (une
 
 Peut-être que le fichier `lib.sh` sera amené à être inclus
 ailleurs que dans du shell bash, par exemple dans du shell
-`/bin/sh`. Par conséquent, ne pas utiliser cette déclaration
-de fonction :
+`/bin/sh`.
+
+Par conséquent, ne pas utiliser cette déclaration de fonction :
 
 ```sh
 function my_function () {
@@ -59,8 +64,9 @@ là consiste à juste changer le shebang du script et mettre
 C'est sans doute le point le plus important. Les fonctions
 ne doivent pas changer l'état du script appelant (le script
 « appelant » d'une fonction est simplement le script qui
-lance l'exécution de la fonction). Par exemple ceci est à
-éviter impérativement :
+lance l'exécution de la fonction).
+
+Par exemple ceci est **à éviter impérativement** :
 
 ```sh
 my_function () {
@@ -178,8 +184,11 @@ var=$(update_var "$var")
 ### Code de retour d'une fonction
 
 Faire en sorte que le code de retour de la fonction reflète
-le bon déroulement ou non de son exécution. Pour cela
-utilisez l'instruction `return`. Une fonction shell doit :
+le bon déroulement ou non de son exécution.
+
+Pour cela utilisez l'instruction `return`.
+
+Une fonction shell doit :
 
 * retourner 0 si tout s'est bien passé (c'est d'ailleurs ce
   que font toutes les commandes du shell comme grep par exemple),
@@ -201,7 +210,7 @@ my_function () {
 
     if truc2_pas_ok
     then
-        return 1
+        return 2
     fi
 
     # ...
@@ -213,8 +222,9 @@ my_function () {
 
 **Remarque :** si on ne précise pas d'instruction `return`,
 le code de retour de la fonction sera celui de sa dernière
-commande exécutée (ce qui peut être pratique parfois). Par
-exemple avec :
+commande exécutée (ce qui peut être pratique parfois).
+
+Par exemple avec :
 
 ```sh
 my_function() {
@@ -230,11 +240,14 @@ my_function() {
 ### Ne pas confondre le code de retour d'une fonction et sa sortie
 
 Pour le code de retour d'une fonction, voir le point
-ci-dessus. La sortie d'une fonction n'a rien à voir a
+ci-dessus. La sortie d'une fonction n'a rien à voir à
 priori. La sortie est simplement ce qu'une fonction affiche.
+
 C'est important car cela permet de récupérer de nouvelles
 valeurs et de les stocker dans des variables du script
-appelant. Par exemple :
+appelant.
+
+Par exemple :
 
 ```sh
 generate_password() {
