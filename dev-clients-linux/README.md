@@ -1,5 +1,14 @@
 # Documentation pour le (futur ?) contributeur/développeur
 
+* [Devenir contributeur/développeur du projet](#devenir-contributeurdéveloppeur-du-projet)
+* [Memo sur Git et le formatage markdow](#memo-sur-git-et-le-formatage-markdow)
+* [Le channel IRC `#se3`](#le-channel-irc-#se3)
+* [Envoyer une notification de ses commits sur la liste `gnu-linux_et_se3`](#envoyer-une-notification-de-ses-commits-sur-la-liste-gnu-linux_et_se3)
+* [Points annexes spécifiques au package `se3-clients-linux`](#points-annexes-spécifiques-au-package-se3-clients-linux)
+    * [Comment construire le package `se3-clients-linux.deb` ?](#comment-construire-le-package-se3-clients-linux-deb?)
+    * [Dépôt APT de test pour le paquet `se3-clients-linux` et branche Git](#dépôt-APT-de-test-pour-le paquet-se3-clients-linux-et-branche-git)
+    * [La boîte à outils `lib.sh`](#la-boîte-à-outils-lib.sh)
+
 
 ## Devenir contributeur/développeur du projet
 
@@ -30,7 +39,7 @@ répondrons par mail dès que possible pour vous indiquer que
 vous êtes bien désormais habilité(e) à contribuer au projet.
 
 
-## Memo sur Git
+## Memo sur Git et le formatage markdow
 
 Maintenant que vous avez bien procédé aux deux étapes
 ci-dessus, vous êtes apte à contribuer au projet. Mais
