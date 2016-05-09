@@ -5,9 +5,9 @@ les différents dépôts `Git` du projet `SambaEdu`.
 
 Si c'est votre première visite, lisez d'abord les préliminaires.
 
-* [Préliminaires](#préliminaires)
+* [**Préliminaires**](#préliminaires)
 
-[Utiliser Git](#utiliser-git)
+[**Utiliser Git**](#utiliser-git)
 * [Installation](#installation)
 * [Mise en place de sa clé publique/privé d'accès](#mise-en-place-de-sa-clé-publiqueprivé-daccès)
 * [Configuration du fichier `~/.gitconfig`](#configuration-du-fichier-gitconfig)
