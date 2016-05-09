@@ -7,7 +7,7 @@ Si c'est votre première visite, lisez d'abord les préliminaires.
 
 * [Préliminaires](#préliminaires)
 
-**Utiliser Git**
+[Utiliser Git](#utiliser-git)
 * [Installation](#installation)
 * [Mise en place de sa clé publique/privé d'accès](#mise-en-place-de-sa-clé-publiqueprivé-daccès)
 * [Configuration du fichier `~/.gitconfig`](#configuration-du-fichier-gitconfig)
@@ -22,7 +22,7 @@ Si c'est votre première visite, lisez d'abord les préliminaires.
     * [Manipulation de branches](#manipulation-de-branches)
 * [Voir les pushs des autres avec Git et Gihub](#voir-les-pushs-des-autres-avec-git-et-gihub)
 
-**Memo sur le formatage markdown (fichiers `.md`)**
+[Memo sur le formatage markdown (fichiers `.md`)](#memo-sur-le-formatage-markdown-fichiers-md)
 * [Mise en forme de base](#mise-en-forme-de-base)
 * [Les liens vers une page markdown avec une ancre](#les-liens-vers-une-page-markdown-avec-une-ancre)
 * [Insérer du code](#insérer-du-code)
