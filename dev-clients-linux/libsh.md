@@ -61,6 +61,15 @@ my_function () {
 }
 ```
 
+ou bien cette forme, *as you like* :
+
+```sh
+ma_fonction()
+{
+    # ...
+}
+```
+
 D'une manière générale, éviter le plus possible les syntaxes
 propres à bash. Un bon moyen de tester son code sur ce point
 là consiste à juste changer le shebang du script et mettre
