@@ -1,26 +1,11 @@
 # Memo Git
 
-On suppose ici que vous avez déjà procédé à la création d'un
-compte Github et que vous êtes déjà membre du projet
-`SambaEdu`.
+Vous trouverez ci-dessous quelques explications pour utiliser
+les différents dépôts `Git` du projet `SambaEdu`.
 
-Si ce n'est pas le cas, avant de lire
-la suite, procédez aux démarches expliquées
-[ici](README.md#devenir-contributeurdéveloppeur-du-projet).
+Si c'est votre première visite, lisez d'abord les préliminaires.
 
-Maintenant, nous allons tenter de vous expliquer comment
-contribuer en pratique au projet à travers d'utilisation du
-programme Git en ligne de commandes (en fait le programme
-Git est éclaté en plusieurs commandes). On suppose que vous
-vous trouvez sur une distribution (pas trop ancienne) Debian
-ou Ubuntu. Dans ce tutoriel, on donnera des exemples de
-commandes basées sur le dépôt `se3-clients-linux`. En effet,
-SambaEdu est un projet éclaté en plusieurs dépôts Git distincts
-dont la liste est disponible [ici](https://github.com/SambaEdu?tab=repositories).
-Le dépôt `se3-clients-linux` n'est qu'un dépôt parmi d'autres
-dans cette liste et c'est celui qu'on prendra en exemple
-ci-dessous. Vous pourrez adapter facilement les commandes
-ci-dessous pour le dépôt qui vous intéresse dans la liste.
+* [Préliminaires](#préliminaires)
 
 **Mémo Git**
 * [Installation](#installation)
@@ -42,6 +27,35 @@ ci-dessous pour le dépôt qui vous intéresse dans la liste.
 * [Les liens vers une page markdown avec une ancre](#les-liens-vers-une-page-markdown-avec-une-ancre)
 * [Insérer du code](#insérer-du-code)
 * [Insérer une image](#insérer-une-image)
+
+
+## Préliminaires
+
+On suppose ici que vous avez déjà procédé à la création d'un
+compte Github et que vous êtes déjà membre du projet
+`SambaEdu`.
+
+Si ce n'est pas le cas, avant de lire
+la suite, procédez aux démarches qui expliquent
+[comment devenir contributeur ou développeur du projet](README.md#devenir-contributeurdéveloppeur-du-projet).
+
+Maintenant, nous allons tenter de vous expliquer comment
+contribuer en pratique au projet à travers d'utilisation du
+programme Git en ligne de commandes (en fait le programme
+Git est éclaté en plusieurs commandes).
+
+On suppose que vous vous trouvez sur une distribution (pas trop ancienne…) Debian
+ou Ubuntu.
+
+Dans ce tutoriel, on donnera des exemples de
+commandes basées sur le dépôt `se3-clients-linux`.
+
+En effet, `SambaEdu` est un projet éclaté en plusieurs dépôts Git distincts
+dont [la liste est disponible](https://github.com/SambaEdu?tab=repositories).
+Le dépôt `se3-clients-linux` n'est qu'un dépôt parmi d'autres
+dans cette liste et c'est celui qu'on prendra en exemple
+ci-dessous. Vous pourrez adapter facilement les commandes
+ci-dessous pour le dépôt qui vous intéresse dans la liste.
 
 
 ## Installation
