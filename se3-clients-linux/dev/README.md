@@ -110,4 +110,12 @@ version. Le dépôt est mis à jour toutes les 5 minutes.
 garantie. Vous trouverez toutes les explications nécessaires
 à [cette page](apt-repository.md).
 
+### La boîte à outils `lib.sh`
+
+C'est un fichier qui contient toute une série de fonctions
+shell qui peuvent être réutilisables dans différents scripts
+du paquet `se3-clients-linux`. Vous trouverez plus
+d'explications à [cette page](libsh.md).
+
+
 
