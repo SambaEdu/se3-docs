@@ -264,7 +264,7 @@ Ici, on a donc la fonction `generate_password` :
 
 * dont le code de retour est 0,
 * dont la sortie affiche un mot de passe (qui est
-  récupéré dans la variable "passwd" du script appelant.
+  récupéré dans la variable "passwd" du script appelant).
 
 Pour récupérer la sortie d'une fonction (et de n'importe
 quelle commande en général), on fait :
@@ -276,7 +276,7 @@ var=$(my_function)
 Et pour récupérer le code de retour d'une fonction (et de
 n'importe quelle commande en général), on peut utiliser la
 variable spéciale `$?` qui contient toujours le code de
-retour de la *dernière* commande exécutée exécutée.
+retour de la *dernière* commande exécutée.
 
 
 
