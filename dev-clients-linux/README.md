@@ -5,8 +5,8 @@
 * [Le channel IRC `#se3`](#le-channel-irc-se3)
 * [Envoyer une notification de ses commits sur la liste `gnu-linux_et_se3`](#envoyer-une-notification-de-ses-commits-sur-la-liste-gnu-linux_et_se3)
 * [Points annexes spécifiques au package `se3-clients-linux`](#points-annexes-spécifiques-au-package-se3-clients-linux)
-    * [Comment construire le package `se3-clients-linux.deb` ?](#comment-construire-le-package-se3-clients-linux-deb-)
-    * [Dépôt APT de test pour le paquet `se3-clients-linux` et branche Git](#dépôt-apt-de-test-pour-le paquet-se3-clients-linux-et-branche-git)
+    * [Comment construire le package `se3-clients-linux.deb` ?](#comment-construire-le-package-se3-clients-linuxdeb-)
+    * [Dépôt APT de test pour le paquet `se3-clients-linux` et branche Git](#dépôt-apt-de-test-pour-le-paquet-se3-clients-linux-et-branche-git)
     * [La boîte à outils `lib.sh`](#la-boîte-à-outils-libsh)
 
 
