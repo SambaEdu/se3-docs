@@ -23,6 +23,7 @@ Si c'est votre première visite, lisez d'abord les préliminaires.
 * [Voir les pushs des autres avec Git et Gihub](#voir-les-pushs-des-autres-avec-git-et-gihub)
 
 [Memo sur le formatage markdown (fichiers `.md`)](#memo-sur-le-formatage-markdown-fichiers-md)
+* [Présentation](#présentation)
 * [Mise en forme de base](#mise-en-forme-de-base)
 * [Les liens vers une page markdown avec une ancre](#les-liens-vers-une-page-markdown-avec-une-ancre)
 * [Insérer du code](#insérer-du-code)
@@ -482,6 +483,8 @@ mettre cette ligne `export EDITOR="vim"` dans le fichier
 
 
 # Memo sur le formatage markdown (fichiers `.md`)
+
+## Présentation
 
 Le site Github est capable d'interpréter correctement des
 fichiers de type markdown (ie des fichiers avec l'extension
