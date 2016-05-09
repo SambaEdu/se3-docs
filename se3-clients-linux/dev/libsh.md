@@ -1,4 +1,4 @@
-# La petite boîte à outil `lib.sh`
+# La petite boîte à outils `lib.sh`
 
 
 ## Principe général
