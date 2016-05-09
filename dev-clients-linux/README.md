@@ -4,6 +4,7 @@
 * [Memo sur Git et le formatage markdow](#memo-sur-git-et-le-formatage-markdow)
 * [Le channel IRC `#se3`](#le-channel-irc-se3)
 * [Envoyer une notification de ses commits sur la liste `gnu-linux_et_se3`](#envoyer-une-notification-de-ses-commits-sur-la-liste-gnu-linux_et_se3)
+* [Un exemple de configuration vim pour éditer le code](#un-exemple-de-configuration-vim-pour-éditer-le-code)
 * [Points annexes spécifiques au package `se3-clients-linux`](#points-annexes-spécifiques-au-package-se3-clients-linux)
     * [Comment construire le package `se3-clients-linux.deb` ?](#comment-construire-le-package-se3-clients-linuxdeb-)
     * [Dépôt APT de test pour le paquet `se3-clients-linux` et branche Git](#dépôt-apt-de-test-pour-le-paquet-se3-clients-linux-et-branche-git)
@@ -122,6 +123,27 @@ niveau du bouton `Raw` (à droite de la page).
 Vous trouverez toutes les explications nécessaires à [cette page](notification.md).
 
 
+## Un exemple de configuration vim pour éditer le code
+
+Avec cette exemple de configuration au niveau de votre
+fichier `~/.vimrc` :
+
+* la touche tabulation entraînera automatiquement la
+  saisie de 4 espaces (qui est, par convention, le nombre
+  d'espaces pour l'indentation dans du shell),
+* Le caractère (nuisible) espace insécable sera visible explicitement,
+* Le caractère tabulation (à remplacer par 4 espaces) sera visible explicitement,
+* Les espaces en fin de lignes (totalement inutiles) seront visible explicitement.
+
+Voici la configuration du fichier `.vimrc` :
+
+```
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set listchars=nbsp:¤,tab:>-,trail:·
+set list
+```
 
 
 ## Points annexes spécifiques au package `se3-clients-linux`
