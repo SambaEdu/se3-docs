@@ -7,7 +7,7 @@ Si c'est votre première visite, lisez d'abord les préliminaires.
 
 * [Préliminaires](#préliminaires)
 
-**Mémo Git**
+**Utiliser Git**
 * [Installation](#installation)
 * [Mise en place de sa clé publique/privé d'accès](#mise-en-place-de-sa-clé-publiqueprivé-daccès)
 * [Configuration du fichier `~/.gitconfig`](#configuration-du-fichier-gitconfig)
@@ -57,6 +57,8 @@ dans cette liste et c'est celui qu'on prendra en exemple
 ci-dessous. Vous pourrez adapter facilement les commandes
 ci-dessous pour le dépôt qui vous intéresse dans la liste.
 
+
+**Utiliser Git**
 
 ## Installation
 
