@@ -22,7 +22,7 @@ Si c'est votre première visite, lisez d'abord les préliminaires.
     * [Manipulation de branches](#manipulation-de-branches)
 * [Voir les pushs des autres avec Git et Gihub](#voir-les-pushs-des-autres-avec-git-et-gihub)
 
-[Memo sur le formatage markdown (fichiers `.md`)](#memo-sur-le-formatage-markdown-fichiers-md)
+[**Memo sur le formatage markdown (fichiers `.md`)**](#memo-sur-le-formatage-markdown-fichiers-md)
 * [Présentation](#présentation)
 * [Mise en forme de base](#mise-en-forme-de-base)
 * [Les liens vers une page markdown avec une ancre](#les-liens-vers-une-page-markdown-avec-une-ancre)
