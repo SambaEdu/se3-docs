@@ -3,7 +3,7 @@
 * [Principe général](#principe-général)
 * [Quelques bonnes pratiques](#quelques-bonnes-pratiques-à-mettre-en-place-dans-libsh)
     * [Que des déclarations de fonctions, rien d'autre](#que-des-déclarations-de-fonctions-rien-dautre)
-    * [Utiliser la syntaxe `POSIX`](#déclarer-les-fonctions-avec-la-syntaxe-POSIX)
+    * [Utiliser la syntaxe `POSIX`](#déclarer-les-fonctions-avec-la-syntaxe-posix)
     * [Pas d'effets de bord](#faire-des-fonctions-sans-effets-de-bord)
     * [Gérer le code de retour d'une fonction](#code-de-retour-dune-fonction)
     * [Ne pas confondre code de retour et sortie de la fonction](#ne-pas-confondre-le-code-de-retour-dune-fonction-et-sa-sortie)
