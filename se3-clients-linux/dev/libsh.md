@@ -20,6 +20,13 @@ contenu du fichier `lib.sh`.
 ## Quelques bonnes pratiques à mettre en place dans `lib.sh`
 
 
+### Que des déclarations de fonctions, rien d'autre
+
+Le contenu de `lib.sh` ne devra **rien exécuter du tout** et
+faire **uniquement des déclarations** de fonctions (une
+*déclaration* de fonction, c'est toujours inoffensif).
+
+
 ### Déclarer les fonctions avec la syntaxe POSIX
 
 Peut-être que le fichier `lib.sh` sera amené à être inclus
@@ -137,6 +144,34 @@ var='valeur-super-importante'
 # du script appelant. La fonction va juste copier son
 # contenu dans sa variable locale var.
 my_function "$var"
+```
+
+Si vous souhaitez changer la valeur d'une variable du script
+appelant, vous pouvez faire comme ceci :
+
+```sh
+# Dans lib.sh.
+update_var () {
+
+    local var="$1"
+
+    # Du code où var est modifiée etc...
+
+    # Ceci est globalement équivalent à un « echo "$var"
+    # mais en plus robuste.
+    printf '%s\n' "$var"
+
+}
+
+
+# Dans le script appelant.
+var='a_default_value'
+
+# On met à jour la valeur de "var". La modification de la
+# valeur de "var" est explicitement faite au niveau du
+# script appelant, elle n'est pas enfouie dans le corps de
+# la fonction "update_var".
+var=$(update_var "$var")
 ```
 
 
