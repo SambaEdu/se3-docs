@@ -1,5 +1,13 @@
 # La petite boîte à outils `lib.sh`
 
+* [Principe général](#principe-général)
+* [Quelques bonnes pratiques](#quelques-bonnes-pratiques-à-mettre-en-place-dans-lib.sh)
+    * [Que des déclarations de fonctions, rien d'autre](#que-des-déclarations-de-fonctions-rien-dautre)
+    * [Utiliser la syntaxe `POSIX`](#déclarer-les-fonctions-avec-la-syntaxe-POSIX)
+    * [Pas d'effets de bord](#faire-des-fonctions-sans-effets-de-bord)
+    * [Gérer le code de retour d'une fonction](#code-de-retour-dune-fonction)
+    * [Ne pas confondre code de retour et sortie de la fonction](#ne-pas-confondre-le-code-de-retour-dune-fonction-et-sa-sortie)
+
 
 ## Principe général
 
@@ -31,7 +39,7 @@ faire **uniquement des déclarations** de fonctions (une
 *déclaration* de fonction, c'est toujours inoffensif).
 
 
-### Déclarer les fonctions avec la syntaxe POSIX
+### Déclarer les fonctions avec la syntaxe `POSIX`
 
 Peut-être que le fichier `lib.sh` sera amené à être inclus
 ailleurs que dans du shell bash, par exemple dans du shell
