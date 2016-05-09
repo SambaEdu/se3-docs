@@ -58,7 +58,7 @@ ci-dessous. Vous pourrez adapter facilement les commandes
 ci-dessous pour le dépôt qui vous intéresse dans la liste.
 
 
-**Utiliser Git**
+## Utiliser Git
 
 ## Installation
 
