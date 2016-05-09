@@ -77,12 +77,12 @@ my_function
 echo "$var"
 ```
 
-Le `echo` affichera `xxxxx` et nom pas
+Le `echo` affichera `xxxxx` et non pas
 `valeur-super-importante` comme on pourrait le penser de
-prime abord, car la fonction aura changé la valeur de la
-variable `var` du script appelant. Pour éviter cela,
-déclarez dans les fonctions **uniquement** des variables
-**locales** avec le mot clé `local` :
+prime abord, car l'exécution de la fonction a changé la
+valeur de la variable `var` du script appelant. Pour éviter
+cela, déclarez dans les fonctions **uniquement** des
+variables **locales** avec le mot clé `local` :
 
 
 ```sh
