@@ -1,7 +1,7 @@
 # La petite boîte à outils `lib.sh`
 
 * [Principe général](#principe-général)
-* [Quelques bonnes pratiques](#quelques-bonnes-pratiques-à-mettre-en-place-dans-lib.sh)
+* [Quelques bonnes pratiques](#quelques-bonnes-pratiques-à-mettre-en-place-dans-libsh)
     * [Que des déclarations de fonctions, rien d'autre](#que-des-déclarations-de-fonctions-rien-dautre)
     * [Utiliser la syntaxe `POSIX`](#déclarer-les-fonctions-avec-la-syntaxe-POSIX)
     * [Pas d'effets de bord](#faire-des-fonctions-sans-effets-de-bord)
