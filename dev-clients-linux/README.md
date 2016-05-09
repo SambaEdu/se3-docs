@@ -21,7 +21,7 @@ participer à l'élaboration de la documentation en ligne ?
 Rien de plus simple, il suffit de suivre les deux étapes
 suivantes :
 
-1. Vous vous créez un compte [Github](https://github.com).
+**1ère étape :** Vous vous créez un compte [Github](https://github.com).
 L'inscription se fait [à cette page](https://github.com/join).
 
 Cela prend 5 minutes, c'est une inscription on ne peut plus
@@ -35,7 +35,7 @@ adresse email sur Github l'adresse email sur laquelle vous
 recevez les messages de la liste de diffusion (voir plus
 bas les explications sur ce point).
 
-2. Faites savoir que vous voulez devenir membre du projet
+**2ème étape :** Faites savoir que vous voulez devenir membre du projet
 `SambaEdu` en écrivant à l'adresse mail indiquée dans
 [ce fichier](https://github.com/SambaEdu/se3-clients-linux/blob/master/src/DEBIAN/control#L7)
 au niveau du champ `Maintainer:`.
