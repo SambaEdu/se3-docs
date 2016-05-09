@@ -1,7 +1,7 @@
 # Memo Git
 
 Vous trouverez ci-dessous quelques explications pour utiliser
-les différents dépôts `Git` du projet `SambaEdu`.
+les différents dépôts `Git` du projet `SambaEdu`. Ainsi que quelques indication sur le formatage `markdown`.
 
 Si c'est votre première visite, lisez d'abord les préliminaires.
 
