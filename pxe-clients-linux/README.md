@@ -45,6 +45,12 @@ Les distributions `GNU/Linux` qui sont proposées à l'installation sont :
     * Ubuntu
     * Xbuntu
     * Lbuntu
+* Ubuntu `Xenial Xerus` (version 16.04)
+    * Ubuntu
+    * Mbuntu (Ubuntu Mate)
+    * Xbuntu
+    * Lbuntu
+
 
 Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bits** (amd64).
 
