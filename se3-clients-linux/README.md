@@ -61,9 +61,11 @@ Les distributions `GNU/Linux` qui ont été testées sont :
 * Xubuntu `Precise Pangolin` (version 12.04)
 * Ubuntu `Trusty Tahr` (version 14.04)
 * Xubuntu `Trusty Tahr` (version 14.04)
+* Lubuntu `Trusty Tahr` (version 14.04)
 * Ubuntu `Xenial Xerus` (version 16.04)
 * Ubuntu Mate `Xenial Xerus` (version 16.04)
 * Xubuntu `Xenial Xerus` (version 16.04)
+* Lubuntu `Xenial Xerus` (version 16.04)
 
 
 ## Avertissements
