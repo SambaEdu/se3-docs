@@ -41,11 +41,11 @@ Les distributions `GNU/Linux` qui sont proposées à l'installation sont :
     * Gnome
     * Xfce
     * Ldxe
-* Ubuntu `Trusty Tahr` (version 14.04)
+* Ubuntu `Trusty Tahr` (version 14.04) sur serveur se3 Squeeze uniquement
     * Ubuntu
     * Xbuntu
     * Lbuntu
-* Ubuntu `Xenial Xerus` (version 16.04)
+* Ubuntu `Xenial Xerus` (version 16.04) sur serveur se3 Wheezy uniquement
     * Ubuntu
     * Mbuntu (Ubuntu Mate)
     * Xbuntu
