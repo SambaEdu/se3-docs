@@ -17,8 +17,7 @@
     * [Démarrer le `se3` sur le DVD gravé](#démarrer-le-se3-sur-le-dvd-gravé)
     * [Autre solution](#autre-solution)
 * [Post-migration](#post-migration)
-    * [Module `se3-pla`](#module-se3-pla)
-    * [Autres modules](#autres-modules)
+    * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
 * [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
 
@@ -28,15 +27,15 @@
 
 Cet article propose une procédure qui vous permettra de migrer, en toute sénérité votre `se3-squeeze` vers un `se3-wheezy`.
 
-Cet article est une synthèse, en cours d'élaboration, à partir d'échanges collaboratifs parus sur la liste de dicussion de l'académie de Cæn `l-samba-edu@ac-caen.fr` : il est donc en évolution en fonction des questions, des réponses et précisions apparues lors de la discussion sur cette liste.
+Cet article est une synthèse réalisée à partir d'échanges collaboratifs parus sur la liste de dicussion de l'académie de Cæn `l-samba-edu@ac-caen.fr` : il est donc en évolution en fonction des questions, des réponses et précisions apparues lors de la discussion sur cette liste.
 
-**Remarque 1 :** toutes les infos de l'échange ne sont pas encore intégrées ; cela prend un certain temps…
+**Remarque 1 :** il se peut que les infos des derniers échanges ne soient pas encore intégrées ; cela prend un certain temps…
 
 Si des intérrogations surgissent au cours de la lecture de cet article, n'hésitez pas à les partager sur la liste.
 
-**Remarque 2 :** Si vous avez encore un `se3-lenny` ou une version antérieure, le mieux est d'utiliser le script de sauvegarde (voir ci-dessous), d'installer un se3-wheezy puis d'utiliser le script de restauration (de même, ci-dessous). Cette méthode est valable aussi pour migrer d'un se3-squeeze vers un se3-wheezy.
+**Remarque 2 :** Si vous avez encore un `se3-lenny` ou une version antérieure, le mieux est d'utiliser les script de sauvegarde/restauration : cela est détaillé ci-dessous avec la méthode alternative qui est valable aussi pour migrer d'un `se3-squeeze` vers un `se3-wheezy`.
 
-**Remarque 3 :** Vous pourrez vous entraîner sur un réseau `se3 virtuel`, ce qui vous permettra de le faire plus sereinement sur votre précieux `se3` si cela vous semble nécessaire. Bien sûr, ce n'est pas obligatoire et le script fonctionne très bien maintenant. L'article ci-dessous, un peu ancien, vous gudera pour la mise en place d'un réseau virtuel. Il faudrait le mettre à jour…
+**Remarque 3 :** Vous pourrez vous entraîner sur un réseau `se3 virtuel`, ce qui vous permettra de le faire plus sereinement sur votre précieux `se3` si cela vous semble nécessaire. Bien sûr, ce n'est pas obligatoire et le script fonctionne très bien maintenant. L'article ci-dessous, un peu ancien et il faudrait le mettre à jour, vous guidera pour la mise en place d'un réseau virtuel.
 > http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox
 
 
@@ -86,6 +85,8 @@ aptitude -P full-upgrade # selon la réponse, validez
 bash /usr/share/se3/scripts/se3_update_system.sh
 ```
 
+**Remarque :** si le `se3-squeeze` est à jour, vous disposerez, de ce fait, la dernière version du script. D'ailleurs, le script de migration vérifie que le `se3` est bien à jour et, sinon, il le met à jour ; c'est pour cette raison que vous devez le relancer pour bénéficier de la version la plus à jour du script de migration.
+
 
 ### Supprimer les profiles ?
 *Franck : "le script supprime immédiatement celui du compte admin et les autres sont supprimés en arrière plan. Cela étant je vais peut être modifier cela pour être certain qu'il ne traîne plus rien à la fin du script."*
@@ -110,6 +111,7 @@ Par ailleurs, il faut que le `se3` ne soit pas utilisé pendant la migration.
 Le mieux est de couper le `se3` du reste du réseau (si cela est possible) pour éviter que des utilisateurs tentent de s'y connecter ; je pense cela préférable vu qu'à la fin du script de migration s'exécute en arrière plan un script qui efface tous les profils et réencode les home en `UTF-8`, c'est très long !
 
 Il vous faut une journée pour être sur que tout soit bien fait.
+
 
 ### Supprimer les montages de disques externes
 En accord avec une bonne pratique de sauvegarde des données, vous avez mis en place les sauvegardes `backuppc` et `sauveserveur` (pour cette dernière, la plus importante, voir ci-dessous la solution alternative). Il vaut mieux les démonter pour éviter des surprises lors de l'exécution du script de migration.
@@ -136,7 +138,7 @@ L'utilisation de `screen` est d'ailleurs suggérée par le script.
 screen
 ```
 
-**Remarque :** il se peut que le paquet ne soit pas installer. Dans ce cas, il faut linstaller :
+**Remarque :** il se peut que le paquet ne soit pas installer. Dans ce cas, il faut l'installer :
 ```sh
 aptitude install screen
 ```
@@ -156,9 +158,9 @@ reboot
 ```
 
 ## Réparer `Grub` ?
- (si nécessaire)
+(si nécessaire)
 
-il se peut que `Grub` soit cassé à la suite de la migration, il suffit de le réparer.
+il se peut que `Grub` soit cassé à la suite de la migration ; il suffit de le réparer.
 
 Cependant, il faudrait voir dans quel cas cela arrive pour palier ce problème.
 
@@ -167,17 +169,16 @@ Cependant, il faudrait voir dans quel cas cela arrive pour palier ce problème.
 > https://sourceforge.net/p/boot-repair/home/fr/
 
 
-graver DVD (pas fait, je n'en ai pas eu besoin).
+graver un DVD (pas fait, je n'en ai pas eu besoin).
 
 
 ### Démarrer le `se3` sur le DVD gravé
 > La réparation est automatique ou y-a-t-il des options à choisir ? **Nicolas ? 
 
-> *Marc : "grub-repair n'avait pas marché (deux jours de chaos au lycée). J'avais réussi à le réinstaller en suivant la procédure en chroot du site ci-dessous (j'avais fait les deux techniques de cette partie...les deux m'indiquaient un message d'echec mais c'était reparti!)"*
-> https://wikiUtiliser les scripts de sauvegarde/restauration.debian-fr.xyz/R%C3%A9installer_Grub2
 
 ### Autre solution
-
+> *Marc : "grub-repair n'avait pas marché (deux jours de chaos au lycée). J'avais réussi à le réinstaller en suivant la procédure en chroot du site ci-dessous (j'avais fait les deux techniques de cette partie...les deux m'indiquaient un message d'echec mais c'était reparti!)"*
+> https://wikiUtiliser les scripts de sauvegarde/restauration.debian-fr.xyz/R%C3%A9installer_Grub2
 
 
 ## Configurer l'onduleur
@@ -192,30 +193,26 @@ Cependant, il vaudra mieux configurer l'onduleur avant la migration car s'il y a
 
 ## Post-migration
 
-### Module `se3-pla`
-`se3-pla` est le nouveau paquet permettant l'exploration de l'annuaire Ldap.
+### Les modules
+
+Tous les modules ont été reportés sur `Wheezy`. Mais `se3-unattended` a disparu (voir ci-dessous) et `se3-internet` est en testing pour l'instant.
+> http://wawadeb.crdp.ac-caen.fr/versions-paquets-se3.html
+
+*Laurent : "sur le paquet wpkg `wsuoffline`, j'ai l'impression qu'il ne fait pas les mises à jour correctement sur W7 de manière automatique. Il faudrait que je jette un oeil sur un poste pour en être sûr".*
+
+**Module `se3-pla` :** `se3-pla` est le nouveau paquet permettant l'exploration de l'annuaire Ldap. À vous de l'installer :
 ```sh
 aptitude install se3-pla
 ```
 
-
-### Autres modules
-> Les modules OCS, clamav, backuppc, clonage… sont remis sur pieds ?
-
-Tous les modules ont été reportés sur Wheezy. `se3-unattended` a disparu et `se3-internet` est en testing pour l'instant.
-> http://wawadeb.crdp.ac-caen.fr/versions-paquets-se3.html
-
-*Laurent : "sur `wsuoffline`, j'ai l'impression qu'il ne fait pas les mises à jour correctement sur W7 de manière automatique. Il faudrait que je jette un oeil sur un poste pour en être sûr".*
-
-**Module `ocs` :** il est désinstallé et purgé lors de la migration. Il est ré-installable ensuite.
-
-`se3-ocs`, version wheezy, sera vierge comme l'a précisé Franck. Tout est effacé du passage de `se3-squeeze` à `se3-wheezy` pour éviter des problèmes de base de donnée.
+**Module `se3-ocs` :** il est désinstallé et purgé lors de la migration. Il est ré-installable ensuite. `se3-ocs`, version `Wheezy`, sera vierge comme l'a précisé Franck. Tout est effacé du passage de `se3-squeeze` à `se3-wheezy` pour éviter des problèmes de base de donnée.
 
 **Module `se3-maintenance` :** il a disparu (peut-être sera-t-il remis).
 
-> wsusoffline par wpkg fonctionne-t-il toujours sous wheezy ?
+**Module `se3-unattended` :** ce module n'est pas supprimé lors de la migration contrairement à Ocs. Par conséquent si tu l'a installé sous squeeze tu conservera ta version sous `Wheezy`. Simplement le module n'étant plus maintenu, il n'a pas été reporté sous `Wheezy` dans une nouvelle version.
 
 **Remarque :** ne vous embêtez pas à mettre votre `se3-Wheezy` en testing, la branche stable est suffisamment bien peuplé.
+
 
 ### Remettre en place les disques de sauvegarde
 Il suffit de rebrancher les disques et deux solutions se présentent :
