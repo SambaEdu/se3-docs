@@ -8,10 +8,10 @@
     * [Supprimer les montages de disques externes](#supprimer-les-montages-de-disques-externes)
     * [Prévenir les collègues…](#prévenir-les-collègues)
 * [Migration vers un `se3-Wheezy`](#migration-vers-un-se3-wheezy)
-    * [Utilisation une session `screen`](#utiliser-une-session-screen)
+    * [Utilisation d'une session `screen`](#utilisation-dune-session-screen)
     * [Utilisation du script de migration](#utilisation-du-script-de-migration)
     * [Redémarrer à la fin ?](#redémarrer-à-la-fin-)
-* [Réparer `Grub` ?](#réparer-Grub-)
+* [Réparer `Grub` ?](#réparer-grub-)
     * [Télécharger et graver `boot-repair`](#télécharger-et-graver-boot-repair)
     * [Démarrer le `se3` sur le DVD](#démarrer-le-se3-sur-le-dvd)
 * [Post-migration](#post-migration)
@@ -100,7 +100,7 @@ umount /sauveserveur
 
 ## Migration vers un `se3-Wheezy`
 
-### Utilisation une session `screen`
+### Utilisation d'une session `screen`
 (peut-être faut-il plus détailler ?
 `screen` est une session particulière en ce sens que vous pouvez la quitter sans que le processus soit arrêté, contrairement à une session normale. Vous trouverez sans doute de la doc sur la toile. Sinon, il faudrait que je retrouve un mémo écrit par François Lafont.
 ```sh
