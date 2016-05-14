@@ -98,12 +98,18 @@ rm -rf /home/profiles/*
 > En faisant ça, les raccourcis firefox  dégagent, non ?
 Si cela fait partie de l'arborescence `/home/profiles/`, oui, en effet. Cependant, il me semble qu'il est plutôt dans le `/home` de l'utilisateur : il n'est donc pas touché. Précision de Franck : seuls, les favoris `IE` passent à la trappe.
 
+Sur les données utilisateurs, vous perdrez peu de choses : les favoris
+Windows, les favoris internet explorer (IE), tout ce qui est dans le profil V2.
+
 
 ### Prévenir les collègues…
 De toute façon, il est prudent de les prévenir en leur demandant de procéder à une sauvegarde de leurs données… Ce qu'ils devraient toujours faire.
 
 Par ailleurs, il faut que le `se3` ne soit pas utilisé pendant la migration.
 
+Le mieux est de couper le `se3` du reste du réseau (si cela est possible) pour éviter que des utilisateurs tentent de s'y connecter ; je pense cela préférable vu qu'à la fin du script de migration s'exécute en arrière plan un script qui efface tous les profils et réencode les home en `UTF-8`, c'est très long !
+
+Il vous faut une journée pour être sur que tout soit bien fait.
 
 ### Supprimer les montages de disques externes
 En accord avec une bonne pratique de sauvegarde des données, vous avez mis en place les sauvegardes `backuppc` et `sauveserveur` (pour cette dernière, la plus importante, voir ci-dessous la solution alternative). Il vaut mieux les démonter pour éviter des surprises lors de l'exécution du script de migration.
@@ -125,8 +131,14 @@ Si cela n'est déjà en place, nous vous recommendons chaudement de procéder à
 ### Utilisation d'une session `screen`
 (peut-être faut-il plus détailler ?
 `screen` est une session particulière en ce sens que vous pouvez la quitter sans que le processus soit arrêté, contrairement à une session normale. Vous trouverez sans doute de la doc sur la toile. Sinon, il faudrait que je retrouve un mémo écrit par François Lafont.
+L'utilisation de `screen` est d'ailleurs suggérée par le script.
 ```sh
 screen
+```
+
+**Remarque :** il se peut que le paquet ne soit pas installer. Dans ce cas, il faut linstaller :
+```sh
+aptitude install screen
 ```
 
 ### Utilisation du script de migration
@@ -146,8 +158,7 @@ reboot
 ## Réparer `Grub` ?
  (si nécessaire)
 
-il se peut que `Grub` soit cassé à la suite de la migration
-il suffit de le réparer.
+il se peut que `Grub` soit cassé à la suite de la migration, il suffit de le réparer.
 
 Cependant, il faudrait voir dans quel cas cela arrive pour palier ce problème.
 
@@ -191,10 +202,20 @@ aptitude install se3-pla
 ### Autres modules
 > Les modules OCS, clamav, backuppc, clonage… sont remis sur pieds ?
 
-**Module `ocs` :** il est désinstallé et purgé lors de  la migration. Il est ré-installable ensuite.
+Tous les modules ont été reportés sur Wheezy. `se3-unattended` a disparu et `se3-internet` est en testing pour l'instant.
+> http://wawadeb.crdp.ac-caen.fr/versions-paquets-se3.html
+
+*Laurent : "sur `wsuoffline`, j'ai l'impression qu'il ne fait pas les mises à jour correctement sur W7 de manière automatique. Il faudrait que je jette un oeil sur un poste pour en être sûr".*
+
+**Module `ocs` :** il est désinstallé et purgé lors de la migration. Il est ré-installable ensuite.
+
+`se3-ocs`, version wheezy, sera vierge comme l'a précisé Franck. Tout est effacé du passage de `se3-squeeze` à `se3-wheezy` pour éviter des problèmes de base de donnée.
+
+**Module `se3-maintenance` :** il a disparu (peut-être sera-t-il remis).
 
 > wsusoffline par wpkg fonctionne-t-il toujours sous wheezy ?
 
+**Remarque :** ne vous embêtez pas à mettre votre `se3-Wheezy` en testing, la branche stable est suffisamment bien peuplé.
 
 ### Remettre en place les disques de sauvegarde
 Il suffit de rebrancher les disques et deux solutions se présentent :
