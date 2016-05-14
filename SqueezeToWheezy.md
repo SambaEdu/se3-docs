@@ -16,6 +16,7 @@
     * [Télécharger et graver `boot-repair`](#télécharger-et-graver-boot-repair)
     * [Démarrer le `se3` sur le DVD gravé](#démarrer-le-se3-sur-le-dvd-gravé)
     * [Autre solution](#autre-solution)
+    * [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
@@ -25,7 +26,7 @@
 
 ## Présentation
 
-Cet article propose une procédure qui vous permettra de migrer, en toute sénérité votre `se3-squeeze` vers un `se3-wheezy`.
+Cet article propose une procédure qui vous permettra de migrer, en toute sénérité, votre `se3-squeeze` vers un `se3-wheezy`.
 
 Cet article est une synthèse réalisée à partir d'échanges collaboratifs parus sur la liste de dicussion de l'académie de Cæn `l-samba-edu@ac-caen.fr` : il est donc en évolution en fonction des questions, des réponses et précisions apparues lors de la discussion sur cette liste.
 
@@ -35,7 +36,7 @@ Si des intérrogations surgissent au cours de la lecture de cet article, n'hési
 
 **Remarque 2 :** Si vous avez encore un `se3-lenny` ou une version antérieure, le mieux est d'utiliser les script de sauvegarde/restauration : cela est détaillé ci-dessous avec la méthode alternative qui est valable aussi pour migrer d'un `se3-squeeze` vers un `se3-wheezy`.
 
-**Remarque 3 :** Vous pourrez vous entraîner sur un réseau `se3 virtuel`, ce qui vous permettra de le faire plus sereinement sur votre précieux `se3` si cela vous semble nécessaire. Bien sûr, ce n'est pas obligatoire et le script fonctionne très bien maintenant. L'article ci-dessous, un peu ancien et il faudrait le mettre à jour, vous guidera pour la mise en place d'un réseau virtuel.
+**Remarque 3 :** Vous pourrez vous entraîner sur un réseau `se3 virtuel`, ce qui vous permettra de le faire ensuite plus sereinement sur votre précieux `se3` si cela vous semble nécessaire. Bien sûr, ce n'est pas obligatoire et le script fonctionne très bien maintenant. L'article ci-dessous, un peu ancien et il faudrait le mettre à jour, vous guidera pour la mise en place d'un réseau virtuel.
 > http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox
 
 
@@ -77,7 +78,7 @@ Acquire::Check-Valid-Until false;
 ```
 
 ### Mise à jour du `se3` ?
-inutile, cela sera fait par le script de migration ; cependant, pour les angoissés, voici quelques commandes utiles pour cette mise à jour :
+Inutile, cela sera fait par le script de migration ; cependant, pour les angoissés, voici quelques commandes utiles pour cette mise à jour :
 ```sh
 aptitude update
 aptitude safe-upgrade
@@ -85,7 +86,7 @@ aptitude -P full-upgrade # selon la réponse, validez
 bash /usr/share/se3/scripts/se3_update_system.sh
 ```
 
-**Remarque :** si le `se3-squeeze` est à jour, vous disposerez, de ce fait, la dernière version du script. D'ailleurs, le script de migration vérifie que le `se3` est bien à jour et, sinon, il le met à jour ; c'est pour cette raison que vous devez le relancer pour bénéficier de la version la plus à jour du script de migration.
+**Remarque :** si le `se3-squeeze` est à jour, vous disposerez, de ce fait, de la dernière version du script. D'ailleurs, le script de migration vérifie que le `se3` est bien à jour et, sinon, il le met à jour ; c'est pour cette raison que vous devez le relancer pour bénéficier de la version la plus à jour du script de migration.
 
 
 ### Supprimer les profiles ?
@@ -103,16 +104,6 @@ Sur les données utilisateurs, vous perdrez peu de choses : les favoris
 Windows, les favoris internet explorer (IE), tout ce qui est dans le profil V2.
 
 
-### Prévenir les collègues…
-De toute façon, il est prudent de les prévenir en leur demandant de procéder à une sauvegarde de leurs données… Ce qu'ils devraient toujours faire.
-
-Par ailleurs, il faut que le `se3` ne soit pas utilisé pendant la migration.
-
-Le mieux est de couper le `se3` du reste du réseau (si cela est possible) pour éviter que des utilisateurs tentent de s'y connecter ; je pense cela préférable vu qu'à la fin du script de migration s'exécute en arrière plan un script qui efface tous les profils et réencode les home en `UTF-8`, c'est très long !
-
-Il vous faut une journée pour être sur que tout soit bien fait.
-
-
 ### Supprimer les montages de disques externes
 En accord avec une bonne pratique de sauvegarde des données, vous avez mis en place les sauvegardes `backuppc` et `sauveserveur` (pour cette dernière, la plus importante, voir ci-dessous la solution alternative). Il vaut mieux les démonter pour éviter des surprises lors de l'exécution du script de migration.
 Le script démonte le disque monté sur `/var/lib/backuppc` mais pas celui monté sur `/sauveserveur`.
@@ -127,18 +118,26 @@ umount /sauveserveur
 Si cela n'est déjà en place, nous vous recommendons chaudement de procéder à la sauvegarde du type `sauveserveur` dont nous avons parlé ci-dessus et qui est documentée dans la solution alternative ci-dessous, avant de lancer le script de sauvegarde ; vous ferez plus sereinement la migration.
 
 
+### Prévenir les collègues…
+De toute façon, il est prudent de les prévenir en leur demandant de procéder à une sauvegarde de leurs données… Ce qu'ils devraient toujours faire.
+
+Par ailleurs, il faut que le `se3` ne soit pas utilisé pendant la migration.
+
+Le mieux est de couper le `se3` du reste du réseau (si cela est possible) pour éviter que des utilisateurs tentent de s'y connecter ; je pense cela préférable vu qu'à la fin du script de migration s'exécute en arrière plan un script qui efface tous les profils et réencode les home en `UTF-8`, c'est très long !
+
+Il vous faut une journée pour être sur que tout soit bien fait.
+
 
 ## Migration vers un `se3-Wheezy`
 
 ### Utilisation d'une session `screen`
-(peut-être faut-il plus détailler ?
 `screen` est une session particulière en ce sens que vous pouvez la quitter sans que le processus soit arrêté, contrairement à une session normale. Vous trouverez sans doute de la doc sur la toile. Sinon, il faudrait que je retrouve un mémo écrit par François Lafont.
 L'utilisation de `screen` est d'ailleurs suggérée par le script.
 ```sh
 screen
 ```
 
-**Remarque :** il se peut que le paquet ne soit pas installer. Dans ce cas, il faut l'installer :
+**Remarque :** il se peut que le paquet ne soit pas installé. Dans ce cas, il faut l'installer :
 ```sh
 aptitude install screen
 ```
@@ -158,18 +157,17 @@ reboot
 ```
 
 ## Réparer `Grub` ?
-(si nécessaire)
-
-il se peut que `Grub` soit cassé à la suite de la migration ; il suffit de le réparer.
+Il se peut que `Grub` soit cassé à la suite de la migration ; il suffit de le réparer.
 
 Cependant, il faudrait voir dans quel cas cela arrive pour palier ce problème.
 
 
 ### Télécharger et graver `boot-repair`
+Récupérer l'archive iso de `boot-repair` :
 > https://sourceforge.net/p/boot-repair/home/fr/
 
 
-graver un DVD (pas fait, je n'en ai pas eu besoin).
+Graver un DVD (pas fait, je n'en ai pas eu besoin).
 
 
 ### Démarrer le `se3` sur le DVD gravé
@@ -178,6 +176,7 @@ graver un DVD (pas fait, je n'en ai pas eu besoin).
 
 ### Autre solution
 > *Marc : "grub-repair n'avait pas marché (deux jours de chaos au lycée). J'avais réussi à le réinstaller en suivant la procédure en chroot du site ci-dessous (j'avais fait les deux techniques de cette partie...les deux m'indiquaient un message d'echec mais c'était reparti!)"*
+
 > https://wikiUtiliser les scripts de sauvegarde/restauration.debian-fr.xyz/R%C3%A9installer_Grub2
 
 
@@ -185,10 +184,10 @@ graver un DVD (pas fait, je n'en ai pas eu besoin).
 
 Normalement, la migration ne doit pas modifier la configuration de l'onduleur.
 
-D'ailleurs, si cette configuration n'est pas faite sur votre se3-squeeze, il sera temps de la mettre en chantier, une fois la migration effectuée en vous aidant des indications de l'article suivant.
+D'ailleurs, si cette configuration n'a pas était faite sur votre `se3-squeeze`,une fois la migration effectuée il sera plus que temps de la mettre en chantier, en vous aidant des indications de l'article suivant. Là, vous n'aurez pas d'excuses en cas de pépin…
 > http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
 
-Cependant, il vaudra mieux configurer l'onduleur avant la migration car s'il y a un problème sur l'alimentation électrique, ce sera plus chaud pour vous ;-) Mais vous aurez pris la précaution d'avoir une sauvegarde à jour (voir la remarque 2 de la présentation ci-dessus) avant de passer aux choses sérieuses…
+Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il y a un problème sur l'alimentation électrique ou des micro-coupures, ce sera plus chaud pour vous ;-) Mais vous aurez pris, de toute façon, la précaution d'avoir une sauvegarde à jour (voir la remarque 2 de la présentation ci-dessus) avant de passer aux choses sérieuses…
 
 
 ## Post-migration
@@ -198,9 +197,7 @@ Cependant, il vaudra mieux configurer l'onduleur avant la migration car s'il y a
 Tous les modules ont été reportés sur `Wheezy`. Mais `se3-unattended` a disparu (voir ci-dessous) et `se3-internet` est en testing pour l'instant.
 > http://wawadeb.crdp.ac-caen.fr/versions-paquets-se3.html
 
-*Laurent : "sur le paquet wpkg `wsuoffline`, j'ai l'impression qu'il ne fait pas les mises à jour correctement sur W7 de manière automatique. Il faudrait que je jette un oeil sur un poste pour en être sûr".*
-
-**Module `se3-pla` :** `se3-pla` est le nouveau paquet permettant l'exploration de l'annuaire Ldap. À vous de l'installer :
+**Module `se3-pla` :** c'est le nouveau paquet permettant l'exploration de l'annuaire Ldap. À vous de l'installer :
 ```sh
 aptitude install se3-pla
 ```
@@ -209,7 +206,10 @@ aptitude install se3-pla
 
 **Module `se3-maintenance` :** il a disparu (peut-être sera-t-il remis).
 
-**Module `se3-unattended` :** ce module n'est pas supprimé lors de la migration contrairement à Ocs. Par conséquent si tu l'a installé sous squeeze tu conservera ta version sous `Wheezy`. Simplement le module n'étant plus maintenu, il n'a pas été reporté sous `Wheezy` dans une nouvelle version.
+**Module `se3-unattended` :** ce module n'est pas supprimé lors de la migration contrairement à `se3-ocs`. Par conséquent si vous l'avez installé sous `se3-squeeze` vous conserverez cette version sous `se3-wheezy`. Simplement le module n'étant plus maintenu, il n'a pas été reporté sous `Wheezy` dans une nouvelle version.
+
+**le paquet wpkg `wsuoffline` :** *Laurent : "pour ce paquet wpkg, j'ai l'impression qu'il ne fait pas les mises à jour correctement sur W7 de manière automatique. Il faudrait que je jette un œil sur un poste pour en être sûr".*
+
 
 **Remarque :** ne vous embêtez pas à mettre votre `se3-Wheezy` en testing, la branche stable est suffisamment bien peuplé.
 
@@ -223,12 +223,14 @@ Il suffit de rebrancher les disques et deux solutions se présentent :
 
 ## Utiliser les scripts de sauvegarde/restauration
 
-Un solution alternative à l'utilisation du script ci-dessus est de procéder à une sauvegarde de votre serveur, d'installer un se3-wheezy par la méthode de votre choix, de configurer les modules adaptés à votre situation, et enfin, d'utiliser le script de restauration.
+Un solution alternative à l'utilisation du script ci-dessus est de procéder à une sauvegarde de votre serveur, d'installer un `se3-wheezy`, par la méthode de votre choix, de configurer les modules adaptés à votre situation, et enfin, d'utiliser le script de restauration.
 
-Ces deux scripts sont proposés sur le site suivant, ainsi que la documentation d'utilisation.
+Ces deux scripts (sauvegarde et restauration) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
+
+Il est à noter qu'ils sont aussi sur votre `se3-squeeze` s'il est à jour bien entendu. Cependant, la version la plus récente se trouvera sur le site suivant :
 > http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
 
-Cependant, une chose à prendre en compte sur ce script : sur Wheezy on est full utf8 et samba 4 n'aime pas du tout les noms de fichiers avec des accents codés en iso. Cela fait quelques versions que nous sommes en utf8 coté samba mais, pour autant, s'il y a eu versions successives, il y a de fortes chances que de l'iso traîne encore dans `/home` et `/var/se3`.
+Cependant, une chose à prendre en compte sur ce script : sur `se3-wheezy` on est full `utf8` et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en iso. Cela fait quelques versions que nous sommes en `utf8` côté samba mais, pour autant, s'il y a eu versions successives, il y a de fortes chances que de l'iso traîne encore dans `/home` et `/var/se3`.
 
 **La solution à ce problème**, c'est de réencoder avec `/usr/bin/convmv`. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
 
@@ -237,6 +239,5 @@ Voici les deux commandes pour cela :
 /usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /home 2&>1 | grep -v Skipping >> $fichier_log
 /usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 2&>1 | grep -v Skipping >> $fichier_log
 ```
-
 
 
