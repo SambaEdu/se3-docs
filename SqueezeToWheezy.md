@@ -13,20 +13,27 @@
     * [Redémarrer à la fin ?](#redémarrer-à-la-fin-)
 * [Réparer `Grub` ?](#réparer-grub-)
     * [Télécharger et graver `boot-repair`](#télécharger-et-graver-boot-repair)
-    * [Démarrer le `se3` sur le DVD](#démarrer-le-se3-sur-le-dvd)
+    * [Démarrer le `se3` sur le DVD gravé](#démarrer-le-se3-sur-le-dvd-gravé)
+    * [Autre solution](#autre-solution)
 * [Post-migration](#post-migration)
     * [Module `se3-pla`](#module-se3-pla)
+    * [Autres modules](#autres-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
+* [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
 
 
 
 ## Présentation
 
-Cet article est une synthèse, en cours d'élaboration, à partir des messages parus sur la liste de dicussion de l'académie de Cæn `l-samba-edu@ac-caen.fr` : il est donc en évolution en fonction des questions et des réponses apparues lors de la discussion sur cette liste.
+Cet article propose une procédure qui vous permettra de migrer, en toute sénérité votre `se3-squeeze` vers un `se3-wheezy`.
 
-**Remarque :** toutes les infos de l'échange ne sont pas encore intégrées ; cela prend un certain temps…
+Cet article est une synthèse, en cours d'élaboration, à partir d'échanges collaboratifs parus sur la liste de dicussion de l'académie de Cæn `l-samba-edu@ac-caen.fr` : il est donc en évolution en fonction des questions, des réponses et précisions apparues lors de la discussion sur cette liste.
+
+**Remarque 1 :** toutes les infos de l'échange ne sont pas encore intégrées ; cela prend un certain temps…
 
 Si des intérrogations surgissent au cours de la lecture de cet article, n'hésitez pas à les partager sur la liste.
+
+**Remarque 2 :** Si vous avez encore un `se3-lenny` ou une version antérieure, le mieux est d'utiliser le script de sauvegarde (voir ci-dessous), d'installer un se3-wheezy puis d'utiliser le script de restauration (de même, ci-dessous). Cette méthode est valable aussi pour migrer d'un se3-squeeze vers un se3-wheezy.
 
 
 ## Préparation du `se3 Squeeze`
@@ -116,8 +123,10 @@ Une première utilistaion de ce script a lieu puis il faudra le relancer pour po
 
 
 ### Redémarrer à la fin ?
+Il n'est pas nécessaire de redémarrer… Mais ce n'est pas interdit ;-)
+```sh
 reboot
-
+```
 
 ## Réparer `Grub` ?
  (si nécessaire)
@@ -125,23 +134,65 @@ reboot
 il se peut que `Grub` soit cassé à la suite de la migration
 il suffit de le réparer
 
+
 ### Télécharger et graver `boot-repair`
-https://sourceforge.net/p/boot-repair/home/fr/
+> https://sourceforge.net/p/boot-repair/home/fr/
 
 
-graver DVD (pas fait, je n'en ai pas eu besoin) 
+graver DVD (pas fait, je n'en ai pas eu besoin).
 
 
-### Démarrer le `se3` sur le DVD
+### Démarrer le `se3` sur le DVD gravé
+> La réparation est automatique ou y-a-t-il des options à choisir ? **Nicolas ? 
+
+> *Marc : "grub-repair n'avait pas marché (deux jours de chaos au lycée). J'avais réussi à le réinstaller en suivant la procédure en chroot du site ci-dessous (j'avais fait les deux techniques de cette partie...les deux m'indiquaient un message d'echec mais c'était reparti!)"*
+> https://wikiUtiliser les scripts de sauvegarde/restauration.debian-fr.xyz/R%C3%A9installer_Grub2
+
+### Autre solution
+
+
+
+## Configurer l'onduleur
+
+Normalement, la migration ne doit pas modifier la configuration de l'onduleur.
+
+D'ailleurs, si cette configuration n'est pas faite sur votre se3-squeeze, il sera temps de la mettre en chantier, une fois la migration effectuée en vous aidant des indications de l'article suivant.
+> http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
+
+Cependant, il vaudra mieux configurer l'onduleur avant la migration car s'il y a un problème sur l'alimentation électrique, ce sera plus chaud pour vous ;-) Mais vous aurez pris la précaution d'avoir une sauvegarde à jour (voir la remarque 2 de la présentation ci-dessus) avant de passer aux choses sérieuses…
 
 
 ## Post-migration
 
 ### Module `se3-pla`
-(module d'exploration de l'annuaire Ldap)
+`se3-pla` est le nouveau paquet permettant l'exploration de l'annuaire Ldap.
+```sh
 aptitude install se3-pla
+```
+
+
+### Autres modules
+> Les modules OCS, clamav, backuppc, clonage… sont remis sur pieds ?
+
+> wsusoffline par wpkg fonctionne-t-il toujours sous wheezy ?
 
 
 ### Remettre en place les disques de sauvegarde
-backuppc et sauveserveur
+Il suffit de rebrancher les disques et deux solutions se présentent :
+
+* soit redémarrer le serveur si des entrées dans le fichier `/etc/fstab` concernent ces disques,
+* soit de les monter conformément aux indications de la documentation.
+
+
+## Utiliser les scripts de sauvegarde/restauration
+
+> http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
+
+Une chose à prendre en compte sur ce script : Sur wheezy on est full utf8 et samba 4 n'aime pas du tout les noms de fichiers avec des accents codés en iso. Cela fait quelques versions que nous sommes en utf8 coté samba mais pour autant, s'il y a eu versions successives, il y a de fortes chances que de l'iso traîne encore dans /home et /var/se3
+
+La solution c'est de réencoder avec /usr/bin/convmv. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
+
+Voici la commande
+/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /home 2&>1 | grep -v Skipping >> $fichier_log
+/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 2&>1 | grep -v Skipping >> $fichier_log 
 
