@@ -8,6 +8,7 @@
     * [Supprimer les montages de disques externes](#supprimer-les-montages-de-disques-externes)
     * [Dernière précaution](#dernière-précaution)
     * [Prévenir les collègues…](#prévenir-les-collègues)
+    * [Temps à prévoir](#temps-à-prévoir)
 * [Migration vers un `se3-Wheezy`](#migration-vers-un-se3-wheezy)
     * [Utilisation d'une session `screen`](#utilisation-dune-session-screen)
     * [Utilisation du script de migration](#utilisation-du-script-de-migration)
@@ -43,7 +44,6 @@ Si des intérrogations surgissent au cours de la lecture de cet article, n'hési
 ## Préparation du `se3 Squeeze`
 
 ### Configurer `apt`
-
 → avoir corrigé les divers sources.list : normalement la mise à jour récente du se3 devrait le faire.
 
 Sur un `se3-squeeze` à jour (*Version 2.4.9299* à la date de rédaction de cet article), **/etc/apt/sources.list** contient :
@@ -125,6 +125,8 @@ Par ailleurs, il faut que le `se3` ne soit pas utilisé pendant la migration.
 
 Le mieux est de couper le `se3` du reste du réseau (si cela est possible) pour éviter que des utilisateurs tentent de s'y connecter ; je pense cela préférable vu qu'à la fin du script de migration s'exécute en arrière plan un script qui efface tous les profils et réencode les home en `UTF-8`, c'est très long !
 
+
+### Temps à prévoir
 Il vous faut une journée pour être sur que tout soit bien fait.
 
 
@@ -193,8 +195,7 @@ Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il
 ## Post-migration
 
 ### Les modules
-
-Tous les modules ont été reportés sur `Wheezy`. Mais `se3-unattended` a disparu (voir ci-dessous) et `se3-internet` est en testing pour l'instant.
+Presque tous les modules ont été reportés sur `Wheezy`. Mais `se3-unattended` a disparu (voir ci-dessous) et `se3-internet` est en testing pour l'instant.
 > http://wawadeb.crdp.ac-caen.fr/versions-paquets-se3.html
 
 **Module `se3-pla` :** c'est le nouveau paquet permettant l'exploration de l'annuaire Ldap. À vous de l'installer :
@@ -208,7 +209,7 @@ aptitude install se3-pla
 
 **Module `se3-unattended` :** ce module n'est pas supprimé lors de la migration contrairement à `se3-ocs`. Par conséquent si vous l'avez installé sous `se3-squeeze` vous conserverez cette version sous `se3-wheezy`. Simplement le module n'étant plus maintenu, il n'a pas été reporté sous `Wheezy` dans une nouvelle version.
 
-**le paquet wpkg `wsuoffline` :** *Laurent : "pour ce paquet wpkg, j'ai l'impression qu'il ne fait pas les mises à jour correctement sur W7 de manière automatique. Il faudrait que je jette un œil sur un poste pour en être sûr".*
+**Le paquet wpkg `wsuoffline` :** *Laurent : "pour ce paquet wpkg, j'ai l'impression qu'il ne fait pas les mises à jour correctement sur W7 de manière automatique. Il faudrait que je jette un œil sur un poste pour en être sûr".*
 
 
 **Remarque :** ne vous embêtez pas à mettre votre `se3-Wheezy` en testing, la branche stable est suffisamment bien peuplé.
@@ -223,14 +224,20 @@ Il suffit de rebrancher les disques et deux solutions se présentent :
 
 ## Utiliser les scripts de sauvegarde/restauration
 
-Un solution alternative à l'utilisation du script ci-dessus est de procéder à une sauvegarde de votre serveur, d'installer un `se3-wheezy`, par la méthode de votre choix, de configurer les modules adaptés à votre situation, et enfin, d'utiliser le script de restauration.
+**Une solution alternative** à l'utilisation du script ci-dessus est la suivante :
+* sauvegarder votre serveur (script `sauve_serveur.sh`)
+* installer un `se3-wheezy`, par la méthode de votre choix
+* configurer les modules adaptés à votre situation
+* restaurer votre serveur (script `restaure_serveur.sh`)
 
-Ces deux scripts (sauvegarde et restauration) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
+Cette méthode sera à utiliser si vous avez une version antérieure à celle de `se3-squeeze`.
 
-Il est à noter qu'ils sont aussi sur votre `se3-squeeze` s'il est à jour bien entendu. Cependant, la version la plus récente se trouvera sur le site suivant :
+Ces deux scripts (`sauve_serveur.sh` et `restaure_serveur.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
+
+Il est à noter qu'ils sont aussi sur votre `se3-squeeze`, s'il est à jour bien entendu. Cependant, les versions les plus récentes de ces scripts se trouveront sur le site suivant :
 > http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
 
-Cependant, une chose à prendre en compte sur ce script : sur `se3-wheezy` on est full `utf8` et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en iso. Cela fait quelques versions que nous sommes en `utf8` côté samba mais, pour autant, s'il y a eu versions successives, il y a de fortes chances que de l'iso traîne encore dans `/home` et `/var/se3`.
+**Remarque :** une chose à prendre en compte sur ces scripts : sur `se3-wheezy` on est full `utf8`, et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en `iso`. Cela fait quelques versions que nous sommes en `utf8` côté `samba` mais, pour autant, s'il y a eu des versions successives, il y a de fortes chances que de le codage `iso` traîne encore dans `/home` et `/var/se3`.
 
 **La solution à ce problème**, c'est de réencoder avec `/usr/bin/convmv`. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
 
