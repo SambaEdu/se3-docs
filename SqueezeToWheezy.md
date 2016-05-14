@@ -6,6 +6,7 @@
     * [Mise à jour du `se3` ?](#mise-à-jour-du-se3-)
     * [Supprimer les profiles ?](#supprimer-les-profiles-)
     * [Supprimer les montages de disques externes](#supprimer-les-montages-de-disques-externes)
+    * [Dernière précaution](#dernière-précaution)
     * [Prévenir les collègues…](#prévenir-les-collègues)
 * [Migration vers un `se3-Wheezy`](#migration-vers-un-se3-wheezy)
     * [Utilisation d'une session `screen`](#utilisation-dune-session-screen)
@@ -34,6 +35,9 @@ Cet article est une synthèse, en cours d'élaboration, à partir d'échanges co
 Si des intérrogations surgissent au cours de la lecture de cet article, n'hésitez pas à les partager sur la liste.
 
 **Remarque 2 :** Si vous avez encore un `se3-lenny` ou une version antérieure, le mieux est d'utiliser le script de sauvegarde (voir ci-dessous), d'installer un se3-wheezy puis d'utiliser le script de restauration (de même, ci-dessous). Cette méthode est valable aussi pour migrer d'un se3-squeeze vers un se3-wheezy.
+
+**Remarque 3 :** Vous pourrez vous entraîner sur un réseau `se3 virtuel`, ce qui vous permettra de le faire plus sereinement sur votre précieux `se3` si cela vous semble nécessaire. Bien sûr, ce n'est pas obligatoire et le script fonctionne très bien maintenant. L'article ci-dessous, un peu ancien, vous gudera pour la mise en place d'un réseau virtuel. Il faudrait le mettre à jour…
+> http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox
 
 
 ## Préparation du `se3 Squeeze`
@@ -84,25 +88,36 @@ bash /usr/share/se3/scripts/se3_update_system.sh
 
 
 ### Supprimer les profiles ?
- (pour Windows7)
+*Franck : "le script supprime immédiatement celui du compte admin et les autres sont supprimés en arrière plan. Cela étant je vais peut être modifier cela pour être certain qu'il ne traîne plus rien à la fin du script."*
+Il n'est pas interdit de le faire préventivement.
 ```sh
 rm -rf /home/profiles/*
 ```
+
+
 > En faisant ça, les raccourcis firefox  dégagent, non ?
-Si cela fait partie de l'arborescence `/home/profiles/`, oui, en effet. Cependant, il me semble qu'il est plutôt dans le `/home` de l'utilisateur : il n'est donc pas touché. À vérifier !
+Si cela fait partie de l'arborescence `/home/profiles/`, oui, en effet. Cependant, il me semble qu'il est plutôt dans le `/home` de l'utilisateur : il n'est donc pas touché. Précision de Franck : seuls, les favoris `IE` passent à la trappe.
+
 
 ### Prévenir les collègues…
 De toute façon, il est prudent de les prévenir en leur demandant de procéder à une sauvegarde de leurs données… Ce qu'ils devraient toujours faire.
 
 Par ailleurs, il faut que le `se3` ne soit pas utilisé pendant la migration.
 
+
 ### Supprimer les montages de disques externes
-Souvent, on a mis en place les sauvegardes backuppc et sauveserveur. Il vaut mieux les démonter pour éviter des surprises lors de l'exécution du script de migration.
+En accord avec une bonne pratique de sauvegarde des données, vous avez mis en place les sauvegardes `backuppc` et `sauveserveur` (pour cette dernière, la plus importante, voir ci-dessous la solution alternative). Il vaut mieux les démonter pour éviter des surprises lors de l'exécution du script de migration.
+Le script démonte le disque monté sur `/var/lib/backuppc` mais pas celui monté sur `/sauveserveur`.
 ```sh
 umount /var/lib/backuppc
 umount /sauveserveur
 ```
 …et on débranche pour éviter un remontage automatique. Voir ci-dessous. 
+
+
+### Dernière précaution
+Si cela n'est déjà en place, nous vous recommendons chaudement de procéder à la sauvegarde du type `sauveserveur` dont nous avons parlé ci-dessus et qui est documentée dans la solution alternative ci-dessous, avant de lancer le script de sauvegarde ; vous ferez plus sereinement la migration.
+
 
 
 ## Migration vers un `se3-Wheezy`
@@ -119,7 +134,7 @@ screen
 bash /usr/share/se3/sbin/se3_upgrade_wheezy.sh
 ```
 
-Une première utilistaion de ce script a lieu puis il faudra le relancer pour poursuivre la migration : les messages donnés à l'écran précisent tout cela très clairement.
+Une première utilisation de ce script a lieu puis il faudra le relancer pour poursuivre la migration : les messages donnés à l'écran précisent tout cela très clairement.
 
 
 ### Redémarrer à la fin ?
@@ -132,7 +147,9 @@ reboot
  (si nécessaire)
 
 il se peut que `Grub` soit cassé à la suite de la migration
-il suffit de le réparer
+il suffit de le réparer.
+
+Cependant, il faudrait voir dans quel cas cela arrive pour palier ce problème.
 
 
 ### Télécharger et graver `boot-repair`
@@ -174,6 +191,8 @@ aptitude install se3-pla
 ### Autres modules
 > Les modules OCS, clamav, backuppc, clonage… sont remis sur pieds ?
 
+**Module `ocs` :** il est désinstallé et purgé lors de  la migration. Il est ré-installable ensuite.
+
 > wsusoffline par wpkg fonctionne-t-il toujours sous wheezy ?
 
 
@@ -186,13 +205,20 @@ Il suffit de rebrancher les disques et deux solutions se présentent :
 
 ## Utiliser les scripts de sauvegarde/restauration
 
+Un solution alternative à l'utilisation du script ci-dessus est de procéder à une sauvegarde de votre serveur, d'installer un se3-wheezy par la méthode de votre choix, de configurer les modules adaptés à votre situation, et enfin, d'utiliser le script de restauration.
+
+Ces deux scripts sont proposés sur le site suivant, ainsi que la documentation d'utilisation.
 > http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
 
-Une chose à prendre en compte sur ce script : Sur wheezy on est full utf8 et samba 4 n'aime pas du tout les noms de fichiers avec des accents codés en iso. Cela fait quelques versions que nous sommes en utf8 coté samba mais pour autant, s'il y a eu versions successives, il y a de fortes chances que de l'iso traîne encore dans /home et /var/se3
+Cependant, une chose à prendre en compte sur ce script : sur Wheezy on est full utf8 et samba 4 n'aime pas du tout les noms de fichiers avec des accents codés en iso. Cela fait quelques versions que nous sommes en utf8 coté samba mais, pour autant, s'il y a eu versions successives, il y a de fortes chances que de l'iso traîne encore dans `/home` et `/var/se3`.
 
-La solution c'est de réencoder avec /usr/bin/convmv. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
+**La solution à ce problème**, c'est de réencoder avec `/usr/bin/convmv`. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
 
-Voici la commande
+Voici les deux commandes pour cela :
+```sh
 /usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /home 2&>1 | grep -v Skipping >> $fichier_log
-/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 2&>1 | grep -v Skipping >> $fichier_log 
+/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 2&>1 | grep -v Skipping >> $fichier_log
+```
+
+
 
