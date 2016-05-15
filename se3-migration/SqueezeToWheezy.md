@@ -151,6 +151,24 @@ bash /usr/share/se3/sbin/se3_upgrade_wheezy.sh
 
 Une première utilisation de ce script a lieu puis il faudra le relancer pour poursuivre la migration : les messages donnés à l'écran précisent tout cela très clairement.
 
+Pendant cette première utilisation, le script vérifie qu'il a la dernière version stable avec cette `url` :
+> http://wawadeb.crdp.ac-caen.fr/majse3/se3_upgrade_wheezy.sh
+C'est une des raisons pour lesquelles le script doit être relancé. Avec la 2ème utilisation du script, on sera donc avec la version stable de ce script.
+
+Il existe une version de dev' (qui sera bientôt transférée en version stable) et qui est, quant à elle, désormais sur le `github` :
+> https://github.com/SambaEdu/maintscripts/blob/master/migration/se3_upgrade_wheezy.sh
+
+Cette version de dev' ajoute quelques fonctions au script comme la possibilité d'utiliser des options afin de se trouver dans différents modes : debug, pas de téléchargement ou encore préchargement des paquets dans le cache `apt`.
+
+Les voici :
+-----
+-d | --download : préparer la migration sans la lancer en téléchargeant uniquement les paquets nécessaires
+--no-update     : ne pas vérifier la mise à jour du script de migration sur le serveur centrale mais utiliser la version locale
+--debug         : lancer le script en outrepassant les tests de taille et de place libre des partitions. À NE PAS UTILISER EN PRODUCTION
+----
+
+Ces options ne servant que pour la mise au point du script, vous n'avez pas à les utiliser.
+
 
 ### Redémarrer à la fin ?
 Il n'est pas nécessaire de redémarrer… Mais ce n'est pas interdit ;-)
@@ -165,19 +183,18 @@ Cependant, il faudrait voir dans quel cas cela arrive pour palier ce problème.
 
 
 ### Télécharger et graver `boot-repair`
-Récupérer l'archive iso de `boot-repair` :
+Récupérer l'archive `iso` de `boot-repair` :
 > https://sourceforge.net/p/boot-repair/home/fr/
 
-
-Graver un DVD (pas fait, je n'en ai pas eu besoin).
+Graver un DVD (pas fait, je n'en ai pas eu besoin) avec cette archive `iso`.
 
 
 ### Démarrer le `se3` sur le DVD gravé
-> La réparation est automatique ou y-a-t-il des options à choisir ? **Nicolas ? 
+> La réparation est automatique ou y-a-t-il des options à choisir ? **Nicolas, un retour ?**
 
 
 ### Autre solution
-> *Marc : "grub-repair n'avait pas marché (deux jours de chaos au lycée). J'avais réussi à le réinstaller en suivant la procédure en chroot du site ci-dessous (j'avais fait les deux techniques de cette partie...les deux m'indiquaient un message d'echec mais c'était reparti!)"*
+> *Marc : "`grub-repair` n'avait pas marché (deux jours de chaos au lycée). J'avais réussi à réinstaller `grub` en suivant la procédure en `chroot` du site ci-dessous (j'avais fait les deux techniques de cette partie… Les deux m'indiquaient un message d'échec mais c'était reparti !)"*
 
 > https://wikiUtiliser les scripts de sauvegarde/restauration.debian-fr.xyz/R%C3%A9installer_Grub2
 
@@ -189,7 +206,7 @@ Normalement, la migration ne doit pas modifier la configuration de l'onduleur.
 D'ailleurs, si cette configuration n'a pas était faite sur votre `se3-squeeze`,une fois la migration effectuée il sera plus que temps de la mettre en chantier, en vous aidant des indications de l'article suivant. Là, vous n'aurez pas d'excuses en cas de pépin…
 > http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
 
-Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il y a un problème sur l'alimentation électrique ou des micro-coupures, ce sera plus chaud pour vous ;-) Mais vous aurez pris, de toute façon, la précaution d'avoir une sauvegarde à jour (voir la remarque 2 de la présentation ci-dessus) avant de passer aux choses sérieuses…
+Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il y a un problème sur l'alimentation électrique ou des micro-coupures, ce sera plus chaud pour vous ;-) Mais vous aurez pris, de toute façon, la précaution d'avoir une sauvegarde de type `sauveserveur` à jour (voir la remarque 2 de la présentation ci-dessus ou bien la solution alternative ci-dessous) avant de passer aux choses sérieuses…
 
 
 ## Post-migration
