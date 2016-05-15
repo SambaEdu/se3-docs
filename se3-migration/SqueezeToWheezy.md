@@ -153,9 +153,10 @@ Une première utilisation de ce script a lieu puis il faudra le relancer pour po
 
 Pendant cette première utilisation, le script vérifie qu'il a la dernière version stable avec cette `url` :
 > http://wawadeb.crdp.ac-caen.fr/majse3/se3_upgrade_wheezy.sh
+
 C'est une des raisons pour lesquelles le script doit être relancé. Avec la 2ème utilisation du script, on sera donc avec la version stable de ce script.
 
-Il existe une version de dev' (qui sera bientôt transférée en version stable) et qui est, quant à elle, désormais sur le `github` :
+**Remarque :** il existe une version de dev' (qui sera bientôt transférée en version stable) et qui est, quant à elle, désormais sur le `github` :
 > https://github.com/SambaEdu/maintscripts/blob/master/migration/se3_upgrade_wheezy.sh
 
 Cette version de dev' ajoute quelques fonctions au script comme la possibilité d'utiliser des options afin de se trouver dans différents modes : debug, pas de téléchargement ou encore préchargement des paquets dans le cache `apt`.
