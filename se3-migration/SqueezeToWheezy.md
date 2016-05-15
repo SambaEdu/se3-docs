@@ -160,14 +160,10 @@ Il existe une version de dev' (qui sera bientôt transférée en version stable)
 
 Cette version de dev' ajoute quelques fonctions au script comme la possibilité d'utiliser des options afin de se trouver dans différents modes : debug, pas de téléchargement ou encore préchargement des paquets dans le cache `apt`.
 
-Les voici :
------
-* -d | --download : préparer la migration sans la lancer en téléchargeant uniquement les paquets nécessaires
+Les voici (ces options ne servant que pour la mise au point du script, vous n'avez pas à les utiliser) :
+* --download | -d : préparer la migration sans la lancer en téléchargeant uniquement les paquets nécessaires
 * --no-update     : ne pas vérifier la mise à jour du script de migration sur le serveur centrale mais utiliser la version locale
 * --debug         : lancer le script en outrepassant les tests de taille et de place libre des partitions. À NE PAS UTILISER EN PRODUCTION
-----
-
-Ces options ne servant que pour la mise au point du script, vous n'avez pas à les utiliser.
 
 
 ### Redémarrer à la fin ?
