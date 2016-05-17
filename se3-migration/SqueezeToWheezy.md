@@ -168,7 +168,9 @@ Les voici (ces options ne servant que pour la mise au point du script, vous n'av
 
 
 ### Redémarrer à la fin ?
-Il n'est pas nécessaire de redémarrer… Mais ce n'est pas interdit ;-)
+Il n'est pas nécessaire de redémarrer…
+
+Mais ce n'est pas interdit ;-) C'est comme vous voulez.
 ```sh
 reboot
 ```
@@ -190,7 +192,7 @@ Graver un DVD (pas fait, je n'en ai pas eu besoin) avec cette archive `iso`.
 Il suffit d'accepter la réparation proposée par boot-repair : au redémarrage du se3, grub devrait être réparé.
 
 **À noter :**
-Si la réparation proposée par `boot-repair` ne résout toujours pas le problème `grub` du `se3`, il est toujours possible, dans l'attente de trouver une solution alternative, d'utiliser `super-grub2` pour faire booter son se3.
+Si la réparation proposée par `boot-repair` ne résout toujours pas le problème `grub` du `se3`, il est toujours possible, **dans l'attente de trouver une solution alternative**, d'utiliser `super-grub2` pour faire booter son se3.
 
 Pour cela, téléchargez puis gravez l'iso disponible à l'adresse suivante :
 > http://www.supergrubdisk.org/category/download/supergrub2diskdownload/
