@@ -187,7 +187,11 @@ Graver un DVD (pas fait, je n'en ai pas eu besoin) avec cette archive `iso`.
 
 
 ### Démarrer le `se3` sur le DVD gravé
-> La réparation est automatique ou y-a-t-il des options à choisir ? **Nicolas, un retour ?**
+> Il suffit d'accepter la réparation proposée par boot-repair : au redémarrage du se3, grub devrait être réparé.
+
+Si la réparation proposée par boot-repair ne résout toujours pas le problème grub du se3. il est toujours possible, dans l'attente de trouver une solution alternative, d'utiliser super-grub2 pour faire booter son se3.
+Pour cela, télécharger puis graver l'iso disponible à
+http://www.supergrubdisk.org/category/download/supergrub2diskdownload/
 
 
 ### Autre solution
