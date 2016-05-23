@@ -11,6 +11,8 @@
     * [Temps à prévoir](#temps-à-prévoir)
 * [Migration vers un `se3-Wheezy`](#migration-vers-un-se3-wheezy)
     * [Utilisation d'une session `screen`](#utilisation-dune-session-screen)
+        * [Quitter ou fermer une session `screen`](#quitter-ou-fermer-une-session-screen)
+        * [Reprendre une session `screen`](#reprendre-une-session-screen)
     * [Utilisation du script de migration](#utilisation-du-script-de-migration)
     * [Redémarrer à la fin ?](#redémarrer-à-la-fin-)
 * [Réparer `Grub` ?](#réparer-grub-)
@@ -133,18 +135,46 @@ Il vous faut une journée pour être sur que tout soit bien fait.
 ## Migration vers un `se3-Wheezy`
 
 ### Utilisation d'une session `screen`
-`screen` est une session particulière en ce sens que vous pouvez la quitter sans que le processus soit arrêté, contrairement à une session normale. Vous trouverez sans doute de la doc sur la toile. Sinon, il faudrait que je retrouve un mémo écrit par François Lafont.
-L'utilisation de `screen` est d'ailleurs suggérée par le script.
+`screen` est une session particulière en ce sens que vous pouvez la quitter sans que le processus soit arrêté, contrairement à une session normale. Vous trouverez ci-dessous quelques commandes pouvant être utiles pour gérer cet outil. L'utilisation de `screen` est d'ailleurs suggérée par le script.
+
+Pour ouvrir une session `screen`, lancez la commande suivante :
 ```sh
 screen
 ```
 
-**Remarque :** il se peut que le paquet ne soit pas installé. Dans ce cas, il faut l'installer :
+**Remarque 1 :** il se peut que le paquet ne soit pas installé. Dans ce cas, il faut l'installer :
 ```sh
 aptitude install screen
 ```
 
+**Remarque 2 :** chaque fois que l'on lance la commande `screen`, il y a un texte introductif qui s'affiche ; il suffit d'appuyer sur la touche `Entrée` pour se retrouver dans la session `screen`.
+
+
+#### Quitter ou fermer une session `screen`
+Une fois dans une session `screen`, vous pourrez en sortir ou la fermer à l'aide des commandes suivantes :
+
+* Ctrl+a d → sortir de la session `screen` sans arrêter le script lancé
+* exit → fermer la session screen en cours
+
+**Remarque :** "Ctrl+a d" signifie que vous utilisez la combinaison des 2 touches `Ctrl` et `a` puis, une fois ces deux touches `Ctrl` et `a` relachées, que vous appuyez sur la touche `d`.
+
+
+#### Reprendre une session `screen`
+Pour reprendre une session `screen`, on peut utiliser la commande suivante :
+
+```sh
+screen -r
+```
+
+Si l'on veut vérifier l'existence de sessions `screen`, on peut utiliser la commande suivante qui liste les sessions `screen` en cours de fonctionnement :
+
+```sh
+screen -ls
+```
+
+
 ### Utilisation du script de migration
+Dans une session `screen`, lancez la commande suivante :
 ```sh
 bash /usr/share/se3/sbin/se3_upgrade_wheezy.sh
 ```
@@ -168,7 +198,9 @@ Les voici (ces options ne servant que pour la mise au point du script, vous n'av
 
 
 ### Redémarrer à la fin ?
-Il n'est pas nécessaire de redémarrer… Mais ce n'est pas interdit ;-)
+Il n'est pas nécessaire de redémarrer…
+
+Mais ce n'est pas interdit ;-) C'est comme vous voulez.
 ```sh
 reboot
 ```
@@ -187,15 +219,15 @@ Graver un DVD (pas fait, je n'en ai pas eu besoin) avec cette archive `iso`.
 
 
 ### Démarrer le `se3` sur le DVD gravé
-> Il suffit d'accepter la réparation proposée par boot-repair : au redémarrage du se3, grub devrait être réparé.
+Il suffit d'accepter la réparation proposée par boot-repair : au redémarrage du se3, grub devrait être réparé.
 
+**À noter :**
+Si la réparation proposée par `boot-repair` ne résout toujours pas le problème `grub` du `se3`, il est toujours possible, **dans l'attente de trouver une solution alternative**, d'utiliser `super-grub2` pour faire booter son se3.
 
-A noter :
-Si la réparation proposée par boot-repair ne résout toujours pas le problème grub du se3. il est toujours possible, dans l'attente de trouver une solution alternative, d'utiliser super-grub2 pour faire booter son se3.
-Pour cela, télécharger puis graver l'iso disponible à
-http://www.supergrubdisk.org/category/download/supergrub2diskdownload/
+Pour cela, téléchargez puis gravez l'iso disponible à l'adresse suivante :
+> http://www.supergrubdisk.org/category/download/supergrub2diskdownload/
 
-Booter sur le cd super-grub2 : le se3 devrait alors se lancer.
+Bootez sur le cd `super-grub2` : le `se3` devrait alors se lancer.
 
 
 ### Autre solution
