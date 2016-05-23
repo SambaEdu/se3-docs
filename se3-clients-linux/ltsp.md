@@ -133,32 +133,40 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 
 4. `deployer_imprimantes.sh` :
 
-	Ce script permet d'installer les pilotes d'imprimantes.
+	Ce script permet d'installer les pilotes d'imprimantes dont vous disposez le fichier ppd.
+	* Lancer l'outil de configuration graphique des imprimantes disponible sur votre client lourd.
 	* Configurer toutes les imprimantes de votre réseau, restreindre éventuellement les droits à certains groupes d'utilisateurs.
+	Le mot de passe du compte root des clients lourds (saisi pendant l'installation de ltps sur le se3) vous est demandé.
 	* Tester l'impression sur vos imprimantes.
-	* Si tout est fonctionnel, double-cliquer sur le `script deployer_imprimantes.sh`.
+	* Si tout est fonctionnel, double-cliquer sur le script `deployer_imprimantes.sh`.
 	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
 5. `sauvegarder_chroot_actuel.sh` :
 
 	Ce script réalise une sauvegarde sans compression dans `/var/se3/ltsp` de l'environnement actuel (le chroot) des clients lourds.
-	Si une sauvegarde précédente existe déjà dans `/var/se3/ltsp`, cette dernière est au préalable déplacée dans `/var/se3/ltsp/precedentes`.
-	Il peut être lancé dès que votre environnement est configuré comme souhaité et fonctionnel.
+	
+	Si une sauvegarde précédente existe déjà dans `/var/se3/ltsp`, cette dernière sera au préalable déplacée dans `/var/se3/ltsp/precedentes`.
+	
+	Il peut être lancé dès que votre environnement est fonctionnel et configuré comme vous le souhaitez.
+	
 	La sauvegarde prend quelques minutes.
 
 6. `restaurer_derniere_sauvegarde.sh` :
 
-	Ce script restaure la dernière sauvegarde de votre environnement (chroot) réalisée.
+	Ce script restaure la dernière sauvegarde de votre environnement (chroot).
+	
 	Il peut être lancé si vous constatez que votre environnement n'est plus fonctionnel après des opérations de maintenance effectuées.
+	
 	La restauration prend quelques secondes.
 
 7. `restaurer_sauvegarde_originale.sh` :
 
-	Ce script restaure la première sauvegarde de votre environnement (chroot) qui a été faite juste à la fin du script d'installation de ltsp sur le se3.
+	Ce script restaure la première sauvegarde de votre environnement : celle qui a été faite juste 
+	à la fin du script d'installation de ltsp sur le se3 (dans `/var/se3/ltsp/originale/`)
 	
-	Cela permet de "repartir" à zéro dans la configuration de l'environnement des clients lourds.
+	Cela permet de refaire une configuration de l'environnement des clients lourds, en `"repartant de zéro"`.
 	
-	La restauration prend quelques secondes.
+	Cette restauration prend quelques secondes.
 
 8. `supprimer_sauvegardes_sauf_derniere.sh` :
 
@@ -172,14 +180,14 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	
 	Avant de lancer le script, il est conseillé de tester le "bon déroulement" des installations en les testant sur un client lourd en fonctionnement.
 	* ouvrir un terminal graphique et se connecter avec le compte root des clients lourds :
-		```sh
-		su root
-		```
+	```sh
+	su root
+	```
 	* puis saisir le mot de passe root renseigné durant l'installation de ltsp sur le serveur se3.
 	* effectuer l'installation des applications :
-		```sh
-		apt-get install -f appli1 appli2 appli3 appli4 ...
-		```
+	```sh
+	apt-get install -f appli1 appli2 appli3 appli4 ...
+	```
 
 	**Remarque :**
 
@@ -190,8 +198,8 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	il y a de très forte chance que l'execution du script `installer_mes_applis.sh` se passe aussi bien.
 
 	* si la commande précédente s'est exécutée sans erreur, lancer le script `installer_mes_applis.sh` puis resaisir la même liste d'applications :
-		```sh
-		appli1 appli2 appli3 appli4 ...
-		```
+	```sh
+	appli1 appli2 appli3 appli4 ...
+	```
 		
 	* Si la distribution `Ubuntu` est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
