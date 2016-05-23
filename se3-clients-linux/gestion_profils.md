@@ -96,7 +96,7 @@ système ou soit juste après chaque fermeture de session).
     **Note :** Le terme de synchronisation est bien adapté car
     c'est justement la commande `rsync` qui est utilisée pour
     effectuer cette tâche.
-
+	
 2. **Au moment de l'ouverture de session** d'un compte du
 domaine, (c'est-à-dire juste après une saisie correcte du
 login et du mot de passe d'un compte du domaine).

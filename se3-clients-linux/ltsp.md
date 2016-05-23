@@ -108,75 +108,74 @@ Ce repertoire contient un ensemble de script qu'il est possible de lancer très 
 Voici une description du rôle et du fonctionnement de ces scripts :
 
 1. `construire_squashfs_image.sh` :
-Ce script construit l'image squashfs des clients lourds, lorsque le service nbd est utilisé.
+	Ce script construit l'image squashfs des clients lourds, lorsque le service nbd est utilisé.
 
-Il doit être lancé **uniquement** avec `Ubuntu`, **au moins une fois à la fin** des tâches d'administration.
+	Il doit être lancé **uniquement** avec `Ubuntu`, **au moins une fois à la fin** des tâches d'administration.
 
-Il entraîne l'arrêt du service nbd : il doit donc être lancé **lorsqu'aucun client lourd n'est utilisé**.
+	Il entraîne l'arrêt du service nbd : il doit donc être lancé **lorsqu'aucun client lourd n'est utilisé**.
 
 2. `deployer_mes_lanceurs.sh` :
-Ce script permet de personnaliser le bureau des clients lourds.
-* Créer sur votre bureau les lanceurs que vous voulez voir apparaître sur le bureau de vos clients.
-* Double-cliquer sur le script `deployer_mes_lanceurs.sh`
-* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
+	Ce script permet de personnaliser le bureau des clients lourds.
+	* Créer sur votre bureau les lanceurs que vous voulez voir apparaître sur le bureau de vos clients.
+	* Double-cliquer sur le script `deployer_mes_lanceurs.sh`
+	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
 3. `deployer_mon_skel.sh` :
-Ce script permet de personnaliser le "home" par défaut des utilisateurs de client lourd.
-* Personnaliser vos applications (votre navigateur web par exemple).
-* Repérer les dossiers de configuration de vos application (par exemple, `/home/admin/.mozilla` pour le navigateur firefox).
-* Copier ces dossiers dans le partage Samba du se3 `Clients-linux/ltsp/skel`, accessible depuis le bureau du compte admin du se3.
-* Double-cliquer sur le script `deployer_mon_skel.sh`
-* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
+	Ce script permet de personnaliser le "home" par défaut des utilisateurs de client lourd.
+	* Personnaliser vos applications (votre navigateur web par exemple).
+	* Repérer les dossiers de configuration de vos application (par exemple, `/home/admin/.mozilla` pour le navigateur firefox).
+	* Copier ces dossiers dans le partage Samba du se3 `Clients-linux/ltsp/skel`, accessible depuis le bureau du compte admin du se3.
+	* Double-cliquer sur le script `deployer_mon_skel.sh`
+	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
 4. `deployer_imprimantes.sh` :
-Ce script permet d'installer les pilotes d'imprimantes.
-* Configurer toutes les imprimantes de votre réseau, restreindre éventuellement les droits à certains groupes d'utilisateurs.
-* Tester l'impression sur vos imprimantes.
-* Si tout est fonctionnel, double-cliquer sur le `script deployer_imprimantes.sh`.
-* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
+	Ce script permet d'installer les pilotes d'imprimantes.
+	* Configurer toutes les imprimantes de votre réseau, restreindre éventuellement les droits à certains groupes d'utilisateurs.
+	* Tester l'impression sur vos imprimantes.
+	* Si tout est fonctionnel, double-cliquer sur le `script deployer_imprimantes.sh`.
+	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
 5. `sauvegarder_chroot_actuel.sh` :
-Ce script réalise une sauvegarde sans compression dans `/var/se3/ltsp` de l'environnement actuel (le chroot) des clients lourds.
-Si une sauvegarde précédente existe déjà dans `/var/se3/ltsp`, cette dernière est au préalable déplacée dans `/var/se3/ltsp/precedentes`.
-Il peut être lancé dès que votre environnement est configuré comme souhaité et fonctionnel.
-La sauvegarde prend quelques minutes.
+	Ce script réalise une sauvegarde sans compression dans `/var/se3/ltsp` de l'environnement actuel (le chroot) des clients lourds.
+	Si une sauvegarde précédente existe déjà dans `/var/se3/ltsp`, cette dernière est au préalable déplacée dans `/var/se3/ltsp/precedentes`.
+	Il peut être lancé dès que votre environnement est configuré comme souhaité et fonctionnel.
+	La sauvegarde prend quelques minutes.
 
 6. `restaurer_derniere_sauvegarde.sh` :
-Ce script restaure la dernière sauvegarde de votre environnement (chroot) réalisée.
-Il peut être lancé si vous constatez que votre environnement n'est plus fonctionnel après des opérations de maintenance effectuées.
-La restauration prend quelques secondes.
+	Ce script restaure la dernière sauvegarde de votre environnement (chroot) réalisée.
+	Il peut être lancé si vous constatez que votre environnement n'est plus fonctionnel après des opérations de maintenance effectuées.
+	La restauration prend quelques secondes.
 
 7. `restaurer_sauvegarde_originale.sh` :
-Ce script restaure la première sauvegarde de votre environnement (chroot) qui a été faite juste à la fin du script d'installation de ltsp sur le se3.
-Cela permet de "repartir" à zéro dans la configuration de l'environnement des clients lourds.
-La restauration prend quelques secondes.
+	Ce script restaure la première sauvegarde de votre environnement (chroot) qui a été faite juste à la fin du script d'installation de ltsp sur le se3.
+	Cela permet de "repartir" à zéro dans la configuration de l'environnement des clients lourds.
+	La restauration prend quelques secondes.
 
 8. `supprimer_sauvegardes_sauf_derniere.sh` :
-Ce script supprime toutes les sauvegardes stockées dans `/var/se3/ltps/precedente`.
-Seule la dernière sauvegarde réalisée, stockée dans `/var/se3/ltsp/`, n'est pas supprimée.
+	Ce script supprime toutes les sauvegardes stockées dans `/var/se3/ltps/precedente`.
+	Seule la dernière sauvegarde réalisée, stockée dans `/var/se3/ltsp/`, n'est pas supprimée.
 
 9. `installer_des_applis.sh` :
-Ce script permet d'installer très rapidement une liste d'applications installables via apt-get.
-Avant de lancer le script, il est conseillé de tester le bon déroulement en testant l'installation sur un client lourd.
-* ouvrir un terminal graphique et se connecter avec le compte root des clients lourds :
-```sh
-su root
-```
-* puis saisir le mot de passe entré pendant l'installation de ltsp sur le serveur se3.
-* effectuer l'installation des applications :
-```sh
-apt-get install -f appli1 appli2 appli3 appli4 ...
-```
+	Ce script permet d'installer très rapidement une liste d'applications installables via apt-get.
+	Avant de lancer le script, il est conseillé de tester le bon déroulement en testant l'installation sur un client lourd.
+	* ouvrir un terminal graphique et se connecter avec le compte root des clients lourds :
+	```sh
+	su root
+	```
+	* puis saisir le mot de passe entré pendant l'installation de ltsp sur le serveur se3.
+	* effectuer l'installation des applications :
+	```sh
+	apt-get install -f appli1 appli2 appli3 appli4 ...
+	```
 
-**Remarque :**
+	**Remarque :**
 
-Cette installation n'est pas persistente car l'environnement des clients lourds "en fonctionnement" est **en lecture seule** : 
+	Cette installation n'est pas persistente car l'environnement des clients lourds "en fonctionnement" 
+	est **en lecture seule** : au prochain démarrage du client lourd, les applications installées auront disparu ...
 
-au prochain démarrage du client lourd, les applications installées auront disparu ...
+	Par contre, cette installation permet de se placer "dans les mêmes conditions" que dans le "chroot" : si elle se déroule convenablement,
+	il y a de très forte chance que l'execution du script `installer_mes_applis.sh` se passe aussi bien.
 
-Par contre, cette installation permet de se placer "dans les mêmes conditions" que dans le "chroot" : si elle se déroule convenablement,
-il y a de très forte chance que l'execution du script `installer_mes_applis.sh` se passe aussi bien.
-
-* si la commande précédente s'est bien sans erreur, lancer le script `installer_mes_applis.sh` puis resaisir la même liste d'applications :
-appli1 appli2 appli3 appli4 ...
-* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
+	* si la commande précédente s'est bien sans erreur, lancer le script `installer_mes_applis.sh` puis resaisir la même liste d'applications :
+	appli1 appli2 appli3 appli4 ...
+	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
