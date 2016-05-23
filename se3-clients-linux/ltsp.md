@@ -64,29 +64,28 @@ ou, pour un bureau Debian Jessie Mate :
 /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
 ```
 
-* Pendant l'installation (qui dure environ une heure), il est demandé :
-** Le mot de passe du compte root de l'environnement des clients lourds.
-** Le mot de passe du compte local enseignant
+Pendant l'installation (qui dure environ une heure), il est demandé :
+* Le mot de passe du `compte root de l'environnement des clients lourds`
+* Le mot de passe du `compte local enseignant`
 
-** Attention !!! **
-Si le bureau `Ubuntu` est choisi, **les mots de passe saisis** pour les comptes root et enseignant du chroot le sont avec un **clavier querty** 
-(la locale est changée pendant l'installation)
+**Attention !!!**
+Avec le bureau `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
 
 ## Que fait le script d'installation ?
 
 Le script d'installation précédent va seulement :
-* créer un répertoire /opt/ltsp/i386 qui contiendra l'environnement (le chroot) des clients lourds Debian Jessie ou Ubuntu Xenial.
-* installer et configurer les services NFS et NBD pour mettre à disposition des clients lourds, via le réseau, leur environnement i386 (leur chroot)
-* créer un répertoire /tftpboot/ltsp contenant l'initrd et le kernel pour le boot PXE des clients lourds.
-* ajouter une entrée au menu PXE (/tftpboot/pxelinux.cfg/default) afin qu'un utilisateur puisse faire démarrer un PC en client lourd LTSP.
-* configurer l'environnement i386 des clients lourds (le chroot) pour réaliser l'identification des utilisateurs avec l annuaire ldap du se3 
-et le montage automatique de deux partages Samba du se3 (Docs et Classes).
+* créer un répertoire `/opt/ltsp/i386` qui contiendra l'environnement (le chroot) des clients lourds Debian Jessie ou Ubuntu Xenial.
+* installer et configurer les services `NFS et NBD` qui mettra à disposition des clients lourds leur environnement i386.
+* créer un répertoire `/tftpboot/ltsp` contenant l'initrd et le kernel pour le boot PXE des clients lourds.
+* ajouter une entrée au menu PXE `/tftpboot/pxelinux.cfg/default` afin qu'un utilisateur puisse faire démarrer un PC en client lourd LTSP.
+* configurer l'environnement i386 des clients lourds pour réaliser l'`identification des utilisateurs avec l annuaire ldap du se3` 
+et `le montage automatique de deux partages Samba du se3 (Docs et Classes)`.
 
-**Seul un service supplémentaire va être lancé sur le serveur se3**, selon le bureau choisi, ce sera :
+Seul **un service supplémentaire** va être lancé sur le serveur se3, ce sera :
 * le service nfs si c'est le bureau Debian Jessie Mate qui est installé dans l'environnement des clients lourds.
 * le service nbd si c'est le bureau Ubuntu Xenial Mate qui est installé dans l'environnement des clients lourds.
 
-L'environnement (le chroot) des clients lourds est configuré pour être au maximum **autonome** et **impacter au minimum le serveur se3**. 
+L'environnement des clients lourds est configuré pour être au maximum **autonome** et **impacter au minimum le serveur se3**. 
 Par soucis de simplicité, **un seul environnement** en architecture i386 est construit pour l'ensemble du parc : cet environnement 
 devra contenir toutes les applications utiles aux utilisateurs et sera utilisé à la fois par les clients lourds i386 et amd64.
 
@@ -105,57 +104,58 @@ Toutes les tâches d'administration peuvent se faire à partir d'un client lourd
 * Se rendre dans le partage Samba du se3 `Clients-linux/ltsp/administrer` accessible depuis le bureau du compte admin du se3.
 
 Ce repertoire contient un ensemble de script qu'il est possible de lancer très simplement en double-cliquant dessus.
+
 Voici une description du rôle et du fonctionnement de ces scripts :
 
-1. construire_squashfs_image.sh
+1. `construire_squashfs_image.sh` :
 Ce script construit l'image squashfs des clients lourds, lorsque le service nbd est utilisé.
 
-Il doit être **lancé au moins une fois, à la fin des tâches d'administration** réalisées sur un environnement **Ubuntu**.
+Il doit être lancé **uniquement** avec `Ubuntu`, **au moins une fois à la fin** des tâches d'administration.
 
-Il entraîne l'arrêt du service nbd : **il doit donc être lancé lorsqu'aucun client lourd n'est utilisé**.
+Il entraîne l'arrêt du service nbd : il doit donc être lancé **lorsqu'aucun client lourd n'est utilisé**.
 
-2. deployer_mes_lanceurs.sh :
+2. `deployer_mes_lanceurs.sh` :
 Ce script permet de personnaliser le bureau des clients lourds.
 * Créer sur votre bureau les lanceurs que vous voulez voir apparaître sur le bureau de vos clients.
-* Double-cliquer sur le script deployer_mes_lanceurs.sh
+* Double-cliquer sur le script `deployer_mes_lanceurs.sh`
 * Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
-3. deployer_mon_skel.sh :
+3. `deployer_mon_skel.sh` :
 Ce script permet de personnaliser le "home" par défaut des utilisateurs de client lourd.
 * Personnaliser vos applications (votre navigateur web par exemple).
-* Repérer les dossiers de configuration de vos application (par exemple, /home/admin/.mozilla pour le navigateur firefox).
+* Repérer les dossiers de configuration de vos application (par exemple, `/home/admin/.mozilla` pour le navigateur firefox).
 * Copier ces dossiers dans le partage Samba du se3 `Clients-linux/ltsp/skel`, accessible depuis le bureau du compte admin du se3.
-* Double-cliquer sur le script deployer_mon_skel.sh
+* Double-cliquer sur le script `deployer_mon_skel.sh`
 * Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
-4. deployer_imprimantes.sh :
+4. `deployer_imprimantes.sh` :
 Ce script permet d'installer les pilotes d'imprimantes.
 * Configurer toutes les imprimantes de votre réseau, restreindre éventuellement les droits à certains groupes d'utilisateurs.
-* Tester l'impression sur vos imprimantes
-* Double-cliquer sur le script deployer_imprimantes.sh
+* Tester l'impression sur vos imprimantes.
+* Si tout est fonctionnel, double-cliquer sur le `script deployer_imprimantes.sh`.
 * Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
-5. sauvegarder_chroot_actuel.sh :
-Ce script réalise une sauvegarde sans compression dans /var/se3/ltsp de l'environnement actuel (le chroot) des clients lourds.
-Si une sauvegarde précédente existe déjà dans /var/se3/ltsp, cette dernière est déplacée dans /var/se3/ltsp/precedentes.
+5. `sauvegarder_chroot_actuel.sh` :
+Ce script réalise une sauvegarde sans compression dans `/var/se3/ltsp` de l'environnement actuel (le chroot) des clients lourds.
+Si une sauvegarde précédente existe déjà dans `/var/se3/ltsp`, cette dernière est au préalable déplacée dans `/var/se3/ltsp/precedentes`.
 Il peut être lancé dès que votre environnement est configuré comme souhaité et fonctionnel.
 La sauvegarde prend quelques minutes.
 
-6. restaurer_derniere_sauvegarde.sh :
+6. `restaurer_derniere_sauvegarde.sh` :
 Ce script restaure la dernière sauvegarde de votre environnement (chroot) réalisée.
 Il peut être lancé si vous constatez que votre environnement n'est plus fonctionnel après des opérations de maintenance effectuées.
 La restauration prend quelques secondes.
 
-7. restaurer_sauvegarde_originale.sh :
-Ce script restaure la première sauvegarde de votre environnement (chroot) réalisée, juste à la fin du script d'installation de ltsp sur le se3.
-Cela permet de "repartir" à zéro dans la configuration de l'environnement (chroot) des clients lourds.
+7. `restaurer_sauvegarde_originale.sh` :
+Ce script restaure la première sauvegarde de votre environnement (chroot) qui a été faite juste à la fin du script d'installation de ltsp sur le se3.
+Cela permet de "repartir" à zéro dans la configuration de l'environnement des clients lourds.
 La restauration prend quelques secondes.
 
-8. supprimer_sauvegardes_sauf_derniere.sh :
-Ce script supprime toutes les sauvegardes stockées dans /var/se3/ltps/precedente.
-Seule la dernière sauvegarde réalisée, stockée dans /var/se3/ltsp/, n'est pas supprimée.
+8. `supprimer_sauvegardes_sauf_derniere.sh` :
+Ce script supprime toutes les sauvegardes stockées dans `/var/se3/ltps/precedente`.
+Seule la dernière sauvegarde réalisée, stockée dans `/var/se3/ltsp/`, n'est pas supprimée.
 
-9. installer_des_applis.sh :
+9. `installer_des_applis.sh` :
 Ce script permet d'installer très rapidement une liste d'applications installables via apt-get.
 Avant de lancer le script, il est conseillé de tester le bon déroulement en testant l'installation sur un client lourd.
 * ouvrir un terminal graphique et se connecter avec le compte root des clients lourds :
@@ -177,6 +177,6 @@ au prochain démarrage du client lourd, les applications installées auront disp
 Par contre, cette installation permet de se placer "dans les mêmes conditions" que dans le "chroot" : si elle se déroule convenablement,
 il y a de très forte chance que l'execution du script `installer_mes_applis.sh` se passe aussi bien.
 
-* si la commande précédente s'est bien déroulée sur le client lourd, lancer le script installer_mes_applis.sh puis resaisir la même liste d'applications à installer dans le chroot :
+* si la commande précédente s'est bien sans erreur, lancer le script `installer_mes_applis.sh` puis resaisir la même liste d'applications :
 appli1 appli2 appli3 appli4 ...
 * Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
