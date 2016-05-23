@@ -161,10 +161,10 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 
 7. `restaurer_sauvegarde_originale.sh` :
 
-	Ce script restaure la première sauvegarde de votre environnement : celle qui a été faite juste 
-	à la fin du script d'installation de ltsp sur le se3 (dans `/var/se3/ltsp/originale/`)
+	Ce script restaure la première sauvegarde (stockée dans `/var/se3/ltsp/originale/`) de l'environnement : celui qui a été créé par le script
+	d'insllation de ltsp sur votre se3.
 	
-	Cela permet de refaire une configuration de l'environnement des clients lourds, en `"repartant de zéro"`.
+	Cela permet de refaire une configuration de l'environnement des clients lourds, en `repartant de l'environnement "original"`.
 	
 	Cette restauration prend quelques secondes.
 
