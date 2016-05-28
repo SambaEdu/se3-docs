@@ -13,6 +13,9 @@
             * [Gestion du répertoire temporaire](#gestion-du-répertoire-temporaire)
         * [Mise en place du menu pxe](#mise-en-place-du-menu-pxe)
         * [Utilisation](#utilisation)
+    * [Installer `Debian Jessie` en semi-automatique](#installer-debian-jessie-en-semi-automatique)
+        * [Mise en place du menu `pxe`](#mise-en-place-du-menu-pxe)
+        * [Mise en place du fichier `preseed`](#mise-en-place-du-fichier-preseed)
     * [Installer `Debian Stretch`](#installer-debian-stretch)
 
 
@@ -150,7 +153,8 @@ Une fois les fichiers en place, on peut supprimer quelques éléments dans le r�
 
 #### Mise en place du menu pxe
 
-Dans le fichier `perso.menu`, rajoutez les lignes suivantes (en remplaçant *IP-du-se3* par la valeur correspondant à votre réseau) :
+Dans le fichier `perso.menu`, rajoutez les lignes suivantes
+(en remplaçant *IP-du-se3* par la valeur correspondant à votre réseau) :
 ```ssh
 LABEL GParted
     MENU LABEL GParted pour la gestion des partitions
@@ -197,6 +201,55 @@ Il suffira de taper sur la touche `Entrée`.
 Enfin, on obtient l'interface de gestion des partitions du client.
 
 ![gparted interface](images/gparted_04.png)
+
+
+### Installer `Debian Jessie` en semi-automatique
+
+Vous pouvez profiter du mécanisme d'installation de `Debian Jessie` via le mode `pxe` pour obtenir l'installation d'un système non intégré.
+
+Il faut donc adapter un des fichiers preseed disponibles dans le répertoire */home/netlogon/clients-linux/install/* et ajouter une entrée au menu perso pour l'utiliser.
+
+
+#### Mise en place du menu `pxe`
+
+Dans le fichier `perso.menu`, rajoutez, par exemple, les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
+```ssh
+…
+LABEL DebianJessiesemiautoamd64
+    MENU LABEL ^Netboot Debian jessie Preseed semi-auto (amd64)
+    KERNEL  debian-installer/amd64/linux
+    APPEND  keymap=fr language=fr country=FR locale=fr_FR.UTF-8 netcfg/dhcp_timeout=60 preseed/url=http://###_IP_SE3_###/install/messcripts_perso/semi-auto_preseed_debian.cfg initrd=debian-installer/amd64/initrd.gz --
+    TEXT HELP
+    Installation semi-automatique de Debian jessie amd64 avec gnome-desktop
+    ENDTEXT
+…
+```
+Dans la ligne `APPEND`, vous remplacerez *###_IP_SE3_###* par l'IP de votre se3
+et vous adapterez éventuellement *le nom du fichier preseed*
+(ici, on a mis *semi-auto_preseed_debian.cfg*)
+fichier preseed à placer, par exemple, dans le répertoire des scripts perso (comme ici).
+
+
+#### Mise en place du fichier `preseed`
+
+Le fichier `preseed` contient toutes les réponses aux questions posées lors d'une installation classique : cela rend le système d'installation automatique sans intervention de la part de l'utilisateur.
+
+Pour une installation semi-automatique, on fera en sorte que certaines questions soient posées (**nom de la machine, nom du domaine, mot de passe root, identifiant et mot de passe d'un compte lambda** par exemple).
+
+Pour cela, on peut prendre un des fichiers preseed qui se trouvent dans le répertoire */home/netlogon/clients-linux/install/* et commenter les lignes correspondantes aux questions dont on souhaite avoir les questions au cours de l'installation. Les réponses aux questions commencent la plupart du temps par *d-i*.
+
+**Remarque :** pour commenter une ligne, il suffit de mettre un **#** au début de cette ligne.
+
+Il faudra aussi modifier **la section 10** qui permet de préparer la post-installation. Si vous n'en avez pas l'usage, il sera plus rapide de commenter la ligne commençant par *d-i preseed/late_command string*.
+
+**Un conseil :** si c'est pour un usage personnel, il peut être intéressant, et pratique lors d'une ré-installation ultérieure, d'avoir le répertoire */home* dans une partition à part. Pour cela, il faudra remplacer le paramètre **atomic** par **home** (voir **la section 5** du fichier preseed).
+
+Vous renommerez ce fichier preseed ainsi modifié
+(par exemple le nommer *semi-auto_preseed_debian.cfg*)
+et le placerez dans le répertoire */home/netlogon/clients-linux/install/messcripts_perso/* :
+ainsi il ne sera pas supprimé lors d'une mise à jour du mécanisme.
+
+Une fois le système installé, il faudra (selon l'usage de cette machine) supprimer le fichier */etc/apt/apt.conf* qui a été créé pour tenir compte du miroir `apt-cacher` géré par le `se3`.
 
 
 ### Installer `Debian Stretch`
