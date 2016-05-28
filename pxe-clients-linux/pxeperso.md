@@ -14,7 +14,7 @@
         * [Mise en place du menu pxe](#mise-en-place-du-menu-pxe)
         * [Utilisation](#utilisation)
     * [Installer `Debian Jessie` en semi-automatique](#installer-debian-jessie-en-semi-automatique)
-        * [Mise en place du menu `pxe`](#mise-en-place-du-menu-pxe)
+        * [Mise en place dans le menu `pxe`](#mise-en-place-dans-le-menu-pxe)
         * [Mise en place du fichier `preseed`](#mise-en-place-du-fichier-preseed)
     * [Installer `Debian Stretch`](#installer-debian-stretch)
 
@@ -210,7 +210,7 @@ Vous pouvez profiter du mécanisme d'installation de `Debian Jessie` via le mode
 Il faut donc adapter un des fichiers preseed disponibles dans le répertoire */home/netlogon/clients-linux/install/* et ajouter une entrée au menu perso pour l'utiliser.
 
 
-#### Mise en place du menu `pxe`
+#### Mise en place dans le menu `pxe`
 
 Dans le fichier `perso.menu`, rajoutez, par exemple, les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
 ```ssh
