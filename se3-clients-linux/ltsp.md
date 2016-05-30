@@ -7,34 +7,36 @@ Cette documantation explique comment `intégrer le service ltsp` à un serveur S
 Tout PC disposant d'une carte ethernet avec un boot PXE et d'au moins 512 Mo de RAM pourra démarrer en tant que clients lourds (mode fat client) 
 grâce au réseau ethernet et sans avoir besoin de son disque dur.
 
-Le bureau des clients lourds pourra être : 
-* soit un bureau `Debian Jessie Mate`.
-* soit un bureau `Ubuntu Xenial Mate`.
+Le bureau des clients lourds retenu est Mate, pour sa légereté, et pourra être sous la distribution :
+* soit `Debian Jessie`.
+* soit `Ubuntu Xenial`.
 
 La configuration ltsp appliquée ici impacte peu le serveur Se3 : l'environnement (chroot) des clients lourds est configuré afin de les rendre "autonomes" du se3 ; 
 en particulier, l'identification d'un utilisateur est réalisé par l'environnement (chroot) des clients lourds et non par le serveur se3.
 
-Le démarrage d'un PC en "mode client lourd" peut :
-* être laissé au choix de l'utilisateur via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage.
-* être configuré par défaut afin que tous les PC démarrent en clients lourds ltsp.
+Le démarrage d'un PC en `mode client lourd` peut :
+* être laissé au choix de l'utilisateur via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration par défaut mise en place par le script d'installation de ltsp.
+* être configuré par défaut afin que tous les PC démarrent en clients lourds ltsp (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
-Le **serveur Se3 n'a pas besoin d'être très puissant** car ltsp est configuré ici pour **ne gérer que des clients lourds (fat client)**.
+Le serveur Se3 **n'a pas besoin d'être très puissant** car ltsp est configuré ici pour **ne gérer que des clients lourds (fat client)**.
 
 ## Pourquoi installer le service ltsp sur un se3 ?
 
 Les utilisations peuvent être nombreuses. Par exemple :
 
-* **faciliter la gestion d'un parc informatique**, la maintenance du parc se limitant à l'environnement (chroot) construit pour tous les clients lourds sur le serveur se3.
+* **faciliter** la gestion d'un parc informatique, la maintenance du parc se limitant à l'environnement (chroot) construit pour tous les clients lourds sur le serveur se3.
 * disposer d'un **mode de démarrage réseau "de secours"** pour l'ensemble de son parc : tout pc disposant d'une carte réseau pxe pourra démarrer grâce au réseau.
 
 ## Pre-requis
 
 * **Votre serveur Se3 doit être sous Debian Wheezy** et disposait d'au moins une carte 1 Gbs relié à un port 1 Gbs d'un commutateur réseau.
+* La partition racine / doit disposer d'environ 5 Go (7 Go pour Ubuntu) pour contenir l'environnement (chroot) des clients lourds.
+* La partition /var/se3 doit disposer d'environ 5 Go pour contenir la sauvegarde originale du chroot des clients lourds.
 * Le service ltsp est configuré en "mode client lourd" **uniquement** : autrement dit, le serveur ltsp n'a pas besoin d'être très puissant car
 les applications sont exécutés avec les ressources des clients lourds. C'est surtout les **accès en lecture au(x) disque(s) dur(s)** qui vont être 
 sollicités sur le se3 (service **nfs ou nbd** selon le bureau) : si le choix se présente, il est donc préférable d'opter dans un (ou des) disque(s) dur(s) SSD 
 ou des disques durs SATA mais montés en RAID 0 (ou RAID 5) pour augmenter le débit des accès disques.
-* La carte réseau des clients lourds doit être au moins de 100 Mbs et reliée à un port 100 Mbs ou plus du commutateur réseau.
+* La carte réseau des clients lourds doit être au moins de 100 Mbs et reliée à un port 100 Mbs (ou plus) du commutateur réseau.
 * Il faut éviter de mettre trop de commutateurs réseau en série (en cascade) afin d'éviter de diminuer la vitesse de leur port 1 Gbs.
 * D'une façon générale, le réseau ethernet pédagogique doit être "en bon état" car il va être assez sollicité par l'ensemble des clients lourds en fonctionnement.
 
@@ -46,27 +48,31 @@ une agrégation de liens (en mode balance-tlb ou en mode balance-alb).
 ## Installation de LTSP
 
 * Se connecter au serveur SE3 en tant que root (en ssh par exemple).
-* Pour obtenir des clients lourds avec le bureau Ubuntu Xenial Mate, rendre le script suivant executable :
-```sh
-chmod u+x /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
-```
-ou, pour un bureau Debian Jessie Mate :
+* Pour obtenir des clients lourds avec le bureau Debian Jessie Mate, rendre le script suivant executable :
+
 ```sh
 chmod u+x /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
 ```
 
-* Puis l'exécuter :
+ou, pour un bureau Debian Ubuntu Xenial Mate :
+
 ```sh
-/home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
+chmod u+x /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
 ```
-ou, pour un bureau Debian Jessie Mate :
+
+* Puis l'exécuter :
 ```sh
 /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
 ```
 
-Pendant l'installation (qui dure environ une heure), il est demandé :
-* Le mot de passe du `compte root de l'environnement des clients lourds`
-* Le mot de passe du `compte local enseignant`
+ou, pour un bureau Ubuntu Xenial Mate :
+```sh
+/home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
+```
+
+Pendant l'installation (qui dure environ une heure), il est demandé, dans l'ordre :
+* Le mot de passe du compte `root` de `l'environnement des clients lourds`
+* Le mot de passe du compte `local enseignant`
 
 **Attention !!!**
 Avec le bureau `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
@@ -80,6 +86,8 @@ Le script d'installation précédent va seulement :
 * ajouter une entrée au menu PXE `/tftpboot/pxelinux.cfg/default` afin qu'un utilisateur puisse faire démarrer un PC en client lourd LTSP.
 * configurer l'environnement i386 des clients lourds pour réaliser l'`identification des utilisateurs avec l annuaire ldap du se3` 
 et `le montage automatique de deux partages Samba du se3 (Docs et Classes)`.
+* créer une sauvegarde, à la fin de l'installation, de l'environnement des clients lourds dans /var/se3/ltsp/i386-original : cela permettra 
+de restaurer le chroot des clients lourds en 5 minutes, en cas de problèmes lors de son administration.
 
 Seul **un service supplémentaire** va être lancé sur le serveur se3, ce sera :
 * le service nfs si c'est le bureau Debian Jessie Mate qui est installé dans l'environnement des clients lourds.
@@ -96,14 +104,34 @@ nfs est plus souple mais moins performant que nbd : il est utilisé par défaut 
 ## Comment administrer le serveur LTSP ?
 
 L'administration du service LTSP consiste principalement à personnaliser l'environnement i386 des clients lourds (le chroot).
-Pour administrer simplement l'environnement des clients lourds, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
 
-Toutes les tâches d'administration peuvent se faire à partir d'un client lourd du réseau, en se connectant avec le **compte admin du se3** (ce compte est le seul à avoir accès au partage précédent).
+Cette administration peut se faire simplement en ligne de commande en se connectant en root au se3 (via ssh par exemple) puis en se mettant sur 
+la racine de l'environnement (le "chroot") des clients lourds avec la commande :
+
+```sh
+ltsp-chroot -a -m i386
+```
+
+Toutes les commandes shell exécutables sur un client linux classique peuvent en principe être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
+Une fois l'administration terminée, sortir du chroot avec la commande :
+
+```sh
+exit
+```
+
+Pour Ubuntu qui utilise le service nbd, ne pas oublier de reconstruire l'image squashfs (cela dure quelques minutes) :
+```sh
+ltps-update-image i386
+```
+
+Toutefois, pour faciliter l'administration, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
+
+Ces scripts sont accessibles à partir d'un client lourd du réseau, en se connectant avec le **compte admin du se3** (ce compte est le seul à avoir accès au partage précédent).
 
 * Se connecter sur un client lourd du réseau, avec le compte admin du se3.
 * Se rendre dans le partage Samba du se3 `Clients-linux/ltsp/administrer` accessible depuis le bureau du compte admin du se3.
 
-Ce repertoire contient un ensemble de script qu'il est possible de lancer très simplement en double-cliquant dessus.
+Ce repertoire contient un ensemble de script qu'il est possible de lancer très simplement en double-cliquant dessus puis en cliquant sur `Lancer`
 
 Voici une description du rôle et du fonctionnement de ces scripts :
 
@@ -111,7 +139,7 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 
 	Ce script construit l'image squashfs des clients lourds, lorsque le service nbd est utilisé.
 
-	Il doit être lancé **uniquement** avec `Ubuntu`, **au moins une fois à la fin** des tâches d'administration.
+	Il doit être lancé **uniquement** avec `Ubuntu`, **à la fin**, une fois les tâches d'administration terminées.
 
 	Il entraîne l'arrêt du service nbd : il doit donc être lancé **lorsqu'aucun client lourd n'est utilisé**.
 
@@ -194,7 +222,7 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	Cette installation n'est pas persistente car l'environnement des clients lourds "en fonctionnement" 
 	est **en lecture seule** : au prochain démarrage du client lourd, les applications installées auront disparu ...
 
-	Par contre, cette installation permet de se placer "dans les mêmes conditions" que dans le "chroot" : si elle se déroule convenablement,
+	Par contre, cette installation permet de se placer "dans les mêmes conditions" que dans le "chroot" des clients lourds : si elle se déroule convenablement,
 	il y a de très forte chance que l'execution du script `installer_mes_applis.sh` se passe aussi bien.
 
 	* si la commande précédente s'est exécutée sans erreur, lancer le script `installer_mes_applis.sh` puis resaisir la même liste d'applications :
