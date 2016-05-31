@@ -44,15 +44,18 @@ L'installation est complétement automatique et ne dure que quelques minutes.
 
 Elle essaie d'être, dans la mesure du possible, le plus "fidèle" aux recommendations de la documentation officielle 
 d'Owncloud :
+
 [Documentation officielle d'Owncloud](https://doc.owncloud.org/server/9.0/admin_manual/)
 
 ainsi qu'à l'article wiki suivant :
-[Wiki dans le DANE de Versailles](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_owncloud_8_avec_l%27annuaire_du_se3)
+
+[Wiki de le DANE de Versailles](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_owncloud_8_avec_l%27annuaire_du_se3)
 
 ## Que fait le script d'installation ?
 
 Le script d'installation précédent va :
 * installer les `paquets` nécessaires à `owncloud 9` et à son module `stockage externe CIFS/SMB`.
+* ajoute le fichier de configuration d'Owncloud 9 `/etc/apache2/sites-available/owncloud.conf` au serveur Apache2 du se3.
 * configurer le module stockage externe pour rendre accessible de l'extérieur de l'établissement deux `partages Samba` 
 du se3 : `Docs` et `Classes`.
 * créer un répertoire `Cloud` pour les utilisateurs afin qu'ils puissent stocker des documents et les partager avec 
