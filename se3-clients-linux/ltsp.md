@@ -11,10 +11,12 @@ Le bureau des clients lourds retenu est Mate, pour sa légereté, et pourra êtr
 * soit `Debian Jessie`.
 * soit `Ubuntu Xenial`.
 
+L'environnement des clients lourds étant isolé dans un `chroot`, il est ainsi possible de faire tourner les clients lourds avec les dernières versions 
+de Debian (Jessie) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
+
 Le démarrage d'un PC en `mode client lourd` peut :
 * être laissé au choix de l'utilisateur via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration par défaut mise en place par le script d'installation de ltsp.
 * être configuré par défaut afin que tous les PC démarrent en clients lourds ltsp (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
-
 
 La configuration ltsp appliquée au serveur Se3 l'impacte peu :
 * l'environnement (chroot) des clients lourds est configuré afin de les rendre `autonomes` du se3 ; en particulier, l'identification 
@@ -24,8 +26,9 @@ sa mise en place : il **n'est pas** nécessaire d'équiper le se3 d'une 2ème ca
 de clients lourds : tout PC ayant un boot PXE et relié au réseau pédagogique pourra démarrer en client lourd, n'importe où dans l'établissement.
 * le serveur Se3 **n'a pas** besoin d'être très puissant car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
 et ne gérer **que** des clients lourds (fat client) : pour pouvoir gérer aussi des clients légers (commme des Raspberry avec le projet Berryterminal), 
-il faudra installer un `serveur d'applications ltsp` puissant, en plus du se3, sur le réseau pédagogique.
-On pourra se reporter à l'article suivant (paragraphe `Mise en place d'un cluster de serveurs LTSP`) :
+il faudra installer un `serveur d'applications ltsp` puissant, en plus du se3, sur le réseau pédagogique. Ce denier ne devra pas nécessairement tourner 
+sous Debian Wheezy : il pourra tourner sous `Debian Jessie` (ou sur Ubuntu Xenial ?).
+On pourra se reporter à l'article suivant pour plus de détail (paragraphe `Mise en place d'un cluster de serveurs LTSP`) :
 
 [Wiki de la DANE Versailles LTSP sur Debian Wheezy](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Wheezy%29_dans_un_r%C3%A9seau_Se3)
 

@@ -99,7 +99,7 @@ exclure.
 
 ## Annexes
 
-* [Transformer votre client Debian Wheezy en serveur `LTSP`](ltsp.md)
+* [Intégrer le service `LTSP` à un serveur se3 Wheezy](ltsp.md)
 * [Installer un miroir local APT de cache avec `apt-cacher-ng`](apt-cacher-ng.md)
 * [Documentation pour le (futur) contributeur/développeur](dev/README.md)
 * [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](upgrade-via-se3testing.md)
@@ -108,7 +108,7 @@ exclure.
 ## Ressources externes
 
 * [Installation de clients `Debian Wheezy` via `Se3` avec intégration automatique](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
-* [Transformer votre client Debian `Jessie` en serveur `LTSP`](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
+* [Installer un serveur LTSP `Jessie` dans un réseau Se3](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
 
 
 ## Les contributeurs
