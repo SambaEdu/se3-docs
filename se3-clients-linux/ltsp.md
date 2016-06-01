@@ -11,14 +11,30 @@ Le bureau des clients lourds retenu est Mate, pour sa légereté, et pourra êtr
 * soit `Debian Jessie`.
 * soit `Ubuntu Xenial`.
 
-La configuration ltsp appliquée ici impacte peu le serveur Se3 : l'environnement (chroot) des clients lourds est configuré afin de les rendre "autonomes" du se3 ; 
-en particulier, l'identification d'un utilisateur est réalisé par l'environnement (chroot) des clients lourds et non par le serveur se3.
-
 Le démarrage d'un PC en `mode client lourd` peut :
 * être laissé au choix de l'utilisateur via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration par défaut mise en place par le script d'installation de ltsp.
 * être configuré par défaut afin que tous les PC démarrent en clients lourds ltsp (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
-Le serveur Se3 **n'a pas besoin d'être très puissant** car ltsp est configuré ici pour **ne gérer que des clients lourds (fat client)**.
+
+La configuration ltsp appliquée au serveur Se3 l'impacte peu
+* l'environnement (chroot) des clients lourds est configuré afin de les rendre "autonomes" du se3 ; en particulier, l'identification 
+d'un utilisateur est réalisé par l'environnement (chroot) des clients lourds et non par le serveur se3.
+* Les clients lourds ne font pas partie d'un `sous-réseau` du réseau pédagogique. ltsp est déployé ici en mode `1 carte réseau` pour faciliter 
+la mise en place de ltsp : il n'est pas nécessaire d'équiper le se3 d'une 2ème carte réseau, ni d'investir dans un commutateur réseau 
+dédié au sous-réseau de clients lourds : tout PC PXE relié au réseau pédagogique géré par le se3 pourra démarré en client lourd.
+* le serveur Se3 **n'a pas besoin d'être très puissant** car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
+et ne gérer **que** des clients lourds (fat client) : pour pouvoir gérer des clients légers dans votre réseau (commme des Raspberry avec le projet 
+Berryterminal), il faudra installer un `serveur d'applications ltsp` en plus du se3 sur votre réseau. 
+On pourra se reporter à l'article suivant (paragraphe `Mise en place d'un cluster de serveurs LTSP`) :
+
+[Wiki de la DANE Versailles LTSP sur Debian Wheezy](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Wheezy%29_dans_un_r%C3%A9seau_Se3)
+
+
+La configuration de l'environnement des clients lourds appliquée ici s'appuie sur le paragraphe 11.6 de l'ANNEXE  
+: `Rendre les clients lourds complétement autonomes du serveur LTSP`) de l'article suivant :
+
+[Wiki de la DANE Versailles LTSP sur Debian Jessie](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
+
 
 ## Pourquoi installer le service ltsp sur un se3 ?
 
@@ -31,12 +47,12 @@ Les utilisations peuvent être nombreuses. Par exemple :
 
 * **Votre serveur Se3 doit être sous Debian Wheezy** et disposait d'au moins une carte 1 Gbs relié à un port 1 Gbs d'un commutateur réseau.
 * La partition racine / doit disposer d'environ 5 Go (7 Go pour Ubuntu) pour contenir l'environnement (chroot) des clients lourds.
-* La partition /var/se3 doit disposer d'environ 5 Go pour contenir la sauvegarde originale du chroot des clients lourds.
+* La partition /var/se3 doit disposer d'environ 5 Go pour contenir la sauvegarde originale du chroot faite pendant l'installation.
 * Le service ltsp est configuré en "mode client lourd" **uniquement** : autrement dit, le serveur ltsp n'a pas besoin d'être très puissant car
 les applications sont exécutés avec les ressources des clients lourds. C'est surtout les **accès en lecture au(x) disque(s) dur(s)** qui vont être 
-sollicités sur le se3 (service **nfs ou nbd** selon le bureau) : si le choix se présente, il est donc préférable d'opter dans un (ou des) disque(s) dur(s) SSD 
-ou des disques durs SATA mais montés en RAID 0 (ou RAID 5) pour augmenter le débit des accès disques.
-* La carte réseau des clients lourds doit être au moins de 100 Mbs et reliée à un port 100 Mbs (ou plus) du commutateur réseau.
+sollicités sur le se3 (service **nfs ou nbd** selon la distribution installée) : si le choix se présente, il est donc préférable d'opter dans un (ou des) disque(s) dur(s) SSD 
+ou des disques durs SATA mais montés en RAID 0 (ou RAID 5) pour augmenter le débit des accès aux disques durs du se3.
+* La carte réseau des clients lourds doit être au moins de 100 Mbs et reliée à un port pédagogique 100 Mbs (ou plus) d'un commutateur réseau.
 * Il faut éviter de mettre trop de commutateurs réseau en série (en cascade) afin d'éviter de diminuer la vitesse de leur port 1 Gbs.
 * D'une façon générale, le réseau ethernet pédagogique doit être "en bon état" car il va être assez sollicité par l'ensemble des clients lourds en fonctionnement.
 
@@ -54,7 +70,7 @@ une agrégation de liens (en mode balance-tlb ou en mode balance-alb).
 chmod u+x /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
 ```
 
-ou, pour un bureau Debian Ubuntu Xenial Mate :
+ou, pour un bureau Ubuntu Xenial Mate :
 
 ```sh
 chmod u+x /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
@@ -71,10 +87,11 @@ ou, pour un bureau Ubuntu Xenial Mate :
 ```
 
 Pendant l'installation (qui dure environ une heure), il est demandé, dans l'ordre :
-* Le mot de passe du compte `root` de `l'environnement des clients lourds`
-* Le mot de passe du compte `local enseignant`
+* Le mot de passe du compte `root` de l'environnement des clients lourds
+* Le mot de passe du compte `local` enseignant
 
 **Attention !!!**
+
 Avec le bureau `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
 
 ## Que fait le script d'installation ?
@@ -86,7 +103,7 @@ Le script d'installation précédent va seulement :
 * ajouter une entrée au menu PXE `/tftpboot/pxelinux.cfg/default` afin qu'un utilisateur puisse faire démarrer un PC en client lourd LTSP.
 * configurer l'environnement i386 des clients lourds pour réaliser l'`identification des utilisateurs avec l annuaire ldap du se3` 
 et `le montage automatique de deux partages Samba du se3 (Docs et Classes)`.
-* créer une sauvegarde, à la fin de l'installation, de l'environnement des clients lourds dans /var/se3/ltsp/i386-original : cela permettra 
+* créer une sauvegarde, à la fin de l'installation, de l'environnement des clients lourds dans /var/se3/ltsp/i386-originale : cela permettra 
 de restaurer le chroot des clients lourds en 5 minutes, en cas de problèmes lors de son administration.
 
 Seul **un service supplémentaire** va être lancé sur le serveur se3, ce sera :
