@@ -16,22 +16,22 @@ Le démarrage d'un PC en `mode client lourd` peut :
 * être configuré par défaut afin que tous les PC démarrent en clients lourds ltsp (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
 
-La configuration ltsp appliquée au serveur Se3 l'impacte peu
-* l'environnement (chroot) des clients lourds est configuré afin de les rendre "autonomes" du se3 ; en particulier, l'identification 
-d'un utilisateur est réalisé par l'environnement (chroot) des clients lourds et non par le serveur se3.
-* Les clients lourds ne font pas partie d'un `sous-réseau` du réseau pédagogique. ltsp est déployé ici en mode `1 carte réseau` pour faciliter 
-la mise en place de ltsp : il n'est pas nécessaire d'équiper le se3 d'une 2ème carte réseau, ni d'investir dans un commutateur réseau 
-dédié au sous-réseau de clients lourds : tout PC PXE relié au réseau pédagogique géré par le se3 pourra démarré en client lourd.
-* le serveur Se3 **n'a pas besoin d'être très puissant** car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
-et ne gérer **que** des clients lourds (fat client) : pour pouvoir gérer des clients légers dans votre réseau (commme des Raspberry avec le projet 
-Berryterminal), il faudra installer un `serveur d'applications ltsp` en plus du se3 sur votre réseau. 
+La configuration ltsp appliquée au serveur Se3 l'impacte peu :
+* l'environnement (chroot) des clients lourds est configuré afin de les rendre `autonomes` du se3 ; en particulier, l'identification 
+des utilisateurs est réalisée par l'environnement (chroot) des clients lourds et non par le serveur se3.
+* Les clients lourds `ne font pas` partie d'un `sous-réseau` du réseau pédagogique : ltsp est configuré ici en mode `1 carte réseau` pour faciliter 
+sa mise en place : il **n'est pas** nécessaire d'équiper le se3 d'une 2ème carte réseau, **n** d'investir dans un commutateur réseau dédié au sous-réseau 
+de clients lourds : tout PC ayant un boot PXE et relié au réseau pédagogique pourra démarrer en client lourd, n'importe où dans l'établissement.
+* le serveur Se3 **n'a pas** besoin d'être très puissant car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
+et ne gérer **que** des clients lourds (fat client) : pour pouvoir gérer aussi des clients légers (commme des Raspberry avec le projet Berryterminal), 
+il faudra installer un `serveur d'applications ltsp` puissant, en plus du se3, sur le réseau pédagogique.
 On pourra se reporter à l'article suivant (paragraphe `Mise en place d'un cluster de serveurs LTSP`) :
 
 [Wiki de la DANE Versailles LTSP sur Debian Wheezy](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Wheezy%29_dans_un_r%C3%A9seau_Se3)
 
 
-La configuration de l'environnement des clients lourds appliquée ici s'appuie sur le paragraphe 11.6 de l'ANNEXE  
-: `Rendre les clients lourds complétement autonomes du serveur LTSP`) de l'article suivant :
+La configuration de l'environnement des clients lourds appliquée ici s'appuie sur le paragraphe 11.6 de l'ANNEXE  : `Rendre les clients lourds complétement autonomes du serveur LTSP`) 
+de l'article suivant :
 
 [Wiki de la DANE Versailles LTSP sur Debian Jessie](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
 
@@ -92,7 +92,7 @@ Pendant l'installation (qui dure environ une heure), il est demandé, dans l'ord
 
 **Attention !!!**
 
-Avec le bureau `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
+Avec `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
 
 ## Que fait le script d'installation ?
 
@@ -129,7 +129,7 @@ la racine de l'environnement (le "chroot") des clients lourds avec la commande :
 ltsp-chroot -a -m i386
 ```
 
-Toutes les commandes shell exécutables sur un client linux classique peuvent en principe être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
+Toutes les commandes shell exécutables sur un client linux classique peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
 Une fois l'administration terminée, sortir du chroot avec la commande :
 
 ```sh
@@ -165,7 +165,6 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	Ce script permet de personnaliser le bureau des clients lourds.
 	* Créer sur votre bureau les lanceurs que vous voulez voir apparaître sur le bureau de vos clients.
 	* Double-cliquer sur le script `deployer_mes_lanceurs.sh`
-	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
 3. `deployer_mon_skel.sh` :
 
@@ -174,7 +173,6 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	* Repérer les dossiers de configuration de vos application (par exemple, `/home/admin/.mozilla` pour le navigateur firefox).
 	* Copier ces dossiers dans le partage Samba du se3 `Clients-linux/ltsp/skel`, accessible depuis le bureau du compte admin du se3.
 	* Double-cliquer sur le script `deployer_mon_skel.sh`
-	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
 4. `deployer_imprimantes.sh` :
 
@@ -184,7 +182,6 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	Le mot de passe du compte root des clients lourds (saisi pendant l'installation de ltps sur le se3) vous est demandé.
 	* Tester l'impression sur vos imprimantes.
 	* Si tout est fonctionnel, double-cliquer sur le script `deployer_imprimantes.sh`.
-	* Si la distribution Ubuntu est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
 
 5. `sauvegarder_chroot_actuel.sh` :
 
@@ -246,5 +243,3 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	```sh
 	appli1 appli2 appli3 appli4 ...
 	```
-		
-	* Si la distribution `Ubuntu` est utilisée, reconstruire l'image squashfs (attention, tous les clients lourds seront automatiquement déconnectés).
