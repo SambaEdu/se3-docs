@@ -109,23 +109,23 @@ C'est donc un problème concernant un des firmwares à fournir qui est pourtant 
 **Solution :** en passant sur la fenêtre principale (à l'aide de la combinaison de touches `Ctrl+c`), le script est relancé et ça passe....Ce doit être un bug de l'installeur AMHA, donc pas grand chose à faire…
 
 
-**Problème 4 :** sur certaines machines (Dell Optiplex 330), l'installation se fige à l'amorce et si on relance l'installation, elle se fige à un autre moment.
+- **Problème 4 :** sur certaines machines (Dell Optiplex 330), l'installation se fige à l'amorce et si on relance l'installation, elle se fige à un autre moment.
 
 **Solution :** configurer le `Bios` de la machine pour accepter le mode `WoL` ([Wake On Line](https://fr.wikipedia.org/wiki/Wake-on-LAN)). Relancer ensuite l'installation.
 
 
-**Problème 5 :** l'installation s'arrête sur un message d'erreur : `Pas de système de fichiers racines. Aucun système de fichiers n'a été choisi comme fichier racine`.
+- **Problème 5 :** l'installation s'arrête sur un message d'erreur : `Pas de système de fichiers racines. Aucun système de fichiers n'a été choisi comme fichier racine`.
 
 **Solution :** une clé usb ou un lecteur de disquette usb sont branchés sur le client : les enlever et relancer l'installation.
 
 
-**Problème 6 :** l'installation s'arrête sur le message d'erreur suivant :
+- **Problème 6 :** l'installation s'arrête sur le message d'erreur suivant :
 ![probleme-installation](images/probleme_netboot.png)
 
 **Solution :** mettre à jour les archives netboot `Ubuntu` ou `Debian`, qui ont dû changer lors d'une évolution de version, en revalidant le choix de l'environnement du Bureau (Voir le module `Serveur TFTP` de l'interface du `se3`).
 
 
-**Problème 7 :** l'installation s'arrête sur un message de corruption du miroir
+- **Problème 7 :** l'installation s'arrête sur un message de corruption du miroir
 ![probleme-miroir](images/probleme_miroir.png)
 
 **Solution :** rétablir la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation.
