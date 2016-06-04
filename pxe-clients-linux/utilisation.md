@@ -207,5 +207,5 @@ il suffit d'utiliser la commande suivante :
 ```ssh
 exit
 ```
-Une autre façon de gérer le `client-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans la documentation du paquet `se3-clients-linux`.
+Une autre façon de gérer le `client-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md).
 
