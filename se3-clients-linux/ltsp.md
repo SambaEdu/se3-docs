@@ -15,8 +15,8 @@ L'environnement des clients lourds étant isolé dans un `chroot`, il est ainsi 
 de Debian (Jessie) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
 
 Le démarrage d'un PC en `mode client lourd` peut :
-* être laissé **au choix de l'utilisateur** via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration par défaut mise en place par le script d'installation de ltsp.
-* être configuré par défaut afin que tous les PC démarrent en clients lourds ltsp (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
+* être laissé **au choix de l'utilisateur** via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration mise en place par défaut par le script d'installation de ltsp.
+* être **automatique** pour tous les PC PXE du réseau pédagogique, après les quelques secondes où s'affiche le menu PXE (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
 La configuration ltsp appliquée au serveur Se3 l'impacte peu :
 * l'environnement (chroot) des clients lourds est configuré afin de les rendre `autonomes` du se3 ; en particulier, l'identification 
@@ -176,12 +176,14 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	* Copier ces dossiers dans le partage Samba du se3 `Clients-linux/ltsp/skel`, accessible depuis le bureau du compte admin du se3.
 	* Double-cliquer sur le script `deployer_mon_skel.sh`
 	
-	** Attention !!! **
-	Cet `home` est téléchargé via le réseau ethernet `par chaque client lourd` après `chaque ouverture de session` de l'utilisateur :
+	**Attention !!!**
+	
+	Cet `"home"` est téléchargé via le réseau ethernet `par chaque client lourd` après `chaque ouverture de session` de l'utilisateur :
 	il est donc **important** que le dossier `Clients-linux/ltsp/skel` garde une petite taille (20 Mo maximum) afin que l'ouverture de session 
 	se déroule en un temps raisonnable, de ne pas saturer la ram des clients lourds et de ne pas saturer le réseau pédagogique.
 	
-	TODO : Solution alternative
+	`TODO` : Solution alternative
+	
 	Créer sur le se3 un profil linux pour chaque utilisateur, profil qui serait monté à l'ouverture de session via cifs.
 	[utiliser la fonction `mount_fat_client_home_with_cifs 'i386' 'IP_DU_SE3'` de la librairie lib.sh]
 
@@ -254,3 +256,12 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	```sh
 	appli1 appli2 appli3 appli4 ...
 	```
+	
+10. `choisir_boot_par_defaut.sh`
+	
+	Ce script permet de choisir le mode de démarrage par défaut des PC qui bootent avec leur carte réseau PXE sur le réseau pédagogique.
+	
+	Deux choix possibles :
+	
+	* `1` : en saisissant cette valeur, les `PC PXE booteront avec leur disque dur par défaut`, après les quelques secondes d'affichage du menu PXE.
+	* `2` : en saisissant cette valeur, les `PC PXE booteront en client lourd ltsp par défaut`, après les quelques secondes d'affichage du  menu PXE.
