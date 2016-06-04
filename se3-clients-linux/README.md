@@ -32,10 +32,13 @@
 
 ## Objectifs
 
-Le but de cette documentation est de décrire un mode opératoire
+Le but de cette documentation est de décrire, d'une part, un mode opératoire
 d'intégration de stations clientes `Debian` ou `Ubuntu` dans un domaine
 SambaÉdu (avec un serveur en version `Squeeze` ou `Wheezy`) par
-l'intermédiaire du paquet `se3-clients-linux`.
+l'intermédiaire du paquet `se3-clients-linux` et, d'autre part, de donner quelques indications quant à la gestion des `clients-linux`.
+
+Nous vous conseillons d'ailleurs d'utiliser le mécanisme d'installation/intégration automatique
+dont vous consulterez [la documentation](pxe-clients-linux/README.md) avec pofit.
 
 En pratique, l'objectif est de pouvoir ouvrir une session
 sur un client Linux avec un compte du domaine et d'avoir
