@@ -14,7 +14,7 @@
     * [Après le 1er redémmarage](#après-le-redémmarage)
     * [Fichiers de log de la phase 2](#fichiers-de-log-de-la-phase-2)
     * [Cas d'une intégration différée](#cas-dune-intégration-différée)
-
+* [Utilisation et gestion du `client-linux`](#utilisation-et-gestion-du-client-linux)
 
 ## Vue d'ensemble
 
@@ -171,4 +171,41 @@ Un compte-rendu de cette `phase 2` est disponible avec le fichier `/root/compte_
 Si vous ne désirez pas intégrer la machine installée au domaine géré par le serveur `se3`, il suffira de répondre`n` quand la question sera posée au cours de la phase 2. **Toute autre réponse déclenchera l'intégration**.
 
 Vous pourrez le faire par la suite, comme cela est indiqué à la fin de la post-installation.
+
+
+## Utilisation et gestion du `client-linux`
+
+Une fois la post-installation terminée, le `client-linux` est près :
+les utilisateurs peuvent ouvrir une session, si un compte leur a été attribué.
+
+Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md) vous donnera quelques informations essentielles.
+
+Si vous voulez intervenir directement sur le `client-linux`,
+le mieux est d'ouvrir un terminal en `root`
+dont le mot de passe est le même que celui du compte `adminse3`.
+
+Cela peut se faire de plusieurs façons :
+
+- utiliser un `terminal` depuis un autre `client-linux`
+en utilisant la commande suivante pour laquelle **ip_client**
+désigne l'`IP` du `client-linux` que vous voulez administrer :
+```ssh
+ssh root@ip_client
+```
+Vous répondrez **yes** à la question posée
+puis vous donnerez le mot de passe du compte `adminse3`.
+
+- ouvrir une session sur le `client-linux` à administrer puis ouvrir un `terminal`
+et lancer la commande suivante :
+```ssh
+su -l
+```
+Vous donnerez le mot de passe du compte `adminse3`.
+
+**Remarque :** pour fermer la session `root` ouverte via un `terminal`,
+il suffit d'utiliser la commande suivante :
+```ssh
+exit
+```
+Une autre façon de gérer le `client-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans la documentation du paquet `se3-clients-linux`.
 
