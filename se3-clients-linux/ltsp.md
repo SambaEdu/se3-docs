@@ -2,7 +2,7 @@
 
 ## Introduction :
 
-Cette documantation explique comment `intégrer le service ltsp` à un serveur Samba Edu 3 puis `comment l'administrer simplement`.
+Cette documantation explique comment `intégrer le service ltsp` à un serveur Samba Edu 3 puis comment l'`administrer` simplement.
 
 Tout PC disposant d'une carte ethernet avec un boot PXE et d'au moins 512 Mo de RAM pourra démarrer en tant que clients lourds (mode fat client) 
 grâce au réseau ethernet et sans avoir besoin de son disque dur.
@@ -15,26 +15,25 @@ L'environnement des clients lourds étant isolé dans un `chroot`, il est ainsi 
 de Debian (Jessie) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
 
 Le démarrage d'un PC en `mode client lourd` peut :
-* être laissé au choix de l'utilisateur via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration par défaut mise en place par le script d'installation de ltsp.
+* être laissé **au choix de l'utilisateur** via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration par défaut mise en place par le script d'installation de ltsp.
 * être configuré par défaut afin que tous les PC démarrent en clients lourds ltsp (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
 La configuration ltsp appliquée au serveur Se3 l'impacte peu :
 * l'environnement (chroot) des clients lourds est configuré afin de les rendre `autonomes` du se3 ; en particulier, l'identification 
 des utilisateurs est réalisée par l'environnement (chroot) des clients lourds et non par le serveur se3.
-* Les clients lourds `ne font pas` partie d'un `sous-réseau` du réseau pédagogique : ltsp est configuré ici en mode `1 carte réseau` pour faciliter 
-sa mise en place : il **n'est pas** nécessaire d'équiper le se3 d'une 2ème carte réseau, **n** d'investir dans un commutateur réseau dédié au sous-réseau 
+* Les clients lourds **ne font pas partie d'un sous-réseau** du réseau pédagogique : ltsp est configuré ici en mode `1 carte réseau` pour faciliter 
+sa mise en place : il **n'est pas nécessaire** d'équiper le se3 d'une 2ème carte réseau, **ni** d'investir dans un commutateur réseau dédié au sous-réseau 
 de clients lourds : tout PC ayant un boot PXE et relié au réseau pédagogique pourra démarrer en client lourd, n'importe où dans l'établissement.
 * le serveur Se3 **n'a pas** besoin d'être très puissant car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
-et ne gérer **que** des clients lourds (fat client) : pour pouvoir gérer aussi des clients légers (commme des Raspberry avec le projet Berryterminal), 
-il faudra installer un `serveur d'applications ltsp` puissant, en plus du se3, sur le réseau pédagogique. Ce denier ne devra pas nécessairement tourner 
+et ne **gérer que des clients lourds** (fat client) : pour pouvoir gérer aussi des clients légers (commme des Raspberry avec le projet Berryterminal), 
+il faudra installer un `serveur d'applications ltsp` **puissant**, en plus du se3. Ce dernier ne devra pas nécessairement tourner 
 sous Debian Wheezy : il pourra tourner sous `Debian Jessie` (ou sur Ubuntu Xenial ?).
 On pourra se reporter à l'article suivant pour plus de détail (paragraphe `Mise en place d'un cluster de serveurs LTSP`) :
 
 [Wiki de la DANE Versailles LTSP sur Debian Wheezy](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Wheezy%29_dans_un_r%C3%A9seau_Se3)
 
 
-La configuration de l'environnement des clients lourds appliquée ici s'appuie sur le paragraphe 11.6 de l'ANNEXE  : `Rendre les clients lourds complétement autonomes du serveur LTSP`) 
-de l'article suivant :
+La configuration de l'environnement des clients lourds appliquée ici s'appuie sur le paragraphe 11.6 de l'ANNEXE "Rendre les `clients lourds complétement autonomes` du serveur LTSP)" de l'article suivant :
 
 [Wiki de la DANE Versailles LTSP sur Debian Jessie](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
 
@@ -48,12 +47,12 @@ Les utilisations peuvent être nombreuses. Par exemple :
 
 ## Pre-requis
 
-* **Votre serveur Se3 doit être sous Debian Wheezy** et disposait d'au moins une carte 1 Gbs relié à un port 1 Gbs d'un commutateur réseau.
-* La partition racine / doit disposer d'environ 5 Go (7 Go pour Ubuntu) pour contenir l'environnement (chroot) des clients lourds.
-* La partition /var/se3 doit disposer d'environ 5 Go pour contenir la sauvegarde originale du chroot faite pendant l'installation.
-* Le service ltsp est configuré en "mode client lourd" **uniquement** : autrement dit, le serveur ltsp n'a pas besoin d'être très puissant car
+* Le serveur `Se3` **doit** être sous `Debian Wheezy` et disposait d'au moins une `carte 1 Gbs` relié à un port 1 Gbs d'un commutateur réseau.
+* La partition `racine /` doit disposer d'environ `5 Go` (7 Go pour Ubuntu) pour contenir l'environnement (chroot) des clients lourds.
+* La partition `/var/se3` doit disposer d'environ `5 Go` pour contenir la sauvegarde originale du chroot faite pendant l'installation.
+* Le service ltsp est configuré en "mode client lourd" **uniquement** : autrement dit, le `serveur se3` n'a donc pas besoin d'être très puissant car
 les applications sont exécutés avec les ressources des clients lourds. C'est surtout les **accès en lecture au(x) disque(s) dur(s)** qui vont être 
-sollicités sur le se3 (service **nfs ou nbd** selon la distribution installée) : si le choix se présente, il est donc préférable d'opter dans un (ou des) disque(s) dur(s) SSD 
+sollicités sur le se3 (service **nfs ou nbd**) : si le choix se présente, il est donc préférable d'opter dans un `disque dur SSD`
 ou des disques durs SATA mais montés en RAID 0 (ou RAID 5) pour augmenter le débit des accès aux disques durs du se3.
 * La carte réseau des clients lourds doit être au moins de 100 Mbs et reliée à un port pédagogique 100 Mbs (ou plus) d'un commutateur réseau.
 * Il faut éviter de mettre trop de commutateurs réseau en série (en cascade) afin d'éviter de diminuer la vitesse de leur port 1 Gbs.
@@ -62,7 +61,7 @@ ou des disques durs SATA mais montés en RAID 0 (ou RAID 5) pour augmenter le d�
 **Remarque :**
 
 Pour desservir un très grand nombre de clients lourds, il peut être judicieux d'équiper le se3 de plusieurs cartes réseaux 1Gbs et de faire
-une agrégation de liens (en mode balance-tlb ou en mode balance-alb).
+une `agrégation de liens` (en mode balance-tlb ou en mode balance-alb).
 
 ## Installation de LTSP
 
@@ -171,11 +170,20 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 
 3. `deployer_mon_skel.sh` :
 
-	Ce script permet de personnaliser le "home" par défaut des utilisateurs de client lourd.
+	Ce script permet de personnaliser le `home` par défaut des utilisateurs de client lourd.
 	* Personnaliser vos applications (votre navigateur web par exemple).
 	* Repérer les dossiers de configuration de vos application (par exemple, `/home/admin/.mozilla` pour le navigateur firefox).
 	* Copier ces dossiers dans le partage Samba du se3 `Clients-linux/ltsp/skel`, accessible depuis le bureau du compte admin du se3.
 	* Double-cliquer sur le script `deployer_mon_skel.sh`
+	
+	** Attention !!! **
+	Cet `home` est téléchargé via le réseau ethernet `par chaque client lourd` après `chaque ouverture de session` de l'utilisateur :
+	il est donc **important** que le dossier `Clients-linux/ltsp/skel` garde une petite taille (20 Mo maximum) afin que l'ouverture de session 
+	se déroule en un temps raisonnable, de ne pas saturer la ram des clients lourds et de ne pas saturer le réseau pédagogique.
+	
+	TODO : Solution alternative
+	Créer sur le se3 un profil linux pour chaque utilisateur, profil qui serait monté à l'ouverture de session via cifs.
+	[utiliser la fonction `mount_fat_client_home_with_cifs 'i386' 'IP_DU_SE3'` de la librairie lib.sh]
 
 4. `deployer_imprimantes.sh` :
 
