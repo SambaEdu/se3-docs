@@ -81,10 +81,13 @@ démarrage et qui affiche une fenêtre de connexion permettant
 d'ouvrir une session après authentification via un
 identifiant et un mot de passe.
 
-Sous `Jessie` par exemple, le « display manager » par défaut
-remplissant cette fonction s'appelle `Gdm3` et sous `Ubuntu`
-il s'agit de `Lightdm`. Tout au long de la documentation,
-il est supposé que c'est bien le cas.
+Sous `Jessie` par exemple,
+le « display manager » par défautremplissant cette fonction s'appelle
+`Gdm3` si vous utilisez `Gnome` comme environnement de Bureau
+et `Lightdm` pour les autres environnements de Bureau
+et sous `Ubuntu`
+il s'agit de `Lightdm` pour tous les environnements de Bureau.
+Tout au long de la documentation, il est supposé que c'est bien le cas.
 
 Si jamais vous tenez à changer de « display manager » sur
 votre distribution, il est quasiment certain que vous devrez
