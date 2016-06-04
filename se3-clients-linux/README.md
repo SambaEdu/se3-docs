@@ -38,7 +38,7 @@ SambaÉdu (avec un serveur en version `Squeeze` ou `Wheezy`) par
 l'intermédiaire du paquet `se3-clients-linux` et, d'autre part, de donner quelques indications quant à la gestion des `clients-linux`.
 
 Nous vous conseillons d'ailleurs d'utiliser le mécanisme d'installation/intégration automatique
-dont vous consulterez [la documentation](. pxe-clients-linux/README.md) avec profit.
+dont vous consulterez [la documentation](../pxe-clients-linux/README.md) avec profit.
 
 En pratique, l'objectif est de pouvoir ouvrir une session
 sur un client Linux avec un compte du domaine et d'avoir
