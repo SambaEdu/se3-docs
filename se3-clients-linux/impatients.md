@@ -21,7 +21,7 @@ Ensuite, sur chaque client-linux, sera exécuté le script correspondant
     * [Lancer le script d'intégration](#lancer-le-script-dint%C3%A9gration)
 
 
-**Recommendation :** Le script d'intégration sera exécuté sur un client-linux qui vient d'être installé. Si le client-linux *a déjà servi*, il se peut qu'apparaissent des effets de bords…
+**Recommendation :** Le script d'intégration sera exécuté sur un client-linux qui vient d'être installé. Si le client-linux *a déjà servi*, il se peut qu'apparaissent des effets de bords… C'est pour cela que nous vous conseillons d'utiliser [le mécanisme d'intallation/intégration automatique](../pxe-clients-linux/README.md).
 
 
 ## Installation du paquet `se3-clients-linux` sur le serveur
