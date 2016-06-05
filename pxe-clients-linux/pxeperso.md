@@ -218,7 +218,7 @@ Dans le fichier `perso.menu`, rajoutez, par exemple, les lignes suivantes (les â
 LABEL DebianJessiesemiautoamd64
     MENU LABEL ^Netboot Debian jessie Preseed semi-auto (amd64)
     KERNEL  debian-installer/amd64/linux
-    APPEND  keymap=fr language=fr country=FR locale=fr_FR.UTF-8 netcfg/dhcp_timeout=60 preseed/url=http://###_IP_SE3_###/install/messcripts_perso/semi-auto_preseed_debian.cfg initrd=debian-installer/amd64/initrd.gz --
+    APPEND  keymap=fr(latin9) language=fr country=FR locale=fr_FR.UTF-8 netcfg/dhcp_timeout=60 preseed/url=http://###_IP_SE3_###/install/messcripts_perso/semi-auto_preseed_debian.cfg initrd=debian-installer/amd64/initrd.gz --
     TEXT HELP
     Installation semi-automatique de Debian jessie amd64 avec gnome-desktop
     ENDTEXT
