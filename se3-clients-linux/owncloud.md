@@ -37,19 +37,23 @@ chmod u+x /home/netlogon/clients-linux/owncloud/integrer_owncloud_sur_se3.sh
 
 * Puis l'exécuter :
 ```sh
-/home/netlogon/clients-linux/owncloud/integrer_owncloud_sur_se3.sh 
+/home/netlogon/clients-linux/owncloud/integrer_owncloud_sur_se3.sh 9.0
 ```
 
-L'installation est complétement automatique et ne dure que quelques minutes.
-
-Elle essaie d'être, dans la mesure du possible, le plus "fidèle" aux recommendations de la documentation officielle 
-d'Owncloud :
+L'installation est complétement automatique et ne dure que quelques minutes. Elle essaie d'être, dans la mesure du possible, 
+le plus "fidèle" aux recommendations de la documentation officielle d'Owncloud :
 
 [Documentation officielle d'Owncloud](https://doc.owncloud.org/server/9.0/admin_manual/)
 
 ainsi qu'à l'article wiki suivant :
 
 [Wiki de le DANE de Versailles](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_owncloud_8_avec_l%27annuaire_du_se3)
+
+**Remarque:**
+
+Lorsque aucun paramètre n'est spécifié au script précédent, ce dernier installe par défaut la `dernière version stable` des dépôts d'Owncloud.
+Le script a été testé avec la `version 9.0` d'Owncloud. Il est donc **déconseillé** de lancer le script sur une version > 9.0, `sans avoir au préalable 
+testé que le script était fonctionnel sous machine virtuelle`.
 
 ## Que fait le script d'installation ?
 
@@ -64,10 +68,24 @@ des membres d'un même cours (ou matière pour les enseignants). Le quota par ut
 * déplacer le repertoire `data` d'Owncloud dans `/var/se3/dataOC` afin d'avoir plus d'espace de stockage 
 et de profiter d'un (éventuel) dispositif de sauvegarde mise en place sur le se3. Ce repertoire `data`
 contiendra toutes les données stockées par les utilisateurs dans leur repertoire `Cloud`
+* Créer deux scripts sur le se3, déposés tout deux à l'endroit suivant :
+`/usr/share/se3/scripts/`
 
-Remarque:
+Le premier script `mettre_droits_sur_data_owncloud.sh` ressere les droits sur le repertoire /var/www/owncloud selon les recommandations de la
+documentation officielle d'Owncloud 9.
 
-Owncloud ne compatibilise pas l'espace de stockage consommé par l'utilisateur dans `Docs` et `Classes` : le
+Le 2d script `upgrade_owncloud.sh` permet de mettre à jour Owncloud 9 vers une version supérieure. 
+Par exemple, si la version 9.0 est installée sur le se3 et que la version 9.1 est disponible dans les depôts d'Owncloud, 
+la mise à jour peut être faite en lançant le script suivant :
+
+`/usr/share/se3/scripts/upgrade_owncloud.sh 9.1`
+
+**Remarques:**
+
+* Il est **déconseillé** de mettre à jour owncloud vers une version supérieure à 9.0 sans avoir `au préalable` testé sous Machine Virtuelle 
+qu'elle se déroulait convenablement , sous peine de perdre son serveur Owncloud ... 
+
+* Owncloud ne compatibilise pas l'espace de stockage consommé par l'utilisateur dans `Docs` et `Classes` : le
 quota de 100 Mo alloué par défaut ne concerne que son repertoire `Cloud`.
 
 ## Que faire après l'installation ?
@@ -84,3 +102,13 @@ augmenter le quota des utilisateurs (mis par défaut à 100 Mo), ...
 vérifier l'accès en lecture/écriture aux partages Docs et Classes du se3 ainsi qu'au repertoire Cloud.
 * Tester les fonctionnalités de `partage entre membre d'un même groupe` offerte par Owncloud sur le repertoire `Cloud`.
 (Cette fonctionnalité n'est pas disponible sur les partage `Docs` et `Classes` du module stockage externe).
+
+Si tout est fonctionnel en interne à l'adresse `http://IP_DU_SE3/owncloud`, faire une demande pour activer 
+le reverse proxy de la passerelle du réseau (ticket cariina pour un serveur Amon). Lors de cette demande, indiquer 
+que votre serveur Owncloud est accessible sur le réseau pédagogique en `http` à l'adresse `http://IP_DU_SE3/owncloud`.
+
+Une fois cette activation réalisée, votre serveur owncloud sera accessible de l'`extérieur de l'établissement` à 
+une adresse du type :
+
+`https://lpo-RNE.ac-versailles.fr/owncloud`
+
