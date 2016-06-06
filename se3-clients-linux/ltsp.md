@@ -200,7 +200,7 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	il est donc **important** que le dossier `Clients-linux/ltsp/skel` garde une petite taille (20 Mo maximum) afin que l'ouverture de session 
 	se déroule en un temps raisonnable, de ne pas saturer la ram des clients lourds et de ne pas saturer le réseau pédagogique.
 	
-	`TODO` : Solution alternative
+	`TODO` : Solution alternative (**non fonctionnelle car non finalisée**)
 	
 	Créer sur le se3 un `profil linux persistent` pour chaque utilisateur, profil qui serait monté à l'ouverture de session via cifs :
 	* utiliser la fonction `mount_fat_client_home_with_cifs 'i386' 'IP_DU_SE3'` de la librairie lib.sh pour monter automatiquement 
@@ -209,8 +209,10 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	```sh
 	#session required pam_mkhomedir.so skel=/etc/skel umask=0077`
 	```
-	De cette façon, les données du `home` de l'utilisateur ne sont téléchargées via le réseau éthernet dans la ram du client lourd que 
-	lorsqu'il les utilise. Les préférences utilisateurs (personnalisation du bureau, du navigateur web, ...) sont aussi persistentes.
+	* Sur le se3, créer un dossier /home/$USER/profil-linux pour l'ensemble des utilisateurs de l'annuaire ldap du se3 [à faire].
+	
+	De cette façon, les données du `home` de l'utilisateur ne sont téléchargées via le réseau éthernet dans la ram du client lourd `que 
+	lorsqu'il les utilise` et les préférences utilisateurs (personnalisation du bureau, du navigateur web, ...) seront ainsi persistentes.
 	
 4. `deployer_imprimantes.sh` :
 
