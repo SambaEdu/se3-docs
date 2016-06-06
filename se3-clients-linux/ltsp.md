@@ -143,6 +143,7 @@ Une fois l'administration terminée, sortir du chroot avec la commande :
 
 ```sh
 exit
+```
 
 **Remarques:**
 
@@ -151,15 +152,12 @@ Par contre, elle ne devrait être utilisé que lorsqu'aucun client lourd n'est e
 la commande exit ne parvient pas à réaliser le démontage des 2 repertoires : il faut alors arrêter le service nfs, ce qui revient à déconnecter 
 tous les clients lourds du réseau ...)
 
-* Toutes les commandes shell exécutables sur un client linux "classique" peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
-
-
-```
-
-Pour Ubuntu qui utilise le service nbd, ne pas oublier de reconstruire l'image squashfs (cela dure quelques minutes) :
+* Pour Ubuntu qui utilise le service nbd, ne pas oublier de reconstruire l'image squashfs (cela dure quelques minutes) :
 ```sh
 ltps-update-image i386
 ```
+
+* Toutes les commandes shell exécutables sur un client linux "classique" peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
 
 Toutefois, pour faciliter l'administration, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
 
