@@ -15,13 +15,15 @@ L'environnement des clients lourds étant isolé dans un `chroot`, il est ainsi 
 de Debian (Jessie) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
 
 Le démarrage d'un PC en `mode client lourd` peut :
-* être laissé **au choix de l'utilisateur** via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : c'est la configuration mise en place par défaut par le script d'installation de ltsp.
-* être **automatique** pour tous les PC PXE du réseau pédagogique, après les quelques secondes où s'affiche le menu PXE (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
+* être laissé **au choix de l'utilisateur** via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : 
+c'est la configuration mise en place par défaut par le script d'installation de ltsp.
+* être **automatique** pour tous les PC PXE du réseau pédagogique, après les quelques secondes où s'affiche le menu PXE 
+(voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
 La configuration ltsp appliquée au serveur Se3 l'impacte peu :
 * l'environnement (chroot) des clients lourds est configuré afin de les rendre `autonomes` du se3 ; en particulier, l'identification 
 des utilisateurs est réalisée par l'environnement (chroot) des clients lourds et non par le serveur se3.
-* Les clients lourds **ne font pas partie d'un sous-réseau** du réseau pédagogique : ltsp est configuré ici en mode `1 carte réseau` pour faciliter 
+* les clients lourds **ne font pas partie d'un sous-réseau** du réseau pédagogique : ltsp est configuré ici en mode `1 carte réseau` pour faciliter 
 sa mise en place : il **n'est pas nécessaire** d'équiper le se3 d'une 2ème carte réseau, **ni** d'investir dans un commutateur réseau dédié au sous-réseau 
 de clients lourds : tout PC ayant un boot PXE et relié au réseau pédagogique pourra démarrer en client lourd, n'importe où dans l'établissement.
 * le serveur Se3 **n'a pas** besoin d'être très puissant car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
@@ -118,24 +120,40 @@ devra contenir toutes les applications utiles aux utilisateurs et sera utilisé 
 
 ## nfs et nbd, quelle différence ?
 nfs et nbd sont deux services utilisés pour desservir via le réseau ethernet, l'environnement (le chroot) aux clients lourds.
-nfs est plus souple mais moins performant que nbd : il est utilisé par défaut sur Debian contrairement à Ubuntu qui utilise nbd.
+nfs est plus souple (et robuste) mais moins performant que nbd : il est utilisé par défaut sur Debian contrairement à Ubuntu qui utilise nbd.
 
 ## Comment administrer le serveur LTSP ?
 
 L'administration du service LTSP consiste principalement à personnaliser l'environnement i386 des clients lourds (le chroot).
 
 Cette administration peut se faire simplement en ligne de commande en se connectant en root au se3 (via ssh par exemple) puis en se mettant sur 
-la racine de l'environnement (le "chroot") des clients lourds avec la commande :
+la racine de l'environnement (le "chroot") des clients lourds avec une des deux commandes :
+
+```sh
+ltsp-chroot -a i386
+```
+
+ou
 
 ```sh
 ltsp-chroot -a -m i386
 ```
 
-Toutes les commandes shell exécutables sur un client linux classique peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
 Une fois l'administration terminée, sortir du chroot avec la commande :
 
 ```sh
 exit
+
+**Remarques:**
+
+* l'option -m permet de monter dans le chroot deux répertoires du se3  : elle est parfois nécessaire à certaines installations dans le chroot. 
+Par contre, elle ne devrait être utilisé que lorsqu'aucun client lourd n'est en fonctionnement (si des clients lourds sont en fonctionnement, 
+la commande exit ne parvient pas à réaliser le démontage des 2 repertoires : il faut alors arrêter le service nfs, ce qui revient à déconnecter 
+tous les clients lourds du réseau ...)
+
+* Toutes les commandes shell exécutables sur un client linux "classique" peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
+
+
 ```
 
 Pour Ubuntu qui utilise le service nbd, ne pas oublier de reconstruire l'image squashfs (cela dure quelques minutes) :
@@ -184,9 +202,16 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	
 	`TODO` : Solution alternative
 	
-	Créer sur le se3 un profil linux pour chaque utilisateur, profil qui serait monté à l'ouverture de session via cifs.
-	[utiliser la fonction `mount_fat_client_home_with_cifs 'i386' 'IP_DU_SE3'` de la librairie lib.sh]
-
+	Créer sur le se3 un `profil linux persistent` pour chaque utilisateur, profil qui serait monté à l'ouverture de session via cifs :
+	* utiliser la fonction `mount_fat_client_home_with_cifs 'i386' 'IP_DU_SE3'` de la librairie lib.sh pour monter automatiquement 
+	le partage à l'ouverture de session.
+	* mettre en commentaire la ligne qui crée le `home directory` dans le fichier de configuration pam `/opt/ltsp/i386/etc/pam.d/lightdm` :
+	```sh
+	#session required pam_mkhomedir.so skel=/etc/skel umask=0077`
+	```
+	De cette façon, les données du `home` de l'utilisateur ne sont téléchargées via le réseau éthernet dans la ram du client lourd que 
+	lorsqu'il les utilise. Les préférences utilisateurs (personnalisation du bureau, du navigateur web, ...) sont aussi persistentes.
+	
 4. `deployer_imprimantes.sh` :
 
 	Ce script permet d'installer les pilotes d'imprimantes dont vous disposez le fichier ppd.
@@ -212,7 +237,7 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	
 	Il peut être lancé si vous constatez que votre environnement n'est plus fonctionnel après des opérations de maintenance effectuées.
 	
-	La restauration prend quelques secondes.
+	La restauration prend quelques minutes.
 
 7. `restaurer_sauvegarde_originale.sh` :
 
@@ -221,7 +246,7 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	
 	Cela permet de refaire une configuration de l'environnement des clients lourds, en `repartant de l'environnement "original"`.
 	
-	Cette restauration prend quelques secondes.
+	Cette restauration prend quelques minutes.
 
 8. `supprimer_sauvegardes_sauf_derniere.sh` :
 
@@ -252,7 +277,7 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	Par contre, cette installation permet de se placer "dans les mêmes conditions" que dans le "chroot" des clients lourds : si elle se déroule convenablement,
 	il y a de très forte chance que l'execution du script `installer_mes_applis.sh` se passe aussi bien.
 
-	* si la commande précédente s'est exécutée sans erreur, lancer le script `installer_mes_applis.sh` puis resaisir la même liste d'applications :
+	* si la commande précédente s'est exécutée sans erreur, lancer le script `installer_mes_applis.sh` puis ressaisir la même liste d'applications :
 	```sh
 	appli1 appli2 appli3 appli4 ...
 	```
@@ -263,5 +288,5 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 	
 	Deux choix possibles :
 	
-	* `1` : en saisissant cette valeur, les `PC PXE booteront avec leur disque dur par défaut`, après les quelques secondes d'affichage du menu PXE.
-	* `2` : en saisissant cette valeur, les `PC PXE booteront en client lourd ltsp par défaut`, après les quelques secondes d'affichage du  menu PXE.
+	* `1` : en saisissant cette valeur, les `PC PXE booteront par défaut avec leur disque dur`, après les quelques secondes d'affichage du menu PXE.
+	* `2` : en saisissant cette valeur, les `PC PXE booteront par défaut en client lourd ltsp`, après les quelques secondes d'affichage du  menu PXE.
