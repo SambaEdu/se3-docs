@@ -163,29 +163,33 @@ ltps-update-image i386
 Toutefois, pour faciliter l'administration, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
 Se reporter à l'annexe pour une description.
 
-## TODO : derniers points à régler concernant l'intégration de ltsp à un se3 wheezy ##
+## TODO : derniers points à régler ##
 
-* La "mise à jour" du module se3-clonage (ou certaines actions dans le menu tftp de l'interface web du se3) va faire perdre l'entrée du menu PXE :
-```sh
-Démarrer le PC en client lourd LTSP
-```
-Afin de pouvoir restaurer rapidement cette entrée, il est conseillé après l'installation du serveur ltsp de faire une copie du fichier suivant :
-```sh
-/tftpboot/pxelinux.cfg/default
-```
+* La "mise à jour" du module se3-clonage (ou certaines actions dans le menu tftp de l'interface web du se3) va faire perdre le menu PXE suivant :
 
-* chaque client ltsp crée dynamiquement à son démarrage son nom d'hôte (son hostname) à partir de son adresse IP (noms d'hôte de la forme ltsp553, ltsp137, ...)
-Si ces clients ont déjà été réservés dans le dhcp du se3 avec des noms différents, cela va créer des `doublons` dans l'annuaire ldap du se3 qu'il est possible 
-de supprimer via l'interface web du se3 (`Gestion des parcs -> Recherche -> Recherche des doublons`).
+`Démarrer le PC en client lourd LTSP`
 
-Une solution pour éviter l'apparition de ces doublons est d'ajouter la directive suivante à la rubrique GENERAL OPTIONS du fichier de configuration du dhcp du se3 (/etc/dhcp/dhcpd.conf) :
+Ce qui privera tout PC de booter en tant que client ltsp.
+
+Afin de pouvoir le restaurer rapidement, il est conseillé après l'installation du serveur ltsp de faire une copie du fichier suivant : `/tftpboot/pxelinux.cfg/default`
+
+* Chaque client ltsp crée dynamiquement à son démarrage son nom d'hôte (`hostname`) à partir de son adresse IP (ou MAC ?) : les clients ltsp auront 
+des noms d'hote de la forme `ltsp553`, `ltsp137`, ...
+Si ces clients ont déjà été réservés dans le dhcp du se3, cela va créer des `doublons` dans l'annuaire ldap du se3 qu'il est possible de supprimer 
+via l'interface web du se3 (`Gestion des parcs -> Recherche -> Recherche des doublons`).
+
+Une solution pour éviter l'apparition de ces doublons serait d'ajouter la directive suivante à la rubrique `GENERAL OPTIONS` du fichier `/etc/dhcp/dhcpd.conf` du se3 :
 ```sh
 use-host-decl-names on; 
 ```
-Avec cette directive, le serveur dhcp du se3 indique au client dhcp de chaque PC du réseau pédagogique d'utiliser comme nom d'hôte, celui qui apparaît dans 
-le fichier dhcpd.conf à côté de `host`, lorsque l'adresse IP de ce PC a été réservée.
+Avec cette directive, le serveur dhcp du se3 indique au client dhcp de chaque PC ayant son adresse IP de réservée, d'utiliser comme nom d'hôte celui qui apparaît dans 
+le fichier dhcpd.conf du se3 à côté de la rubrique `host` de sa réservation.
+En principe (?), ce nom est identique à celui stocké dans la branche `computers` de l'annuaire ldap du se3. 
 
-Tout comme le module se3-clonage, toute mise à jour (ou action) faite sur le serveur dhcp via l'interface web du se3 va faire perdre cette directive ...
+Ainsi, un PC qui aura son adresse IP de réservée dans le dhcp du se3 aura le même nom, qu'il boote en client lourd ou en client "classique". 
+Si le PC n'a pas son adresse IP de réservée, le client lourd prendra un nom de la forme `ltsp553` ...
+
+Tout comme le module se3-clonage, **toute mise à jour (ou action) faite** sur le serveur `dhcp `via l'interface web du se3 fera perdre cette directive ...
 
 ## ANNEXE ##
 Ces scripts sont accessibles à partir d'un client lourd du réseau, en se connectant avec le **compte admin du se3** (ce compte est le seul à avoir accès au partage précédent).
