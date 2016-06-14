@@ -50,6 +50,7 @@ Les utilisations peuvent être nombreuses. Par exemple :
 ## Pre-requis
 
 * Le serveur `Se3` **doit** être sous `Debian Wheezy` et disposait d'au moins une `carte 1 Gbs` relié à un port 1 Gbs d'un commutateur réseau.
+* Les modules `Serveur DHCP` (se3-dhcp), `Support des clients GNU/Linux` (se3-clients-linux) et `Sauvegarde / Clonage - Restauration de stations` (se3-clonage) doivent être activés sur le se3. 
 * La partition `racine /` doit disposer d'environ `5 Go` (7 Go pour Ubuntu) pour contenir l'environnement (chroot) des clients lourds.
 * La partition `/var/se3` doit disposer d'environ `5 Go` pour contenir la sauvegarde originale du chroot faite pendant l'installation.
 * Le service ltsp est configuré en "mode client lourd" **uniquement** : autrement dit, le `serveur se3` n'a donc pas besoin d'être très puissant car
