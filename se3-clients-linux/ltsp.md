@@ -161,7 +161,33 @@ ltps-update-image i386
 * Toutes les commandes shell exécutables sur un client linux "classique" peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
 
 Toutefois, pour faciliter l'administration, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
+Se reporter à l'annexe pour une description.
 
+## TODO : derniers points à régler concernant l'intégration de ltsp à un se3 wheezy ##
+
+* La "mise à jour" du module se3-clonage (ou certaines actions dans le menu tftp de l'interface web du se3) va faire perdre l'entrée du menu PXE :
+```sh
+Démarrer le PC en client lourd LTSP
+```
+Afin de pouvoir restaurer rapidement cette entrée, il est conseillé après l'installation du serveur ltsp de faire une copie du fichier suivant :
+```sh
+/tftpboot/pxelinux.cfg/default
+```
+
+* chaque client ltsp crée dynamiquement à son démarrage son nom d'hôte (son hostname) à partir de son adresse IP (noms d'hôte de la forme ltsp553, ltsp137, ...)
+Si ces clients ont déjà été réservés dans le dhcp du se3 avec des noms différents, cela va créer des `doublons` dans l'annuaire ldap du se3 qu'il est possible 
+de supprimer via l'interface web du se3 (`Gestion des parcs -> Recherche -> Recherche des doublons`).
+
+Une solution pour éviter l'apparition de ces doublons est d'ajouter la directive suivante à la rubrique GENERAL OPTIONS du fichier de configuration du dhcp du se3 (/etc/dhcp/dhcpd.conf) :
+```sh
+use-host-decl-names on; 
+```
+Avec cette directive, le serveur dhcp du se3 indique au client dhcp de chaque PC du réseau pédagogique d'utiliser comme nom d'hôte, celui qui apparaît dans 
+le fichier dhcpd.conf à côté de `host`, lorsque l'adresse IP de ce PC a été réservée.
+
+Tout comme le module se3-clonage, toute mise à jour (ou action) faite sur le serveur dhcp via l'interface web du se3 va faire perdre cette directive ...
+
+## ANNEXE ##
 Ces scripts sont accessibles à partir d'un client lourd du réseau, en se connectant avec le **compte admin du se3** (ce compte est le seul à avoir accès au partage précédent).
 
 * Se connecter sur un client lourd du réseau, avec le compte admin du se3.
