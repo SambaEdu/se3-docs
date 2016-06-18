@@ -8,6 +8,7 @@
     * [Supprimer les montages de disques externes](#supprimer-les-montages-de-disques-externes)
     * [Dernière précaution](#dernière-précaution)
     * [Prévenir les collègues…](#prévenir-les-collègues)
+    * [Isoler le `se3` du réseau](#isoler-le-se3-du-réseau)
     * [Temps à prévoir](#temps-à-prévoir)
 * [Migration vers un `se3-Wheezy`](#migration-vers-un-se3-wheezy)
     * [Utilisation d'une session `screen`](#utilisation-dune-session-screen)
@@ -123,13 +124,19 @@ Si cela n'est déjà en place, nous vous recommendons chaudement de procéder à
 ### Prévenir les collègues…
 De toute façon, il est prudent de les prévenir en leur demandant de procéder à une sauvegarde de leurs données… Ce qu'ils devraient toujours faire.
 
+
+### Isoler le `se3` du réseau
 Par ailleurs, il faut que le `se3` ne soit pas utilisé pendant la migration.
 
 Le mieux est de couper le `se3` du reste du réseau (si cela est possible) pour éviter que des utilisateurs tentent de s'y connecter ; je pense cela préférable vu qu'à la fin du script de migration s'exécute en arrière plan un script qui efface tous les profils et réencode les home en `UTF-8`, c'est très long !
 
+Pour couper le `se3` du reste du réseau vous pouvez utiliser un commutateur (ou switch) sur lequel vous branchez uniquement le `se3`, la passerelle (par exemple `l'Amon`) et un ordinateur pour ouvrir une session `root` sur le `se3` via un `terminal`. Bien entendu, sur l'ordinateur utilisé, ouvrir une session locale…
+
+Ou alors, faites la migration lorsque vous êtes sûr qu'aucune personne ne sera présente pour ouvrir une session et que tous les clients (linux ou windows) seront éteints.
+
 
 ### Temps à prévoir
-Il vous faut une journée pour être sur que tout soit bien fait.
+Il vous faut une journée pour être sûr que tout soit bien fait.
 
 
 ## Migration vers un `se3-Wheezy`
