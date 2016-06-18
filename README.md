@@ -1,10 +1,11 @@
 # se3-docs
 
 Ce dépôt contient la documentation de certains composants de
-la solution SambaÉdu3 dont le code est hébergé sur Github.
+la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Pour contribuer au projet
 * Documentation en rapport avec [le développement et l'utilisation de Git](dev-clients-linux/README.md)
+* Documentation pour [utiliser le Git et le formatage markdown](dev-clients-linux/memo-git.md)
 * Documentation en rapport avec [la création de paquets debian](https://www.debian.org/doc/manuals/maint-guide/index.fr.html)
 
 ## Installation automatique des clients-linux
