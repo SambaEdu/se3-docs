@@ -101,8 +101,10 @@ rm -rf /home/profiles/*
 
 
 > En faisant ça, les raccourcis firefox  dégagent, non ?
-> Si cela fait partie de l'arborescence `/home/profiles/`
-> Oui, en effet. Cependant, il me semble qu'il est plutôt dans le `/home` de l'utilisateur : il n'est donc pas touché. Précision de Franck : seuls, les favoris `IE` passent à la trappe.
+
+> Si cela fait partie de l'arborescence `/home/profiles/`, oui, en effet. Cependant, il me semble qu'il est plutôt dans le `/home` de l'utilisateur : il n'est donc pas touché.
+
+>Précision de Franck : seuls, les favoris `IE` passent à la trappe.
 
 Sur les données utilisateurs, vous perdrez peu de choses : les favoris
 Windows, les favoris internet explorer (IE), tout ce qui est dans le profil V2.
