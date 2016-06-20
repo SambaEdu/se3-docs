@@ -101,10 +101,13 @@ rm -rf /home/profiles/*
 
 
 > En faisant ça, les raccourcis firefox  dégagent, non ?
-Si cela fait partie de l'arborescence `/home/profiles/`, oui, en effet. Cependant, il me semble qu'il est plutôt dans le `/home` de l'utilisateur : il n'est donc pas touché. Précision de Franck : seuls, les favoris `IE` passent à la trappe.
+> Si cela fait partie de l'arborescence `/home/profiles/`
+> Oui, en effet. Cependant, il me semble qu'il est plutôt dans le `/home` de l'utilisateur : il n'est donc pas touché. Précision de Franck : seuls, les favoris `IE` passent à la trappe.
 
 Sur les données utilisateurs, vous perdrez peu de choses : les favoris
 Windows, les favoris internet explorer (IE), tout ce qui est dans le profil V2.
+
+**NB :** comme cette opération de suppression risque d'être assez longue, il vaut mieux la lancer en utilisant une session `screen` ; [voir ci-dessous pour sa mise en œuvre](#utilisation-dune-session-screen).
 
 
 ### Supprimer les montages de disques externes
@@ -133,6 +136,8 @@ Le mieux est de couper le `se3` du reste du réseau (si cela est possible) pour 
 Pour couper le `se3` du reste du réseau vous pouvez utiliser un commutateur (ou switch) sur lequel vous branchez uniquement le `se3`, la passerelle (par exemple `l'Amon`) et un ordinateur pour ouvrir une session `root` sur le `se3` via un `terminal`. Bien entendu, sur l'ordinateur utilisé, ouvrir une session locale…
 
 Ou alors, faites la migration lorsque vous êtes sûr qu'aucune personne ne sera présente pour ouvrir une session et que tous les clients (linux ou windows) seront éteints.
+
+Ou alors, désactiver le `dhcp` en étant sûr que les bails ont tous expirés et qu'aucun utilisateur n'aura l'idée de mettre son client en ip fixe.
 
 
 ### Temps à prévoir
