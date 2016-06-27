@@ -80,7 +80,11 @@ rmdir /mnt/disque
 
 Modifier le fichier `/etc/fstab` en ajoutant la ligne suivante à la fin du fichier :
 ```sh
-/dev/sdb1 /tftpboot     ext3    defaults        0       2
+UUID=xxx /tftpboot ext3 defaults 0 2
+```
+**Remarque :** Dans cette ligne, vous remplacerez xxx par la valeur de l’UUID du disque dur. Pour connaître la valeur de l'UUID, vous pouvez utiliser la commande suivante :
+```sh
+blkid | grep /dev/sdb1
 ```
 
 Effectuer les montages contenus dans `/etc/fstab` avec la commande :
@@ -93,7 +97,11 @@ Vérifier que le contenu de `/tftpboot` est bien là :
 ls -alh /tftpboot
 ```
 
-Et voilà ! Un petit coup de `df -h` pour vérifier que `/` a plus de place, et vous pouvez respirer !
+Et voilà ! Un petit coup de la commande suivante…
+```sh
+df -h
+```
+…pour vérifier que `/` a plus de place, et **vous pouvez respirer !**
 
 
 ## Modifier le partitionnement `LVM`
