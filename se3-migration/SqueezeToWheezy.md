@@ -4,6 +4,7 @@
 * [Préparation du `se3 Squeeze`](#préparation-du-se3-squeeze)
     * [Configurer `apt`](#configurer-apt)
     * [Mise à jour du `se3` ?](#mise-à-jour-du-se3-)
+    * [Assez de place dans le répertoire `/` ?](#assez-de-place-dans-le-répertoire--)
     * [Supprimer les profiles ?](#supprimer-les-profiles-)
     * [Supprimer les montages de disques externes](#supprimer-les-montages-de-disques-externes)
     * [Dernière précaution](#dernière-précaution)
@@ -90,6 +91,13 @@ bash /usr/share/se3/scripts/se3_update_system.sh
 ```
 
 **Remarque :** si le `se3-squeeze` est à jour, vous disposerez, de ce fait, de la dernière version du script. D'ailleurs, le script de migration vérifie que le `se3` est bien à jour et, sinon, il le met à jour ; c'est pour cette raison que vous devez le relancer pour bénéficier de la version la plus à jour du script de migration.
+
+
+### Assez de place dans le répertoire `/` ?
+
+Dans l'inteface web, entrée `Informations système/Espace disques`, le répertoire racine `/` est en orange ou en rouge : il n'y aura sans doute pas assez de place pour mener à bien le changement de version.
+
+Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](AugmenterRacine.md).
 
 
 ### Supprimer les profiles ?
