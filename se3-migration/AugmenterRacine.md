@@ -1,12 +1,12 @@
 # Faire de la place pour passer en Wheezy
 
 * [Avez-vous de la place dans la partition `/` ?](#avez-vous-de-la-place-dans-la-partition--)
-* [Ajouter un disque physique pour déplacer `/tftpboot` et son contenu](#ajouter-un-disque-physique-pour-déplacer-tftpboot-et-son-contenu)
+* [1ère solution : Ajouter un disque physique pour déplacer `/tftpboot` et son contenu](#ajouter-un-disque-physique-pour-déplacer-tftpboot-et-son-contenu)
     * [Repérer le nouveau disque](#repérer-le-nouveau-disque)
     * [Créer une partition sur l'ensemble du disque](#créer-une-partition-sur-lensemble-du-disque)
     * [Déplacer le contenu de `/tftpboot` dans le disque](#déplacer-le-contenu-de-tftpboot-dans-le-disque)
     * [Monter le disque sur `/tftpboot`](#monter-le-disque-sur-tftpboot)
-* [Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
+* [2ème solution : Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
     * [Effectuer un `dump`](#effectuer-un-dump)
     * [Redimensionner un volume `LVM` pour disposer d'espace libre](#redimensionner-un-volume-lvm-pour-disposer-despace-libre)
     * [Ajouter une partition `/tftpboot`](#ajouter-une-partition-tftpboot)
@@ -20,11 +20,11 @@ Avec le développement de `se3-clients-linux`, les outils d'installation s'accum
 
 La commande `df -h` ou l'affichage de l'espace disque dans l'interface web pourra vous aider à voir où vous en êtes…
 
-Plusieurs solutions peuvent être envisagées.
+Plusieurs solutions peuvent être envisagées. Nous en présentons 2.
 
 Si votre installation utilise `LVM`, il est possible de modifier la répartition des différents volumes pour augmenter la taille de la partition racine `/`, ou plutôt pour ajouter une partition spécifique distincte pour `/tftpboot`.
 
-Si votre utilisation n'utilise pas `LVM`, ou si vous trouvez cela plus simple, l'autre solution est d'ajouter un disque physique, et de l'utiliser pour y placer le répertoire `/tftpboot`.
+Si votre installation n'utilise pas `LVM`, ou si vous trouvez cela plus simple dans le cas où votre installation utilise`LVM`, l'autre solution est d'ajouter un disque physique, et de l'utiliser pour y placer le répertoire `/tftpboot`.
 
 
 ## Ajouter un disque physique pour déplacer `/tftpboot` et son contenu
