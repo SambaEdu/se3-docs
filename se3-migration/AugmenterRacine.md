@@ -1,6 +1,6 @@
 # Faire de la place pour passer en Wheezy
 
-* [Avez-vous de la place dans la partition `/` ?](#avez-vous-de-la-place-dans-la-partition\/-?)
+* [Avez-vous de la place dans la partition `/` ?](#avez-vous-de-la-place-dans-la-partition-?)
 * [Ajouter un disque physique pour déplacer `/tftpboot` et son contenu](#ajouter-un-disque-physique-pour-déplacer\/tftpboot-et-son-contenu)
     * [Repérer le nouveau disque](#repérer-le-nouveau-disque)
     * [Créer une partition sur l'ensemble du disque](#créer-une-partition-sur-l-ensemble-du-disque)
