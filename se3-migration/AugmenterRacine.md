@@ -48,13 +48,14 @@ Si ce n'est pas déjà le cas, créer une partition primaire occupant la totalit
 ```sh
 fdisk /dev/sdb
 ```
-
 puis répondre aux questions.
 
 Formater cette partition en `ext3` :
 ```sh
 mkfs.ext3 /dev/sdb1
 ```
+
+### Déplacer le contenu de `/tftpboot` dans le disque
 
 Monter ce disque provisoirement dans `/mnt/disque` :
 ```sh
@@ -78,6 +79,8 @@ umount /mnt/disque
 rmdir /mnt/disque
 ```
 
+### Monter le disque sur `/tftpboot`
+
 Modifier le fichier `/etc/fstab` en ajoutant la ligne suivante à la fin du fichier :
 ```sh
 UUID=xxx /tftpboot ext3 defaults 0 2
@@ -87,7 +90,7 @@ UUID=xxx /tftpboot ext3 defaults 0 2
 blkid | grep /dev/sdb1
 ```
 
-Effectuer les montages contenus dans `/etc/fstab` avec la commande :
+Effectuer les montages contenus dans `/etc/fstab` avec la commande (cela évite de redémarrer le serveur) :
 ```sh
 mount -a
 ```
