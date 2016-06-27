@@ -115,127 +115,130 @@ df -h
 
 ## Modifier le partitionnement `LVM`
 
-Si vous utilisez LVM, il est possible de modifier la répartition de l'espace entre les différentes partitions faisant partie du groupe de volume. Pour bien comprendre de quoi il s'agit, il est vivement conseillé de bien connaître ce qu'est et ce que permet LVM <https://doc.ubuntu-fr.org/lvm>.
+Si vous utilisez `LVM`, il est possible de modifier la répartition de l'espace entre les différentes partitions faisant partie du `groupe de volume`. Pour bien comprendre de quoi il s'agit, il est vivement conseillé de bien connaître [ce qu'est et ce que permet `LVM`](https://doc.ubuntu-fr.org/lvm).
 
-Il demeure un problème de taille toutefois. En effet, si la réduction de la taille d'un systeme de fichier ext3 est possible, seule l'augmentation de la taille d'un système de fichier xfs est possible. Or il y a de fortes chances que vous souhaitiez rogner sur votre partition `/home` ou `/var/se3`, qui sont en xfs, pour augmenter la racine ou créer une partition dédiée à `/tftpboot`.
+Il demeure **un problème de taille** toutefois. En effet, si la réduction de la taille d'un systeme de fichier `ext3` est possible, seule l'augmentation de la taille d'un système de fichier `xfs` est possible. Or, il y a de fortes chances que vous souhaitiez rogner sur votre partition `/home` ou `/var/se3`, qui sont en `xfs`, pour augmenter la racine ou créer une partition dédiée à `/tftpboot`.
 
 La solution consistera à :
 
-* créer un dump de la partition `/home` ou `/var/se3` sur un disque externe d'un volume suffisant,
+* créer un `dump` de la partition `/home` ou `/var/se3` sur un disque externe d'un volume suffisant,
 * réduire la taille du volume contenant `/home` ou `/var/se3`,
-* reformater le volume réduit en xfs,
-* restaurer le dump,
+* reformater le volume réduit en `xfs`,
+* restaurer le `dump`,
 * utiliser l'espace libéré comme on le souhaite.
 
-Dans l'exemple qui suit, on supposera que l'on dispose d'une partition `/var/se3` de 50Go utilisée pour moitié (25Go), qui dispose donc de 25Go d'espace libre, et dont on souhaite réduire la taille à 45Go.
+Dans l'exemple qui suit, on supposera que l'on dispose d'une partition `/var/se3` de 50 Go utilisée pour moitié (25 Go), qui dispose donc de 25 Go d'espace libre, et dont on souhaite réduire la taille à 45 Go : l'espace libre ne sera plus que de 20 Go.
 
-Il va sans dire qu'il n'est pas possible dans notre cas de réduire la taille de la partition à moins de 25Go, et on préfèrera par sécurité lui laisser plus d'espace que celui réellement utilisé.
+Il va sans dire qu'il n'est pas possible dans notre cas de réduire la taille de la partition à moins de 25 Go, et on préfèrera, par sécurité, lui laisser plus d'espace que celui réellement utilisé.
 
-D'autre part la procédure nécessite l'utilisation d'un support externe (disque USB ou NAS) disposant de l'espace équivalent à l'espace utilisé dans `/var/se3` pour y stocker provisoirement les données. On pourra donc monter provisoirement un disque USB, ou comme dans cet exemple, utiliser le montage `/sauveserveur` s'il dispose de l'espace nécessaire.
+D'autre part, la procédure nécessite l'utilisation d'un support externe (disque `USB` ou `NAS`) disposant de l'espace équivalent à l'espace utilisé dans `/var/se3` pour y stocker provisoirement les données. On pourra donc monter provisoirement un disque `USB`, ou comme dans cet exemple, utiliser le montage `/sauveserveur` s'il dispose de l'espace nécessaire.
 
 Enfin, il est vivement conseillé d'effectuer ces opérations lorsque personne n'utilise le réseau ;-)
 
-Ah, et aussi d'avoir une "vraie" sauvegarde sous le coude !
+Ah, et aussi d'avoir [une "vraie" sauvegarde](http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3) sous le coude !
+
 
 ### Effectuer un `dump`
 
 On vérifie que personne n'utilise `/var/se3` : la commande suivante ne doit rien renvoyer.
-```
+```sh
 lsof | grep var/se3
 ```
 
 On démonte `/var/se3` :
-```
+```sh
 umount /var/se3
 ```
 
 On vérifie le système de fichier :
-```
+```sh
 xfs_check /dev/mapper/vol0-lv_var_se3
 ```
 
-On réalise le dump :
-```
+On réalise le `dump` :
+```sh
 xfsdump -f /sauveserveur/varse3.dump /var/se3
 ```
 
+
 ### Redimensionner un volume `LVM` pour disposer d'espace libre
 
-On peut afficher la liste et le détail des volumes du lvm avec les commandes :
-```
+On peut afficher la liste et le détail des volumes du `LVM` avec les  2 commandes :
+```sh
 lvs
 lvdisplay
 ```
 
-On réduit la taille du volume logique à 45Go (adapter la commande à votre cas) :
-```
+On réduit la taille du volume logique à 45 Go (adapter la commande à votre cas) :
+```sh
 lvreduce --size 45g /dev/vol0/lv_var_se3
 ```
 
-On reformate le volume logique en xfs :
-```
+On reformate le volume logique en `xfs` :
+```sh
 mkfs.xfs -f /dev/vol0/lv_var_se3
 ```
 
-On remonte le volume tel qu'indiqué dans `/etc/fstab`
-```
+On remonte le volume tel qu'indiqué dans le fichier `/etc/fstab` :
+```sh
 mount -a
 ```
 
-On restaure les données
-```
+On restaure les données :
+```sh
 xfsrestore -f /sauveserveur/varse3.dump /var/se3/
 ```
 
-Par la suite, ne pas oublier de supprimer le dump qui prend de la place inutilement :
-```
+Par la suite, ne pas oublier de supprimer le `dump` qui prend de la place inutilement :
+```sh
 rm /sauveserveur/varse3.dump
 ```
 
 Nous avons donc maintenant (dans cet exemple) 5Go disponible pour notre groupe de volume.
 
+
 ### Ajouter une partition `/tftpboot`
 
 Il n'est pas nécessaire d'utiliser la totalité de l'espace libéré pour `/tftpboot`, et on peut garder quelques Go sous le coude en cas de coup dur ;-)
 
-Dans cet exemple, nous allons créer un nouveau volume de 2Go :
-
-```
+Dans cet exemple, nous allons créer un nouveau volume de 2 Go :
+```sh
 lvcreate -n lv_tftpboot -L 2g vol0
 ```
 
-Que l'on formate en ext3 (comme `/`) :
-```
+Que l'on formate en `ext3` (comme `/`) :
+```sh
 mkfs.ext3 /dev/mapper/vol0-lv_tftpboot
 ```
 
 On monte provisoirement ce volume :
-```
+```sh
 mkdir /mnt/tftpboot
 mount /dev/vol0/lv_tftpboot /mnt/tftpboot
 ```
 
 On déplace les données :
-```
+```sh
 mv /tftpboot/* /mnt/tftpboot/
 ```
 
 On démonte le volume contenant `/tftpboot` :
-```
+```sh
 umount /mnt/tftpboot
 ```
 
 On ajoute la ligne suivante au fichier `/etc/fstab` :
-```
+```sh
 /dev/mapper/vol0-lv_tftpboot /tftpboot     ext3    defaults        0       2
 ```
 
 On remonte le tout tel qu'indiqué dans le fichier `/etc/fstab` :
-```
+```sh
 mount -a
 ```
 
-On vérifie tout ça et on se détend ;-)
-```
+On vérifie tout ça et **on se détend ;-)**
+```sh
 df -h
 ```
+
