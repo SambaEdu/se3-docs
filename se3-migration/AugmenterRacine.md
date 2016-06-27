@@ -38,10 +38,12 @@ Ce disque n'a pas besoin d'être d'un volume important. À la limite, une clé `
 
 La commande suivante devrait vous indiquer le nom du disque ajouté.
 ```sh
-fdisk -l
+lsblk
 ```
 
 À priori, si vous n'aviez qu'un seul disque, cela devrait être `/dev/sdb`. Repérez bien cette référence pour adapter les commandes ci-dessous.
+
+**Remarque :** selon les versions de Debian, il se peut que cette commande soit indisponible. Il faudra alors utiliser la commande `fdisk -l`.
 
 
 ### Créer une partition sur l'ensemble du disque
@@ -56,6 +58,7 @@ Formater cette partition en `ext3` :
 ```sh
 mkfs.ext3 /dev/sdb1
 ```
+
 
 ### Déplacer le contenu de `/tftpboot` dans le disque
 
@@ -81,13 +84,14 @@ umount /mnt/disque
 rmdir /mnt/disque
 ```
 
+
 ### Monter le disque sur `/tftpboot`
 
 Modifier le fichier `/etc/fstab` en ajoutant la ligne suivante à la fin du fichier :
 ```sh
 UUID=xxx /tftpboot ext3 defaults 0 2
 ```
-**Remarque :** Dans cette ligne, vous remplacerez xxx par la valeur de l’UUID du disque dur. Pour connaître la valeur de l'UUID, vous pouvez utiliser la commande suivante :
+**Remarque :** Dans cette ligne, vous remplacerez xxx par la valeur de l’`UUID` du disque dur. Pour connaître la valeur de l'`UUID`, vous pouvez utiliser la commande suivante :
 ```sh
 blkid | grep /dev/sdb1
 ```
