@@ -92,6 +92,13 @@ bash /usr/share/se3/scripts/se3_update_system.sh
 **Remarque :** si le `se3-squeeze` est à jour, vous disposerez, de ce fait, de la dernière version du script. D'ailleurs, le script de migration vérifie que le `se3` est bien à jour et, sinon, il le met à jour ; c'est pour cette raison que vous devez le relancer pour bénéficier de la version la plus à jour du script de migration.
 
 
+### Assez de place dans le répertoire `/`
+
+Dans l'inteface web, entrée `Informations système/Espace disques`, le répertoire racine `/` est en orange ou en rouge : il n'y aura sans doute pas assez de place pour mener à bien le changement de version.
+
+Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](#AugmenterRacine.md).
+
+
 ### Supprimer les profiles ?
 *Franck : "le script supprime immédiatement celui du compte admin et les autres sont supprimés en arrière plan. Cela étant je vais peut être modifier cela pour être certain qu'il ne traîne plus rien à la fin du script."*
 Il n'est pas interdit de le faire préventivement.
