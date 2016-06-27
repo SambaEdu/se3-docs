@@ -47,7 +47,7 @@ fdisk -l
 Si ce n'est pas déjà le cas, créer une partition primaire occupant la totalité du disque : 
 ```sh
 fdisk /dev/sdb
-```sh
+```
 
 puis répondre aux questions.
 
