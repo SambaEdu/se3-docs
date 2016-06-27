@@ -10,71 +10,91 @@
     * [Ajouter une partition `/tftpboot`](#ajouter-une-partition-tftpboot)
 
 
-
 ## Avez-vous de la place dans la partition `/` ?
 
 Si vous avez conservé les paramètres par défaut lors de l'installation en Squeeze, vous avez une partition racine `/` de 3 Go.
 
 Avec le développement de `se3-clients-linux`, les outils d'installation s'accumulent dans le répertoire `/tftpboot`, et la partition racine `/` devient trop petite pour envisager une migration en toute sérénité.
 
-La commande `df -h` ou l'affichage de l'espace disque dans l'interface web pourra vous aider à voir où vous en êtes...
+La commande `df -h` ou l'affichage de l'espace disque dans l'interface web pourra vous aider à voir où vous en êtes…
 
 Plusieurs solutions peuvent être envisagées.
 
-Si votre installation utilise LVM, il est possible de modifier la répartition des différents volumes pour augmenter la taille de la partition racine `/`, ou plutôt pour ajouter une partition spécifique distincte pour `/tftpboot`.
+Si votre installation utilise `LVM`, il est possible de modifier la répartition des différents volumes pour augmenter la taille de la partition racine `/`, ou plutôt pour ajouter une partition spécifique distincte pour `/tftpboot`.
 
-Si votre utilisation n'utilise pas LVM, ou si vous trouvez cela plus simple, l'autre solution est d'ajouter un disque physique, et de l'utiliser pour y placer le répertoire `/tftpboot`.
+Si votre utilisation n'utilise pas `LVM`, ou si vous trouvez cela plus simple, l'autre solution est d'ajouter un disque physique, et de l'utiliser pour y placer le répertoire `/tftpboot`.
+
 
 ## Ajouter un disque physique pour déplacer `/tftpboot` et son contenu
 
-Cette procédure nécessite à priori d'éteindre le serveur, d'y ajouter un disque physique, puis de redémarrer le serveur. Ce disque n'a pas besoin d'être d'un volume important. À la limite, une clé USB branchée sur un port interne pourrait suffire !
+Cette procédure nécessite à priori d'éteindre le serveur, d'y ajouter un disque physique, puis de redémarrer le serveur.
+
+Ce disque n'a pas besoin d'être d'un volume important. À la limite, une clé `USB` branchée sur un port interne pourrait suffire !
+
 
 ### Repérer le nouveau disque
 
-La commande `fdisk -l` devrait vous indiquer le nom du disque ajouté. À priori, si vous n'aviez qu'un seul disque, cela devrait être `/dev/sdb`.
+La commande suivante devrait vous indiquer le nom du disque ajouté.
+```sh
+fdisk -l
+```
+
+À priori, si vous n'aviez qu'un seul disque, cela devrait être `/dev/sdb`. Repérez bien cette référence pour adapter les commandes ci-dessous.
+
 
 ### Créer une partition sur l'ensemble du disque
 
-Si ce n'est pas déjà le cas, créer une partition primaire occupant la totalité du disque : `fdisk /dev/sdb` puis répondre aux questions.
+Si ce n'est pas déjà le cas, créer une partition primaire occupant la totalité du disque : 
+```sh
+fdisk /dev/sdb
+```sh
 
-Formater cette partition en ext3 : `mkfs.ext3 /dev/sdb1`
+puis répondre aux questions.
+
+Formater cette partition en `ext3` :
+```sh
+mkfs.ext3 /dev/sdb1
+```
 
 Monter ce disque provisoirement dans `/mnt/disque` :
-```
+```sh
 mkdir /mnt/disque
 mount /dev/sdb1 /mnt/disque
-
 ```
 
-Déplacer le contenu de /tftpboot sur ce nouveau disque :
-```
+Déplacer le contenu de `/tftpboot` sur ce nouveau disque :
+```sh
 mv /tftpboot/* /mnt/disque
 ```
 
 Vérifier que `/tftpboot` est vide :
-```
+```sh
 ls -alh /tftpboot
 ```
 
 Démonter le disque :
-```
+```sh
 umount /mnt/disque
 rmdir /mnt/disque
 ```
 
 Modifier le fichier `/etc/fstab` en ajoutant la ligne suivante à la fin du fichier :
-```
+```sh
 /dev/sdb1 /tftpboot     ext3    defaults        0       2
 ```
 
-Effectuer les montages contenus dans `/etc/fstab` avec la commande `mount -a`
+Effectuer les montages contenus dans `/etc/fstab` avec la commande :
+```sh
+mount -a
+```
 
 Vérifier que le contenu de `/tftpboot` est bien là :
-```
+```sh
 ls -alh /tftpboot
 ```
 
 Et voilà ! Un petit coup de `df -h` pour vérifier que `/` a plus de place, et vous pouvez respirer !
+
 
 ## Modifier le partitionnement `LVM`
 
