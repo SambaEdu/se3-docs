@@ -4,6 +4,8 @@ Si vous avez conservé les paramètres par défaut lors de l'installation en Squ
 
 Avec le développement de `se3-clients-linux`, les outils d'installation s'accumulent dans le répertoire èè/tftpboot`, et la partition racine `/` devient trop petite pour envisager une migration en toute sérénité.
 
+La commande `df -h` ou l'affichage de l'occupation des disques dans l'interface web pourra vous aider à voir où vous en êtes...
+
 Plusieurs solutions peuvent être envisagées.
 
 Si votre installation utilise LVM, il est possible de modifier la répartition des différents volumes pour augmenter la taille de la partition racine `/`, voire d'ajouter une partition spécifique pour `/tftpboot` distincte.
@@ -44,10 +46,10 @@ ls -alh /tftpboot
 Démonter le disque :
 ```
 umount /mnt/disque
+rmdir /mnt/disque
 ```
 
-Modifier le fichier `/etc/fstab`
-Ajouter la ligne suivante à la fin du fichier :
+Modifier le fichier `/etc/fstab` en ajoutant la ligne suivante à la fin du fichier :
 ```
 /dev/sdb1 /tftpboot     ext3    defaults        0       2
 ```
@@ -59,7 +61,20 @@ Vérifier que le contenu de `/tftpboot` est bien là :
 ls -alh /tftpboot
 ```
 
+Et voilà ! Un petit coup de `df -h` pour vérifier que `/` a plus de place, et vous pouvez respirer !
+
 ## Modifier le partitionnement LVM
+
+Si vous utilisez LVM, il est possible de modifier la répartition de l'espace entre les différentes partitions faisant partie du groupe de volume. Pour bien comprendre de quoi il s'agit, il est vivement conseillé de bien connaître ce qu'est et ce que permet LVM <https://doc.ubuntu-fr.org/lvm>.
+
+Il demeure un problème de taille toutefois. En effet, si la réduction de la taille d'un systeme de fichier ext3 est possible, la réduction de la tailler d'un système de fichier xfs n'est pas possible. Or il y a de fortes chances que vous souhaitiez rogner sur votre partition `/home` ou `/var/se3`, qui sont en xfs, pour augmenter la racine ou créer une partition dédiée à `/tftpboot`.
+
+La solution consistera à :
+* créer un dump de la partition `/home` ou `/var/se3` sur un disque externe d'un volume suffisant,
+* réduire la taille du volume contenant `/home` ou `/var/se3`,
+* formater le nouveau volume en xfs,
+* restaurer le dump,
+* utiliser l'espace libéré comme on le souhaite.
 
 ### Redimensionner un volume LVM pour disposer d'espace libre
 
