@@ -2,13 +2,13 @@
 
 Si vous avez conservé les paramètres par défaut lors de l'installation en Squeeze, vous avez une partition racine `/` de 3Go.
 
-Avec le développement de `se3-clients-linux`, les outils d'installation s'accumulent dans le répertoire èè/tftpboot`, et la partition racine `/` devient trop petite pour envisager une migration en toute sérénité.
+Avec le développement de `se3-clients-linux`, les outils d'installation s'accumulent dans le répertoire `/tftpboot`, et la partition racine `/` devient trop petite pour envisager une migration en toute sérénité.
 
 La commande `df -h` ou l'affichage de l'occupation des disques dans l'interface web pourra vous aider à voir où vous en êtes...
 
 Plusieurs solutions peuvent être envisagées.
 
-Si votre installation utilise LVM, il est possible de modifier la répartition des différents volumes pour augmenter la taille de la partition racine `/`, voire d'ajouter une partition spécifique pour `/tftpboot` distincte.
+Si votre installation utilise LVM, il est possible de modifier la répartition des différents volumes pour augmenter la taille de la partition racine `/`, ou plutôt pour ajouter une partition spécifique distincte pour `/tftpboot`.
 
 Si votre utilisation n'utilise pas LVM, ou si vous trouvez cela plus simple, l'autre solution est d'ajouter un disque physique, et de l'utiliser pour y placer le répertoire `/tftpboot`.
 
@@ -146,8 +146,46 @@ Nous avons donc maintenant (dans cet exemple) 5Go disponible pour notre groupe d
 
 ### Ajouter une partition <code>/tftpboot</code>
 
+Il n'est pas nécessaire d'utiliser la totalité de l'espace libéré pour `/tftpboot`, et on peut garder quelques Go sous le coude en cas de coup dur ;-)
 
+Dans cet exemple, nous allons créer un nouveau volume de 2Go :
 
+```
+lvcreate -n lv_tftpboot -L 2g vol0
+```
 
+Que l'on formate en ext3 (comme `/`) :
+```
+mkfs.ext3 /dev/mapper/vol0-lv_tftpboot
+```
 
+On monte provisoirement ce volume :
+```
+mkdir /mnt/tftpboot
+mount /dev/vol0/lv_tftpboot /mnt/tftpboot
+```
 
+On déplace les données :
+```
+mv /tftpboot/* /mnt/tftpboot/
+```
+
+On démonte le volume contenant `/tftpboot` :
+```
+umount /mnt/tftpboot
+```
+
+On ajoute la ligne suivante au fichier `/etc/fstab` :
+```
+/dev/mapper/vol0-lv_tftpboot /tftpboot     ext3    defaults        0       2
+```
+
+On remonte le tout tel qu'indiqué dans le fichier `/etc/fstab` :
+```
+mount -a
+```
+
+On vérifie tout ça et on se détend ;-)
+```
+df -h
+```
