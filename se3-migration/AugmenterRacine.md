@@ -1,6 +1,19 @@
 # Faire de la place pour passer en Wheezy
 
-Si vous avez conservé les paramètres par défaut lors de l'installation en Squeeze, vous avez une partition racine `/` de 3Go.
+* [Avez-vous de la place dans la partition `/` ?](#avez-vous-de-la-place-dans-la-partition\/-?)
+* [Ajouter un disque physique pour déplacer `/tftpboot` et son contenu](#ajouter-un-disque-physique-pour-déplacer\/tftpboot-et-son-contenu)
+    * [Repérer le nouveau disque](#repérer-le-nouveau-disque)
+    * [Créer une partition sur l'ensemble du disque](#créer-une-partition-sur-l-ensemble-du-disque)
+* [Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
+    * [Effectuer un `dump`](#effectuer-un-dump)
+    * [Redimensionner un volume `LVM` pour disposer d'espace libre](#redimensionner-un-volume-lvm-pour-disposer-despace-libre)
+    * [Ajouter une partition `/tftpboot`](#ajouter-une-partition-\/tftpboot)
+
+
+
+## Avez-vous de la place dans la partition `/` ?
+
+Si vous avez conservé les paramètres par défaut lors de l'installation en Squeeze, vous avez une partition racine `/` de 3 Go.
 
 Avec le développement de `se3-clients-linux`, les outils d'installation s'accumulent dans le répertoire `/tftpboot`, et la partition racine `/` devient trop petite pour envisager une migration en toute sérénité.
 
@@ -12,7 +25,7 @@ Si votre installation utilise LVM, il est possible de modifier la répartition d
 
 Si votre utilisation n'utilise pas LVM, ou si vous trouvez cela plus simple, l'autre solution est d'ajouter un disque physique, et de l'utiliser pour y placer le répertoire `/tftpboot`.
 
-## Ajouter un disque physique pour déplacer <code>/tftpboot</code> et son contenu
+## Ajouter un disque physique pour déplacer `/tftpboot` et son contenu
 
 Cette procédure nécessite à priori d'éteindre le serveur, d'y ajouter un disque physique, puis de redémarrer le serveur. Ce disque n'a pas besoin d'être d'un volume important. À la limite, une clé USB branchée sur un port interne pourrait suffire !
 
@@ -63,7 +76,7 @@ ls -alh /tftpboot
 
 Et voilà ! Un petit coup de `df -h` pour vérifier que `/` a plus de place, et vous pouvez respirer !
 
-## Modifier le partitionnement LVM
+## Modifier le partitionnement `LVM`
 
 Si vous utilisez LVM, il est possible de modifier la répartition de l'espace entre les différentes partitions faisant partie du groupe de volume. Pour bien comprendre de quoi il s'agit, il est vivement conseillé de bien connaître ce qu'est et ce que permet LVM <https://doc.ubuntu-fr.org/lvm>.
 
@@ -87,7 +100,7 @@ Enfin, il est vivement conseillé d'effectuer ces opérations lorsque personne n
 
 Ah, et aussi d'avoir une "vraie" sauvegarde sous le coude !
 
-### Effectuer un dump
+### Effectuer un `dump`
 
 On vérifie que personne n'utilise `/var/se3` : la commande suivante ne doit rien renvoyer.
 ```
@@ -109,7 +122,7 @@ On réalise le dump :
 xfsdump -f /sauveserveur/varse3.dump /var/se3
 ```
 
-### Redimensionner un volume LVM pour disposer d'espace libre
+### Redimensionner un volume `LVM` pour disposer d'espace libre
 
 On peut afficher la liste et le détail des volumes du lvm avec les commandes :
 ```
@@ -144,7 +157,7 @@ rm /sauveserveur/varse3.dump
 
 Nous avons donc maintenant (dans cet exemple) 5Go disponible pour notre groupe de volume.
 
-### Ajouter une partition <code>/tftpboot</code>
+### Ajouter une partition `/tftpboot`
 
 Il n'est pas nécessaire d'utiliser la totalité de l'espace libéré pour `/tftpboot`, et on peut garder quelques Go sous le coude en cas de coup dur ;-)
 
