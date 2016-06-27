@@ -4,6 +4,8 @@
 * [Ajouter un disque physique pour déplacer `/tftpboot` et son contenu](#ajouter-un-disque-physique-pour-déplacer-tftpboot-et-son-contenu)
     * [Repérer le nouveau disque](#repérer-le-nouveau-disque)
     * [Créer une partition sur l'ensemble du disque](#créer-une-partition-sur-lensemble-du-disque)
+    * [Déplacer le contenu de `/tftpboot` dans le disque](#déplacer-le-contenu-de-tftpboot-dans-le-disque)
+    * [Monter le disque sur `/tftpboot`](#monter-le-disque-sur-tftpboot)
 * [Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
     * [Effectuer un `dump`](#effectuer-un-dump)
     * [Redimensionner un volume `LVM` pour disposer d'espace libre](#redimensionner-un-volume-lvm-pour-disposer-despace-libre)
