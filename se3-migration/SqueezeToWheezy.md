@@ -97,7 +97,7 @@ bash /usr/share/se3/scripts/se3_update_system.sh
 
 Dans l'inteface web, entrée `Informations système/Espace disques`, le répertoire racine `/` est en orange ou en rouge : il n'y aura sans doute pas assez de place pour mener à bien le changement de version.
 
-Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](./augmenterracine.md).
+Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](AugmenterRacine.md).
 
 
 ### Supprimer les profiles ?
