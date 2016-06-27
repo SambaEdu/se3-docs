@@ -7,6 +7,7 @@
     * [Déplacer le contenu de `/tftpboot` dans le disque](#déplacer-le-contenu-de-tftpboot-dans-le-disque)
     * [Monter le disque sur `/tftpboot`](#monter-le-disque-sur-tftpboot)
 * [2ème solution : Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
+    * [Vue d'ensemble](#vue-densemble)
     * [Effectuer un `dump`](#effectuer-un-dump)
     * [Redimensionner un volume `LVM` pour disposer d'espace libre](#redimensionner-un-volume-lvm-pour-disposer-despace-libre)
     * [Ajouter une partition `/tftpboot`](#ajouter-une-partition-tftpboot)
@@ -114,6 +115,8 @@ df -h
 
 
 ## Modifier le partitionnement `LVM`
+
+### Vue d'ensemble
 
 Si vous utilisez `LVM`, il est possible de modifier la répartition de l'espace entre les différentes partitions faisant partie du `groupe de volume`. Pour bien comprendre de quoi il s'agit, il est vivement conseillé de bien connaître [ce qu'est et ce que permet `LVM`](https://doc.ubuntu-fr.org/lvm).
 
