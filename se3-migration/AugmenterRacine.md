@@ -4,7 +4,7 @@ Si vous avez conservé les paramètres par défaut lors de l'installation en Squ
 
 Avec le développement de `se3-clients-linux`, les outils d'installation s'accumulent dans le répertoire `/tftpboot`, et la partition racine `/` devient trop petite pour envisager une migration en toute sérénité.
 
-La commande `df -h` ou l'affichage de l'occupation des disques dans l'interface web pourra vous aider à voir où vous en êtes...
+La commande `df -h` ou l'affichage de l'espace disque dans l'interface web pourra vous aider à voir où vous en êtes...
 
 Plusieurs solutions peuvent être envisagées.
 
