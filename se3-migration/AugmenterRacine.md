@@ -30,7 +30,6 @@ Monter ce disque provisoirement dans `/mnt/disque` :
 ```
 mkdir /mnt/disque
 mount /dev/sdb1 /mnt/disque
-
 ```
 
 Déplacer le contenu de /tftpboot sur ce nouveau disque :
@@ -69,7 +68,9 @@ Si vous utilisez LVM, il est possible de modifier la répartition de l'espace en
 
 Il demeure un problème de taille toutefois. En effet, si la réduction de la taille d'un systeme de fichier ext3 est possible, seule l'augmentation de la taille d'un système de fichier xfs est possible. Or il y a de fortes chances que vous souhaitiez rogner sur votre partition `/home` ou `/var/se3`, qui sont en xfs, pour augmenter la racine ou créer une partition dédiée à `/tftpboot`.
 
-La solution consistera à :
+Si c'est à `/var` que vous voulez prendre de l'espace, alors c'est plus simple, car il est en ext3. Cette solution est abordée en toute fin de ce document.
+
+La solution concernant les partitions en xfs consistera à :
 
 * créer un dump de la partition `/home` ou `/var/se3` sur un disque externe d'un volume suffisant,
 * réduire la taille du volume contenant `/home` ou `/var/se3`,
@@ -189,3 +190,21 @@ On vérifie tout ça et on se détend ;-)
 ```
 df -h
 ```
+
+## Récupérer de l'espace sur `/var` (qui est en ext3)
+
+Le système de fichiers ext3 supporte la réduction de volume à chaud. Dans cet exemple, nous allons réduire `/var` de 2Go pour créer un volume pour `/tftpboot` et augmenter également la taille de la partition racine `/`.
+
+On vérifie qu'il est possible de diminuer la taille de `/var`
+```
+df -h | grep var
+```
+
+On démonte `/var` :
+```
+umount /var
+```
+
+On redimensionns
+
+
