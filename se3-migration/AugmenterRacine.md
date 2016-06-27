@@ -106,7 +106,7 @@ Vérifier que le contenu de `/tftpboot` est bien là :
 ls -alh /tftpboot
 ```
 
-Et voilà ! Un petit coup de la commande suivante…
+Et voilà ! Un petit coup de la commande suivante (ou bien une petite visite de l'interface web)…
 ```sh
 df -h
 ```
