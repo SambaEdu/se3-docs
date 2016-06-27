@@ -41,9 +41,9 @@ La commande suivante devrait vous indiquer le nom du disque ajouté.
 lsblk
 ```
 
-À priori, si vous n'aviez qu'un seul disque, cela devrait être `/dev/sdb`. Repérez bien cette référence pour adapter les commandes ci-dessous.
+À priori, si vous n'aviez qu'un seul disque (repéré par `sda`), cela devrait être `sdb` pour le nouveau disque. Repérez bien cette référence pour adapter les commandes ci-dessous.
 
-**Remarque :** selon les versions de Debian, il se peut que cette commande soit indisponible. Il faudra alors utiliser la commande `fdisk -l`.
+**Remarque :** selon les versions de Debian, il se peut que cette commande soit indisponible. Il faudra alors utiliser la commande `fdisk -l`. Dans cette commande, les disques sont repérés par `/dev/sda`, `/dev/sdb`,…
 
 
 ### Créer une partition sur l'ensemble du disque
