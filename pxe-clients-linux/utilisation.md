@@ -4,6 +4,8 @@
 * [Démarrage en `PXE`](#démarrage-en-pxe)
 * [Menus pxe disponibles](#menus-pxe-disponibles)
 * [Installation du système `phase 1`](#installation-du-système-phase-1)
+* [Quelques précisions](#quelques-précisions)
+    * [Installation en double-boot](#installation-en-double-boot)
     * [Les firmwares pour la carte réseau](#les-firmwares-pour-la-carte-réseau)
     * [Fichiers de log de la phase 1](#fichiers-de-log-de-la-phase-1)
     * [Problèmes éventuels lors de la phase 1](#problèmes-éventuels-lors-de-la-phase-1)
@@ -15,6 +17,7 @@
     * [Fichiers de log de la phase 2](#fichiers-de-log-de-la-phase-2)
     * [Cas d'une intégration différée](#cas-dune-intégration-différée)
 * [Utilisation et gestion du `client-linux`](#utilisation-et-gestion-du-client-linux)
+
 
 ## Vue d'ensemble
 
@@ -72,6 +75,17 @@ L'installation du système choisi se fait automatiquement.
 ![menu pxe preseed](images/menu_pxe_preseed.png)
 
 **Remarque :** la première utilisation de ce mécanisme peut être assez longue mais les installations suivantes seront nettement plus rapides. En effet, l'installation utilise le miroir local géré par le paquet `apt-caher-ng` du serveur `se3` qui doit récupérer (et par la suite mettre à jour si nécessaire) les paquets utiles à l'installation via les dépôts officiels. Une fois ces paquets récupérés, ils sont alors disponibles localement et on profite alors du débit du réseau interne qui est nettement plus rapide.
+
+
+## Quelques précisions
+
+### Installation en double-boot
+
+Les menus `pxe`, que ce soit pour `Debian` ou pour `Ubuntu`, propose une installation en double-boot (voir les copies d'écran ci-dessus).
+
+_Une condition à respecter_ pour cela est qu'il y ait un espace libre (ie non partitionné) sur le disque dur qui contient déjà l'installation d'un système d'exploitation, quelqu'il soit. L'espace libre doit être après l'espace partitionné.
+
+**Attention :** s'il n'y a pas d'espace libre, ou s'il est insuffisant, l'installateur vous prévient et si vous lui dites de continuer, il écrase tout "menu menu" : hop ! Plus que du `GNU/Linux`, vite fait bien fait ;-)
 
 
 ### Les firmwares pour la carte réseau
