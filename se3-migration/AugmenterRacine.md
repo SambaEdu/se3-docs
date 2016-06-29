@@ -191,6 +191,11 @@ On vérifie que personne n'utilise `/var/se3` : la commande suivante ne doit rie
 lsof | grep var/se3
 ```
 
+Pour clore les connexions utilisant éventuellement le disque, on pourra arrêter le service smbd :
+```
+service smbd stop
+```
+
 On démonte `/var/se3` :
 ```sh
 umount /var/se3
@@ -238,6 +243,11 @@ xfsrestore -f /sauveserveur/varse3.dump /var/se3/
 Par la suite, ne pas oublier de supprimer le `dump` qui prend de la place inutilement :
 ```sh
 rm /sauveserveur/varse3.dump
+```
+
+Et redémarrer le service smbd si nécessaire :
+```
+service smbd start
 ```
 
 Nous avons donc maintenant (dans cet exemple) 5Go disponible pour notre groupe de volume.
