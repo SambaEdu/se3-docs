@@ -4,7 +4,6 @@
 * [1ère solution : Ajouter un disque physique pour déplacer `/tftpboot` et son contenu](#ajouter-un-disque-physique-pour-déplacer-tftpboot-et-son-contenu)
     * [Repérer le nouveau disque](#repérer-le-nouveau-disque)
     * [Créer une partition sur l'ensemble du disque](#créer-une-partition-sur-lensemble-du-disque)
-<<<<<<< HEAD
 * [Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
     * [Déplacer le contenu de `/tftpboot` dans le disque](#déplacer-le-contenu-de-tftpboot-dans-le-disque)
     * [Monter le disque sur `/tftpboot`](#monter-le-disque-sur-tftpboot)
@@ -59,17 +58,13 @@ Si ce n'est pas déjà le cas, créer une partition primaire occupant la totalit
 fdisk /dev/sdb
 ```
 
-puis répondre aux questions.
+Répondre aux questions…
 
-Formater cette partition en `ext3` :
+…puis formater cette partition en `ext3` :
 ```sh
 mkfs.ext3 /dev/sdb1
 ```
 
-
-### Déplacer le contenu de `/tftpboot` dans le disque
-
-=======
 
 ### Déplacer le contenu de `/tftpboot` dans le disque
 
@@ -98,10 +93,6 @@ rmdir /mnt/disque
 
 ### Monter le disque sur `/tftpboot`
 
-=======
-
-### Monter le disque sur `/tftpboot`
-
 Modifier le fichier `/etc/fstab` en ajoutant la ligne suivante à la fin du fichier :
 ```sh
 /dev/sdb1 /tftpboot     ext3    defaults        0       2
@@ -122,13 +113,7 @@ Vérifier que le contenu de `/tftpboot` est bien là :
 ls -alh /tftpboot
 ```
 
-Et voilà ! Un petit coup de `df -h` pour vérifier que `/` a plus de place, et vous pouvez respirer !
-Et voilà ! Un petit coup de la commande suivante…
-```sh
-df -h
-```
-
-Et voilà ! Un petit coup de la commande suivante (ou bien une petite visite de l'interface web)…
+**Et voilà !** Un petit coup de la commande suivante (ou bien une petite visite de l'interface web)…
 ```sh
 df -h
 ```
