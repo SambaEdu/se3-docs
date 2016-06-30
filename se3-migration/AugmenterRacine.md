@@ -6,16 +6,13 @@
     * [Créer une partition sur l'ensemble du disque](#créer-une-partition-sur-lensemble-du-disque)
 <<<<<<< HEAD
 * [Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
-||||||| merged common ancestors
     * [Déplacer le contenu de `/tftpboot` dans le disque](#déplacer-le-contenu-de-tftpboot-dans-le-disque)
     * [Monter le disque sur `/tftpboot`](#monter-le-disque-sur-tftpboot)
 * [Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
-=======
     * [Déplacer le contenu de `/tftpboot` dans le disque](#déplacer-le-contenu-de-tftpboot-dans-le-disque)
     * [Monter le disque sur `/tftpboot`](#monter-le-disque-sur-tftpboot)
 * [2ème solution : Modifier le partitionnement `LVM`](#modifier-le-partitionnement-lvm)
     * [Vue d'ensemble](#vue-densemble)
->>>>>>> 71aecbe82f24713ba7bf1d9be8b5ef99a5de66e4
     * [Effectuer un `dump`](#effectuer-un-dump)
     * [Redimensionner un volume `LVM` pour disposer d'espace libre](#redimensionner-un-volume-lvm-pour-disposer-despace-libre)
     * [Ajouter une partition `/tftpboot`](#ajouter-une-partition-tftpboot)
@@ -69,15 +66,13 @@ Formater cette partition en `ext3` :
 mkfs.ext3 /dev/sdb1
 ```
 
-<<<<<<< HEAD
-||||||| merged common ancestors
+
 ### Déplacer le contenu de `/tftpboot` dans le disque
 
 =======
 
 ### Déplacer le contenu de `/tftpboot` dans le disque
 
->>>>>>> 71aecbe82f24713ba7bf1d9be8b5ef99a5de66e4
 Monter ce disque provisoirement dans `/mnt/disque` :
 ```sh
 mkdir /mnt/disque
@@ -100,32 +95,21 @@ umount /mnt/disque
 rmdir /mnt/disque
 ```
 
-<<<<<<< HEAD
-||||||| merged common ancestors
+
 ### Monter le disque sur `/tftpboot`
 
 =======
 
 ### Monter le disque sur `/tftpboot`
 
->>>>>>> 71aecbe82f24713ba7bf1d9be8b5ef99a5de66e4
 Modifier le fichier `/etc/fstab` en ajoutant la ligne suivante à la fin du fichier :
 ```sh
-<<<<<<< HEAD
 /dev/sdb1 /tftpboot     ext3    defaults        0       2
-||||||| merged common ancestors
 UUID=xxx /tftpboot ext3 defaults 0 2
 ```
 **Remarque :** Dans cette ligne, vous remplacerez xxx par la valeur de l’UUID du disque dur. Pour connaître la valeur de l'UUID, vous pouvez utiliser la commande suivante :
 ```sh
 blkid | grep /dev/sdb1
-=======
-UUID=xxx /tftpboot ext3 defaults 0 2
-```
-**Remarque :** Dans cette ligne, vous remplacerez xxx par la valeur de l’`UUID` du disque dur. Pour connaître la valeur de l'`UUID`, vous pouvez utiliser la commande suivante :
-```sh
-blkid | grep /dev/sdb1
->>>>>>> 71aecbe82f24713ba7bf1d9be8b5ef99a5de66e4
 ```
 
 Effectuer les montages contenus dans `/etc/fstab` avec la commande :
@@ -138,21 +122,17 @@ Vérifier que le contenu de `/tftpboot` est bien là :
 ls -alh /tftpboot
 ```
 
-<<<<<<< HEAD
 Et voilà ! Un petit coup de `df -h` pour vérifier que `/` a plus de place, et vous pouvez respirer !
-||||||| merged common ancestors
 Et voilà ! Un petit coup de la commande suivante…
 ```sh
 df -h
 ```
-…pour vérifier que `/` a plus de place, et **vous pouvez respirer !**
-=======
+
 Et voilà ! Un petit coup de la commande suivante (ou bien une petite visite de l'interface web)…
 ```sh
 df -h
 ```
 …pour vérifier que `/` a plus de place, et **vous pouvez respirer !**
->>>>>>> 71aecbe82f24713ba7bf1d9be8b5ef99a5de66e4
 
 
 ## Modifier le partitionnement `LVM`
