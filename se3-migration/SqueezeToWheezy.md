@@ -297,6 +297,9 @@ Il suffit de rebrancher les disques et deux solutions se présentent :
 * soit redémarrer le serveur si des entrées dans le fichier `/etc/fstab` concernent ces disques,
 * soit de les monter conformément aux indications de la documentation.
 
+**Remarque :** les machines `bakuppc` dégagent
+mais il suffit de les recréer avec un nom identique pour retrouver les sauvegardes antérieures.
+
 
 ## Utiliser les scripts de sauvegarde/restauration
 
@@ -319,8 +322,8 @@ Il est à noter qu'ils sont aussi sur votre `se3-squeeze`, s'il est à jour bien
 
 Voici les deux commandes pour cela :
 ```sh
-/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /home | grep -v Skipping &>> $fichier_log
-/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 | grep -v Skipping &>> $fichier_log
+/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /home | grep -v Skipping &>> rapport_home.log
+/usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 | grep -v Skipping &>> rapport_varse3.log
 ```
 
 
