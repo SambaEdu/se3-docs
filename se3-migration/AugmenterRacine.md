@@ -171,9 +171,20 @@ On vérifie le système de fichier :
 xfs_check /dev/mapper/vol0-lv_var_se3
 ```
 
+On remonte `/var/se3` :
+```sh
+mount -a
+```
+
 On réalise le `dump` :
 ```sh
 xfsdump -f /sauveserveur/varse3.dump /var/se3
+```
+
+ou
+
+```sh
+xfsdump -f /sauveserveur/varse3.dump /dev/vol0/lv_var_se3
 ```
 
 
