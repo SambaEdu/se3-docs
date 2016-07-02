@@ -187,13 +187,17 @@ ou
 xfsdump -f /sauveserveur/varse3.dump /dev/vol0/lv_var_se3
 ```
 
-
 ### Redimensionner un volume `LVM` pour disposer d'espace libre
 
 On peut afficher la liste et le détail des volumes du `LVM` avec les  2 commandes :
 ```sh
 lvs
 lvdisplay
+```
+
+On démonte `/var/se3` :
+```sh
+umount /var/se3
 ```
 
 On réduit la taille du volume logique à 45 Go (adapter la commande à votre cas) :
