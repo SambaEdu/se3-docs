@@ -222,11 +222,6 @@ On restaure les données :
 xfsrestore -f /sauveserveur/varse3.dump /var/se3/
 ```
 
-Par la suite, ne pas oublier de supprimer le `dump` qui prend de la place inutilement :
-```sh
-rm /sauveserveur/varse3.dump
-```
-
 Et redémarrer le service smbd si nécessaire :
 ```
 service smbd start
@@ -290,3 +285,7 @@ On vérifie tout ça et **on se détend ;-)**
 df -h
 ```
 
+Par la suite, ne pas oublier de supprimer le `dump` qui prend de la place inutilement :
+```sh
+rm /sauveserveur/varse3.dump
+```
