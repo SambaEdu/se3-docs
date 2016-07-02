@@ -239,9 +239,19 @@ Nous avons donc maintenant (dans cet exemple) 5Go disponible pour notre groupe d
 
 Il n'est pas nécessaire d'utiliser la totalité de l'espace libéré pour `/tftpboot`, et on peut garder quelques Go sous le coude en cas de coup dur ;-)
 
+Pour connaitre l'espace disponible :
+```sh
+vgdisplay
+```
+
 Dans cet exemple, nous allons créer un nouveau volume de 2 Go :
 ```sh
 lvcreate -n lv_tftpboot -L 2g vol0
+```
+
+Si vous souhaitez utiliser tout l'espace rendu disponible :
+```sh
+lvcreate -n lv_tftpboot -l 100%FREE vol0
 ```
 
 Que l'on formate en `ext3` (comme `/`) :
