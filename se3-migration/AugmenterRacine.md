@@ -187,6 +187,8 @@ ou
 xfsdump -f /sauveserveur/varse3.dump /dev/vol0/lv_var_se3
 ```
 
+On vous demandera de saisir un "session label" et un "media label". Peu importe ce que vous saisissez, les deux peuvent rester vides.
+
 ### Redimensionner un volume `LVM` pour disposer d'espace libre
 
 On peut afficher la liste et le détail des volumes du `LVM` avec les  2 commandes :
