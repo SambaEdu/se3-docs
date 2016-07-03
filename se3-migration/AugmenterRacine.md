@@ -128,7 +128,7 @@ Si vous utilisez `LVM`, il est possible de modifier la répartition de l'espace 
 
 Il demeure **un problème de taille** toutefois. En effet, si la réduction de la taille d'un systeme de fichier `ext3` est possible, seule l'augmentation de la taille d'un système de fichier `xfs` est possible. Or, il y a de fortes chances que vous souhaitiez rogner sur votre partition `/home` ou `/var/se3`, qui sont en `xfs`, pour augmenter la racine ou créer une partition dédiée à `/tftpboot`.
 
-Si c'est à `/var` que vous voulez prendre de l'espace, alors c'est plus simple, car il est en ext3. Cette solution est abordée en toute fin de ce document.
+Si c'est à `/var` que vous voulez prendre de l'espace, alors ça devrait être plus simple, car il est en ext3. Mais il faudrait le démonter, et cela pourrait poser problème sur un serveur en fonctionnement. Cette solution réalisable en démarrant le serveur sur un liveCD ne sera pas abordée.
 
 La solution concernant les partitions en xfs consistera à :
 
