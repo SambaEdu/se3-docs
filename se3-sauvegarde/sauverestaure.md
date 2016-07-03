@@ -106,8 +106,11 @@ mount | grep ^/dev | gawk -F" " '{print $1" "$2" "$3}'
 
 Ce qui peut donner ceci :
 > /dev/sda2 on /
+
 > /dev/sda6 on /home
+
 > /dev/sda3 on /var
+
 > /dev/sda5 on /var/se3
 
 
@@ -166,7 +169,7 @@ sauve_se3.sh -v
 
 ### Utilisation programmée du script
 
-L' option **-t** permet de lancer régulièrement le script en mode silencieux (aucun affichage à l'écran sauf en cas d'erreur) via le `crontab`.
+L' option **-s** permet de lancer régulièrement le script en mode silencieux (aucun affichage à l'écran sauf en cas d'erreur) via le `crontab`.
 
 * Entrez dans l'éditeur de crontab
 ```sh
@@ -182,11 +185,13 @@ Par exemple pour une sauvegarde tous les jours à 4h du matin
 
 * Sauvegardez et quittez
 
-Pour cela, utilisez la combinaison de 2 touches `Ctrl`+`o` et tapez sur `Entrée`, puis la combinaison de 2 touches `Ctrl`+`x` et tapez sur `Entrée`.
+Pour cela, et si l'éditeur choisi est `nano` (c'est celui par défaut ; et si l'éditeur n'est pas `nano`, il est raisonnable de penser que vous savez faire…), utilisez la combinaison de 2 touches `Ctrl`+`o` et tapez sur `Entrée`, puis la combinaison de 2 touches `Ctrl`+`x` et tapez sur `Entrée`.
 
 La sauvegarde est désormais opérationnelle et s’effectuera selon la tâche planifiée que vous aurez mise en place. Un courriel vous parviendra à la fin de chaque sauvegarde.
 
 **Conseil :** informez-vous [sur la syntaxe de crontab](http://fr.wikipedia.org/wiki/Crontab).
+
+**Remarque :** il se peut, lors de la 1ère sauvegarde notamment, qu'une sauvegarde se lance alors que la précédente ne soit pas terminée : *pas de panique*, le script `sauve_se3.sh` détectera cette situation et s'arrêtera avant de lancer la sauvegarde.
 
 
 ### Montage automatique du disque dur externe de sauvegarde
