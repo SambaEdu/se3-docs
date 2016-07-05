@@ -164,7 +164,7 @@ La commande est la suivante :
 sauve_se3.sh -v
 ```
 
-**Conseil :** si vous utilisez manuellement le script, [nous vous conseillons d'utiliser **screen**](dev-clients-linux/screen.md), ce qui vous permettra de vous déconnecter sans interrompre le déroulement du script, ce qui peut être assez long.
+**Conseil :** si vous utilisez manuellement le script, [nous vous conseillons d'utiliser **screen**](. /dev-clients-linux/screen.md), ce qui vous permettra de vous déconnecter sans interrompre le déroulement du script, ce qui peut être assez long.
 
 
 ### Utilisation programmée du script
