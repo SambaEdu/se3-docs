@@ -164,7 +164,7 @@ La commande est la suivante :
 sauve_se3.sh -v
 ```
 
-**Conseil :** si vous utilisez manuellement le script, nous vous conseillons d'utiliser **screen**, ce qui vous permettra de vous déconnecter sans interrompre le déroulement du script.
+**Conseil :** si vous utilisez manuellement le script, [nous vous conseillons d'utiliser **screen**](screen.md), ce qui vous permettra de vous déconnecter sans interrompre le déroulement du script, ce qui peut être assez long.
 
 
 ### Utilisation programmée du script
@@ -265,7 +265,7 @@ Les étapes de la restauration sont donc :
 
 Pour rappel, [une procédure d'installation est disponible sur le site](http://www.samba-edu.ac-versailles.fr/spip.php?article19).
 
-* Une fois l’installation terminée, activez tous les modules comme sur l'ancien serveur.
+* Une fois l’installation terminée, activez tous les modules et les paramétrer comme sur l'ancien serveur ; notamment le plan d'adressage doit être compatible avec les adresses `ip` fixes et celles qui sont réservées.
 
 * Vérifiez que votre `se3` accède bien au `web`.
 
@@ -297,7 +297,7 @@ pour cette dernière commande, voir [les recommendations faites dans la partie c
 
 ### Lancement du script de restauration en mode test
 
-Le script de restauration comporte une option de test **-t** qui vour permettra de contrôler si les conditions d'utilisation du script sont bien en place et si la sauvegarde que vous possédez est bien disponible.
+Le script de restauration comporte une option de test **-t** qui vous permettra de contrôler si les conditions d'utilisation du script sont bien en place et si la sauvegarde que vous possédez est bien disponible.
 
 Lancez le script de restauration en mode test
 ```sh
