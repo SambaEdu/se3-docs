@@ -1,5 +1,10 @@
 # Utilisation d'une session `screen`
 
+* [Présentation](#présentation)
+* [Ouvrir une session `screen`](#ouvrir-une-session-screen)
+* [Quitter ou fermer une session `screen`](#quitter-ou-fermer-une-session-screen)
+* [Reprendre une session `screen`](#reprendre-une-session-screen)
+
 
 ## Présentation
 
@@ -24,6 +29,7 @@ aptitude install screen
 
 
 ## Quitter ou fermer une session `screen`
+
 Une fois dans une session `screen`, vous pourrez en sortir ou la fermer à l'aide des commandes suivantes :
 
 * Ctrl+a d → sortir de la session `screen` sans arrêter le script lancé
@@ -33,6 +39,7 @@ Une fois dans une session `screen`, vous pourrez en sortir ou la fermer à l'aid
 
 
 ## Reprendre une session `screen`
+
 Pour reprendre une session `screen`, on peut utiliser la commande suivante :
 
 ```sh
