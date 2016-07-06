@@ -1,7 +1,6 @@
 # Sauvegarder et restaurer un serveur `se3`
 
 * [Présentation](#présentation)
-* [En cas de problème insoluble](#en-cas-de-problème-insoluble)
 * [Les scripts](#les-scripts)
 * [Où sauvegarder ?](#où-sauvegarder-)
 * [Réseau pédagogique et passerelle `Amon`](#réseau-pédagogique-et-passerelle-amon)
@@ -20,9 +19,12 @@
     * [Montage du disque dur externe `usb` ou du `NAS`](#montage-du-disque-dur-externe-usb-ou-du-nas)
     * [Lancement du script de restauration en mode test](#lancement-du-script-de-restauration-en-mode-test)
     * [Lancement du script de restauration en mode restauration](#lancement-du-script-de-restauration-en-mode-restauration)
+* [Des problèmes ?](#des-problèmes-)
+    * [Erreur lors de l'envoi du courriel](#erreur-lors-de-lenvoi-du-courriel)
     * [Problèmes rencontrés lors d'une restauration](#problèmes-rencontrés-lors-dune-restauration)
         * [Accès à l'interface `setup` mais pas à l'interface `web`](#accès-à-linterface-setup-mais-pas-à-linterface-web)
         * [Un message d'erreur indique que l'annuaire ne peut être joint et que la base `DN` est correcte](#un-message-derreur-indique-que-lannuaire-ne-peut-être-joint-et-que-la-base-dn-est-correcte)
+    * [En cas de problème insoluble](#en-cas-de-problème-insoluble)
 
 
 
@@ -33,13 +35,6 @@ Nous vous proposons une solution de sauvegarde et de restauration *clé en main*
 Il s'agit de pouvoir restaurer un `se3` rapidement à la suite d'un crash disque ou pour migrer sur un nouveau serveur ou une nouvelle version de `se3`.
 
 La solution proposée ici est indépendante du module `Backuppc` du serveur `se3`. D'ailleurs, on pourra utiliser, en complément, les fonctionnalités du module `Backuppc` qui permettent de récupérer des documents effacés par mégarde par les utilisateurs.
-
-
-## En cas de problème insoluble
-
-Il est fortement recommandé d'exposer sa situation sur le [forum versaillais](http://web2news.ac-versailles.fr/tree.php?group_name=ac-versailles_assistance-technique_samba-edu) lors de problèmes survenant suite à l'usage des scripts de sauvegarde et de restauration.
-
-Soyez le plus précis possible :-)
 
 
 ## Les scripts
@@ -327,6 +322,14 @@ Lors de la phase de restauration des répertoires `/home` et `/var/se3` vous pou
 À la fin de la restauration, un courriel est envoyé à l'administrateur. Un fichier  de log est disponible. Ce fichier est disponible sur le serveur `se3` : **/root/restauration_date**.
 
 
+## Des problèmes ?
+
+### Erreur lors de l'envoi du courriel
+
+ (à venir)
+
+
+
 ### Problèmes rencontrés lors d'une restauration
 
 #### Accès à l'interface `setup` mais pas à l'interface `web`
@@ -346,4 +349,13 @@ tail -f /var/log/syslog
 * Relancez la restauration sans la restauration de `/home` et de `/var/se3`
 * Redémarrez le serveur
 * Tentez une connexion
+
+
+### En cas de problème insoluble
+
+Si vous n'arrivez pas à résoudre un problème lors de l'utilisation des scripts de sauvegarde et de restauration, n'hésitez pas : exposez votre problème sur le [forum versaillais](http://web2news.ac-versailles.fr/tree.php?group_name=ac-versailles_assistance-technique_samba-edu).
+
+Soyez le plus précis possible :-)
+
+Et si vous avez eu un problème et que vous avez trouvé une solution, vous pouvez compléter cette doc :-)
 
