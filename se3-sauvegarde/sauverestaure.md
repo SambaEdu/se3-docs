@@ -326,8 +326,21 @@ Lors de la phase de restauration des répertoires `/home` et `/var/se3` vous pou
 
 ### Erreur lors de l'envoi du courriel
 
- (à venir)
+Lors du lancement du script **sauve_se3.sh -t** (en mode test), on obtient un message d'erreur concernant l'envoi du courriel.
 
+Dans ce cas, il suffit de reconfigurer l'application mailx :
+```sh
+update-alternatives --config mailx
+```
+
+2 possibilités sont offertes :
+> heirloom-mailx (proposition par défaut)
+
+> mail.mailutils
+
+Il suffit alors de choisir mail.mailutils.
+
+Relancez le test pour vérifier que l'erreur est corrigée.
 
 
 ### Problèmes rencontrés lors d'une restauration
