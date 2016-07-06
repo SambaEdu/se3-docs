@@ -328,7 +328,7 @@ Lors de la phase de restauration des répertoires `/home` et `/var/se3` vous pou
 
 Lors du lancement du script **sauve_se3.sh -t** (en mode test), on obtient un message d'erreur concernant l'envoi du courriel.
 
-Dans ce cas, il suffit de reconfigurer l'application mailx :
+Dans ce cas, il suffit de reconfigurer l'application `mailx` :
 ```sh
 update-alternatives --config mailx
 ```
@@ -338,9 +338,9 @@ update-alternatives --config mailx
 
 > mail.mailutils
 
-Il suffit alors de choisir mail.mailutils.
+Il suffit alors de choisir `mail.mailutils`.
 
-Relancez le test pour vérifier que l'erreur est corrigée.
+Relancez le test (**sauve_se3.sh -t**) pour vérifier que l'erreur est corrigée.
 
 
 ### Problèmes rencontrés lors d'une restauration
