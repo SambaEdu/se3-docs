@@ -21,6 +21,8 @@
 
 ## Préliminaire
 
+Cette documentation présente une installation manuelle d'un `se3`.
+
 Un certain nombre de paramètres doivent être préparés avant de se lancer dans l'installation.
 
 Voici ceux qui ont été pris pour la rédaction de cette documentation :
@@ -33,7 +35,7 @@ Voici ceux qui ont été pris pour la rédaction de cette documentation :
 * le serveur de noms : 192.168.0.1
 * le mot de passe root du se3
 
-vous les adapterez à votre situation et à votre plan d'adressage. Il est impératif que ces paramètres soient ceux du fichier **setup_se3.data** qu'il faudra créer par ailleurs (voir la documentation générale).
+vous les adapterez à votre situation et à votre plan d'adressage. Il est impératif que ces paramètres soient ceux du fichier **setup_se3.data** qu'il faudra créer par ailleurs (voir [la documentation générale](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation)).
 
 Dans l'installation présentée, un disque d'environ 50 Go, nommé **sda**, est utilisé.
 
@@ -81,7 +83,8 @@ Le menu principal indique les principales étapes :
 
 ### Langue, pays, clavier
 
-* la langue (Choose language) : **Français**
+* Choose language : `Entrée`
+* la langue : **Français**
 * le pays (situation géographique) : **France**
 * les paramètres régionaux (locales) : **fr\_FR.UTF-8**
 * paramètres supplémentaires : `Entrée`
@@ -254,9 +257,11 @@ Le système redémarre…
 
 ### Le fichier setup_se3.data
 
-La seconde phase est chargée de l'installation des paquets spécifiques au serveur `se3`.
+La seconde phase correspond à l'installation des paquets spécifiques au serveur `se3`.
 
 Pour cela, il faudra fournir au serveur le fichier **setup_se3.data** (à mettre dans une clé usb) et le script **install_phase2.sh** (à récupérer via le réseau).
+
+Voici les détails de ces opérations à effectuer à l'aide d'une session **root** en `ssh`.
 
 * se connecter en **root** via `ssh` sur le serveur
 * brancher la clé `usb`
@@ -267,15 +272,18 @@ Cela peut se faire à l'aide de la commande suivante :
 lsblk
 ```
 ![instal_manuel_14](images/instal_manuel_14.png)
+
 Vous pouvez repérer le nom attribué à la clé `usb` : dans la copie d'écran ci-dessus, **sda** est le disque dur sur lequel a été installé le système de base (les différentes partitions créées sont bien visibles) et **sdb** est le nom de la clé `usb` branchée.
 
-* monter la clé `usb` et vérifier la présence du fichier setup_se3.data
+**Remarque :** avant de brancher la clé `usb`, on peut lancer la commande `lsblk` et, par différence avec le résultat obtenu après le branchement, vous repérerez bien le nom de la clé `usb`.
+
+* monter la clé `usb` et vérifier la présence du fichier setup_se3.data :
 ```sh
 mount /dev/sdc1 /mnt
 ls -l /mnt
 ```
 
-* créer le répertoire `/etc/se3` et copier le script `install_phase2.sh`
+* créer le répertoire `/etc/se3` et copier le script `install_phase2.sh` :
 ```sh
 mkdir /etc/se3
 cp /mnt/setup_se3.data /etc/se3
@@ -299,6 +307,6 @@ Toujours avec la session en **root** via `ssh` sur le serveur :
 ./install_phase2.sh
 ```
 
-À partir de là, vous pourrez vous référer à l'installation automatique pour la suite de l'installation.
+À partir de là, vous pourrez vous référer à [l'installation automatique (phase3)](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation#Phase_3_:_Apr.C3.A8s_le_reboot_installation_automatique_du_paquet_se3_et_consort) pour la suite de l'installation.
 
 
