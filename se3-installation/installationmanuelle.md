@@ -65,17 +65,17 @@ Vous trouverez ce fichier sur le site `Debian`.
 ## Lancement de l'installation de `Debian` (Phase 1)
 
 Démarrer le serveur en insérant le CD sur lequel se trouve l'archive d'installation gravée.
-![install_manu_01](images/install_manu_01.png)
+![instal_manuel_01](images/instal_manuel_01.png)
 
 Dans l'interface qui apparaît à l'écran, choisir **Advanced options** puis **expert instal**.
-![install_manu_02](images/install_manu_02.png)
+![instal_manuel_02](images/instal_manuel_02.png)
 
 Ce mode d'installation présente toutes les questions qu'il est possible de poser. Cela vous permettra de gérer plus finement certaines étapes de l'installation.
 
 Dans ce qui suit, la plupart du temps, il suffira d'appuyer sur la touche `Entrée` pour accepter l'option proposée par défaut (Continuer).
 
 Le menu principal indique les principales étapes :
-![install_manu_03](images/install_manu_03.png)
+![instal_manuel_03](images/instal_manuel_03.png)
 
 
 ### Langue, pays, clavier
@@ -97,12 +97,12 @@ Le menu principal indique les principales étapes :
     * Passerelle (**192.168.0.1**) : `Entrée`
     * Serveur de noms (**192.168.0.1**) : `Entrée`
 
-![install_manu_04](images/install_manu_04.png)
+![instal_manuel_04](images/instal_manuel_04.png)
 Un récapitulatif est affiché. Si c'est bon, il suffit de Choisir `Oui` ; pour modifier un des paramètres du réseau, choisir `Non`.
 
 * Un délai de détection du réseau est proposé : `Entrée`
 * Nom de machine : **se3test**
-![install_manu_05](images/install_manu_05.png)
+![instal_manuel_05](images/instal_manuel_05.png)
 * Domaine : **local**
 * Choix d'un miroir de l'archive `Debian`
     * protocole de téléchargements (**http**) : `Entrée`
@@ -141,20 +141,20 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 * Détecter les disques
 * Partitionner les disques
 * Méthode de partitionnement : **Manuel**
-![install_manu_06](images/install_manu_06.png)
+![instal_manuel_06](images/instal_manuel_06.png)
 * Choisir le disque sda
-![install_manu_07](images/install_manu_07.png)
+![instal_manuel_07](images/instal_manuel_07.png)
 * Créer une nouvelle table des partitions : **Oui**
 * Type de la table des partitions : **msdos**
 * Paramétrage de la 1ère partition
     * Se positionner sur l'espace libre du disque sda
-    ![install_manu_08](images/install_manu_08.png)
+    ![instal_manuel_08](images/instal_manuel_08.png)
     * Créer une nouvelle partition
     * Nouvelle taile de la partition : **1 GB**
     * Type de la nouvelle partition : **Primaire**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir espace d'échange (swap)
-    ![install_manu_09](images/install_manu_09.png)
+    ![instal_manuel_09](images/instal_manuel_09.png)
     * Fin du paramétrage de cette partition
 * Paramétrage de la 2ème partition
     * Se positionner sur l'espace libre du disque sda + `Entrée`
@@ -166,7 +166,7 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
     * Formater la partition : **Oui, formater**
     * point de montage : **/**
     * indicateur d'amorçage : avec la touche `Entrée`, choisir présent
-    ![install_manu_10](images/install_manu_10.png)
+    ![instal_manuel_10](images/instal_manuel_10.png)
     * Fin du paramétrage de cette partition
 * Paramétrage de la 3ème partition
     * Se positionner sur l'espace libre du disque sda
@@ -197,9 +197,9 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
-![install_manu_11](images/install_manu_11.png)
+![instal_manuel_11](images/instal_manuel_11.png)
 * Terminer le partitionnemnt et appliquer le changement : `Entrée`
-![install_manu_12](images/install_manu_12.png)
+![instal_manuel_12](images/instal_manuel_12.png)
 * Faut-il appliquer les changements sur les disques : **Oui**
 
 
@@ -231,7 +231,7 @@ Dans cette partie, il suffira de prendre les paramètres proposés par défaut.
     * décocher l'environnement de Bureau `Debian`
     * décocher le serveur d'impression
     * cocher le serveur `SSH`
-![install_manu_13](images/install_manu_13.png)
+![instal_manuel_13](images/instal_manuel_13.png)
 
 
 ### Programme de démarrage `GRUB`
