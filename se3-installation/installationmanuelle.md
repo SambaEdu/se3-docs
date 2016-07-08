@@ -39,7 +39,7 @@ Dans l'installation présentée, un disque d'environ 50 Go, nommé **sda**, est 
 En production, il faudra adapter les valeurs en fonctions de la place disponible et du nombre de disques durs de votre serveur.
 
 Typiquement, on peut avoir 2 disques durs de 500 Go (nommés **sda** et **sdb**) que l'on pourra formater comme cela :
-
+```sh
 **sda** ---+-- **swap** (PRIMAIRE) 2 à 4 Go (Selon Mémoire)
        |
        +-- **/** (PRIMAIRE) ext3 30 Go
@@ -49,6 +49,7 @@ Typiquement, on peut avoir 2 disques durs de 500 Go (nommés **sda** et **sdb**)
        +-- **/var/se3** (LOGIQUE) xfs (Go = Le reste)
 
 **sdb** ------ **/home** (PRIMAIRE) xfs 500 Go
+```
 
 **Conseil :** n'hésitez pas à reprendre plusieurs fois l'installation pour bien la connaître. Par la suite, vous n'en aurez pas autant l'occasion.
 
