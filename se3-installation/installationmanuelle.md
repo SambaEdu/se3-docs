@@ -14,8 +14,9 @@
     * [Programme de démarrage `GRUB`](#programme-de-démarrage-grub)
     * [Fin de l'installation](#fin-de-linstallation)
 * [Installation des paquets `Se3` (Phase 2)](#installation-des-paquets-se3-phase-2)
-    * [Transfert des fichiers de la phase 2](#transfert-des-fichiers-de-la-phase-2)
-    * [Lancement du script `install_phase2.sh`](#lancement-du-script-install_phase2.sh)
+    * [Le fichier setup_se3.data](#le-fichier-setup_se3data)
+    * [Le script install_phase2.sh](#le-script-install_phase2sh)
+    * [Lancement du script de la phase 2](#lancement-du-script-de-la-phase-2)
 
 
 ## Préliminaire
