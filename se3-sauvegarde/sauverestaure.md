@@ -45,7 +45,7 @@ Les 2 scripts se trouvent dans le répertoire `/usr/share/se3/sbin` du `se3` dep
 
 Si vous n'êtes pas en `Wheezy` ou en `Squeeze` mais dans une version antérieure, telle que `Lenny`, il faudra mettre en place le script `sauve_se3.sh` en le téléchargeant. Cependant, certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, relisez le conseil ci-dessus.
 
-Les [versions en développement des scripts](../se3-clients-linux/sauvegarde-restauration) sont aussi disponibles et correspondent à cette documentation.
+Les [versions en développement des scripts](../se3-clients-linux/sauvegarde-restauration/) sont aussi disponibles et correspondent à cette documentation.
 
 
 ## Où sauvegarder ?
