@@ -16,9 +16,6 @@
 * [Installation des paquets `Se3` (Phase 2)](#installation-des-paquets-se3-phase-2)
     * [Transfert des fichiers de la phase 2](#transfert-des-fichiers-de-la-phase-2)
     * [Lancement du script `install_phase2.sh`](#lancement-du-script-install_phase2.sh)
-    * [](#)
-* [](#)
-* [](#)
 
 
 ## Préliminaire
@@ -35,23 +32,23 @@ Voici ceux qui ont été pris pour la rédaction de cette documentation :
 * le serveur de noms : 192.168.0.1
 * le mot de passe root du se3
 
-Il est impératif que ces paramètres soient ceux du fichier **setup_se3.data** qu'il faudra créer.
+vous les adapterez à votre situation et à votre plan d'adressage. Il est impératif que ces paramètres soient ceux du fichier **setup_se3.data** qu'il faudra créer par ailleurs (voir la documentation générale).
 
 Dans l'installation présentée, un disque d'environ 50 Go, nommé **sda**, est utilisé.
 
-En production, il faudra adapter les valeurs en fonctions de la place disponible et du nombre de disques durs.
+En production, il faudra adapter les valeurs en fonctions de la place disponible et du nombre de disques durs de votre serveur.
 
 Typiquement, on peut avoir 2 disques durs de 500 Go (nommés **sda** et **sdb**) que l'on pourra formater comme cela :
 
-|**sda** ---+-- **swap** (PRIMAIRE) 2 à 4 Go (Selon Mémoire)
-|       |
-|       +-- **/** (PRIMAIRE) ext3 30 Go
-|       |
-|       +-- **/var** (PRIMAIRE) ext3 20 Go
-|       |
-|       +-- **/var/se3** (LOGIQUE) xfs (Go = Le reste)
-|
-|**sdb** ------ **/home** (PRIMAIRE) xfs 500 Go
+**sda** ---+-- **swap** (PRIMAIRE) 2 à 4 Go (Selon Mémoire)
+       |
+       +-- **/** (PRIMAIRE) ext3 30 Go
+       |
+       +-- **/var** (PRIMAIRE) ext3 20 Go
+       |
+       +-- **/var/se3** (LOGIQUE) xfs (Go = Le reste)
+
+**sdb** ------ **/home** (PRIMAIRE) xfs 500 Go
 
 **Conseil :** n'hésitez pas à reprendre plusieurs fois l'installation pour bien la connaître. Par la suite, vous n'en aurez pas autant l'occasion.
 
