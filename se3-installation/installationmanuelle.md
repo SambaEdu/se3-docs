@@ -40,15 +40,15 @@ En production, il faudra adapter les valeurs en fonctions de la place disponible
 
 Typiquement, on peut avoir 2 disques durs de 500 Go (nommés **sda** et **sdb**) que l'on pourra formater comme cela :
 ```sh
-**sda** ---+-- **swap** (PRIMAIRE) 2 à 4 Go (Selon Mémoire)
+sda ---+-- swap (PRIMAIRE) 2 à 4 Go (Selon Mémoire)
        |
-       +-- **/** (PRIMAIRE) ext3 30 Go
+       +-- / (PRIMAIRE) ext3 30 Go
        |
-       +-- **/var** (PRIMAIRE) ext3 20 Go
+       +-- /var (PRIMAIRE) ext3 20 Go
        |
-       +-- **/var/se3** (LOGIQUE) xfs (Go = Le reste)
+       +-- /var/se3 (LOGIQUE) xfs (Go = Le reste)
 
-**sdb** ------ **/home** (PRIMAIRE) xfs 500 Go
+sdb ------ /home (PRIMAIRE) xfs 500 Go
 ```
 
 **Conseil :** n'hésitez pas à reprendre plusieurs fois l'installation pour bien la connaître. Par la suite, vous n'en aurez pas autant l'occasion.
