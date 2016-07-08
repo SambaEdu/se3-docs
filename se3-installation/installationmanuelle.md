@@ -58,7 +58,7 @@ sdb ------ /home (PRIMAIRE) xfs 500 Go
 
 Le fichier d'installation est à télécharger et à graver sur un CD.
 
-Vous trouverez ce fichier sur le site `Debian`.
+Vous trouverez [ce fichier nommé `mini.iso` sur le site `Debian`](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/).
 
 
 
@@ -113,7 +113,7 @@ Un récapitulatif est affiché. Si c'est bon, il suffit de Choisir `Oui` ; pour 
 * Télécharger des composants d'installation : `Entrée`
 
 
-**Remarque :** dans cette partie, il se peut que l'on vous demande un pilote spécifique pour la carte réseau du `se3`. Cela peut se paramétrer une fois l'installation terminée. Cependant, si vous avez récupéré [les fichiers des firmwares](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/wheezy/current/) sur une clé `usb`, vous pouvez fournir le pilote concerné en suivant les indications données par l'installateur. Si le pilote n'est pas présent dans les fimwares, notez bien les indications affichées pour résoudre le prblème ultérieurement.
+**Remarque :** dans cette partie, il se peut que l'on vous demande un pilote spécifique pour la carte réseau du `se3`. Cela peut se paramétrer une fois l'installation terminée. Cependant, si vous avez récupéré [les fichiers des firmwares](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/wheezy/current/) pour les extraire sur une clé `usb`, vous pouvez fournir le pilote concerné en suivant les indications données par l'installateur. Si le pilote n'est pas présent dans les fimwares, notez bien les indications affichées pour résoudre le prblème ultérieurement.
 
 
 ### Les utilisateurs et mots de passe
