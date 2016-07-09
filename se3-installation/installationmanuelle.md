@@ -2,6 +2,7 @@
 
 * [Préliminaire](#préliminaire)
 * [Fichier d'installation par le réseau](#fichier-dinstallation-par-le-réseau)
+    * [Avec une clé `usb`](#avec-une-clé-usb)
 * [Lancement de l'installation de `Debian` (Phase 1)](#lancement-de-linstallation-de-debian-phase-1)
     * [Langue, pays, clavier](#langue-pays-clavier)
     * [Le réseau](#le-réseau)
@@ -89,7 +90,9 @@ lsblk
 umount /dev/sdb1
 ```
 * copier le fichier d'installation sur la clé `usb`
+```sh
 cp /root/mini.iso /dev/sdb
+```
 
 Une fois cela fait, il suffira de brancher la clé `usb` sur le serveur et de le démarrer.
 
