@@ -195,7 +195,7 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 * Partitionner les disques : `Entrée`
     * Méthode de partitionnement : **Manuel**
 ![instal_manuel_06](images/instal_manuel_06.png)
-    * Choisir le disque sda
+    * Choisir le disque sda puis utiliser la touche `Entrée`
 ![instal_manuel_07](images/instal_manuel_07.png)
     * Créer une nouvelle table des partitions : **Oui**
     * Type de la table des partitions : **msdos**
@@ -208,7 +208,6 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
 
 * Paramétrage de la 1ère partition (**swap**)
     * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple)
-    ![instal_manuel_08](images/instal_manuel_08.png)
     * Créer une nouvelle partition
     * Nouvelle taille de la partition : **1 GB**
     * Type de la nouvelle partition : **Primaire**
@@ -218,6 +217,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Fin du paramétrage de cette partition
 * Paramétrage de la 2ème partition (**/**)
     * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple) + `Entrée`
+    ![instal_manuel_08](images/instal_manuel_08.png)
     * Créer une nouvelle partition
     * Nouvelle taille de la partition : **5 GB**
     * Type de la nouvelle partition : **Primaire**
@@ -258,6 +258,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
+
 ![instal_manuel_11](images/instal_manuel_11.png)
 * Terminer le partitionnemnt et appliquer le changement : `Entrée`
 ![instal_manuel_12](images/instal_manuel_12.png)
@@ -269,8 +270,8 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
 Dans cette partie, il suffira de prendre les paramètres proposés par défaut.
 
 * Installer le système de base : `Entrée`
-* Noyau à installer (linux-image-amd64) : `Entrée`
-* Pilotes à inclure (image générique) : `Entrée`
+    * Noyau à installer (linux-image-amd64) : `Entrée`
+    * Pilotes à inclure (image générique) : `Entrée`
 
 
 ### Outil de gestion des paquets (APT)
@@ -278,34 +279,35 @@ Dans cette partie, il suffira de prendre les paramètres proposés par défaut.
 Dans cette partie, il suffira de prendre les paramètres proposés par défaut.
 
 * Configurer l'outil de gestion des paquets : `Entrée`
-* Utiliser des logiciels non libres : **Non**
-* Utiliser des logiciels contrib : **Non**
-* services (sécurité et publication) : accepter les paramètres proposés `Entrée`
+    * Utiliser des logiciels non libres : **Non**
+    * Utiliser des logiciels contrib : **Non**
+    * services (sécurité et publication) : accepter les paramètres proposés `Entrée`
 
 
 ### Choisir et installer des logiciels
 
 * Choisir et installer des logiciels : `Entrée`
-* Étude statistique d'utilisation des paquets : **Non**
-* droits programmes `man` et `mandb` : **Non**
-* Logiciels à installer : (cocher/décocher à l'aide de la barre d'espace)
-    * décocher l'environnement de Bureau `Debian`
-    * décocher le serveur d'impression
-    * cocher le serveur `SSH`
-![instal_manuel_13](images/instal_manuel_13.png)
+    * Étude statistique d'utilisation des paquets : **Non**
+    * droits programmes `man` et `mandb` : **Non**
+    * Logiciels à installer : (cocher/décocher à l'aide de la barre d'espace)
+        * décocher l'environnement de Bureau `Debian`
+        * décocher le serveur d'impression
+        * cocher le serveur `SSH`
+        ![instal_manuel_13](images/instal_manuel_13.png)
+        * Valider les choix à l'aide de la touche `Entrée`
 
 
 ### Programme de démarrage `GRUB`
 
 * Installer GRUB : `Entrée`
-* Installer GRUB sur le secteur d'amorçage : **Oui**
+    * Installer GRUB sur le secteur d'amorçage : **Oui**
 
 
 ### Fin de l'installation
 
 * Terminer l'installation : `Entrée`
-* heure universelle (UTC) : **Oui**
-* **Retirer le CD** puis `Entrée`
+    * heure universelle (UTC) : **Oui**
+    * **Retirer le CD** puis `Entrée`
 
 Le système redémarre…
 
