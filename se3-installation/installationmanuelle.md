@@ -139,19 +139,20 @@ Au début, le menu principal est en anglais mais une fois les locales configuré
 
 * Configurer le réseau : `Entrée`
     * Faut-il configurer le réseau automatiquement : **Non**
-    * Donnez l'adresse `IP` du serveur : **192.168.0.60**
+    * Donner l'adresse `IP` du serveur : **192.168.0.60**
     * Valeur du masque-réseau (**255.255.255.0**) : `Entrée`
     * Passerelle (**192.168.0.1**) : `Entrée`
     * Serveur de noms (**192.168.0.1**) : `Entrée`
-
-Un récapitulatif est affiché.
-![instal_manuel_04](images/instal_manuel_04.png)
-
-Si c'est bon, il suffit de Choisir `Oui`. Sinon, pour modifier un des paramètres du réseau, choisir `Non`.
-
+    
+    Un récapitulatif est affiché.
+    ![instal_manuel_04](images/instal_manuel_04.png)
+    
+    Si c'est bon, il suffit de Choisir `Oui`. Sinon, pour modifier un des paramètres du réseau, choisir `Non`.
+    
     * Un délai de détection du réseau est proposé : `Entrée`
     * Nom de machine : **se3test**
-![instal_manuel_05](images/instal_manuel_05.png)
+    ![instal_manuel_05](images/instal_manuel_05.png)
+    
     * Domaine : **local**
 
 **Remarque :** les différents paramètres (ip, nom du serveur, domaine,…) doivent correspondre à ceux du fichier **setup_se3.data**.
