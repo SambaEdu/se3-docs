@@ -64,10 +64,44 @@ Le fichier d'installation est à télécharger et à graver sur un CD.
 Vous trouverez [ce fichier nommé `mini.iso` sur le site `Debian`](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/).
 
 
+### Avec une clé `usb`
+
+Au lieu de graver l'archive d'installation sur un CD, on peut utiliser une clé `usb`.
+
+Voici une méthode que vous pouvez mettre en œuvre sur un système `GNU/Linux`.
+
+* se mettre en `root`
+```sh
+su -l
+```
+* télécharger le fichier d'installation
+```sh
+wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso
+```
+* brancher une clé `usb`
+* repérer la clé `usb`
+```sh
+lsblk
+```
+
+* démonter la clé `usb`
+```sh
+umount /dev/sdb1
+```
+* copier le fichier d'installation sur la clé `usb`
+cp /root/mini.iso /dev/sdb
+
+Une fois cela fait, il suffira de brancher la clé `usb` sur le serveur et de le démarrer.
+
 
 ## Lancement de l'installation de `Debian` (Phase 1)
 
-Démarrer le serveur en insérant le CD sur lequel se trouve l'archive d'installation gravée.
+Démarrer le serveur selon une des deux méthodes suivantes :
+
+* en insérant le CD sur lequel a été gravé l'archive d'installation
+* en ayant branché la clé `usb` sur laquelle a été copié l'archive d'installation
+
+Vous devriez obtenir l'écran suivant :
 ![instal_manuel_01](images/instal_manuel_01.png)
 
 Dans l'interface qui apparaît à l'écran, choisir **Advanced options** puis **expert instal**.
@@ -83,19 +117,22 @@ Le menu principal indique les principales étapes :
 
 ### Langue, pays, clavier
 
+Au début, le menu principal est en anglais mais une fois les locales configurées, il sera en français.
+
 * Choose language : `Entrée`
-* la langue : **Français**
-* le pays (situation géographique) : **France**
-* les paramètres régionaux (locales) : **fr\_FR.UTF-8**
-* paramètres supplémentaires : `Entrée`
-* le clavier : **Français**
+    * la langue : **Français**
+    * le pays (**France**) : `Entrée`
+    * les paramètres régionaux (**fr\_FR.UTF-8**) : `Entrée`
+    * paramètres supplémentaires : `Entrée`
+* Configurer le clavier : `Entrée`
+    * disposition du clavier (**Français**) : `Entrée`
 
 
 ### Le réseau
 
-* Détecter le matériel réseau (module usb-storage) : `Entrée`
-* Configurer le réseau
-    * Faut-il configurer le réseau automatiquement : Non
+* Détecter le matériel réseau : `Entrée`
+* Configurer le réseau : `Entrée`
+    * Faut-il configurer le réseau automatiquement : **Non**
     * Donnez l'adresse `IP` du serveur : **192.168.0.60**
     * Valeur du masque-réseau (**255.255.255.0**) : `Entrée`
     * Passerelle (**192.168.0.1**) : `Entrée`
@@ -108,7 +145,7 @@ Un récapitulatif est affiché. Si c'est bon, il suffit de Choisir `Oui` ; pour 
 * Nom de machine : **se3test**
 ![instal_manuel_05](images/instal_manuel_05.png)
 * Domaine : **local**
-* Choix d'un miroir de l'archive `Debian`
+* Choix d'un miroir de l'archive `Debian` : `Entrée`
     * protocole de téléchargements (**http**) : `Entrée`
     * pays du miroir (**France**) : `Entrée`
     * miroir de l'archive Debian (**ftp.fr.debian.org**) : `Entrée`
@@ -117,88 +154,98 @@ Un récapitulatif est affiché. Si c'est bon, il suffit de Choisir `Oui` ; pour 
 * Télécharger des composants d'installation : `Entrée`
 
 
-**Remarque :** dans cette partie, il se peut que l'on vous demande un pilote spécifique pour la carte réseau du `se3`. Cela peut se paramétrer une fois l'installation terminée. Cependant, si vous avez récupéré [les fichiers des firmwares](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/wheezy/current/) pour les extraire sur une clé `usb`, vous pouvez fournir le pilote concerné en suivant les indications données par l'installateur. Si le pilote n'est pas présent dans les fimwares, notez bien les indications affichées pour résoudre le prblème ultérieurement.
+**Remarque :** dans cette partie, il se peut que l'on vous demande un pilote spécifique pour la carte réseau du `se3`. Cela peut se paramétrer une fois l'installation terminée. Cependant, si vous avez récupéré [les fichiers des firmwares](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/wheezy/current/) pour les extraire sur une clé `usb`, vous pouvez fournir le pilote concerné en suivant les indications données par l'installateur. Si le pilote n'est pas présent dans les firmwares, notez bien les indications affichées pour résoudre le problème ultérieurement.
 
 
 ### Les utilisateurs et mots de passe
 
 Un seul utilisateur suffit, il s'agit du compte **root** du `se3`.
 
-* Activer les mots de passe cachés (Oui) : `Entrée`
-* Autoriser les connexions du super utilisateur (Oui) : `Entrée`
-* mot de passe du superutilisateur root : **à compléter**
-* confirmer le mot de passe root
-* compte utilisateur ordinaire : **Non**
+* Créer les utilisateurs et mots de passe : `Entrée`
+    * Activer les mots de passe cachés (**Oui**) : `Entrée`
+    * Autoriser les connexions du super utilisateur (**Oui**) : `Entrée`
+    * mot de passe du superutilisateur root : **à compléter**
+    * confirmer le mot de passe root
+    * compte utilisateur ordinaire : **Non**
 
 
 ### Le serveur de temps
 
 On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou un `Slis`.
 
-* utiliser NTP : **Oui**
-* serveur ntp : **192.168.0.1**
-* fuseau horaire : **Europe/Paris**
+* Configurer l'horloge : `Entrée`
+    * utiliser NTP : **Oui**
+    * serveur ntp : **192.168.0.1**
+    * fuseau horaire : **Europe/Paris**
 
 
 ### Partitionnement des disques
 
-* Détecter les disques
-* Partitionner les disques
-* Méthode de partitionnement : **Manuel**
+* Détecter les disques : `Entrée`
+* Partitionner les disques : `Entrée`
+    * Méthode de partitionnement : **Manuel**
 ![instal_manuel_06](images/instal_manuel_06.png)
-* Choisir le disque sda
+    * Choisir le disque sda
 ![instal_manuel_07](images/instal_manuel_07.png)
-* Créer une nouvelle table des partitions : **Oui**
-* Type de la table des partitions : **msdos**
-* Paramétrage de la 1ère partition
-    * Se positionner sur l'espace libre du disque sda
+    * Créer une nouvelle table des partitions : **Oui**
+    * Type de la table des partitions : **msdos**
+
+Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et 2 partitions logiques (**/var/se3** et **/home**).
+
+Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions primaires (**swap**, **/** et **/var**) et 1 partition logique (/var/se3) et le deuxième (**sdb**) en une seule partition primaire (**/home**).
+
+**Remarque importante :** si vous avez utilisé une clé `usb` pour l'archive d'installation, elle apparaîtra comme étant nommé **sda** : il faudra surtout ne pas y toucher. Le disque dur du serveur sera sûrement nommé **sdb** (et, s'il y a un deuxième disque dur, ce deuxième disque sera nommé **sdc**).
+
+* Paramétrage de la 1ère partition (**swap**)
+    * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple)
     ![instal_manuel_08](images/instal_manuel_08.png)
     * Créer une nouvelle partition
-    * Nouvelle taile de la partition : **1 GB**
+    * Nouvelle taille de la partition : **1 GB**
     * Type de la nouvelle partition : **Primaire**
     * Emplacement : début
-    * Utiliser comme : avec la touche `Entrée`, choisir espace d'échange (swap)
+    * Utiliser comme : avec la touche `Entrée`, choisir **espace d'échange (swap)**
     ![instal_manuel_09](images/instal_manuel_09.png)
     * Fin du paramétrage de cette partition
-* Paramétrage de la 2ème partition
-    * Se positionner sur l'espace libre du disque sda + `Entrée`
+* Paramétrage de la 2ème partition (**/**)
+    * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple) + `Entrée`
     * Créer une nouvelle partition
-    * Nouvelle taile de la partition : **5 GB**
+    * Nouvelle taille de la partition : **5 GB**
     * Type de la nouvelle partition : **Primaire**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **ext3**
-    * Formater la partition : **Oui, formater**
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
     * point de montage : **/**
-    * indicateur d'amorçage : avec la touche `Entrée`, choisir présent
+    * indicateur d'amorçage : pour le positionner en **présent**, utiliser la touche `Entrée`
     ![instal_manuel_10](images/instal_manuel_10.png)
     * Fin du paramétrage de cette partition
-* Paramétrage de la 3ème partition
-    * Se positionner sur l'espace libre du disque sda
+* Paramétrage de la 3ème partition (**/var**)
+    * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple)
     * Créer une nouvelle partition
-    * Nouvelle taile de la partition : **10 GB**
+    * Nouvelle taille de la partition : **10 GB**
     * Type de la nouvelle partition : **Primaire**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **ext3**
-    * Formater la partition : **Oui, formater**
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
     * point de montage : **/var**
     * Fin du paramétrage de cette partition
-* Paramétrage de la 4ème partition
-    * Se positionner sur l'espace libre du disque sda
+* Paramétrage de la 4ème partition (**/var/se3**)
+    * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple)
     * Créer une nouvelle partition
-    * Nouvelle taile de la partition : **11 GB**
+    * Nouvelle taille de la partition : **11 GB**
     * Type de la nouvelle partition : **Logique**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
-    * Formater la partition : **Oui, formater**
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
     * point de montage : **/var/se3** il faudra utiliser **Autre choix** dans la liste des noms de partitions proposées
     * Fin du paramétrage de cette partition
-* Paramétrage de la 5ème partition
-    * Se positionner sur l'espace libre du disque sda
+* Paramétrage de la 5ème partition (**/home**)
+    * Se positionner sur l'espace libre du disque **sda** (ou sur le 2ème disque, **sdb** selon la situation)
     * Créer une nouvelle partition
-    * Nouvelle taile de la partition : accepter la valeur proposée (le reste disponible)
+    * Nouvelle taille de la partition : accepter la valeur proposée (le reste disponible)
     * Type de la nouvelle partition : **Logique**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
 ![instal_manuel_11](images/instal_manuel_11.png)
