@@ -258,6 +258,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
+    
     Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées.
     ![instal_manuel_11](images/instal_manuel_11.png)
 * Terminer le partitionnemnt et appliquer le changement : `Entrée`
