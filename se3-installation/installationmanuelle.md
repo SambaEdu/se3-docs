@@ -261,7 +261,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     
     Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées.
     ![instal_manuel_11](images/instal_manuel_11.png)
-* Terminer le partitionnemnt et appliquer le changement : `Entrée`
+* Terminer le partitionnemnt et appliquer les changements : `Entrée`
 
 ![instal_manuel_12](images/instal_manuel_12.png)
 * Faut-il appliquer les changements sur les disques : **Oui**
