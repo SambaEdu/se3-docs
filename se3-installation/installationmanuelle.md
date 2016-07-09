@@ -191,6 +191,8 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 
 ### Partitionnement des disques
 
+**Remarque importante :** si vous avez utilisé une clé `usb` pour l'archive d'installation, **il faut la retirer avant de lancer la détection des disques**. Pour la suite, elle ne servira plus car l'archive d'installation a été chargée dans la mémoire vive de la machine.
+
 * Détecter les disques : `Entrée`
 * Partitionner les disques : `Entrée`
     * Méthode de partitionnement : **Manuel**
@@ -203,8 +205,6 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et 2 partitions logiques (**/var/se3** et **/home**).
 
 Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions primaires (**swap**, **/** et **/var**) et 1 partition logique (/var/se3) et le deuxième (**sdb**) en une seule partition primaire (**/home**).
-
-**Remarque importante :** si vous avez utilisé une clé `usb` pour l'archive d'installation, elle apparaîtra comme étant nommé **sda** : il faudra surtout ne pas y toucher. Le disque dur du serveur sera sûrement nommé **sdb** (et, s'il y a un deuxième disque dur, ce deuxième disque sera nommé **sdc**).
 
 * Paramétrage de la 1ère partition (**swap**)
     * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple)
@@ -260,6 +260,9 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Fin du paramétrage de cette partition
 
 ![instal_manuel_11](images/instal_manuel_11.png)
+
+Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées.
+
 * Terminer le partitionnemnt et appliquer le changement : `Entrée`
 ![instal_manuel_12](images/instal_manuel_12.png)
 * Faut-il appliquer les changements sur les disques : **Oui**
@@ -307,7 +310,7 @@ Dans cette partie, il suffira de prendre les paramètres proposés par défaut.
 
 * Terminer l'installation : `Entrée`
     * heure universelle (UTC) : **Oui**
-    * **Retirer le CD** puis `Entrée`
+    * **Retirer le CD** (s'il y a lieu) puis `Entrée`
 
 Le système redémarre…
 
