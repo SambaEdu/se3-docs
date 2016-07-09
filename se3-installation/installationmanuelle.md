@@ -107,12 +107,12 @@ Démarrer le serveur selon une des deux méthodes suivantes :
 Vous devriez obtenir l'écran suivant :
 ![instal_manuel_01](images/instal_manuel_01.png)
 
-Dans l'interface qui apparaît à l'écran, choisir **Advanced options** puis **expert instal**.
+Dans l'interface qui apparaît à l'écran, choisir **Advanced options** puis **Expert install**.
 ![instal_manuel_02](images/instal_manuel_02.png)
 
 Ce mode d'installation présente toutes les questions qu'il est possible de poser. Cela vous permettra de gérer plus finement certaines étapes de l'installation.
 
-Dans ce qui suit, la plupart du temps, il suffira d'appuyer sur la touche `Entrée` pour accepter l'option proposée par défaut (Continuer).
+Dans ce qui suit, la plupart du temps, il suffira d'appuyer sur la touche `Entrée` pour accepter l'option proposée par défaut.
 
 Le menu principal indique les principales étapes :
 ![instal_manuel_03](images/instal_manuel_03.png)
@@ -134,6 +134,9 @@ Au début, le menu principal est en anglais mais une fois les locales configuré
 ### Le réseau
 
 * Détecter le matériel réseau : `Entrée`
+
+**Remarque :** il se peut que l'on vous demande un pilote spécifique pour la carte réseau du serveur. Cela peut se paramétrer une fois l'installation terminée. Cependant, si vous avez récupéré [les fichiers des firmwares](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/wheezy/current/) pour les extraire sur une clé `usb`, vous pouvez fournir le pilote concerné en suivant les indications données par l'installateur. Si le pilote n'est pas présent dans les firmwares, notez bien les indications affichées pour résoudre le problème ultérieurement.
+
 * Configurer le réseau : `Entrée`
     * Faut-il configurer le réseau automatiquement : **Non**
     * Donnez l'adresse `IP` du serveur : **192.168.0.60**
@@ -141,23 +144,26 @@ Au début, le menu principal est en anglais mais une fois les locales configuré
     * Passerelle (**192.168.0.1**) : `Entrée`
     * Serveur de noms (**192.168.0.1**) : `Entrée`
 
+Un récapitulatif est affiché.
 ![instal_manuel_04](images/instal_manuel_04.png)
-Un récapitulatif est affiché. Si c'est bon, il suffit de Choisir `Oui` ; pour modifier un des paramètres du réseau, choisir `Non`.
 
-* Un délai de détection du réseau est proposé : `Entrée`
-* Nom de machine : **se3test**
+Si c'est bon, il suffit de Choisir `Oui`. Sinon, pour modifier un des paramètres du réseau, choisir `Non`.
+
+    * Un délai de détection du réseau est proposé : `Entrée`
+    * Nom de machine : **se3test**
 ![instal_manuel_05](images/instal_manuel_05.png)
-* Domaine : **local**
+    * Domaine : **local**
+
+**Remarque :** les différents paramètres (ip, nom du serveur, domaine,…) doivent correspondre à ceux du fichier **setup_se3.data**.
+
 * Choix d'un miroir de l'archive `Debian` : `Entrée`
     * protocole de téléchargements (**http**) : `Entrée`
     * pays du miroir (**France**) : `Entrée`
     * miroir de l'archive Debian (**ftp.fr.debian.org**) : `Entrée`
     * mandataire http (à laiser vide) : `Entrée`
     * version de Debian à installer (**wheezy - ancienne version stable**) : `Entrée`
+
 * Télécharger des composants d'installation : `Entrée`
-
-
-**Remarque :** dans cette partie, il se peut que l'on vous demande un pilote spécifique pour la carte réseau du `se3`. Cela peut se paramétrer une fois l'installation terminée. Cependant, si vous avez récupéré [les fichiers des firmwares](http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/wheezy/current/) pour les extraire sur une clé `usb`, vous pouvez fournir le pilote concerné en suivant les indications données par l'installateur. Si le pilote n'est pas présent dans les firmwares, notez bien les indications affichées pour résoudre le problème ultérieurement.
 
 
 ### Les utilisateurs et mots de passe
