@@ -192,6 +192,8 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
     * serveur ntp : **192.168.0.1**
     * fuseau horaire : **Europe/Paris**
 
+**Remarque :** pour que votre `Amon` soit serveur de temps, il suffit d'en faire la demande auprès de l'administrateur de cet `Amon` via un ticket `Cariina`.
+
 
 ### Partitionnement des disques
 
