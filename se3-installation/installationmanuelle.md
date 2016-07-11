@@ -15,14 +15,14 @@
     * [Programme de démarrage `GRUB`](#programme-de-démarrage-grub)
     * [Fin de l'installation](#fin-de-linstallation)
 * [Installation des paquets `Se3` (Phase 2)](#installation-des-paquets-se3-phase-2)
-    * [Le fichier setup_se3.data](#le-fichier-setup_se3data)
-    * [Le script install_phase2.sh](#le-script-install_phase2sh)
+    * [Le fichier `setup_se3.data`](#le-fichier-setup_se3data)
+    * [Le script `install_phase2.sh`](#le-script-install_phase2sh)
     * [Lancement du script de la phase 2](#lancement-du-script-de-la-phase-2)
 
 
 ## Préliminaire
 
-Cette documentation présente une installation manuelle d'un `se3`.
+Cette documentation présente une installation manuelle d'un `se3` version `Wheezy`.
 
 Un certain nombre de paramètres doivent être préparés avant de se lancer dans l'installation.
 
@@ -75,20 +75,24 @@ Voici une méthode que vous pouvez mettre en œuvre sur un système `GNU/Linux`.
 ```sh
 su -l
 ```
+
 * télécharger le fichier d'installation
 ```sh
 wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso
 ```
+
 * brancher une clé `usb`
+
 * repérer la clé `usb`
 ```sh
 lsblk
 ```
 
-* démonter la clé `usb`
+* vérifier que la clé `usb` est démontée
 ```sh
 umount /dev/sdb1
 ```
+
 * copier le fichier d'installation sur la clé `usb`
 ```sh
 cp /root/mini.iso /dev/sdb
@@ -337,15 +341,15 @@ lsblk
 
 Vous pouvez repérer le nom attribué à la clé `usb` : dans la copie d'écran ci-dessus, **sda** est le disque dur sur lequel a été installé le système de base (les différentes partitions créées sont bien visibles) et **sdb** est le nom de la clé `usb` branchée.
 
-**Remarque :** avant de brancher la clé `usb`, on peut lancer la commande `lsblk` et, par différence avec le résultat obtenu après le branchement, vous repérerez bien le nom de la clé `usb`.
+**Remarque :** avant de brancher la clé `usb`, on peut lancer la commande `lsblk` puis brancher la clé `usb` et relancer la commande `lsblk` ; ainsi, par différence entre les deux affichages, vous repérerez bien le nom de la clé `usb`.
 
-* monter la clé `usb` et vérifier la présence du fichier setup_se3.data :
+* monter la clé `usb` et vérifier la présence du fichier `setup_se3.data` :
 ```sh
-mount /dev/sdc1 /mnt
+mount /dev/sdb1 /mnt
 ls -l /mnt
 ```
 
-* créer le répertoire `/etc/se3` et copier le script `install_phase2.sh` :
+* créer le répertoire `/etc/se3` et y copier le fichier `setup_se3.data` :
 ```sh
 mkdir /etc/se3
 cp /mnt/setup_se3.data /etc/se3
@@ -353,9 +357,9 @@ ls -l /etc/se3
 ```
 
 
-### Le script install_phase2.sh
+### Le script `install_phase2.sh`
 
-Toujours avec la session en **root** via `ssh` sur le serveur :
+Toujours avec la session en **root** via `ssh` sur le serveur, télécharger le script `install_phase2.sh` :
 ```sh
 cd /root
 wget http://dimaker.tice.ac-caen.fr/diSE3/se3scripts/install_phase2.sh
@@ -364,7 +368,7 @@ chmod +x install_phase2.sh
 
 ### Lancement du script de la phase 2
 
-Toujours avec la session en **root** via `ssh` sur le serveur :
+Toujours avec la session en **root** via `ssh` sur le serveur, on lance le script :
 ```sh
 ./install_phase2.sh
 ```
