@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Script de création d'un doc pdf à partir des .md de github
+# Il faut créer, dans le dossier doc_LaTeX, un lien symbolique
+# vers le répertoire images
+# ln -s ../se3-clients-linux/images/ images 
 
 repertoire_courant=`pwd`
 # On récupère la liste des fichiers .md de tous les sous-répertoires
@@ -14,12 +17,12 @@ for i in $liste_fichiers; do
     #echo $i
     # On récupère le nombre d'occurences du caractère / dans
     # le nom de fichier 
-    separateurs=`echo $i | tr -dc '/' | wc -c`
+    separateur_dossier=`echo $i | tr -dc '/' | wc -c`
     # Le nombre obtenu est incrémenté de 1
-    separateurs=$((separateurs + 1))
+    separateur_fichier=$((separateur_dossier + 1))
     #echo $separateurs
     # On récupère le nom du fichier seul sans le chemin qui est
-    # à la position $separateurs 
+    # à la position $separateurs_dossier
     nom=`echo $i | cut -d / -f$separateurs`
     # On récupère le nom du fchier seul sans l'extension md
     nom=`echo $nom | cut -d . -f1`
