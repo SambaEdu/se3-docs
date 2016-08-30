@@ -19,7 +19,7 @@
     * [Télécharger et graver `boot-repair`](#télécharger-et-graver-boot-repair)
     * [Démarrer le `se3` sur le DVD gravé](#démarrer-le-se3-sur-le-dvd-gravé)
     * [Autre solution](#autre-solution)
-    * [Configurer l'onduleur](#configurer-londuleur)
+* [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
@@ -233,7 +233,7 @@ Bootez sur le cd `super-grub2` : le `se3` devrait alors se lancer.
 Normalement, la migration ne doit pas modifier la configuration de l'onduleur.
 
 D'ailleurs, si cette configuration n'a pas était faite sur votre `se3-squeeze`,une fois la migration effectuée il sera plus que temps de la mettre en chantier, en vous aidant des indications de l'article suivant. Là, vous n'aurez pas d'excuses en cas de pépin…
-> http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
+> http://www.samba-edu.ac-versailles.fr/Configurer-l-onduleur
 
 Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il y a un problème sur l'alimentation électrique ou des micro-coupures, ce sera plus chaud pour vous ;-) Mais vous aurez pris, de toute façon, la précaution d'avoir une sauvegarde de type `sauveserveur` à jour (voir la remarque 2 de la présentation ci-dessus ou bien la solution alternative ci-dessous) avant de passer aux choses sérieuses…
 
