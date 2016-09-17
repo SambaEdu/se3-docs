@@ -13,6 +13,7 @@ du paquet `se3-clients-linux` sur le serveur. Le mieux est de vous reporter à [
     * [Quelques précisions](#quelques-pr%C3%A9cisions)
     * [En ligne de commande](#en-ligne-de-commande)
     * [Par l'interface Web du serveur se3](#par-linterface-web-du-serveur-se3)
+    
     * [Message éventuel concernant le serveur NTP](#message-éventuel-concernant-le-serveur-ntp)
     * [Le partage CIFS netlogon-linux](#le-partage-cifs-netlogon-linux)
     * [Reconfiguration du paquet et restauration des droits](#reconfiguration-du-paquet-et-restauration-des-droits)
@@ -108,25 +109,6 @@ le paquet `se3-clients-linux` en lançant, en tant que `root` sur une console du
 serveur se3, la commande suivante : `dpkg-reconfigure se3-clients-linux`.
 Si tout se passe bien, vous ne devriez plus obtenir
 d'avertissement à propos du serveur NTP.
-
-
-### Le partage CIFS netlogon-linux
-
-Votre serveur Samba possède donc un nouveau partage `CIFS`
-qui, au passage, ne sera pas visible par les machines
-clientes sous Windows.
-
-**Attention :** le nom du partage CIFS n'est pas le même que
-le nom du répertoire correspondant dans l'arborescence locale
-du serveur :
-
-Nom du partage | Chemin réseau              | Chemin dans l'arborescence locale du serveur
----------------|----------------------------|---------------------------------------------
-netlogon-linux | `//SERVEUR/netlogon-linux` | `/home/netlogon/clients-linux/`
-
-Au niveau de l'installation du paquet proprement dite, côté
-serveur, plus aucune manipulation supplémentaire n'est
-nécessaire désormais.
 
 
 ### Reconfiguration du paquet et restauration des droits

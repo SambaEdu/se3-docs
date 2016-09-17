@@ -1,8 +1,23 @@
 #Visite rapide du répertoire clients-linux/ du serveur
 
-Afin de faire un rapide tour d'horizon du paquet `se3-clients-linux`, voici ci-dessous un schéma du contenu du répertoire `/home/netlogon/clients-linux/` du serveur.
 
-Les noms des répertoires possèdent un slash à la fin, sinon il s'agit de fichiers standards.
+
+
+### Le partage CIFS netlogon-linux
+
+Votre serveur `se3` possède un partage `CIFS`
+qui, au passage, ne sera pas visible par les `clients-windows`.
+
+**Attention :** le nom du partage `CIFS` n'est pas le même que
+le nom du répertoire correspondant dans l'arborescence locale
+du serveur :
+
+Nom du partage | Chemin réseau              | Chemin dans l'arborescence locale du serveur
+---------------|----------------------------|---------------------------------------------
+netlogon-linux | `//SERVEUR/netlogon-linux` | `/home/netlogon/clients-linux/`
+
+
+
 
 * [Arborescence du répertoire clients-linux/](#arborescence-du-répertoire-clients-linux)
 * [Quelques commentaires rapides](#quelques-commentaires-rapides)
@@ -19,6 +34,10 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
 
 
 ## Arborescence du répertoire clients-linux/
+
+Afin de faire un rapide tour d'horizon du paquet `se3-clients-linux`, voici ci-dessous un schéma du contenu du répertoire `/home/netlogon/clients-linux/` du serveur.
+
+Les noms des répertoires possèdent un slash à la fin, sinon il s'agit de fichiers standards.
 
 **Schéma de l'arborescence du répertoire clients-linux/**
 ```
