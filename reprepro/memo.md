@@ -1,12 +1,13 @@
 # Petit memo sur `reprepro`
-* [ Installation basique sans signer les paquets](# Installation basique sans signer les paquets)
-* [ Utiliser une clé gpg pour signer les paquets de son dépôt](# Utiliser une clé gpg pour signer les paquets de son dépôt)
+* [Installation basique sans signer les paquets](#Installation basique sans signer les paquets)
+* [Utiliser une clé gpg pour signer les paquets de son dépôt](#Utiliser une clé gpg pour signer les paquets de son dépôt)
+
 ##Installation basique sans signer les paquets
 
 ```sh
 apt-get install reprepro
 
-# Le répertoire conf/ servira à stocker la conf du dépôt.
+** Le répertoire conf/ servira à stocker la conf du dépôt.**
 mkdir /repository
 mkdir /repository/{conf,incoming}
 ```
@@ -71,7 +72,7 @@ Sur une machine Debian, il n'y a plus qu'à rajouter dans le
 ligne :
 
 ```sh
-# dans le cas d'une Wheezy
+### dans le cas d'une Wheezy
 deb http://le-nom-fqdn-du-depot/debian/ wheezy main
 ```
 
