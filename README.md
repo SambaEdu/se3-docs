@@ -26,6 +26,10 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * La documentation pour [la mise en œuvre des scripts](http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3)
 * La documentation pour [les nouvelles versions des scripts](se3-sauvegarde/sauverestaure.md)
 
+## Reprepro
+
+Un petit memo concernant [reprepro](reprepro/memo.md)
+
 ## La doc de Raphaël Hertzog
 * Documentation en rapport avec [le cahier de l'administrateur Debian](https://debian-handbook.info/browse/fr-FR/stable/)
 
