@@ -32,24 +32,21 @@
 
 ## Objectifs
 
-Le but de cette documentation est de décrire, d'une part, un mode opératoire
-d'intégration de stations clientes `Debian` ou `Ubuntu` dans un domaine
-SambaÉdu (avec un serveur en version `Squeeze` ou `Wheezy`) par
-l'intermédiaire du paquet `se3-clients-linux` et, d'autre part, de donner quelques indications quant à la gestion des `clients-linux`.
+Le but de cette documentation est de donner quelques indications et conseils quant à la gestion des `clients-linux`.
 
-Nous vous conseillons d'ailleurs d'utiliser le mécanisme d'installation/intégration automatique
-dont vous consulterez [la documentation](../pxe-clients-linux/README.md) avec profit.
+Nous vous conseillons d'utiliser le mécanisme d'installation/intégration automatique
+dont vous consulterez [la documentation](../pxe-clients-linux/README.md) avec profit. Cependant, nous avons laissé les explications de mise en place et d'intégration manuelles qui vous apporteront des précisions parfois utiles.
 
 En pratique, l'objectif est de pouvoir ouvrir une session
-sur un client Linux avec un compte du domaine et d'avoir
+sur un `client-linux` avec un compte du domaine et d'avoir
 accès à l'essentiel des partages offerts par le serveur
-SambaÉdu en fonction du compte.
+`SambaÉdu` en fonction du compte.
 
 Le fonctionnement de l'ensemble du paquet a été écrit de
 manière à tenter de minimiser le trafic réseau entre un
-client Linux et le serveur, notamment au moment de
+`client-linux` et le serveur, notamment au moment de
 l'ouverture de session où la gestion des profils est très
-différente de celle mise en place pour les clients Windows
+différente de celle mise en place pour les `clients-windows`
 (voir la documentation pour plus de précisions).
 
 
@@ -117,6 +114,7 @@ exclure.
 * [Installation de clients `Debian Wheezy` via `Se3` avec intégration automatique](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
 * [Installer un serveur LTSP `Jessie` dans un réseau Se3](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
 * [Installer un serveur Owncloud 8 dans un réseau Se3](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_owncloud_8_avec_l%27annuaire_du_se3)
+
 
 ## Les contributeurs
 
