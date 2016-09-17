@@ -12,12 +12,7 @@ du paquet `se3-clients-linux` sur le serveur. Le mieux est de vous reporter à [
 * [Installation du paquet `se3-clients-linux` sur le serveur](#installation-du-paquet-se3-clients-linux-sur-le-serveur)
     * [Quelques précisions](#quelques-pr%C3%A9cisions)
     * [En ligne de commande](#en-ligne-de-commande)
-    * [Par l'interface Web du serveur se3](#par-linterface-web-du-serveur-se3)
-    
-    * [Message éventuel concernant le serveur NTP](#message-éventuel-concernant-le-serveur-ntp)
-    * [Le partage CIFS netlogon-linux](#le-partage-cifs-netlogon-linux)
-    * [Reconfiguration du paquet et restauration des droits](#reconfiguration-du-paquet-et-restauration-des-droits)
-
+    * [Par l'interface `Web` du serveur `se3`](#par-linterface-web-du-serveur-se3)
 
 Ensuite, sur chaque `client-linux`, il était exécuté le script d'intégration correspondant
 à sa version (Jessie ou Trusty, par exemple). Cela, et bien d'autres choses, est maintenant réalisé automatiquement : reportez-vous à [la doc d'utilisation du mécanisme `pxe`](../pxe-clients-linux/utilisation.md) qui donne, là encore, la marche à suivre pour les versions actuelles des `se3`.
@@ -83,7 +78,7 @@ Ce mode de mise en place est valable quel que soit la version de votre se3.
 Cependant, si vous êtes en `Lenny`, nous vous conseillons fortement de passer en `Squeeze`.
 
 
-### Par l'interface Web du serveur se3
+### Par l'interface `Web` du serveur `se3`
 
 Vous pouvez aussi faire l'installation du module `se3-clients-linux`
 en passant par `l'interface d'administration Web` du serveur
@@ -91,48 +86,6 @@ via les menus `Configuration générale` puis `Modules`.
 
 Dans le tableau des modules, le paquet `se3-clients-linux`
 correspond à la ligne avec l'intitulé `Support des clients linux`.
-
-
-### Message éventuel concernant le serveur NTP
-
-Lors de l'installation du paquet, si jamais
-vous obtenez un message vous indiquant que `le serveur NTP` ne
-semble pas fonctionner, avant de passer à la suite, vous
-devez vous rendre sur la console d'administration Web de
-votre serveur (dans Configuration générale → Paramètres
-serveur) afin de spécifier l'adresse d'un serveur de temps
-qui fonctionne correctement (chose que l'on peut vérifier
-ensuite dans la page de diagnostic du serveur).
-
-Une fois le paramétrage effectué il vous suffit de reconfigurer
-le paquet `se3-clients-linux` en lançant, en tant que `root` sur une console du
-serveur se3, la commande suivante : `dpkg-reconfigure se3-clients-linux`.
-Si tout se passe bien, vous ne devriez plus obtenir
-d'avertissement à propos du serveur NTP.
-
-
-### Reconfiguration du paquet et restauration des droits
-
-Sachez enfin que si, pour une raison ou pour une autre, il
-vous est nécessaire de reconfigurer le paquet pour restaurer
-des droits corrects sur les fichiers, ou bien pour réadapter
-les scripts à l'environnement de votre serveur (parce que
-par exemple son IP a changé, ou que vous avez modifié le skel,
-ou le logon_perso,…), cela est prévu :-)
-
-Deux méthodes sont prévues :
-
-#### via le `se3`
-Pour cela, il vous suffit de lancer la commande suivante
-en tant que `root` sur une console du serveur `se3` :
-```sh
-dpkg-reconfigure se3-clients-linux
-```
-
-#### via un `client-linux`
-Si vous avez ouvert une session sur un client-linux avec le compte `admin`, vous pourrez double-cliquer sur le fichier `reconfigure.bash` accessible en passant par le lien symbolique `clients-linux` sur le bureau puis par le répertoire `bin/` (le mot de passe root du serveur se3 sera demandé).
-
-Voir le schéma de [l'arborescence du répertoire `clients-linux/`](#arborescence-du-répertoire-clients-linux).
 
 
 ## Intégration d'un client `GNU/Linux`

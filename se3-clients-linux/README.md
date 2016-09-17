@@ -9,7 +9,9 @@
 * [Objectifs](#objectifs)
 * [Distributions `GNU/Linux` testées](#distributions-gnulinux-test%C3%A9es)
 * [Avertissements](#avertissements)
+* [Reconfiguration du paquet et restauration des droits](#reconfiguration-du-paquet-et-restauration-des-droits)
 * [Visite rapide du répertoire `clients-linux/` du serveur `se3`](visite_rapide.md)
+
 * [Les partages des utilisateurs](partages_utilisateurs.md)
 * [La gestion des profils](gestion_profils.md)
 * [Le répertoire `unefois/`](repertoire_unefois.md)
@@ -20,10 +22,12 @@
 * [Les logs pour détecter un problème](logs_detecter_probleme.md)
 * [Le cas des classes nomades](classes_nomades.md)
 * [Un mot sur les imprimantes](imprimantes.md)
+
 * [Intégration manuelle d'un client-linux](impatients.md)
 * [Les options des scripts d'intégration](options_scripts.md)
 * [Désinstallation/réinstallation du paquet `se3-clients-linux`](desinstall_reinstall_paquet.md)
 * [La "désintégration" (fonctionalité dépréciée)](desintegration.md)
+
 * [Annexes](#annexes)
 * [Ressources externes](#ressources-externes)
 * [Les contributeurs](#lescontributeurs)
@@ -98,6 +102,30 @@ malgré tout, mais nous ne pouvons en rien vous garantir le
 résultat final, et l'apparition de régressions ici ou là par
 rapport à ce qui est annoncé dans ce document n'est pas à
 exclure.
+
+
+## Reconfiguration du paquet et restauration des droits
+
+Sachez enfin que si, pour une raison ou pour une autre, il
+vous est nécessaire de reconfigurer le paquet pour restaurer
+des droits corrects sur les fichiers, ou bien pour réadapter
+les scripts à l'environnement de votre serveur (parce que
+par exemple son IP a changé, ou que vous avez modifié le skel,
+ou le logon_perso,…), cela est prévu :-)
+
+Deux méthodes sont prévues :
+
+#### via le `se3`
+Pour cela, il vous suffit de lancer la commande suivante
+en tant que `root` sur une console du serveur `se3` :
+```sh
+dpkg-reconfigure se3-clients-linux
+```
+
+#### via un `client-linux`
+Si vous avez ouvert une session sur un client-linux avec le compte `admin`, vous pourrez double-cliquer sur le fichier `reconfigure.bash` accessible en passant par le lien symbolique `clients-linux` sur le bureau puis par le répertoire `bin/` (le mot de passe root du serveur se3 sera demandé).
+
+Voir le schéma de [l'arborescence du répertoire `clients-linux/`](#arborescence-du-répertoire-clients-linux).
 
 
 ## Annexes

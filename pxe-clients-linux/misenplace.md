@@ -6,6 +6,7 @@
         * [Serveur `se3` à jour](#serveur-se3-à-jour)
         * [Module `TFTP` installé](#module-tftp-installé)
         * [Module `se3-clients-linux` installé](#module-se3-clients-linux-installé)
+        * [Message éventuel concernant le serveur `NTP`](#message-éventuel-concernant-le-serveur-ntp)
         * [Un coup d'œil dans le répertoire `/tftpboot/clients_linux/`](#un-coup-dœil-dans-le-répertoire-tftpbootclients_linux)
     * [Côté `client linux`](#côté-client-linux)
         * [Mode `PXE`](#mode-pxe)
@@ -49,6 +50,27 @@ S'il est déjà installé, vérifiez qu'il est bien dans la dernière version : 
 Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
 
 
+#### Message éventuel concernant le serveur `NTP`
+
+Lors de l'installation du paquet, si jamais
+vous obtenez un message vous indiquant que `le serveur NTP` ne
+semble pas fonctionner, avant de passer à la suite, vous
+devez vous rendre sur la console d'administration Web de
+votre serveur (dans Configuration générale → Paramètres
+serveur) afin de spécifier l'adresse d'un serveur de temps
+qui fonctionne correctement (chose que l'on peut vérifier
+ensuite dans la page de diagnostic du serveur).
+
+Une fois le paramétrage effectué il vous suffit de reconfigurer
+le paquet `se3-clients-linux` en lançant, en tant que `root` sur une console du
+serveur `se3`, la commande suivante :
+```sh
+dpkg-reconfigure se3-clients-linux
+```
+Si tout se passe bien, vous ne devriez plus obtenir
+d'avertissement à propos du serveur `NTP`.
+
+
 #### Un coup d'œil dans le répertoire `/tftpboot/clients_linux/`
 
 Sur le serveur `se3`, le répertoire `/tftpboot/clients_linux/` contient un certain nombre de fichiers, d'archives ou de répertoires.
@@ -90,6 +112,7 @@ Dans le second cas, il faudra laisser **un espace libre** à côté des partitio
 
 Nous en avons déjà parlé dans les prérequis : indispensable !
 ![module tftp mot de passe](images/pxe_tftp_01.png)
+
 
 ### Les environnements de Bureau
 
