@@ -1,7 +1,7 @@
 # Visite rapide du répertoire `clients-linux/` du serveur `se3`
 
 * [Le partage `CIFS` `netlogon-linux`](#le-partage-cifs-netlogon-linux)
-* [Arborescence du répertoire clients-linux/](#arborescence-du-répertoire-clients-linux)
+* [Arborescence du répertoire `clients-linux/`](#arborescence-du-répertoire-clients-linux)
 * [Quelques commentaires rapides](#quelques-commentaires-rapides)
     * [Le répertoire `bin/`](#le-répertoire-bin)
     * [Le répertoire `distribs/`](#le-répertoire-distribs)
@@ -23,7 +23,7 @@ Nom du partage | Chemin réseau              | Chemin dans l'arborescence locale
 netlogon-linux | `//SERVEUR/netlogon-linux` | `/home/netlogon/clients-linux/`
 
 
-## Arborescence du répertoire clients-linux/
+## Arborescence du répertoire `clients-linux/`
 
 Afin de faire un rapide tour d'horizon du paquet `se3-clients-linux`, voici ci-dessous un schéma du contenu du répertoire `/home/netlogon/clients-linux/` du serveur.
 
@@ -36,9 +36,10 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
 **Note :** En fait, vous pouvez le faire bien sûr car vous êtes `root` sur le serveur. Mais les modifications effectuées sur les fichiers/répertoires qui ne sont pas mis en évidence ci-dessous par des `**...**` sur le schéma ne survivront pas à une réinstallation ou à une mise à jour du paquet `se3-clients-linux`. Par contre, les fichiers/répertoires qui sont mis en évidence ci-dessous par des `**...**` ne seront pas affectés par une mise à jour du paquet `se3-clients-linux`.
 
 
-**Schéma de l'arborescence du répertoire clients-linux/**
+**Schéma de l'arborescence du répertoire `clients-linux/`**
 ```
     ── clients-linux/
+       │
        ├── bin/
        │   ├── connexion_ssh_serveur.bash
        │   ├── logon
@@ -46,6 +47,7 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
        │   └── reconfigure.bash
        │
        ├── distribs/
+       │   │
        │   ├── jessie/
        │   │   ├── integration/
        │   │   │   └── integration_jessie.bash
@@ -53,13 +55,11 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
        │   │
        │   ├── precise/
        │   │   ├── integration/
-       │   │   │   ├── desintegration_precise.bash
        │   │   │   └── integration_precise.bash
        │   │   └──  **skel**/
        │   │
        │   ├── squeeze/
        │   │   ├── integration/
-       │   │   │   ├── desintegration_squeeze.bash
        │   │   │   └── integration_squeeze.bash
        │   │   └── **skel**/
        │   │
@@ -68,12 +68,19 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
        │   │   │   └── integration_trusty.bash
        │   │   └── **skel**/
        │   │
-       │   └── wheezy/
+       │   ├── wheezy/
+       │   │   ├── integration/
+       │   │   │   └── integration_wheezy.bash
+       │   │   └── **skel**/
+       │   │
+       │   └── xenial/
        │       ├── integration/
-       │       │   └── integration_wheezy.bash
+       │       │   └── integration_xenial.bash
        │       └── **skel**/
        │
+       │
        ├── **divers**/
+       │
        │
        └── **unefois**/
 ```
