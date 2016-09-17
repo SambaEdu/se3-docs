@@ -1,8 +1,12 @@
 # Petit memo sur `reprepro`
-* [Installation basique sans signer les paquets](#Installation basique sans signer les paquets)
-* [Utiliser une clé gpg pour signer les paquets de son dépôt](#Utiliser une clé gpg pour signer les paquets de son dépôt)
 
-##Installation basique sans signer les paquets
+
+* [Installation basique sans signer les paquets](#installation-basique-sans-signer-les-paquets)
+* [Utiliser une clé gpg pour signer les paquets de son dépôt](#utiliser-une-clé-gpg-pour-signer-les-paquets-de-son-dépôt)
+ 
+
+
+## Installation basique sans signer les paquets
 
 ```sh
 apt-get install reprepro
