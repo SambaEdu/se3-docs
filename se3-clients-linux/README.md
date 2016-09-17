@@ -11,7 +11,6 @@
 * [Avertissements](#avertissements)
 * [Reconfiguration du paquet et restauration des droits](#reconfiguration-du-paquet-et-restauration-des-droits)
 * [Visite rapide du répertoire `clients-linux/` du serveur `se3`](visite_rapide.md)
-
 * [Les partages des utilisateurs](partages_utilisateurs.md)
 * [La gestion des profils](gestion_profils.md)
 * [Le répertoire `unefois/`](repertoire_unefois.md)
@@ -22,12 +21,10 @@
 * [Les logs pour détecter un problème](logs_detecter_probleme.md)
 * [Le cas des classes nomades](classes_nomades.md)
 * [Un mot sur les imprimantes](imprimantes.md)
-
 * [Intégration manuelle d'un client-linux](impatients.md)
 * [Les options des scripts d'intégration](options_scripts.md)
 * [Désinstallation/réinstallation du paquet `se3-clients-linux`](desinstall_reinstall_paquet.md)
 * [La "désintégration" (fonctionalité dépréciée)](desintegration.md)
-
 * [Annexes](#annexes)
 * [Ressources externes](#ressources-externes)
 * [Les contributeurs](#lescontributeurs)
