@@ -1,9 +1,15 @@
-#Visite rapide du répertoire clients-linux/ du serveur
+# Visite rapide du répertoire `clients-linux/` du serveur `se3`
+
+* [Le partage `CIFS` `netlogon-linux`](#le-partage-cifs-netlogon-linux)
+* [Arborescence du répertoire clients-linux/](#arborescence-du-répertoire-clients-linux)
+* [Quelques commentaires rapides](#quelques-commentaires-rapides)
+    * [Le répertoire `bin/`](#le-répertoire-bin)
+    * [Le répertoire `distribs/`](#le-répertoire-distribs)
+    * [Le répertoire `divers/`](#le-répertoire-divers)
+    * [Le répertoire `unefois/`](#le-répertoire-unefois)
 
 
-
-
-### Le partage CIFS netlogon-linux
+## Le partage `CIFS` `netlogon-linux`
 
 Votre serveur `se3` possède un partage `CIFS`
 qui, au passage, ne sera pas visible par les `clients-windows`.
@@ -17,27 +23,18 @@ Nom du partage | Chemin réseau              | Chemin dans l'arborescence locale
 netlogon-linux | `//SERVEUR/netlogon-linux` | `/home/netlogon/clients-linux/`
 
 
-
-
-* [Arborescence du répertoire clients-linux/](#arborescence-du-répertoire-clients-linux)
-* [Quelques commentaires rapides](#quelques-commentaires-rapides)
-    * [Le répertoire `bin/`](#le-répertoire-bin)
-    * [Le répertoire `distribs/`](#le-répertoire-distribs)
-    * [Le répertoire `divers/`](#le-répertoire-divers)
-    * [Le répertoire `unefois/`](#le-répertoire-unefois)
-
-Certains fichiers ou répertoires, dont vous n'avez pas à vous préoccuper, ont été omis afin d'alléger le schéma et les explications qui vont avec. Notamment le répertoire `save` dont le contenu est essentiel lors de l'intégration des clients-linux.
-
-Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter à vos besoins sont mis en évidence ci-dessous par des `**...**`. À l'inverse, vous ne devez pas modifier tous les autres fichiers ou répertoires.
-
-**Note :** En fait, vous pouvez le faire bien sûr car vous êtes `root` sur le serveur. Mais les modifications effectuées sur les fichiers/répertoires qui ne sont pas mis en évidence ci-dessous par des `**...**` sur le schéma ne survivront pas à une réinstallation ou à une mise à jour du `paquet se3-clients-linux`. Par contre, les fichiers/répertoires qui sont mis en évidence ci-dessous par des `**...**` ne seront pas affectés par une mise à jour du paquet `se3-clients-linux`.
-
-
 ## Arborescence du répertoire clients-linux/
 
 Afin de faire un rapide tour d'horizon du paquet `se3-clients-linux`, voici ci-dessous un schéma du contenu du répertoire `/home/netlogon/clients-linux/` du serveur.
 
 Les noms des répertoires possèdent un slash à la fin, sinon il s'agit de fichiers standards.
+
+Certains fichiers ou répertoires, dont vous n'avez pas à vous préoccuper, ont été omis afin d'alléger le schéma et les explications qui vont avec. Notamment le répertoire `save` dont le contenu est essentiel lors de l'intégration des clients-linux.
+
+Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter à vos besoins sont mis en évidence ci-dessous par des `**...**`. À l'inverse, vous ne devez pas modifier tous les autres fichiers ou répertoires.
+
+**Note :** En fait, vous pouvez le faire bien sûr car vous êtes `root` sur le serveur. Mais les modifications effectuées sur les fichiers/répertoires qui ne sont pas mis en évidence ci-dessous par des `**...**` sur le schéma ne survivront pas à une réinstallation ou à une mise à jour du paquet `se3-clients-linux`. Par contre, les fichiers/répertoires qui sont mis en évidence ci-dessous par des `**...**` ne seront pas affectés par une mise à jour du paquet `se3-clients-linux`.
+
 
 **Schéma de l'arborescence du répertoire clients-linux/**
 ```
