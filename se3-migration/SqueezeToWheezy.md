@@ -19,8 +19,10 @@
     * [Télécharger et graver `boot-repair`](#télécharger-et-graver-boot-repair)
     * [Démarrer le `se3` sur le DVD gravé](#démarrer-le-se3-sur-le-dvd-gravé)
     * [Autre solution](#autre-solution)
+    * [Grub et partitions GPT](#Grub-et-partitions-GPT)
 * [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
+    * [Plus de réseau](#plus-de-reseau)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
 * [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
@@ -227,6 +229,17 @@ Bootez sur le cd `super-grub2` : le `se3` devrait alors se lancer.
 
 > https://wiki.debian-fr.xyz/Réinstaller_Grub2
 
+### Grub et Partitions GPT
+Si l'installation du se3 a été faite sur un disque de taille importante (2To...donc en format GPT) avec des partitions classiques, alors la partition de 100 Mio servant au démarrage n'a pas été créée par l'installateur debian sur le disque contenant la racine. La mise à jour du grub va donc échouer pour donner un invité ">grub rescue" après un reboot. Aucune des solutions précédentes ne marchera tant que la partition de boot ne sera pas présente. 
+La seule solution pour faire repartir le serveur dans ce cas est donc:
+* Créer une image clonezilla du disque contenant la racine au cas où.
+* Utiliser une version de gparted récente à partir d'un live cd (sysrescuecd par exemple). Le format XFS du /home et /var/se3 doit être reconnu. Si un trinagle d'alerte arrive, alors il faut prendre une version plus récente.
+* Diminuer la taille de la partition sda1 de façon à liberer environ 100 Mio en début de disque. Valider pour que la modification se fasse.
+* Créer une nouvelle partition avec ce petit espace liberé en début de disque. Ne pas la formater mais lui donner le drapeau "bios-grub"
+* Redémarrer avec le dvd boot-repair et faire "réparer le grub". Tout devrait repartir.
+
+
+
 
 ## Configurer l'onduleur
 
@@ -239,6 +252,10 @@ Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il
 
 
 ## Post-migration
+
+###Plus de reseau
+Après migration, impossible de faire un ping sur le Amon ou sur une adresse externe. Je me suis apercçu que ma carthe "eth0" était maintenant devenue "eth1".
+Il a fallut editer le fichier /etc/network/interfaces et remplacer eth0 par eth1. Un reboot a été nécéssaire ( /etc/init.d/networking restart ne marchait pas complètement).
 
 ### Les modules
 Presque tous les modules ont été reportés sur `Wheezy`. Mais `se3-unattended` a disparu (voir ci-dessous) et `se3-internet` est en testing pour l'instant.
