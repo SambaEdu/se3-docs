@@ -310,7 +310,7 @@ Il est à noter qu'ils sont aussi sur votre `se3-squeeze`, s'il est à jour bien
 
 **La solution à ce problème**, c'est de réencoder avec `/usr/bin/convmv`. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
 
-Voici les deux commandes pour cela :
+Les deux commandes ci-dessous réencode en `utf8` et ont été intégrées au script de restauration dans sa version la plus récente :
 ```sh
 /usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /home 2>&1 | grep -v Skipping >> rapport_home.log
 /usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 2>&1 | grep -v Skipping >> rapport_varse3.log
