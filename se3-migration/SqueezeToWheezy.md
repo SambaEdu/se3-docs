@@ -231,7 +231,7 @@ Bootez sur le cd `super-grub2` : le `se3` devrait alors se lancer.
 
 
 ### `Grub` et Partitions `GPT`
-Si l'installation du `se3` a été faite sur un disque de taille importante (2To...donc en format `GPT`) avec des partitions classiques, alors la partition de 100 Mio servant au démarrage n'a pas été créée par l'installateur Debian sur le disque contenant la racine.
+Si l'installation du `se3` a été faite sur un disque de taille importante (2To...donc en format [`GPT`](https://fr.wikipedia.org/wiki/GUID_Partition_Table)) avec des partitions classiques, alors la partition de 100 Mio servant au démarrage n'a pas été créée par l'installateur Debian sur le disque contenant la racine.
 
 La mise à jour du `Grub` va donc échouer pour donner une invite `>grub rescue` après un reboot. Aucune des solutions précédentes ne marchera tant que la partition de boot ne sera pas présente.
 
