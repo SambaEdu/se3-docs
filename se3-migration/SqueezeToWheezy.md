@@ -231,15 +231,16 @@ Bootez sur le cd `super-grub2` : le `se3` devrait alors se lancer.
 
 
 ### `Grub` et Partitions `GPT`
-Si l'installation du se3 a été faite sur un disque de taille importante (2To...donc en format GPT) avec des partitions classiques, alors la partition de 100 Mio servant au démarrage n'a pas été créée par l'installateur debian sur le disque contenant la racine. La mise à jour du grub va donc échouer pour donner un invité ">grub rescue" après un reboot. Aucune des solutions précédentes ne marchera tant que la partition de boot ne sera pas présente. 
+Si l'installation du `se3` a été faite sur un disque de taille importante (2To...donc en format `GPT`) avec des partitions classiques, alors la partition de 100 Mio servant au démarrage n'a pas été créée par l'installateur Debian sur le disque contenant la racine.
+
+La mise à jour du `Grub` va donc échouer pour donner une invite `>grub rescue` après un reboot. Aucune des solutions précédentes ne marchera tant que la partition de boot ne sera pas présente.
+
 La seule solution pour faire repartir le serveur dans ce cas est donc:
-* Créer une image clonezilla du disque contenant la racine au cas où.
-* Utiliser une version de gparted récente à partir d'un live cd (sysrescuecd par exemple). Le format XFS du /home et /var/se3 doit être reconnu. Si un trinagle d'alerte arrive, alors il faut prendre une version plus récente.
-* Diminuer la taille de la partition sda1 de façon à liberer environ 100 Mio en début de disque. Valider pour que la modification se fasse.
-* Créer une nouvelle partition avec ce petit espace liberé en début de disque. Ne pas la formater mais lui donner le drapeau "bios-grub"
-* Redémarrer avec le dvd boot-repair et faire "réparer le grub". Tout devrait repartir.
-
-
+* Créer une image `Clonezilla` du disque contenant la racine au cas où,
+* Utiliser une version de `Gparted` récente à partir d'un live cd (`sysrescuecd` par exemple). Le format `XFS` des partitions `/home` et `/var/se3` doit être reconnu. Si un trinagle d'alerte arrive, alors il faut prendre une version plus récente,
+* Diminuer la taille de la partition `sda1` de façon à liberer environ 100 Mio en début de disque. Valider pour que la modification se fasse,
+* Créer une nouvelle partition avec ce petit espace liberé en début de disque. Ne pas la formater mais lui donner le drapeau `bios-grub`,
+* Redémarrer avec le dvd `boot-repair` et faire "réparer le grub". Tout devrait repartir.
 
 
 ## Configurer l'onduleur
