@@ -19,7 +19,7 @@
     * [Télécharger et graver `boot-repair`](#télécharger-et-graver-boot-repair)
     * [Démarrer le `se3` sur le DVD gravé](#démarrer-le-se3-sur-le-dvd-gravé)
     * [Autre solution](#autre-solution)
-    * [Grub et partitions GPT](#Grub-et-partitions-GPT)
+    * [`Grub` et partitions `GPT`](#grub-et-partitions-gpt)
 * [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
     * [Plus de réseau](#plus-de-reseau)
@@ -229,7 +229,8 @@ Bootez sur le cd `super-grub2` : le `se3` devrait alors se lancer.
 
 > https://wiki.debian-fr.xyz/Réinstaller_Grub2
 
-### Grub et Partitions GPT
+
+### `Grub` et Partitions `GPT`
 Si l'installation du se3 a été faite sur un disque de taille importante (2To...donc en format GPT) avec des partitions classiques, alors la partition de 100 Mio servant au démarrage n'a pas été créée par l'installateur debian sur le disque contenant la racine. La mise à jour du grub va donc échouer pour donner un invité ">grub rescue" après un reboot. Aucune des solutions précédentes ne marchera tant que la partition de boot ne sera pas présente. 
 La seule solution pour faire repartir le serveur dans ce cas est donc:
 * Créer une image clonezilla du disque contenant la racine au cas où.
