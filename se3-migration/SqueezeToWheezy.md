@@ -256,7 +256,7 @@ Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il
 ## Post-migration
 
 ### Plus de réseau
-Après migration, impossible de faire un ping sur la passerelle `Amon` ou sur une adresse externe. Je me suis apercçu que ma carte `eth0` était maintenant devenue `eth1`.
+Après migration, impossible de faire un ping sur la passerelle `Amon` ou sur une adresse externe. Je me suis alors aperçu que la carte réseau `eth0` était maintenant devenue `eth1`.
 
 Il a fallut éditer le fichier `/etc/network/interfaces` et remplacer `eth0` par `eth1`. Un reboot a été nécéssaire (la commande */etc/init.d/networking restart* ne marchait pas complètement).
 
