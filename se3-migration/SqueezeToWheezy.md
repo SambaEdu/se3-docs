@@ -303,8 +303,7 @@ Cette méthode sera à utiliser si vous avez une version antérieure à celle de
 
 Ces deux scripts (`sauve_serveur.sh` et `restaure_serveur.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
 
-Il est à noter qu'ils sont aussi sur votre `se3-squeeze`, s'il est à jour bien entendu. Cependant, les versions les plus récentes de ces scripts se trouveront sur le site suivant, ainsi que la doc d'utilisation :
-> https://github.com/SambaEdu/se3-docs/blob/master/se3-sauvegarde/sauverestaure.md
+Il est à noter que ces deux scripts sont sur votre `se3-squeeze`, s'il est à jour bien entendu, mais dans une version insuffisante pour la restauration sur un `se3-wheezy`. Dans ce cas, il faudra utiliser [les versions les plus récentes](../../../../se3-clients-linux/tree/master/sauvegarde-restauration) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md).
 
 **Remarque :** une chose à prendre en compte sur ces scripts : sur `se3-wheezy` on est full `utf8`, et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en `iso`. Cela fait quelques versions que nous sommes en `utf8` côté `samba` mais, pour autant, s'il y a eu des versions successives, il y a de fortes chances que de le codage `iso` traîne encore dans `/home` et `/var/se3`.
 
