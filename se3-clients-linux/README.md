@@ -101,30 +101,6 @@ rapport à ce qui est annoncé dans ce document n'est pas à
 exclure.
 
 
-## Reconfiguration du paquet et restauration des droits
-
-Sachez enfin que si, pour une raison ou pour une autre, il
-vous est nécessaire de reconfigurer le paquet pour restaurer
-des droits corrects sur les fichiers, ou bien pour réadapter
-les scripts à l'environnement de votre serveur (parce que
-par exemple son IP a changé, ou que vous avez modifié le skel,
-ou le logon_perso,…), cela est prévu :-)
-
-Deux méthodes sont prévues :
-
-#### via le `se3`
-Pour cela, il vous suffit de lancer la commande suivante
-en tant que `root` sur une console du serveur `se3` :
-```sh
-dpkg-reconfigure se3-clients-linux
-```
-
-#### via un `client-linux`
-Si vous avez ouvert une session sur un client-linux avec le compte `admin`, vous pourrez double-cliquer sur le fichier `reconfigure.bash` accessible en passant par le lien symbolique `clients-linux` sur le bureau puis par le répertoire `bin/` (le mot de passe root du serveur se3 sera demandé).
-
-Voir le schéma de [l'arborescence du répertoire `clients-linux/`](visite_rapide.md#arborescence-du-répertoire-clients-linux).
-
-
 ## Annexes
 
 * [Intégrer le service `LTSP` à un serveur se3 Wheezy](ltsp.md)
