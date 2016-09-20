@@ -9,7 +9,7 @@
 * [Objectifs](#objectifs)
 * [Distributions `GNU/Linux` testées](#distributions-gnulinux-test%C3%A9es)
 * [Avertissements](#avertissements)
-* [Reconfiguration du paquet et restauration des droits](#reconfiguration-du-paquet-et-restauration-des-droits)
+* [Reconfiguration du paquet et restauration des droits](reconfiguration_restauration.md)
 * [Visite rapide du répertoire `clients-linux/` du serveur `se3`](visite_rapide.md)
 * [Les partages des utilisateurs](partages_utilisateurs.md)
 * [La gestion des profils](gestion_profils.md)
