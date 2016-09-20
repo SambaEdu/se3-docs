@@ -1,4 +1,4 @@
-# Intégration de stations de travail Debian ou Ubuntu dans un domaine SambaÉdu avec le paquet se3-clients-linux
+# Gestion des stations de travail `Debian` ou `Ubuntu` dans un domaine `SambaÉdu` avec le paquet `se3-clients-linux`
 
 
 **Documentation générale du module `se3-clients-linux`**
@@ -16,12 +16,12 @@
 * [Le répertoire `unefois/`](repertoire_unefois.md)
 * [Des variables et des fonctions prêtes à l'emploi](variables_fonctions.md)
 * [Le script de `logon`](script_logon.md)
-* [Personnaliser avec le `logon_perso`](logon_perso.md)
+* [Personnalisation avec le `logon_perso`](logon_perso.md)
 * [Des variables et des fonctions utiles pour le `logon_perso`](variables_fonctions_logon.md)
 * [Les logs pour détecter un problème](logs_detecter_probleme.md)
 * [Le cas des classes nomades](classes_nomades.md)
 * [Un mot sur les imprimantes](imprimantes.md)
-* [Intégration manuelle d'un client-linux](impatients.md)
+* [Intégration manuelle d'un `client-linux`](impatients.md)
 * [Les options des scripts d'intégration](options_scripts.md)
 * [Désinstallation/réinstallation du paquet `se3-clients-linux`](desinstall_reinstall_paquet.md)
 * [La "désintégration" (fonctionalité dépréciée)](desintegration.md)
