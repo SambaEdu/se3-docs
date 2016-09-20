@@ -12,7 +12,7 @@ la liste des partages disponibles en fonction du compte qui se connecte ou en fo
     * [Partages pour un compte `professeur`](#partages-pour-un-compte-professeur)
     * [Partages pour le compte `admin`](#partages-pour-le-compte-admin)
 * [Le lien symbolique `clients-linux`](#le-lien-symbolique-clients-linux)
-* [Reconfiguration des droits du paquet `se3-clients-linux`](#reconfiguration_restauration.md)
+* [Reconfiguration des droits du paquet `se3-clients-linux`](reconfiguration_restauration.md)
 * [Cas des paquets dont la version est antérieure à 1.1](#cas-des-paquets-dont-la-version-est-antérieure-à-11)
 * [Retrouver le comportement par défaut](#retrouver-le-comportement-par-défaut)
 
