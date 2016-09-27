@@ -28,7 +28,7 @@ mais voici quelques syntaxes fondamentales ci-dessous.
 * Pour faire un sous-titre : `## Sous titre` (en début de ligne).
 * Pour faire un sous-sous-titre : `### Sous sous titre` (en début de ligne).
 * Pour mettre en gras  : `**du gras**`.
-* Pour faire une liste à puce : ̀`* Premièrement...`.
+* Pour faire une liste à puce : `* Premièrement...`.
 * Pour faire un lien : `Consultez [cette page](<url relative ou absolue>)`,
 si la cible du lien est un fichier interne au dépôt, il faut
 toujours privilégier une url relative.
