@@ -1,4 +1,4 @@
-# Installation d'Owncloud 9 sur un serveur Samba Edu 3
+# Installation d'Owncloud 9 (9.0 ou 9.1) sur un serveur Samba Edu 3
 
 ## Introduction :
 
@@ -35,9 +35,14 @@ Intégrer directement Owncloud à un serveur se3 évite :
 chmod u+x /home/netlogon/clients-linux/owncloud/integrer_owncloud_sur_se3.sh 
 ```
 
-* Puis l'exécuter :
+* Puis l'exécuter. Par exemple, pour installer la version 9.0 d'Owncloud, saisir :
 ```sh
 /home/netlogon/clients-linux/owncloud/integrer_owncloud_sur_se3.sh 9.0
+```
+
+ou, pour installer la version 9.1 d'Owncloud :
+```sh
+/home/netlogon/clients-linux/owncloud/integrer_owncloud_sur_se3.sh 9.1
 ```
 
 L'installation est complétement automatique et ne dure que quelques minutes. Elle essaie d'être, dans la mesure du possible, 
@@ -52,8 +57,8 @@ ainsi qu'à l'article wiki suivant :
 **Remarque:**
 
 Lorsque aucun paramètre n'est spécifié au script précédent, ce dernier installe par défaut la `dernière version stable` des dépôts d'Owncloud.
-Le script a été testé avec la `version 9.0` d'Owncloud. Il est donc **déconseillé** de lancer le script sur une version > 9.0, `sans avoir au préalable 
-testé que le script était fonctionnel sous machine virtuelle`.
+Le script a été testé avec les `versions 9.0 et 9.1` d'Owncloud. Il est donc **déconseillé** de lancer le script sur une version > 9.1, `sans avoir au préalable 
+testé que le script était fonctionnel (sous machine virtuelle par exemple)`.
 
 ## Que fait le script d'installation ?
 
@@ -82,8 +87,9 @@ la mise à jour peut être faite en lançant le script suivant :
 
 **Remarques:**
 
-* Il est **déconseillé** de mettre à jour owncloud vers une version supérieure à 9.0 sans avoir `au préalable` testé sous Machine Virtuelle 
-qu'elle se déroulait convenablement , sous peine de perdre son serveur Owncloud ... 
+* Il est **déconseillé** de mettre à jour owncloud vers une version supérieure sans avoir `au préalable` testé (sur machine virtuelle par exemple)
+qu'elle se déroulait convenablement , sous peine de perdre son serveur Owncloud ... Le script de mise à jour précédent a été testé uniquement 
+pour une migration de la version 9.0 vers la version 9.1 d'Owncloud.
 
 * Owncloud ne compatibilise pas l'espace de stockage consommé par l'utilisateur dans `Docs` et `Classes` : le
 quota de 100 Mo alloué par défaut ne concerne que son repertoire `Cloud`.
