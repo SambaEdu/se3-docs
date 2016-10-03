@@ -22,6 +22,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Installation d'un `se3`
 * Documentation pour une [installation manuelle](se3-installation/installationmanuelle.md) d'un `se3`
+* Documentation pour installer [un réseau virtuel `se3`](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox) avec `VirtualBox`
 
 
 ## La doc pour migrer son `se3`
