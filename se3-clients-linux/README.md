@@ -35,10 +35,12 @@
 
 Le but de cette documentation est de donner quelques indications et conseils quant à la gestion des `clients-linux`.
 
-Nous vous conseillons d'utiliser le mécanisme d'installation/intégration automatique
-dont vous consulterez [la documentation](../pxe-clients-linux/README.md) avec profit. Cependant, nous avons laissé les explications de mise en place et d'intégration manuelles qui vous apporteront des précisions parfois utiles.
+La mise en place du paquet `se3-clients-linux` est décrite dans [la documentation du paquet `pxe-clients-linux`](../pxe-clients-linux/README.md) que vous consulterez  avec profit : ce paquet `pxe-clients-linux` donne accès au mécanisme d'installation/intégration automatique
+que nous vous conseillons fortement d'utiliser.
 
-En pratique, l'objectif est de pouvoir ouvrir une session
+**Remarque :** nous avons laissé les explications de mise en place et d'intégration manuelles issues des premières versions : elles vous apporteront des précisions complémentaires sur le fonctionnement général du mécanisme.
+
+En pratique, après avoir utilisé le mécanisme d'installation/intégration automatique mentionné ci-dessus, l'objectif est de pouvoir ouvrir une session
 sur un `client-linux` avec un compte du domaine et d'avoir
 accès à l'essentiel des partages offerts par le serveur
 `SambaÉdu` en fonction du compte.
