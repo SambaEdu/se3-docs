@@ -27,25 +27,27 @@
 
 #### Serveur `se3` à jour
 
-Mettre à jour le serveur `se3`. Ce dernier doit impérativement être en version `Squeeze` ou `Wheezy`.
+Mettre à jour le serveur `se3`.
+
+Ce dernier doit impérativement être en version `Wheezy`. Si vous avez encore votre serveur `se3` en version `squeeze`, nous vous conseillons d'effectuer [la migration vers la version `wheezy`](se3-migration/SqueezeToWheezy.md).
 
 
 #### Module `TFTP` installé
 
 Il faut que le module `se3-clonage`, dit [`TFTP`](https://fr.wikipedia.org/wiki/Trivial_File_Transfer_Protocol), soit installé.
 
-Si c'est le cas vérifiez qu'il est bien dans la dernière version : 0.74 au minimum (le mettre à jour si nécessaire).
+Si c'est le cas vérifiez qu'il est bien dans la dernière version : **0.88** (le mettre à jour si nécessaire).
 
-Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
+Sinon installez le module `se3-clonage` puis activez le mode graphique via l'interface web du serveur `se3`.
 
-Mettez **un mot de passe** : cela évitera l'utilisation intempestive du mode `PXE` des ordinateurs de votre réseau par les utilisateurs.
+**Conseil :** mettez **un mot de passe** ([voir ci-dessous](#le-mot-de-passe)) : cela évitera l'utilisation intempestive du mode `PXE` des ordinateurs de votre réseau par les utilisateurs.
 
 
 #### Module `se3-clients-linux` installé
 
 Si vous souhaitez intégrer vos clients Linux au domaine `se3`, il vous faut aussi installer le module `se3-clients-linux`.
 
-S'il est déjà installé, vérifiez qu'il est bien dans la dernière version : 2.0.5 au minimum (le mettre à jour si nécessaire).
+S'il est déjà installé, vérifiez qu'il est bien dans la dernière version : **2.1.1** (le mettre à jour si nécessaire).
 
 Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
 
