@@ -13,6 +13,8 @@
 * [Les listes des applications installées](listeapplis.md)
 * [Utilisation du script perso](messcripts.md)
 * [Annexes](#annexes)
+    * [Utiliser la branche `testing`](#utiliser-la-branche-testing)
+    * [Utiliser le menu `perso`](#utiliser-le-menu-perso)
 * [Ressources externes](#ressources-externes)
 
 
@@ -57,14 +59,19 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 
 ## Annexes
 
+### Utiliser la branche `testing`
+
 * [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](testing.md)
+
+### Utiliser le menu `perso`
+
 * [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md)
 
 
 ## Ressources externes
 
-* [la documentation de Sébastien Muller](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
 * [la documentation du module `se3-clients-linux`](../se3-clients-linux/README.md)
+* [la documentation de Sébastien Muller](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
 * [amorçage via `pxe`](https://fr.wikipedia.org/wiki/Preboot_Execution_Environment)
 * [installation de `Debian` par préconfiguration](https://www.debian.org/releases/jessie/amd64/apb.html.fr)
 
