@@ -17,6 +17,10 @@
     * [Fichiers de log de la phase 2](#fichiers-de-log-de-la-phase-2)
     * [Cas d'une intégration différée](#cas-dune-intégration-différée)
 * [Utilisation et gestion du `client-linux`](#utilisation-et-gestion-du-client-linux)
+    * [La documentation](la-documentation)
+    * [Mot de passe du compte `root` d'un `client-linux`](#mot-de-passe-du-compte-root-dun-client-linux`)
+    * [Utilisation d'un `terminal`](#utilisation-dun-terminal)
+    * [Utilisation des scripts `unefois`](#utilisation-des-scripts `unefois`)
 
 
 ## Vue d'ensemble
@@ -189,14 +193,25 @@ Vous pourrez le faire par la suite, comme cela est indiqué à la fin de la post
 
 ## Utilisation et gestion du `client-linux`
 
-Une fois la post-installation terminée, le `client-linux` est près :
+Une fois la post-installation terminée, le `client-linux` est prêt :
 les utilisateurs peuvent ouvrir une session, si un compte leur a été attribué.
 
-Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md) vous donnera quelques informations essentielles.
+
+### La documentation
+
+Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md) vous donnera quelques informations essentielles. Notamment en ce qui concerne la gestion du profil commun à tous les comptes.
+
+
+### Mot de passe du compte `root` d'un `client-linux`
+
+Chaque `client-linux` a un compte `root` qui permet son administration. Le mot de passe de ce compte local est le même que celui du compte `adminse3`.
+
+
+### Utilisation d'un `terminal`
 
 Si vous voulez intervenir directement sur le `client-linux`,
-le mieux est d'ouvrir un terminal en `root`
-dont le mot de passe est le même que celui du compte `adminse3`.
+le mieux est d'ouvrir un terminal en `root`.
+
 
 Cela peut se faire de plusieurs façons :
 
@@ -221,5 +236,8 @@ il suffit d'utiliser la commande suivante :
 ```ssh
 exit
 ```
-Une autre façon de gérer le `client-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/repertoire_unefois.md).
+
+### Utilisation des scripts `unefois`
+
+Une autre façon de gérer un parc de `clients-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/repertoire_unefois.md).
 
