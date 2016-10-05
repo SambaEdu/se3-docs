@@ -18,9 +18,9 @@
     * [Cas d'une intégration différée](#cas-dune-intégration-différée)
 * [Utilisation et gestion du `client-linux`](#utilisation-et-gestion-du-client-linux)
     * [La documentation](#la-documentation)
-    * [Mot de passe du compte `root` d'un `client-linux`](#mot-de-passe-du-compte-root-dun-client-linux`)
+    * [Mot de passe du compte `root` d'un `client-linux`](#mot-de-passe-du-compte-root-dun-client-linux)
     * [Utilisation d'un `terminal`](#utilisation-dun-terminal)
-    * [Utilisation des scripts `unefois`](#utilisation-des-scripts `unefois`)
+    * [Utilisation des scripts `unefois`](#utilisation-des-scripts-unefois)
 
 
 ## Vue d'ensemble
