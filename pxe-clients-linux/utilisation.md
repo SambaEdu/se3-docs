@@ -134,7 +134,7 @@ C'est donc un problème concernant un des firmwares à fournir qui est pourtant 
 
 - **Problème 5 :** l'installation s'arrête sur un message d'erreur : `Pas de système de fichiers racines. Aucun système de fichiers n'a été choisi comme fichier racine`.
 
-**Solution :** une clé usb ou un lecteur de disquette usb sont branchés sur le client : les enlever et relancer l'installation.
+**Solution :** une clé usb, un lecteur de disquette usb ou une imprimante sont branchés sur le client : les enlever et relancer l'installation.
 
 
 - **Problème 6 :** l'installation s'arrête sur le message d'erreur suivant :
