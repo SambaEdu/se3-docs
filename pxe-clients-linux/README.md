@@ -80,4 +80,5 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 
 Les personnes qui ont contribué à la rédaction de cette documentation sont :
 
+* Arnaud Malpeyre
 * Michel Suquet
