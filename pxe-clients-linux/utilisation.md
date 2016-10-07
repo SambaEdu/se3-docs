@@ -9,6 +9,13 @@
     * [Les firmwares pour la carte réseau](#les-firmwares-pour-la-carte-réseau)
     * [Fichiers de log de la phase 1](#fichiers-de-log-de-la-phase-1)
     * [Problèmes éventuels lors de la phase 1](#problèmes-éventuels-lors-de-la-phase-1)
+        * [Problème 1 : carte réseau et microprogramme](#problème-1-carte-réseau-et-microprogramme)
+        * [](#)
+        * [](#)
+        * [](#)
+        * [](#)
+        * [](#)
+        * [](#)
 * [Réservation de l'`IP` du `client-linux`](#réservation-de-lip-du-client-linux)
     * [Cas d'une nouvelle machine](#cas-dune-nouvelle-machine)
     * [Cas d'une machine ayant une réservation](#cas-dune-machine-ayant-une-réservation)
@@ -106,18 +113,24 @@ Des fichiers de log de la phase 1 sont disponibles dans `/var/log/installer/sysl
 
 ### Problèmes éventuels lors de la phase 1
 
-- **Problème 1 :** au début de l'installation, certaines cartes réseau ont besoin d'un micro-programme et il ne se trouve pas dans ceux qui sont incorporés comme cela est expliqué ci-dessus : l'installation demande alors ce micro-programme (ou firmware).
+#### Problème 1 : carte réseau et microprogramme
+
+Au début de l'installation, certaines cartes réseau ont besoin d'un micro-programme et il ne se trouve pas dans ceux qui sont incorporés comme cela est expliqué ci-dessus : l'installation demande alors ce micro-programme (ou firmware).
 
 **Solution :** noter les références du micro-programme et répondre Non pour poursuivre l'installation. Par la suite, il suffira d'installer le paquet correspondant à ce micro-programme. Par exemple, pour certaines cartes réseau `Broadcom`, on installera le paquet `firmware-b43-installer` (via un `terminal` à l'aide de la commande *aptitude install firmware-b43-installer*).
 
 
-- **Problème 2 :** au début de l'installation, le système détecte 2 cartes réseaux ; c'est souvent le cas d'un portable ayant une interface `Ethernet` et une interface `Wifi` et, dans ce cas, les interfaces peuvent être nommées `eth0` et `wlan0`. On peut avoir aussi 2 interfaces `Ethernet`, nommées `eth0` et `eth1` comme dans l'image ci-dessous.
+#### Problème 2 : 2 cartes réseaux détectées
+
+Au début de l'installation, le système détecte 2 cartes réseaux ; c'est souvent le cas d'un portable ayant une interface `Ethernet` et une interface `Wifi` et, dans ce cas, les interfaces peuvent être nommées `eth0` et `wlan0`. On peut avoir aussi 2 interfaces `Ethernet`, nommées `eth0` et `eth1` comme dans l'image ci-dessous.
 ![probleme-carte-reseau](images/probleme_carte_reseau.png)
 
 **Solution :** il suffira de choisir l'interface branchée au réseau, cette interface est souvent `eth0`, comme sur l'image ci-dessus.
 
 
-- **Problème 3 :** sur certaines machines, au début, après avoir choisi et lancé l'installation, l'installation se fige sur un fond bleu… En passant sur la 4ème console qui donne les `syslog` (avec la combinaison de touches `Ctrl+Alt+F4`) on reste bloqué sur les lignes suivantes :
+#### Problème 3 : un fond bleu figé
+
+Sur certaines machines, au début, après avoir choisi et lancé l'installation, l'installation se fige sur un fond bleu… En passant sur la 4ème console qui donne les `syslog` (avec la combinaison de touches `Ctrl+Alt+F4`) on reste bloqué sur les lignes suivantes :
 ```ssh
 check missing firmware, installing package /firmware/firmare-linux-nonfree_0.43_all.deb
 check missing firmware : removing and loading kernel module tg3
@@ -127,23 +140,31 @@ C'est donc un problème concernant un des firmwares à fournir qui est pourtant 
 **Solution :** en passant sur la fenêtre principale (à l'aide de la combinaison de touches `Ctrl+c`), le script est relancé et ça passe....Ce doit être un bug de l'installeur AMHA, donc pas grand chose à faire…
 
 
-- **Problème 4 :** sur certaines machines (Dell Optiplex 330), l'installation se fige à l'amorce et si on relance l'installation, elle se fige à un autre moment.
+#### Problème 4 : installation qui se fige
+
+Sur certaines machines (Dell Optiplex 330), l'installation se fige à l'amorce et si on relance l'installation, elle se fige à un autre moment.
 
 **Solution :** configurer le `Bios` de la machine pour accepter le mode `WoL` ([Wake On Line](https://fr.wikipedia.org/wiki/Wake-on-LAN)). Relancer ensuite l'installation.
 
 
-- **Problème 5 :** l'installation s'arrête sur un message d'erreur : `Pas de système de fichiers racines. Aucun système de fichiers n'a été choisi comme fichier racine`.
+#### Problème 5 : système de fichiers racines
 
-**Solution :** une clé usb, un lecteur de disquette usb ou une imprimante sont branchés sur le client : les enlever et relancer l'installation.
+L'installation s'arrête sur un message d'erreur : `Pas de système de fichiers racines. Aucun système de fichiers n'a été choisi comme fichier racine`.
+
+**Solution :** une clé usb, un lecteur de disquette usb, un lecteur de carte interne ou une imprimante sont branchés sur le client : les enlever et relancer l'installation.
 
 
-- **Problème 6 :** l'installation s'arrête sur le message d'erreur suivant :
+#### Problème 6 : montage d'un système de fichiers
+
+L'installation s'arrête sur le message d'erreur suivant :
 ![probleme-installation](images/probleme_netboot.png)
 
 **Solution :** mettre à jour les archives netboot `Ubuntu` ou `Debian`, qui ont dû changer lors d'une évolution de version, en revalidant le choix de l'environnement du Bureau (Voir le module `Serveur TFTP` de l'interface du `se3`).
 
 
-- **Problème 7 :** l'installation s'arrête sur un message de corruption du miroir
+#### Problème 7 : corruption de miroir
+
+L'installation s'arrête sur un message de corruption du miroir
 ![probleme-miroir](images/probleme_miroir.png)
 
 **Solution :** rétablir la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation.
