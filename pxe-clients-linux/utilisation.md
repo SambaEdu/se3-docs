@@ -232,7 +232,7 @@ On peut laisser le système ainsi mais si on veut voir apparaître les partages 
 
 Pour cela, il faut lancer l'application **Outils système/outil de personnalisation** et dans l'onglet **Bureau**, activer les icônes sur le Bureau ; ne laisser cocher que les volumes montés.
 
-Ensuite, vous [rajoutez le fichier *.config/dconf/user* dans le `skel`]() pour que tous les utilisateurs aient la même configuration.
+Ensuite, vous [rajoutez le fichier *.config/dconf/user* dans le `skel`](../se3-clients-linux/gestion_profils.md) pour que tous les utilisateurs aient la même configuration.
 
 
 ### Mot de passe du compte `root` d'un `client-linux`
