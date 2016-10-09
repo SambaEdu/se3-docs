@@ -243,9 +243,8 @@ Chaque `client-linux` a un compte `root` qui permet son administration. Le mot d
 
 ### Utilisation d'un `terminal`
 
-Si vous voulez intervenir directement sur le `client-linux`,
-le mieux est d'ouvrir un terminal en `root`.
-
+Si vous voulez intervenir directement sur un `client-linux`,
+le mieux est d'ouvrir un terminal en `root`. Cependant, si cela concerne plusieurs `clients-linux`, vous pourrez [utiliser un script `unefois`](#utilisation-des-scripts-unefois), en ayant auparavant testé le script sur un des `client-linux`…
 
 Cela peut se faire de plusieurs façons :
 
