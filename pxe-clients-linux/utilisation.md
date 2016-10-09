@@ -25,6 +25,7 @@
     * [Cas d'une intégration différée](#cas-dune-intégration-différée)
 * [Utilisation et gestion du `client-linux`](#utilisation-et-gestion-du-client-linux)
     * [La documentation](#la-documentation)
+    * [Bureau des `clients-linux` `Debian/Jessie/gnome`](#bureau-des-clients-linux-debianjessiegnome)
     * [Mot de passe du compte `root` d'un `client-linux`](#mot-de-passe-du-compte-root-dun-client-linux)
     * [Utilisation d'un `terminal`](#utilisation-dun-terminal)
     * [Utilisation des scripts `unefois`](#utilisation-des-scripts-unefois)
@@ -221,6 +222,17 @@ les utilisateurs peuvent ouvrir une session, si un compte leur a été attribué
 ### La documentation
 
 Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md) vous donnera quelques informations essentielles. Notamment en ce qui concerne la gestion du profil commun à tous les comptes.
+
+
+### Bureau des `clients-linux` `Debian/Jessie/gnome`
+
+Lors de la première installation des `clients-linux` `Debian/Jessie/Gnome`, si on n'a pas encore configuré le profil pour ces `clients-linux`, on se retrouve avec un Bureau "vide" par défaut.
+
+On peut laisser le système ainsi mais si on veut voir apparaître les partages sur le Bureau, il faut configurer le profil via le `skel`.
+
+Pour cela, il faut lancer l'application **Outils système/outil de personnalisation** et dans l'onglet **Bureau**, activer les icônes sur le Bureau ; ne laisser cocher que les volumes montés.
+
+Ensuite, vous [rajoutez le fichier *.config/dconf/user* dans le `skel`]() pour que tous les utilisateurs aient la même configuration.
 
 
 ### Mot de passe du compte `root` d'un `client-linux`
