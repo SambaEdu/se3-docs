@@ -37,11 +37,11 @@ Ce dernier doit impérativement être en version `Wheezy`. Si vous avez encore v
 Il faut que le module `se3-clonage`, dit [`TFTP`](https://fr.wikipedia.org/wiki/Trivial_File_Transfer_Protocol), soit installé.
 
 * Si c'est le cas vérifiez qu'il est bien dans la dernière version : au moins **0.88** (le mettre à jour si nécessaire).
-
-Pour cela, vous pouvez utilisez la commande suivante dans un terminal en `root` sur le `se3` :
-```sh
-apt-cache policy se3-clonage
-```
+    
+    Pour cela, vous pouvez utilisez la commande suivante dans un terminal en `root` sur le `se3` :
+    ```sh
+    apt-cache policy se3-clonage
+    ```
 
 * Sinon installez le module `se3-clonage` puis activez le mode graphique via l'interface web du serveur `se3`.
 
