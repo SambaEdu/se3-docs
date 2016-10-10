@@ -36,7 +36,12 @@ Ce dernier doit impérativement être en version `Wheezy`. Si vous avez encore v
 
 Il faut que le module `se3-clonage`, dit [`TFTP`](https://fr.wikipedia.org/wiki/Trivial_File_Transfer_Protocol), soit installé.
 
-Si c'est le cas vérifiez qu'il est bien dans la dernière version : **0.88** (le mettre à jour si nécessaire).
+Si c'est le cas vérifiez qu'il est bien dans la dernière version : au moins **0.88** (le mettre à jour si nécessaire).
+
+Pour cela, vous pouvez utilisez la commande suivante dans un terminal en `root` sur le `se3` :
+```sh
+apt-cache policy se3-clonage
+```
 
 Sinon installez le module `se3-clonage` puis activez le mode graphique via l'interface web du serveur `se3`.
 
@@ -47,7 +52,12 @@ Sinon installez le module `se3-clonage` puis activez le mode graphique via l'int
 
 Si vous souhaitez intégrer vos clients Linux au domaine `se3`, il vous faut aussi installer le module `se3-clients-linux`.
 
-S'il est déjà installé, vérifiez qu'il est bien dans la dernière version : **2.1.1** (le mettre à jour si nécessaire).
+S'il est déjà installé, vérifiez qu'il est bien dans la dernière version : au moins **2.1.1** (le mettre à jour si nécessaire).
+
+Pour cela, vous pouvez utilisez la commande suivante dans un terminal en `root` sur le `se3` :
+```sh
+apt-cache policy se3-clients-linux
+```
 
 Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
 
