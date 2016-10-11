@@ -8,10 +8,10 @@
 
 * [Vue d'ensemble du dispositif](#vue-densemble)
 * [Distributions GNU/Linux proposées](#distributions-gnulinux-proposées)
-* [Mise en place du dispositif](misenplace.md)
-* [Utilisation du dispositif](utilisation.md)
-* [Les listes des applications installées](listeapplis.md)
-* [Utilisation du script perso](messcripts.md)
+* [Mise en place du dispositif](misenplace.md#mise-en-place-du-dispositif-dinstallation-de-clients-gnulinux)
+* [Utilisation du dispositif](utilisation.md#utilisation-du-dispositif-dinstallation-de-clients-gnulinux)
+* [Les listes des applications installées](listeapplis.md#liste-des-applications-à-installer)
+* [Utilisation du script perso](messcripts.md#lancement-dun-script-perso-en-fin-de-post-installation-des-clients-linux)
 * [Annexes](#annexes)
     * [Utiliser la branche `testing`](#utiliser-la-branche-testing)
     * [Utiliser le menu `perso`](#utiliser-le-menu-perso)
@@ -61,11 +61,11 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 
 ### Utiliser la branche `testing`
 
-* [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](testing.md)
+* [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
 
 ### Utiliser le menu `perso`
 
-* [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md)
+* [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md#menu-pxe-persomenu)
 
 
 ## Ressources externes
