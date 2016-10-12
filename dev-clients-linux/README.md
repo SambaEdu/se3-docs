@@ -75,6 +75,16 @@ tutoriels sur Git dans le Web. Nous vous proposons également
 un [petit memo ici](memo-git.md#memo-git) qui devrait vous permettre
 de bien débuter.
 
+Une fois que vous en saurez suffisamment sur Git, vous serez
+par exemple en mesure d'écrire des pages de documentation,
+exactement comme celle que vous êtes en train de lire
+présentement, en utilisant la syntaxe markdown. Markdown est
+une syntaxe vraiment très simple utilisée par Github (entre
+autres) afin de mettre en forme du texte (elle ressemble
+beaucoup aux syntaxes que l'on rencontre sur certains sites
+de type Wiki). Vous trouverez un résumé de l'essentiel de
+cette syntaxe markdown [ici](memo-markdown.md).
+
 
 ## Le channel IRC `#se3`
 
