@@ -1,7 +1,7 @@
 # Documentation pour le (futur ?) contributeur/développeur
 
 * [Devenir contributeur/développeur du projet](#devenir-contributeurdéveloppeur-du-projet)
-* [Memo sur Git et le formatage markdow](#memo-sur-git-et-le-formatage-markdow)
+* [Memo sur Git et le formatage markdown](#memo-sur-git-et-le-formatage-markdown)
 * [Le channel IRC `#se3`](#le-channel-irc-se3)
 * [Envoyer une notification de ses commits sur la liste `gnu-linux_et_se3`](#envoyer-une-notification-de-ses-commits-sur-la-liste-gnu-linux_et_se3)
 * [Un exemple de configuration vim pour éditer le code](#un-exemple-de-configuration-vim-pour-éditer-le-code)
@@ -48,7 +48,7 @@ répondrons par mail dès que possible pour vous indiquer que
 vous êtes bien désormais habilité(e) à contribuer au projet.
 
 
-## Memo sur Git et le formatage markdow
+## Memo sur Git et le formatage markdown
 
 Maintenant que vous avez bien procédé aux deux étapes
 ci-dessus, vous êtes apte à contribuer au projet.
