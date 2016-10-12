@@ -39,11 +39,11 @@ La solution proposée ici est indépendante du module `Backuppc` du serveur `se3
 
 ## Les scripts
 
-Les scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, sont maintenant disponibles directement sur votre serveur `se3` s'il est à jour.
+Les scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, seront maintenant disponibles directement sur votre serveur `se3`.
 
-Les 2 scripts se trouvent dans le répertoire `/usr/share/se3/sbin` du `se3` depuis la version `Squeeze` 2.4.9138 de janvier 2016.
+Les 2 scripts se trouveront dans le répertoire `/usr/share/se3/sbin` du `se3` dans la prochaine mise à jour prévue en octobre 2016.
 
-Si vous n'êtes pas en `Wheezy` ou en `Squeeze` mais dans une version antérieure, telle que `Lenny`, il faudra mettre en place le script `sauve_se3.sh` en le téléchargeant. Cependant, certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, relisez le conseil ci-dessus.
+Si vous n'êtes pas en `Wheezy` mais dans une version antérieure, telle que `Lenny` ou `Squeeze`, il faudra mettre en place le script `sauve_se3.sh` en le téléchargeant. Cependant, certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Cæn pour leur utilisation.
 
 Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) sont aussi disponibles et correspondent à cette documentation.
 
