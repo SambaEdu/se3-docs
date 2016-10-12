@@ -116,8 +116,29 @@ codes nettement plus jolis.
 
 ## Insérer une image
 
-Pour insérer une image centrée, on doit insérer un petit
-bout de code html au sein du fichier markdown comme ceci :
+Pour insérer une image, on pourra utiliser cette syntaxe
+ci-dessous, qui n'est rien d'autre que la syntaxe utilisée
+pour un lien mais précédée du caractère `!` :
+
+```
+Blabla blabla Blabla blabla Blabla blabla Blabla blabla
+Blabla blabla Blabla blabla Blabla blabla Blabla blabla
+
+![Texte alternatif](images/bidul.png)
+
+Blabla blabla Blabla blabla Blabla blabla Blabla blabla
+Blabla blabla Blabla blabla Blabla blabla Blabla blabla
+```
+
+En revanche, avec le code ci-dessus :
+
+* l'image est forcément alignée sur la marge de gauche
+* et on ne peut pas redéfinir la taille de l'image.
+
+
+**Remarque :** si jamais vous souhaitez centrer votre image
+et aussi redéfinir sa taille, alors il faudra écrire un bout
+de code html au sein du fichier markdown comme ceci :
 
 ```
 Blabla blabla Blabla blabla Blabla blabla Blabla blabla
@@ -152,19 +173,4 @@ de l'image. Dans le cas présent, l'image occupera la moitié
 préciser des tailles d'images en pixels `px`, un pourcentage
 par rapport à la largeur du texte est un bien meilleur choix).
 
-**Remarque :** en fait il y a bien plus propre que la manière
-ci-dessus en utilisant de la syntaxe markdown uniquement comme
-ceci :
-
-```
-Blabla blabla Blabla blabla Blabla blabla Blabla blabla
-Blabla blabla Blabla blabla Blabla blabla Blabla blabla
-
-![Texte alternatif](images/bidul.png)
-
-Blabla blabla Blabla blabla Blabla blabla Blabla blabla
-Blabla blabla Blabla blabla Blabla blabla Blabla blabla
-```
-
-En revanche, on ne peut pas redéfinir la taille de l'image.
 
