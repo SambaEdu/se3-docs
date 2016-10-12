@@ -294,14 +294,14 @@ Il suffit de rebrancher les disques et deux solutions se présentent :
 ## Utiliser les scripts de sauvegarde/restauration
 
 **Une solution alternative** à l'utilisation du script ci-dessus est la suivante :
-* sauvegarder votre serveur (script `sauve_serveur.sh`)
+* sauvegarder votre serveur (script `sauve_se3.sh`)
 * installer un `se3-wheezy`, par la méthode de votre choix
 * configurer les modules adaptés à votre situation
-* restaurer votre serveur (script `restaure_serveur.sh`)
+* restaurer votre serveur (script `restaure_se3.sh`)
 
 Cette méthode sera à utiliser si vous avez une version antérieure à celle de `se3-squeeze`.
 
-Ces deux scripts (`sauve_serveur.sh` et `restaure_serveur.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
+Ces deux scripts (`sauve_se3.sh` et `restaure_se3.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
 
 Il est à noter que ces deux scripts sont sur votre `se3-squeeze`, s'il est à jour bien entendu, mais dans une version insuffisante pour la restauration sur un `se3-wheezy`. Dans ce cas, il faudra utiliser [les versions les plus récentes](../../../../se3master/tree/master/usr/share/se3/sbin) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 

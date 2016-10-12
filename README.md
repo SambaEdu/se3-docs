@@ -34,8 +34,8 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * La documentation pour [les nouvelles versions des scripts](se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3)
 
 
-## Reprepro
-
+## Utilitaires
+* Une brêve documentation pour [l'utilisation d'une session `screen`](../dev-clients-linux/screen.md#utilisation-dune-session-screen)
 * Un petit memo concernant [reprepro](reprepro/memo.md#petit-memo-sur-reprepro)
 
 
