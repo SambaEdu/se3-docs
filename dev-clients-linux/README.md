@@ -38,7 +38,7 @@ bas les explications sur ce point).
 
 **2ème étape :** Faites savoir que vous voulez devenir membre du projet
 `SambaEdu` en écrivant à l'adresse mail indiquée dans
-[ce fichier](https://github.com/SambaEdu/se3-clients-linux/blob/master/src/DEBIAN/control#L7)
+[ce fichier](../../../../se3-clients-linux/blob/master/src/DEBIAN/control#L7)
 au niveau du champ `Maintainer:`.
 
 Dans votre mail, indiquez
@@ -72,7 +72,7 @@ L'utilisation de Git pour des tâches
 courantes (typiquement modifier/ajouter un fichier) est
 beaucoup plus simple qu'il n'y paraît. Il existe de nombreux
 tutoriels sur Git dans le Web. Nous vous proposons également
-un [petit memo ici](memo-git.md) qui devrait vous permettre
+un [petit memo ici](memo-git.md#memo-git) qui devrait vous permettre
 de bien débuter.
 
 
@@ -120,7 +120,7 @@ niveau du bouton `Raw` (à droite de la page).
 
 ## Envoyer une notification de ses commits sur la liste `gnu-linux_et_se3`
 
-Vous trouverez toutes les explications nécessaires à [cette page](notification.md).
+Vous trouverez toutes les explications nécessaires à [cette page](notification.md#envoyer-une-notification-de-ses-commits-sur-la-liste-gnu-linux_et_se3).
 
 
 ## Un exemple de configuration vim pour éditer le code
@@ -150,7 +150,7 @@ set list
 
 ### Comment construire le package `se3-clients-linux.deb` ?
 
-Vous trouverez toutes les explications nécessaires à [cette page](build-package.md).
+Vous trouverez toutes les explications nécessaires à [cette page](build-package.md#construire-le-package).
 
 
 ### Dépôt APT de test pour le paquet `se3-clients-linux` et branche Git
@@ -163,7 +163,7 @@ Le dépôt est mis à jour toutes les 5 minutes.
 
 Évidemment c'est pour du test, aucune stabilité n'est
 garantie. Vous trouverez toutes les explications nécessaires
-à [cette page](apt-repository.md).
+à [cette page](apt-repository.md#utiliser-une-branche-git-puis-tester-le-package-se3-clients-linux).
 
 
 ### La boîte à outils `lib.sh`
@@ -173,7 +173,7 @@ shell qui peuvent être réutilisables dans différents scripts
 du paquet `se3-clients-linux`.
 
 Vous trouverez plus
-d'explications à [cette page](libsh.md).
+d'explications à [cette page](libsh.md#la-petite-boîte-à-outils-libsh).
 
 
 
