@@ -97,7 +97,7 @@ bash /usr/share/se3/scripts/se3_update_system.sh
 
 Dans l'inteface web, entrée `Informations système/Espace disques`, le répertoire racine `/` est en orange ou en rouge : il n'y aura sans doute pas assez de place pour mener à bien le changement de version.
 
-Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](AugmenterRacine.md).
+Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](AugmenterRacine.md#faire-de-la-place-pour-passer-en-wheezy).
 
 
 ### Supprimer les profiles ?
@@ -160,7 +160,7 @@ Il vous faut une journée pour être sûr que tout soit bien fait.
 ### Utilisation d'une session `screen`
 `screen` est une session particulière en ce sens que vous pouvez la quitter sans que le processus soit arrêté, contrairement à une session normale.
 
-Vous trouverez une brêve [documentation de l'utilisation d'une session `screen`](../dev-clients-linux/screen.md) qui vous permettra de découvrir cet outil, indispensable dans certaine situation.
+Vous trouverez une brêve [documentation de l'utilisation d'une session `screen`](../dev-clients-linux/screen.md#utilisation-dune-session-screen) qui vous permettra de découvrir cet outil, indispensable dans certaine situation.
 
 L'utilisation de `screen` est d'ailleurs suggérée par le script.
 
@@ -188,7 +188,7 @@ Cette version de dev' ajoute quelques fonctions au script comme la possibilité 
 Les voici (ces options ne servant que pour la mise au point du script, vous n'avez pas à les utiliser) :
 * --download | -d : préparer la migration sans la lancer en téléchargeant uniquement les paquets nécessaires
 * --no-update     : ne pas vérifier la mise à jour du script de migration sur le serveur centrale mais utiliser la version locale
-* --debug         : lancer le script en outrepassant les tests de taille et de place libre des partitions. À NE PAS UTILISER EN PRODUCTION
+* --debug         : lancer le script en outrepassant les tests de taille et de place libre des partitions. **À NE PAS UTILISER EN PRODUCTION**
 
 
 ### Redémarrer à la fin ?
@@ -303,7 +303,7 @@ Cette méthode sera à utiliser si vous avez une version antérieure à celle de
 
 Ces deux scripts (`sauve_serveur.sh` et `restaure_serveur.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
 
-Il est à noter que ces deux scripts sont sur votre `se3-squeeze`, s'il est à jour bien entendu, mais dans une version insuffisante pour la restauration sur un `se3-wheezy`. Dans ce cas, il faudra utiliser [les versions les plus récentes](../../../../se3-clients-linux/tree/master/sauvegarde-restauration) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md).
+Il est à noter que ces deux scripts sont sur votre `se3-squeeze`, s'il est à jour bien entendu, mais dans une version insuffisante pour la restauration sur un `se3-wheezy`. Dans ce cas, il faudra utiliser [les versions les plus récentes](../../../../se3master/tree/master/usr/share/se3/sbin) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 
 **Remarque :** une chose à prendre en compte sur ces scripts : sur `se3-wheezy` on est full `utf8`, et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en `iso`. Cela fait quelques versions que nous sommes en `utf8` côté `samba` mais, pour autant, s'il y a eu des versions successives, il y a de fortes chances que de le codage `iso` traîne encore dans `/home` et `/var/se3`.
 
