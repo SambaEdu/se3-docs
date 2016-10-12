@@ -35,7 +35,7 @@
 
 Le but de cette documentation est de donner quelques indications et conseils quant à la gestion des `clients-linux`.
 
-La mise en place du paquet `se3-clients-linux` est décrite dans [la documentation du paquet `pxe-clients-linux`](../pxe-clients-linux/README.md) que vous consulterez  avec profit : ce paquet `pxe-clients-linux` donne accès au mécanisme d'installation/intégration automatique
+La mise en place du paquet `se3-clients-linux` est décrite dans [la documentation du paquet `pxe-clients-linux`](../pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) que vous consulterez  avec profit : ce paquet `pxe-clients-linux` donne accès au mécanisme d'installation/intégration automatique
 que nous vous conseillons fortement d'utiliser.
 
 **Remarque :** nous avons laissé les explications de mise en place et d'intégration manuelles issues des premières versions : elles vous apporteront des précisions complémentaires sur le fonctionnement général du mécanisme.
@@ -105,11 +105,11 @@ exclure.
 
 ## Annexes
 
-* [Intégrer le service `LTSP` à un serveur se3 Wheezy](ltsp.md)
-* [Installer un miroir local APT de cache avec `apt-cacher-ng`](apt-cacher-ng.md)
-* [Documentation pour le (futur) contributeur/développeur](dev/README.md)
-* [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](upgrade-via-se3testing.md)
-* [Intégrer un serveur Owncloud 9 à un se3 Wheezy](owncloud.md)
+* [Intégrer le service `LTSP` à un serveur se3 Wheezy](ltsp.md#installation-du-service-ltsp---client-lourd-fat-client-sur-un-serveur-samba-edu-3)
+* [Installer un miroir local APT de cache avec `apt-cacher-ng`](apt-cacher-ng.md#mise-en-place-dapt-cacher-ng)
+* [Documentation pour le (futur) contributeur/développeur](dev-clients-linux/README.md)
+* [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](upgrade-via-se3testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
+* [Intégrer un serveur Owncloud 9 à un se3 Wheezy](owncloud.md#installation-downcloud-9-90-ou-91-sur-un-serveur-samba-edu-3)
 
 
 ## Ressources externes
