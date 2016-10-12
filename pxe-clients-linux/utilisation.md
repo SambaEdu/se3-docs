@@ -49,7 +49,7 @@ Ensuite, tout se déroulera de façon automatique, sans intervention de votre pa
 
 On obtient ainsi un client `Gnu/Linux` sur lequel on peut ouvrir une session avec un des comptes disponibles dans [l'annuaire `Ldap`](https://fr.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol) du serveur `se3`.
 
-**Remarque 1 :** à la fin de la post-installation (**phase 2**), il est lancé un [script perso](messcripts.md) que vous pouvez utiliser pour apporter votre touche personnelle au `client-linux` ;-)
+**Remarque 1 :** à la fin de la post-installation (**phase 2**), il est lancé un [script perso](messcripts.md#lancement-dun-script-perso-en-fin-de-post-installation-des-clients-linux) que vous pouvez utiliser pour apporter votre touche personnelle au `client-linux` ;-)
 
 **Remarque 2 :** de même, une [liste de paquets perso](listeapplis.md#la-liste-perso) à installer lors de cette phase de post-installation est à votre disposition. Sinon, il est toujours possible de le faire par la suite à l'aide des scripts `unefois`.
 
@@ -221,7 +221,7 @@ les utilisateurs peuvent ouvrir une session, si un compte leur a été attribué
 
 ### La documentation
 
-Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md) vous donnera quelques informations essentielles. Notamment en ce qui concerne la gestion du profil commun à tous les comptes.
+Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux) vous donnera quelques informations essentielles. Notamment en ce qui concerne la gestion du profil commun à tous les comptes.
 
 
 ### Bureau des `clients-linux` `Debian/Jessie/gnome`
@@ -233,7 +233,7 @@ On peut laisser le système ainsi mais si on veut voir apparaître les partages 
 Pour cela, il faut lancer l'application **Outils système/outil de personnalisation** et dans l'onglet **Bureau**, activer les icônes sur le Bureau ; ne laisser cocher que les volumes montés.
 ![bureau-debian-jessie-gnome](images/bureau_gnome.png)
 
-Ensuite, vous [rajoutez le fichier **.config/dconf/user** dans le `skel`](../se3-clients-linux/gestion_profils.md) pour que tous les utilisateurs aient la même configuration.
+Ensuite, vous [rajoutez le fichier **.config/dconf/user** dans le `skel`](../se3-clients-linux/gestion_profils.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux) pour que tous les utilisateurs aient la même configuration.
 
 
 ### Mot de passe du compte `root` d'un `client-linux`
@@ -272,5 +272,5 @@ exit
 
 ### Utilisation des scripts `unefois`
 
-Une autre façon de gérer un parc de `clients-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/repertoire_unefois.md).
+Une autre façon de gérer un parc de `clients-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/repertoire_unefois.md#le-répertoire-unefois).
 

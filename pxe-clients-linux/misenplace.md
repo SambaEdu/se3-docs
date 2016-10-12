@@ -29,7 +29,7 @@
 
 Mettre à jour le serveur `se3`.
 
-Ce dernier doit impérativement être en version `Wheezy`. Si vous avez encore votre serveur `se3` en version `squeeze`, nous vous conseillons d'effectuer [la migration vers la version `wheezy`](../se3-migration/SqueezeToWheezy.md).
+Ce dernier doit impérativement être en version `Wheezy`. Si vous avez encore votre serveur `se3` en version `squeeze`, nous vous conseillons d'effectuer [la migration vers la version `wheezy`](../se3-migration/SqueezeToWheezy.md#migration-de-se3-squeeze-vers-se3-wheezy).
 
 
 #### Module `TFTP` installé
