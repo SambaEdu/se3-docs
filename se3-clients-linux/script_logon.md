@@ -90,4 +90,4 @@ Pour pouvoir modifier le comportement du script de `logon` de manière pérenne,
 
 Le `logon_perso` permet la personnalisation du script de `logon` : Une partie importante du script de `logon` est gérée par le `logon_perso` qui permet d'aptater son fonctionnement aux besoins des utilisateurs.
 
-Pour en savoir davantage sur le `logon_perso`, reportez-vous à [la page de personnalisation du logon](logon_perso.md).
+Pour en savoir davantage sur le `logon_perso`, reportez-vous à [la page de personnalisation du logon](logon_perso.md#personnaliser-le-script-de-logon).
