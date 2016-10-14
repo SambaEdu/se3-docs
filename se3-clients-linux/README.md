@@ -105,19 +105,19 @@ exclure.
 
 ## Annexes
 
-* [Intégrer le service `LTSP` à un serveur se3 Wheezy](ltsp.md#installation-du-service-ltsp---client-lourd-fat-client-sur-un-serveur-samba-edu-3)
-* [Installer un miroir local APT de cache avec `apt-cacher-ng`](apt-cacher-ng.md#mise-en-place-dapt-cacher-ng)
+* [Intégrer le service `LTSP` à un serveur `se3 Wheezy`](ltsp.md#installation-du-service-ltsp---client-lourd-fat-client-sur-un-serveur-samba-edu-3)
+* [Installer un miroir local `APT` de cache avec `apt-cacher-ng`](apt-cacher-ng.md#mise-en-place-dapt-cacher-ng)
 * [Documentation pour le (futur) contributeur/développeur](../dev-clients-linux/README.md#documentation-pour-le-futur--contributeurdéveloppeur)
 * [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](upgrade-via-se3testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
-* [Intégrer un serveur Owncloud 9 à un se3 Wheezy](owncloud.md#installation-downcloud-9-90-ou-91-sur-un-serveur-samba-edu-3)
+* [Intégrer un serveur `Owncloud 9` à un `se3 Wheezy`](owncloud.md#installation-downcloud-9-90-ou-91-sur-un-serveur-samba-edu-3)
 
 
 ## Ressources externes
 
 * [Installer un réseau `se3` virtuel avec `VirtualBox`](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox)
 * [Installation de clients `Debian Wheezy` via `Se3` avec intégration automatique](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
-* [Installer un serveur LTSP `Jessie` dans un réseau Se3](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
-* [Installer un serveur Owncloud 8 dans un réseau Se3](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_owncloud_8_avec_l%27annuaire_du_se3)
+* [Installer un serveur `LTSP Jessie` dans un réseau `se3`](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Jessie%29_dans_un_r%C3%A9seau_Se3)
+* [Installer un serveur `Owncloud 8` dans un réseau `se3`](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_owncloud_8_avec_l%27annuaire_du_se3)
 
 
 ## Les contributeurs
