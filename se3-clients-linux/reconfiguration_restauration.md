@@ -30,5 +30,5 @@ puis par le répertoire `bin/` (le mot de passe root du serveur `se3` sera deman
 Voir le schéma de [l'arborescence du répertoire `clients-linux/`](visite_rapide.md#arborescence-du-répertoire-clients-linux).
 
 
-**Remarque :** en réalité, ces deux procédures ne font pas que reconfigurer les droits sur les fichiers, elles permettent aussi d'injecter le contenu du fichier `logon_perso` dans le fichier `logon`. Ce point est abordé dans la section [personnalisation](script_logon.md#personnaliser-le-script-de-logon).
+**Remarque :** en réalité, ces deux procédures ne font pas que reconfigurer les droits sur les fichiers, elles permettent aussi d'injecter le contenu du fichier `logon_perso` dans le fichier `logon`. Ce point est abordé dans la section [personnalisation](script_logon.md#le-logon_perso).
 
