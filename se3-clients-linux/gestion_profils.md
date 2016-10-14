@@ -140,8 +140,7 @@ domaine (que ce soit les comptes professeur ou les comptes
 élève) possèdent exactement le même profil par défaut.
 
 **Note :** Cette restriction pourra, dans une certaine
-mesure, être levée lorsqu'on abordera [la personnalisation du
-script de logon](script_logon.md#personnaliser-le-script-de-logon).
+mesure, être levée lorsqu'on abordera [la personnalisation du script de logon](script_logon.md#personnaliser-le-script-de-logon).
 
 Seule la liste des partages réseau accessibles sera
 différente d'un compte à l'autre.
@@ -334,7 +333,7 @@ décrite à la section précédente peut cependant être
 assouplie pour certains utilisateurs ou tout un groupe d'utilisateurs en modifiant le script de `logon`.
 
 **Note :** Il est important de bien comprendre 
-[le fonctionnement du script de `logon`](script_logon.md#le-script-de-logon) et comment l'adapter à vos usages à l'aide du [fichier `logon_perso`](logon_perso.md).
+[le fonctionnement du script de `logon`](script_logon.md#le-script-de-logon) et comment l'adapter à vos usages à l'aide du [fichier `logon_perso`](logon_perso.md#personnaliser-le-script-de-logon).
 
 Pour comprendre cela, poursuivons avec l'exemple de la modification du
 profil par défaut de `Mozilla`.
