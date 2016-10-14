@@ -12,7 +12,7 @@ la liste des partages disponibles en fonction du compte qui se connecte ou en fo
     * [Partages pour un compte `professeur`](#partages-pour-un-compte-professeur)
     * [Partages pour le compte `admin`](#partages-pour-le-compte-admin)
 * [Le lien symbolique `clients-linux`](#le-lien-symbolique-clients-linux)
-* [Reconfiguration des droits du paquet `se3-clients-linux`](reconfiguration_restauration.md)
+* [Reconfiguration des droits du paquet `se3-clients-linux`](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits)
 * [Cas des paquets dont la version est antérieure à 1.1](#cas-des-paquets-dont-la-version-est-antérieure-à-11)
 * [Retrouver le comportement par défaut](#retrouver-le-comportement-par-défaut)
 
@@ -60,7 +60,7 @@ Ce lien symbolique vous permet d'avoir accès, **en lecture et en écriture**, a
 
 Techniquement, une modification de ce répertoire est aussi possible via le lien symbolique `admhomes` puisque celui-ci donne accès à tout le répertoire `/home/` du serveur.
 
-**Avertissement : toujours [reconfigurer les droits](reconfiguration_restauration.md) après modifications du contenu du répertoire `clients-linux/`**
+**Avertissement : toujours [reconfigurer les droits](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits) après modifications du contenu du répertoire `clients-linux/`**
 
 Lors de certains paramétrages du paquet `se3-clients-linux`, vous serez parfois amené(e) à modifier le contenu du répertoire `/home/netlogon/clients-linux/` du serveur :
 
@@ -68,7 +68,7 @@ Lors de certains paramétrages du paquet `se3-clients-linux`, vous serez parfois
 * soit via le lien symbolique `clients-linux` situé sur le bureau du compte `admin` 
 lorsque vous êtes connecté(e) sur un `client-linux` intégré au domaine.
 
-Dans un cas comme dans l'autre, une fois vos modifications terminées, il faudra **TOUJOURS [reconfigurer les droits du paquet](reconfiguration_restauration.md)** sans quoi vous risquez ensuite de rencontrer des erreurs incompréhensibles.
+Dans un cas comme dans l'autre, une fois vos modifications terminées, il faudra **TOUJOURS [reconfigurer les droits du paquet](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits)** sans quoi vous risquez ensuite de rencontrer des erreurs incompréhensibles.
 
 
 ## Cas des paquets dont la version est antérieure à 1.1
