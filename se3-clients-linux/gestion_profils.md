@@ -358,7 +358,7 @@ l'ouverture de session, le répertoire `/.mozilla` soit
 remplacé par `/.mozilla-prof` si et seulement si c'est un(e)
 enseignant(e) qui se connecte.
 
-Pour ce faire, vous utiliserez [les variables prêtes à l'emploi](variables_fonctions.md#des-variables-et-des-fonctions-prêtes-à-lemploi),
+Pour ce faire, vous utiliserez [les variables prêtes à l'emploi](variables_fonctions.md#des-variables-et-des-fonctions-prêtes-à-lemploi-pour-des-scripts),
 et indiquerez dans la fonction `ouverture_perso` du fichier `logon_perso` les lignes suivantes :
 
 ```sh
