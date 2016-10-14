@@ -95,7 +95,7 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
 
 Ce fichier `logon` est véritablement le chef d'orchestre de tous les clients GNU/Linux intégrés au domaine. C'est lui qui contient les instructions exécutées systématiquement par les clients GNU/Linux juste avant l'affichage de la fenêtre de connexion, au moment de l'ouverture de session et au moment de la fermeture de session.
 
-Ce fichier `logon` est expliqué à la section [logon-script](script_logon.md).
+Ce fichier `logon` est expliqué à la section [logon-script](script_logon.md#le-script-de-logon).
 
 En principe, vous ne devez pas modifier directement ce fichier `logon` mais cela est possible indirectement à l'aide du fichier `logon_perso` juste à côté.
 
