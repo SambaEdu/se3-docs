@@ -42,6 +42,7 @@ Il faut que le module `se3-clonage`, dit [`TFTP`](https://fr.wikipedia.org/wiki/
     ```sh
     apt-cache policy se3-clonage
     ```
+    ![policy_se3-clonage.png](policy_se3-clonage.png)
     
 * Sinon installez le module `se3-clonage` puis activez le mode graphique via l'interface web du serveur `se3`.
 
@@ -58,6 +59,7 @@ Si vous souhaitez intégrer vos clients Linux au domaine `se3`, il vous faut aus
     ```sh
     apt-cache policy se3-clients-linux
     ```
+    ![policy_se3-clients-linux.png](policy_se3-clients-linux.png)
     
 * Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
 
