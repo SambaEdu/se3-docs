@@ -97,9 +97,9 @@ Ce fichier `logon` est véritablement le chef d'orchestre de tous les clients GN
 
 Ce fichier `logon` est expliqué à la section [logon-script](script_logon.md).
 
-En principe, vous ne devez pas modifier ce fichier `logon`. En revanche, vous pourrez modifier le fichier `logon_perso` juste à côté.
+En principe, vous ne devez pas modifier directement ce fichier `logon` mais cela est possible indirectement à l'aide du fichier `logon_perso` juste à côté.
 
-Ce fichier `logon_perso` vous permettra d'affiner le comportement du script `logon` afin de l'adapter à vos besoins. Vous trouverez toutes les explications nécessaires dans la section [personnalisation](script_logon.md#personnaliser-le-script-de-logon).
+Ce fichier `logon_perso` vous permettra d'affiner le comportement du script `logon` afin de l'adapter à vos besoins. Vous trouverez toutes les explications nécessaires avec la [personnalisation du script de logon](logon_perso.md#personnaliser-le-script-de-logon).
 
 * **Le répertoire `bin/` contient également le fichier `connexion_ssh_serveur.bash`**
 
@@ -126,17 +126,17 @@ Le répertoire `distribs/` contient un sous-répertoire par distribution GNU/Lin
 
 Ce répertoire contient le `script d'intégration`.
 
-C'est ce script qu'il faudra exécuter en tant que `root` sur chaque client que l'on souhaite intégrer au domaine du serveur. Pour l'utilisation de ce script, voir la section [Intégration d'un client GNU/Linux](impatients.md#intégration-dun-client-gnulinux).
+C'est ce script qui sera exécuté lors de [l'installation/intégration automatique des `clients-linux`](../pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique). Pour une utilisation manuelle de ce script, voir la section [Intégration d'un client GNU/Linux](impatients.md#intégration-dun-client-gnulinux).
 
-Les options disponibles dans ce script d'intégration sont décrites dans la section [options-integration](options_scripts.md).
+Les options disponibles dans ce script d'intégration sont décrites dans la section [options-integration](options_scripts.md#les-options-des-scripts-dintégration).
 
 * Le dossier `skel/`
 
 Ce répertoire contient **le profil par défaut** de tous les utilisateurs du domaine sur la distribution concernée.
 
-**Note :** Certains fichiers et répertoires de ce dossier sont cachés. Pour les afficher, vous pouvez utiliser la combianiason de touches `Ctrl+h`.
+**Note :** Certains fichiers et répertoires de ce dossier sont cachés. Pour les afficher, vous pouvez utiliser la combinaison de touches `Ctrl+h`.
 
-Si vous voulez modifier la page d'accueil du navigateur de tous les utilisateurs du domaine ou bien si vous voulez ajouter des icônes sur le bureau, c'est dans ce dossier `skel/` qu'il faudra faire des modifications. Vous trouverez toutes les explications nécessaires dans la section [profils](gestion_profils.md).
+Si vous voulez modifier la page d'accueil du navigateur de tous les utilisateurs du domaine ou bien si vous voulez ajouter des icônes sur le bureau, c'est dans ce dossier `skel/` qu'il faudra faire des modifications. Vous trouverez toutes les explications nécessaires dans la partie consacrée à [la gestion des profils](gestion_profils.md#la-gestion-des-profils).
 
 
 ### Le répertoire `divers/`
@@ -145,12 +145,12 @@ Le répertoire `divers/` ne contient pas grand chose par défaut et vous pourrez
 
 L'intérêt de ce répertoire est que, si vous y placez des fichiers (ou des répertoires), ceux-ci seront accessibles uniquement par le compte `root` local de chaque client GNU/Linux et par le compte `admin` du domaine.
 
-En particulier, vous aurez accès au contenu du répertoire `divers/` à travers le script de logon et à travers les scripts `unefois` (évoqués ci-dessous) qui sont tous les deux exécutés par le compte `root` local de chaque client GNU/Linux. Vous trouverez un exemple d'utilisation possible de ce répertoire dans la section [imprimante](imprimantes.md).
+En particulier, vous aurez accès au contenu du répertoire `divers/` à travers le script de logon et à travers les scripts `unefois` (évoqués ci-dessous) qui sont tous les deux exécutés par le compte `root` local de chaque client GNU/Linux. Vous trouverez un exemple d'utilisation possible de ce répertoire dans la section [imprimante](imprimantes.md#un-mot-sur-les-imprimantes).
 
 
 ### Le répertoire `unefois/`
 
 Le répertoire `unefois/` sert à gérer l'exécution de scripts une seule fois sur toute une famille de clients GNU/Linux intégrés au domaine.
 
-Ce répertoire peut s'avérer utile pour effectuer des tâches administratives sur les clients GNU/Linux. Toutes les explications nécessaires sur ce répertoire se trouvent dans la section [unefois](repertoire_unefois.md).
+Ce répertoire peut s'avérer utile pour effectuer des tâches administratives sur les `clients-linux`. Toutes les explications nécessaires sur ce répertoire se trouvent dans la partie concernant [les scripts `unefois`](repertoire_unefois.md#le-répertoire-unefois).
 
