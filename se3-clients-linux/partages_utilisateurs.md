@@ -1,9 +1,11 @@
-#Les partages des utilisateurs
+# Les partages des utilisateurs
 
 Cette liste de partages est une liste proposée **par défaut** par le paquet `se3-clients-linux`.
 
-Vous verrez plus loin, à la section [gestion du montage des partages](script_logon.md#gestion-du-montage-des-partages-réseau), que vous pourrez définir vous-même
-la liste des partages disponibles en fonction du compte qui se connecte ou en fonction de son appartenance à tel ou tel groupe.
+À la section [gestion du montage des partages](logon_perso.md#gestion-du-montage-des-partages-réseau),
+vous verrez que vous pourrez définir vous-même la liste des partages disponibles
+en fonction du compte qui se connecte
+ou en fonction de son appartenance à tel ou tel groupe.
 
 **Cette liste est donc tout à fait modifiable**.
 
