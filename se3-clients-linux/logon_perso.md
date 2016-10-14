@@ -30,7 +30,7 @@ Une partie importante du script de `logon` est gérée par le `logon_perso` qui 
 
 ## Personnaliser le script de `logon`
 
-Le fichier `logon_perso` va vous permettre d'affiner et personnaliser le comportement du [script de `logon`](script_logon.md) afin de l'adapter à vos besoins.
+Le fichier `logon_perso` va vous permettre d'affiner et personnaliser le comportement du [script de `logon`](script_logon.md#le-script-de-logon) afin de l'adapter à vos besoins.
 
 Et, très important, **cette adaptation sera pérenne dans le temps** (les modifications persisteront notamment après une mise à jour du paquet `se3-clients-linux`).
 
@@ -90,7 +90,7 @@ Cette mise à jour peut se faire de 2 façons :
 
 ## Quelques variables et fonctions prêtes à l'emploi
 
-Vous trouverez, dans cette documentation, la [liste des variables et des fonctions](variables_fonctions_logon.md) que vous pourrez utiliser dans le fichier `logon_perso` et qui seront susceptibles de vous aider à affiner le comportement du script de logon.
+Vous trouverez, dans cette documentation, la [liste des variables et des fonctions](variables_fonctions_logon.md#quelques-variables-et-fonctions-prêtes-à-lemploi-pour-personnaliser-le-script-de-logon) que vous pourrez utiliser dans le fichier `logon_perso` et qui seront susceptibles de vous aider à affiner le comportement du script de logon.
 
 
 ## Gestion du montage des partages réseau
