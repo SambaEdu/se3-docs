@@ -84,7 +84,7 @@ partages réseau sur le serveur, il faudra forcément faire usage de cette fonct
 qui est donc très importante.
 
 Toutes les explications sur cette fonction se
-trouvent dans la partie concernant [la personnalisation du script de `logon`](script_logon.md#gestion-du-montage-des-partages-réseau) 
+trouvent dans la partie concernant [la personnalisation du script de `logon`](logon_perso.md#gestion-du-montage-des-partages-réseau) 
 
 Cette fonction n'a de sens que **lors de la phase d'ouverture**.
 
@@ -92,14 +92,14 @@ Cette fonction n'a de sens que **lors de la phase d'ouverture**.
 ## `creer_lien`
 
 Cette fonction, qui va de pair avec la précédente, sera détaillée aussi
-dans la partie concernant [la personnalisation du script de `logon`](script_logon.md#la-fonction-creer_lien).
+dans la partie concernant [la personnalisation du script de `logon`](logon_perso.md#la-fonction-creer_lien).
 
 Cette fonction n'a de sens que **lors de la phase d'ouverture**.
 
 
 ## `changer_icone`
 
-Cette fonction sera détaillée dans la partie concernant [la personnalisation du script de `logon`](script_logon.md#changer-les-icônes-représentants-les-liens-pour-faire-plus-joli).
+Cette fonction sera détaillée dans la partie concernant [la personnalisation du script de `logon`](logon_perso.md#changer-les-icônes-représentants-les-liens-pour-faire-plus-joli)).
 
 Cette fonction n'a de sens que **lors de la phase d'ouverture**.
 
@@ -113,13 +113,13 @@ Elle prend un argument qui correspond au chemin absolu (sur le client) du fichie
 utiliser en guise de fond d'écran.
 
 Un exemple de l'utilisation de cette fonction
-sera donné dans la partie concernant [la personnalisation du script de `logon`](script_logon.md#changer-le-papier-peint-en-fonction-des-utilisateurs).
+sera donné dans la partie concernant [la personnalisation du script de `logon`](logon_perso.md#changer-le-papier-peint-en-fonction-des-utilisateurs).
 
 
 ## `activer_pave_numerique`
 
 Cette fonction, qui fait exactement ce à quoi on pense naturellement, sera
-détaillée dans la partie concernant [la personnalisation du script de logon](script_logon.md#lactivation-du-pavé-numérique).
+détaillée dans la partie concernant [la personnalisation du script de logon](logon_perso.md#lactivation-du-pavé-numérique).
 
 
 ## `executer_a_la_fin`
@@ -133,8 +133,7 @@ executer_a_la_fin "5" "commande" "arg1" "arg2"
 La commande `commande` (avec ses arguments) sera lancée 5 secondes après
 que le script de logon ait terminé son exécution.
 
-Un exemple de l'usage de cette fonction sera donné dans la partie concernant [la personnalisation du script de logon](script_logon.md#incruster-un-message-sur-le-bureau-des-utilisateurs-pour-faire-classe).
-
+Un exemple de l'usage de cette fonction sera donné dans la partie concernant [la personnalisation du script de logon](logon_perso.md#incruster-un-message-sur-le-bureau-des-utilisateurs-pour-faire-classe).
 
 **Attention**, l'exécution
 se faisant une fois le script de `logon` terminé, il n'y aura **aucune trace dans les fichiers de `log`** de l'exécution de la commande `commande`.
