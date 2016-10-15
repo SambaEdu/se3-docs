@@ -82,7 +82,7 @@ la commande est la suivante :
 apt-get install se3-clients-linux
 ```
 
-Cette mise à jour peut aussi se faire via `l'interface' web` du `se3`.
+Cette mise à jour peut aussi se faire via `l'interface web` du `se3`.
 
 
 ## Distributions `GNU/Linux` testées
