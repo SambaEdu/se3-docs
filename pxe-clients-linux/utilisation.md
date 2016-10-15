@@ -23,7 +23,7 @@
     * [Après le 1er redémmarage](#après-le-redémmarage)
     * [Fichiers de log de la phase 2](#fichiers-de-log-de-la-phase-2)
     * [Cas d'une intégration différée](#cas-dune-intégration-différée)
-* [Utilisation et gestion du `client-linux`](#utilisation-et-gestion-du-client-linux)
+* [Utilisation et gestion du `client-linux`](gestionclients.md#utilisation-et-gestion-du-client-linux)
 
 
 

@@ -12,7 +12,7 @@
 * [Utilisation du dispositif](utilisation.md#utilisation-du-dispositif-dinstallation-de-clients-gnulinux)
 * [Les listes des applications installées](listeapplis.md#liste-des-applications-à-installer)
 * [Utilisation du script perso](messcripts.md#lancement-dun-script-perso-en-fin-de-post-installation-des-clients-linux)
-* [Gestion des `clients-linux`](gestionclients.md)
+* [Gestion des `clients-linux`](gestionclients.md#utilisation-et-gestion-dun-client-linux)
 * [Annexes](#annexes)
     * [Utiliser la branche `testing`](#utiliser-la-branche-testing)
     * [Utiliser le menu `perso`](#utiliser-le-menu-perso)
