@@ -7,10 +7,12 @@
 ## Table des matières
 
 * [Objectifs](#objectifs)
+* [Version du paquet `se3-clients-linux`](#version-du-paquet-se3-clients-linux)
+* [Mise à jour du paquet `se3-clients-linux`](#mise-à-jour-du-paquet-se3-clients-linux)
 * [Distributions `GNU/Linux` testées](#distributions-gnulinux-test%C3%A9es)
 * [Avertissements](#avertissements)
-* [Reconfiguration du paquet et restauration des droits](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits)
 * [Visite rapide du répertoire `clients-linux/` du serveur `se3`](visite_rapide.md#visite-rapide-du-répertoire-clients-linux-du-serveur-se3)
+* [Reconfiguration du paquet et restauration des droits](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits)
 * [Les partages des utilisateurs](partages_utilisateurs.md#les-partages-des-utilisateurs)
 * [La gestion des profils](gestion_profils.md#la-gestion-des-profils)
 * [Le répertoire `unefois/`](repertoire_unefois.md#le-répertoire-unefois)
@@ -53,22 +55,53 @@ différente de celle mise en place pour les `clients-windows`
 (voir la documentation pour plus de précisions).
 
 
+## Version du paquet `se3-clients-linux`
+
+La version actuelle du paquet `se3-clients-linux` est la **0.88**.
+
+**NB :** La documentation est actuellement en relecture et mise à niveau : il se peut donc que certaines parties de la version **0.88** ne soient pas encore documentées.
+
+Pour connaître la version installée sur votre se3,
+vous pouvez utilisez la commande suivante
+dans un terminal en `root` sur le `se3` :
+    ```sh
+    apt-cache policy se3-clonage
+    ```
+    ![policy_se3-clonage.png](../pxe-clients-linux/images/policy_se3-clonage.png)
+
+
+## Mise à jour du paquet `se3-clients-linux`
+
+Pour mettre à jour le paquet `se3-clients-linux`,
+à l'aide d'un terminal en `root` sur le `se3`,
+la commande est la suivante :
+```sh
+# Et oui, c'est curieux mais `apt-get install` permet de
+# mettre à jour un paquet (et de l'installer s'il ne l'est
+# pas déjà).
+apt-get install se3-clients-linux
+```
+
+
 ## Distributions `GNU/Linux` testées
 
 Les distributions `GNU/Linux` qui ont été testées sont :
 
+* Debian `Jessie` (version 8)
+* Ubuntu `Xenial Xerus` (version 16.04)
+* Ubuntu Mate `Xenial Xerus` (version 16.04)
+* Xubuntu `Xenial Xerus` (version 16.04)
+* Lubuntu `Xenial Xerus` (version 16.04)
+
+**Remarque :** Les versions antérieures (voir la liste ci-dessous), bien que gérées par le paquet `se3-clients-linux`, ne bénéficieront pas des évolutions disponibles pour les version `Jessie` et `Xenial`.
+
 * Debian `Squeeze` (version 6)
 * Debian `Wheezy` (version 7)
-* Debian `Jessie` (version 8)
 * Ubuntu `Precise Pangolin` (version 12.04)
 * Xubuntu `Precise Pangolin` (version 12.04)
 * Ubuntu `Trusty Tahr` (version 14.04)
 * Xubuntu `Trusty Tahr` (version 14.04)
 * Lubuntu `Trusty Tahr` (version 14.04)
-* Ubuntu `Xenial Xerus` (version 16.04)
-* Ubuntu Mate `Xenial Xerus` (version 16.04)
-* Xubuntu `Xenial Xerus` (version 16.04)
-* Lubuntu `Xenial Xerus` (version 16.04)
 
 
 ## Avertissements
@@ -82,11 +115,12 @@ d'ouvrir une session après authentification via un
 identifiant et un mot de passe.
 
 Sous `Jessie` par exemple,
-le « display manager » par défautremplissant cette fonction s'appelle
+le « display manager » par défaut remplissant cette fonction s'appelle
 `Gdm3` si vous utilisez `Gnome` comme environnement de Bureau
 et `Lightdm` pour les autres environnements de Bureau
 et sous `Ubuntu`
 il s'agit de `Lightdm` pour tous les environnements de Bureau.
+
 Tout au long de la documentation, il est supposé que c'est bien le cas.
 
 Si jamais vous tenez à changer de « display manager » sur
