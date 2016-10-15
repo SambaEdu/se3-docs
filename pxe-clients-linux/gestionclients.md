@@ -12,7 +12,11 @@ les utilisateurs peuvent ouvrir une session, si un compte leur a été attribué
 
 ## La documentation
 
-Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux) vous donnera quelques informations essentielles. Notamment en ce qui concerne la gestion du profil commun à tous les comptes.
+Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux) vous donnera quelques informations essentielles.
+
+**Remarque :** Si vous utilisez des `clients-linux` pour la première fois, il faudra d'abord vous concentrer sur [le paramétrage du profil commun](../se3-clients-linux/gestion_profils.md#la-gestion-des-profils) à tous les comptes. Il y en a un par défaut lors de l'installation du paquet `se3-clients-linux` : il vous servira de base pour son adaptation aux usages de votre établissement. Et, pour cela, *faites-vous la main* sur un `client-linux` avant de passer à une installation progressive.
+
+**Conseil :** Avant de généraliser l'installation des `clients-linux`, commencez par la salle des profs et les salles de classes. Ainsi, vos collègues se familiarisation avec le nouvel environnement (`Ubuntu` ou `Debian`) et seront plus à l'aise ensuite quand il s'agira de gérer les élèves en salle informatique face à la nouveauté de l'usage des [systèmes libres `GNU/Linux`](https://fr.wikipedia.org/wiki/Linux#Philosophie_du_projet_:_esprit_hacker_et_logiciel_libre).
 
 
 ## Bureau des `clients-linux` `Debian/Jessie/gnome`
