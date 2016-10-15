@@ -59,15 +59,15 @@ différente de celle mise en place pour les `clients-windows`
 
 La version actuelle du paquet `se3-clients-linux` est la **0.88**.
 
-**NB :** La documentation est actuellement en relecture et mise à niveau : il se peut donc que certaines parties de la version **0.88** ne soient pas encore documentées.
+**Remarque :** La documentation est actuellement en relecture et mise à niveau : il se peut donc que certaines parties de la version **0.88** ne soient pas encore documentées.
 
 Pour connaître la version installée sur votre se3,
-vous pouvez utilisez la commande suivante
-dans un terminal en `root` sur le `se3` :
-    ```sh
-    apt-cache policy se3-clonage
-    ```
-    ![policy_se3-clonage.png](../pxe-clients-linux/images/policy_se3-clonage.png)
+vous pouvez utilisez la commande suivante,
+dans un terminal, en `root` sur le `se3` :
+```sh
+apt-cache policy se3-clonage
+```
+![policy_se3-clonage.png](../pxe-clients-linux/images/policy_se3-clonage.png)
 
 
 ## Mise à jour du paquet `se3-clients-linux`
