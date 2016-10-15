@@ -1,13 +1,13 @@
 # Intégration manuelle d'un `client-linux`
 
-Il est possible d'intégrer manuellement un `client-linux` à un domaine géré par un `se3` mais il est plus simple d'utiliser [le mécanisme d'installation/post-intallation/intégration automatique](../pxe-clients-linux/README.md) mis à votre disposition par les `se3` actuels.
+Il est possible d'intégrer manuellement un `client-linux` à un domaine géré par un `se3` mais il est plus simple d'utiliser [le mécanisme d'installation/post-intallation/intégration automatique](../pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) mis à votre disposition par les `se3` actuels.
 
 **NB :** il est actuellement déconseillé de relancer le script d'intégration sur un `client-linux` déjà intégré. En effet, le script n'est pas totalement idempotent (il reste encore à rendre idempotentes 2 à 3 fonctions du script). Cela aurait des effets de bords néfastes au bon fonctionnement des `clients-linux`.
 
 **Ce qui suit n'est là que pour votre culture générale ;-)**
 
 Dans les anciennes versions des `se3`, la mise en place des `clients-linux` commencait par l'installation
-du paquet `se3-clients-linux` sur le serveur. Le mieux est de vous reporter à [la doc de mise en place](../pxe-clients-linux/misenplace.md) qui donne la marche à suivre pour les versions actuelles des `se3`.
+du paquet `se3-clients-linux` sur le serveur. Le mieux est de vous reporter à [la doc de mise en place](../pxe-clients-linux/misenplace.md#mise-en-place-du-dispositif-dinstallation-de-clients-gnulinux) qui donne la marche à suivre pour les versions actuelles des `se3`.
 
 * [Installation du paquet `se3-clients-linux` sur le serveur](#installation-du-paquet-se3-clients-linux-sur-le-serveur)
     * [Quelques précisions](#quelques-pr%C3%A9cisions)
@@ -15,7 +15,7 @@ du paquet `se3-clients-linux` sur le serveur. Le mieux est de vous reporter à [
     * [Par l'interface `Web` du serveur `se3`](#par-linterface-web-du-serveur-se3)
 
 Ensuite, sur chaque `client-linux`, il était exécuté le script d'intégration correspondant
-à sa version (Jessie ou Trusty, par exemple). Cela, et bien d'autres choses, est maintenant réalisé automatiquement : reportez-vous à [la doc d'utilisation du mécanisme `pxe`](../pxe-clients-linux/utilisation.md) qui donne, là encore, la marche à suivre pour les versions actuelles des `se3`.
+à sa version (Jessie ou Trusty, par exemple). Cela, et bien d'autres choses, est maintenant réalisé automatiquement : reportez-vous à [la doc d'utilisation du mécanisme `pxe`](../pxe-clients-linux/utilisation.md#utilisation-du-dispositif-dinstallation-de-clients-gnulinux) qui donne, là encore, la marche à suivre pour les versions actuelles des `se3`.
 
 * [Intégration d'un client GNU/Linux](#int%C3%A9gration-dun-client-gnulinux)
     * [Copier le script d'intégration sur le client-linux](#copier-le-script-dint%C3%A9gration-sur-le-client-linux)
@@ -23,7 +23,7 @@ Ensuite, sur chaque `client-linux`, il était exécuté le script d'intégration
     * [Lancer le script d'intégration](#lancer-le-script-dint%C3%A9gration)
 
 
-**Recommendation :** Le script d'intégration sera exécuté sur un `client-linux` qui vient d'être installé. Si le client-linux *a déjà servi*, il se peut qu'apparaissent des effets de bords… C'est pour cela que, d'une part, nous vous conseillons d'utiliser [le mécanisme d'intallation/intégration automatique](../pxe-clients-linux/README.md), et d'autre part, il vaut mieux intégrer un client-linux ayant un système venant d'être installé.
+**Recommendation :** Le script d'intégration sera exécuté sur un `client-linux` qui vient d'être installé. Si le client-linux *a déjà servi*, il se peut qu'apparaissent des effets de bords… C'est pour cela que, d'une part, nous vous conseillons d'utiliser [le mécanisme d'intallation/intégration automatique](../pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique), et d'autre part, il vaut mieux intégrer un client-linux ayant un système venant d'être installé.
 
 
 ## Installation du paquet `se3-clients-linux` sur le serveur
@@ -42,7 +42,7 @@ L'installation ne fait rien de bien méchant sur votre
 serveur. Vous pouvez parfaitement désinstaller le paquet du
 serveur afin que celui-ci retrouve très exactement le même
 état qu'avant l'installation (voir la page concernant
-[la désinstallation](desinstall_reinstall_paquet.md)).
+[la désinstallation](desinstall_reinstall_paquet.md#désinstallationréinstallation-du-paquet-se3-clients-linux)).
 
 L'installation se borne uniquement à effectuer les tâches
 suivantes :
@@ -176,7 +176,7 @@ vous pouvez lancer, toujours **en tant que root**, l'intégration ainsi :
 ```
 
 Les explications sur les options se trouvent plus loin dans
-le document (à [cette page](options_scripts.md)).
+le document (à [cette page](options_scripts.md#les-options-des-scripts-dintégration)).
 
 Si tout se passe bien, le client finira par lancer un
 redémarrage. Une fois celui-ci terminé, vous devriez être en
