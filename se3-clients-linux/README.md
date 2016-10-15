@@ -8,7 +8,7 @@
 
 * [Objectifs](#objectifs)
 * [Version du paquet `se3-clients-linux`](#version-du-paquet-se3-clients-linux)
-* [Mise à jour du paquet `se3-clients-linux`](#mise-à-jour-du-paquet-se3-clients-linux)
+* [Installation et mise à jour du paquet `se3-clients-linux`](#installation-et-mise-à-jour-du-paquet-se3-clients-linux)
 * [Distributions `GNU/Linux` testées](#distributions-gnulinux-test%C3%A9es)
 * [Avertissements](#avertissements)
 * [Visite rapide du répertoire `clients-linux/` du serveur `se3`](visite_rapide.md#visite-rapide-du-répertoire-clients-linux-du-serveur-se3)
@@ -70,9 +70,9 @@ apt-cache policy se3-clonage
 ![policy_se3-clonage.png](../pxe-clients-linux/images/policy_se3-clonage.png)
 
 
-## Mise à jour du paquet `se3-clients-linux`
+## Installation et mise à jour du paquet `se3-clients-linux`
 
-Pour mettre à jour le paquet `se3-clients-linux`,
+Pour installer ou mettre à jour le paquet `se3-clients-linux`,
 à l'aide d'un terminal en `root` sur le `se3`,
 la commande est la suivante :
 ```sh
