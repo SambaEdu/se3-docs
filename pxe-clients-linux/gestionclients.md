@@ -24,7 +24,7 @@ On peut laisser le système ainsi mais si on veut voir apparaître les partages 
 Pour cela, il faut lancer l'application **Outils système/outil de personnalisation** et dans l'onglet **Bureau**, activer les icônes sur le Bureau ; ne laisser cocher que les volumes montés.
 ![bureau-debian-jessie-gnome](images/bureau_gnome.png)
 
-Ensuite, vous [rajoutez le fichier **.config/dconf/user** dans le `skel`](../se3-clients-linux/gestion_profils.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux) pour que tous les utilisateurs aient la même configuration.
+Ensuite, vous [rajoutez le fichier **.config/dconf/user** dans le `skel`](../se3-clients-linux/gestion_profils.md#la-gestion-des-profils) pour que tous les utilisateurs aient la même configuration.
 
 
 ## Mot de passe du compte `root` d'un `client-linux`
