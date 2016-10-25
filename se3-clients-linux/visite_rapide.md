@@ -82,6 +82,13 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
        ├── **divers**/
        │
        │
+       ├── install/
+       │   └── **messcripts_perso**/
+       │       ├── **imprimantes**/
+       │       │   **mesapplis-debian-perso.txt**
+       │       │   **mesapplis-ubuntu-perso.txt**
+       │       └── **monscript-perso.sh**
+       │
        └── **unefois**/
 ```
 
@@ -146,6 +153,19 @@ Le répertoire `divers/` ne contient pas grand chose par défaut et vous pourrez
 L'intérêt de ce répertoire est que, si vous y placez des fichiers (ou des répertoires), ceux-ci seront accessibles uniquement par le compte `root` local de chaque client GNU/Linux et par le compte `admin` du domaine.
 
 En particulier, vous aurez accès au contenu du répertoire `divers/` à travers le script de logon et à travers les scripts `unefois` (évoqués ci-dessous) qui sont tous les deux exécutés par le compte `root` local de chaque client GNU/Linux. Vous trouverez un exemple d'utilisation possible de ce répertoire dans la section [imprimante](imprimantes.md#un-mot-sur-les-imprimantes).
+
+
+### Le répertoire `install/`
+
+Le répertoire `install/` dépend du paquet `pxe-clients-linux` associé au paquet `se3-clonage`. Le contenu de ce répertoire est utilisé lors des installations automatiques des `clients-linux`.
+
+Le sous-répertoire **`messcripts_perso/`** contient les fichiers `mesapplis-debian-perso.txt`, `mesapplis-ubuntu-perso.txt` et `monscript-perso.sh`.
+
+Les fichiers **`mesapplis-debian-perso.txt`** et **`mesapplis-ubuntu-perso.txt`** sont des listes d'applications à installer en plus de celles qui sont prévues lors de la post-installation. Ces fichiers servent également à installer des paquets via le script `installer_applis_perso_20160430.unefois`.
+
+**`monscript-perso.sh`** est un script lancé à la fin de la post-installation, script que vous pouvez utiliser pour ajouter des commandes ou des scripts supplémentaires pour compléter la post-installation en fonction des usages de votre établissement.
+
+Vous pouvez ajouter un répertoire `imprimantes/` contenant les fichiers `ppd` nécessaires à l'installation des imprimantes sur les `clients-linux`.
 
 
 ### Le répertoire `unefois/`
