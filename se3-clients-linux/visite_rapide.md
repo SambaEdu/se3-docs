@@ -6,6 +6,7 @@
     * [Le répertoire `bin/`](#le-répertoire-bin)
     * [Le répertoire `distribs/`](#le-répertoire-distribs)
     * [Le répertoire `divers/`](#le-répertoire-divers)
+    * [Le répertoire `install/`](#le-répertoire-install)
     * [Le répertoire `unefois/`](#le-répertoire-unefois)
 
 
