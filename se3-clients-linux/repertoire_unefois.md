@@ -150,11 +150,11 @@ Si jamais vous utilisez le langage `Bash` pour écrire des script de la forme `*
 
 Un script `une fois` est disponible afin d'installer automatiquement de nouveaux paquets sur les `clients-linux`.
 
-Pour cela, on complète le fichier `mesapplis-debian-perso.txt` qui contient la liste des paquets à installer sur les `clients-linux`. Ce fichier se trouve dans le répertoire */home/netlogon/client-linux/install/messcripts_perso/* du `se3`.
+Pour cela, on complète le fichier `mesapplis-debian-perso.txt`, ou le fichier `mesapplis-ubuntu-perso.txt` selon le type de clients-linux, qui contient la liste des paquets à installer sur les `clients-linux`. Ce fichier se trouve dans le répertoire */home/netlogon/client-linux/install/messcripts_perso/* du `se3`.
 
-Ce fichier est aussi accessible via le partage `client-linux` qui se trouve sur le Bureau dans le cas d'une session ouverte à l'aide du compte `admin`.'
+Ce fichier est aussi accessible via le partage `client-linux` qui se trouve sur le Bureau dans le cas d'une session ouverte à l'aide du compte `admin`.
 
-Ensuite on modifie le nom du script `installer_applis_perso_20160430.unefois` qui se trouve dans le répertoire */home/netlogon/client-linux/unefois/* du `se3` (il est donc accessible aussi via le partage `client-linux`) : pour cela, il suffit de modifier la date qui est incorporée dans le nom de ce script.
+Ensuite on modifie le nom du script `installer_applis_perso_20161025.unefois` qui se trouve dans le répertoire */home/netlogon/client-linux/unefois/* du `se3` (il est donc accessible aussi via le partage `client-linux`) : pour cela, il suffit de modifier la date qui est incorporée dans le nom de ce script.
 
-**Remarque :** cette liste de paquets `mesapplis-debian-perso.txt` est utilisée aussi lors de la post-installation automatique des `clients-linux`. Ainsi, les prochains clients installés via le mécanisme `pxe` comporteront aussi les nouveaux paquets ajoutés sans qu'il soit nécessaire de relancer le script unefois.
+**Remarque :** ces listes de paquets `mesapplis-debian-perso.txt` et `mesapplis-ubuntu-perso.txt` sont utilisées aussi lors de la post-installation automatique des `clients-linux`. Ainsi, les prochains clients installés via le mécanisme `pxe` comporteront aussi les nouveaux paquets ajoutés sans qu'il soit nécessaire de relancer le script unefois.
 
