@@ -1,10 +1,10 @@
 #Un mot sur les imprimantes
 
-Ne disposant personnellement d'aucune imprimante réseau, je n'ai jamais pu tester ce qui suit . Je suis donc loin de maîtriser l'aspect « gestion des imprimantes » sur les clients GNU/Linux. Ceci étant, il faut bien évoquer ce point très important.
+Ce qui suit vous permettra d'installer des imprimantes sur les `clients-linux`.
 
 **Note :** Si vous avez du code bash à me proposer pour automatiser l'installation des imprimantes sur les clients GNU/Linux via par exemple la fonction initialisation_perso, je suis preneur (francois.lafont@crdp.ac-versailles.fr).
 
-* [Le répertoire `/mnt/netlogon/divers/imprimantes/`](#le-répertoire-mntnetlogondiversimprimantes)
+* [Le répertoire `/mnt/netlogon/install/messcripts_perso/imprimantes/`](#le-répertoire-mntnetlogoninstallmesscripts_persoimprimantes)
 * [Installation d'une imprimante réseau](#installation-dune-imprimante-réseau)
 * [Imprimante par défaut](#imprimante-par-défaut)
 * [Suppression d'une imprimante](#suppression-dune-imprimante)
@@ -13,28 +13,27 @@ Ne disposant personnellement d'aucune imprimante réseau, je n'ai jamais pu test
 * [Références](#références)
 
 
-## Le répertoire `/mnt/netlogon/divers/imprimantes/`
+## Le répertoire `/mnt/netlogon/install/messcripts_perso/imprimantes/`
 
-Sur un client GNU/Linux, le répertoire `/mnt/netlogon/divers/` contient un sous-répertoire nommé `imprimantes/`.
+Sur un client GNU/Linux, le répertoire `/mnt/netlogon/install/messcripts_perso/` contient un sous-répertoire nommé `imprimantes/` ; si ce n'est pas le cas, vous pouvez le créer.
 
 Ce répertoire vous permettra de stocker de manière centralisée des fichiers `.ppd` (pour « PostScript Printer Description ») qui sont des sortes de drivers permettant d'installer des imprimantes sur les clients GNU/Linux.
 
 Vous pouvez télécharger de tels fichiers (qui dépendent du modèle de l'imprimante) sur ce site par exemple :  
 [http://www.openprinting.org/printers](http://www.openprinting.org/printers)
 
-
 Certains constructeurs proposent des fichiers `.ppd` sur leurs sites.
 
 
 ## Installation d'une imprimante réseau
 
-Supposons que, dans le répertoire `/mnt/netlogon/divers/imprimantes/`, se trouve le fichier `.ppd` d'un modèle d'imprimante réseau donné.
+Supposons que, dans le répertoire `/mnt/netlogon/install/messcripts_perso/imprimantes/`, se trouve le fichier `.ppd` d'un modèle d'imprimante réseau donné.
 
 Vous pouvez alors lancer l'installation de cette imprimante sur un client GNU/Linux via la commande suivante (en tant que `root`) :
 
 ```sh
 lpadmin -p NOM-IMPRIMANTE -v socket://IP-IMPRIMANTE:9100 \<Touche ENTRÉE>
-    -E -P /mnt/netlogon/divers/imprimantes/fichier.ppd
+    -E -P /mnt/netlogon/install/messcripts_perso/imprimantes/fichier.ppd
 ```
 
 Cette commande doit être, en principe, exécutée une seule fois sur le client GNU/Linux.
