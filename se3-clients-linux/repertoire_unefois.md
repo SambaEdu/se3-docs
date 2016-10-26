@@ -18,7 +18,7 @@ Si vous souhaitez faire des interventions ponctuelles sur les clients GNU/Linux 
 
 En effet, des fichiers exécutables placés dans ce répertoire seront susceptibles d'être lancés une seule fois sur les clients GNU/Linux lors du démarrage.
 
-En pratique, vous allez créer un sous-répertoire à la racine du répertoire `unefois/` du serveur `se3` et y placer un script dont [le nom respectera certains critères](#Les noms des scripts).
+En pratique, vous allez créer un sous-répertoire à la racine du répertoire `unefois/` du serveur `se3` et y placer un script dont [le nom respectera certains critères](#les-noms-des-scripts).
 
 
 ## Les sous-répertoires
