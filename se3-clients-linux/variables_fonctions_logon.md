@@ -12,7 +12,7 @@ Voici la liste des variables et des fonctions que vous pourrez utiliser dans le 
   [`DEMARRAGE`](#demarrage)                           |  [`activer_pave_numerique`](#activer_pave_numerique)
                                                       |  [`executer_a_la_fin`](#executer_a_la_fin)
 
-**Nota :** d'autres [variables et fonctions](variables_fonctions.md#quelques-variables-et-fonctions-prêtes-à-lemploi-pour-personnaliser-le-script-de-logon) sont aussi utilisables dans le fichier `logon_perso`.
+**Nota :** d'autres [variables et fonctions](variables_fonctions.md#des-variables-et-des-fonctions-prêtes-à-lemploi-pour-des-scripts) sont aussi utilisables dans le fichier `logon_perso`.
 
 
 ## `LOGIN`
