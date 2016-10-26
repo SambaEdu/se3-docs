@@ -1,6 +1,11 @@
 # Le répertoire unefois/
 
 * [Principe de base](#principe-de-base)
+* [Les sous-répertoires](#les-sous-répertoires)
+    * [Principe de nommage](#principe-de-nommage)
+    * [Quelques exemples](#quelques-exemples)
+    * [Le sous-répertoire `^.`](#le-sous-répertoire--)
+* [Les noms des scripts](#Les noms des scripts)
 * [Détails du mécanisme](#le-mécanisme-en-détail)
 * [La locale lors de l'exécution des scripts](#réglage-de-la-locale-durant-lexécution-des-scripts--unefois-)
 * [Des variables et des fonctions](#des-variables-et-des-fonctions-prêtes-à-lemploi)
@@ -13,17 +18,33 @@ Si vous souhaitez faire des interventions ponctuelles sur les clients GNU/Linux 
 
 En effet, des fichiers exécutables placés dans ce répertoire seront susceptibles d'être lancés une seule fois sur les clients GNU/Linux lors du démarrage.
 
-En pratique, vous allez créer un sous-répertoire à la racine du répertoire `unefois/` du serveur se3.
+En pratique, vous allez créer un sous-répertoire à la racine du répertoire `unefois/` du serveur `se3` et y placer un script dont [le nom respectera certains critères](#Les noms des scripts).
 
-Exemples :
+
+## Les sous-répertoires
+
+### Principe de nommage
+
+Le nom d'un sous-répertoire est interprété par le client GNU/Linux comme *une expression régulière étendue* : vous pouvez donc choisir comme nom de sous-répertoire n'importe quelle [expression régulière étendue](http://fr.wikipedia.org/wiki/Expression_rationnelle) pour filtrer les noms de machines qui sont censées exécuter une fois vos scripts ou vos fichiers binaires.
+
+Ainsi, un sous-répertoire peut avoir un nom commençant par un accent circonflexe `^` ou un nom se terminant par un dollar `$`.
+
+Les noms des sous-répertoires seront choisis pour faciliter la gestion d'un ensemble donné de `clients-linux`.
+
+Bien sûr, le répertoire `unefois/` du serveur peut parfaitement contenir plusieurs sous-répertoires. Dans ce cas, si le nom de machine d'un client correspond par exemple avec trois noms de sous-répertoires `regex1/`, `regex2/` et `regex3/`, alors le client devra lancer une seule fois au démarrage tous les exécutables contenus dans chacun des sous-répertoires `regex1/`, `regex2/` et `regex3/`.
+
+**Note :** Après avoir créé vos sous-répertoires et vos fichiers exécutables dans le répertoire `unefois/` du serveur, n'oubliez pas de [réajuster les droits sur les fichiers](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits)
+
+
+### Quelques exemples
+
+Voici quelques exemples de sous-répertoires :
 
 * Si le nom de ce sous-répertoire est `dell740`
 
 Alors les exécutables se trouvant dans ce sous-répertoire seront lancés une fois au démarrage de tous les clients GNU/Linux dont le nom de machine **contient à la casse près** la chaîne de caractères `dell740`.
 
 * Si le nom de ce sous-répertoire est `^S121-`
-
-**Remarque :** oui, il s'agit bien d'un répertoire dont le nom commence par un accent circonflexe.
 
 Alors les exécutables se trouvant dans ce sous-répertoire seront lancés une fois au démarrage de tous les clients GNU/Linux dont le nom de machine **commence, à la casse près**, par la chaîne de caractères `S121-`.
 
@@ -35,19 +56,17 @@ Alors les exécutables se trouvant dans ce sous-répertoire seront lancés une f
 
 Alors les exécutables se trouvant dans ce sous-répertoire seront lancés une fois au démarrage du client GNU/Linux dont le nom de machine **est identique, à la casse près**, à la chaîne de caractères `S121-HP-P`.
 
-Si jamais cela évoque quelque chose pour vous, sachez qu'en réalité le nom des sous-répertoires est interprété par le client GNU/Linux comme *une expression régulière étendue*.
 
-Vous pouvez donc choisir comme nom de sous-répertoire n'importe quelle [expression régulière étendue](http://fr.wikipedia.org/wiki/Expression_rationnelle) pour filtrer les noms de machines qui sont censées exécuter une fois vos scripts ou vos fichiers binaires.
+### Le sous-répertoire `^.`
 
-Voici un dernier exemple de nom de sous-répertoire possible (et donc d'expression régulière possible) : `^.` (le nom de ce sous-répertoire est constitué d'un accent circonflexe puis d'un point).
+* Un sous-répertoire très particulier : `^.` (le nom de ce sous-répertoire est constitué d'un accent circonflexe puis d'un point).
 
 Cette expression régulière signifie : « n'importe quelle chaîne de caractères qui commence par un caractère quelconque ».
 
 Autrement dit, les exécutables se trouvant dans ce sous-répertoire seront lancés une fois au démarrage de **tous les clients GNU/Linux sans exception**.
 
-Bien sûr, le répertoire `unefois/` du serveur peut parfaitement contenir plusieurs sous-répertoires. Dans ce cas, si le nom de machine d'un client correspond par exemple avec trois noms de sous-répertoires `regex1/`, `regex2/` et `regex3/`, alors le client devra lancer une seule fois au démarrage tous les exécutables contenus dans chacun des sous-répertoires `regex1/`, `regex2/` et `regex3/`.
 
-**Note :** Après avoir créé vos sous-répertoires et vos fichiers exécutables dans le répertoire `unefois/` du serveur, n'oubliez pas de réajuster les droits sur les fichiers comme expliqué à la section [TODO]
+## Les noms des scripts
 
 **Attention**, les fichiers exécutables d'un sous-répertoire donné doivent vérifier certains critères :
 * Le nom d'un exécutable **ne doit pas commencer par un point**.
