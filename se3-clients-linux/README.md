@@ -16,7 +16,7 @@
 * [Les partages des utilisateurs](partages_utilisateurs.md#les-partages-des-utilisateurs)
 * [La gestion des profils](gestion_profils.md#la-gestion-des-profils)
 * [Le répertoire `unefois/`](repertoire_unefois.md#le-répertoire-unefois)
-* [Des variables et des fonctions prêtes à l'emploi](variables_fonctions.md#des-variables-et-des-fonctions-prêtes-à-lemploi-pour-des-scripts)
+* [Des variables et des fonctions prêtes à l'emploi pour des scripts](variables_fonctions.md#des-variables-et-des-fonctions-prêtes-à-lemploi-pour-des-scripts)
 * [Le script de `logon`](script_logon.md#le-script-de-logon)
 * [Personnalisation avec le `logon_perso`](logon_perso.md#personnaliser-le-script-de-logon)
 * [Des variables et des fonctions utiles pour le `logon_perso`](variables_fonctions_logon.md#quelques-variables-et-fonctions-prêtes-à-lemploi-pour-personnaliser-le-script-de-logon)
