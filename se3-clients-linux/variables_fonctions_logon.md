@@ -99,7 +99,7 @@ Cette fonction n'a de sens que **lors de la phase d'ouverture**.
 
 ## `changer_icone`
 
-Cette fonction sera détaillée dans la partie concernant [la personnalisation du script de `logon`](logon_perso.md#changer-les-icônes-représentants-les-liens-pour-faire-plus-joli)).
+Cette fonction sera détaillée dans la partie concernant [la personnalisation du script de `logon`](logon_perso.md#changer-les-icônes-représentants-les-liens-pour-faire-plus-joli).
 
 Cette fonction n'a de sens que **lors de la phase d'ouverture**.
 
