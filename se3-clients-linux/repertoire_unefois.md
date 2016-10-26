@@ -66,6 +66,7 @@ Cette expression régulière signifie : « n'importe quelle chaîne de caractèr
 Autrement dit, les exécutables se trouvant dans ce sous-répertoire seront lancés une fois au démarrage de **tous les clients GNU/Linux sans exception**.
 
 Ce répertoire contient par défaut les scripts suivants :
+
     * conf-ocs_20160501.unefois
     * get-ssh-key.unefois
     * installer_applis_perso_20161025.unefois
