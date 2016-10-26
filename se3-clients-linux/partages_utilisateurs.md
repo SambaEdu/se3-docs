@@ -38,9 +38,9 @@ Un compte `élève` aura accès :
 Un compte `professeur` aura accès :
 
 * Aux mêmes partages qu'un compte `élève`.
-* Il aura accès en plus au partage `//SERVEUR/Docs/` (ne pas confondre avec le partage `//SERVEUR/homes/Docs/`) via deux liens symboliques. Tous les deux possèdent le même nom : « `Ressources sur le réseau` ». L'un se trouve dans le répertoire `/home/<login>/` et l'autre dans le répertoire `/home/<login>/Bureau/`.
+* Il aura accès en plus au partage `//SERVEUR/Docs/` (**ne pas confondre avec le partage `//SERVEUR/homes/Docs/`**) via deux liens symboliques. Tous les deux possèdent le même nom : « `Ressources sur le réseau` ». L'un se trouve dans le répertoire `/home/<login>/` et l'autre dans le répertoire `/home/<login>/Bureau/`.
 
-**Anciennes versions :** Pour certaines anciennes versions du paquet, à la place de `Ressources sur le réseau`, vous trouverez `Public sur le réseau` mais nous vous conseillons de le modifier, par l'intermédiaire du fichier `logon_perso`, en `Ressources sur le réseau` qui nous semble plus judicieux et moins source de confusions pour les utilisateurs.
+**Anciennes versions :** Pour certaines anciennes versions du paquet, à la place de `Ressources sur le réseau`, vous trouverez `Public sur le réseau` mais **nous vous conseillons de le modifier, par l'intermédiaire du fichier `logon_perso`, en `Ressources sur le réseau`** qui nous semble plus judicieux et moins source de confusions pour les utilisateurs.
 
 **Remarque :** Ce partage`//SERVEUR/Docs/` pourra aussi être accessible aux élèves en supprimant ses conditions d'accès dans le fichier `logon_perso` mais il faudra alors paramétrer en conséquence les droits sur les fichiers et répertoires de ce partage via l'interface web du `se3`.
 
