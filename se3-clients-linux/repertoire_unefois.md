@@ -7,6 +7,12 @@
     * [Le sous-répertoire `^.`](#le-sous-répertoire-)
 * [Les noms des scripts](#les-noms-des-scripts)
 * [Détails du mécanisme](#le-mécanisme-en-détail)
+    * [Fonctionnement général](#fonctionnement-général)
+    * [Fichier de `log`](#fichier-de-log)
+    * [Mise en pause et remise à zéro du mécanisme](#mise-en-pause-et-remise-à-zéro-du-mécanisme)
+        * [Deux exceptions au mécanisme](#deux-exceptions-au-mécanisme)
+        * [Le fichier `PAUSE`](#le-fichier-pause)
+        * [Le fichier `BLACKOUT`](#le-fichier-blackout)
 * [La locale lors de l'exécution des scripts](#réglage-de-la-locale-durant-lexécution-des-scripts--unefois-)
 * [Des variables et des fonctions](#des-variables-et-des-fonctions-prêtes-à-lemploi)
 * [Installer des paquets à la demande](#installer-des-paquets-à-la-demande)
@@ -18,7 +24,7 @@ Si vous souhaitez faire des interventions ponctuelles sur les clients GNU/Linux 
 
 En effet, des fichiers exécutables placés dans ce répertoire seront susceptibles d'être lancés une seule fois sur les clients GNU/Linux lors du démarrage.
 
-En pratique, vous allez créer un sous-répertoire à la racine du répertoire `unefois/` du serveur `se3` et y placer un script dont [le nom respectera certains critères](#les-noms-des-scripts).
+En pratique, vous allez créer des sous-répertoires à la racine du répertoire `unefois/` du serveur `se3` et y placer des scripts (au début cela peut être un seul sous-répertoire et un seul script). En fonction du nom du `client-linux` et du nom du sous-répertoire dans lequel se trouve un script, ce script sera exécuté une seule fois conformément au mécanisme décrit ci-dessous.
 
 
 ## Les sous-répertoires
@@ -65,7 +71,7 @@ Cette expression régulière signifie : « n'importe quelle chaîne de caractèr
 
 Autrement dit, les exécutables se trouvant dans ce sous-répertoire seront lancés une fois au démarrage de **tous les clients GNU/Linux sans exception**.
 
-Ce répertoire contient par défaut les scripts suivants :
+Si le paquet `se3-clonage` est au moins de la version **0.88**, ce répertoire contient par défaut les scripts suivants :
 
     * conf-ocs_20160501.unefois
     * get-ssh-key.unefois
@@ -93,9 +99,11 @@ Si vous avez un script que vous souhaitez exécuter non pas une seule fois, mais
 
 ## Le mécanisme en détail
 
+### Fonctionnement général
+
 Voici le mécanisme effectué par les clients GNU/Linux au niveau du répertoire `unefois/` **au moment du démarrage du système** uniquement (le démarrage est le seul instant où les clients GNU/-Linux se préoccupent du répertoire `unefois/`) :
 
-1. Le client regarde le contenu de tous les sous-répertoires de `/mnt/netlogon/unefois/` 11 dont les noms correspondent à son nom de machine. Par exemple, si le client s'appelle `S18-DELL-03`, il va regarder le contenu du sous-répertoire `^S18-` mais il va ignorer le sous-répertoire `-HP-`. Dans chaque sous-répertoire qu'il n'a pas ignoré (s'il en existe), le client va y chercher tous les fichiers de la forme `*.unefois`, afin d'obtenir toute une liste (éventuellement vide) de fichier `*.unefois`.
+1. Le client regarde le contenu de tous les sous-répertoires de `/mnt/netlogon/unefois/` dont les noms correspondent à son nom de machine. Par exemple, si le client s'appelle `S18-DELL-03`, il va regarder le contenu du sous-répertoire `^S18-` mais il va ignorer le sous-répertoire `-HP-`. Dans chaque sous-répertoire qu'il n'a pas ignoré (s'il en existe), le client va y chercher tous les fichiers de la forme `*.unefois`, afin d'obtenir toute une liste (éventuellement vide) de fichier `*.unefois`.
 
     **Note :** Rappelons à nouveau que le répertoire `/mnt/netlogon/unefois/` sur les clients GNU/Linux correspond en réalité au répertoire `/home/netlogon/clients-linux/unefois/` du serveur Samba.
 
@@ -103,17 +111,43 @@ Voici le mécanisme effectué par les clients GNU/Linux au niveau du répertoire
 
     **Note :** Les clients GNU/Linux ne tiennent compte que du nom des fichiers, pas de leur contenu. La casse dans le nom des fichiers est prise en compte.
 
-C'est donc le répertoire `/etc/se3/unefois/` qui constitue la « mémoire » du client GNU/Linux : il contient la liste des noms de fichiers déjà exécutés. Il y a toutefois deux exceptions au mécanisme décrit ci-dessus :
+C'est donc le répertoire `/etc/se3/unefois/` qui constitue la « mémoire » du client GNU/Linux : il contient la liste des noms de fichiers déjà exécutés.
 
-1. Au moment du démarrage du système, si le client détecte la présence d'un fichier nommé `PAUSE` à la racine du répertoire `/mnt/netlogon/unefois/`, alors le client ne fait strictement rien au niveau des fichiers `*.unefois` et donc il n'exécute absolument rien, quoi qu'il arrive.
+Les scripts `*.unefois` sont tous exécutés, en tant que `root`, en arrière-plan et cela dès l'affichage de la fenêtre de connexion lors du démarrage.
 
-2. Au moment du démarrage du système, si le client ne repère pas la présence du fichier `PAUSE` précédent mais qu'en revanche il détecte la présence du fichier `BLACKOUT` , toujours à la racine du répertoire local `/mnt/netlogon/unefois/`, alors le client GNU/Linux efface le contenu du répertoire `/etc/se3/unefois/`. Ainsi, au prochain démarrage, si les fichiers `PAUSE` et `BLACKOUT` ne sont pas présents, le client exécutera tous les exécutables `*.unefois` qui le concerne, peu importe leur nom étant donné que la « mémoire » du client GNU/Linux concernant tout ce qui a déjà été exécuté a été effacée.
+Si vous souhaitez qu'un script `*.unefois` se lance un peu après (parce que, par exemple, vous avez besoin d'attendre que certains services soient lancés), vous pouvez parfaitement utiliser des instructions comme « `sleep 20` » afin de forcer le script à attendre pendant 20 secondes avant de commencer réellement son travail.
 
-**Note :** Le nom du fichier `PAUSE` ou `BLACKOUT` doit être en majuscules uniquement et peu importe le contenu de ce fichier qui peut être totalement vide. Attention, les droits de ce fichier doivent être corrects une fois celui-ci créé.
 
-**Important :** Au moment du démarrage, la recherche par les clients GNU/Linux des fichiers `*.unefois` à exécuter (ainsi que leur copie en local le cas échéant) entraîne(nt) forcément du trafic réseau. Lorsque vous ne souhaitez pas faire usage de ce mécanisme (ce qui en principe sera le cas 90% du temps), n'hésitez pas à placer le fichier `PAUSE` à la racine du répertoire `unefois/` du serveur afin d'éviter ce travail de recherche aux clients GNU/Linux qui solliciteraient inutilement le réseau. Là encore, lorsque vous créerez ce fichier `PAUSE`, attention de bien reconfigurer les droits des fichiers comme expliqué à section [TODO].
+### Fichier de `log`
 
-Les scripts `*.unefois` sont tous exécutés, en tant que `root`, en arrière-plan et cela dès l'affichage de la fenêtre de connexion lors du démarrage. Si vous souhaitez qu'un script `*.unefois` se lance un peu après (parce que, par exemple, vous avez besoin d'attendre que certains services soient lancés), vous pouvez parfaitement utiliser des instructions comme « `sleep 20` » afin de forcer le script à attendre pendant 20 secondes avant de commencer réellement son travail. Enfin sachez que dans le répertoire local `/etc/se3/unefois/`, chaque exécutable `truc.unefois` est accompagné de son homologue nommé `truc.unefois.log` qui contient simplement l'ensemble des messages (d'erreur ou non) du fichier l'exécutable.
+Enfin, sachez que dans le répertoire local `/etc/se3/unefois/`, chaque exécutable `truc.unefois` est accompagné de son homologue nommé `truc.unefois.log` qui contient simplement l'ensemble des messages (d'erreur ou non) du fichier l'exécutable.
+
+
+### Mise en pause et remise à zéro du mécanisme
+
+#### Deux exceptions au mécanisme
+
+Il y a toutefois **deux exceptions au mécanisme** décrit ci-dessus : ces exceptions sont gérées par les fichiers `PAUSE` et `BLACKOUT`.
+
+**Note :** Le nom du fichier `PAUSE` ou `BLACKOUT` doit être en majuscules uniquement et peu importe le contenu de ces fichiers qui peuvent être totalement vides.
+
+Lorsque vous créerez un de ces fichiers il faudra [reconfigurer les droits des fichiers](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits) sinon il ne sera pas correctement pris en compte.
+
+**Important :** Lorsque vous ne souhaitez pas faire usage du mécanisme des scripts `*.unefois` (ce qui en principe sera le cas 90% du temps), n'hésitez pas à placer le fichier `PAUSE` à la racine du répertoire `unefois/` du serveur afin d'éviter ce travail de recherche aux clients GNU/Linux qui solliciteraient inutilement le réseau. En effet, au moment du démarrage, la recherche par les clients GNU/Linux des fichiers `*.unefois` à exécuter (ainsi que leur copie en local le cas échéant) entraîne(nt) forcément du trafic réseau.
+
+
+#### Le fichier `PAUSE`
+
+Au moment du démarrage du système, si le client détecte la présence d'un fichier nommé `PAUSE` à la racine du répertoire `/mnt/netlogon/unefois/`, alors le client ne fait strictement rien au niveau des fichiers `*.unefois` et donc il n'exécute absolument rien, quoi qu'il arrive.
+
+**Astuce :** plutôt que de supprimer ce fichier `PAUSE`, il suffira de le renommer `NOPAUSE` et de reconfigurer les droits.
+
+
+#### Le fichier `BLACKOUT`
+
+Au moment du démarrage du système, si le client ne repère pas la présence du fichier `PAUSE` précédent mais qu'en revanche il détecte la présence du fichier `BLACKOUT`, toujours à la racine du répertoire local `/mnt/netlogon/unefois/`, alors le client GNU/Linux efface le contenu du répertoire `/etc/se3/unefois/`.
+
+Ainsi, au prochain démarrage, si les fichiers `PAUSE` et `BLACKOUT` ne sont pas présents, le client exécutera tous les exécutables `*.unefois` qui le concerne, peu importe leur nom étant donné que la « mémoire » du client GNU/Linux concernant tout ce qui a déjà été exécuté a été effacée.
 
 
 ## Réglage de la locale durant l'exécution des scripts « unefois »
