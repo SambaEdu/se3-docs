@@ -16,8 +16,6 @@ ou en fonction de son appartenance à tel ou tel groupe.
 * [Le lien symbolique `clients-linux`](#le-lien-symbolique-clients-linux)
 * [Reconfiguration des droits du paquet `se3-clients-linux`](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits)
 * [Cas des paquets dont la version est antérieure à 1.1](#cas-des-paquets-dont-la-version-est-antérieure-à-11)
-* [Retrouver le comportement par défaut](#retrouver-le-comportement-par-défaut)
-
 
 
 ## Liste par défaut des partages accessibles suivant le type de compte
@@ -85,29 +83,7 @@ Cela a une conséquence importante si une version **antérieure à la version 1.
 
 En effet, lors de la mise à jour du paquet vers une version **postérieure à 1.1**, plus aucun partage réseau ne devrait être monté à l'ouverture de session sur vos `clients-linux` et cela pour tout utilisateur du domaine.
 
-C'est parfaitement normal car, lors de la mise à jour du paquet, votre fichier `logon_perso` a été conservé et, pour les versions postérieures à 1.1, c'est désormais dans ce fichier que les commandes de montage des partages sont effectuées. Or, a priori, votre fichier `logon_perso` ne contient pas encore ces commandes de montage. **Pour retrouver ces partages réseau**, il faudra utiliser la procédure ci-dessous.
+C'est parfaitement normal car, lors de la mise à jour du paquet, votre fichier `logon_perso` a été conservé et, pour les versions postérieures à 1.1, c'est désormais dans ce fichier que les commandes de montage des partages sont effectuées. Or, a priori, votre fichier `logon_perso` ne contient pas encore ces commandes de montage.
 
-
-## Retrouver le comportement par défaut
-
-Il est très facile de retrouver le comportement par défaut (comme décrit ci-dessous) au niveau du montage des partages réseau à l'ouverture de session. Il faudra ensuite reprendre les aménagements de personnalisation effectués dans le fichier `logon_perso`.
-
-Sur une console du serveur, en tant que `root`, il vous suffit de faire :
-
-```sh
-# On se place dans le répertoire `bin/`.
-cd /home/netlogon/clients-linux/bin/
-
-# On met dans un coin votre fichier `logon_perso` en le renommant
-# `logon_perso.SAVE` (si jamais vous n'avez jamais touché à ce fichier
-# alors vous pouvez même le supprimer avec la commande `rm logon_perso`).
-mv logon_perso logon_perso.SAVE
-
-# On reconfigure le paquet. L'absence du fichier `logon_perso` sera
-# détectée et vous retrouverez ainsi la version par défaut de ce 
-# fichier.
-dpkg-reconfigure se3-clients-linux
-```
-
-Vous retrouverez un comportement par défaut dès que les `clients-linux` auront mis à jour leur script de logon local, c'est-à-dire au plus tard après un redémarrage des clients (en fait, après une simple fermeture de session, la mise à jour devrait se produire).
+**Pour retrouver ces partages réseau**, il faudra utiliser [la procédure qui permet de retrouver le comportement par défaut](desinstall_reinstall_paquet.md#retrouver-le-comportement-par-défaut-du-logon_perso) du fichier `logon_perso` tel que prévu par la nouvelle version du paquet `se3-clients-linux`.
 

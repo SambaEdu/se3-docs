@@ -1,5 +1,10 @@
 # Désinstallation/réinstallation du paquet se3-clients-linux
 
+* [Désinstallation complète](#désinstallation-complète)
+* [Désinstallation partielle en vue d'une réinstallation ultérieure](#désinstallation-partielle-en-vue-dune-réinstallation-ultérieure)
+* [Retrouver le comportement par défaut du `logon_perso`](#retrouver-le-comportement-par-défaut-du-logon_perso)
+
+
 ## Désinstallation complète
 
 Si jamais vous souhaitez désinstaller complètement le paquet
@@ -25,6 +30,7 @@ contient) sera effacé. Si vous aviez pris la peine de vous
 concocter un fichier `logon_perso` à votre sauce, d'écrire
 de nombreux scripts dans le répertoire `unefois/` etc., tout
 sera purement et simplement effacé.
+
 
 ## Désinstallation partielle en vue d'une réinstallation ultérieure
 
@@ -93,3 +99,27 @@ fichiers/répertoires conservés lors d'une réinstallation ou
 d'une mise à jour du paquet.
 
 
+## Retrouver le comportement par défaut du `logon_perso`
+
+Il est très facile de retrouver le comportement par défaut (c'est-à-dire comme si on venait d'installer le paquet `se3-clients-linux`) du fichier `logon_perso` de personnalisation du logon, notamment au niveau du montage des partages réseau à l'ouverture de session.
+
+Il faudra alors reprendre les aménagements de personnalisation effectués dans le fichier `logon_perso`…
+
+Sur une console du serveur, en tant que `root`, il vous suffit de faire :
+
+```sh
+# On se place dans le répertoire `bin/`.
+cd /home/netlogon/clients-linux/bin/
+
+# On met dans un coin votre fichier `logon_perso` en le renommant
+# `logon_perso.SAVE` (si jamais vous n'avez jamais touché à ce fichier
+# alors vous pouvez même le supprimer avec la commande `rm logon_perso`).
+mv logon_perso logon_perso.SAVE
+
+# On reconfigure le paquet. L'absence du fichier `logon_perso` sera
+# détectée et vous retrouverez ainsi la version par défaut de ce 
+# fichier.
+dpkg-reconfigure se3-clients-linux
+```
+
+Vous retrouverez un comportement par défaut dès que les `clients-linux` auront mis à jour leur script de logon local, c'est-à-dire au plus tard après un redémarrage des clients (en fait, après une simple fermeture de session, la mise à jour devrait se produire).
