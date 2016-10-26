@@ -19,6 +19,7 @@
 * [Réservation de l'`IP` du `client-linux`](#réservation-de-lip-du-client-linux)
     * [Cas d'une nouvelle machine](#cas-dune-nouvelle-machine)
     * [Cas d'une machine ayant une réservation](#cas-dune-machine-ayant-une-réservation)
+    * [Nom du `client-linux`](#nom-du-client-linux)
 * [Post-installation `phase 2`](#post-installation-phase-2)
     * [Après le 1er redémmarage](#après-le-redémmarage)
     * [Fichiers de log de la phase 2](#fichiers-de-log-de-la-phase-2)
@@ -183,6 +184,23 @@ Sinon, la post-installation vous demandera d'attribuer un nom au `client-linux`,
 Si vous installez une machine qui a une réservation, vous pouvez directement lancer l'installation. Le `client-linux` aura la même adresse `IP` et le même nom que celui qui est inscrit dans l'annuaire `Ldap` du serveur `se3`.
 
 Si vous voulez changer le nom ou l'`IP` inscrits dans l'annuaire `Ldap` du serveur `se3`, le mieux est de supprimer cette réservation, de supprimer son éventuelle appartenance à un ou des parcs et, enfin, de supprimer aussi son entrée dans l'annuaire `Ldap` du serveur `se3`. Une fois cela fait, vous pouvez recommencer la procédure de réservation.
+
+
+### Nom du `client-linux`
+
+Le nom du `client-linux` doit respecter certaines règles qui seront vérifiées lors de la post-installation/intégration.
+
+**Les caractères autorisés pour le choix du nom d'hôte sont :**  
+  → les 26 lettres de l'alphabet en minuscules ou en majuscules, **sans accents**  
+  → les chiffres  
+  → le tiret du 6 (-)  
+  → et c'est tout !  
+
+**Nombre de caractères :** *De plus, le nom de la machine ne soit pas faire plus de 15 caractères*.
+
+Pour faciliter la gestion des `clients-linux`, vous pouvez structurer le nom pour tenir compte, d'une part, des particularités de votre établissement et, d'autre part, des possibilités offertes par les scripts `unefois`.
+
+Par exemple, vous pouvez nommer des machines en référence à la salle où elles se trouvent (cas d'une salle informatique smm1 : smm1-01, smm1-02,…) ou bien en référence à leur utilisation (cas des ordinateurs dans les salles de cours : cours-eg1, cours-eg2, cours-musique,…).
 
 
 ## Post-installation (phase 2)
