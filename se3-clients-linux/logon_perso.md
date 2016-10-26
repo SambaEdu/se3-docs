@@ -2,7 +2,7 @@
 
 Une partie importante du script de `logon` est gérée par le `logon_perso` qui permet d'aptater son fonctionnement aux besoins des utilisateurs.
 
-* [Personnaliser à l'aide du `logon_perso`](#personnaliser-le-script-de-logon)
+* [Personnaliser à l'aide du `logon_perso`](#personnaliser-à-laide-du-logon_perso)
     * [Structure du `logon_perso`](#structure-du-fichier-logon_perso)
     * [Conséquences sur le comportement du `logon`](#conséquences-du-logon_perso-sur-le-comportement-du-script-de-logon)
     * [Incorporer le `logon_perso` au `logon`](#incorporer-le-logon_perso-dans-le-logon)
@@ -28,7 +28,7 @@ Une partie importante du script de `logon` est gérée par le `logon_perso` qui 
 
 
 
-## Personnaliser le script de `logon`
+## Personnaliser à l'aide du `logon_perso`
 
 Le fichier `logon_perso` va vous permettre d'affiner et personnaliser le comportement du [script de `logon`](script_logon.md#le-script-de-logon) afin de l'adapter à vos besoins.
 
@@ -79,13 +79,7 @@ Vous pouvez bien sûr définir dans le fichier `logon_perso` des fonctions suppl
 
 Il faut bien avoir en tête que le contenu de `logon_perso` doit être ni plus ni moins inséré dans le script `logon` pour qu'il soit pris en compte.
 
-En conséquence, après modification de `logon_perso`, **il faut toujours mettre à jour le fichier `logon`**
-
-Cette mise à jour peut se faire de 2 façons :
-
-* via  la commande « `dpkg-reconfigure se3-clients-linux` » en console `root` sur le serveur se3.
-
-* via le fichier `reconfigure.bash` : **si vous avez ouvert une session sur un client-linux avec le compte `admin`**, vous pourrez double-cliquer sur le fichier `reconfigure.bash` accessible en passant par le lien symbolique `clients-linux` sur le bureau puis par le répertoire `bin/` (le mot de passe root du serveur se3 sera demandé). Voir le schéma de [l'arborescence du répertoire `clients-linux/`](visite_rapide.md#arborescence-du-répertoire-clients-linux).
+En conséquence, après modification de `logon_perso`, **il faut toujours mettre à jour le fichier `logon`** [en reconfigurant le paquet `se3-clients-linux`](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits).
 
 
 ## Quelques variables et fonctions prêtes à l'emploi
