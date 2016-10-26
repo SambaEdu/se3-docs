@@ -57,9 +57,9 @@ différente de celle mise en place pour les `clients-windows`
 
 ## Version du paquet `se3-clients-linux`
 
-La version actuelle du paquet `se3-clients-linux` est la **0.88**.
+La version actuelle du paquet `se3-clients-linux` est la **2.1.1**.
 
-**Remarque :** La documentation est actuellement en relecture et mise à niveau : il se peut donc que certaines parties de la version **0.88** ne soient pas encore documentées.
+**Remarque :** La documentation est actuellement en relecture et mise à niveau : il se peut donc que certaines parties de la version **2.1.1** ne soient pas encore documentées.
 
 Pour connaître la version installée sur votre se3,
 vous pouvez utilisez la commande suivante,
