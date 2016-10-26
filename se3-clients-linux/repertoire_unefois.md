@@ -1,4 +1,4 @@
-# Le répertoire unefois/
+# Le répertoire `unefois/`
 
 * [Principe de base](#principe-de-base)
 * [Les sous-répertoires](#les-sous-répertoires)
