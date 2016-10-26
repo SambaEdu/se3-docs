@@ -65,9 +65,9 @@ Pour connaître la version installée sur votre se3,
 vous pouvez utilisez la commande suivante,
 dans un terminal, en `root` sur le `se3` :
 ```sh
-apt-cache policy se3-clonage
+apt-cache policy se3-clients-linux
 ```
-![policy_se3-clonage.png](../pxe-clients-linux/images/policy_se3-clonage.png)
+![policy_se3-clients-linux.png](../pxe-clients-linux/images/policy_se3-clients-linux.png)
 
 
 ## Installation et mise à jour du paquet `se3-clients-linux`
