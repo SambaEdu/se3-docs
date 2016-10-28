@@ -89,12 +89,14 @@ Voici une procédure pour réaliser ce formatage :
 ```sh
 lsblk
 ```
+Par exemple :
+![lsblk_avant_disque_usb](images/lsblk_avant_disque_usb.png)
 
 * Brancher le disque dur sur un port usb puis relancez la commande précédente.
-Par comparaison, vous devriez trouver comment est repéré le disque branché.
+Par exemple :
+![lsblk_apres_disque_usb](images/lsblk_apres_disque_usb.png)
 
-
-Dans l'exemple ci-dessus, le disque dur externe est repéré par `/dev/sdb1`.
+Dans l'exemple ci-dessus, par comparaison entre les deux réponses à la commande `lsblk`, on voit que le disque dur externe que vous avez branché est repéré par `/dev/sdc1`.
 
 * Vérifiez que la partition repérée n'est pas montée, à l'aide de la commande suivante :
 ```sh
@@ -104,26 +106,26 @@ mount | grep ^/dev | gawk -F" " '{print $1" "$2" "$3}'
 Ce qui peut donner ceci :
 > /dev/sda2 on /
 
-> /dev/sda6 on /home
-
 > /dev/sda3 on /var
 
-> /dev/sda5 on /var/se3
+> /dev/sda4 on /var/se3
+
+> /dev/sdb1 on /home
 
 
-**Remarque :** si elle est montée (/dev/sdb1 apparaîtrait dans la réponse précédente), la démonter à l'aide de la commande suivante :
+**Remarque :** si elle est montée (en reprenant l'exemple ci-dessus, /dev/sdc1 apparaîtrait dans la réponse précédente), avant de formater le disque, la démonter à l'aide de la commande suivante :
 ```sh
-umount /dev/sdb1
+umount /dev/sdc1
 ```
 
 * Formatez le disque dur externe à l'aide de la commande suivante :
 ```sh
-mkfs.ext3 /dev/sdb1
+mkfs.ext3 /dev/sdc1
 ```
 
 ### Montage du disque externe sur le répertoire `/sauvese3`
 
-Le disque étant repéré par `/dev/sdb1` (voir ci-dessus), il s'agit de le monter sur le répertoire `/sauvese3`. Voici comment faire cette opération :
+Le disque étant repéré par `/dev/sdc1` (voir ci-dessus), il s'agit de le monter sur le répertoire `/sauvese3`. Voici comment faire cette opération :
 
 * Créez le répertoire `/sauvese3`
 ```sh
@@ -131,9 +133,9 @@ mkdir /sauvese3
 ```
 Et le disque externe usb étant préparé (voir ci-dessus), on peut le monter :
 
-* Montez le disque externe `/dev/sdb1`
+* Montez le disque externe `/dev/sdc1`
 ```sh
-mount /dev/sdb1 /sauvese3
+mount /dev/sdc1 /sauvese3
 ```
 
 ### Utilisation du script en mode test
@@ -216,9 +218,9 @@ Pour cela, utilisez la combinaison de 2 touches `Ctrl`+`o` et tapez sur `Entrée
 
 **Remarque :** pour connaître la valeur de l'UUID du disque dur externe, vous pouvez utiliser la commande suivante :
 ```sh
-blkid | grep /dev/sdb1
+blkid | grep /dev/sdc1
 ```
-où `/dev/sdb1` est à adapter en fonction de votre situation (voir ci-dessus).
+où `/dev/sdc1` est à adapter en fonction de votre situation (voir ci-dessus).
 
 
 ### Utilisation d'un `NAS`
