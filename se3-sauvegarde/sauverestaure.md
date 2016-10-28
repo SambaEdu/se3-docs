@@ -240,6 +240,11 @@ mount -t nfs -o nfsvers=3 192.168.1.5:/volume1/sauveserveur /sauvese3
 ```
 Dans cette commande, `192.168.1.5` est l'ip du `NAS`, `/volume1/sauveserveur` est la partie du `NAS` qui doit recevoir la sauvegarde et `/sauvese3` est le répertoire du `se3` dans lequel est monté le `NAS`.
 
+**Remarque :** vous ajouterez aussi une ligne à votre fichier `/etc/fstab` pour que votre `NAS` soit remonté automatiquement lors d'un redémarrage de votre `se3`. La ligne à ajouter peut être celle-ci :
+```sh
+192.168.1.5:/volume1/sauveserveur /sauvese3 nfs nouser,auto,nfsvers=3 0 0
+```
+
 
 ### Utilisation conjointe du script de sauvegarde et du module `Backuppc`
 
