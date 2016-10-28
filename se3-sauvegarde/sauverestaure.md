@@ -90,10 +90,12 @@ Voici une procédure pour réaliser ce formatage :
 lsblk
 ```
 Par exemple :
+
 ![lsblk_avant_disque_usb](images/lsblk_avant_disque_usb.png)
 
 * Brancher le disque dur sur un port usb puis relancez la commande précédente.
 Par exemple :
+
 ![lsblk_apres_disque_usb](images/lsblk_apres_disque_usb.png)
 
 Dans l'exemple ci-dessus, par comparaison entre les deux réponses à la commande `lsblk`, on voit que le disque dur externe que vous avez branché est repéré par `/dev/sdc1`.
