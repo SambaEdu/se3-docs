@@ -41,11 +41,13 @@ La solution proposée ici est indépendante du module `Backuppc` du serveur `se3
 
 Les scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, seront maintenant disponibles directement sur votre serveur `se3`.
 
-Les 2 scripts se trouveront dans le répertoire `/usr/share/se3/sbin` du `se3` dans la prochaine mise à jour prévue en octobre 2016.
+Les 2 scripts se trouveront dans le répertoire `/usr/share/se3/sbin` du `se3` dans la prochaine mise à jour prévue en novembre 2016.
 
-Si vous n'êtes pas en `Wheezy` mais dans une version antérieure, telle que `Lenny` ou `Squeeze`, il faudra mettre en place le script `sauve_se3.sh` en le téléchargeant. Cependant, certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Cæn pour leur utilisation.
+Si ces deux scripts ne sont pas disponibles dans le répertoire `/usr/share/se3/sbin` du `se3` ou si vous n'êtes pas en `Wheezy` mais dans une version antérieure, telle que `Lenny` ou `Squeeze`, il faudra mettre en place les scripts `sauve_se3.sh` et `restaure_se3.sh` en les téléchargeant.
 
 Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) sont aussi disponibles et correspondent à cette documentation.
+
+**Remarque :** certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Cæn pour qu'un collègue vous guide pour leur utilisation.
 
 
 ## Où sauvegarder ?
@@ -56,7 +58,7 @@ Il y a plusieurs possibilités pour stocker la sauvegarde :
 * sur un `NAS`
 * sur un serveur distant
 
-Les indications ci-dessous sont données pour l'utilisation d'un disque dur externe usb et vous trouverez aussi quelques indications concernant l'utilisation d'un `NAS`.
+Les indications ci-dessous sont données pour l'utilisation d'un disque dur externe `usb` et vous trouverez aussi quelques indications concernant l'utilisation d'un `NAS`.
 
 L'utilisation d'un serveur distant est possible mais n'est pas documentée : il suffira d'adapter ce qui est indiqué pour un `NAS`.
 
@@ -94,11 +96,12 @@ Par exemple :
 ![lsblk_avant_disque_usb](images/lsblk_avant_disque_usb.png)
 
 * Brancher le disque dur sur un port usb puis relancez la commande précédente.
-Par exemple :
+
+En continuant l'exemple précédent :
 
 ![lsblk_apres_disque_usb](images/lsblk_apres_disque_usb.png)
 
-Dans l'exemple ci-dessus, par comparaison entre les deux réponses à la commande `lsblk`, on voit que le disque dur externe que vous avez branché est repéré par `/dev/sdc1`.
+Dans l'exemple ci-dessus, par comparaison entre les deux réponses à la commande `lsblk`, on voit que le disque dur externe que vous avez branché est repéré par `/dev/sdc1`. Pour préciser les commandes suivantes, nous prendrons cette information ; vous les adapterez en fonction des réponses obtenues dans votre situation.
 
 * Vérifiez que la partition repérée n'est pas montée, à l'aide de la commande suivante :
 ```sh
@@ -127,13 +130,12 @@ mkfs.ext3 /dev/sdc1
 
 ### Montage du disque externe sur le répertoire `/sauvese3`
 
-Le disque étant repéré par `/dev/sdc1` (voir ci-dessus), il s'agit de le monter sur le répertoire `/sauvese3`. Voici comment faire cette opération :
+Le disque étant formaté en `ext3` et repéré par `/dev/sdc1` (voir ci-dessus), il s'agit de le monter sur le répertoire `/sauvese3`. Voici comment faire cette opération :
 
 * Créez le répertoire `/sauvese3`
 ```sh
 mkdir /sauvese3
 ```
-Et le disque externe usb étant préparé (voir ci-dessus), on peut le monter :
 
 * Montez le disque externe `/dev/sdc1`
 ```sh
