@@ -47,8 +47,9 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * Un petit memo concernant [reprepro](reprepro/memo.md#petit-memo-sur-reprepro)
 
 
-## La doc de Raphaël Hertzog
+## Des documentations sur Debian
 
-* Documentation en rapport avec [le cahier de l'administrateur Debian](https://debian-handbook.info/browse/fr-FR/stable/)
+* Une documentation pour [les débutants](http://lescahiersdudebutant.fr/)
+* La documentation de Raphaël Hertzog : [le cahier de l'administrateur Debian](https://debian-handbook.info/browse/fr-FR/stable/)
 
 
