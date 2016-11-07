@@ -28,7 +28,7 @@ Si vous vous posez la question d'installer des postes `windowsXP`, [installez de
 
 ## Installation
 
-Installation en mode `Legacy Bios` (**surtout pas d'`UEFI` !**).
+Installation en mode `Legacy Bios`. **Surtout pas d'`UEFI` !**.
 
 Une seule partition `windows` + la petite partition de boot qui est créée automatiquement par l'installeur. Pour cette partition, 100 Go sont largement suffisant.
 
