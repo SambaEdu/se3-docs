@@ -1,8 +1,17 @@
-#Prérequis pour l'intégration de clients windows
+# Prérequis pour l'intégration de clients-windows
 
-Ceci correspond aux configurations testées et validées pour l'intégration de postes Windows à un domaine SE3. Vu l'infinité de situations possibles, seule ces configurations sont supportées et feront l'objet d'une assistance.
+Ceci correspond aux configurations testées et validées pour l'intégration de postes Windows à un domaine SE3. Vu l'infinité de situations possibles, seules ces configurations sont supportées et feront l'objet d'une assistance.
 
-##Système : 
+* [Système](#système)
+* [Installation](#installation)
+* [Ordre de boot](#ordre-de-boot)
+* [Drivers](#drivers)
+* [Licence et activation](#licence-et-activation)
+* [Logiciels](#logiciels)
+
+
+## Système
+
 Il faut impérativement partir d'un poste fraîchement installé. Le temps perdu à refaire une installation propre sera toujours du temps qu'on ne perdra pas ensuite à résoudre des incompatibilités. 
 
 * Windows 10 pro 64 bits. L'installeur peut être téléchargé directement chez microsoft sans restrictions particulières, et installé sur une clé USB
@@ -12,17 +21,28 @@ Il faut impérativement partir d'un poste fraîchement installé. Le temps perdu
 
 * Windows XP n'est plus supporté, ni par SE3, ni par Microsoft, ni par les applications récentes. Si vous vous posez la question d'installer des postes XP, installez des clients Linux ! 
 
-##Installation :
+
+## Installation
+
 installation en mode Legacy Bios (surtout pas d'UEFI !), une seule partition windows + la petite partition de boot qui est créée automatiquement par l'installeur. Il est possible d'avoir un double boot linux, dans ce cas les partitions linux doivent être les suivantes.
 
-##Ordre de boot :
+
+## Ordre de boot
+
 Boot PXE activé (soit systématiquement, soit manuellement avec F12)
 
-##Drivers : 
+
+## Drivers
+
 Tous les drivers utiles doivent être installés et à jour, voir les outils plus bas
 
-##Licence et activation : 
+
+## Licence et activation
+
 Pour Windows 7 il faut activer à l'aide d'un outil tiers... Pour Windows 10, aucune activation n'est requise si le poste est éligible à une installation OEM
 
-##Logiciels :
+
+## Logiciels
+
 AUCUN logiciel installable à l'aide de Wpkg ne doit être installé préalablement. C'est une source de problème sans fin.
+
