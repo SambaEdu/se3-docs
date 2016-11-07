@@ -23,7 +23,7 @@ Il faut utiliser une version officielle sans personnalisations `OEM`, il est adm
 
 * **Windows XP n'est plus supporté**,  
 ni par SE3, ni par Microsoft, ni par les applications récentes.  
-Si vous vous posez la question d'installer des postes `windowsXP`, [installez des `clients-linux`](pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) !
+Si vous vous posez la question d'installer des postes `windowsXP`, [installez des `clients-linux`](../pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) !
 
 
 ## Installation
@@ -42,7 +42,8 @@ Boot `PXE` activé (soit systématiquement, soit manuellement avec `F12`).
 
 ## Drivers
 
-Tous les drivers utiles doivent être installés et à jour : voir [les outils](#Outils) plus bas.
+Tous les drivers utiles doivent être installés et à jour : voir
+[les outils](#outils) plus bas.
 
 
 ## Licence et activation
