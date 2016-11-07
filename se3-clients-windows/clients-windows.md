@@ -8,6 +8,7 @@ Ceci correspond aux configurations testées et validées pour l'intégration de 
 * [Drivers](#drivers)
 * [Licence et activation](#licence-et-activation)
 * [Logiciels](#logiciels)
+* [Outils](#outils)
 
 
 ## Système
@@ -46,3 +47,7 @@ Pour `Windows7` il faut activer à l'aide d'un outil tiers... Pour `Windows10`, 
 
 Aucun logiciel installable à l'aide de Wpkg ne doit être installé préalablement. C'est une source de problème sans fin.
 
+
+## Outils
+
+…à venir…
