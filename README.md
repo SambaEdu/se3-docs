@@ -23,9 +23,10 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * Documentation de [se3-clients-linux](se3-clients-linux/README.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux)
 
 
-## Gestion des`clients-windows`
+## Gestion des `clients-windows`
 
 * Prérequis [avant intégration d'un clients-windows](se3-clients-windows/clients-windows.md#prérequis-pour-lintégration-de-clients-windows)
+
 
 ## Installation d'un `se3`
 
