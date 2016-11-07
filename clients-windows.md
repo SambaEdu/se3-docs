@@ -7,17 +7,17 @@ Ceci correspond aux configurations téstées et validées pour l'intégration de
 
 * Windows 10 pro 64 bits l'iso à jour peut être téléchargée directement chez microsoft, et installée sur une clé USB
 
-#Installation :
+##Installation :
 installation en mode Legacy Bios (surtout pas d'UEFI !), une seule partition windows + la petite partition de boot. Il est possible d'avoir un double boot linux, dans ce cas les partitions linux doivent être les suivantes.
 
-#Ordre de boot :
+##Ordre de boot :
 Boot PXE activé (soit systématiquement, soit manuellement avec F12)
 
-#Drivers : 
+##Drivers : 
 Tous les drivers utiles doivent être installés et à jour, voir les outils plus bas
 
-#Licence et activation : 
+##Licence et activation : 
 Pour Windows 7 il faut activer à l'aide d'un outil tiers... Pour Windows 10, aucune activation n'est requise si le poste est éligible à une installation OEM
 
-#Logiciels :
+##Logiciels :
 AUCUN logiciel installable à l'aide de Wpkg ne doit être installé préalablement. C'est une source de problème sans fin.
