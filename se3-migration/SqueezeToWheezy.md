@@ -314,13 +314,15 @@ rsyslog:
 ```
 
 **Si le paquet est absent**, on devrait obtenir ceci :
->rsyslog:  
+```sh
+rsyslog:  
   Installé : (aucun)  
   Candidat : 5.8.11-3+deb7u2  
  Table de version :  
      5.8.11-3+deb7u2 0  
         500 http://ftp.fr.debian.org/debian/ wheezy/main i386 Packages  
         500 http://security.debian.org/ wheezy/updates/main i386 Packages
+```
 
 Il faut alors l'installer :
 ```sh
