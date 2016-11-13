@@ -297,9 +297,9 @@ Un certain nombre de vérifications sont nécessaires :
 
 * vérifier la présence du paquet `rsyslog`
 ```sh
-apt-cache policy rsyslog policy rsyslog
+apt-cache policy rsyslog
 ```
-On dvrait obtenir ceci :
+On devrait obtenir ceci :
 >rsyslog:  
 >  Installé : 5.8.11-3+deb7u2  
 >  Candidat : 5.8.11-3+deb7u2  
