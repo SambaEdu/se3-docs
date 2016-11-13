@@ -300,16 +300,18 @@ Un certain nombre de vérifications sont nécessaires :
 apt-cache policy rsyslog
 ```
 On devrait obtenir ceci :
->rsyslog:  
-  Installé : 5.8.11-3+deb7u2  
-  Candidat : 5.8.11-3+deb7u2  
- Table de version :  
->>     7.6.3-2~bpo70+1 0  
->>        100 http://ftp.fr.debian.org/debian/ wheezy-backports/main i386 Packages  
- *** 5.8.11-3+deb7u2 0  
->>        500 http://ftp.fr.debian.org/debian/ wheezy/main i386 Packages  
->>        500 http://security.debian.org/ wheezy/updates/main i386 Packages  
->>        100 /var/lib/dpkg/status
+```sh
+rsyslog:
+  Installé : 5.8.11-3+deb7u2
+  Candidat : 5.8.11-3+deb7u2
+ Table de version :
+     7.6.3-2~bpo70+1 0
+        100 http://ftp.fr.debian.org/debian/ wheezy-backports/main i386 Packages
+ *** 5.8.11-3+deb7u2 0
+        500 http://ftp.fr.debian.org/debian/ wheezy/main i386 Packages
+        500 http://security.debian.org/ wheezy/updates/main i386 Packages
+        100 /var/lib/dpkg/status
+```
 
 **Si le paquet est absent**, on devrait obtenir ceci :
 >rsyslog:  
