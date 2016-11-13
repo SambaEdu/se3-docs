@@ -25,6 +25,7 @@
     * [Plus de réseau](#plus-de-reseau)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
+    * [Quelques vérifications](#quelques-vérifications)
 * [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
 
 
@@ -289,6 +290,31 @@ Il suffit de rebrancher les disques et deux solutions se présentent :
 * soit de les monter conformément aux indications de la documentation.
 
 **Remarque :** toutes les machines `bakuppc` sauvegardées antérieurement disparaissent mais il suffit de les recréer avec un nom identique pour retrouver les sauvegardes antérieures.
+
+
+### Quelques vérifications
+Un certain nombre de vérifications sont nécessaires :
+
+* vérifier la présence du paquet `rsyslog`
+```sh
+apt-cache policy rsyslog policy rsyslog
+```
+On dvrait obtenir ceci :
+>rsyslog:
+>  Installé : 5.8.11-3+deb7u2
+>  Candidat : 5.8.11-3+deb7u2
+> Table de version :
+>     7.6.3-2~bpo70+1 0
+>        100 http://ftp.fr.debian.org/debian/ wheezy-backports/main i386 Packages
+> *** 5.8.11-3+deb7u2 0
+>        500 http://ftp.fr.debian.org/debian/ wheezy/main i386 Packages
+>        500 http://security.debian.org/ wheezy/updates/main i386 Packages
+>        100 /var/lib/dpkg/status 
+
+**Si le paquet est absent**, l'installer :
+```sh
+apt-get install rsyslog
+```sh
 
 
 ## Utiliser les scripts de sauvegarde/restauration
