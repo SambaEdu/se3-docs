@@ -370,14 +370,18 @@ function ouverture_perso ()
     if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
     then
         rm -Rf "$REP_HOME/.mozilla"
-        [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux/.mozilla" ] && mkdir -p /mnt/_$LOGIN/Docs/.profile-linux/.mozilla
+        if [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux/.mozilla" ]
+        then
+            [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux" ] & mkdir -p /mnt/_$LOGIN/Docs/.profile-linux
+            cp -R /mnt/netlogon/distribs/jessie/skel/.mozilla /mnt/_$LOGIN/Docs/.profile-linux/
+        fi
         creer_lien "Docs/.profile-linux/.mozilla" "$REP_HOME/.mozilla"
     fi
     …
 }
 ```
 
-C'est cette méthode que j'utilise pour le réseau de mon collège.
+C'est cette méthode que j'utilise pour le réseau de mon collège. Pour les nouveaux comptes, le profil du skel est mis en place : chaque utilisateur pourra ensuite le personnaliser.
 
 
 ### Méthode à l'aide de `rsync`
