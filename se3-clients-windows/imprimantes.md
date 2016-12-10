@@ -13,6 +13,11 @@ Pour l'ensemble des étapes qui suivent, on utilisera un poste sous Windows 4 64
 #Trouver les drivers
 La première étape consiste à télécharger les drivers sur le site du constructeur.
 
+##Attention 
+Depuis juillet 2016, Microsoft a fermé un trou de sécurité, ce qui rend impossible l'installation totalement silencieuse des pilotes qui ne sont pas au format "packaged". Le problème c'est que très peu le sont, pourtant c'est la préconisation de Microsoft depuis Vista...
+
+Les HP le sont, pour les autres je ne sais pas !
+
 Pour le modèle utilisé dans cet exemple, on les trouvera ici : http://support.hp.com/fr-fr/drivers/selfservice/HP-LaserJet-1000-Printer-series/439424/model/439432
 
 Le driver pour Windows 7 32 bits se nomme : lj1018_1020_1022-HB-pnp-win32-fr.exe
@@ -87,9 +92,11 @@ Cliquer sur `Suivant`.
 
 Choisir le pilote précédemment téléchargé et décompressé correspondant à l'architecture sélectionné, et suivre les étapes d'installation.
 
-Une fois le pilote 32 bits instalé, recommencer la procédure pur le pilote 64 bits.
+Une fois le pilote 32 bits installé, recommencer la procédure pur le pilote 64 bits.
 
-Attention : les deux pilotes doivent porter le même nom.
+Attention : les deux pilotes doivent porter exactement le même nom.
+
+On peut voir dans la fenêtre MMC si le pilote est packagé ou non.
 
 ##Affecter les pilotes à l'imprimante
 
@@ -115,6 +122,8 @@ Dans la liste des pilotes, choisir le pilote précédemment ajouté, puis clique
 
 L'imprimante est maintenant déployable automatiquement sur l'ensemble des machines du parc concerné.
 
-TODO-ÀVERIFIER Il se peut qu'un message demandant l'autorisation d'installer l'imprinante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre oui, et le message n'apparaît plus par la suite.
+Si le pilote est non packagé, Il se peut qu'un message demandant l'autorisation d'installer l'imprimante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre oui, et le message n'apparaît plus par la suite.
+C'est la sécurité mise en place pour éviter l'installation de virus via le téléchargement de pilotes non packagés. Elle n'est pas contournable par des GPO. 
 
-Un xml [`pb-imprimante-win7.xml`](pb-imprimante-win7.xml) a été proposé par Emmanuel Farcy sur la liste et semble résoudre ce problème. TODO mettre le xml sur le SVN ;-)
+Un xml [`pb-imprimante-win7.xml`](pb-imprimante-win7.xml) a été proposé par Emmanuel Farcy sur la liste et semble résoudre ce problème. TODO mettre le xml sur le SVN ;-)  NON, ces clés sont déjà dans les GPO et n'ont pas d'effet pour ce problème. Il faudrait faire un Autoit qui automatise le clic...
+
