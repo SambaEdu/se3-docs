@@ -16,9 +16,17 @@ La première étape consiste à télécharger les drivers sur le site du constru
 ##Attention 
 Depuis juillet 2016, Microsoft a fermé un trou de sécurité, ce qui rend impossible l'installation totalement silencieuse des pilotes qui ne sont pas au format "packaged". Le problème c'est que très peu le sont, pourtant c'est la préconisation de Microsoft depuis Vista...
 
-Les HP le sont, pour les autres je ne sais pas !
+Les HP le sont, pour les autres je ne sais pas ! En général il faut privilégier les "Universal Drivers", qui sont conçus pour des installations centralisées et ont donc plus de chances d'être aux normes.
+
+pour HP :
+
+x64 : http://ftp.hp.com/pub/softlib/software13/COL40842/ds-99374-14/upd-pcl6-x64-6.3.0.21178.exe
+
+x32 : http://ftp.hp.com/pub/softlib/software13/COL40842/ds-99374-14/upd-pcl6-x32-6.3.0.21178.exe
 
 Pour le modèle utilisé dans cet exemple, on les trouvera ici : http://support.hp.com/fr-fr/drivers/selfservice/HP-LaserJet-1000-Printer-series/439424/model/439432
+
+On peut aussi prendre les pilotes individuels, mais c'est souvent plus complexe : 
 
 Le driver pour Windows 7 32 bits se nomme : lj1018_1020_1022-HB-pnp-win32-fr.exe
 
