@@ -22,11 +22,13 @@ pour HP :
 
 x64 : http://ftp.hp.com/pub/softlib/software13/COL40842/ds-99374-14/upd-pcl6-x64-6.3.0.21178.exe
 
-x32 : http://ftp.hp.com/pub/softlib/software13/COL40842/ds-99374-14/upd-pcl6-x32-6.3.0.21178.exe
+x32 : http://ftp.hp.com/pub/softlib/software13/COL40842/ds-99353-14/upd-pcl6-x32-6.3.0.21178.exe
+
+
+On peut aussi prendre les pilotes individuels, mais c'est souvent plus complexe : 
 
 Pour le modèle utilisé dans cet exemple, on les trouvera ici : http://support.hp.com/fr-fr/drivers/selfservice/HP-LaserJet-1000-Printer-series/439424/model/439432
 
-On peut aussi prendre les pilotes individuels, mais c'est souvent plus complexe : 
 
 Le driver pour Windows 7 32 bits se nomme : lj1018_1020_1022-HB-pnp-win32-fr.exe
 
