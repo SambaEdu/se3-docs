@@ -75,4 +75,46 @@ Vérifier que la branche `Serveur d'impression` -> `Se3` -> `Imprimantes` contie
 ##Ajouter les pilotes
 Clic droit sur la branche `Pilotes` -> `Ajouter un pilote...`
 
-![Fenêtre Ajouter un pilote](images/imprimantes_console_mmc_ajout_pilote_1.png)
+![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_1.png)
+
+Cliquer sur `Suivant`.
+
+![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_2.png)
+
+Commencer systématiquement par ajouter le pilote x86 (32 bits).
+
+Cliquer sur `Suivant`.
+
+Choisir le pilote correspondant précédemment téléchargé et décompressé correspondant à l'architecture sélectionné, et suivre les étapes d'installation.
+
+Une fois le pilote 32 bits instalé, recommencer la procédure pur le pilote 64 bits.
+
+Attention : les deux pilotes doivent porter le même nom.
+
+##Affecter les pilotes à l'imprimante
+
+Dans la branche `Imprimantes`, faire un clic droit -> `Propriétés` sur l'imprimante souhaitée.
+
+À la question "[...] Voulez-vous installer le pilote maintenant ?", répondre `Non`.
+
+![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_3.png)
+
+Sélectionner l'onglet `Avancé`.
+
+![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_4.png)
+
+Dans la liste des pilotes, choisir le pilote précédemment ajouté, puis cliquer sur `Appliquer`.
+
+À la question "Faites-vous confiance à cette imprimante ?", répondre `Installer le pilote`.
+
+![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_5.png)
+
+À la question "[...] Certaines propriétés de l'imprimante ne seront pas disponibles jusqu'à ce que vous installiez le pilote de l'imprimante. Voulez-vous installer le pilote maintenant ?", répondre `Oui`.
+
+![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_6.png)
+
+L'imprimante est maintenant déployable automatiquement sur l'ensemble des machines du parc concerné.
+
+TODO-ÀVERIFIER Il se peut qu'un message demandant l'autorisation d'installer l'imprinante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre oui, et le message n'apparaît plus par la suite.
+
+Un xml `pb-imprimante-w7.xml` a été proposé par Emmanuel Farcy sur la liste pour résoudre ce problème.
