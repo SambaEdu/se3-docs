@@ -11,12 +11,12 @@ Pour l'ensemble des étapes qui suivent, on utilisera un poste sous Windows 4 64
 
 
 #Trouver les drivers
-La première étape consiste à télécharger les drivers sur le site du constructeur.
+La première étape consiste à télécharger les drivers sur le site du constructeur. En général il faut privilégier les "Universal Drivers", qui sont conçus pour des installations centralisées et ont donc plus de chances d'être aux normes. Quelques liens sont donnés ci-dessous, mais ils peuvent expirer, rechercher "Universal driver" sur votre moteur de recherche favori...
 
 ##Attention 
 Depuis juillet 2016, Microsoft a fermé un trou de sécurité, ce qui rend impossible l'installation totalement silencieuse des pilotes qui ne sont pas au format "packaged". Le problème c'est que très peu le sont, pourtant c'est la préconisation de Microsoft depuis Vista...
 
-Les HP le sont, pour les autres je ne sais pas ! En général il faut privilégier les "Universal Drivers", qui sont conçus pour des installations centralisées et ont donc plus de chances d'être aux normes.
+Les HP le sont, pour les autres je ne sais pas ! 
 
 pour HP :
 
@@ -24,6 +24,9 @@ x64 : http://ftp.hp.com/pub/softlib/software13/COL40842/ds-99374-14/upd-pcl6-x64
 
 x32 : http://ftp.hp.com/pub/softlib/software13/COL40842/ds-99353-14/upd-pcl6-x32-6.3.0.21178.exe
 
+Pour Sharp : 
+
+http://siica.sharpusa.com/portals/0/downloads/Drivers/WIN32_64BIT_UD2_PCL6_PHOENIX50_60_1510A.zip
 
 On peut aussi prendre les pilotes individuels, mais c'est souvent plus complexe : 
 
