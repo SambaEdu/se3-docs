@@ -77,4 +77,4 @@ Partez d'une installation de `Windows` de base et laissez le serveur `Wpkg` gér
 * [Pack de drivers](https://sdi-tool.org/)
 * [Créer une clé USB bootable](http://www.winsetupfromusb.com/)
 * [Créer une ISO personnalisée](http://rt7lite.com/)
-* [Sauvegarder et restaurer l'activation](http://www.pcastuces.com/pratique/windows/sauvegarder_activation/page1.htm)
+* [Sauvegarder et restaurer l'activation](http://joshcellsoftwares.com/products/advancedtokensmanager/) [Doc](http://www.pcastuces.com/pratique/windows/sauvegarder_activation/page1.htm)
