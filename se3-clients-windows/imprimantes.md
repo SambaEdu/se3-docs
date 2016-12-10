@@ -185,5 +185,3 @@ L'imprimante est maintenant déployable automatiquement sur l'ensemble des machi
 **Remarque :** Si le pilote est non packagé, Il se peut qu'un message demandant l'autorisation d'installer l'imprimante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre `oui`, et le message n'apparaît plus par la suite.
 C'est la sécurité mise en place pour éviter l'installation de virus via le téléchargement de pilotes non packagés. Elle n'est pas contournable par des `GPO`.
 
-Un xml [`pb-imprimante-win7.xml`](pb-imprimante-win7.xml) a été proposé par `Emmanuel Farcy` sur la liste et semble résoudre ce problème. [TODO] Mettre le xml sur le SVN ;-)  NON, ces clés sont déjà dans les `GPO` et n'ont pas d'effet pour ce problème. Il faudrait faire un `Autoit` qui automatise le clic…
-
