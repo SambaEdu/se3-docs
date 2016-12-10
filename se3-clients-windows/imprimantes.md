@@ -7,10 +7,10 @@
     * [Ajouter l'imprimante au parc](#ajouter-limprimante-au-parc)
 * [La console MMC](#la-console-mmc)
     * [Ajouter le module de gestion des imprimantes](#ajouter-le-module-de-gestion-des-imprimantes)
-    * [Ajouter le serveur `Se3`](#ajouter-le serveur-se3)
+    * [Ajouter le serveur `se3`](#ajouter-le-serveur-se3)
     * [Lister les imprimantes](#lister-les-imprimantes)
     * [Ajouter les pilotes](#ajouter-les-pilotes)
-    * [Affecter les pilotes à l'imprimante](#affecter-les pilotes-à-limprimante)
+    * [Affecter les pilotes à l'imprimante](#affecter-les-pilotes-à-limprimante)
 
 
 ## Préambule
@@ -104,7 +104,7 @@ Sélectionner `Gestion de l'impression` dans la colonne de gauche, cliquer sur `
 ![Console MMC : Ajout du module de gestion des imprimantes](images/imprimantes_console_mmc_ajout_module.png)
 
 
-### Ajouter le serveur Se3
+### Ajouter le serveur `se3`
 
 Clic droit sur `Gestion de l'impression` -> `Ajouter/Supprimer des serveurs`
 
