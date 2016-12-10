@@ -2,10 +2,11 @@
 
 * [Préambule](#préambule)
 * [Trouver les pilotes](#trouver-les-drivers)
-* [Sur le serveur `se3`](#sur-le-serveur-se3)
+* [1ère étape : sur l'interface web du `se3`](#1ère-étape-sur-linterface-web-du-se3)
     * [Ajouter l'imprimante](#ajouter-limprimante)
     * [Ajouter l'imprimante au parc](#ajouter-limprimante-au-parc)
-* [La console MMC](#la-console-mmc)
+* [2ème étape : sur la console `MMC`](#2ème-étape-sur-la-console-mmc)
+    * [Ouvrir la console 'MMC`](#ouvrir-la-console-mmc)
     * [Ajouter le module de gestion des imprimantes](#ajouter-le-module-de-gestion-des-imprimantes)
     * [Ajouter le serveur `se3`](#ajouter-le-serveur-se3)
     * [Lister les imprimantes](#lister-les-imprimantes)
@@ -63,7 +64,7 @@ Une fois téléchargés, il faut
 Extraire le contenu avec par exemple `7-zip` dans deux dossiers distincts.
 
 
-## Sur le serveur `se3`
+## 1ère étape : sur l'interface web du `se3`
 
 ### Ajouter l'imprimante
 
@@ -91,7 +92,9 @@ Menu `Imprimantes` → `Ajout à un parc`
 Sélectionner le parc, puis l'imprimante à intégrer.
 
 
-## La console MMC
+## 2ème étape : sur la console `MMC`
+
+### Ouvrir la console 'MMC`
 
 Ouvrir la console `MMC` en lançant la commande `mmc.exe`
 
