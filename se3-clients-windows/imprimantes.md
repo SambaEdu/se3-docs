@@ -96,7 +96,9 @@ Une fois le pilote 32 bits installé, recommencer la procédure pur le pilote 64
 
 Attention : les deux pilotes doivent porter exactement le même nom.
 
-On peut voir dans la fenêtre MMC si le pilote est packagé ou non. (https://canonusa.i.lithium.com/t5/image/serverpage/image-id/10463i06A9CC53F7F8A2A0/image-size/original?v=v2&px=-1)
+On peut voir dans la fenêtre MMC si le pilote est packagé ou non. 
+
+![packaged](https://canonusa.i.lithium.com/t5/image/serverpage/image-id/10463i06A9CC53F7F8A2A0/image-size/original?v=v2&px=-1)
 
 ##Affecter les pilotes à l'imprimante
 
