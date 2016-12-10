@@ -50,23 +50,29 @@ Sélectionner le parc, puis l'imprimante à intégrer.
 
 Ouvrir la console MMC en lançant la commande mmc.exe
 
-![](images/imprimantes_console_mmc_vide.png)
+![Consolle MMC vide](images/imprimantes_console_mmc_vide.png)
 
 ##Ajouter le module de gestion des imprimantes
 Menu `Fichier` -> `Ajouter/Supprimer un composant logiciel enfichable`
 
 Sélectionner `Gestion de l'impression` dans la colonne de gauche, cliquer sur `Ajouter`, puis valider.
 
-![](images/imprimantes_console_mmc_ajout_module.png)
+![Console MMC : Ajout du module de gestion des imprimantes](images/imprimantes_console_mmc_ajout_module.png)
 
+##Ajouter le serveur Se3
 Clic droit sur `Gestion de l'impression` -> `Ajouter/Supprimer des serveurs`
 
-Cliquer sur `Parcourir`, afin de sélectionner le serveur Se3 soit par son nom, soit par son adresse IP, puis cliquer sur `Ajouter à la liste`, puis `Terminer`.
+Cliquer sur `Parcourir`, afin de sélectionner le serveur Se3 soit par son nom, soit par son adresse IP, puis cliquer sur `Ajouter à la liste`, puis valider.
 
+![Console MMC : Ajout d'un serveur](images/imprimantes_console_mmc_ajout_serveur.png)
 
-![](images/imprimantes_console_mmc_ajout_serveur.png)
+##Lister les imprimantes
 
-##Lister 
+Vérifier que la branche `Serveur d'impression` -> `Se3` -> `Imprimantes` contient bien l'imprimante précédemment créée via l'interface web du Se3.
 
+![Console MMC](images/imprimantes_console_mmc.png)
 
-##Activer la gestion des imprimantes
+##Ajouter les pilotes
+Clic droit sur la branche `Pilotes` -> `Ajouter un pilote...`
+
+![Fenêtre Ajouter un pilote](images/imprimantes_console_mmc_ajout_pilote_1.png)
