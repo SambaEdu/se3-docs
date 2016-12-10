@@ -62,7 +62,7 @@ Sélectionner `Gestion de l'impression` dans la colonne de gauche, cliquer sur `
 ##Ajouter le serveur Se3
 Clic droit sur `Gestion de l'impression` -> `Ajouter/Supprimer des serveurs`
 
-Cliquer sur `Parcourir`, afin de sélectionner le serveur Se3 soit par son nom, soit par son adresse IP, puis cliquer sur `Ajouter à la liste`, puis valider.
+Cliquer sur `Parcourir`, afin de sélectionner le serveur Se3 soit par son nom, soit par son adresse IP, puis cliquer sur `Ajouter à la liste`, et valider.
 
 ![Console MMC : Ajout d'un serveur](images/imprimantes_console_mmc_ajout_serveur.png)
 
@@ -85,7 +85,7 @@ Commencer systématiquement par ajouter le pilote x86 (32 bits).
 
 Cliquer sur `Suivant`.
 
-Choisir le pilote correspondant précédemment téléchargé et décompressé correspondant à l'architecture sélectionné, et suivre les étapes d'installation.
+Choisir le pilote précédemment téléchargé et décompressé correspondant à l'architecture sélectionné, et suivre les étapes d'installation.
 
 Une fois le pilote 32 bits instalé, recommencer la procédure pur le pilote 64 bits.
 
