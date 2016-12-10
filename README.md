@@ -26,6 +26,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 ## Gestion des `clients-windows`
 
 * Prérequis [avant intégration d'un clients-windows](se3-clients-windows/clients-windows.md#prérequis-pour-lintégration-de-clients-windows)
+* Gestion des imprimantes : documentation en préparation…
 
 
 ## Installation d'un `se3`
