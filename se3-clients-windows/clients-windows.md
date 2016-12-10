@@ -32,6 +32,16 @@ Installation en mode `Legacy Bios`. **Surtout pas d'`UEFI` !**.
 
 Une seule partition `windows` + la petite partition de boot qui est créée automatiquement par l'installeur. Pour cette partition, 100 Go sont largement suffisant.
 
+Une astuce permet d'éviter la création de la partition de boot de 100Mo créée automatiquement à l'installation de Windows 7. Cela simplifie le clonage et la création d'images. Voici comment procéder.
+
+**Avant de lancer l'installation de Windows** (par exemple avec gparted inclu dans SystemRescuCD via le boot PXE) :
+* supprimer toute partition du disque,
+* (re)créer une table de partition ms-dos (pas de gpt),
+* créer la partition destinnée à recevoir l'OS (100G suffisent),
+* formater cette partition en NTFS.
+
+Ainsi, lors de l'installation, en choisisannt cette partition, la partition de boot de 100Mo ne sera pas créée.
+
 Il est possible d'avoir un double-boot `Gnu/Linux`, dans ce cas [vous laisserez un espace vide](../pxe-clients-linux/utilisation.md#installation-en-double-boot) en partageant le disque dur en deux parties sensiblement égales.
 
 
@@ -62,4 +72,8 @@ Partez d'une installation de `Windows` de base et laissez le serveur `Wpkg` gér
 
 ## Outils
 
-…à venir…
+…à compléter…
+* [Obtenir des ISO légalement](http://www.downflex.com/)
+* [Pack de drivers](https://sdi-tool.org/)
+* [Créer une clé USB bootable](http://www.winsetupfromusb.com/)
+* [Créer une ISO personnalisée](http://rt7lite.com/)
