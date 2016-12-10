@@ -117,4 +117,4 @@ L'imprimante est maintenant déployable automatiquement sur l'ensemble des machi
 
 TODO-ÀVERIFIER Il se peut qu'un message demandant l'autorisation d'installer l'imprinante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre oui, et le message n'apparaît plus par la suite.
 
-Un xml `pb-imprimante-w7.xml` a été proposé par Emmanuel Farcy sur la liste pour résoudre ce problème.
+Un xml [`pb-imprimante-w7.xml`](pb-imprimante-w7.xml) a été proposé par Emmanuel Farcy sur la liste et semble résoudre ce problème. TODO mettre le xml sur le SVN ;-)
