@@ -93,7 +93,7 @@ Sélectionner le parc, puis l'imprimante à intégrer.
 
 ## La console MMC
 
-Ouvrir la console MMC en lançant la commande mmc.exe
+Ouvrir la console `MMC` en lançant la commande `mmc.exe`
 
 ![Consolle MMC vide](images/imprimantes_console_mmc_vide.png)
 
@@ -111,21 +111,21 @@ Sélectionner `Gestion de l'impression` dans la colonne de gauche, cliquer sur `
 
 Clic droit sur `Gestion de l'impression` → `Ajouter/Supprimer des serveurs`
 
-Cliquer sur `Parcourir`, afin de sélectionner le serveur Se3 soit par son nom, soit par son adresse IP, puis cliquer sur `Ajouter à la liste`, et valider.
+Cliquer sur `Parcourir`, afin de sélectionner le serveur `se3` soit par son nom, soit par son adresse `IP`, puis cliquer sur `Ajouter à la liste`, et valider.
 
 ![Console MMC : Ajout d'un serveur](images/imprimantes_console_mmc_ajout_serveur.png)
 
 
 ### Lister les imprimantes
 
-Vérifier que la branche `Serveur d'impression` → `Se3` → `Imprimantes` contient bien l'imprimante précédemment créée via l'interface web du Se3.
+Vérifier que la branche `Serveur d'impression` → `Se3` → `Imprimantes` contient bien l'imprimante précédemment créée via l'interface web du `se3`.
 
 ![Console MMC](images/imprimantes_console_mmc.png)
 
 
 ### Ajouter les pilotes
 
-Clic droit sur la branche `Pilotes` → `Ajouter un pilote...`
+Clic droit sur la branche `Pilotes` → `Ajouter un pilote…`
 
 ![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_1.png)
 
@@ -133,17 +133,17 @@ Cliquer sur `Suivant`.
 
 ![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_2.png)
 
-Commencer systématiquement par ajouter le pilote x86 (32 bits).
+Commencer systématiquement par ajouter le pilote `x86` (32 bits).
 
 Cliquer sur `Suivant`.
 
 Choisir le pilote précédemment téléchargé et décompressé correspondant à l'architecture sélectionné, et suivre les étapes d'installation.
 
-Une fois le pilote 32 bits installé, recommencer la procédure pur le pilote 64 bits.
+Une fois le pilote 32 bits installé, recommencer la procédure pour le pilote 64 bits.
 
-Attention : les deux pilotes doivent porter exactement le même nom.
+**Attention :** les deux pilotes doivent porter exactement le même nom.
 
-On peut voir dans la fenêtre MMC si le pilote est packagé ou non. 
+On peut voir dans la console `MMC` si le pilote est packagé ou non. 
 
 ![packaged](https://canonusa.i.lithium.com/t5/image/serverpage/image-id/10463i06A9CC53F7F8A2A0/image-size/original?v=v2&px=-1)
 
@@ -152,7 +152,7 @@ On peut voir dans la fenêtre MMC si le pilote est packagé ou non.
 
 Dans la branche `Imprimantes`, faire un clic droit → `Propriétés` sur l'imprimante souhaitée.
 
-À la question "[...] Voulez-vous installer le pilote maintenant ?", répondre `Non`.
+À la question "[…] Voulez-vous installer le pilote maintenant ?", répondre `Non`.
 
 ![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_3.png)
 
@@ -166,14 +166,14 @@ Dans la liste des pilotes, choisir le pilote précédemment ajouté, puis clique
 
 ![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_5.png)
 
-À la question "[...] Certaines propriétés de l'imprimante ne seront pas disponibles jusqu'à ce que vous installiez le pilote de l'imprimante. Voulez-vous installer le pilote maintenant ?", répondre `Oui`.
+À la question "[…] Certaines propriétés de l'imprimante ne seront pas disponibles jusqu'à ce que vous installiez le pilote de l'imprimante. Voulez-vous installer le pilote maintenant ?", répondre `Oui`.
 
 ![Fenêtre Ajouter un pilote](images/imprimantes_ajout_pilote_6.png)
 
 L'imprimante est maintenant déployable automatiquement sur l'ensemble des machines du parc concerné.
 
-Si le pilote est non packagé, Il se peut qu'un message demandant l'autorisation d'installer l'imprimante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre oui, et le message n'apparaît plus par la suite.
-C'est la sécurité mise en place pour éviter l'installation de virus via le téléchargement de pilotes non packagés. Elle n'est pas contournable par des GPO. 
+**Remarque :** Si le pilote est non packagé, Il se peut qu'un message demandant l'autorisation d'installer l'imprimante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre `oui`, et le message n'apparaît plus par la suite.
+C'est la sécurité mise en place pour éviter l'installation de virus via le téléchargement de pilotes non packagés. Elle n'est pas contournable par des `GPO`.
 
-Un xml [`pb-imprimante-win7.xml`](pb-imprimante-win7.xml) a été proposé par Emmanuel Farcy sur la liste et semble résoudre ce problème. TODO mettre le xml sur le SVN ;-)  NON, ces clés sont déjà dans les GPO et n'ont pas d'effet pour ce problème. Il faudrait faire un Autoit qui automatise le clic...
+Un xml [`pb-imprimante-win7.xml`](pb-imprimante-win7.xml) a été proposé par `Emmanuel Farcy` sur la liste et semble résoudre ce problème. [TODO] Mettre le xml sur le SVN ;-)  NON, ces clés sont déjà dans les `GPO` et n'ont pas d'effet pour ce problème. Il faudrait faire un `Autoit` qui automatise le clic…
 
