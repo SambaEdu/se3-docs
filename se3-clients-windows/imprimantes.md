@@ -2,10 +2,10 @@
 
 * [Préambule](#préambule)
 * [Trouver les pilotes](#trouver-les-drivers)
-* [1ère étape : sur l'interface web du `se3`](#1ère-étape-sur-linterface-web-du-se3)
+* [1ère étape : sur l'interface web du `se3`](#1ère-étape--sur-linterface-web-du-se3)
     * [Ajouter l'imprimante](#ajouter-limprimante)
     * [Ajouter l'imprimante au parc](#ajouter-limprimante-au-parc)
-* [2ème étape : sur la console `MMC`](#2ème-étape-sur-la-console-mmc)
+* [2ème étape : sur la console `MMC`](#2ème-étape--sur-la-console-mmc)
     * [Ouvrir la console 'MMC`](#ouvrir-la-console-mmc)
     * [Ajouter le module de gestion des imprimantes](#ajouter-le-module-de-gestion-des-imprimantes)
     * [Ajouter le serveur `se3`](#ajouter-le-serveur-se3)
