@@ -2,16 +2,18 @@
 
 * [Préambule](#préambule)
 * [Trouver les pilotes](#trouver-les-drivers)
-* [1ère étape : sur l'interface web du `se3`](#1ère-étape--sur-linterface-web-du-se3)
-    * [Ajouter l'imprimante](#ajouter-limprimante)
-    * [Ajouter l'imprimante au parc](#ajouter-limprimante-au-parc)
-* [2ème étape : sur la console `MMC`](#2ème-étape--sur-la-console-mmc)
+* [Préparer la console `MMC`](#préparer-la-console-mmc)
     * [Ouvrir la console `MMC`](#ouvrir-la-console-mmc)
     * [Ajouter le module de gestion des imprimantes](#ajouter-le-module-de-gestion-des-imprimantes)
     * [Ajouter le serveur `se3`](#ajouter-le-serveur-se3)
-    * [Lister les imprimantes](#lister-les-imprimantes)
-    * [Ajouter les pilotes](#ajouter-les-pilotes)
-    * [Affecter les pilotes à l'imprimante](#affecter-les-pilotes-à-limprimante)
+* [Gestion d'une imprimante](#gestion-dune-imprimante)
+    * [1ère étape : sur l'interface web du `se3`](#1ère-étape--sur-linterface-web-du-se3)
+        * [Ajouter l'imprimante](#ajouter-limprimante)
+        * [Ajouter l'imprimante au parc](#ajouter-limprimante-au-parc)
+    * [2ème étape : sur la console `MMC`](#2ème-étape--sur-la-console-mmc)
+        * [Lister les imprimantes](#lister-les-imprimantes)
+        * [Ajouter les pilotes](#ajouter-les-pilotes)
+        * [Affecter les pilotes à l'imprimante](#affecter-les-pilotes-à-limprimante)
 
 
 ## Préambule
@@ -64,35 +66,7 @@ Une fois téléchargés, il faut
 Extraire le contenu avec par exemple `7-zip` dans deux dossiers distincts.
 
 
-## 1ère étape : sur l'interface web du `se3`
-
-### Ajouter l'imprimante
-
-Sur le serveur, menu `Imprimantes` → `Nouvelle imprimante`
-
-Saisir les informations concernant l'imprimante :
-* Un nom (8 caractères max, pas d'espace)
-* L'URI (généralement, son adresse IP)
-* L'emplacement de l'imprimante (généralement la salle)
-* Une description (N/B, couleur, modèle, etc.)
-
-Sélectionner le protocole `TCP/IP`.
-
-Cochez `Pilote Windows du client déployable`.
-
-[TODO] Pour le reste, je ne suis pas certain…
-
-![Ajout d'une imprimante dans l'interface web du Se3](images/imprimantes_se3_ajout.png)
-
-
-### Ajouter l'imprimante au parc
-
-Menu `Imprimantes` → `Ajout à un parc`
-
-Sélectionner le parc, puis l'imprimante à intégrer.
-
-
-## 2ème étape : sur la console `MMC`
+## Préparer la console `MMC`
 
 ### Ouvrir la console `MMC`
 
@@ -119,14 +93,47 @@ Cliquer sur `Parcourir`, afin de sélectionner le serveur `se3` soit par son nom
 ![Console MMC : Ajout d'un serveur](images/imprimantes_console_mmc_ajout_serveur.png)
 
 
-### Lister les imprimantes
+## Gestion d'une imprimante
+
+### 1ère étape : sur l'interface web du `se3`
+
+#### Ajouter l'imprimante
+
+Sur le serveur, menu `Imprimantes` → `Nouvelle imprimante`
+
+Saisir les informations concernant l'imprimante :
+* Un nom (8 caractères max, pas d'espace)
+* L'URI (généralement, son adresse IP)
+* L'emplacement de l'imprimante (généralement la salle)
+* Une description (N/B, couleur, modèle, etc.)
+
+Sélectionner le protocole `TCP/IP`.
+
+Cochez `Pilote Windows du client déployable`.
+
+[TODO] Pour le reste, je ne suis pas certain…
+
+![Ajout d'une imprimante dans l'interface web du Se3](images/imprimantes_se3_ajout.png)
+
+
+#### Ajouter l'imprimante au parc
+
+Menu `Imprimantes` → `Ajout à un parc`
+
+Sélectionner le parc, puis l'imprimante à intégrer.
+
+
+### 2ème étape : sur la console `MMC`
+
+
+#### Lister les imprimantes
 
 Vérifier que la branche `Serveur d'impression` → `Se3` → `Imprimantes` contient bien l'imprimante précédemment créée via l'interface web du `se3`.
 
 ![Console MMC](images/imprimantes_console_mmc.png)
 
 
-### Ajouter les pilotes
+#### Ajouter les pilotes
 
 Clic droit sur la branche `Pilotes` → `Ajouter un pilote…`
 
@@ -151,7 +158,7 @@ On peut voir dans la console `MMC` si le pilote est packagé ou non.
 ![packaged](https://canonusa.i.lithium.com/t5/image/serverpage/image-id/10463i06A9CC53F7F8A2A0/image-size/original?v=v2&px=-1)
 
 
-### Affecter les pilotes à l'imprimante
+#### Affecter les pilotes à l'imprimante
 
 Dans la branche `Imprimantes`, faire un clic droit → `Propriétés` sur l'imprimante souhaitée.
 
