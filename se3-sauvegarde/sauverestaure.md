@@ -233,6 +233,7 @@ où `/dev/sdc1` est à adapter en fonction de votre situation (voir ci-dessus).
 
 **Recommendations :** pour éviter les problèmes concernant les propriétaires des fichiers :
 - s'assurer que la partage `NFS` a l'option **pas de mappage**
+- ajouter l'ip du `se3` comme **hôte avec les droits root**
 - décocher l'option **NFS4** au niveau du `NAS` et du partage qui doit accueillir la sauvegarde `se3`
 - ajouter l'option **nfsvers=3** lors du montage du partage sur le se3 :
 ```sh
