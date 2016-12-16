@@ -19,10 +19,13 @@
     * [Télécharger et graver `boot-repair`](#télécharger-et-graver-boot-repair)
     * [Démarrer le `se3` sur le DVD gravé](#démarrer-le-se3-sur-le-dvd-gravé)
     * [Autre solution](#autre-solution)
-    * [Configurer l'onduleur](#configurer-londuleur)
+    * [`Grub` et partitions `GPT`](#grub-et-partitions-gpt)
+* [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
+    * [Plus de réseau](#plus-de-reseau)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
+    * [Quelques vérifications](#quelques-vérifications)
 * [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
 
 
@@ -37,7 +40,7 @@ Cet article est une synthèse réalisée à partir d'échanges collaboratifs par
 
 Si des intérrogations surgissent au cours de la lecture de cet article, n'hésitez pas à les partager sur la liste.
 
-**Remarque 2 :** Si vous avez encore un `se3-lenny` ou une version antérieure, le mieux est d'utiliser les script de sauvegarde/restauration : cela est détaillé ci-dessous avec la méthode alternative qui est valable aussi pour migrer d'un `se3-squeeze` vers un `se3-wheezy`.
+**Remarque 2 :** Si vous avez encore un `se3-lenny` ou une version antérieure, le mieux est d'utiliser les script de sauvegarde/restauration : [cela est détaillé ci-dessous](#utiliser-les-scripts-de-sauvegarderestauration) avec la méthode alternative qui est valable aussi pour migrer d'un `se3-squeeze` vers un `se3-wheezy`.
 
 **Remarque 3 :** Vous pourrez vous entraîner sur un réseau `se3 virtuel`, ce qui vous permettra de le faire ensuite plus sereinement sur votre précieux `se3` si cela vous semble nécessaire. Bien sûr, ce n'est pas obligatoire et le script fonctionne très bien maintenant. L'article ci-dessous, un peu ancien et il faudrait le mettre à jour, vous guidera pour la mise en place d'un réseau virtuel.
 > http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox
@@ -95,7 +98,7 @@ bash /usr/share/se3/scripts/se3_update_system.sh
 
 Dans l'inteface web, entrée `Informations système/Espace disques`, le répertoire racine `/` est en orange ou en rouge : il n'y aura sans doute pas assez de place pour mener à bien le changement de version.
 
-Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](AugmenterRacine.md).
+Si vous êtes dans ce cas, **pas de panique**, consultez [la page spéciale "je manque de place"](AugmenterRacine.md#faire-de-la-place-pour-passer-en-wheezy).
 
 
 ### Supprimer les profiles ?
@@ -158,7 +161,7 @@ Il vous faut une journée pour être sûr que tout soit bien fait.
 ### Utilisation d'une session `screen`
 `screen` est une session particulière en ce sens que vous pouvez la quitter sans que le processus soit arrêté, contrairement à une session normale.
 
-Vous trouverez une brêve [documentation de l'utilisation d'une session `screen`](../dev-clients-linux/screen.md) qui vous permettra de découvrir cet outil, indispensable dans certaine situation.
+Vous trouverez une brêve [documentation de l'utilisation d'une session `screen`](../dev-clients-linux/screen.md#utilisation-dune-session-screen) qui vous permettra de découvrir cet outil, indispensable dans certaine situation.
 
 L'utilisation de `screen` est d'ailleurs suggérée par le script.
 
@@ -186,7 +189,7 @@ Cette version de dev' ajoute quelques fonctions au script comme la possibilité 
 Les voici (ces options ne servant que pour la mise au point du script, vous n'avez pas à les utiliser) :
 * --download | -d : préparer la migration sans la lancer en téléchargeant uniquement les paquets nécessaires
 * --no-update     : ne pas vérifier la mise à jour du script de migration sur le serveur centrale mais utiliser la version locale
-* --debug         : lancer le script en outrepassant les tests de taille et de place libre des partitions. À NE PAS UTILISER EN PRODUCTION
+* --debug         : lancer le script en outrepassant les tests de taille et de place libre des partitions. **À NE PAS UTILISER EN PRODUCTION**
 
 
 ### Redémarrer à la fin ?
@@ -228,17 +231,36 @@ Bootez sur le cd `super-grub2` : le `se3` devrait alors se lancer.
 > https://wiki.debian-fr.xyz/Réinstaller_Grub2
 
 
+### `Grub` et Partitions `GPT`
+Si l'installation du `se3` a été faite sur un disque de taille importante (2To...donc en format [`GPT`](https://fr.wikipedia.org/wiki/GUID_Partition_Table)) avec des partitions classiques, alors la partition de 100 Mio servant au démarrage n'a pas été créée par l'installateur Debian sur le disque contenant la racine.
+
+La mise à jour du `Grub` va donc échouer pour donner une invite `>grub rescue` après un reboot. Aucune des solutions précédentes ne marchera tant que la partition de boot ne sera pas présente.
+
+La seule solution pour faire repartir le serveur dans ce cas est donc:
+* Créer une image `Clonezilla` du disque contenant la racine au cas où,
+* Utiliser une version de `Gparted` récente à partir d'un live cd (`sysrescuecd` par exemple). Le format `XFS` des partitions `/home` et `/var/se3` doit être reconnu. Si un trinagle d'alerte arrive, alors il faut prendre une version plus récente,
+* Diminuer la taille de la partition `sda1` de façon à liberer environ 100 Mio en début de disque. Valider pour que la modification se fasse,
+* Créer une nouvelle partition avec ce petit espace liberé en début de disque. Ne pas la formater mais lui donner le drapeau `bios-grub`,
+* Redémarrer avec le dvd `boot-repair` et faire "réparer le grub". Tout devrait repartir.
+
+
 ## Configurer l'onduleur
 
 Normalement, la migration ne doit pas modifier la configuration de l'onduleur.
 
 D'ailleurs, si cette configuration n'a pas était faite sur votre `se3-squeeze`,une fois la migration effectuée il sera plus que temps de la mettre en chantier, en vous aidant des indications de l'article suivant. Là, vous n'aurez pas d'excuses en cas de pépin…
-> http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
+> http://www.samba-edu.ac-versailles.fr/Configurer-l-onduleur
 
 Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il y a un problème sur l'alimentation électrique ou des micro-coupures, ce sera plus chaud pour vous ;-) Mais vous aurez pris, de toute façon, la précaution d'avoir une sauvegarde de type `sauveserveur` à jour (voir la remarque 2 de la présentation ci-dessus ou bien la solution alternative ci-dessous) avant de passer aux choses sérieuses…
 
 
 ## Post-migration
+
+### Plus de réseau
+Après migration, impossible de faire un ping sur la passerelle `Amon` ou sur une adresse externe. Je me suis alors aperçu que la carte réseau `eth0` était maintenant devenue `eth1`.
+
+Il a fallut éditer le fichier `/etc/network/interfaces` et remplacer `eth0` par `eth1`. Un reboot a été nécéssaire (la commande */etc/init.d/networking restart* ne marchait pas complètement).
+
 
 ### Les modules
 Presque tous les modules ont été reportés sur `Wheezy`. Mais `se3-unattended` a disparu (voir ci-dessous) et `se3-internet` est en testing pour l'instant.
@@ -270,26 +292,63 @@ Il suffit de rebrancher les disques et deux solutions se présentent :
 **Remarque :** toutes les machines `bakuppc` sauvegardées antérieurement disparaissent mais il suffit de les recréer avec un nom identique pour retrouver les sauvegardes antérieures.
 
 
+### Quelques vérifications
+Un certain nombre de vérifications sont nécessaires :
+
+* vérifier la présence du paquet `rsyslog`
+```sh
+apt-cache policy rsyslog
+```
+On devrait obtenir ceci :
+```sh
+rsyslog:
+  Installé : 5.8.11-3+deb7u2
+  Candidat : 5.8.11-3+deb7u2
+ Table de version :
+     7.6.3-2~bpo70+1 0
+        100 http://ftp.fr.debian.org/debian/ wheezy-backports/main i386 Packages
+ *** 5.8.11-3+deb7u2 0
+        500 http://ftp.fr.debian.org/debian/ wheezy/main i386 Packages
+        500 http://security.debian.org/ wheezy/updates/main i386 Packages
+        100 /var/lib/dpkg/status
+```
+
+**Si le paquet est absent**, on devrait obtenir ceci :
+```sh
+rsyslog:
+  Installé : (aucun)
+  Candidat : 5.8.11-3+deb7u2
+ Table de version :
+     5.8.11-3+deb7u2 0
+        500 http://ftp.fr.debian.org/debian/ wheezy/main i386 Packages
+        500 http://security.debian.org/ wheezy/updates/main i386 Packages
+```
+
+Il faut alors l'installer :
+```sh
+apt-get install rsyslog
+```
+
+
 ## Utiliser les scripts de sauvegarde/restauration
 
 **Une solution alternative** à l'utilisation du script ci-dessus est la suivante :
-* sauvegarder votre serveur (script `sauve_serveur.sh`)
+* sauvegarder votre serveur (script `sauve_se3.sh`)
 * installer un `se3-wheezy`, par la méthode de votre choix
 * configurer les modules adaptés à votre situation
-* restaurer votre serveur (script `restaure_serveur.sh`)
+* restaurer votre serveur (script `restaure_se3.sh`)
 
 Cette méthode sera à utiliser si vous avez une version antérieure à celle de `se3-squeeze`.
 
-Ces deux scripts (`sauve_serveur.sh` et `restaure_serveur.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
+Ces deux scripts (`sauve_se3.sh` et `restaure_se3.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
 
-Il est à noter qu'ils sont aussi sur votre `se3-squeeze`, s'il est à jour bien entendu. Cependant, les versions les plus récentes de ces scripts se trouveront sur le site suivant :
-> http://www.samba-edu.ac-versailles.fr/Sauvegarde-et-restauration-SE3
+Il est à noter que ces deux scripts sont sur votre `se3-squeeze`, s'il est à jour bien entendu, mais dans une version insuffisante pour la restauration sur un `se3-wheezy`. Dans ce cas, il faudra utiliser [les versions les plus récentes](../../../../se3master/tree/master/usr/share/se3/sbin) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 
 **Remarque :** une chose à prendre en compte sur ces scripts : sur `se3-wheezy` on est full `utf8`, et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en `iso`. Cela fait quelques versions que nous sommes en `utf8` côté `samba` mais, pour autant, s'il y a eu des versions successives, il y a de fortes chances que de le codage `iso` traîne encore dans `/home` et `/var/se3`.
 
 **La solution à ce problème**, c'est de réencoder avec `/usr/bin/convmv`. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
 
-Voici les deux commandes pour cela :
+Les deux commandes ci-dessous réencodent en `utf8` et ont été intégrées au script de restauration dans sa version la plus récente :
 ```sh
 /usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /home 2>&1 | grep -v Skipping >> rapport_home.log
 /usr/bin/convmv --notest -f iso-8859-15 -t utf-8 -r /var/se3 2>&1 | grep -v Skipping >> rapport_varse3.log

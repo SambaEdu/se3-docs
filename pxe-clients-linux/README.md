@@ -8,11 +8,14 @@
 
 * [Vue d'ensemble du dispositif](#vue-densemble)
 * [Distributions GNU/Linux proposées](#distributions-gnulinux-proposées)
-* [Mise en place du dispositif](misenplace.md)
-* [Utilisation du dispositif](utilisation.md)
-* [Les listes des applications installées](listeapplis.md)
-* [Utilisation du script perso](messcripts.md)
+* [Mise en place du dispositif](misenplace.md#mise-en-place-du-dispositif-dinstallation-de-clients-gnulinux)
+* [Utilisation du dispositif](utilisation.md#utilisation-du-dispositif-dinstallation-de-clients-gnulinux)
+* [Les listes des applications installées](listeapplis.md#liste-des-applications-à-installer)
+* [Utilisation du script perso](messcripts.md#lancement-dun-script-perso-en-fin-de-post-installation-des-clients-linux)
+* [Gestion des `clients-linux`](gestionclients.md#utilisation-et-gestion-dun-client-linux)
 * [Annexes](#annexes)
+    * [Utiliser la branche `testing`](#utiliser-la-branche-testing)
+    * [Utiliser le menu `perso`](#utiliser-le-menu-perso)
 * [Ressources externes](#ressources-externes)
 
 
@@ -57,14 +60,18 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 
 ## Annexes
 
-* [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](testing.md)
-* [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md)
+### Utiliser la branche `testing`
+
+* [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
+
+### Utiliser le menu `perso`
+
+* [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md#menu-pxe-persomenu)
 
 
 ## Ressources externes
 
 * [la documentation de Sébastien Muller](http://www-annexe.ac-rouen.fr/productions/tice/SE3_install_wheezy_pxe_web_gen_web/co/SE3_install_wheezy_pxe_web.html)
-* [la documentation du module `se3-clients-linux`](../se3-clients-linux/README.md)
 * [amorçage via `pxe`](https://fr.wikipedia.org/wiki/Preboot_Execution_Environment)
 * [installation de `Debian` par préconfiguration](https://www.debian.org/releases/jessie/amd64/apb.html.fr)
 
@@ -73,4 +80,5 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 
 Les personnes qui ont contribué à la rédaction de cette documentation sont :
 
+* Arnaud Malpeyre
 * Michel Suquet

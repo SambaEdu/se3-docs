@@ -13,7 +13,7 @@ Voici la liste des variables et des fonctions pouvant être utilisées dans le `
                                    |  [`est_connecte`](#est_connecte)
                                    |  [`activer_pave_numerique`](#activer_pave_numerique)
 
-**Nota :** d'autres [variables et fonctions](variables_fonctions_logon.md) pourront être utiles pour le fichier `logon_perso`.
+**Nota :** d'autres [variables et fonctions](variables_fonctions_logon.md#quelques-variables-et-fonctions-prêtes-à-lemploi-pour-personnaliser-le-script-de-logon) pourront être utiles pour le fichier `logon_perso`.
 
 
 ## `SE3`

@@ -27,6 +27,25 @@ contenu du fichier `lib.sh`.
 Et ainsi, toutes fonctions de cette boîte à outils
 seront disponibles pour le script shell.
 
+**Remarque :** une autre façon d'utiliser dans un script les fonctions contenues dans le fichier `lib.sh` est de le télécharger et de l'exécuter dans ce script en y incorporant la fonction `recuperer_lib_sh` suivante et en l'appelant en début du script (c'est le cas des scripts de post-installation du paquet `pxe-clients-linux`) :
+
+```sh
+recuperer_lib_sh()
+{
+    # Récupération de la librairie lib.sh des fonctions shell 
+    wget -q http://${ip_se3}/install/lib.sh
+    if [ "$?" = "0" ]
+    then
+        echo "la librairie de fonctions lib.sh a bien été récupérée" | tee -a $compte_rendu
+        chmod +x lib.sh
+        mv lib.sh /root/bin/lib.sh
+        . /root/bin/lib.sh
+    else
+        echo "${rouge}échec de la recupération de la libraire lib.sh" | tee -a $compte_rendu
+        sleep 5
+    fi
+}
+```
 
 
 ## Quelques bonnes pratiques à mettre en place dans `lib.sh`

@@ -6,6 +6,7 @@
         * [Serveur `se3` à jour](#serveur-se3-à-jour)
         * [Module `TFTP` installé](#module-tftp-installé)
         * [Module `se3-clients-linux` installé](#module-se3-clients-linux-installé)
+        * [Message éventuel concernant le serveur `NTP`](#message-éventuel-concernant-le-serveur-ntp)
         * [Un coup d'œil dans le répertoire `/tftpboot/clients_linux/`](#un-coup-dœil-dans-le-répertoire-tftpbootclients_linux)
     * [Côté `client linux`](#côté-client-linux)
         * [Mode `PXE`](#mode-pxe)
@@ -26,27 +27,62 @@
 
 #### Serveur `se3` à jour
 
-Mettre à jour le serveur `se3`. Ce dernier doit impérativement être en version `Squeeze` ou `Wheezy`.
+Mettre à jour le serveur `se3`.
+
+Ce dernier doit impérativement être en version `Wheezy`. Si vous avez encore votre serveur `se3` en version `squeeze`, nous vous conseillons d'effectuer [la migration vers la version `wheezy`](../se3-migration/SqueezeToWheezy.md#migration-de-se3-squeeze-vers-se3-wheezy).
 
 
 #### Module `TFTP` installé
 
 Il faut que le module `se3-clonage`, dit [`TFTP`](https://fr.wikipedia.org/wiki/Trivial_File_Transfer_Protocol), soit installé.
 
-Si c'est le cas vérifiez qu'il est bien dans la dernière version : 0.74 au minimum (le mettre à jour si nécessaire).
+* Si c'est le cas vérifiez qu'il est bien dans la dernière version : au moins **0.88** (le mettre à jour si nécessaire).
+    
+    Pour cela, vous pouvez utilisez la commande suivante dans un terminal en `root` sur le `se3` :
+    ```sh
+    apt-cache policy se3-clonage
+    ```
+    ![policy_se3-clonage.png](images/policy_se3-clonage.png)
+    
+* Sinon installez le module `se3-clonage` puis activez le mode graphique via l'interface web du serveur `se3`.
 
-Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
-
-Mettez **un mot de passe** : cela évitera l'utilisation intempestive du mode `PXE` des ordinateurs de votre réseau par les utilisateurs.
+**Conseil :** mettez **un mot de passe** ([voir ci-dessous](#le-mot-de-passe)) : cela évitera l'utilisation intempestive du mode `PXE` des ordinateurs de votre réseau par les utilisateurs.
 
 
 #### Module `se3-clients-linux` installé
 
 Si vous souhaitez intégrer vos clients Linux au domaine `se3`, il vous faut aussi installer le module `se3-clients-linux`.
 
-S'il est déjà installé, vérifiez qu'il est bien dans la dernière version : 2.0.5 au minimum (le mettre à jour si nécessaire).
+* S'il est déjà installé, vérifiez qu'il est bien dans la dernière version : au moins **2.1.1** (le mettre à jour si nécessaire).
+    
+    Pour cela, vous pouvez utilisez la commande suivante dans un terminal en `root` sur le `se3` :
+    ```sh
+    apt-cache policy se3-clients-linux
+    ```
+    ![policy_se3-clients-linux.png](images/policy_se3-clients-linux.png)
+    
+* Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
 
-Sinon installez le module puis activez le mode graphique via l'interface web du serveur `se3`.
+
+#### Message éventuel concernant le serveur `NTP`
+
+Lors de l'installation du paquet, si jamais
+vous obtenez un message vous indiquant que `le serveur NTP` ne
+semble pas fonctionner, avant de passer à la suite, vous
+devez vous rendre sur la console d'administration Web de
+votre serveur (dans Configuration générale → Paramètres
+serveur) afin de spécifier l'adresse d'un serveur de temps
+qui fonctionne correctement (chose que l'on peut vérifier
+ensuite dans la page de diagnostic du serveur).
+
+Une fois le paramétrage effectué il vous suffit de reconfigurer
+le paquet `se3-clients-linux` en lançant, en tant que `root` sur une console du
+serveur `se3`, la commande suivante :
+```sh
+dpkg-reconfigure se3-clients-linux
+```
+Si tout se passe bien, vous ne devriez plus obtenir
+d'avertissement à propos du serveur `NTP`.
 
 
 #### Un coup d'œil dans le répertoire `/tftpboot/clients_linux/`
@@ -90,6 +126,7 @@ Dans le second cas, il faudra laisser **un espace libre** à côté des partitio
 
 Nous en avons déjà parlé dans les prérequis : indispensable !
 ![module tftp mot de passe](images/pxe_tftp_01.png)
+
 
 ### Les environnements de Bureau
 

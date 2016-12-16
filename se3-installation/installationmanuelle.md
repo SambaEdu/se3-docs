@@ -46,14 +46,18 @@ Typiquement, on peut avoir 2 disques durs de 500 Go (nommés **sda** et **sdb**)
 ```sh
 sda ---+-- swap (PRIMAIRE) 2 à 4 Go (Selon Mémoire)
        |
-       +-- / (PRIMAIRE) ext3 30 Go
+       +-- / (PRIMAIRE) ext3 10 Go
        |
-       +-- /var (PRIMAIRE) ext3 20 Go
+       +-- /var (PRIMAIRE) ext3 10 Go
        |
        +-- /var/se3 (LOGIQUE) xfs (Go = Le reste)
 
 sdb ------ /home (PRIMAIRE) xfs 500 Go
 ```
+
+**Remarques :**
+* `/` c'est le système. "Sur le `se3` de mon lycée, 1500 comptes, en wheezy et qui n'est plus très jeune, j'en suis à moins de 3 Go occupés. On n'est pas sur un serveur `Windows` que diable…" (FXV)
+* `/var` c'est juste au moment de la création des comptes que la taille occupée augmente significativement du fait des logs temporaires. Sinon, on tourne autour de 1,5 Go en utilisation normale. 10 Go ça permet de créer à l'aise plus de 4000 comptes d'un coup sans saturer la partition. (FXV)
 
 **Conseil :** n'hésitez pas à reprendre plusieurs fois l'installation pour bien la connaître. Par la suite, vous n'en aurez pas autant l'occasion.
 

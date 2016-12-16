@@ -111,6 +111,7 @@ Pour utiliser `GParted` via le réseau, il faut mettre en place les commandes d'
 
 Les indications qui suivent sont issues de [la documentation `GParted live on PXE Server`](http://gparted.sourceforge.net/livepxe.php). Nous vous recommendons de suivre cette documentation si des changements sont nécessaires lors de mises à jour ultérieures de `GParted`.
 
+
 ##### Télécharger l'archive
 
 Téléchargez l'archive (dans la commande, on a pris celle correspondant à l'architecture `amd64` mais on pourra utiliser aussi celle correspondant à `i686` ou à `i686-pae`) contenant le nécessaire dans un répertoire temporaire et décompressez-la :
@@ -121,7 +122,7 @@ mkdir -p /tftpboot/tempgparted/gparted
 unzip /tftpboot/tempgparted/gparted-live-*-amd64.zip -d /tftpboot/tempgparted/gparted/
 ```
 
-**Remarque :** la version de `GParted` pouvant évoluer, il faudra adapter la commande de téléchargement ci-dessus.
+**Remarque :** la version de `GParted` pouvant évoluer, il faudra adapter la commande de téléchargement ci-dessus. Ainsi, au lieu de `0.25.0-1`, vous pourriez mettre `0.27.0-1` qui est [la version stable](https://sourceforge.net/projects/gparted/files/gparted-live-stable/) en novembre 2016.
 
 
 ##### Copier les fichiers d'amorçage
@@ -131,6 +132,7 @@ Les fichiers pour l'amorçage sont à placer dans un sous-répertoire de `/tftpb
 mkdir -p /tftpboot/gparted
 cp /tftpboot/tempgparted/gparted/live/{vmlinuz,initrd.img} /tftpboot/gparted/
 ```
+
 
 ##### Copier le fichier de fonctionnement de `GParted`
 
@@ -145,10 +147,6 @@ cp /tftpboot/tempgparted/gparted/live/filesystem.squashfs /var/www/install/messc
 ##### Gestion du répertoire temporaire
 
 Une fois les fichiers en place, on peut supprimer quelques éléments dans le répertoire temporaire `/tftpboot/tempgparted`. On pourrait le supprimer mais il est intéressant de le garder avec l'archive téléchargée pour se souvenir de la version de `Gparted` mise en place.
-
-```ssh
-
-```
 
 
 #### Mise en place du menu pxe
@@ -205,7 +203,7 @@ Enfin, on obtient l'interface de gestion des partitions du client.
 
 ### Installer `Debian Jessie` en semi-automatique
 
-Vous pouvez profiter du mécanisme d'installation de `Debian Jessie` via le mode `pxe` pour obtenir l'installation d'un système non intégré.
+Vous pouvez profiter du mécanisme d'installation de `Debian Jessie` via le mode `pxe` pour obtenir l'installation d'un système non intégré. Cela peut servir à installer `Debian/Jessie` sur l'ordinateur personnel d'un collègue…
 
 Il faut donc adapter un des fichiers preseed disponibles dans le répertoire */home/netlogon/clients-linux/install/* et ajouter une entrée au menu perso pour l'utiliser.
 
@@ -234,7 +232,7 @@ fichier preseed à placer, par exemple, dans le répertoire des scripts perso (c
 
 Le fichier `preseed` contient toutes les réponses aux questions posées lors d'une installation classique : cela rend le système d'installation automatique sans intervention de la part de l'utilisateur.
 
-Pour une installation semi-automatique, on fera en sorte que certaines questions soient posées (**nom de la machine, nom du domaine, mot de passe root, identifiant et mot de passe d'un compte lambda** par exemple).
+Pour une installation semi-automatique, on fera en sorte que certaines questions soient posées (**nom de la machine, nom du domaine, partitionnement, mot de passe root, identifiant et mot de passe d'un compte lambda** par exemple).
 
 Pour cela, on peut prendre un des fichiers preseed qui se trouvent dans le répertoire */home/netlogon/clients-linux/install/* et commenter les lignes correspondantes aux questions dont on souhaite avoir les questions au cours de l'installation. Les réponses aux questions commencent la plupart du temps par *d-i*.
 

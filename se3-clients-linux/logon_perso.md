@@ -2,7 +2,7 @@
 
 Une partie importante du script de `logon` est gérée par le `logon_perso` qui permet d'aptater son fonctionnement aux besoins des utilisateurs.
 
-* [Personnaliser à l'aide du `logon_perso`](#personnaliser-le-script-de-logon)
+* [Personnaliser à l'aide du `logon_perso`](#personnaliser-à-laide-du-logon_perso)
     * [Structure du `logon_perso`](#structure-du-fichier-logon_perso)
     * [Conséquences sur le comportement du `logon`](#conséquences-du-logon_perso-sur-le-comportement-du-script-de-logon)
     * [Incorporer le `logon_perso` au `logon`](#incorporer-le-logon_perso-dans-le-logon)
@@ -15,9 +15,10 @@ Une partie importante du script de `logon` est gérée par le `logon_perso` qui 
     * [Montage limité à un groupe](#montage-limité-à-un-groupe)
     * [Le montage `home` d'un utilisateur](#le-montage-home-dun-utilisateur)
     * [La fonction `creer_lien`](#la-fonction-creer_lien)
-* [Gérer les profils pour `Iceweasel`](#gérer-les-profils-pour-iceweasel)
+* [Gérer les profils pour `Firefox`](#gérer-les-profils-pour-firefox)
+    * [à l'aide d'un partage](#méthode-à-laide-dun-partage)
+    * [à l'aide d'un lien et du partage `Docs`](#méthode-à-laide-dun-lien)
     * [à l'aide de `rsync`](#méthode-à-laide-de-rsync)
-    * [à l'aide d'un partage ou d'un lien](#méthode-à-laide-dun-partage)
 * [Quelques bricoles pour les perfectionnistes](#quelques-bricoles-pour-les-perfectionnistes)
     * [Changer les icônes](#changer-les-icônes-représentants-les-liens-pour-faire-plus-joli)
     * [Changer le papier peint](#changer-le-papier-peint-en-fonction-des-utilisateurs)
@@ -27,9 +28,9 @@ Une partie importante du script de `logon` est gérée par le `logon_perso` qui 
 
 
 
-## Personnaliser le script de `logon`
+## Personnaliser à l'aide du `logon_perso`
 
-Le fichier `logon_perso` va vous permettre d'affiner et personnaliser le comportement du [script de `logon`](script_logon.md) afin de l'adapter à vos besoins.
+Le fichier `logon_perso` va vous permettre d'affiner et personnaliser le comportement du [script de `logon`](script_logon.md#le-script-de-logon) afin de l'adapter à vos besoins.
 
 Et, très important, **cette adaptation sera pérenne dans le temps** (les modifications persisteront notamment après une mise à jour du paquet `se3-clients-linux`).
 
@@ -78,18 +79,12 @@ Vous pouvez bien sûr définir dans le fichier `logon_perso` des fonctions suppl
 
 Il faut bien avoir en tête que le contenu de `logon_perso` doit être ni plus ni moins inséré dans le script `logon` pour qu'il soit pris en compte.
 
-En conséquence, après modification de `logon_perso`, **il faut toujours mettre à jour le fichier `logon`**
-
-Cette mise à jour peut se faire de 2 façons :
-
-* via  la commande « `dpkg-reconfigure se3-clients-linux` » en console `root` sur le serveur se3.
-
-* via le fichier `reconfigure.bash` : **si vous avez ouvert une session sur un client-linux avec le compte `admin`**, vous pourrez double-cliquer sur le fichier `reconfigure.bash` accessible en passant par le lien symbolique `clients-linux` sur le bureau puis par le répertoire `bin/` (le mot de passe root du serveur se3 sera demandé). Voir le schéma de [l'arborescence du répertoire `clients-linux/`](visite_rapide.md#arborescence-du-répertoire-clients-linux).
+En conséquence, après modification de `logon_perso`, **il faut toujours mettre à jour le fichier `logon`** [en reconfigurant le paquet `se3-clients-linux`](reconfiguration_restauration.md#reconfiguration-du-paquet-et-restauration-des-droits).
 
 
 ## Quelques variables et fonctions prêtes à l'emploi
 
-Vous trouverez, dans cette documentation, la [liste des variables et des fonctions](variables_fonctions_logon.md) que vous pourrez utiliser dans le fichier `logon_perso` et qui seront susceptibles de vous aider à affiner le comportement du script de logon.
+Vous trouverez, dans cette documentation, la [liste des variables et des fonctions](variables_fonctions_logon.md#quelques-variables-et-fonctions-prêtes-à-lemploi-pour-personnaliser-le-script-de-logon) que vous pourrez utiliser dans le fichier `logon_perso` et qui seront susceptibles de vous aider à affiner le comportement du script de logon.
 
 
 ## Gestion du montage des partages réseau
@@ -335,11 +330,63 @@ function ouverture_perso ()
 Dans cet exemple, nous avons rajouté un lien entre le répertoire local *Documents* et le répertoire *Docs* de l'utilisateur. Ainsi, lorsque l'utilisateur clique sur le raccourcis *Documents* du navigateur de fichiers, il se trouve dans le répertoire de ses documents sur le serveur `se3`. Nous avons aussi rajouté l'utilisation de la fonction de changement d'icône qui est décrite ci-dessous.
 
 
-## Gérer les profils pour Iceweasel
+## Gérer les profils pour `Firefox`
+
+### Méthode à l'aide d'un partage
+
+Cette méthode a été proposée par *Stéphane Boiron*. Elle permet d'utiliser le même profil entre les différents clients, `linux` ou `windows`.
+
+La voici :
+
+* ajouter un partage dans le `logon_perso`, uniquement pour les profs :
+
+```sh
+function ouverture_perso ()
+{
+    …
+    if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
+    then
+        rm -Rf "$REP_HOME/.mozilla/firefox"
+        monter_partage "//$SE3/homes/profil/appdata/Mozilla/Firefox" "ProfilFirefox" \
+            "$REP_HOME/.mozilla/firefox"
+    fi
+    …
+}
+```
+
+Je l'ai testé sur un réseau virtuel. Cette méthode est nettement plus simple que celle utilisant `rsync` (voir ci-dessous).
+
+
+### Méthode à l'aide d'un lien
+
+On peut modifier la méthode précédente à l'aide d'un lien si on veut séparer les profils `windows` et `linux`, comme cela est proposé ci-dessous en utilisant le partage `Docs` déjà monté :
+
+* ajouter un lien dans le `logon_perso`, uniquement pour les profs :
+
+```sh
+function ouverture_perso ()
+{
+    …
+    if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
+    then
+        rm -Rf "$REP_HOME/.mozilla"
+        if [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux/.mozilla" ]
+        then
+            [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux" ] & mkdir -p /mnt/_$LOGIN/Docs/.profile-linux
+            cp -R /mnt/netlogon/distribs/jessie/skel/.mozilla /mnt/_$LOGIN/Docs/.profile-linux/
+        fi
+        creer_lien "Docs/.profile-linux/.mozilla" "$REP_HOME/.mozilla"
+    fi
+    …
+}
+```
+
+C'est cette méthode que j'utilise pour le réseau de mon collège. Pour les nouveaux comptes, le profil du skel est mis en place : chaque utilisateur pourra ensuite le personnaliser.
+
 
 ### Méthode à l'aide de `rsync`
 
-J'ai testé une solution via rsync, proposée par Frédéric Sauvage sur la liste de discusion de Cæn, en rajoutant les lignes suivantes dans le `logon_perso` :
+J'ai testé aussi une solution via `rsync`, proposée par *Frédéric Sauvage* sur la liste de discusion de `Cæn`, en rajoutant les lignes suivantes dans le `logon_perso` :
 
 * dans la fonction ouverture_perso :
 ```sh
@@ -380,50 +427,7 @@ function fermeture_perso ()
 }
 ```
 
-Cette méthode fonctionne bien mais il peut y avoir *des effets de bord* lors de la transition entre le .mozilla du skel et celui de l'utilisateur. Pour l'instant je n'ai eu qu'un seul cas dont la gestion s'est faite *à la mano*.
-
-
-### Méthode à l'aide d'un partage
-
-J'avais gardé en mémoire une autre méthode. Je crois me souvenir qu'elle avait été proposée par Stéphane Boiron (À confirmer…). Elle permet d'utiliser le même profil entre les différents clients.
-
-La voici :
-
-* ajouter un partage dans le logon_perso, uniquement pour les profs :
-
-```sh
-function ouverture_perso ()
-{
-    …
-    if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
-    then
-        rm -Rf "$REP_HOME/.mozilla/firefox"
-        monter_partage "//$SE3/homes/profil/appdata/Mozilla/Firefox" "ProfilFirefox" \
-            "$REP_HOME/.mozilla/firefox"
-    fi
-    …
-}
-```
-
-Je l'ai testé sur un réseau virtuel. Cette méthode est nettement plus simple que la précédente.
-
-On peut modifier cette méthode à l'aide d'un lien si on veut séparer les profils windows et linux, comme cela est proposé ci-dessous en utilisant le partage Docs déjà monté :
-
-* ajouter un lien dans le logon_perso, uniquement pour les profs :
-
-```sh
-function ouverture_perso ()
-{
-    …
-    if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
-    then
-        rm -Rf "$REP_HOME/.mozilla"
-        [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux/.mozilla" ] && mkdir -p /mnt/_$LOGIN/Docs/.profile-linux/.mozilla
-        creer_lien "Docs/.profile-linux/.mozilla" "$REP_HOME/.mozilla"
-    fi
-    …
-}
-```
+Cette méthode fonctionne bien mais il peut y avoir *des effets de bord* lors de la transition entre le .mozilla du `skel` et celui de l'utilisateur. Pour l'instant je n'ai eu qu'un seul cas dont la gestion s'est faite *à la mano*, avant de changer pour la méthode à l'aide d'un lien.
 
 
 ## Quelques bricoles pour les perfectionnistes

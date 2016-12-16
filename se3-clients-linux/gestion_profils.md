@@ -10,7 +10,10 @@ Par exemple, le profil de `toto` est le contenu du répertoire
 * [Le partage `netlogon-linux`](#le-partage-netlogon-linux)
 * [Les différentes copies du profil par défaut](#les-différentes-copies-du-profil-par-défaut)
 * [Le mécanisme des profils](#le-mécanisme-des-profils)
-* [Exemple de modification du profil par défaut avec Firefox](#exemple-de-modification-du-profil-par-défaut-avec-firefox)
+* [Une contrainte…](#une-contrainte)
+* [Mais des avantages !](#mais-des-avantages-)
+* [Exemple de modification du profil par défaut avec `Firefox`](#exemple-de-modification-du-profil-par-défaut-avec-firefox)
+* [Modifier le profil par défaut pour d'autres applications ou d'autres paramètres](#modifier-le-profil-par-défaut-pour-dautres-applications-ou-dautres-paramètres)
 * [Personnaliser le profil en fonction de l'utilisateur](#personnaliser-le-profil-en-fonction-de-lutilisateur)
 
 
@@ -19,23 +22,22 @@ Par exemple, le profil de `toto` est le contenu du répertoire
 Pour bien comprendre le mécanisme des
 profils, il faut avoir en tête ces deux éléments :
 
-1. Le serveur Samba offre un partage CIFS dont le chemin
+1. Le serveur `se3` offre un partage `CIFS` dont le chemin
 réseau est `//SERVEUR/netlogon-linux/` et qui correspond sur
 le serveur au répertoire `/home/netlogon/clients-linux/`.
-2. Sur chaque client GNU/Linux intégré au domaine, le
+2. Sur chaque `client GNU/Linux` intégré au domaine, le
 répertoire `/mnt/netlogon/` est un point de montage (en
-lecture seule) du partage CIFS `//SERVEUR/netlogon-linux/`.
+lecture seule) du partage `CIFS` `//SERVEUR/netlogon-linux/`.
 
-**Conclusion à bien avoir en tête :** sur un client
-GNU/Linux intégré au domaine, visiter le répertoire local
-`/mnt/netlogon/` revient en fin de compte à visiter le
-répertoire `/home/netlogon/clients-linux/` du serveur Samba.
+**Conclusion à bien avoir en tête :** sur un `client GNU/Linux` intégré au domaine,
+visiter le répertoire local `/mnt/netlogon/` revient en fin de compte à visiter le
+répertoire `/home/netlogon/clients-linux/` du serveur `se3`.
 
 Dans le tableau ci-dessous, les trois « adresses » suivantes
 désignent finalement **la même zone de stockage** qui se trouve
-sur le serveur se3 :
+sur le serveur `se3` :
 
-Chemin réseau          | Chemin local sur le serveur     | Chemin local sur un client GNU/Linux
+Chemin réseau          | Chemin local sur le serveur     | Chemin local sur un `client-linux`
 ---------------------- | ------------------------------- | ------------------------------------
 `//SE3/netlogon-linux` | `/home/netlogon/clients-linux/` | `/mnt/netlogon/`
 
@@ -43,11 +45,11 @@ Chemin réseau          | Chemin local sur le serveur     | Chemin local sur un 
 ## Les différentes copies du profil par défaut
 
 Revenons maintenant à nos profils. En fin de compte, pour un
-client GNU/Linux donné qui a été intégré au domaine, il
+`client GNU/Linux` donné qui a été intégré au domaine, il
 existe plusieurs copies du profil par défaut des
 utilisateurs.
 
-Par exemple, **Dans le cas des clients sur Debian Jessie**, il y a :
+Par exemple, **Dans le cas des clients sur `Debian Jessie`**, il y a :
 
 1. Le profil par défaut **distant** qui est unique et
 centralisé sur le serveur. Il est accessible de plusieurs
@@ -64,27 +66,27 @@ manières. Les trois « adresses » ci-dessous accèdent toutes
 2. Le profil par défaut **local** qui se trouve sur chaque
 client intégré au domaine dans le **répertoire local**
 `/etc/se3/skel/` (ce répertoire n'est pas un point de
-montage, c'est un répertoire local au client GNU/Linux).
+montage, c'est un répertoire local au `client GNU/Linux`).
 
 
 ## Le mécanisme des profils
 
 Voici comment fonctionne le mécanisme des profils du point
-de vue d'un client GNU/Linux sous Debian Jessie (sous une
+de vue d'un `client GNU/Linux` sous `Debian Jessie` (sous une
 autre distribution, c'est exactement la même chose) :
 
 1. **Au moment de l'affichage de la fenêtre de connexion**
 du système (c'est-à-dire soit juste après le démarrage du
 système ou soit juste après chaque fermeture de session).
     
-    le client GNU/Linux va comparer le contenu de deux fichiers :
+    le `client GNU/Linux` va comparer le contenu de deux fichiers :
     
     1. le fichier `/etc/se3/skel/.VERSION` de son profil par défaut **local**
     
     2. le fichier `/mnt/netlogon/distribs/jessie/skel/.VERSION` du profil par défaut **distant**.
     
     Si ces deux fichiers ont un contenu totalement identique,
-    alors le client GNU/Linux ne fait rien car il estime que son
+    alors le `client GNU/Linux` ne fait rien car il estime que son
     profil par défaut **local** et le profil par défaut
     **distant** sont identiques.
     Si en revanche les deux fichiers ont un contenu différent,
@@ -96,7 +98,7 @@ système ou soit juste après chaque fermeture de session).
     **Note :** Le terme de synchronisation est bien adapté car
     c'est justement la commande `rsync` qui est utilisée pour
     effectuer cette tâche.
-	
+
 2. **Au moment de l'ouverture de session** d'un compte du
 domaine, (c'est-à-dire juste après une saisie correcte du
 login et du mot de passe d'un compte du domaine).
@@ -121,7 +123,7 @@ client ou bien au prochain démarrage du système).
     À ce moment, **le répertoire `/home/toto/` est tout simplement effacé**.
 
 
-## Exemple de modification du profil par défaut avec Firefox
+## Une contrainte…
 
 Du point de vue de l'utilisateur, cette gestion des profils
 est assez contraignante.
@@ -138,11 +140,13 @@ domaine (que ce soit les comptes professeur ou les comptes
 élève) possèdent exactement le même profil par défaut.
 
 **Note :** Cette restriction pourra, dans une certaine
-mesure, être levée lorsqu'on abordera [la personnalisation du
-script de logon](script_logon.md#personnaliser-le-script-de-logon).
+mesure, être levée lorsqu'on abordera [la personnalisation du script de logon](script_logon.md#personnaliser-le-script-de-logon).
 
 Seule la liste des partages réseau accessibles sera
 différente d'un compte à l'autre.
+
+
+## Mais des avantages !
 
 Mais ceci étant dit, cette
 gestion des profils présente tout de même deux avantages
@@ -160,34 +164,37 @@ importants :
     En effet, il devient très facile de modifier le profil par défaut des utilisateurs,
     car, si vous avez bien suivi, c'est le profil par défaut
     **distant** (celui sur le serveur) qui sert de modèle à tous
-    les profils par défaut **locaux** des clients GNU/Linux. Une
+    les profils par défaut **locaux** des `clients GNU/Linux`. Une
     modification du profil par défaut **distant** accompagnée
     d'une modification du fichier `.VERSION` associé sera
     impactée sur chaque profil par défaut **local** de tous les
-    clients GNU/Linux.
+    `clients GNU/Linux`.
 
-Prenons un exemple avec le navigateur `Firefox` (`Iceweasel` pour `Debian`) : vous
+
+## Exemple de modification du profil par défaut avec `Firefox`
+
+Prenons un exemple avec le navigateur `Firefox` : vous
 souhaitez imposer un profil par défaut particulier au niveau
-de Firefox pour tous les utilisateurs du domaine sur les
-clients GNU/Linux de type `Precise Pangolin`.
+de `Firefox` pour tous les utilisateurs du domaine sur les
+`clients GNU/Linux` de type `Xenial` (mais ce pourrait être un client de type `Jessie`, la procédure est la même).
 
-Pour commencer,vous devez ouvrir une session sur un client GNU/Linux
-`Precise Pangolin` et lancer `Firefox` afin de le configurer
+**Pour commencer**, vous devez ouvrir une session sur un `client GNU/Linux`
+`Xenial` (le mieux est le compte `admin`) et lancer `Firefox` afin de le configurer
 exactement comme vous souhaitez qu'il le soit pour tous les
 utilisateurs (page d'accueil, proxy, etc).
 
 Une fois le paramétrage effectué, pensez bien sûr à fermer l'application
-`Firefox`. Ensuite, il vous suffit de suivre la procédure
-ci-dessous.
+`Firefox`.
+
+Ensuite, il vous suffit de suivre la procédure ci-dessous.
 
 Pour la suite, on admettra que la session
-utilisée pour fabriquer le profil Firefox par défaut est
-celle du compte `toto`.
+utilisée pour fabriquer le profil `Firefox` par défaut est
+celle du compte `toto` (encore une fois, le mieux est le compte `admin`).
 
-1. Il faut copier le répertoire `/home/toto/.mozilla/` (et
-tout son contenu bien sûr.
+1. Il faut copier le répertoire `/home/toto/.mozilla/` (et tout son contenu bien sûr.
     En effet, c'est ce répertoire qui
-    contient tous les réglages concernant Firefox que vous avez
+    contient tous les réglages concernant `Firefox` que vous avez
     effectués) dans le profil par défaut **distant** du serveur,
     et cela tout en veillant à ce que les droits sur la copie
     soient corrects. Pour ce faire, vous avez deux méthodes
@@ -197,7 +204,7 @@ tout son contenu bien sûr.
     sous une clé USB puis vous fermez la session de `toto` pour en rouvrir une
     avec le compte `admin` du domaine. Ensuite, vous double-cliquez sur le lien
     symbolique `clients-linux` qui se trouve sur le bureau puis vous vous
-    rendez successivement dans `distribs/` → `precise/` → `skel/` pour enfin,
+    rendez successivement dans `distribs/` → `xenial/` → `skel/` pour enfin,
     via un glisser-déposer, copier dans `skel/` le répertoire `.mozilla/` qui
     se trouve dans la clé USB (le dossier `skel/` devra donc contenir un
     répertoire `.mozilla/`).
@@ -224,18 +231,18 @@ tout son contenu bien sûr.
     SOURCE="/home/toto/.mozilla/"
     
     # Destination sur le serveur.
-    DESTINATION="/home/netlogon/clients-linux/distribs/precise/skel/"
+    DESTINATION="/home/netlogon/clients-linux/distribs/xenial/skel/"
     
     # Copie du répertoire local (et de tout son contenu) vers le serveur.
     scp -r "$SOURCE" root@IP-SERVEUR:"$DESTINATION"
     ```
     
     À ce stade, le répertoire `.mozilla/` a bien été copié
-    sur le serveur mais les droits Unix sur la copie ne sont pas
+    sur le serveur `se3` mais les droits `Unix` sur la copie ne sont pas
     encore corrects. Pour les reconfigurer, il faut exécuter la
     commande « `dpkg-reconfigure se3-clients-linux` » en tant
     que `root` sur le serveur. Là aussi, cela peut se faire
-    directement du client GNU/Linux, sans bouger, via ssh avec
+    directement du `client GNU/Linux`, sans bouger, via ssh avec
     la commande :
     ```sh
     # Avec ssh, en étant sur le client GNU/Linux, on peut exécuter notre commande
@@ -254,21 +261,21 @@ tout son contenu bien sûr.
     fichier `.VERSION` du serveur possède un contenu différent
     de chacun des fichiers `.VERSION` locaux aux machines
     clientes. Dans notre exemple, le fichier se trouve dans le
-    répertoire `/home/netlogon/clients-linux/precise/skel/` du
+    répertoire `/home/netlogon/clients-linux/xenial/skel/` du
     serveur. Là aussi, deux méthodes s'offrent à vous pour le
     modifier :
     
     **Note :** Ne pas oublier cette étape, sans quoi les
-    clients GNU/Linux estimeront que le profil par défaut
+    `clients GNU/Linux` estimeront que le profil par défaut
     distant n'a pas été modifié et la mise à jour du profil par
     défaut local n'aura pas lieu.
     
     * **La méthode graphique :** si ce n'est pas déjà fait, vous fermez
-    la session de `toto` pour vous connecter sur le client
-    GNU/Linux avec le compte `admin` du domaine. Ensuite, vous
+    la session de `toto` pour vous connecter sur le `client GNU/Linux`
+    avec le compte `admin` du domaine. Ensuite, vous
     double-cliquez sur le lien symbolique `clients-linux` qui se
     trouve sur le bureau puis vous vous rendez successivement
-    dans `distribs/` → `precise/` → `skel/`. Faites en sorte
+    dans `distribs/` → `xenial/` → `skel/`. Faites en sorte
     d'activer l'option « `afficher les fichiers cachés` » afin
     de voir apparaître le fichier `.VERSION` qui se trouve à
     l'intérieur du dossier `skel/`. Éditez ce fichier afin
@@ -284,22 +291,25 @@ tout son contenu bien sûr.
     
     ```sh
     # Le fichier sur le serveur qu'il faut modifier.
-    CIBLE="/home/netlogon/clients-linux/distribs/precise/skel/.VERSION"
+    CIBLE="/home/netlogon/clients-linux/distribs/xenial/skel/.VERSION"
     
     ssh root@IP-SERVEUR "echo Version du 10 janvier 2012 à 15h04 > $CIBLE"
     # Maintenant le fichier contient "Version du 10 janvier 2012 à 15h04".
     ```
 
 Dès le prochain affichage de la fenêtre de connexion, les
-profils par défaut **locaux** de tous les clients `Precise Pangolin`
+profils par défaut **locaux** de tous les clients `Xenial`
 seront modifiés afin d'être identiques au profil
 par défaut **distant** du serveur. Dès lors, les
-utilisateurs bénéficieront des paramétrages de Firefox que
+utilisateurs bénéficieront des paramétrages de `Firefox` que
 vous avez effectués.
+
+
+### Modifier le profil par défaut pour d'autres applications ou d'autres paramètres
 
 De la même manière que précédemment, sur le profil par
 défaut **distant**, vous pouvez parfaitement définir le
-contenu du bureau des utilisateurs : au lieu de copier un
+contenu du Bureau (par exemple) des utilisateurs : une fois cela fait, au lieu de copier un
 répertoire `.mozilla/` sur le serveur, ce sera un répertoire
 `Bureau/`, mais le principe reste le même.
 
@@ -308,19 +318,22 @@ logiciels n'étant pas forcément identiques, chaque
 distribution prise en charge possède son propre profil par
 défaut **distant**.
 
-Sur le serveur Samba, on a donc :
+Sur le serveur `se3`, on a donc :
 
 * le répertoire `/home/netlogon/clients-linux/distribs/jessie/skel/`
-pour les Debian Jessie.
-* le répertoire `/home/netlogon/clients-linux/distribs/precise/skel/`
-pour les Ubuntu Precise Pangolin.
+pour les `Debian Jessie`.
+* le répertoire `/home/netlogon/clients-linux/distribs/xenial/skel/`
+pour les Ubuntu `Xenial`.
 
 
 ## Personnaliser le profil en fonction de l'utilisateur
 
 La rigidité de la gestion du profil telle qu'elle est
 décrite à la section précédente peut cependant être
-contournée en modifiant le script de `logon`.
+assouplie pour certains utilisateurs ou tout un groupe d'utilisateurs en modifiant le script de `logon`.
+
+**Note :** Il est important de bien comprendre 
+[le fonctionnement du script de `logon`](script_logon.md#le-script-de-logon) et comment l'adapter à vos usages à l'aide du [fichier `logon_perso`](logon_perso.md#personnaliser-le-script-de-logon).
 
 Pour comprendre cela, poursuivons avec l'exemple de la modification du
 profil par défaut de `Mozilla`.
@@ -330,24 +343,23 @@ que les enseignants disposent d'un navigateur dont la
 configuration diffère de celle à laquelle accèdent les
 élèves (extensions particulières, favoris différents, etc.).
 
-**Note :** Le fonctionnement du script de logon est décrit
-[à cette page](script_logon.md#le-script-de-logon).
-
 Dans ce cas, vous copierez sur le répertoire `/skel` du
-serveur le répertoire `/home/toto/.mozilla` après l'avoir
+serveur `se3` le répertoire `/home/toto/.mozilla` après l'avoir
 renommé en `/.mozilla-prof`.
 
 Évidemment, dans ce cas, si un enseignant ouvre une session
 et lance son navigateur, la configuration prise en compte
 par le système sera toujours celle du répertoire
-`/.mozilla`. Il faut donc, pour achever ce processus,
-modifier le fichier `logon_perso` pour qu'au moment de
+`/.mozilla`.
+
+Il faut donc, pour achever ce processus,
+**modifier le fichier `logon_perso`** pour qu'au moment de
 l'ouverture de session, le répertoire `/.mozilla` soit
 remplacé par `/.mozilla-prof` si et seulement si c'est un(e)
 enseignant(e) qui se connecte.
 
-Pour ce faire, vous utiliserez [les variables prêtes à l'emploi](variables_fonctions.md#des-variables-et-des-fonctions-prêtes-à-lemploi),
-et indiquerez dans la fonction `ouverture_perso` les lignes suivantes :
+Pour ce faire, vous utiliserez [les variables prêtes à l'emploi](variables_fonctions.md#des-variables-et-des-fonctions-prêtes-à-lemploi-pour-des-scripts),
+et indiquerez dans la fonction `ouverture_perso` du fichier `logon_perso` les lignes suivantes :
 
 ```sh
     # chargement du profil mozilla pour les profs
@@ -368,5 +380,7 @@ Vous imaginez la suite : on
 peut, avec cette méthode, personnaliser la configuration de
 tous les logiciels et de l'environnemnet de bureau pour
 chaque profil, voire pour chaque utilisateur.
+
+On peut aussi envisager que chaque enseignant dispose d'un profil `Firefox`. Plusieurs solutions sont envisageables comme cela est décrit dans [la partie consacrée au fichier `logon_perso`](logon_perso.md#gérer-les-profils-pour-firefox).
 
 

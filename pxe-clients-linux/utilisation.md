@@ -9,14 +9,23 @@
     * [Les firmwares pour la carte réseau](#les-firmwares-pour-la-carte-réseau)
     * [Fichiers de log de la phase 1](#fichiers-de-log-de-la-phase-1)
     * [Problèmes éventuels lors de la phase 1](#problèmes-éventuels-lors-de-la-phase-1)
+        * [Problème 1 : carte réseau et microprogramme](#problème-1--carte-réseau-et-microprogramme)
+        * [Problème 2 : 2 cartes réseaux détectées](#problème-2--2-cartes-réseaux-détectées)
+        * [Problème 3 : un fond bleu figé](#problème-3--un-fond-bleu-figé)
+        * [Problème 4 : installation qui se fige](#problème-4--installation-qui-se-fige)
+        * [Problème 5 : système de fichiers racines](#problème-5--système-de-fichiers-racines)
+        * [Problème 6 : montage d'un système de fichiers](#problème-6--montage-dun-système-de-fichiers)
+        * [Problème 7 : corruption de miroir](#problème-7--corruption-de-miroir)
 * [Réservation de l'`IP` du `client-linux`](#réservation-de-lip-du-client-linux)
     * [Cas d'une nouvelle machine](#cas-dune-nouvelle-machine)
     * [Cas d'une machine ayant une réservation](#cas-dune-machine-ayant-une-réservation)
+    * [Nom du `client-linux`](#nom-du-client-linux)
 * [Post-installation `phase 2`](#post-installation-phase-2)
     * [Après le 1er redémmarage](#après-le-redémmarage)
     * [Fichiers de log de la phase 2](#fichiers-de-log-de-la-phase-2)
     * [Cas d'une intégration différée](#cas-dune-intégration-différée)
-* [Utilisation et gestion du `client-linux`](#utilisation-et-gestion-du-client-linux)
+* [Utilisation et gestion du `client-linux`](gestionclients.md#utilisation-et-gestion-dun-client-linux)
+
 
 
 ## Vue d'ensemble
@@ -37,7 +46,7 @@ Ensuite, tout se déroulera de façon automatique, sans intervention de votre pa
 
 On obtient ainsi un client `Gnu/Linux` sur lequel on peut ouvrir une session avec un des comptes disponibles dans [l'annuaire `Ldap`](https://fr.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol) du serveur `se3`.
 
-**Remarque 1 :** à la fin de la post-installation (**phase 2**), il est lancé un [script perso](messcripts.md) que vous pouvez utiliser pour apporter votre touche personnelle au `client-linux` ;-)
+**Remarque 1 :** à la fin de la post-installation (**phase 2**), il est lancé un [script perso](messcripts.md#lancement-dun-script-perso-en-fin-de-post-installation-des-clients-linux) que vous pouvez utiliser pour apporter votre touche personnelle au `client-linux` ;-)
 
 **Remarque 2 :** de même, une [liste de paquets perso](listeapplis.md#la-liste-perso) à installer lors de cette phase de post-installation est à votre disposition. Sinon, il est toujours possible de le faire par la suite à l'aide des scripts `unefois`.
 
@@ -102,18 +111,24 @@ Des fichiers de log de la phase 1 sont disponibles dans `/var/log/installer/sysl
 
 ### Problèmes éventuels lors de la phase 1
 
-- **Problème 1 :** au début de l'installation, certaines cartes réseau ont besoin d'un micro-programme et il ne se trouve pas dans ceux qui sont incorporés comme cela est expliqué ci-dessus : l'installation demande alors ce micro-programme (ou firmware).
+#### Problème 1 : carte réseau et microprogramme
+
+Au début de l'installation, certaines cartes réseau ont besoin d'un micro-programme et il ne se trouve pas dans ceux qui sont incorporés comme cela est expliqué ci-dessus : l'installation demande alors ce micro-programme (ou firmware).
 
 **Solution :** noter les références du micro-programme et répondre Non pour poursuivre l'installation. Par la suite, il suffira d'installer le paquet correspondant à ce micro-programme. Par exemple, pour certaines cartes réseau `Broadcom`, on installera le paquet `firmware-b43-installer` (via un `terminal` à l'aide de la commande *aptitude install firmware-b43-installer*).
 
 
-- **Problème 2 :** au début de l'installation, le système détecte 2 cartes réseaux ; c'est souvent le cas d'un portable ayant une interface `Ethernet` et une interface `Wifi` et, dans ce cas, les interfaces peuvent être nommées `eth0` et `wlan0`. On peut avoir aussi 2 interfaces `Ethernet`, nommées `eth0` et `eth1` comme dans l'image ci-dessous.
+#### Problème 2 : 2 cartes réseaux détectées
+
+Au début de l'installation, le système détecte 2 cartes réseaux ; c'est souvent le cas d'un portable ayant une interface `Ethernet` et une interface `Wifi` et, dans ce cas, les interfaces peuvent être nommées `eth0` et `wlan0`. On peut avoir aussi 2 interfaces `Ethernet`, nommées `eth0` et `eth1` comme dans l'image ci-dessous.
 ![probleme-carte-reseau](images/probleme_carte_reseau.png)
 
 **Solution :** il suffira de choisir l'interface branchée au réseau, cette interface est souvent `eth0`, comme sur l'image ci-dessus.
 
 
-- **Problème 3 :** sur certaines machines, au début, après avoir choisi et lancé l'installation, l'installation se fige sur un fond bleu… En passant sur la 4ème console qui donne les `syslog` (avec la combinaison de touches `Ctrl+Alt+F4`) on reste bloqué sur les lignes suivantes :
+#### Problème 3 : un fond bleu figé
+
+Sur certaines machines, au début, après avoir choisi et lancé l'installation, l'installation se fige sur un fond bleu… En passant sur la 4ème console qui donne les `syslog` (avec la combinaison de touches `Ctrl+Alt+F4`) on reste bloqué sur les lignes suivantes :
 ```ssh
 check missing firmware, installing package /firmware/firmare-linux-nonfree_0.43_all.deb
 check missing firmware : removing and loading kernel module tg3
@@ -123,23 +138,31 @@ C'est donc un problème concernant un des firmwares à fournir qui est pourtant 
 **Solution :** en passant sur la fenêtre principale (à l'aide de la combinaison de touches `Ctrl+c`), le script est relancé et ça passe....Ce doit être un bug de l'installeur AMHA, donc pas grand chose à faire…
 
 
-- **Problème 4 :** sur certaines machines (Dell Optiplex 330), l'installation se fige à l'amorce et si on relance l'installation, elle se fige à un autre moment.
+#### Problème 4 : installation qui se fige
+
+Sur certaines machines (Dell Optiplex 330), l'installation se fige à l'amorce et si on relance l'installation, elle se fige à un autre moment.
 
 **Solution :** configurer le `Bios` de la machine pour accepter le mode `WoL` ([Wake On Line](https://fr.wikipedia.org/wiki/Wake-on-LAN)). Relancer ensuite l'installation.
 
 
-- **Problème 5 :** l'installation s'arrête sur un message d'erreur : `Pas de système de fichiers racines. Aucun système de fichiers n'a été choisi comme fichier racine`.
+#### Problème 5 : système de fichiers racines
 
-**Solution :** une clé usb ou un lecteur de disquette usb sont branchés sur le client : les enlever et relancer l'installation.
+L'installation s'arrête sur un message d'erreur : `Pas de système de fichiers racines. Aucun système de fichiers n'a été choisi comme fichier racine`.
+
+**Solution :** une clé usb, un lecteur de disquette usb, un lecteur de carte interne ou une imprimante sont branchés sur le client : les enlever et relancer l'installation.
 
 
-- **Problème 6 :** l'installation s'arrête sur le message d'erreur suivant :
+#### Problème 6 : montage d'un système de fichiers
+
+L'installation s'arrête sur le message d'erreur suivant :
 ![probleme-installation](images/probleme_netboot.png)
 
 **Solution :** mettre à jour les archives netboot `Ubuntu` ou `Debian`, qui ont dû changer lors d'une évolution de version, en revalidant le choix de l'environnement du Bureau (Voir le module `Serveur TFTP` de l'interface du `se3`).
 
 
-- **Problème 7 :** l'installation s'arrête sur un message de corruption du miroir
+#### Problème 7 : corruption de miroir
+
+L'installation s'arrête sur un message de corruption du miroir
 ![probleme-miroir](images/probleme_miroir.png)
 
 **Solution :** rétablir la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation.
@@ -161,6 +184,23 @@ Sinon, la post-installation vous demandera d'attribuer un nom au `client-linux`,
 Si vous installez une machine qui a une réservation, vous pouvez directement lancer l'installation. Le `client-linux` aura la même adresse `IP` et le même nom que celui qui est inscrit dans l'annuaire `Ldap` du serveur `se3`.
 
 Si vous voulez changer le nom ou l'`IP` inscrits dans l'annuaire `Ldap` du serveur `se3`, le mieux est de supprimer cette réservation, de supprimer son éventuelle appartenance à un ou des parcs et, enfin, de supprimer aussi son entrée dans l'annuaire `Ldap` du serveur `se3`. Une fois cela fait, vous pouvez recommencer la procédure de réservation.
+
+
+### Nom du `client-linux`
+
+Le nom du `client-linux` doit respecter certaines règles qui seront vérifiées lors de la post-installation/intégration.
+
+**Les caractères autorisés pour le choix du nom d'hôte sont :**  
+  → les 26 lettres de l'alphabet en minuscules ou en majuscules, **sans accents**  
+  → les chiffres  
+  → le tiret du 6 (-)  
+  → et c'est tout !  
+
+**Nombre de caractères :** *De plus, le nom de la machine ne soit pas faire plus de 15 caractères*.
+
+Pour faciliter la gestion des `clients-linux`, vous pouvez structurer le nom pour tenir compte, d'une part, des particularités de votre établissement et, d'autre part, des possibilités offertes par les scripts `unefois`.
+
+Par exemple, vous pouvez nommer des machines en référence à la salle où elles se trouvent (cas d'une salle informatique smm1 : smm1-01, smm1-02,…) ou bien en référence à leur utilisation (cas des ordinateurs dans les salles de cours : cours-eg1, cours-eg2, cours-musique,…).
 
 
 ## Post-installation (phase 2)
@@ -185,41 +225,4 @@ Un compte-rendu de cette `phase 2` est disponible avec le fichier `/root/compte_
 Si vous ne désirez pas intégrer la machine installée au domaine géré par le serveur `se3`, il suffira de répondre`n` quand la question sera posée au cours de la phase 2. **Toute autre réponse déclenchera l'intégration**.
 
 Vous pourrez le faire par la suite, comme cela est indiqué à la fin de la post-installation.
-
-
-## Utilisation et gestion du `client-linux`
-
-Une fois la post-installation terminée, le `client-linux` est près :
-les utilisateurs peuvent ouvrir une session, si un compte leur a été attribué.
-
-Pour la gestion des `clients-linux` [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/README.md) vous donnera quelques informations essentielles.
-
-Si vous voulez intervenir directement sur le `client-linux`,
-le mieux est d'ouvrir un terminal en `root`
-dont le mot de passe est le même que celui du compte `adminse3`.
-
-Cela peut se faire de plusieurs façons :
-
-- utiliser un `terminal` depuis un autre `client-linux`
-en utilisant la commande suivante pour laquelle **ip_client**
-désigne l'`IP` du `client-linux` que vous voulez administrer :
-```ssh
-ssh root@ip_client
-```
-Vous répondrez **yes** à la question posée
-puis vous donnerez le mot de passe du compte `adminse3`.
-
-- ouvrir une session sur le `client-linux` à administrer puis ouvrir un `terminal`
-et lancer la commande suivante :
-```ssh
-su -l
-```
-Vous donnerez le mot de passe du compte `adminse3`.
-
-**Remarque :** pour fermer la session `root` ouverte via un `terminal`,
-il suffit d'utiliser la commande suivante :
-```ssh
-exit
-```
-Une autre façon de gérer le `client-linux` est d'utiliser le mécanisme des scripts `unefois`, mécanisme décrit dans [la documentation du paquet `se3-clients-linux`](../se3-clients-linux/repertoire_unefois.md).
 

@@ -39,13 +39,15 @@ La solution proposée ici est indépendante du module `Backuppc` du serveur `se3
 
 ## Les scripts
 
-Les scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, sont maintenant disponibles directement sur votre serveur `se3` s'il est à jour.
+Les scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, seront maintenant disponibles directement sur votre serveur `se3`.
 
-Les 2 scripts se trouvent dans le répertoire `/usr/share/se3/sbin` du `se3` depuis la version `Squeeze` 2.4.9138 de janvier 2016.
+Les 2 scripts se trouveront dans le répertoire `/usr/share/se3/sbin` du `se3` dans la prochaine mise à jour prévue en novembre 2016.
 
-Si vous n'êtes pas en `Wheezy` ou en `Squeeze` mais dans une version antérieure, telle que `Lenny`, il faudra mettre en place le script `sauve_se3.sh` en le téléchargeant. Cependant, certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, relisez le conseil ci-dessus.
+Si ces deux scripts ne sont pas disponibles dans le répertoire `/usr/share/se3/sbin` du `se3` ou si vous n'êtes pas en `Wheezy` mais dans une version antérieure, telle que `Lenny` ou `Squeeze`, il faudra mettre en place les scripts `sauve_se3.sh` et `restaure_se3.sh` en les téléchargeant.
 
-Les [versions en développement des scripts](../SambaEdu/se3-clients-linux/sauvegarde-restauration/) sont aussi disponibles et correspondent à cette documentation.
+Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) sont aussi disponibles et correspondent à cette documentation.
+
+**Remarque :** certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Cæn pour qu'un collègue vous guide pour leur utilisation.
 
 
 ## Où sauvegarder ?
@@ -56,7 +58,7 @@ Il y a plusieurs possibilités pour stocker la sauvegarde :
 * sur un `NAS`
 * sur un serveur distant
 
-Les indications ci-dessous sont données pour l'utilisation d'un disque dur externe usb et vous trouverez aussi quelques indications concernant l'utilisation d'un `NAS`.
+Les indications ci-dessous sont données pour l'utilisation d'un disque dur externe `usb` et vous trouverez aussi quelques indications concernant l'utilisation d'un `NAS`.
 
 L'utilisation d'un serveur distant est possible mais n'est pas documentée : il suffira d'adapter ce qui est indiqué pour un `NAS`.
 
@@ -89,12 +91,17 @@ Voici une procédure pour réaliser ce formatage :
 ```sh
 lsblk
 ```
+Par exemple :
+
+![lsblk_avant_disque_usb](images/lsblk_avant_disque_usb.png)
 
 * Brancher le disque dur sur un port usb puis relancez la commande précédente.
-Par comparaison, vous devriez trouver comment est repéré le disque branché.
 
+En continuant l'exemple précédent :
 
-Dans l'exemple ci-dessus, le disque dur externe est repéré par `/dev/sdb1`.
+![lsblk_apres_disque_usb](images/lsblk_apres_disque_usb.png)
+
+Dans l'exemple ci-dessus, par comparaison entre les deux réponses à la commande `lsblk`, on voit que le disque dur externe que vous avez branché est repéré par `/dev/sdc1`. Pour préciser les commandes suivantes, nous prendrons cette information ; vous les adapterez en fonction des réponses obtenues dans votre situation.
 
 * Vérifiez que la partition repérée n'est pas montée, à l'aide de la commande suivante :
 ```sh
@@ -104,36 +111,35 @@ mount | grep ^/dev | gawk -F" " '{print $1" "$2" "$3}'
 Ce qui peut donner ceci :
 > /dev/sda2 on /
 
-> /dev/sda6 on /home
-
 > /dev/sda3 on /var
 
-> /dev/sda5 on /var/se3
+> /dev/sda4 on /var/se3
+
+> /dev/sdb1 on /home
 
 
-**Remarque :** si elle est montée (/dev/sdb1 apparaîtrait dans la réponse précédente), la démonter à l'aide de la commande suivante :
+**Remarque :** si elle est montée (en reprenant l'exemple ci-dessus, /dev/sdc1 apparaîtrait dans la réponse précédente), avant de formater le disque, la démonter à l'aide de la commande suivante :
 ```sh
-umount /dev/sdb1
+umount /dev/sdc1
 ```
 
 * Formatez le disque dur externe à l'aide de la commande suivante :
 ```sh
-mkfs.ext3 /dev/sdb1
+mkfs.ext3 /dev/sdc1
 ```
 
 ### Montage du disque externe sur le répertoire `/sauvese3`
 
-Le disque étant repéré par `/dev/sdb1` (voir ci-dessus), il s'agit de le monter sur le répertoire `/sauvese3`. Voici comment faire cette opération :
+Le disque étant formaté en `ext3` et repéré par `/dev/sdc1` (voir ci-dessus), il s'agit de le monter sur le répertoire `/sauvese3`. Voici comment faire cette opération :
 
 * Créez le répertoire `/sauvese3`
 ```sh
 mkdir /sauvese3
 ```
-Et le disque externe usb étant préparé (voir ci-dessus), on peut le monter :
 
-* Montez le disque externe `/dev/sdb1`
+* Montez le disque externe `/dev/sdc1`
 ```sh
-mount /dev/sdb1 /sauvese3
+mount /dev/sdc1 /sauvese3
 ```
 
 ### Utilisation du script en mode test
@@ -161,7 +167,7 @@ La commande est la suivante :
 sauve_se3.sh -v
 ```
 
-**Conseil :** si vous utilisez manuellement le script, [nous vous conseillons d'utiliser **screen**](../dev-clients-linux/screen.md), ce qui vous permettra de vous déconnecter sans interrompre le déroulement du script, ce qui peut être assez long.
+**Conseil :** si vous utilisez manuellement le script, [nous vous conseillons d'utiliser **screen**](../dev-clients-linux/screen.md#utilisation-dune-session-screen), ce qui vous permettra de vous déconnecter sans interrompre le déroulement du script, ce qui peut être assez long.
 
 
 ### Utilisation programmée du script
@@ -216,9 +222,9 @@ Pour cela, utilisez la combinaison de 2 touches `Ctrl`+`o` et tapez sur `Entrée
 
 **Remarque :** pour connaître la valeur de l'UUID du disque dur externe, vous pouvez utiliser la commande suivante :
 ```sh
-blkid | grep /dev/sdb1
+blkid | grep /dev/sdc1
 ```
-où `/dev/sdb1` est à adapter en fonction de votre situation (voir ci-dessus).
+où `/dev/sdc1` est à adapter en fonction de votre situation (voir ci-dessus).
 
 
 ### Utilisation d'un `NAS`
@@ -227,12 +233,18 @@ où `/dev/sdb1` est à adapter en fonction de votre situation (voir ci-dessus).
 
 **Recommendations :** pour éviter les problèmes concernant les propriétaires des fichiers :
 - s'assurer que la partage `NFS` a l'option **pas de mappage**
+- ajouter l'ip du `se3` comme **hôte avec les droits root**
 - décocher l'option **NFS4** au niveau du `NAS` et du partage qui doit accueillir la sauvegarde `se3`
 - ajouter l'option **nfsvers=3** lors du montage du partage sur le se3 :
 ```sh
 mount -t nfs -o nfsvers=3 192.168.1.5:/volume1/sauveserveur /sauvese3
 ```
 Dans cette commande, `192.168.1.5` est l'ip du `NAS`, `/volume1/sauveserveur` est la partie du `NAS` qui doit recevoir la sauvegarde et `/sauvese3` est le répertoire du `se3` dans lequel est monté le `NAS`.
+
+**Remarque :** vous ajouterez aussi une ligne à votre fichier `/etc/fstab` pour que votre `NAS` soit remonté automatiquement lors d'un redémarrage de votre `se3`. La ligne à ajouter peut être celle-ci :
+```sh
+192.168.1.5:/volume1/sauveserveur /sauvese3 nfs nouser,auto,nfsvers=3 0 0
+```
 
 
 ### Utilisation conjointe du script de sauvegarde et du module `Backuppc`

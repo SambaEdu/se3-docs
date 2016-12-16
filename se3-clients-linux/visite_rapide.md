@@ -1,28 +1,46 @@
-#Visite rapide du répertoire clients-linux/ du serveur
+# Visite rapide du répertoire `clients-linux/` du serveur `se3`
+
+* [Le partage `CIFS` `netlogon-linux`](#le-partage-cifs-netlogon-linux)
+* [Arborescence du répertoire `clients-linux/`](#arborescence-du-répertoire-clients-linux)
+* [Quelques commentaires rapides](#quelques-commentaires-rapides)
+    * [Le répertoire `bin/`](#le-répertoire-bin)
+    * [Le répertoire `distribs/`](#le-répertoire-distribs)
+    * [Le répertoire `divers/`](#le-répertoire-divers)
+    * [Le répertoire `install/`](#le-répertoire-install)
+    * [Le répertoire `unefois/`](#le-répertoire-unefois)
+
+
+## Le partage `CIFS` `netlogon-linux`
+
+Votre serveur `se3` possède un partage `CIFS`
+qui, au passage, ne sera pas visible par les `clients-windows`.
+
+**Attention :** le nom du partage `CIFS` n'est pas le même que
+le nom du répertoire correspondant dans l'arborescence locale
+du serveur :
+
+Nom du partage | Chemin réseau              | Chemin dans l'arborescence locale du serveur
+---------------|----------------------------|---------------------------------------------
+netlogon-linux | `//SERVEUR/netlogon-linux` | `/home/netlogon/clients-linux/`
+
+
+## Arborescence du répertoire `clients-linux/`
 
 Afin de faire un rapide tour d'horizon du paquet `se3-clients-linux`, voici ci-dessous un schéma du contenu du répertoire `/home/netlogon/clients-linux/` du serveur.
 
 Les noms des répertoires possèdent un slash à la fin, sinon il s'agit de fichiers standards.
 
-* [Arborescence du répertoire clients-linux/](#arborescence-du-répertoire-clients-linux)
-* [Quelques commentaires rapides](#quelques-commentaires-rapides)
-    * [Le répertoire `bin/`](#le-répertoire-bin)
-    * [Le répertoire `distribs/`](#le-répertoire-distribs)
-    * [Le répertoire `divers/`](#le-répertoire-divers)
-    * [Le répertoire `unefois/`](#le-répertoire-unefois)
-
 Certains fichiers ou répertoires, dont vous n'avez pas à vous préoccuper, ont été omis afin d'alléger le schéma et les explications qui vont avec. Notamment le répertoire `save` dont le contenu est essentiel lors de l'intégration des clients-linux.
 
 Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter à vos besoins sont mis en évidence ci-dessous par des `**...**`. À l'inverse, vous ne devez pas modifier tous les autres fichiers ou répertoires.
 
-**Note :** En fait, vous pouvez le faire bien sûr car vous êtes `root` sur le serveur. Mais les modifications effectuées sur les fichiers/répertoires qui ne sont pas mis en évidence ci-dessous par des `**...**` sur le schéma ne survivront pas à une réinstallation ou à une mise à jour du `paquet se3-clients-linux`. Par contre, les fichiers/répertoires qui sont mis en évidence ci-dessous par des `**...**` ne seront pas affectés par une mise à jour du paquet `se3-clients-linux`.
+**Note :** En fait, vous pouvez le faire bien sûr car vous êtes `root` sur le serveur. Mais les modifications effectuées sur les fichiers/répertoires qui ne sont pas mis en évidence ci-dessous par des `**...**` sur le schéma ne survivront pas à une réinstallation ou à une mise à jour du paquet `se3-clients-linux`. Par contre, les fichiers/répertoires qui sont mis en évidence ci-dessous par des `**...**` ne seront pas affectés par une mise à jour du paquet `se3-clients-linux`.
 
 
-## Arborescence du répertoire clients-linux/
-
-**Schéma de l'arborescence du répertoire clients-linux/**
+**Schéma de l'arborescence du répertoire `clients-linux/`**
 ```
     ── clients-linux/
+       │
        ├── bin/
        │   ├── connexion_ssh_serveur.bash
        │   ├── logon
@@ -30,6 +48,7 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
        │   └── reconfigure.bash
        │
        ├── distribs/
+       │   │
        │   ├── jessie/
        │   │   ├── integration/
        │   │   │   └── integration_jessie.bash
@@ -37,13 +56,11 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
        │   │
        │   ├── precise/
        │   │   ├── integration/
-       │   │   │   ├── desintegration_precise.bash
        │   │   │   └── integration_precise.bash
        │   │   └──  **skel**/
        │   │
        │   ├── squeeze/
        │   │   ├── integration/
-       │   │   │   ├── desintegration_squeeze.bash
        │   │   │   └── integration_squeeze.bash
        │   │   └── **skel**/
        │   │
@@ -52,12 +69,26 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
        │   │   │   └── integration_trusty.bash
        │   │   └── **skel**/
        │   │
-       │   └── wheezy/
+       │   ├── wheezy/
+       │   │   ├── integration/
+       │   │   │   └── integration_wheezy.bash
+       │   │   └── **skel**/
+       │   │
+       │   └── xenial/
        │       ├── integration/
-       │       │   └── integration_wheezy.bash
+       │       │   └── integration_xenial.bash
        │       └── **skel**/
        │
+       │
        ├── **divers**/
+       │
+       │
+       ├── install/
+       │   └── **messcripts_perso**/
+       │       ├── **imprimantes**/
+       │       │   **mesapplis-debian-perso.txt**
+       │       │   **mesapplis-ubuntu-perso.txt**
+       │       └── **monscript-perso.sh**
        │
        └── **unefois**/
 ```
@@ -72,11 +103,11 @@ Les fichiers ou répertoires que vous êtes libre de modifier pour les adapter �
 
 Ce fichier `logon` est véritablement le chef d'orchestre de tous les clients GNU/Linux intégrés au domaine. C'est lui qui contient les instructions exécutées systématiquement par les clients GNU/Linux juste avant l'affichage de la fenêtre de connexion, au moment de l'ouverture de session et au moment de la fermeture de session.
 
-Ce fichier `logon` est expliqué à la section [logon-script](script_logon.md).
+Ce fichier `logon` est expliqué à la section [logon-script](script_logon.md#le-script-de-logon).
 
-En principe, vous ne devez pas modifier ce fichier `logon`. En revanche, vous pourrez modifier le fichier `logon_perso` juste à côté.
+En principe, vous ne devez pas modifier directement ce fichier `logon` mais cela est possible indirectement à l'aide du fichier `logon_perso` juste à côté.
 
-Ce fichier `logon_perso` vous permettra d'affiner le comportement du script `logon` afin de l'adapter à vos besoins. Vous trouverez toutes les explications nécessaires dans la section [personnalisation](script_logon.md#personnaliser-le-script-de-logon).
+Ce fichier `logon_perso` vous permettra d'affiner le comportement du script `logon` afin de l'adapter à vos besoins. Vous trouverez toutes les explications nécessaires avec la [personnalisation du script de logon](logon_perso.md#personnaliser-le-script-de-logon).
 
 * **Le répertoire `bin/` contient également le fichier `connexion_ssh_serveur.bash`**
 
@@ -103,17 +134,17 @@ Le répertoire `distribs/` contient un sous-répertoire par distribution GNU/Lin
 
 Ce répertoire contient le `script d'intégration`.
 
-C'est ce script qu'il faudra exécuter en tant que `root` sur chaque client que l'on souhaite intégrer au domaine du serveur. Pour l'utilisation de ce script, voir la section [Intégration d'un client GNU/Linux](impatients.md#intégration-dun-client-gnulinux).
+C'est ce script qui sera exécuté lors de [l'installation/intégration automatique des `clients-linux`](../pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique). Pour une utilisation manuelle de ce script, voir la section [Intégration d'un client GNU/Linux](impatients.md#intégration-dun-client-gnulinux).
 
-Les options disponibles dans ce script d'intégration sont décrites dans la section [options-integration](options_scripts.md).
+Les options disponibles dans ce script d'intégration sont décrites dans la section [options-integration](options_scripts.md#les-options-des-scripts-dintégration).
 
 * Le dossier `skel/`
 
 Ce répertoire contient **le profil par défaut** de tous les utilisateurs du domaine sur la distribution concernée.
 
-**Note :** Certains fichiers et répertoires de ce dossier sont cachés. Pour les afficher, vous pouvez utiliser la combianiason de touches `Ctrl+h`.
+**Note :** Certains fichiers et répertoires de ce dossier sont cachés. Pour les afficher, vous pouvez utiliser la combinaison de touches `Ctrl+h`.
 
-Si vous voulez modifier la page d'accueil du navigateur de tous les utilisateurs du domaine ou bien si vous voulez ajouter des icônes sur le bureau, c'est dans ce dossier `skel/` qu'il faudra faire des modifications. Vous trouverez toutes les explications nécessaires dans la section [profils](gestion_profils.md).
+Si vous voulez modifier la page d'accueil du navigateur de tous les utilisateurs du domaine ou bien si vous voulez ajouter des icônes sur le bureau, c'est dans ce dossier `skel/` qu'il faudra faire des modifications. Vous trouverez toutes les explications nécessaires dans la partie consacrée à [la gestion des profils](gestion_profils.md#la-gestion-des-profils).
 
 
 ### Le répertoire `divers/`
@@ -122,12 +153,25 @@ Le répertoire `divers/` ne contient pas grand chose par défaut et vous pourrez
 
 L'intérêt de ce répertoire est que, si vous y placez des fichiers (ou des répertoires), ceux-ci seront accessibles uniquement par le compte `root` local de chaque client GNU/Linux et par le compte `admin` du domaine.
 
-En particulier, vous aurez accès au contenu du répertoire `divers/` à travers le script de logon et à travers les scripts `unefois` (évoqués ci-dessous) qui sont tous les deux exécutés par le compte `root` local de chaque client GNU/Linux. Vous trouverez un exemple d'utilisation possible de ce répertoire dans la section [imprimante](imprimantes.md).
+En particulier, vous aurez accès au contenu du répertoire `divers/` à travers le script de logon et à travers les scripts `unefois` (évoqués ci-dessous) qui sont tous les deux exécutés par le compte `root` local de chaque client GNU/Linux.
+
+
+### Le répertoire `install/`
+
+Le répertoire `install/` dépend du paquet `pxe-clients-linux` associé au paquet `se3-clonage`. Le contenu de ce répertoire est utilisé lors des installations automatiques des `clients-linux`.
+
+Le sous-répertoire **`messcripts_perso/`** contient les fichiers `mesapplis-debian-perso.txt`, `mesapplis-ubuntu-perso.txt` et `monscript-perso.sh`. Vous pourrez y déposer des scripts supplémentaires pouvant être lancés via le script `monscript-perso.sh`.
+
+* Les fichiers **`mesapplis-debian-perso.txt`** et **`mesapplis-ubuntu-perso.txt`** sont des listes d'applications à installer en plus de celles qui sont prévues lors de la post-installation. Ces fichiers servent également à installer des paquets via le script `installer_applis_perso_20160430.unefois`.
+
+* **`monscript-perso.sh`** est un script lancé à la fin de la post-installation, script que vous pouvez utiliser pour ajouter des commandes ou des scripts supplémentaires pour compléter la post-installation en fonction des usages de votre établissement.
+
+Vous pouvez ajouter, s'il n'existe pas, un répertoire `imprimantes/` contenant les fichiers `ppd` nécessaires à l'installation des imprimantes sur les `clients-linux`. Vous trouverez un exemple d'utilisation possible de ce répertoire dans la section [imprimante](imprimantes.md#un-mot-sur-les-imprimantes).
 
 
 ### Le répertoire `unefois/`
 
 Le répertoire `unefois/` sert à gérer l'exécution de scripts une seule fois sur toute une famille de clients GNU/Linux intégrés au domaine.
 
-Ce répertoire peut s'avérer utile pour effectuer des tâches administratives sur les clients GNU/Linux. Toutes les explications nécessaires sur ce répertoire se trouvent dans la section [unefois](repertoire_unefois.md).
+Ce répertoire peut s'avérer utile pour effectuer des tâches administratives sur les `clients-linux`. Toutes les explications nécessaires sur ce répertoire se trouvent dans la partie concernant [les scripts `unefois`](repertoire_unefois.md#le-répertoire-unefois).
 
