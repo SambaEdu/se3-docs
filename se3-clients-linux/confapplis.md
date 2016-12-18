@@ -48,8 +48,8 @@ Où faut-il copier/utiliser cette fonction ? Dans le logon_perso ? [TODO]
 ```sh
 gerer_arduino ()
 {
-   % On teste si un dossier Technologie existe dans les documents de
-   % l'utilisateur connecté. S'il n'existe pas on le créé
+   # On teste si un dossier Technologie existe dans les documents de
+   # l'utilisateur connecté. S'il n'existe pas on le créé
    Tech=`ls $REP_HOME/Documents | grep Technologie`
    if [ -z "$Tech" ]; then
       mkdir $REP_HOME/Documents/Technologie
@@ -57,11 +57,11 @@ gerer_arduino ()
       chmod -R 744 "$REP_HOME/Documents/Technologie"
    fi
 
-   % On teste si un dossier Arduino existe dans les documents de
-   % l'utilisateur connecté. S'il n'existe pas on le créé en téléchargant
-   % une archive créée préalablement et qui contient toutes les
-   % bibliothèques nécessaires. Cette archive sera simplement déposée
-   % dans un dossier du serveur web de Se3
+   # On teste si un dossier Arduino existe dans les documents de
+   # l'utilisateur connecté. S'il n'existe pas on le créé en téléchargant
+   # une archive créée préalablement et qui contient toutes les
+   # bibliothèques nécessaires. Cette archive sera simplement déposée
+   # dans un dossier du serveur web de Se3
    Ard=`ls $REP_HOME/Documents/Technologie | grep Arduino`
    if [ -z "$Ard" ]; then
       ici=`pwd`
@@ -75,13 +75,13 @@ gerer_arduino ()
       cd $ici
    fi
 
-   % Création du fichier de préférences
-   % Plusieurs éléments sont importants :
-   %  -     board=                     le type de carte
-   %  -     serial.port=/dev/ttyACM0   le port série
-   %  - sketchbook.path=/mnt/_$USER/Docs/Technologie/Arduino
-   % le chemin d'accèr aux bibliothèques. Ici, cela correspond à la présence
-   % de dossiers « Technologie » et « Arduino »
+   # Création du fichier de préférences
+   # Plusieurs éléments sont importants :
+   #  -     board=                     le type de carte
+   #  -     serial.port=/dev/ttyACM0   le port série
+   #  - sketchbook.path=/mnt/_$USER/Docs/Technologie/Arduino
+   # le chemin d'accès aux bibliothèques. Ici, cela correspond à la présence
+   # des dossiers « Technologie » et « Arduino »
 
    mkdir $REP_HOME/.arduino
    cat > "$REP_HOME/.arduino/preferences.txt" <<FIN
@@ -187,7 +187,7 @@ preproc.imports.list=java.applet.*,java.awt.Dimension,java.awt.Frame,java.awt.ev
     upload.verbose=false
     upload.verify=true
 FIN
-    % On positionne correctement les droits
+    # On positionne correctement les droits
     chown -R "$LOGIN:" "$REP_HOME/.arduino"
     chmod -R 744 "$REP_HOME/.arduino"
 
