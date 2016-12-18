@@ -16,9 +16,9 @@ Dans ce qui suit, nous proposons quelques configurations pour l'utilisation d'ap
 
 L'utilisation de `Arduino` nécessite que l'utilisateur fasse partie du groupe `dialout`.
 
-Créer un fichier de post_installation dans le dossier. De quels fichier et dossier s'agit-il ? [TODO]
+Créer un fichier de post_installation dans le dossier `unefois`. De quels fichier et dossier s'agit-il ? [TODO]
 
-Le script suivant permettra de réaliser plusieurs opérations après l'installation et « l'intégration » de la machine. Quand et où seront lancé ce script ? [TODO]
+Ajouter le script suivant au fichier de post_installation. Un script de post_installation permet de réaliser plusieurs opérations après l'installation et « l'intégration » de la machine. Quand et où seront lancé ce script ? [TODO]
 
 ```sh
 Ajout du groupe dialout
@@ -41,19 +41,27 @@ fi
 
 ### Ajout des bibliothèques nécessaires dans l'espace de travail de l'utilisateur
 
-Pour fonctionner avec certains matériels, et avec `Ardublock`, il est nécessaire de copier un certain nombre de dossiers dans l'espace de travail de l'utilisateur. Cette fonction est à adapter en fonction des besoins.
+Pour fonctionner avec certains matériels, et avec `Ardublock`, il est nécessaire de copier un certain nombre de dossiers dans l'espace de travail de l'utilisateur. Cette fonction est à adapter en fonction des besoins et à mettre dans le logon_perso et à appeler depuis la fonction ouverture_session.
 
 Où faut-il copier/utiliser cette fonction ? Dans le logon_perso ? [TODO]
 
 ```sh
 gerer_arduino ()
 {
+   % On teste si un dossier Technologie existe dans les documents de
+   % l'utilisateur connecté. S'il n'existe pas on le créé
    Tech=`ls $REP_HOME/Documents | grep Technologie`
    if [ -z "$Tech" ]; then
       mkdir $REP_HOME/Documents/Technologie
       chown -R "$LOGIN:" "$REP_HOME/Documents/Technologie"
       chmod -R 744 "$REP_HOME/Documents/Technologie"
    fi
+
+   % On teste si un dossier Arduino existe dans les documents de
+   % l'utilisateur connecté. S'il n'existe pas on le créé en téléchargant
+   % une archive créée préalablement et qui contient toutes les
+   % bibliothèques nécessaires. Cette archive sera simplement déposée
+   % dans un dossier du serveur web de Se3
    Ard=`ls $REP_HOME/Documents/Technologie | grep Arduino`
    if [ -z "$Ard" ]; then
       ici=`pwd`
@@ -66,6 +74,15 @@ gerer_arduino ()
       rm -r Arduino*
       cd $ici
    fi
+
+   % Création du fichier de préférences
+   % Plusieurs éléments sont importants :
+   %  -     board=                     le type de carte
+   %  -     serial.port=/dev/ttyACM0   le port série
+   %  - sketchbook.path=/mnt/_$USER/Docs/Technologie/Arduino
+   % le chemin d'accèr aux bibliothèques. Ici, cela correspond à la présence
+   % de dossiers « Technologie » et « Arduino »
+
    mkdir $REP_HOME/.arduino
    cat > "$REP_HOME/.arduino/preferences.txt" <<FIN
     board=uno
@@ -170,6 +187,7 @@ preproc.imports.list=java.applet.*,java.awt.Dimension,java.awt.Frame,java.awt.ev
     upload.verbose=false
     upload.verify=true
 FIN
+    % On positionne correctement les droits
     chown -R "$LOGIN:" "$REP_HOME/.arduino"
     chmod -R 744 "$REP_HOME/.arduino"
 
