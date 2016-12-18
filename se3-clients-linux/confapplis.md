@@ -1,10 +1,24 @@
-# Configurations diverses pour l'utilisation de logiciels spécifiques sur des stations de travail `Debian` ou `Ubuntu` dans un domaine `SambaÉdu` avec le paquet `se3-clients-linux`
+# Configurations diverses pour l'utilisation de logiciels spécifiques
+
+
+Dans ce qui suit, nous proposons quelques configurations pour l'utilisation d'applications spécifiques sur des stations de travail `Debian` ou `Ubuntu` dans un domaine `SambaÉdu` avec le paquet `se3-clients-linux`.
+
+* [Arduino](#arduino)
+    * [Ajout des utilisateurs `ldap` au groupe `dialout`](#ajout-des-utilisateurs-ldap-au-groupe-dialout)
+    * [Ajout des bibliothèques nécessaires dans l'espace de travail de l'utilisateur](#ajout-des-bibliothèques-nécessaires-dans-lespace-de-travail-de-lutilisateur)
+* [Cura](#cura)
+* [Firefox](#firefox)
 
 
 ## Arduino
-### Ajout des utilisateurs ldap au groupe `dialout`
-L'utilisation de Arduino nécessite que l'utilisateur fasse partie du groupe `dialout`.
-Créer un fichier de post_installation dans le dossier. Ce script permettra de réaliser plusieurs opérations après l'installation et « l'intégration » de la machine.
+
+### Ajout des utilisateurs `ldap` au groupe `dialout`
+
+L'utilisation de `Arduino` nécessite que l'utilisateur fasse partie du groupe `dialout`.
+
+Créer un fichier de post_installation dans le dossier. De quels fichier et dossier s'agit-il ? [TODO]
+
+Le script suivant permettra de réaliser plusieurs opérations après l'installation et « l'intégration » de la machine. Quand et où seront lancé ce script ? [TODO]
 
 ```sh
 Ajout du groupe dialout
@@ -24,11 +38,15 @@ if [ -z "$EXISTE" ]; then
     sed -i "${LIGNE}i auth    required                        pam_group.so use_first" /etc/pam.d/common-auth
 fi
 ```
+
 ### Ajout des bibliothèques nécessaires dans l'espace de travail de l'utilisateur
-Pour fonctionner avec certains matériels, et avec Ardublock, il est nécessaire de copier un certain nombre de dossier dans l'espace de travail de l'utilisateur. Cette fonction est à adapter en fonction des besoins.
+
+Pour fonctionner avec certains matériels, et avec `Ardublock`, il est nécessaire de copier un certain nombre de dossiers dans l'espace de travail de l'utilisateur. Cette fonction est à adapter en fonction des besoins.
+
+Où faut-il copier/utiliser cette fonction ? Dans le logon_perso ? [TODO]
 
 ```sh
-function gerer_arduino ()
+gerer_arduino ()
 {
    Tech=`ls $REP_HOME/Documents | grep Technologie`
    if [ -z "$Tech" ]; then
@@ -159,6 +177,15 @@ FIN
 
 ```
 
+
 ## Cura
 
+…en préparation ?…
+
+
 ## Firefox
+
+…en préparation ?…
+
+
+

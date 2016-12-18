@@ -20,6 +20,7 @@
 * [Le script de `logon`](script_logon.md#le-script-de-logon)
 * [Personnalisation avec le `logon_perso`](logon_perso.md#personnaliser-le-script-de-logon)
 * [Des variables et des fonctions utiles pour le `logon_perso`](variables_fonctions_logon.md#quelques-variables-et-fonctions-prêtes-à-lemploi-pour-personnaliser-le-script-de-logon)
+* [Configuration de quelques applications](confapplis.md#configurations-diverses-pour-lutilisation-de-logiciels-spécifiques)
 * [Les logs pour détecter un problème](logs_detecter_probleme.md#les-logs-pour-détecter-un-problème)
 * [Le cas des classes nomades](classes_nomades.md#le-cas-des-classes-nomades)
 * [Un mot sur les imprimantes](imprimantes.md#un-mot-sur-les-imprimantes)
