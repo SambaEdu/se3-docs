@@ -27,6 +27,9 @@
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
     * [Quelques vérifications](#quelques-vérifications)
 * [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
+    * [Une solution alternative](#une-solution-alternative)
+    * [Correction du problème de l'annuaire](#correction-du-problème-de-lannuaire)
+    * [Cas éventuel des encodages](#cas-éventuel-des-encodages)
 
 
 
@@ -332,7 +335,10 @@ apt-get install rsyslog
 
 ## Utiliser les scripts de sauvegarde/restauration
 
-**Une solution alternative** à l'utilisation du script ci-dessus est la suivante :
+### Une solution alternative
+
+Au lieu d'utiliser le script de migration ci-dessus, une autre solution est la suivante :
+
 * sauvegarder votre serveur (script `sauve_se3.sh`)
 * installer un `se3-wheezy`, par la méthode de votre choix
 * configurer les modules adaptés à votre situation
@@ -344,9 +350,26 @@ Ces deux scripts (`sauve_se3.sh` et `restaure_se3.sh`) sont proposés sur le sit
 
 Il est à noter que ces deux scripts sont sur votre `se3-squeeze`, s'il est à jour bien entendu, mais dans une version insuffisante pour la restauration sur un `se3-wheezy`. Dans ce cas, il faudra utiliser [les versions les plus récentes](../../../../se3master/tree/master/usr/share/se3/sbin) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 
-**Remarque :** une chose à prendre en compte sur ces scripts : sur `se3-wheezy` on est full `utf8`, et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en `iso`. Cela fait quelques versions que nous sommes en `utf8` côté `samba` mais, pour autant, s'il y a eu des versions successives, il y a de fortes chances que de le codage `iso` traîne encore dans `/home` et `/var/se3`.
 
-**La solution à ce problème**, c'est de réencoder avec `/usr/bin/convmv`. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
+### Correction du problème de l'annuaire
+
+Il se peut qu'un problème concerne l'annuaire `Ldap` après la restauration : des messages d'erreurs apparaissent lorsqu'on se connecte sur l'interface web du se3.
+
+Voici comment corriger cela :
+
+* Éditer avec "nano" ou "vi" le fichier `/etc/ldap.secret`
+* Relever le mot de passe contenu dans ce fichier afin de remplacer celui
+de **adminPw** (administrateur de l'annuaire) dans les paramètres `LDAP` de
+l'interface web du mode sans échec (http://IP_SE3:909/setup)
+* Ne pas oublier de valider les modifications (bouton situé en bas de
+l'interface setup)
+
+
+### Cas éventuel des encodages
+
+Sur `se3-wheezy` on est full `utf8`, et `samba 4` n'aime pas du tout les noms de fichiers avec des accents codés en `iso`. Cela fait quelques versions que nous sommes en `utf8` côté `samba` mais, pour autant, s'il y a eu des versions successives, il y a de fortes chances que de le codage `iso` traîne encore dans `/home` et `/var/se3`.
+
+**La solution à ce problème s'il apparaît**, c'est de réencoder avec `/usr/bin/convmv`. Cela fonctionne très bien mais demande d'analyser tous les fichiers.
 
 Les deux commandes ci-dessous réencodent en `utf8` et ont été intégrées au script de restauration dans sa version la plus récente :
 ```sh
