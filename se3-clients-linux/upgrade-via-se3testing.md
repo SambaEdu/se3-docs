@@ -18,7 +18,7 @@ installés via la branche stable `se3` comme d'habitude
 (parce que vous ne souhaitez pas non plus prendre de risque
 au niveau de votre serveur de production).
 
-On suppose ici que votre serveur Se3 est sous Squeeze mais
+On suppose ici que votre serveur Se3 est sous Wheezy mais
 la méthode est très certainement exactement la même pour un
 serveur Se3 sous une autre distribution.
 
@@ -40,14 +40,14 @@ nano /etc/apt/sources.list.d/se3.list
 
 Dans ce fichier, vous devriez avoir cette ligne là :
 ```
-deb http://wawadeb.crdp.ac-caen.fr/debian squeeze se3
+deb http://wawadeb.crdp.ac-caen.fr/debian wheezy se3
 ```
 
 Vous devez alors modifier cette ligne pour qu'elle devienne
 comme ceci (vous changez juste la branche utilisée qui est
 `se3testing` au lieu de `se3` désormais) :
 ```
-deb http://wawadeb.crdp.ac-caen.fr/debian squeeze se3testing
+deb http://wawadeb.crdp.ac-caen.fr/debian wheezy se3testing
 ```
 
 Vous fermez ensuite votre éditeur en prenant bien soin
@@ -95,7 +95,7 @@ Vous éditez donc à nouveau le fichier `/etc/apt/sources.list.d/se3.list`
 (voir ci-dessus) afin de remettre la ligne modifiée précédemment
 dans son état initial, à savoir comme ceci :
 ```
-deb http://wawadeb.crdp.ac-caen.fr/debian squeeze se3
+deb http://wawadeb.crdp.ac-caen.fr/debian wheezy se3
 ```
 
 Pensez bien à enregistrer la modification (à l'aide des combinaisons de
