@@ -4,10 +4,10 @@ Vous trouverez ci-dessous quelques explications concernant la mise en place d'un
 
 * [Préliminaires](#préliminaires)
 * [La problématique](#la-problématique)    
-* [Que fait le script ?](#que-fait-le-script-)
+* [Que fait le script de test ?](#que-fait-le-script-de-test-)
 * [Que permet-il de faire ?](#que-permet-il-de-faire-)
-* [Comment l'utiliser ?](#comment-lutiliser-)
-* [Mise à jour vers samba 4.4 et se3 V3.0](#mise-à-jour-vers-samba-44-et-se3-v30)
+* [Comment utiliser le script ?](#comment-utiliser-le-script-)
+* [Mise à jour vers `samba 4.4` et `se3 3.0`](#mise-à-jour-vers-samba-44-et-se3-30)
 
 
 ## Préliminaires
@@ -17,26 +17,26 @@ On suppose ici que vous avez déjà procédé à l'installation d'une machine vi
 
 ## La problématique
 
-Le passage sur `se3` **version 3.0** et donc **samba 4.4** demande un annuaire légèrement différent de l'actuel et respectant certaines normes induites par `samba 4.4.` Lors du passage en 3.0, l'annuaire est donc analysé et modifié par un script durant la mise à jour.
+Le passage sur **`se3` version 3.0** et donc **samba 4.4** demande un annuaire légèrement différent de l'actuel et respectant certaines normes induites par `samba 4.4.` Lors du passage en 3.0, l'annuaire est donc analysé et modifié par un script durant la mise à jour.
 
-Toutefois, il peut être utile de tester, avant, la compatibilité de l'annuaire sur une machine virtuelle en question mais cela demande d'avoir une machine virtuelle avec exactement les mêmes caractéristiques (nom de domaine samba, meme base DN, etc...).
+Toutefois, il peut être utile de tester, avant le passage en version 3.0, la compatibilité de l'annuaire sur une machine virtuelle en question mais cela demande d'avoir une machine virtuelle avec exactement les mêmes caractéristiques (nom de domaine samba, meme base DN, etc.).
 
-Un script, dont nous allons détailler le mode de fonctionnement se propose de résoudre cette problématique de compatibilité.
+Le script **test-ldap-smb44.sh**, dont nous allons détailler le mode de fonctionnement, se propose de résoudre cette problématique de compatibilité.
 
 
-## Que fait le script ?
+## Que fait le script de test ?
 
-Il analyse un export `ldap` prenant la forme d'un fichier `ldif` afin de mettre en place toute la structure `ldap/samba` correspondante. 
+Le script **test-ldap-smb44.sh** analyse un export `ldap` prenant la forme d'un fichier `ldif` afin de mettre en place toute la structure `ldap/samba` correspondante. 
 
 
 ## Que permet-il de faire ?
 
-Il permet de vérifier tranquillement que l'annuaire passe la mise à jour SE3 3.0 sans encombre et donc sa compatibilité avec `samba 4.4.`
+Le script **test-ldap-smb44.sh** permet de vérifier tranquillement que l'annuaire passe la mise à jour `SE3 3.0` sans encombre et donc sa compatibilité avec `samba 4.4.`
 
-Si tel n'est pas le cas, on peut alors remonter ses problèmes sur la liste de diffusion `se3-devel` afin que le défaut constaté sur l'annuaire puisse être pris en compte via un correctif adéquat. Ce correctif permettra lors de la mise à jour de bien passer correctement sur l'annuaire de production. 
+Si tel n'est pas le cas, on peut alors remonter ses problèmes sur la liste de diffusion `se3-devel` afin que le défaut constaté sur l'annuaire testé puisse être pris en compte via un correctif adéquat. Ce correctif permettra, lors de la mise à jour, de bien passer correctement sur l'annuaire de production. 
 
 
-## Comment l'utiliser ?
+## Comment utiliser le script ?
 
 On commence par le charger sur la machine virtuelle en le récupérant sur le dépot Git à l'aide de la commande suivante :
 ```sh
