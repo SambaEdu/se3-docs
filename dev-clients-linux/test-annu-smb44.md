@@ -78,7 +78,7 @@ En premier lieu il met à jour `mysql` avec les valeurs trouvées dans le fichie
     changement du sambaSID dans mysql
     changement du nom de domaine samba dans mysql
     
-Ensuite il relance met en place une base ldap vierge puis intègre le fichier ldif
+Ensuite il met en place une base ldap vierge puis intègre le fichier ldif
 
     Reconstruction de la conf ldap
     Pas de replication, LDAP local, SSL off
@@ -104,7 +104,7 @@ Normalement en une seule passe, le script devrait remettre en place un système 
 Si tel n'est pas le cas, il peut être lancé une seconde fois. Il est par exemple possible que `samba` refuse de fonctionner dans un premier temps vue le bouleversement…
 
 
-##Mise à jour vers samba 4.4 et se3 V3.0
+## Mise à jour vers samba 4.4 et se3 V3.0
 
 Une fois la structure mise en place, il reste à passer sur `samba 4.4`. Il faut donc installer le paquet `se3 3.0` disponible sur la branche testing.
 
