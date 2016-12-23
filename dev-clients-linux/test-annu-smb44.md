@@ -95,15 +95,19 @@ Samba 4.4 sera tiré par dépendance. Si d'autres modules sont utilisés, il peu
 
 Si des problèmes sont rencontrées, il devraient être apparant lors de la  mise à jour. Toutefois quelques tests manuels sont toujours possibles, les voici :
 
+Cette commande permet de vérifier que l'annuaire est bien en mode ldap trusted
 
 	# grep trusted /etc/samba/smb.conf
     ldapsam:trusted = Yes
 
-Cette commande permet de vérifier que l'annuaire est bien en mode ldap trusted
+
+
+
+Ces deux suivantes testent l'annuaire sur des points qui poseront problème si l'annuaire n'est pas compatible avec samba 4.4. 
+
 
 	create_adminse3.sh
 	smbclient -L localhost -U admin
 
-Ces deux suivantes testent l'annuaire sur des points qui poseront problème si l'annuaire n'est pas compatible avec samba 4.4. 
 
 Merci de remonter sur la liste de diffusions les résultats de vos tests.
