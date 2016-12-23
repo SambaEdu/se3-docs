@@ -19,13 +19,13 @@ Le passage sur se3 version 3.0 et donc samba 4.4 demande un annuaire légèremen
 
 ## Que fait le script ?
 
-Il analyse un export ldap prenant la forme d'un fichier ldif afin de mettre en place toute la structure ldap /samba correpodante. 
+Il analyse un export ldap prenant la forme d'un fichier ldif afin de mettre en place toute la structure ldap /samba correspondante. 
 
 ## Que permet-il de faire ?
 
 Il permet de vérifier tranquillement que l'annuaire passe la mise à jour SE3 3.0 sans encombre et donc sa compatibilité avec samba 4.4. 
 
-Si tel n'est pas le cas, on peut alors remonter ses problèmes sur la liste de diffusion se3-devel afin que le défaut constaté sur l'annuaire puisse être pris en compte via un correctif adéquat.
+Si tel n'est pas le cas, on peut alors remonter ses problèmes sur la liste de diffusion se3-devel afin que le défaut constaté sur l'annuaire puisse être pris en compte via un correctif adéquat. Ce correctif permettra à la mise à jour de bien passer correctement sur l'annuaire de production. 
 
 ## Comment l'utiliser ?
 
@@ -33,14 +33,13 @@ On commence par le charger sur la machine virtuelle en le récupérant sur le d�
 
     wget https://gist.githubusercontent.com/SambaEdu/bc0c2b4166c9152cbf786cefb271b2e8/raw/f9bce505cbd545ce05230c149892b0bee72b1830/test-ldap-smb44.sh
 
-Esuite on le lance :
+Ensuite on le lance en ayant pris soin de déposer dans le même dossier un export de son annuuaire de production. ici il se nomme export.ldif mais ce n'est pas oobligatoire, il peut s'appeler autrement.
 
 	bash test-ldap-smb44.sh export.ldif
 
-Dans un premier temps, une sauvegarde de l'annuaire en cours de fonctionnement est faite dans /var/se3/save/ldap afin de revenir . il est plus prudent d'avoir un snapshot de sa VM sous la main.....
+Dans un premier temps, une sauvegarde de l'annuaire en cours de fonctionnement est faite dans /var/se3/save/ldap afin de revenir à l'état initial par la suite si on le souhaite.
 
-
-Ensuite, le script va tenter de trouver toutes les infos dont il a besoin dans l'export ldif donné en argument, à savoir la basedn, le sid samba et le nom de domaine samba. Dans un premier temps la base dn trouvée sera affichée. Si cela convient il recherche les autres éléments puis donne un récapitulatif. Voici un exemple :
+Ensuite, le script va tenter de trouver toutes les informations dont il a besoin dans l'export ldif donné en argument, à savoir la basedn, le sid samba et le nom de domaine samba. Dans un premier temps la base dn trouvée sera affichée. Si cela convient il recherche les autres éléments puis donne un récapitulatif. Voici un exemple :
 
      Résumé des modifications :
     - Analyse de export.ldif
@@ -110,4 +109,4 @@ Ces deux suivantes testent l'annuaire sur des points qui poseront problème si l
 	smbclient -L localhost -U admin
 
 
-Merci de remonter sur la liste de diffusions les résultats de vos tests.
+Merci de remonter sur la liste de diffusion les résultats de vos tests.
