@@ -84,3 +84,26 @@ Normalement en une seule passe, le script devrait remettre en place un système 
 ##Mise à jour vers samba 4.4 et se3 V3.0
 
 Une fois la structure mise en place, il reste à passer sur samba 4.4. Il faut donc installer le paquet se3 3.0 disponible sur la branche testing. Afin de se positionner sur la branche testing, on pourra se reporter à cette documentation : 
+https://github.com/SambaEdu/se3-docs/blob/master/se3-clients-linux/upgrade-via-se3testing.md#%C3%89dition-du-fichier-etcaptsourceslistdse3list
+
+Une fois sur la branche testing, mettre à jour les paquets puis installer les paquets se3 :
+
+	apt-get update 
+	apt-get install se3 se3-logonpy se3-domain
+
+Samba 4.4 sera tiré par dépendance. Si d'autres modules sont utilisés, il peutvent être mis à jour également. En effet, samba 4.4 induit des modifications sur quasiment l'ensemble des paquets Se3.
+
+Si des problèmes sont rencontrées, il devraient être apparant lors de la  mise à jour. Toutefois quelques tests manuels sont toujours possibles, les voici :
+
+
+	# grep trusted /etc/samba/smb.conf
+    ldapsam:trusted = Yes
+
+Cette commande permet de vérifier que l'annuaire est bien en mode ldap trusted
+
+	create_adminse3.sh
+	smbclient -L localhost -U admin
+
+Ces deux suivantes testent l'annuaire sur des points qui poseront problème si l'annuaire n'est pas compatible avec samba 4.4. 
+
+Merci de remonter sur la liste de diffusions les résultats de vos tests.
