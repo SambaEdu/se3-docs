@@ -1,0 +1,86 @@
+# Tester la compatibilité  d'un annuaire de production dans une machine virtuelle
+
+Vous trouverez ci-dessous quelques explications concernant la mise en place d'un environnement de test d'un annuaire de production.
+
+* [Préliminaires](#préliminaires)
+* [La problématique](#La_problématique)    
+* [Que fait le script ?](#Que_fait_le_script_?)
+* [Que permet-il de faire ?](Que_permet-il_de_faire_?)
+* [Comment l'utiliser ?](Comment_l'utiliser_?)
+* [Mise à jour vers samba 4.4 et se3 V3.0](Mise_à_jour_vers_samba_4.4_et_se3_V3.0)
+## Préliminaires
+
+On suppose ici que vous avez déjà procédé à l'installation d'une machine virtuelle `SE3`. il est également plus prudent d'avoir un snapshot de sa VM sous la main.....
+
+
+## La problématique
+
+Le passage sur se3 version 3.0 et donc samba 4.4 demande un annuaire légèrement différent de l'actuel et respectant certaines normes induites par samba 4.4. Lors du passage en 3.0, l'annuaire est donc analysé et modifié par un script durant la mise à jour. Toutefois, il peut être utile de tester avant la compatibilité de l'annuaire sur une machine virtuelle en question mais cela demande d'avoir une machine virtuelle avec exactement les mêmes caractéristiques (nom de domaine samba, meme base DN, etc...). Un script, dont nous allons détailler le mode de fonctionnement se propose de résoudre cette problématique de compatibilité. 
+
+## Que fait le script ?
+
+Il analyse un export ldap prenant la forme d'un fichier ldif afin de mettre en place toute la structure ldap /samba correpodante. 
+
+## Que permet-il de faire ?
+
+Il permet de vérifier tranquillement que l'annuaire passe la mise à jour SE3 3.0 sans encombre et donc sa compatibilité avec samba 4.4. 
+
+Si tel n'est pas le cas, on peut alors remonter ses problèmes sur la liste de diffusion se3-devel afin que le défaut constaté sur l'annuaire puisse être pris en compte via un correctif adéquat.
+
+## Comment l'utiliser ?
+
+On commence par le charger sur la machine virtuelle en le récupérant sur le dépot Git à l'aide de la commande suivante :
+
+    wget https://gist.githubusercontent.com/SambaEdu/bc0c2b4166c9152cbf786cefb271b2e8/raw/f9bce505cbd545ce05230c149892b0bee72b1830/test-ldap-smb44.sh
+
+Esuite on le lance :
+
+	bash test-ldap-smb44.sh export.ldif
+
+Dans un premier temps, une sauvegarde de l'annuaire en cours de fonctionnement est faite dans /var/se3/save/ldap afin de revenir . il est plus prudent d'avoir un snapshot de sa VM sous la main.....
+
+
+Ensuite, le script va tenter de trouver toutes les infos dont il a besoin dans l'export ldif donné en argument, à savoir la basedn, le sid samba et le nom de domaine samba. Dans un premier temps la base dn trouvée sera affichée. Si cela convient il recherche les autres éléments puis donne un récapitulatif. Voici un exemple :
+
+     Résumé des modifications :
+    - Analyse de export.ldif
+    - Mise en place la base dn  ou=clg-hugo-gisors,ou=ac-rouen,ou=education,o=gouv,c=fr
+    - Vidage de l'annuaire insertion du contenu de  export.ldif
+    - Sid samba positionné à  S-1-5-21-1428338548-94502439-1745090853
+    - Nom de domaine Samba récupéré   SAMBAEDU3
+
+	Peut-on poursuivre? (o/n)
+
+Le script commence alors les modifications. En premier lieu il met à jour mysql avec les valeurs trouvées dans le fichier ldif :
+
+	changement de la basedn dans mysql
+	changement du sambaSID dans mysql
+	changement du nom de domaine samba dans mysql
+Ensuite il relance met en place une base ldap vierge puis intègre le fichier ldif
+
+	Reconstruction de la conf ldap
+	Pas de replication, LDAP local, SSL off
+
+	Supression de /var/lib/ldap
+	Intégration du fichier ldif  export.ldif
+	.#################### 100.00% eta   none elapsed             03s spd 367.4 k/s
+	Closing DB...
+	
+
+Après quoi viennent les modifications concernant samba :
+
+    remise en place pass ldap samba
+    Setting stored password for "cn=admin,ou=clg-hugo-gisors,ou=ac-rouen,ou=education,o=gouv,c=fr" in secrets.tdb
+    changement du SID pour samba
+	lancement update-smbconf.sh pour conf initiale
+	Lancement correctSID.sh au cas ou
+	Lancement update-smbconf.sh pour activation ldaptrusted
+
+	Terminé !!
+
+Normalement en une seule passe, le script devrait remettre en place un système fonctionnel. Si tel n'est pas le cas, il peut être lancé une seconde fois. Il est par exemple possible que samba refuse de fonctionner dans un premier temps vue le boulversement... 
+
+
+##Mise à jour vers samba 4.4 et se3 V3.0
+
+Une fois la structure mise en place, il reste à passer sur samba 4.4. Il faut donc installer le paquet se3 3.0 disponible sur la branche testing. Afin de se positionner sur la branche testing, on pourra se reporter à cette documentation : 
