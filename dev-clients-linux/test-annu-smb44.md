@@ -5,8 +5,9 @@ Vous trouverez ci-dessous quelques explications concernant la mise en place d'un
 * [Préliminaires](#préliminaires)
 * [La problématique](#la-problématique)    
 * [Que fait le script de test ?](#que-fait-le-script-de-test-)
-* [Que permet-il de faire ?](#que-permet-il-de-faire-)
+* [Que permet-il de vérifier ?](#que-permet-il-de-vérifier-)
 * [Comment utiliser le script ?](#comment-utiliser-le-script-)
+* [Les étapes du script](#les-étapes-du-script)
 * [Mise à jour vers `samba 4.4` et `se3 3.0`](#mise-à-jour-vers-samba-44-et-se3-30)
 
 
@@ -29,7 +30,7 @@ Le script **test-ldap-smb44.sh**, dont nous allons détailler le mode de fonctio
 Le script **test-ldap-smb44.sh** analyse un export `ldap` prenant la forme d'un fichier `ldif` afin de mettre en place toute la structure `ldap/samba` correspondante. 
 
 
-## Que permet-il de faire ?
+## Que permet-il de vérifier ?
 
 Le script **test-ldap-smb44.sh** permet de vérifier tranquillement que l'annuaire passe la mise à jour `SE3 3.0` sans encombre et donc sa compatibilité avec `samba 4.4.`
 
@@ -38,21 +39,25 @@ Si tel n'est pas le cas, on peut alors remonter ses problèmes sur la liste de d
 
 ## Comment utiliser le script ?
 
-On commence par le charger sur la machine virtuelle en le récupérant sur le dépot Git à l'aide de la commande suivante :
+On commence par charger le script **test-ldap-smb44.sh** sur la machine virtuelle en le récupérant sur le dépot `Git` à l'aide de la commande suivante :
 ```sh
 wget https://gist.githubusercontent.com/SambaEdu/bc0c2b4166c9152cbf786cefb271b2e8/raw/f9bce505cbd545ce05230c149892b0bee72b1830/test-ldap-smb44.sh
 ```
 
-Ensuite on le lance en ayant pris soin de déposer dans le même dossier un export de son annuuaire de production. Dans la commande suivante, il se nomme **export.ldif** mais ce n'est pas obligatoire : il peut s'appeler autrement.
+On dépose, dans le même dossier, un export de son annuaire de production que l'on veut tester. Par exemple, mettons qu'il se nomme **export.ldif** ; mais ce n'est pas obligatoire : il peut s'appeler autrement.
+
+On lance le script avec le nom de l'export en argument :
 ```sh
 bash test-ldap-smb44.sh export.ldif
 ```
+
+## Les étapes du script
 
 Dans un premier temps, une sauvegarde de l'annuaire en cours de fonctionnement est faite dans `/var/se3/save/ldap` afin de revenir à l'état initial par la suite si on le souhaite.
 
 Ensuite, le script va tenter de trouver toutes les informations dont il a besoin dans l'export `ldif` donné en argument, à savoir la `basedn`, le `sid samba` et le `nom de domaine samba`.
 
-Dans un premier temps la `base dn` trouvée sera affichée. Si cela convient il recherche les autres éléments puis donne un récapitulatif.
+Dans un premier temps la `base dn` trouvée sera affichée. Si cela convient, le script recherche les autres éléments puis donne un récapitulatif.
 
 Voici un exemple :
 
@@ -62,37 +67,41 @@ Voici un exemple :
     - Vidage de l'annuaire insertion du contenu de  export.ldif
     - Sid samba positionné à  S-1-5-21-1428338548-94502439-1745090853
     - Nom de domaine Samba récupéré   SAMBAEDU3
+    
+    Peut-on poursuivre? (o/n)
 
-	Peut-on poursuivre? (o/n)
+Le script commence alors les modifications.
 
-Le script commence alors les modifications. En premier lieu il met à jour `mysql` avec les valeurs trouvées dans le fichier `ldif` :
+En premier lieu il met à jour `mysql` avec les valeurs trouvées dans le fichier `ldif` :
 
-	changement de la basedn dans mysql
-	changement du sambaSID dans mysql
-	changement du nom de domaine samba dans mysql
+    changement de la basedn dans mysql
+    changement du sambaSID dans mysql
+    changement du nom de domaine samba dans mysql
+    
 Ensuite il relance met en place une base ldap vierge puis intègre le fichier ldif
 
-	Reconstruction de la conf ldap
-	Pas de replication, LDAP local, SSL off
-
-	Supression de /var/lib/ldap
-	Intégration du fichier ldif  export.ldif
-	.#################### 100.00% eta   none elapsed             03s spd 367.4 k/s
-	Closing DB...
-	
+    Reconstruction de la conf ldap
+    Pas de replication, LDAP local, SSL off
+    
+    Supression de /var/lib/ldap
+    Intégration du fichier ldif  export.ldif
+    .#################### 100.00% eta   none elapsed             03s spd 367.4 k/s
+    Closing DB...
 
 Après quoi viennent les modifications concernant `samba` :
 
     remise en place pass ldap samba
     Setting stored password for "cn=admin,ou=clg-hugo-gisors,ou=ac-rouen,ou=education,o=gouv,c=fr" in secrets.tdb
     changement du SID pour samba
-	lancement update-smbconf.sh pour conf initiale
-	Lancement correctSID.sh au cas ou
-	Lancement update-smbconf.sh pour activation ldaptrusted
+    lancement update-smbconf.sh pour conf initiale
+    Lancement correctSID.sh au cas ou
+    Lancement update-smbconf.sh pour activation ldaptrusted
+    
+    Terminé !!
 
-	Terminé !!
+Normalement en une seule passe, le script devrait remettre en place un système fonctionnel.
 
-Normalement en une seule passe, le script devrait remettre en place un système fonctionnel. Si tel n'est pas le cas, il peut être lancé une seconde fois. Il est par exemple possible que `samba` refuse de fonctionner dans un premier temps vue le boulversement…
+Si tel n'est pas le cas, il peut être lancé une seconde fois. Il est par exemple possible que `samba` refuse de fonctionner dans un premier temps vue le bouleversement…
 
 
 ##Mise à jour vers samba 4.4 et se3 V3.0
@@ -113,13 +122,14 @@ Si des problèmes sont rencontrés, ils devraient être apparents lors de la  mi
 
 Toutefois quelques tests manuels sont toujours possibles, les voici :
 
-Cette commande permet de vérifier que l'annuaire est bien en mode `ldap trusted`
+La commande suivante permet de vérifier que l'annuaire est bien en mode `ldap trusted`
 ```sh
 grep trusted /etc/samba/smb.conf
-ldapsam:trusted = Yes
 ```
+    ldapsam:trusted = Yes
 
-Ces deux commandes suivantes testent l'annuaire sur des points qui poseront problème si l'annuaire n'est pas compatible avec `samba 4.4.` :
+
+Les deux commandes suivantes testent l'annuaire sur des points qui poseront problème si l'annuaire n'est pas compatible avec `samba 4.4.` :
 
 ```sh
 create_adminse3.sh
