@@ -7,7 +7,7 @@ Vous trouverez ci-dessous quelques explications concernant la mise en place d'un
 * [Que fait le script ?](#que-fait-le-script-)
 * [Que permet-il de faire ?](#que-permet-il-de-faire-)
 * [Comment l'utiliser ?](#comment-l-utiliser-)
-* [Mise à jour vers samba 4.4 et se3 V3.0](#mise-à-jour-vers-samba-4.4-et-se3-v3.0)
+* [Mise à jour vers samba 4.4 et se3 V3.0](#mise-à-jour-vers-samba-44-et-se3-v30)
 
 
 ## Préliminaires
