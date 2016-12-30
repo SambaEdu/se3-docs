@@ -12,6 +12,9 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * Documentation plus complète pour [le formatage markdown](http://enacit1.epfl.ch/markdown-pandoc/)
 * Documentation en rapport avec [la création de paquets debian](https://www.debian.org/doc/manuals/maint-guide/index.fr.html)
 
+## Tester ou remonter des bugs
+* Documentation sur le passage dur [la branche test du projet pour aider dans la remontée des bug](se3-clients-linux/upgrade-via-se3testing.md)
+* Documentation expliquant comment [tester la compatibilité samba 4.4 de son annuaire de production sur une machine virtuelle](dev-clients-linux/test-annu-smb44.md)
 
 ## Installation automatique des `clients-linux`
 
@@ -39,7 +42,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## La doc pour migrer son `se3`
 
-* Procédure pour migrer [de se3-squeeze à se3-wheeze](se3-migration/SqueezeToWheezy.md#migration-de-se3-squeeze-vers-se3-wheezy)
+* Procédure pour migrer [de se3-squeeze à se3-wheezy](se3-migration/SqueezeToWheezy.md#migration-de-se3-squeeze-vers-se3-wheezy)
 
 
 ## Sauvegarder et restaurer un `se3`
