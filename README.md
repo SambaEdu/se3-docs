@@ -12,9 +12,13 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * Documentation plus complète pour [le formatage markdown](http://enacit1.epfl.ch/markdown-pandoc/)
 * Documentation en rapport avec [la création de paquets debian](https://www.debian.org/doc/manuals/maint-guide/index.fr.html)
 
+
 ## Tester ou remonter des bugs
-* Documentation sur le passage dur [la branche test du projet pour aider dans la remontée des bug](se3-clients-linux/upgrade-via-se3testing.md)
-* Documentation expliquant comment [tester la compatibilité samba 4.4 de son annuaire de production sur une machine virtuelle](dev-clients-linux/test-annu-smb44.md)
+
+* Documentation sur le passage de [la branche `se3testing` du projet pour aider dans la remontée des bugs](se3-clients-linux/upgrade-via-se3testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
+
+* Documentation expliquant comment [tester la compatibilité `samba 4.4` de son annuaire `ldap` de production **sur une machine virtuelle**](dev-clients-linux/test-annu-smb44.md#tester-la-compatibilité-dun-annuaire-de-production-dans-une-machine-virtuelle)
+
 
 ## Installation automatique des `clients-linux`
 
