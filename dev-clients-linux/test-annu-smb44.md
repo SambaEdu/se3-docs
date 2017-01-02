@@ -8,7 +8,7 @@ Vous trouverez ci-dessous quelques explications concernant la mise en place d'un
 * [Que permet-il de vérifier ?](#que-permet-il-de-vérifier-)
 * [Comment utiliser le script ?](#comment-utiliser-le-script-)
 * [Les étapes du script](#les-étapes-du-script)
-* [Mise à jour vers `samba 4.4` et `se3 3.0`](#mise-à-jour-vers-samba-44-et-se3-30)
+* [Test de la mise à jour vers `samba 4.4` et `se3 3.0`](#test-de-la-mise-à-jour-vers-samba-44-et-se3-30)
 * [Remontée des tests](#remontée-des-tests)
 
 
@@ -105,23 +105,23 @@ Après quoi viennent les modifications concernant `samba` :
     
     Terminé !!
 
-Normalement en une seule passe, le script devrait remettre en place un système fonctionnel.
+Normalement, en une seule passe, le script devrait remettre en place un système fonctionnel.
 
-Si tel n'est pas le cas, il peut être lancé une seconde fois. Il est par exemple possible que `samba` refuse de fonctionner dans un premier temps vue le bouleversement…
+Si tel n'est pas le cas, **le script peut être lancé une seconde fois**. Il est par exemple possible que `samba` refuse de fonctionner dans un premier temps vue le bouleversement…
 
 
-## Mise à jour vers `samba 4.4` et `se3 3.0`
+## Test de la mise à jour vers `samba 4.4` et `se3 3.0`
 
 Une fois la structure mise en place à l'aide du script *test-ldap-smb44.sh*, il reste à tester le passage en `samba 4.4`, **toujours sur la même VM**. Il faut donc installer le paquet `se3 3.0` disponible sur la branche `se3testing`.
 
 Afin de se positionner sur la branche `se3testing`, on pourra se reporter à [la documentation détaillant la modification du fichier `/etc/apt/sources.list.d/se3.list`](../se3-clients-linux/upgrade-via-se3testing.md#%C3%89dition-du-fichier-etcaptsourceslistdse3list).
-
 
 Une fois sur la branche `se3testing`, mettre à jour la liste des paquets puis installer les paquets `se3`, `se3-logonpy` et `se3-domain` :
 ```sh
 apt-get update 
 apt-get install se3 se3-logonpy se3-domain
 ```
+
 `Samba 4.4` sera tiré par dépendance. Si d'autres modules sont utilisés, ils peuvent être mis à jour également. En effet, `samba 4.4` induit des modifications sur quasiment l'ensemble des paquets `Se3`.
 
 Si des problèmes sont rencontrés, ils devraient être apparents lors de la  mise à jour.
@@ -141,6 +141,7 @@ Les deux commandes suivantes testent l'annuaire sur des points qui poseront prob
 create_adminse3.sh
 smbclient -L localhost -U admin
 ```
+
 
 ## Remontée des tests
 
