@@ -1,6 +1,6 @@
 # Tester la compatibilité d'un annuaire de production dans une machine virtuelle
 
-Vous trouverez ci-dessous quelques explications concernant la mise en place d'un environnement de test d'un annuaire de production.
+Vous trouverez ci-dessous quelques explications concernant la mise en place d'un environnement de test d'un annuaire de production et le passage en `samba 4.4` et `se3 3.0` sur une machine virtuelle.
 
 * [Préliminaires](#préliminaires)
 * [La problématique](#la-problématique)    
@@ -9,11 +9,17 @@ Vous trouverez ci-dessous quelques explications concernant la mise en place d'un
 * [Comment utiliser le script ?](#comment-utiliser-le-script-)
 * [Les étapes du script](#les-étapes-du-script)
 * [Mise à jour vers `samba 4.4` et `se3 3.0`](#mise-à-jour-vers-samba-44-et-se3-30)
+* [Remontée des tests](#remontée-des-tests)
 
 
 ## Préliminaires
 
-On suppose ici que vous avez déjà procédé à l'installation d'une machine virtuelle `SE3`. il est également plus prudent d'avoir un snapshot de sa VM sous la main…
+On suppose ici que vous avez déjà procédé à l'installation d'une machine virtuelle `SE3`. **Les tests ci-dessous ne sont prévus que dans ce cadre**.
+
+Si vous voulez plus de détails sur la mise en place d'une machine virtuelle `SE3`, vous pourrez vous reporter à [la documentaion *ad hoc*](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox).
+
+
+**Conseil :**  il est également plus prudent d'avoir un snapshot de sa VM sous la main avant de se lancer dans les tests…
 
 
 ## La problématique
@@ -106,12 +112,12 @@ Si tel n'est pas le cas, il peut être lancé une seconde fois. Il est par exemp
 
 ## Mise à jour vers `samba 4.4` et `se3 3.0`
 
-Une fois la structure mise en place, il reste à passer sur `samba 4.4`. Il faut donc installer le paquet `se3 3.0` disponible sur la branche testing.
+Une fois la structure mise en place à l'aide du script *test-ldap-smb44.sh*, il reste à tester le passage en `samba 4.4`, **toujours sur la même VM**. Il faut donc installer le paquet `se3 3.0` disponible sur la branche `se3testing`.
 
-Afin de se positionner sur la branche testing, on pourra se reporter à [la documentation détaillant l'utilisation de cette branche testing](https://github.com/SambaEdu/se3-docs/blob/master/se3-clients-linux/upgrade-via-se3testing.md#%C3%89dition-du-fichier-etcaptsourceslistdse3list).
+Afin de se positionner sur la branche `se3testing`, on pourra se reporter à [la documentation détaillant la modification du fichier `/etc/apt/sources.list.d/se3.list`](se3-clients-linux/upgrade-via-se3testing.md#%C3%89dition-du-fichier-etcaptsourceslistdse3list).
 
 
-Une fois sur la branche testing, mettre à jour les paquets puis installer les paquets `se3` :
+Une fois sur la branche `se3testing`, mettre à jour la liste des paquets puis installer les paquets `se3`, `se3-logonpy` et `se3-domain` :
 ```sh
 apt-get update 
 apt-get install se3 se3-logonpy se3-domain
@@ -135,6 +141,8 @@ Les deux commandes suivantes testent l'annuaire sur des points qui poseront prob
 create_adminse3.sh
 smbclient -L localhost -U admin
 ```
+
+## Remontée des tests
 
 Merci de remonter sur la liste de diffusion les résultats de vos tests.
 
