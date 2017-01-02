@@ -1,7 +1,7 @@
 # Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`
 
-En général, la politique chez SambaÉdu lorsqu'une nouvelle
-version d'un paquet est publiée est de déposer ce paquet
+En général, la politique chez `SambaÉdu`, lorsqu'une nouvelle
+version d'un paquet est publiée, est de déposer ce paquet
 dans la branche `se3testing` pendant quelques jours avant de
 le mettre dans la branche `se3`, qui est la branche stable.
 
@@ -10,17 +10,19 @@ version du paquet `se3-clients-linux` issue de la branche
 `se3testing` sur votre serveur en toute sécurité, en évitant
 de mettre à jour d'autres paquets issus de cette branche.
 
+**Remarque :** les explications sont données pour le paquet `se3-clients-linux`, mais cela est valable pour tout autre paquet du projet `SambaÉdu`.
+
 Le but est donc d'installer, via la branche `se3testing`
 (parce que vous êtes impatient de tester la nouvelle version
-qui s'y trouve), le paquet `se3-clients-linux` mais de le faire
-rien que pour ce paquet, les autres paquets étant toujours
+qui s'y trouve), le paquet `se3-clients-linux` **mais de le faire
+rien que pour ce paquet**, les autres paquets étant toujours
 installés via la branche stable `se3` comme d'habitude
 (parce que vous ne souhaitez pas non plus prendre de risque
 au niveau de votre serveur de production).
 
-On suppose ici que votre serveur Se3 est sous Wheezy mais
+On suppose ici que votre serveur `Se3` est sous `Wheezy` mais
 la méthode est très certainement exactement la même pour un
-serveur Se3 sous une autre distribution.
+serveur `Se3` sous une autre distribution.
 
 Voici les étapes que nous vous proposons :
 
@@ -76,6 +78,8 @@ Ensuite, vous pouvez alors passer à la mise à jour du paquet
 # pas déjà).
 apt-get install se3-clients-linux
 ```
+
+**Remarque :** si vous voulez tester la version en *branche testing* d'un autre paquet, il suffira de remplacer, dans cette commande, le paramètre *se3-clients-linux* par le nom du paquet à tester.
 
 
 ## Retour à la branche stable `se3`
