@@ -15,9 +15,9 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Tester ou remonter des bugs
 
-* Documentation sur le passage de [la branche `se3testing` du projet pour aider dans la remontée des bugs](se3-clients-linux/upgrade-via-se3testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
+* Documentation pour passer sur [la branche `se3testing` du projet](dev-clients-linux/upgrade-via-se3testing.md#installer-et-tester-en-toute-sécurité-la-version-dun-paquet-issue-de-la-branche-se3testing) dans le but de tester des paquets et aider dans la remontée des bugs
 
-* Documentation expliquant comment [tester la compatibilité `samba 4.4` de son annuaire `ldap` de production **sur une machine virtuelle**](dev-clients-linux/test-annu-smb44.md#tester-la-compatibilité-dun-annuaire-de-production-dans-une-machine-virtuelle)
+* Documentation expliquant [comment tester la compatibilité `samba 4.4` de son annuaire `ldap` de production](dev-clients-linux/test-annu-smb44.md#tester-la-compatibilité-dun-annuaire-de-production-dans-une-machine-virtuelle) **sur une machine virtuelle**
 
 
 ## Installation automatique des `clients-linux`
