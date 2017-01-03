@@ -14,7 +14,7 @@
 * [Utilisation du script perso](messcripts.md#lancement-dun-script-perso-en-fin-de-post-installation-des-clients-linux)
 * [Gestion des `clients-linux`](gestionclients.md#utilisation-et-gestion-dun-client-linux)
 * [Annexes](#annexes)
-    * [Utiliser la branche `testing`](#utiliser-la-branche-testing)
+    * [Utiliser la branche `se3testing`](#utiliser-la-branche-se3testing)
     * [Utiliser le menu `perso`](#utiliser-le-menu-perso)
 * [Ressources externes](#ressources-externes)
 
@@ -60,9 +60,9 @@ Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bit
 
 ## Annexes
 
-### Utiliser la branche `testing`
+### Utiliser la branche `se3testing`
 
-* [Installer et tester en toute sécurité la version du paquet issue de la branche `se3testing`](testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
+* [Installer et tester en toute sécurité les versions des paquets issues de la branche `se3testing`](testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
 
 ### Utiliser le menu `perso`
 
