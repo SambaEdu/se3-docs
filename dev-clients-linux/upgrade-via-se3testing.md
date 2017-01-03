@@ -4,7 +4,7 @@
 * [Passer en branche `se3testing`](#passer-en-branche-se3testing)
     * [Édition du fichier `/etc/apt/sources.list.d/se3.list`](#Édition-du-fichier-etcaptsourceslistdse3list)
     * [Mettre à jour la liste des paquets](#mise-à-jour-du-cache-apt)
-* [Mettre à jour un ou des paquet(s)](#mise-à-jour-du-ou-des-paquets)
+* [Mettre à jour un ou des paquet(s) à tester](#mise-à-jour-du-ou-des-paquets-à-tester)
 * [Retourner en branche stable `se3`](#retour-à-la-branche-stable-se3)
 
 
@@ -92,10 +92,10 @@ apt-get update
 ```
 
 
-## Mise à jour du ou des paquets
+## Mise à jour du ou des paquets à tester
 
 Ensuite, vous pouvez alors passer à la mise à jour du paquet (ici, nous prenons en exemple le paquet
-`se3-clients-linux` dont une version est disponible dans la branche `se3testing`) avec la commande :
+`se3-clients-linux` dont une version à tester est disponible dans la branche `se3testing`) avec la commande :
 ```sh
 # Et oui, c'est curieux mais `apt-get install` permet de
 # mettre à jour un paquet (et de l'installer s'il ne l'est
