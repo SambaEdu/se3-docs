@@ -18,7 +18,7 @@ On suppose ici que vous avez déjà procédé à l'installation d'une machine vi
 
 Cette machine virtuelle `se3` sera donc en `Wheezy 7.11`, branche stable et à jour : `se3 2.6.3.6`.
 
-Si vous voulez plus de détails sur la mise en place d'une machine virtuelle `SE3`, vous pourrez vous reporter à [la documentaion *ad hoc*](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox).
+Si vous voulez plus de détails sur la mise en place d'une machine virtuelle `SE3`, vous pourrez vous reporter à [la documentation *ad hoc*](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox).
 
 
 **Conseil :**  il est également plus prudent d'avoir un snapshot de sa VM sous la main avant de se lancer dans les tests…
