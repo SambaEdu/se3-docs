@@ -2,7 +2,7 @@
 
 * [Présentation](#présentation)
 * [Passer en branche `se3testing`](#passer-en-branche-se3testing)
-    * [Édition du fichier `/etc/apt/sources.list.d/se3.list`](#édition-du-fichier-etcaptsourceslistdse3list)
+    * [Édition du fichier `/etc/apt/sources.list.d/se3.list`](#Édition-du-fichier-etcaptsourceslistdse3list)
     * [Mettre à jour la liste des paquets](#mise-à-jour-du-cache-apt)
 * [Mettre à jour un ou des paquet(s)](#mise-à-jour-du-ou-des-paquets)
 * [Retourner en branche stable `se3`](#retour-à-la-branche-stable-se3)
