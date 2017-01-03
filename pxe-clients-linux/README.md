@@ -13,9 +13,9 @@
 * [Les listes des applications installées](listeapplis.md#liste-des-applications-à-installer)
 * [Utilisation du script perso](messcripts.md#lancement-dun-script-perso-en-fin-de-post-installation-des-clients-linux)
 * [Gestion des `clients-linux`](gestionclients.md#utilisation-et-gestion-dun-client-linux)
-* [Annexes](#annexes)
-    * [Utiliser la branche `se3testing`](#utiliser-la-branche-se3testing)
-    * [Utiliser le menu `perso`](#utiliser-le-menu-perso)
+* Annexes
+    * [Installer et tester en toute sécurité les versions des paquets issues de la branche `se3testing`](testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
+    * [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md#menu-pxe-persomenu)
 * [Ressources externes](#ressources-externes)
 
 
@@ -56,17 +56,6 @@ Les distributions `GNU/Linux` qui sont proposées à l'installation sont :
 
 
 Ces distributions sont proposées pour des machines **32bits** (i386) ou **64bits** (amd64).
-
-
-## Annexes
-
-### Utiliser la branche `se3testing`
-
-* [Installer et tester en toute sécurité les versions des paquets issues de la branche `se3testing`](testing.md#installer-et-tester-en-toute-sécurité-la-version-du-paquet-issue-de-la-branche-se3testing)
-
-### Utiliser le menu `perso`
-
-* [Utilisation du menu `perso` via le mode `PXE`](pxeperso.md#menu-pxe-persomenu)
 
 
 ## Ressources externes
