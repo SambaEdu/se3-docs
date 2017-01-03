@@ -116,7 +116,7 @@ Si tel n'est pas le cas, **le script peut être lancé une seconde fois**. Il es
 
 Une fois la structure mise en place à l'aide du script *test-ldap-smb44.sh*, il reste à tester le passage en `samba 4.4`, **toujours sur la même VM**. Il faut donc installer le paquet `se3 3.0` disponible sur la branche `se3testing`.
 
-Afin de se positionner sur la branche `se3testing`, on pourra se reporter à [la documentation détaillant la modification du fichier `/etc/apt/sources.list.d/se3.list`](../se3-clients-linux/upgrade-via-se3testing.md#%C3%89dition-du-fichier-etcaptsourceslistdse3list).
+Afin de se positionner sur la branche `se3testing`, on pourra se reporter à [la documentation détaillant la modification du fichier `/etc/apt/sources.list.d/se3.list`](../dev-clients-linux/upgrade-via-se3testing.md#Édition-du-fichier-etcaptsourceslistdse3list).
 
 Une fois sur la branche `se3testing`, mettre à jour la liste des paquets puis installer les paquets `se3`, `se3-logonpy` et `se3-domain` :
 ```sh
@@ -147,6 +147,6 @@ smbclient -L localhost -U admin
 
 ## Remontée des tests
 
-Merci de remonter sur la liste de diffusion les résultats de vos tests.
+Merci de remonter les résultats de vos tests sur la liste de diffusion `l-se3-devel` de Caen.
 
 
