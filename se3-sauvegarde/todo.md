@@ -1,6 +1,7 @@
 # Liste de propositions d'évolutions du module se3-sauvegarde
 
 * refonte de la gestion des tests pour le script de sauvegarde : est-ce nécessaire ?
+* rajouter des tests de vérification du montage du disque de sauvegarde au cours de la sauvegarde
 
 
 
