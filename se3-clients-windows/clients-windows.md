@@ -60,7 +60,9 @@ Tous les drivers utiles doivent être installés et à jour : voir
 
 Pour `Windows7` il faut activer à l'aide d'un outil tiers…
 
-Pour `Windows10`, aucune activation n'est requise si le poste est éligible à une installation `OEM`.
+Pour `Windows10`, aucune activation n'est requise si le poste est éligible à une installation `OEM`. Ceci implique généralement que les clés OEM SLIC V2.4 soient intégrées au Bios. Ce n'est malheureusement pas toujours le cas. On a alors deux possibilités légales pour éviter de devoir faire l'activation : intégrer les clés au Bios si on les possède, ou installer à partir du DVD OEM du constructeur.
+
+''Attention'' Ne pas télécharger et utiliser Windows Loader pour Windows 10 : c'est un faux, qui en revanche installe de vrais virus !
 
 
 ## Logiciels
