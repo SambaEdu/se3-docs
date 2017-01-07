@@ -98,13 +98,11 @@ Il est possible d'automatiser un certain nombre de réglages, dans l'optique de 
 
 * Mettre à jour depuis wsusoffline du Se3 :
 
-`
+``
 net use W: \\IP_du_Se3\install\wsusoffline mdp_admise3 /user:sambaedu3\adminse3
-
 w:\client\cmd\DoUpdate.cmd /updatecerts /instielatest /updatecpp /instmssl /instdotnet35 /instdotnet4 /instpsh /instofv
-
 net use W: /delete
-`
+``
 
 ## Logiciels
 
