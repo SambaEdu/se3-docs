@@ -65,7 +65,7 @@ Pour `Windows10`, aucune activation n'est requise si le poste est éligible à u
 
 **Attention** Ne pas télécharger et utiliser Windows Loader pour Windows 10 : c'est un faux, qui en revanche installe de vrais virus !
 
-## Préparation & mise à jour
+## Préparation et mise à jour
 Il est possible d'automatiser un certain nombre de réglages, dans l'optique de faire une image de la machine avant l'intégration. À vous de choisir parmi les commandes suivantes, celles qui vous conviennent et les mettre dans un fichier `.bat`.
 
 * Désactiver les 3 pare-feux de Windows7 :
@@ -98,7 +98,8 @@ Il est possible d'automatiser un certain nombre de réglages, dans l'optique de 
 
 * Mettre à jour depuis wsusoffline du Se3 :
 
-```net use W: \\IP_du_Se3\install\wsusoffline mdp_admise3 /user:sambaedu3\adminse3
+```
+net use W: \\IP_du_Se3\install\wsusoffline mdp_admise3 /user:sambaedu3\adminse3
 w:\client\cmd\DoUpdate.cmd /updatecerts /instielatest /updatecpp /instmssl /instdotnet35 /instdotnet4 /instpsh /instofv
 net use W: /delete
 ```
