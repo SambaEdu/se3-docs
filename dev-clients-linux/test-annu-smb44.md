@@ -134,7 +134,7 @@ La commande suivante permet de vérifier que l'annuaire est bien en mode `ldap t
 ```sh
 grep trusted /etc/samba/smb.conf
 ```
-    ldapsam:trusted = Yes
+![trusted_yes.png](images/trusted_yes.png)
 
 
 Les deux commandes suivantes testent l'annuaire sur des points qui poseront problème si l'annuaire n'est pas compatible avec `samba 4.4.` :
