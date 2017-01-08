@@ -68,7 +68,7 @@ On dépose, dans le même dossier, un export de son annuaire de production que l
 
 On lance le script avec le nom de l'export en argument :
 ```sh
-bash test-ldap-smb44.sh \_tmp\_export.ldif
+bash test-ldap-smb44.sh _tmp_export.ldif
 ```
 
 
