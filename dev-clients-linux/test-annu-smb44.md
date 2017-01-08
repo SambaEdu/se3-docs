@@ -6,6 +6,7 @@ Vous trouverez ci-dessous quelques explications concernant la mise en place d'un
 * [La problématique](#la-problématique)    
 * [Que fait le script de test ?](#que-fait-le-script-de-test-)
 * [Que permet-il de vérifier ?](#que-permet-il-de-vérifier-)
+* [Comment obtenir un export de l'annuaire ?](#comment-obtenir-un-export-de-lannuaire-)
 * [Comment utiliser le script ?](#comment-utiliser-le-script-)
 * [Les étapes du script](#les-étapes-du-script)
 * [Test de la mise à jour vers `samba 4.4` et `se3 3.0`](#test-de-la-mise-à-jour-vers-samba-44-et-se3-30)
@@ -45,6 +46,17 @@ Le script **test-ldap-smb44.sh** permet de vérifier tranquillement que l'annuai
 Si tel n'est pas le cas, on peut alors remonter ses problèmes sur la liste de diffusion `se3-devel` afin que le défaut constaté sur l'annuaire testé puisse être pris en compte via un correctif adéquat. Ce correctif permettra, lors de la mise à jour, de bien passer correctement sur l'annuaire de production. 
 
 
+## Comment obtenir un export de l'annuaire ?
+
+Le script **test-ldap-smb44.sh** va analyser un export de l'annuaire de votre `se3` en production. Il s'agit donc de réaliser un tel export.
+
+Pour cela, **sur votre `se3` en production**, via l'interface `web` du `se3`,
+vous utilisez l'entrée **Annuaire** et choisissez **Administration LDAP**.
+Vous laissez vide le champ concernant le `filtre LDAP` et vous validez.
+
+Vous obtenez ainsi un fichier **\_tmp\_export.ldif** que vous enregistrez : vous avez un export de l'annuaire du `se3`.
+
+
 ## Comment utiliser le script ?
 
 On commence par charger le script **test-ldap-smb44.sh** sur la machine virtuelle en le récupérant sur le dépot `Git` à l'aide de la commande suivante :
@@ -52,12 +64,13 @@ On commence par charger le script **test-ldap-smb44.sh** sur la machine virtuell
 wget https://gist.githubusercontent.com/SambaEdu/bc0c2b4166c9152cbf786cefb271b2e8/raw/f9bce505cbd545ce05230c149892b0bee72b1830/test-ldap-smb44.sh
 ```
 
-On dépose, dans le même dossier, un export de son annuaire de production que l'on veut tester. Par exemple, mettons qu'il se nomme **export.ldif** ; mais ce n'est pas obligatoire : il peut s'appeler autrement.
+On dépose, dans le même dossier, un export de son annuaire de production que l'on veut tester : [voir ci-dessus pour obtenir un export](#comment-obtenir-un-export-de-lannuaire-). Par exemple, mettons qu'il se nomme **\_tmp\_export.ldif** ; mais ce n'est pas obligatoire : il peut s'appeler autrement.
 
 On lance le script avec le nom de l'export en argument :
 ```sh
-bash test-ldap-smb44.sh export.ldif
+bash test-ldap-smb44.sh \_tmp\_export.ldif
 ```
+
 
 ## Les étapes du script
 
