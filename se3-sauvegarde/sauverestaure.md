@@ -41,7 +41,7 @@ La solution proposée ici est indépendante du module `Backuppc` du serveur `se3
 
 Les scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, seront maintenant disponibles directement sur votre serveur `se3`.
 
-Les 2 scripts se trouveront dans le répertoire `/usr/share/se3/sbin` du `se3` dans la prochaine mise à jour prévue en novembre 2016.
+Les 2 scripts se trouveront dans le répertoire `/usr/share/se3/sbin` du `se3` dans une prochaine mise à jour prévue en 2017.
 ```sh
 ls /usr/share/se3/sbin/sauve_se3.sh /usr/share/se3/sbin/restaure_se3.sh
 ```
