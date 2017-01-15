@@ -27,4 +27,8 @@
 
 ## Références
 
+Voici quelques références que nous avons utilisé pour la rédaction de cette documentation :
+
+* Article du site [`Debian Facile`](https://debian-facile.org) : [preseed debian](https://debian-facile.org/doc:install:preseed) qui décrit l'incorporation d'un fichier `preseed`.
+* …
 
