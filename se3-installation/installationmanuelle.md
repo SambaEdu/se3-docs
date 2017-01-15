@@ -1,8 +1,12 @@
 # Installation manuelle d'un `Se3`
 
 * [Préliminaire](#préliminaire)
+    * [Paramètres à préparer](#paramètres-à-préparer)
+    * [Automatiser l'installation : le fichier `preseed`](#automatiser-linstallation--le-fichier-preseed)
 * [Fichier d'installation par le réseau](#fichier-dinstallation-par-le-réseau)
-    * [Avec une clé `usb`](#avec-une-clé-usb)
+    * [Télécharger l'archive d'installation `Debian`](#télécharger-larchive-dinstallation-Debian)
+    * [Utiliser une clé `usb`](#utiliser-une-clé-usb)
+    * [Incorporer les fichiers `se3` à l'installateur](#incorporer-les-fichiers-se3-à-linstallateur)
 * [Lancement de l'installation de `Debian` (Phase 1)](#lancement-de-linstallation-de-debian-phase-1)
     * [Langue, pays, clavier](#langue-pays-clavier)
     * [Le réseau](#le-réseau)
@@ -23,6 +27,8 @@
 ## Préliminaire
 
 Cette documentation présente une installation manuelle d'un `se3` version `Wheezy`.
+
+### Paramètres à préparer
 
 Un certain nombre de paramètres doivent être préparés avant de se lancer dans l'installation.
 
@@ -62,16 +68,25 @@ sdb ------ /home (PRIMAIRE) xfs 500 Go
 **Conseil :** n'hésitez pas à reprendre plusieurs fois l'installation pour bien la connaître. Par la suite, vous n'en aurez pas autant l'occasion.
 
 
+### Automatiser l'installation : le fichier `preseed`
+
+Il est possible d'automatiser l'installation présentée ci-dessous à l'aide d'un fichier `preseed` qui contiendra l'ensemble des réponses aux questions posées lors de cette installation.
+
+Un [article spécifique](incorporerpreseed.md) détaille comment incorporer un fichier `preseed` à l'image `iso` de l'installateur.
+
+
 ## Fichier d'installation par le réseau
 
-Le fichier d'installation est à télécharger et à graver sur un CD.
+### Télécharger l'archive d'installation `Debian`
+
+Le fichier d'installation au format `iso` est à télécharger et à graver sur un `CD`.
 
 Vous trouverez [ce fichier nommé `mini.iso` sur le site `Debian`](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/).
 
 
-### Avec une clé `usb`
+### Utiliser une clé `usb`
 
-Au lieu de graver l'archive d'installation sur un CD, on peut utiliser une clé `usb`.
+Au lieu de graver l'archive d'installation sur un `CD`, on peut utiliser une clé `usb`.
 
 Voici une méthode que vous pouvez mettre en œuvre sur un système `GNU/Linux`.
 
@@ -103,6 +118,14 @@ cp /root/mini.iso /dev/sdb
 ```
 
 Une fois cela fait, il suffira de brancher la clé `usb` sur le serveur et de le démarrer.
+
+
+### Incorporer les fichiers `se3` à l'installateur
+
+Le fichier au format `iso` [(voir ci-dessus)](#fichier-dinstallation-par-le-réseau) d'installation du système d'exploitation `Debian` peut être personnalisé en incorporant les fichiers de configuration du `se3` :
+cela vous offrira une installation automatique
+
+
 
 
 ## Lancement de l'installation de `Debian` (Phase 1)
