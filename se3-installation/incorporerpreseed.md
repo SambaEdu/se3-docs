@@ -32,37 +32,39 @@ Il faut effectuer des modifications du `preseed` pour une automatisation complè
 ```sh
 nano ./se3.preseed
 ```
-/#MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
-/#mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
-/#d-i preseed/run string netcfg.sh
-/#AJOUTE, pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
-/#Mirror settings
-/#If you select ftp, the mirror/country string does not need to be set.
-/#d-i mirror/protocol string ftp
+```sh
+#MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
+#mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
+#d-i preseed/run string netcfg.sh
+#AJOUTE, pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
+#Mirror settings
+#If you select ftp, the mirror/country string does not need to be set.
+#d-i mirror/protocol string ftp
 
 d-i mirror/country string manual
 d-i mirror/http/hostname string ftp.fr.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
-/#AJOUTE, pour evite de répondre à la question
-/#Some versions of the installer can report back on what software you have
-/#installed, and what software you use. The default is not to report back,
-/#but sending reports helps the project determine what software is most
-/#popular and include it on CDs.
+#AJOUTE, pour evite de répondre à la question
+#Some versions of the installer can report back on what software you have
+#installed, and what software you use. The default is not to report back,
+#but sending reports helps the project determine what software is most
+#popular and include it on CDs.
 popularity-contest popularity-contest/participate boolean false
-/#AJOUTE, pour installer par exemple les packages des modules du se3 mais j'ai pas essayé
-/#Individual additional packages to install
-/#d-i pkgsel/include string backuppc ...
-/#Whether to upgrade packages after debootstrap.
-/#Allowed values: none, safe-upgrade, full-upgrade
-/#d-i pkgsel/upgrade select none
-/#MODIFIE Preseed commands
-/----------------
+#AJOUTE, pour installer par exemple les packages des modules du se3 mais j'ai pas essayé
+#Individual additional packages to install
+#d-i pkgsel/include string backuppc ...
+#Whether to upgrade packages after debootstrap.
+#Allowed values: none, safe-upgrade, full-upgrade
+#d-i pkgsel/upgrade select none
+#MODIFIE Preseed commands
+----------------
 d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     cp /cdrom/se3.preseed ./; \
     cp /cdrom/se3scripts/* ./; \
     chmod 755 se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
-    ./se3-early-command.sh se3-post-base-installer.sh 
+    ./se3-early-command.sh se3-post-base-installer.sh
+```
 
 Il faut aussi télécharger les fichiers suivants qui seront aussi nécessaires
 ```sh
