@@ -4,6 +4,8 @@
 
 * [Préliminaire](#préliminaire)
 * [Le fichier `preseed`](#le-fichier-preseed)
+    * [Création du fichier `preseed`](#création-du-fichier-preseed)
+    * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
 * [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
 * [Utiliser l'archive d'installation personnalisée](#utiliser-larchive-dinstallation-personnalisée)
 * [Solution alternative](#solution-alternative)
@@ -12,14 +14,22 @@
 
 ## Préliminaire
 
-L'objectif est de créer un `CD d'installation` complètement automatisé de son `SE3 Wheezy`, ainsi, avec ce `CD` *personnalisé* et une sauvegarde de son `SE3`, cela permettra très rapidement de (re)-mettre en production son `SE3`, que ce soit sur la même machine ou sur une autre machine.
+L'objectif est de créer un `CD d'installation` ou une clé `usb` complètement automatisé de son `SE3 Wheezy`, ainsi, avec ce `CD`, ou cette clé `usb`, *personnalisé* et une sauvegarde de son `SE3`.
+
+Cela permettra très rapidement de (re)-mettre en production son `SE3`, que ce soit sur la même machine ou sur une autre machine.
+
+Pour la sauvegarde de son `SE3`, il existe [une documentation ad hoc]().
 
 
 ## Le fichier `preseed`
 
-Il faut commencer par (re)-créer son fichier `preseed` en utilisant [l'interface ad doc](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy).
+### Création du fichier `preseed`
 
-Les explications sont dans la [documentation création du fichier `preseed`](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation_sous_Debian_Wheezy_en_mode_automatique)
+Il faut commencer par (re)-créer son fichier `preseed` (nommé ici **se3.preseed**) en utilisant [l'interface ad hoc](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy).
+
+On pourra bien entendu utiliser l'ancien fichier **se3.preseed** (cas d'une migration ou d'une ré-installation). Il y aura des modifications à apporter en fonction des évolutions éventuelles, que ce soit du point de vue des versions de `se3, ou du point de vue du matériel.
+
+Les explications sont dans la [documentation de création du fichier `preseed`](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation_sous_Debian_Wheezy_en_mode_automatique)
 
 
 Il faut ensuite télécharger les fichiers **se3.preseed** et **setup_se3.data** ainsi créés en remplaçant les xxxx par le nombre qui convient :
@@ -28,7 +38,12 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/setup_se3.data
 ```
 
-Il faut effectuer des modifications du `preseed` pour une automatisation complète :
+Là encore, on peut utiliser les anciens fichiers **se3.preseed** et **setup_se3.data**, en les adaptant éventuellement.
+
+
+### Modification du fichier `preseed`
+
+Il faut effectuer des modifications du fichier **se3.preseed** pour une automatisation complète :
 ```sh
 nano ./se3.preseed
 ```
@@ -43,7 +58,6 @@ Ensuite,…
 #Mirror settings
 #If you select ftp, the mirror/country string does not need to be set.
 #d-i mirror/protocol string ftp
-
 d-i mirror/country string manual
 d-i mirror/http/hostname string ftp.fr.debian.org
 d-i mirror/http/directory string /debian
@@ -61,7 +75,7 @@ popularity-contest popularity-contest/participate boolean false
 #Allowed values: none, safe-upgrade, full-upgrade
 #d-i pkgsel/upgrade select none
 #MODIFIE Preseed commands
-----------------
+#----------------
 d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     cp /cdrom/se3.preseed ./; \
     cp /cdrom/se3scripts/* ./; \
@@ -95,18 +109,19 @@ Ensuite, on va créer deux répertoires :
 * isoorig : il contiendra le contenu de l'image d'origine
 * isonew : il contiendra le contenu de votre image personnalisée
 
-On monte ensuite l'iso téléchargée dans isoorig, puis on copie son contenu dans isonew.
+On monte ensuite, dans le répertoire isoorig, l'iso téléchargée , puis on copie son contenu dans le répertoire isonew.
 ```sh
 mkdir isoorig isonew
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H –exclude=TRANS.TBL isoorig/ isonew
-```sh
-(j'ai pas tres bien compris a quoi cela sert d'exclure TRANS.TBL car il n'existe pas )
+```
+(j'ai pas trés bien compris à quoi cela sert d'exclure TRANS.TBL car il n'existe pas )
 
-Les modifications suivantes seront à réaliser dans le dossier isonew.
+Les modifications suivantes seront à réaliser dans le répertoire isonew.
 
 On va maintenant faire en sorte que l'installateur se charge automatiquement.
-On donne les droits en ecriture aux 3 fichiers à modifier :
+
+On donne les droits en écriture aux 3 fichiers à modifier :
 ```sh
 chmod 755 ./isonew/isolinux/txt.cfg
 chmod 755 ./isonew/isolinux/isolinux.cfg
@@ -126,9 +141,9 @@ default install
       menu default
       kernel /install.amd/vmlinuz
       append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
-      ```
-      
-(Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le dossier isoorig.)
+```
+
+(Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.)
 
 Ensuite, éditez isolinux/isolinux.cfg et isolinux/prompt.cfg et changez timeout 0 en timeout 4 par exemple et prompt par prompt 1
 ```sh
@@ -138,15 +153,19 @@ nano ./isonew/isolinux/prompt.cfg
 
 Enfin on copie les 2 fichiers du preseed à la racine du répertoire isonew et les fichiers se3scripts :
 ```sh
-
+cp se3.preseed ./isonew/
+cp setup_se3.data ./isonew/
+mkdir ./isonew/se3scripts
+cp ./se3scripts/* ./isonew/se3scripts/
 ```
 
-Enfin on crée la nouvelle image ISO :
+Enfin on crée la nouvelle image `ISO` :
 ```sh
 cd isonew
  md5sum find -follow -type f > md5sum.txt 
 ```
-(ne marche pas, pb avec le lien symbolique ... il y a une boucle ... ceci dit il n'y a aucun fichier qui sont dans le md5sum.txt qui ont ete modifie donc cette etape ne sert a rien il me semble)
+(ne marche pas, pb avec le lien symbolique ... il y a une boucle ... ceci dit, il n'y a aucun fichier qui sont dans le md5sum.txt qui ont été modifié donc cette étape ne sert à rien il me semble)
+
 ```sh
 apt-get install genisoimage
 genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux/isolinux.bin -c isolinux/boot.cat ../isonew
@@ -155,10 +174,11 @@ genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -b
 
 ## Utiliser l'archive d'installation personnalisée
 
-Je me suis arrêté là car j'ai utilisé ISO pour tester sur une VM.  L'iso démarre, ne pose aucune question mais le clavier est en qwerty et à la première connexion en root la 2eme phase ne démarre pas toute seul, il faut lancer à la main ./install_phase2.sh qui est bien présent au bon endroit, idem pour setup_se3.data
+Je me suis arrêté là car j'ai utilisé l'ISO pour tester sur une VM.  L'iso démarre, ne pose aucune question mais le clavier est en `qwerty` et, à la première connexion en root, la 2ème phase ne démarre pas toute seule, il faut lancer à la main ./install_phase2.sh qui est bien présent au bon endroit, idem pour setup_se3.data.
 
 
 ## Solution alternative
+
 
 
 ## Références
