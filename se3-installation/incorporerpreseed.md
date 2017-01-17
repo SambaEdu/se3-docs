@@ -33,6 +33,8 @@ Il faut effectuer des modifications du `preseed` pour une automatisation complè
 nano ./se3.preseed
 ```
 
+Ensuite,…
+
 ```sh
 #MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
 #mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
