@@ -18,7 +18,7 @@ L'objectif est de créer un `CD d'installation` ou une clé `usb` complètement 
 
 Cela permettra très rapidement de (re)-mettre en production son `SE3`, que ce soit sur la même machine ou sur une autre machine.
 
-Pour la sauvegarde de son `SE3`, il existe [une documentation ad hoc]().
+Pour la sauvegarde de son `SE3`, il existe [une documentation ad hoc](se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 
 
 ## Le fichier `preseed`
