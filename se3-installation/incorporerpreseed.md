@@ -32,6 +32,7 @@ Il faut effectuer des modifications du `preseed` pour une automatisation complè
 ```sh
 nano ./se3.preseed
 ```
+
 ```sh
 #MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
 #mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
@@ -82,9 +83,51 @@ cd ..
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
 
+Ensuite nous allons incorporer ces fichiers dans un `cd d'installation Wheezy`. Il nous faut pour cela une archive `Debian Wheezy`.
+
+Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* devrait suffire.
+```sh
+wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
+```
+Ensuite, on va créer deux répertoires :
+* isoorig : il contiendra le contenu de l'image d'origine
+* isonew : il contiendra le contenu de votre image personnalisée
+
+On monte ensuite l'iso téléchargée dans isoorig, puis on copie son contenu dans isonew.
+
+mkdir isoorig isonew
+mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
+rsync -a -H –exclude=TRANS.TBL isoorig/ isonew (j'ai pas tres bien compris a quoi cela sert d'exclure TRANS.TBL car il n'existe pas )
+Les modifications suivantes seront à réaliser dans le dossier isonew. On va maintenant faire en sorte que l'installateur se charge automatiquement.
+On donne les droits en ecriture aux 3 fichiers à modifier :
+chmod 755 ./isonew/isolinux/txt.cfg
+chmod 755 ./isonew/isolinux/isolinux.cfg
+chmod 755 ./isonew/isolinux/prompt.cfg 
+On modifie le fichier isolinux/txt.cfg ainsi :
+nano ./isonew/isolinux/txt.cfg
+
+default install
+  label install
+      menu label ^Install
+      menu default
+      kernel /install.amd/vmlinuz
+      append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
+(Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le dossier isoorig.)
+Ensuite, éditez isolinux/isolinux.cfg et isolinux/prompt.cfg et changez timeout 0 en timeout 4 par exemple et prompt par prompt 1
+nano ./isonew/isolinux/isolinux.cfg
+nano ./isonew/isolinux/prompt.cfg
+Enfin on copie les 2 fichiers du preseed à la racine du répertoire isonew et les fichiers se3scripts :
+
+Enfin on crée la nouvelle image ISO :
+cd isonew
+ md5sum find -follow -type f > md5sum.txt (ne marche pas, pb avec le lien symbolique ... il y a une boucle ... ceci dit il n'y a aucun fichier qui sont dans le md5sum.txt qui ont ete modifie donc cette etape ne sert a rien il me semble)
+apt-get install genisoimage
+genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux/isolinux.bin -c isolinux/boot.cat ../isonew
+
 
 ## Utiliser l'archive d'installation personnalisée
 
+Je me suis arrêté là car j'ai utilisé ISO pour tester sur une VM.  L'iso démarre, ne pose aucune question mais le clavier est en qwerty et à la première connexion en root la 2eme phase ne démarre pas toute seul, il faut lancer à la main ./install_phase2.sh qui est bien présent au bon endroit, idem pour setup_se3.data
 
 ## Solution alternative
 
