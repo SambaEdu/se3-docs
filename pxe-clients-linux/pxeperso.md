@@ -257,11 +257,13 @@ Une fois le système installé, il faudra (selon l'usage de cette machine) suppr
 ## restaurer une image clonezilla stockée sur un partage samba
 
 On ajoute dans le fichier perso.menu les lignes suivantes
-```label Clonezilla-live 
+```ssh 
+...
+label Clonezilla-live 
 MENU LABEL Clonezilla restore m72esciences (partimag)
 KERNEL clonezilla64/vmlinuz
-APPEND initrd=clonezilla64/initrd.img boot=live config noswap nolocales edd=on nomodeset  ocs_prerun="mount -t cifs //172.20.0.6/partimag /home/partimag/ -o user=clonezilla,password=clonezilla123"  ocs_live_run="ocs-sr  -e1 auto -e2  -r -j2  -p reboot restoredisk  m72esciencesv4 sda" ocs_live_extra_param="" keyboard-layouts="fr" ocs_live_batch="no" locales="fr_FR.UTF-8" vga=788 nosplash noprompt fetch=tftp://172.20.0.2/clonezilla64/filesystem.squashfs
-```
+APPEND initrd=clonezilla64/initrd.img boot=live config noswap nolocales edd=on nomodeset  ocs_prerun="mount -t cifs //172.20.0.6/partimag /home/partimag/ -o user=clonezilla,password=clonezilla123"  ocs_live_run="ocs-sr  -e1 auto -e2  -r -j2  -p reboot restoredisk  m72esciencesv4 sda" ocs_live_extra_param="" keyboard-layouts="fr" ocs_live_batch="no" locales="fr_FR.UTF-8" vga=788 nosplash noprompt fetch=tftp://172.20.0.2/clonezilla64/filesystem.squashfs ```
+
 Ici l'image est stockée sur un serveur debian avec samba installé.
 
 Un compte local et samba clonezilla a été crée sans aucun accès ssh, ou bash car le mdp peut éventuellement être vu si le clonage est lancé devant les élèves.
