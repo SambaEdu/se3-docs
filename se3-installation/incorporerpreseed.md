@@ -122,6 +122,11 @@ Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netin
 ```sh
 wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
+Si votre serveur dispose de matériel (carte résau notamment) nécessitant des firmwares non libres, préférez cette image :
+```sh
+wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
+```
+
 Ensuite, on va créer deux répertoires :
 * isoorig : il contiendra le contenu de l'image d'origine
 * isonew : il contiendra le contenu de votre image personnalisée
