@@ -20,6 +20,11 @@ Cela permettra très rapidement de (re)-mettre en production son `SE3`, que ce s
 
 Pour la sauvegarde de son `SE3`, il existe [une documentation ad hoc](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 
+L'installationautomatique d'un `se3` se déroule en 3 phases :
+* **Phase1 :** création des fichiers **se3.preseed** et **setup_se3.data**
+* **Phase2 :** installation du système d'exploitation `Debian` via le fichier **se3.preseed**
+* **Phase3 :** installation du paquet `se3` et consorts
+
 
 ## Le fichier `preseed`
 
