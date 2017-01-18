@@ -10,6 +10,10 @@
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
 * [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
+    * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
+    * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
+        * [Dans le répertoire **isoorig**](#dans-le-répertoire-isoorig)
+        * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
 * [Utiliser l'archive d'installation personnalisée](#utiliser-larchive-dinstallation-personnalisée)
 * [Solution alternative](#solution-alternative)
 * [Références](#références)
@@ -116,7 +120,9 @@ cd ..
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
 
-Ensuite nous allons incorporer ces fichiers dans un `cd d'installation Wheezy`. Il nous faut pour cela une archive `Debian Wheezy`.
+### Téléchargement de l'installateur `Debian`
+
+Comme nous allons incorporer les fichiers créés précédemment dans un `cd d'installation Wheezy` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
 
 Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* devrait suffire.
 ```sh
@@ -127,17 +133,28 @@ Si votre serveur dispose de matériel (carte résau notamment) non reconnus car 
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
 
-Ensuite, on va créer deux répertoires :
-* isoorig : il contiendra le contenu de l'image d'origine
-* isonew : il contiendra le contenu de votre image personnalisée
+### Mise en place des éléments pour l'incorporation
 
-On monte ensuite, dans le répertoire isoorig, l'iso téléchargée , puis on copie son contenu dans le répertoire isonew.
+Pour mener à bien la modification de l'installateur `Debian`, on va créer deux répertoires :
+* **isoorig :** il contiendra le contenu de l'image d'origine
+* **isonew :** il contiendra le contenu de votre image personnalisée
+
 ```sh
 mkdir isoorig isonew
+```
+
+
+#### Dans le répertoire **isoorig**
+
+On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis on copie son contenu dans le répertoire isonew.
+```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H –exclude=TRANS.TBL isoorig/ isonew
 ```
 (j'ai pas trés bien compris à quoi cela sert d'exclure TRANS.TBL car il n'existe pas )
+
+
+#### Dans le répertoire **isonew**
 
 Les modifications suivantes seront à réaliser dans le répertoire isonew.
 
