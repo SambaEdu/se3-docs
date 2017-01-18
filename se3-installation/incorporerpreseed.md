@@ -5,7 +5,7 @@
 * [Préliminaires](#préliminaires)
     * [Objectif](#objectif)
     * [Étapes de l'installation automatique d'un `se3`](#Étapes-de-linstallation-automatique-dun-se3)
-* [Les fichiers `preseed` et `setup_se3`](#les-fichiers-preseed)
+* [Les fichiers `preseed` et `setup_se3`](#les-fichiers-preseed-et-setup_se3)
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
@@ -40,7 +40,7 @@ Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers n�
 Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'utomatisation**.
 
 
-## Le fichier `preseed`
+## Les fichiers `preseed` et `setup_se3`
 
 ### Création des fichiers `preseed` et `setup_se3`
 
