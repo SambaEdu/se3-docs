@@ -2,9 +2,12 @@
 
 …article en chantier…
 
-* [Préliminaire](#préliminaire)
-* [Le fichier `preseed`](#le-fichier-preseed)
-    * [Création du fichier `preseed`](#création-du-fichier-preseed)
+* [Préliminaires](#préliminaires)
+    * [Objectif](#objectif)
+    * [Étapes de l'installation automatique d'un `se3`](#Étapes-de-linstallation-automatique-dun-se3)
+* [Les fichiers `preseed` et `setup_se3`](#les-fichiers-preseed)
+    * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
+    * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
 * [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
 * [Utiliser l'archive d'installation personnalisée](#utiliser-larchive-dinstallation-personnalisée)
@@ -12,38 +15,45 @@
 * [Références](#références)
 
 
-## Préliminaire
+## Préliminaires
+
+### Objectif
 
 L'objectif est de créer un `CD d'installation` ou une clé `usb` complètement automatisé de son `SE3 Wheezy`, ainsi, avec ce `CD`, ou cette clé `usb`, *personnalisé* et une sauvegarde de son `SE3`.
 
 Cela permettra très rapidement de (re)-mettre en production son `SE3`, que ce soit sur la même machine ou sur une autre machine.
 
-Pour la sauvegarde de son `SE3`, il existe [une documentation ad hoc](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
+Pour la sauvegarde du `SE3`, vous consulterez avec profit [la documentation ad hoc](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 
-L'installationautomatique d'un `se3` se déroule en 3 phases :
+
+### Étapes de l'installation automatique d'un `se3`
+
+L'installation automatique d'un `se3` se déroule en 3 phases :
 * **Phase1 :** création des fichiers **se3.preseed** et **setup_se3.data**
 * **Phase2 :** installation du système d'exploitation `Debian` via le fichier **se3.preseed**
 * **Phase3 :** installation du paquet `se3` et consorts
 
+Pour la description de chaque phase, vous consulterez [la documentation ad hoc](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation_sous_Debian_Wheezy_en_mode_automatique).
+
+Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers nécessaires lors de l'installation en les incorporant, une fois pour toute, dans l'archive de l'installateur. Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'utomatisation**.
+
 
 ## Le fichier `preseed`
 
-### Création du fichier `preseed`
+### Création des fichiers `preseed` et `setup_se3`
 
-Il faut commencer par (re)-créer son fichier `preseed` (nommé ici **se3.preseed**) en utilisant [l'interface ad hoc](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy).
+La phase 1 consiste à créer le fichier `preseed` (nommé ici **se3.preseed**) et le fichier **setup_se3.data** en utilisant [l'interface ad hoc](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy).
 
-On pourra bien entendu utiliser l'ancien fichier **se3.preseed** (cas d'une migration ou d'une ré-installation). Il y aura des modifications à apporter en fonction des évolutions éventuelles, que ce soit du point de vue des versions de `se3, ou du point de vue du matériel.
-
-Les explications sont dans la [documentation de création du fichier `preseed`](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation_sous_Debian_Wheezy_en_mode_automatique)
+On pourra bien entendu utiliser un fichier **se3.preseed** existant dans le cas d'une migration ou d'une ré-installation ou tout simplement par précaution : *mieux vaut prévenir que guérir*… Il y aura éventuellement des modifications à apporter en fonction des évolutions, que ce soit du point de vue des versions de `se3`, ou du point de vue du matériel.
 
 
-Il faut ensuite télécharger les fichiers **se3.preseed** et **setup_se3.data** ainsi créés en remplaçant les xxxx par le nombre qui convient :
+### Téléchargement des fichiers
+
+Une fois les fichiers **se3.preseed** et **setup_se3.data** ainsi créés, il s'agira de les télécharger en remplaçant les xxxx par le nombre qui convient (voir message de l'interface de création) :
 ```sh
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/setup_se3.data
 ```
-
-Là encore, on peut utiliser les anciens fichiers **se3.preseed** et **setup_se3.data**, en les adaptant éventuellement.
 
 
 ### Modification du fichier `preseed`
@@ -184,6 +194,7 @@ Je me suis arrêté là car j'ai utilisé l'ISO pour tester sur une VM.  L'iso d
 
 ## Solution alternative
 
+…en attente…
 
 
 ## Références
