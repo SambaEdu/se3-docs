@@ -12,9 +12,13 @@
 * [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
     * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
     * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
+        * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
         * [Dans le répertoire **isoorig**](#dans-le-répertoire-isoorig)
         * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
 * [Utiliser l'archive d'installation personnalisée](#utiliser-larchive-dinstallation-personnalisée)
+    * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
+    * [Avec un `CD`](#graver-un-cd)
+    * [Avec une clé `usb`](#utiliser-une-clé-usb)
 * [Solution alternative](#solution-alternative)
 * [Références](#références)
 
@@ -133,7 +137,12 @@ Si votre serveur dispose de matériel (carte résau notamment) non reconnus car 
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
 
+NB : on peut aussi incorporer les firmwares à l'archive [TODO].
+
+
 ### Mise en place des éléments pour l'incorporation
+
+#### Création des répertoires de travail **isoorig** et **isonew**
 
 Pour mener à bien la modification de l'installateur `Debian`, on va créer deux répertoires :
 * **isoorig :** il contiendra le contenu de l'image d'origine
@@ -151,12 +160,12 @@ On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis o
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H –exclude=TRANS.TBL isoorig/ isonew
 ```
-(j'ai pas trés bien compris à quoi cela sert d'exclure TRANS.TBL car il n'existe pas )
+J'ai pas trés bien compris à quoi cela sert d'exclure TRANS.TBL car il n'existe pas dans l'archive téléchargée. En fait, ce fichier existe dans d'autres archives… supprimer cette option ? [TODO]
 
 
 #### Dans le répertoire **isonew**
 
-Les modifications suivantes seront à réaliser dans le répertoire isonew.
+Les modifications suivantes seront à réaliser dans le répertoire **isonew**.
 
 On va maintenant faire en sorte que l'installateur se charge automatiquement.
 
@@ -167,12 +176,14 @@ chmod 755 ./isonew/isolinux/isolinux.cfg
 chmod 755 ./isonew/isolinux/prompt.cfg
 ```
 
-On modifie le fichier isolinux/txt.cfg ainsi :
+On modifie le fichier isolinux/txt.cfg pour l'utilisation du fichier preseed lors de l'installation.
+
+On l'édite :
 ```sh
 nano ./isonew/isolinux/txt.cfg
 ```
 
-
+On le modifie ainsi :
 ```sh
 default install
   label install
@@ -184,13 +195,14 @@ default install
 
 (Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.)
 
-Ensuite, éditez isolinux/isolinux.cfg et isolinux/prompt.cfg et changez timeout 0 en timeout 4 par exemple et prompt par prompt 1
+Ensuite, éditez **isolinux/isolinux.cfg** et **isolinux/prompt.cfg** :
 ```sh
 nano ./isonew/isolinux/isolinux.cfg
 nano ./isonew/isolinux/prompt.cfg
 ```
+et changez *timeout 0* en *timeout 4* par exemple et *prompt* par *prompt 1*.
 
-Enfin on copie les 2 fichiers du preseed à la racine du répertoire isonew et les fichiers se3scripts :
+Enfin, on copie les 2 fichiers du preseed à la racine du répertoire isonew et les fichiers se3scripts :
 ```sh
 cp se3.preseed ./isonew/
 cp setup_se3.data ./isonew/
@@ -201,9 +213,9 @@ cp ./se3scripts/* ./isonew/se3scripts/
 Enfin on crée la nouvelle image `ISO` :
 ```sh
 cd isonew
- md5sum find -follow -type f > md5sum.txt 
+md5sum `find -follow -type f` > md5sum.txt
 ```
-(ne marche pas, pb avec le lien symbolique ... il y a une boucle ... ceci dit, il n'y a aucun fichier qui sont dans le md5sum.txt qui ont été modifié donc cette étape ne sert à rien il me semble)
+(ne marche pas, pb avec le lien symbolique ... il y a une boucle ... ceci dit, il n'y a aucun fichier qui sont dans le md5sum.txt qui ont été modifié donc cette étape ne sert à rien il me semble) → la commande comporte des `` (voir doc en référence). Je les rajoute…
 
 ```sh
 apt-get install genisoimage
@@ -213,7 +225,19 @@ genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -b
 
 ## Utiliser l'archive d'installation personnalisée
 
+### Sur un réseau virtuel
+
 Je me suis arrêté là car j'ai utilisé l'ISO pour tester sur une VM.  L'iso démarre, ne pose aucune question mais le clavier est en `qwerty` et, à la première connexion en root, la 2ème phase ne démarre pas toute seule, il faut lancer à la main ./install_phase2.sh qui est bien présent au bon endroit, idem pour setup_se3.data.
+
+
+### Graver un `CD`
+
+…à venir…
+
+
+### Utiliser une clé `usb`
+
+…à venir…
 
 
 ## Solution alternative
