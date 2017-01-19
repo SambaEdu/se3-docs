@@ -39,7 +39,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 ## Installation d'un `se3`
 
 * Documentation pour une [installation manuelle](se3-installation/installationmanuelle.md#installation-manuelle-dun-se3) d'un `se3`
-* Documentation pour une [installation automatique](se3-installation/incorporerpreseed.md#installation-automatique-dun-se3)
+* Documentation pour une [installation automatique](se3-installation/incorporerpreseed.md#installation-automatique-dun-se3) d'un `se3`
 * Documentation pour installer [un réseau virtuel `se3`](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox) avec `VirtualBox`
 * Documentation pour configurer [l'onduleur](http://www.samba-edu.ac-versailles.fr/Configurer-l-onduleur)
 * Documentation pour configurer [la messagerie](http://www.samba-edu.ac-versailles.fr/Configurer-l-envoi-de-courriels-derriere-Amon-avec-un-SMTP-authentifie)
