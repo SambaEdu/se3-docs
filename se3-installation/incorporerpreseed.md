@@ -76,6 +76,7 @@ On l'édite :
 nano ./se3.preseed
 ```
 
+
 Ensuite,quelques lignes à adapter :
 
 ```sh
@@ -91,6 +92,7 @@ d-i     debian-installer/locale                            string fr_FR.UTF-8
 # Préconfigurer la locale seule définit la langue, le pays et la locale.
 d-i debian-installer/locale string fr_FR
 ```
+
 
 ```sh
 #MODIFIE
@@ -108,11 +110,13 @@ Et ici, ceci :
 d-i keymap select fr(latin9) 
 ```
 
+
 ```sh
 #MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
 #mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
 #d-i preseed/run string netcfg.sh
 ```
+
 
 ```sh
 #AJOUTE, pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
@@ -123,7 +127,9 @@ d-i mirror/http/hostname string ftp.fr.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
 d-i mirror/suite string wheezy
-```
+`
+
+``
 
 ```sh
 #AJOUTE, pour evite de répondre à la question
@@ -134,6 +140,7 @@ d-i mirror/suite string wheezy
 popularity-contest popularity-contest/participate boolean false
 ```
 
+
 ```sh
 #AJOUTE, pour installer par exemple les packages des modules du se3 mais cela ne fonctionne pas 
 #peut etre que les paquet ne sont pas dnas les depot wheezy ...
@@ -143,6 +150,7 @@ d-i pkgsel/include string se3-backup se3-clamav se3-dhcp se3-client-linux se3-wp
 #Allowed values: none, safe-upgrade, full-upgrade
 #d-i pkgsel/upgrade select none
 ```
+
 
 ```sh
 #MODIFIE Preseed commands
