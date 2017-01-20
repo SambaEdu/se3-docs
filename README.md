@@ -54,8 +54,8 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Gestion des `clients-linux`
 
-* Documentation de l'installation automatique [des `clients-linux`](pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique)
-* Documentation de la gestion des [`clients-linux`](se3-clients-linux/README.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux)
+* Documentation de [l'installation automatique](pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) des `clients-linux`
+* Documentation de [la gestion](se3-clients-linux/README.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux) des `clients-linux`
 
 
 ## Gestion des `clients-windows`
