@@ -103,6 +103,7 @@ net use W: \\IP_du_Se3\install\wsusoffline mdp_admise3 /user:sambaedu3\adminse3
 w:\client\cmd\DoUpdate.cmd /updatecerts /instielatest /updatecpp /instmssl /instdotnet35 /instdotnet4 /instpsh /instofv
 net use W: /delete
 ```
+Si par hasard les màj windows update sont bloquée, une piste de résolution [ici](http://www.easy-pc.org/2016/06/fix-windows-7-quand-les-verifications-des-mises-a-jour-prend-trop-de-temps.html).
 
 ## Logiciels
 
