@@ -69,13 +69,12 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/setup_se3.data
 
 ### Modification du fichier `preseed`
 
-Il faut effectuer des modifications du fichier **se3.preseed** pour une automatisation complète :
+pour une automatisation complète, il faut effectuer des modifications dans le fichier **se3.preseed** :
 
 On l'édite :
 ```sh
-nano ./se3.preseed
+nano se3.preseed
 ```
-
 
 Ensuite,quelques lignes à adapter :
 
@@ -86,8 +85,11 @@ d-i     debian-installer/locale                            string fr_FR.UTF-8
 d-i     debian-installer/supported-locales                 string fr_FR.UTF-8, en_US.UTF-8
 d-i     debian-installer/locale                            string fr_FR.UTF-8
 ```
-# pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr dans la ligne du milieu ??
-# je mettrai plutôt ceci :
+pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr dans la ligne du milieu ??
+
+→ ce doit être un bug : outil de créationdu preseed à modifier ?
+
+**NB :**je mettrai plutôt ceci :
 ```sh
 # Préconfigurer la locale seule définit la langue, le pays et la locale.
 d-i debian-installer/locale string fr_FR
@@ -103,7 +105,7 @@ d-i console-keymaps-at/keymap select fr
 d-i keyboard-configuration/layoutcode                  string fr
 d-i debian-installer/keymap string fr-latin9
 ```
-Et ici, ceci :
+**NB :** et ici, ceci :
 ```sh
 # Choix du clavier :
 # keymap est un alias de keyboard-configuration/xkb-keymap
@@ -116,6 +118,7 @@ d-i keymap select fr(latin9)
 #mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
 #d-i preseed/run string netcfg.sh
 ```
+**NB :** il faudrait éclaircir cela.
 
 
 ```sh
@@ -127,9 +130,8 @@ d-i mirror/http/hostname string ftp.fr.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
 d-i mirror/suite string wheezy
-`
-
-``
+```
+**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 ```sh
 #AJOUTE, pour evite de répondre à la question
@@ -139,6 +141,7 @@ d-i mirror/suite string wheezy
 #popular and include it on CDs.
 popularity-contest popularity-contest/participate boolean false
 ```
+**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 
 ```sh
@@ -150,6 +153,7 @@ d-i pkgsel/include string se3-backup se3-clamav se3-dhcp se3-client-linux se3-wp
 #Allowed values: none, safe-upgrade, full-upgrade
 #d-i pkgsel/upgrade select none
 ```
+**NB :** Cela ne fonctionne pas car les dépôts ne sont pas encore en place : ils le seront lors de la phase 3.
 
 
 ```sh
@@ -181,7 +185,7 @@ cd ..
 
 ### Téléchargement de l'installateur `Debian`
 
-Comme nous allons incorporer les fichiers créés précédemment dans un `cd d'installation Wheezy` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
+Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés et modifiés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
 
 Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* devrait suffire.
 
