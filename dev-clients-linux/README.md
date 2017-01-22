@@ -185,5 +185,3 @@ du paquet `se3-clients-linux`.
 Vous trouverez plus
 d'explications à [cette page](libsh.md#la-petite-boîte-à-outils-libsh).
 
-
-
