@@ -174,9 +174,9 @@ L'installation s'arrête sur un message de corruption du miroir
 Si votre problème n'est pas encore dans la liste ci-dessus,
 il est possible de l'analyser en utilisant **les consoles disponibles lors de l'installation**.
 
-* Ctrl+Alt+F1 : sortie graphique
-* Ctrl+Alt+F4 : sortie terminal
-* Ctrl+Alt+F2 : console en ligne de commande
+* **Ctrl+Alt+F1 :** sortie graphique de l'installation
+* **Ctrl+Alt+F4 :** sortie des journaux de l'installation
+* **Ctrl+Alt+F2 :** console permettant quelques commandes pendant l'installation
 
 
 ## Réservation de l'`IP` du `client-linux`
