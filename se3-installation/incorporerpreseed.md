@@ -168,6 +168,7 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
+
 Il y aura sans doute un autre fichier à télécharger lorsqu'il sera disponible…
 ```sh
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab
@@ -175,15 +176,21 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab
 
 Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
 
+On met en place l'autologin pour le 1er redémarrage du se3 (début de la phase 3) en modifiant le script se3-post-base-installer.sh , en rajoutant des lignes pour la gestion du fichier inittab :
+```sh
+mv bashrc /target/root/.bashrc
+mv /target/etc/inittab /target/etc/inittab.orig
+mv inittab /target/etc/inittab
+cp /target/etc/inittab /target/root/
+```
 
-Il faut aussi modifier la fin du script install_phase2.sh en rajoutant ces  2 lignes (vers la fin du script):
+Et pour supprimer l'autologin lors des redémarrages suivants., on modifie la fin du script install_phase2.sh en rajoutant ces  2 lignes (vers la fin du script):
 ```sh
 rm -f /etc/inittab
 cp /etc/inittab.orig /etc/inittab
 [ "$DEBUG" != "yes" ] && rm -f /root/install_phase2.sh
 . /etc/profile
 ```
-Cela permet de supprimer l'autologin pour les redémarrages suivants.
 
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
