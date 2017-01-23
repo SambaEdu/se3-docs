@@ -9,6 +9,7 @@
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
+    * [Téléchargement et modifications de fichiers pour la phase 3](#téléchargement-et-modifications-de-fichiers-pour-la-phase-3)
     * [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
       * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
       * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
@@ -113,8 +114,9 @@ Puis encore :
 #d-i preseed/run string netcfg.sh
 ```
 **NB :** il faudrait éclaircir cela. 
-Ce fichier existe null pas dans une install avec preseed d'un wheezy, il a surement ete rajoute par ceux qui ont fabrique l'install du se3. Lorsqu'on l'enleve il semble que il n'y a pas d'acces reseau pendnant l'execution du preseed mais elle reapparait apres c'est pourquoi j'ai ete oblige de telecharger les fichiers plus loin dans le preceed avant de faire l'install. ceux la : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts
+Ce fichier existe nul part dans une install avec preseed d'un wheezy, il a surement été rajouté par ceux qui ont fabriqué l'install du se3. Lorsqu'on l'enlève, il semble que il n'y a pas d'acces reseau pendnant l'execution du preseed mais elle réapparait apres c'est pourquoi j'ai ete oblige de telecharger les fichiers plus loin dans le preseed avant de faire l'install. ceux la : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts
 Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu ...
+[TODO] remettre les wget dans le preseed à la fin ?
 
 Il faut ajouter cela : 
 ```sh
@@ -151,7 +153,10 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
 ```
 Voila , le fichier se3.preseed est pret
 
-Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrit laisser le fait de les telecharger en modifiant comme a l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
+
+### Téléchargement et modifications de fichiers pour la phase 3
+
+Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrait laisser le fait de les telecharger en modifiant comme à l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
 ```sh
 mkdir ./se3scripts
 cd se3scripts
@@ -163,6 +168,23 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
+Il y aura sans doute un autre fichier à télécharger lorsqu'il sera disponible…
+```sh
+wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab
+```
+
+Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
+
+
+Il faut aussi modifier la fin du script install_phase2.sh en rajoutant ces  2 lignes (vers la fin du script):
+```sh
+rm -f /etc/inittab
+cp /etc/inittab.orig /etc/inittab
+[ "$DEBUG" != "yes" ] && rm -f /root/install_phase2.sh
+. /etc/profile
+```
+Cela permet de supprimer l'autologin pour les redémarrages suivants.
+
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
 
@@ -175,7 +197,7 @@ Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netin
 wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
 
-Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image :
+Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (non testée [TODO]):
 ```sh
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
@@ -202,7 +224,7 @@ mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H –exclude=TRANS.TBL isoorig/ isonew
 ```
 J'ai pas trés bien compris à quoi cela sert d'exclure TRANS.TBL car il n'existe pas dans l'archive téléchargée. En fait, ce fichier existe dans d'autres archives… supprimer cette option ? [TODO]
-OK mais pas dans l'archive avec install reseau ? no dnas celle avec les firwares que tu propose au dessus  ?
+OK mais pas dans l'archive avec install reseau ? Ou dans celle avec les firwares que tu propose au dessus ? Je ne sais pas ; il s'agit peut-être d'une scorie d'anciennes versions…
 
 
 ##### Dans le répertoire **isonew**
@@ -232,6 +254,8 @@ label install
 	append  language=fr locale=fr_FR.UTF-8 console-setup/layoutcode=fr_FR keyboard-configuration/xkb-keymap=fr languagechooser/language-name=French countrychooser/shortlist=FR console-keymaps-at/keymap=fr debian-installer/country=FR debian-installer/locale=fr_FR.UTF-8 preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
 ```
 
+**Remarque :** Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.
+
 Ce qui ne marche pas :
 ```sh
    append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
@@ -241,10 +265,8 @@ ou
 append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
 ```
 
-(Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.)
-
-Ensuite, éditez **isolinux/isolinux.cfg** et **isolinux/prompt.cfg** :
-et changez *timeout 0* en *timeout 4* par exemple et *prompt 0* par *prompt 1*.
+Ensuite, éditez **isolinux/isolinux.cfg** et **isolinux/prompt.cfg** :  
+changez *timeout 0* en *timeout 4* par exemple et *prompt 0* par *prompt 1*.
 ```sh
 nano ./isonew/isolinux/isolinux.cfg
 nano ./isonew/isolinux/prompt.cfg
