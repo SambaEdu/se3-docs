@@ -169,7 +169,7 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
 
-Il y aura sans doute un autre fichier à télécharger lorsqu'il sera disponible…
+Il y aura sans doute un autre fichier à télécharger lorsqu'il sera disponible… [TODO]
 ```sh
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab
 ```
