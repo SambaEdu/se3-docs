@@ -5,20 +5,21 @@
 * [Préliminaires](#préliminaires)
     * [Objectif](#objectif)
     * [Étapes de l'installation automatique d'un `se3`](#Étapes-de-linstallation-automatique-dun-se3)
-* [Les fichiers `preseed` et `setup_se3`](#les-fichiers-preseed-et-setup_se3)
+* [Phase 1 : Les fichiers `preseed` et `setup_se3`](#les-fichiers-preseed-et-setup_se3)
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
-* [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
-    * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
-    * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
-        * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
-        * [Dans le répertoire **isoorig**](#dans-le-répertoire-isoorig)
-        * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
-* [Utiliser l'archive d'installation personnalisée](#utiliser-larchive-dinstallation-personnalisée)
+    * [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
+      * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
+      * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
+         * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
+         * [Dans le répertoire **isoorig**](#dans-le-répertoire-isoorig)
+         * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
+* [Phase 2 : Utiliser l'archive d'installation personnalisée](#utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
-    * [Avec un `CD`](#graver-un-cd)
-    * [Avec une clé `usb`](#utiliser-une-clé-usb)
+    * [Sur un `CD`](#graver-un-cd)
+    * [Sur une clé `usb`](#utiliser-une-clé-usb)
+* [Phase 3 : installation du packages SE3](#ne fonctionne pas automatiquement)
 * [Solution alternative](#solution-alternative)
 * [Références](#références)
 
@@ -48,7 +49,7 @@ Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers n�
 Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation**.
 
 
-## Les fichiers `preseed` et `setup_se3`
+## Phase1 : Les fichiers `preseed` et `setup_se3`
 
 ### Création des fichiers `preseed` et `setup_se3`
 
@@ -75,39 +76,37 @@ On l'édite :
 nano se3.preseed
 ```
 
-Ensuite,quelques lignes à adapter :
+Ensuite,quelques lignes à modifier :
 ```sh
 # MODIFIE
+# langue et pays
+d-i localechooser/shortlist	select	FR
+d-i debian-installer/locale string fr_FR.UTF-8
+d-i debian-installer/language string fr
+d-i debian-installer/country string FR
+```
+
+Attention : bugs dans le preseed de dimaker ...
+```sh
 # Choix des parametres regionaux (locales)
 d-i     debian-installer/locale                            string fr_FR.UTF-8
-d-i     debian-installer/supported-locales                 string fr_FR.UTF-8, en_US.UTF-8
+d-i     debian-installer/supported-locales                 string br_FR.UTF-8, en_US.UTF-8
 d-i     debian-installer/locale                            string fr_FR.UTF-8
 ```
 pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr dans la ligne du milieu ??
-→ ce doit être un bug : outil de création du preseed à modifier ? quelqu'un peut il confirmer ? (mais cela ne resoud pas le pb de claveir en querty a la fin car j'ai essaye les 2 )
-**NB :**je mettrai plutôt ceci :
-```sh
-# Préconfigurer la locale seule définit la langue, le pays et la locale.
-d-i debian-installer/locale string fr_FR
-```
+→ ce doit être un bug : outil de création du preseed à modifier ? 
 
+D'autres lignes a modifier :
 ```sh
 #MODIFIE
-### Keyboard
-d-i console-keymaps-at/keymap select fr
-d-i keyboard-configuration/xkb-keymap                  select fr
-d-i console-keymaps-at/keymap select fr
-d-i keyboard-configuration/layoutcode                  string fr
+# clavier
+d-i console-keymaps-at/keymap select fr-latin9
 d-i debian-installer/keymap string fr-latin9
+d-i console-setup/modelcode string pc105
+d-i console-setup/layoutcode string fr
 ```
-**NB :** et ici, ceci :
-```sh
-# Choix du clavier :
-# keymap est un alias de keyboard-configuration/xkb-keymap
-d-i keymap select fr(latin9) 
-```
-j'ai deja essaye cela cela me dit que le clavier fr(latin9) est obsolete , interromp l'install et me demande un autre clavier fr-latin9 est ce qui est propose par dimaker ... et ne resoud pas le pb de clavier en querty à la fin
 
+Puis encore : 
 ```sh
 #MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
 #mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
@@ -117,18 +116,20 @@ j'ai deja essaye cela cela me dit que le clavier fr(latin9) est obsolete , inter
 Ce fichier existe null pas dans une install avec preseed d'un wheezy, il a surement ete rajoute par ceux qui ont fabrique l'install du se3. Lorsqu'on l'enleve il semble que il n'y a pas d'acces reseau pendnant l'execution du preseed mais elle reapparait apres c'est pourquoi j'ai ete oblige de telecharger les fichiers plus loin dans le preceed avant de faire l'install. ceux la : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts
 Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu ...
 
+Il faut ajouter cela : 
 ```sh
 #AJOUTE, pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
 #Mirror settings
-d-i mirror/protocol string http
+#d-i mirror/protocol string http
 d-i mirror/country string manual
 d-i mirror/http/hostname string ftp.fr.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
-d-i mirror/suite string wheezy
+#d-i mirror/suite string wheezy
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
+Puis cela : 
 ```sh
 #AJOUTE, pour evite de répondre à la question
 #Some versions of the installer can report back on what software you have
@@ -139,18 +140,7 @@ popularity-contest popularity-contest/participate boolean false
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
-```sh
-#AJOUTE, pour installer par exemple les packages des modules du se3 mais cela ne fonctionne pas 
-#peut etre que les paquet ne sont pas dnas les depot wheezy ...
-#Individual additional packages to install
-d-i pkgsel/include string se3-backup se3-clamav se3-dhcp se3-client-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius...
-#Whether to upgrade packages after debootstrap.
-#Allowed values: none, safe-upgrade, full-upgrade
-#d-i pkgsel/upgrade select none
-```
-**NB :** Cela ne fonctionne pas car les dépôts ne sont pas encore en place : ils le seront lors de la phase 3.
-OK
-
+Et enfin modifier cela : 
 ```sh
 #MODIFIE Preseed commands
 ----------------
@@ -159,7 +149,9 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
-Il faut aussi télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrit laisser le fait de les telecharger en modifiant comme a l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
+Voila , le fichier se3.preseed est pret
+
+Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrit laisser le fait de les telecharger en modifiant comme a l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
 ```sh
 mkdir ./se3scripts
 cd se3scripts
@@ -171,9 +163,6 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
-
-**NB :** je ne me souviens plus ce qu'il faut mettre en place pour qu'au redémarrage on se trouve en root et qu'un script se lance.
-normalement c'est automatique : avec une install auto url=... avec ce meme preceed tout fonctionne correctement mais en install auto file =... non , la phase 2 ./install_phase2.sh ne se lance pas tout seul ...
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
 
@@ -193,9 +182,9 @@ wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware
 NB : on peut aussi incorporer les firmwares à l'archive [TODO].
 
 
-### Mise en place des éléments pour l'incorporation
+#### Mise en place des éléments pour l'incorporation
 
-#### Création des répertoires de travail **isoorig** et **isonew**
+##### Création des répertoires de travail **isoorig** et **isonew**
 
 Pour mener à bien la modification de l'installateur `Debian`, on va créer deux répertoires :
 * **isoorig :** il contiendra le contenu de l'image d'origine
@@ -205,7 +194,7 @@ mkdir isoorig isonew
 ```
 
 
-#### Dans le répertoire **isoorig**
+##### Dans le répertoire **isoorig**
 
 On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis on copie son contenu dans le répertoire isonew.
 ```sh
@@ -216,7 +205,7 @@ J'ai pas trés bien compris à quoi cela sert d'exclure TRANS.TBL car il n'exist
 OK mais pas dans l'archive avec install reseau ? no dnas celle avec les firwares que tu propose au dessus  ?
 
 
-#### Dans le répertoire **isonew**
+##### Dans le répertoire **isonew**
 
 Les modifications suivantes seront à réaliser dans le répertoire **isonew**.
 On va maintenant faire en sorte que l'installateur se charge automatiquement.
@@ -228,7 +217,6 @@ chmod 755 ./isonew/isolinux/prompt.cfg
 ```
 
 On modifie le fichier isolinux/txt.cfg pour l'utilisation du fichier preseed lors de l'installation.
-
 On l'édite :
 ```sh
 nano ./isonew/isolinux/txt.cfg
@@ -237,24 +225,21 @@ nano ./isonew/isolinux/txt.cfg
 On le modifie ainsi :
 ```sh
 default install
-  label install
-      menu label ^Install
-      menu default
-      kernel /install.amd/vmlinuz
-      append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
+label install
+	menu label ^Install
+	menu default
+	kernel /install.amd/vmlinuz 
+	append  language=fr locale=fr_FR.UTF-8 console-setup/layoutcode=fr_FR keyboard-configuration/xkb-keymap=fr languagechooser/language-name=French countrychooser/shortlist=FR console-keymaps-at/keymap=fr debian-installer/country=FR debian-installer/locale=fr_FR.UTF-8 preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
 ```
 
-J'ai aussi essaye cela a la place de la derniere ligne mais cela ne change rien ...
+Ce qui ne marche pas :
+```sh
+   append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
+```
+ou
 ```sh
 append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
 ```
-
-Je mettrai plutôt ceci :
-```sh
-append auto=true preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
-```
-Éventuellement, on peut rajouter une locale avec : locale=fr_FR et un clavier keymap=fr mais je me demande si c'est utile ? Ne les rajoute pas dans un premier temps.
-Comme tu le vois au dessus j'ai deja essaye cela et cela ne fonctionne pas ... clavier toujours en querty apres
 
 (Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.)
 
@@ -285,21 +270,21 @@ apt-get install genisoimage
 genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux/isolinux.bin -c isolinux/boot.cat ../isonew
 cd ..
 ```
-L’image est là (dans le repertoire en cours) elle porte le nom my_wheezy_install.iso
+L’image est là (dans le repertoire en cours), elle porte le nom my_wheezy_install.iso
 
 
-## Utiliser l'archive d'installation personnalisée
+## Phase 2 : Utiliser l'archive d'installation personnalisée
 
 ### Sur un réseau virtuel
 J'ai teste l'image iso sur une VM.  L'iso démarre, ne pose aucune question mais le clavier est en `qwerty` et, à la première connexion en root, la 2ème phase ne démarre pas toute seule, il faut lancer à la main ./install_phase2.sh qui est bien présent au bon endroit, idem pour setup_se3.data.
 
 
-### Graver un `CD`
+### Sur un `CD`
 
 …à venir…
 
 
-### Utiliser une clé `usb`
+### Sur une clé `usb`
 
 Insérez votre clé USB d'une taille supérieur à la taille de l'image iso.
 En root, tapez
@@ -323,14 +308,20 @@ On lance la commande qui va créer la clé USB.
 cp ./my_wheezy_install.iso /dev/sdX && sync
 ```
 
+### Utilisation de la cle, du CD , ou de l'image iso
 
-## Utilisation de la cle, du CD , ou de l'image iso
+La machine démarre, ne pose aucune question et le clavier est bien en azerty et à la première connexion en root
 
-La machine démarre, ne pose aucune question mais le clavier est en qwerty et à la première connexion en root la 2eme phase ne démarre pas toute seul, il faut la lancer à la main.
+## Phase 3 : Se connecter en ROOT et installation du package SE3
+
+la 3eme phase ne démarre pas toute seul, il faut la lancer à la main.
 Au redémarrage se connecter en root puis lancer : 
 ```sh
 ./install_phase2.sh
 ```
+**NB :** je ne me souviens plus ce qu'il faut mettre en place pour qu'au redémarrage on se trouve en root et qu'un script se lance.
+normalement c'est automatique : avec une install auto url=... avec ce meme preceed tout fonctionne correctement mais en install auto file =... non , la phase 3 ./install_phase2.sh ne se lance pas tout seul ...
+
 
 Le reste semble se dérouler correctement ... a tester.
 
