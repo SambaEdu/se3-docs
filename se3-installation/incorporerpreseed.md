@@ -315,6 +315,8 @@ J'ai teste l'image iso sur une VM.  L'iso démarre, ne pose aucune question mais
 
 ### Sur une clé `usb`
 
+**Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO].
+
 Insérez votre clé USB d'une taille supérieur à la taille de l'image iso.
 En root, tapez
 ```sh
