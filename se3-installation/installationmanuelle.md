@@ -97,7 +97,7 @@ Voici une méthode que vous pouvez mettre en œuvre sur un système `GNU/Linux`.
 su -l
 ```
 
-* télécharger le fichier d'installation
+* télécharger le fichier d'installation  
 *Ici, il est renommé en `wheezy_mini.iso` (vous pouvez choisir un autre nom…)*
 ```sh
 wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso -O wheezy_mini.iso
