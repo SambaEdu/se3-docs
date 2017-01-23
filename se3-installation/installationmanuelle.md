@@ -81,6 +81,9 @@ Un [article spécifique](incorporerpreseed.md#installation-automatique-dun-se3) 
 Le fichier d'installation au format `iso` est à télécharger et à graver sur un `CD`.
 
 Vous trouverez [ce fichier nommé `mini.iso` sur le site `Debian`](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/).
+```sh
+wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso -O wheezy_mini.iso
+```
 
 
 ### Utiliser une clé `usb`
@@ -95,8 +98,9 @@ su -l
 ```
 
 * télécharger le fichier d'installation
+*Ici, il est renommé en `wheezy_mini.iso` (vous pouvez choisir un autre nom…)*
 ```sh
-wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso
+wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso -O wheezy_mini.iso
 ```
 
 * brancher une clé `usb`
@@ -113,7 +117,7 @@ umount /dev/sdb1
 
 * copier le fichier d'installation sur la clé `usb`
 ```sh
-cp /root/mini.iso /dev/sdb
+cp /root/wheezy_mini.iso /dev/sdb
 ```
 
 Une fois cela fait, il suffira de brancher la clé `usb` sur le serveur et de le démarrer.
