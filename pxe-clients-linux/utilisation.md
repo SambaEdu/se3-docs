@@ -16,6 +16,7 @@
         * [Problème 5 : système de fichiers racines](#problème-5--système-de-fichiers-racines)
         * [Problème 6 : montage d'un système de fichiers](#problème-6--montage-dun-système-de-fichiers)
         * [Problème 7 : corruption de miroir](#problème-7--corruption-de-miroir)
+        * [Analyser un problème](#analyser-un-problème)
 * [Réservation de l'`IP` du `client-linux`](#réservation-de-lip-du-client-linux)
     * [Cas d'une nouvelle machine](#cas-dune-nouvelle-machine)
     * [Cas d'une machine ayant une réservation](#cas-dune-machine-ayant-une-réservation)
@@ -166,6 +167,16 @@ L'installation s'arrête sur un message de corruption du miroir
 ![probleme-miroir](images/probleme_miroir.png)
 
 **Solution :** rétablir la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation.
+
+
+#### Analyser un problème
+
+Si votre problème n'est pas encore dans la liste ci-dessus,
+il est possible de l'analyser en utilisant **les consoles disponibles lors de l'installation**.
+
+* Ctrl+Alt+F1 : sortie graphique
+* Ctrl+Alt+F4 : sortie terminal
+* Ctrl+Alt+F2 : console en ligne de commande
 
 
 ## Réservation de l'`IP` du `client-linux`
