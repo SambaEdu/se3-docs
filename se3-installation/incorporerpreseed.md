@@ -260,10 +260,13 @@ Et pour supprimer l'autologin lors des redémarrages suivants., on modifie la fi
 nano ./se3scripts/install_phase2.sh
 ```
 
-En rajoutant ces  2 lignes :
+En rajoutant ces lignes :
 ```sh
-rm -f /etc/inittab
-cp /etc/inittab.orig /etc/inittab
+if [ -e /etc/inittab.orig ]
+then
+    rm -f /etc/inittab
+    cp /etc/inittab.orig /etc/inittab
+fi
 ```
 avant ces 2 lignes (vers la fin du script)
 ```sh
