@@ -145,7 +145,7 @@ popularity-contest popularity-contest/participate boolean false
 Et enfin modifier cela : 
 ```sh
 #MODIFIE Preseed commands
-----------------
+#----------------
 d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     cp /cdrom/se3scripts/* ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
