@@ -427,8 +427,6 @@ Il faut appuyer sur **Entree** puis choisir **3** (sans serveur de communication
 
 ** NB ** ne peut on pas terminer l'automatisation complete et automatiser  le dessus ? et en profiter pour installer tous les paquets SE3  : se3-backup se3-clamav se3-dhcp se3-client-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius puis faire une mise a jour de tout ... ?
 **NB :** je ne me souviens plus ce qu'il faut mettre en place pour qu'au redémarrage on se trouve en root et qu'un script se lance.
-normalement c'est automatique : avec une install auto url=... avec ce meme preceed tout fonctionne correctement mais en install auto file =... non , la phase 3 ./install_phase2.sh ne se lance pas tout seul ...
-
 
 Il reste a tester que le se3 est vraiement ok, en tout cas il est accessible en [IPSE3]:909
 
