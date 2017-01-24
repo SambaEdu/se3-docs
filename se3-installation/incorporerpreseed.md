@@ -167,7 +167,7 @@ cd se3scripts
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-post-base-installer.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/sources.se3 http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/install_phase2.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
-Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts , j'ai deja ajouter la telechargement au dessus [TODO] Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
+Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts , j'ai deja ajouté la ligne pour le telechargement au dessus [TODO] Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
 ```sh
 nano ./se3scripts/inittab
 ```
@@ -283,7 +283,7 @@ Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés et mo
 
 Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* devrait suffire.
 ```sh
-cd /cdwget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
+wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
 
 Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (non testée [TODO]):
