@@ -65,6 +65,30 @@ Le driver pour `Windows 7` 64 bits se nomme : lj1018_1020_1022-HB-pnp-win64-fr.e
 Une fois téléchargés, il faut
 Extraire le contenu avec par exemple `7-zip` dans deux dossiers distincts.
 
+** Pilotes Kyocera **
+Les pilotes Kyocera ne peuvent pas être uploadés directement, il faut procéder à une petite modification:
+Ouvrir le fichier oemsetup.inf du driver avec un vrai éditeur de texte (notepad++ par exemple).
+
+On va ensuite dans la catégorie
+`[Manufacturer]
+"Kyocera"=Kyocera,NTx86.5.1,NTamd64.5.1,NTx86.6.0,NTamd64.6.0`
+
+
+Et remplacer cela par
+`[Manufacturer]
+"Kyocera"=Kyocera,NTx86,NTamd64`
+
+Il faut supprimer toute la partie (cette ligne et le listing des imprimantes qui va avec juste après)
+`[Kyocera.NTx86.5.1]`
+
+puis la partie
+`[Kyocera.NTamd64.5.1]`
+
+
+On renomme ensuite les lignes
+`[Kyocera.NTx86.6.0]` par `[Kyocera.NTx86]`
+`[Kyocera.NTamd64.6.0]` par`[Kyocera.NTamd64]`
+On enregistre. Les drivers peuvent ensuite être uploadés avec la console mmc vers le se3.
 
 ## Préparer la console `MMC`
 
