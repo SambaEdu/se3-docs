@@ -20,7 +20,7 @@
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
     * [Sur un `CD`](#graver-un-cd)
     * [Sur une clé `usb`](#utiliser-une-clé-usb)
-* [Phase 3 : installation du packages SE3](#ne fonctionne pas automatiquement)
+* [Phase 3 : installation du paquet SE3](#ne fonctionne pas automatiquement)
 * [Solution alternative](#solution-alternative)
 * [Références](#références)
 
@@ -116,18 +116,19 @@ Puis encore :
 **NB :** il faudrait éclaircir cela. 
 Ce fichier existe nul part dans une install avec preseed d'un wheezy, il a surement été rajouté par ceux qui ont fabriqué l'install du se3. Lorsqu'on l'enlève, il semble que il n'y a pas d'acces reseau pendnant l'execution du preseed mais elle réapparait apres c'est pourquoi j'ai ete oblige de telecharger les fichiers plus loin dans le preseed avant de faire l'install. ceux la : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts
 Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu ...
-[TODO] remettre les wget dans le preseed à la fin ?
+[TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible .
+J'ai remarqué de grosses differences entre l'execution de l'iso modifie pour etre completement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'install avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
 
 Il faut ajouter cela : 
 ```sh
 #AJOUTE, pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
 #Mirror settings
-#d-i mirror/protocol string http
+d-i mirror/protocol string http
 d-i mirror/country string manual
 d-i mirror/http/hostname string ftp.fr.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
-#d-i mirror/suite string wheezy
+d-i mirror/suite string wheezy
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
@@ -151,6 +152,7 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
+** je me demande a quoi sert la command chmod +x sur les fichiers car ils ont deja sur le cd les droits en exécution ...
 Voila , le fichier se3.preseed est pret
 
 
@@ -160,34 +162,38 @@ Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessa
 ```sh
 mkdir ./se3scripts
 cd se3scripts
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-post-base-installer.sh
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/sources.se3
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/install_phase2.sh
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
+wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-post-base-installer.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/sources.se3 http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/install_phase2.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
-
-Il y aura sans doute un autre fichier à télécharger lorsqu'il sera disponible… [TODO]
-```sh
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab
-```
-
+Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO]
 Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
 
-On met en place l'autologin pour le 1er redémarrage du se3 (début de la phase 3) en modifiant le script se3-post-base-installer.sh , en rajoutant des lignes pour la gestion du fichier inittab :
+On met en place l'autologin pour le 1er redémarrage du se3 (début de la phase 3) en modifiant le script se3-post-base-installer.sh :
+```sh
+nano ./se3scripts/se3-post-base-installer.sh
+```
+
+En rajoutant les lignes suivantes a la fin pour la gestion du fichier inittab :
 ```sh
 mv bashrc /target/root/.bashrc
 mv /target/etc/inittab /target/etc/inittab.orig
 mv inittab /target/etc/inittab
 cp /target/etc/inittab /target/root/
 ```
+** dans le fichier la premiere ligne est deja presente, et il y a un probleme avec le fichier sources.list qui n'existe pas (mais pourrait etre telecharge sur se3scripts, un reste d'avant ... ? )tandis que sources.se3 existe mais est vide ... et n'est pas copier ... est il necessaire ?
 
-Et pour supprimer l'autologin lors des redémarrages suivants., on modifie la fin du script install_phase2.sh en rajoutant ces  2 lignes (vers la fin du script):
+Et pour supprimer l'autologin lors des redémarrages suivants., on modifie la fin du script install_phase2.sh :
+```sh
+nano ./se3scripts/install_phase2.sh
+```
+
+En rajoutant ces  2 lignes :
 ```sh
 rm -f /etc/inittab
 cp /etc/inittab.orig /etc/inittab
+```
+avant ces 2 lignes (vers la fin du script)
+```sh
 [ "$DEBUG" != "yes" ] && rm -f /root/install_phase2.sh
 . /etc/profile
 ```
@@ -201,7 +207,7 @@ Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés et mo
 
 Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* devrait suffire.
 ```sh
-wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
+cd /cdwget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
 
 Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (non testée [TODO]):
@@ -230,8 +236,7 @@ On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis o
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H –exclude=TRANS.TBL isoorig/ isonew
 ```
-J'ai pas trés bien compris à quoi cela sert d'exclure TRANS.TBL car il n'existe pas dans l'archive téléchargée. En fait, ce fichier existe dans d'autres archives… supprimer cette option ? [TODO]
-OK mais pas dans l'archive avec install reseau ? Ou dans celle avec les firwares que tu propose au dessus ? Je ne sais pas ; il s'agit peut-être d'une scorie d'anciennes versions…
+Cela dit que l'image est montée en lecture seule c'est normal, et il y a une erreur sur TRANS.TBL car il n'existe pas dans l'archive téléchargée, c'est aussi normal. (En fait, ce fichier existe dans d'autres archives) … supprimer cette option ? [TODO]
 
 
 ##### Dans le répertoire **isonew**
@@ -240,9 +245,7 @@ Les modifications suivantes seront à réaliser dans le répertoire **isonew**.
 On va maintenant faire en sorte que l'installateur se charge automatiquement.
 On donne les droits en écriture aux 3 fichiers à modifier :
 ```sh
-chmod 755 ./isonew/isolinux/txt.cfg
-chmod 755 ./isonew/isolinux/isolinux.cfg
-chmod 755 ./isonew/isolinux/prompt.cfg
+chmod 755 ./isonew/isolinux/txt.cfg ./isonew/isolinux/isolinux.cfg ./isonew/isolinux/prompt.cfg
 ```
 
 On modifie le fichier isolinux/txt.cfg pour l'utilisation du fichier preseed lors de l'installation.
@@ -258,9 +261,8 @@ label install
 	menu label ^Install
 	menu default
 	kernel /install.amd/vmlinuz 
-	append  language=fr locale=fr_FR.UTF-8 console-setup/layoutcode=fr_FR keyboard-configuration/xkb-keymap=fr languagechooser/language-name=French countrychooser/shortlist=FR console-keymaps-at/keymap=fr debian-installer/country=FR debian-installer/locale=fr_FR.UTF-8 preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
+	append  auto=true priority=critical language=fr locale=fr_FR.UTF-8 console-setup/layoutcode=fr_FR keyboard-configuration/xkb-keymap=fr languagechooser/language-name=French countrychooser/shortlist=FR console-keymaps-at/keymap=fr debian-installer/country=FR debian-installer/locale=fr_FR.UTF-8 preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
 ```
-
 **Remarque :** Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.
 
 Ce qui ne marche pas :
@@ -343,7 +345,7 @@ cp ./my_wheezy_install.iso /dev/sdX && sync
 
 La machine démarre, ne pose aucune question et le clavier est bien en azerty et à la première connexion en root
 
-## Phase 3 : Se connecter en ROOT et installation du package SE3
+## Phase 3 : Se connecter en ROOT et installation du paquet SE3
 
 la 3eme phase ne démarre pas toute seul, il faut la lancer à la main.
 Au redémarrage se connecter en root puis lancer : 
