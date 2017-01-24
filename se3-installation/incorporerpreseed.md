@@ -83,10 +83,10 @@ nano se3.preseed
 ```sh
 # MODIFIE
 # langue et pays
-d-i localechooser/shortlist	select	FR
+d-i localechooser/shortlist	select	fr
 d-i debian-installer/locale string fr_FR.UTF-8
 d-i debian-installer/language string fr
-d-i debian-installer/country string FR
+d-i debian-installer/country string fr
 ```
 Attention : bugs dans le preseed de dimaker…
 ```sh
@@ -153,8 +153,6 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
-** je me demande a quoi sert la command chmod +x sur les fichiers, car ils ont deja sur le cd les droits en exécution ... j'ai testé en l'enlevant effectivement elle sert a rien ...
-
 Voila , le fichier **se3.preseed** est pret
 
 
@@ -338,7 +336,7 @@ label install
 	menu label ^Install
 	menu default
 	kernel /install.amd/vmlinuz 
-	append  auto=true priority=critical language=fr locale=fr_FR.UTF-8 console-setup/layoutcode=fr_FR keyboard-configuration/xkb-keymap=fr languagechooser/language-name=French countrychooser/shortlist=FR console-keymaps-at/keymap=fr debian-installer/country=FR debian-installer/locale=fr_FR.UTF-8 preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
+	append language=fr locale=fr_FR.UTF-8 console-setup/layoutcode=fr_FR keyboard-configuration/xkb-keymap=fr languagechooser/language-name=French countrychooser/shortlist=FR console-keymaps-at/keymap=fr debian-installer/country=FR debian-installer/locale=fr_FR.UTF-8 preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
 ```
 **Remarque :** Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.
 
