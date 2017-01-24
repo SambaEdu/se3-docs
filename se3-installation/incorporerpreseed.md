@@ -27,6 +27,7 @@
 
 ## Préliminaires
 
+
 ### Objectif
 
 L'objectif est de créer un `CD d'installation` ou une clé `usb` complètement automatisé de son `SE3 Wheezy`.
@@ -63,8 +64,7 @@ On pourra bien entendu utiliser un fichier **se3.preseed** existant, dans le cas
 
 Une fois les fichiers **se3.preseed** et **setup_se3.data** ainsi créés, il s'agira de les télécharger en remplaçant les xxxx par le nombre qui convient (voir message de l'interface de création) :
 ```sh
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/setup_se3.data
+wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/setup_se3.data
 ```
 
 
@@ -86,7 +86,6 @@ d-i debian-installer/locale string fr_FR.UTF-8
 d-i debian-installer/language string fr
 d-i debian-installer/country string FR
 ```
-
 Attention : bugs dans le preseed de dimaker ...
 ```sh
 # Choix des parametres regionaux (locales)
@@ -152,8 +151,8 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
-** je me demande a quoi sert la command chmod +x sur les fichiers car ils ont deja sur le cd les droits en exécution ...
-Voila , le fichier se3.preseed est pret
+** je me demande a quoi sert la command chmod +x sur les fichiers, car ils ont deja sur le cd les droits en exécution ...
+Voila , le fichier **se3.preseed** est pret
 
 
 ### Téléchargement et modifications de fichiers pour la phase 3
@@ -165,8 +164,81 @@ cd se3scripts
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-post-base-installer.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/sources.se3 http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/install_phase2.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
-Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO]
-Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
+Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts , j'ai deja ajouter la telechargement au dessus [TODO] Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
+```sh
+nano ./se3scripts/inittab
+```
+Et copier à l'interieur ceci :
+```sh
+# /etc/inittab: init(8) configuration.
+# $Id: inittab,v 1.91 2002/01/25 13:35:21 miquels Exp $
+
+# The default runlevel.
+id:2:initdefault:
+
+# Boot-time system configuration/initialization script.
+# This is run first except when booting in emergency (-b) mode.
+si::sysinit:/etc/init.d/rcS
+
+# What to do in single-user mode.
+~~:S:wait:/sbin/sulogin
+
+# /etc/init.d executes the S and K scripts upon change
+# of runlevel.
+#
+# Runlevel 0 is halt.
+# Runlevel 1 is single-user.
+# Runlevels 2-5 are multi-user.
+# Runlevel 6 is reboot.
+
+l0:0:wait:/etc/init.d/rc 0
+l1:1:wait:/etc/init.d/rc 1
+l2:2:wait:/etc/init.d/rc 2
+l3:3:wait:/etc/init.d/rc 3
+l4:4:wait:/etc/init.d/rc 4
+l5:5:wait:/etc/init.d/rc 5
+l6:6:wait:/etc/init.d/rc 6
+# Normally not reached, but fallthrough in case of emergency.
+z6:6:respawn:/sbin/sulogin
+
+# What to do when CTRL-ALT-DEL is pressed.
+ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+
+# Action on special keypress (ALT-UpArrow).
+#kb::kbrequest:/bin/echo "Keyboard Request--edit /etc/inittab to let this work."
+
+# What to do when the power fails/returns.
+pf::powerwait:/etc/init.d/powerfail start
+pn::powerfailnow:/etc/init.d/powerfail now
+po::powerokwait:/etc/init.d/powerfail stop
+
+# /sbin/getty invocations for the runlevels.
+#
+# The "id" field MUST be the same as the last
+# characters of the device (after "tty").
+#
+# Format:
+#  <id>:<runlevels>:<action>:<process>
+#
+# Note that on most Debian systems tty7 is used by the X Window System,
+# so if you want to add more getty's go ahead but skip tty7 if you run X.
+#
+1:2345:respawn:/bin/login -f root tty1 </dev/tty1 >/dev/tty1 2>&1
+2:23:respawn:/sbin/getty 38400 tty2
+3:23:respawn:/sbin/getty 38400 tty3
+4:23:respawn:/sbin/getty 38400 tty4
+5:23:respawn:/sbin/getty 38400 tty5
+6:23:respawn:/sbin/getty 38400 tty6
+
+# Example how to put a getty on a serial line (for a terminal)
+#
+#T0:23:respawn:/sbin/getty -L ttyS0 9600 vt100
+#T1:23:respawn:/sbin/getty -L ttyS1 9600 vt100
+
+# Example how to put a getty on a modem line.
+#
+#T3:23:respawn:/sbin/mgetty -x0 -s 57600 ttyS3
+```
 
 On met en place l'autologin pour le 1er redémarrage du se3 (début de la phase 3) en modifiant le script se3-post-base-installer.sh :
 ```sh
@@ -201,6 +273,7 @@ avant ces 2 lignes (vers la fin du script)
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
 
+
 ### Téléchargement de l'installateur `Debian`
 
 Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés et modifiés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
@@ -218,6 +291,7 @@ NB : on peut aussi incorporer les firmwares à l'archive [TODO].
 
 
 #### Mise en place des éléments pour l'incorporation
+
 
 ##### Création des répertoires de travail **isoorig** et **isonew**
 
@@ -306,6 +380,7 @@ L’image est là (dans le repertoire en cours), elle porte le nom my_wheezy_ins
 
 ## Phase 2 : Utiliser l'archive d'installation personnalisée
 
+
 ### Sur un réseau virtuel
 J'ai teste l'image iso sur une VM.  L'iso démarre, ne pose aucune question mais le clavier est en `qwerty` et, à la première connexion en root, la 2ème phase ne démarre pas toute seule, il faut lancer à la main ./install_phase2.sh qui est bien présent au bon endroit, idem pour setup_se3.data.
 
@@ -345,6 +420,7 @@ cp ./my_wheezy_install.iso /dev/sdX && sync
 
 La machine démarre, ne pose aucune question et le clavier est bien en azerty et à la première connexion en root
 
+
 ## Phase 3 : Se connecter en ROOT et installation du paquet SE3
 
 la 3eme phase ne démarre pas toute seul, il faut la lancer à la main.
@@ -357,6 +433,7 @@ normalement c'est automatique : avec une install auto url=... avec ce meme prece
 
 
 Le reste semble se dérouler correctement ... a tester.
+
 
 ## Références
 
