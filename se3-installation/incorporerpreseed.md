@@ -77,7 +77,9 @@ On l'édite :
 nano se3.preseed
 ```
 
-Ensuite,quelques lignes à modifier :
+…quelques lignes à modifier :
+
+**Pour la langue**, modifiez les lignes correspondantes :
 ```sh
 # MODIFIE
 # langue et pays
@@ -86,7 +88,7 @@ d-i debian-installer/locale string fr_FR.UTF-8
 d-i debian-installer/language string fr
 d-i debian-installer/country string FR
 ```
-Attention : bugs dans le preseed de dimaker ...
+Attention : bugs dans le preseed de dimaker…
 ```sh
 # Choix des parametres regionaux (locales)
 d-i     debian-installer/locale                            string fr_FR.UTF-8
@@ -96,7 +98,7 @@ d-i     debian-installer/locale                            string fr_FR.UTF-8
 pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr dans la ligne du milieu ??
 → ce doit être un bug : outil de création du preseed à modifier ? 
 
-D'autres lignes a modifier :
+**Pour le clavier**, modifications des lignes correspondantes :
 ```sh
 #MODIFIE
 # clavier
@@ -106,7 +108,7 @@ d-i console-setup/modelcode string pc105
 d-i console-setup/layoutcode string fr
 ```
 
-Puis encore : 
+**Pour un script inutile**, commentez la ligne :
 ```sh
 #MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
 #mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
@@ -118,7 +120,7 @@ Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me
 [TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible .
 J'ai remarqué de grosses differences entre l'execution de l'iso modifie pour etre completement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'install avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
 
-Il faut ajouter cela : 
+**Pour les dépôts**, il faut ajouter ces lignes :
 ```sh
 #AJOUTE, pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
 #Mirror settings
@@ -131,7 +133,7 @@ d-i mirror/suite string wheezy
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
-Puis cela : 
+**Pour les statistiques**, une  ligne à rajouter :
 ```sh
 #AJOUTE, pour evite de répondre à la question
 #Some versions of the installer can report back on what software you have
@@ -142,7 +144,7 @@ popularity-contest popularity-contest/participate boolean false
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
-Et enfin modifier cela : 
+**Pour la mise en place de la phase 3**, modifiez les commandes à la fin :
 ```sh
 #MODIFIE Preseed commands
 #----------------
