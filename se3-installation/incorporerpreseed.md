@@ -151,7 +151,8 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
-** je me demande a quoi sert la command chmod +x sur les fichiers, car ils ont deja sur le cd les droits en exécution ...
+** je me demande a quoi sert la command chmod +x sur les fichiers, car ils ont deja sur le cd les droits en exécution ... j'ai testé en l'enlevant effectivement elle sert a rien ...
+
 Voila , le fichier **se3.preseed** est pret
 
 
@@ -382,15 +383,11 @@ L’image est là (dans le repertoire en cours), elle porte le nom my_wheezy_ins
 
 
 ### Sur un réseau virtuel
-J'ai teste l'image iso sur une VM.  L'iso démarre, ne pose aucune question mais le clavier est en `qwerty` et, à la première connexion en root, la 2ème phase ne démarre pas toute seule, il faut lancer à la main ./install_phase2.sh qui est bien présent au bon endroit, idem pour setup_se3.data.
+
+Sur une VM, il n'y a rien a faire, on peut utiliser directement l'image iso.
 
 
-### Sur un `CD`
-
-…à venir…
-
-
-### Sur une clé `usb`
+### Sur un `CD` ou Sur une clé `usb`
 
 **Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO].
 
@@ -418,22 +415,20 @@ cp ./my_wheezy_install.iso /dev/sdX && sync
 
 ### Utilisation de la cle, du CD , ou de l'image iso
 
-La machine démarre, ne pose aucune question et le clavier est bien en azerty et à la première connexion en root
+La machine démarre, il n'y a rien a faire l'installation est completement automatique jusqu'a la première connexion en root
 
 
 ## Phase 3 : Se connecter en ROOT et installation du paquet SE3
 
-la 3eme phase ne démarre pas toute seul, il faut la lancer à la main.
-Au redémarrage se connecter en root puis lancer : 
-```sh
-./install_phase2.sh
-```
+Au redémarrage se connecter en root, la suite de l'installation est automatique
+Il faut appuyer sur **Entree** puis choisir **3** (sans serveur de communication), puis saisir le mot de passe pour `adminse3` et saisir 2 fois le nouveau mot de passe pour `root`
+
+** NB ** ne peut on pas terminer l'automatisation complete et automatiser  le dessus ? et en profiter pour installer tous les paquets SE3  : se3-backup se3-clamav se3-dhcp se3-client-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius puis faire une mise a jour de tout ... ?
 **NB :** je ne me souviens plus ce qu'il faut mettre en place pour qu'au redémarrage on se trouve en root et qu'un script se lance.
 normalement c'est automatique : avec une install auto url=... avec ce meme preceed tout fonctionne correctement mais en install auto file =... non , la phase 3 ./install_phase2.sh ne se lance pas tout seul ...
 
 
-Le reste semble se dérouler correctement ... a tester.
-
+Il reste a tester que le se3 est vraiement ok, en tout cas il est accessible en [IPSE3]:909
 
 ## Références
 
