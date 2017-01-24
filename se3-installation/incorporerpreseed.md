@@ -248,14 +248,14 @@ On met en place l'autologin pour le 1er redémarrage du se3 (début de la phase 
 nano ./se3scripts/se3-post-base-installer.sh
 ```
 
-En rajoutant les lignes suivantes a la fin pour la gestion du fichier inittab :
+En rajoutant les lignes suivantes à la fin pour la gestion du fichier inittab :
 ```sh
-mv bashrc /target/root/.bashrc
+# ajout pour l'autologin
 mv /target/etc/inittab /target/etc/inittab.orig
 mv inittab /target/etc/inittab
 cp /target/etc/inittab /target/root/
 ```
-** dans le fichier la premiere ligne est deja presente, et il y a un probleme avec le fichier sources.list qui n'existe pas (mais pourrait etre telecharge sur se3scripts, un reste d'avant ... ? )tandis que sources.se3 existe mais est vide ... et n'est pas copier ... est il necessaire ?
+** dans le fichier il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ? )tandis que sources.se3 existe mais est vide ... et n'est pas copier ... est il necessaire ?
 
 Et pour supprimer l'autologin lors des redémarrages suivants., on modifie la fin du script install_phase2.sh :
 ```sh
