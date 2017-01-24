@@ -65,7 +65,7 @@ Le driver pour `Windows 7` 64 bits se nomme : lj1018_1020_1022-HB-pnp-win64-fr.e
 Une fois téléchargés, il faut
 Extraire le contenu avec par exemple `7-zip` dans deux dossiers distincts.
 
-** Pilotes Kyocera **
+**Pilotes Kyocera :**
 Les pilotes Kyocera ne peuvent pas être uploadés directement, il faut procéder à une petite modification:
 Ouvrir le fichier oemsetup.inf du driver avec un vrai éditeur de texte (notepad++ par exemple).
 
