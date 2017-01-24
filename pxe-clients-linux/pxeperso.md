@@ -254,7 +254,8 @@ Une fois le système installé, il faudra (selon l'usage de cette machine) suppr
 
 … *à venir* …
 
-## restaurer une image clonezilla stockée sur un partage samba
+## restaurer une image clonezilla stockée sur un partage samba (se3 ou un autre serveur)
+L'intéret est de pouvoir stocker des images propres d'un type de poste non intégré. En cas de contamination d'une salle par un virus, il est facile de restaurer un poste, de l'intégrer puis de lancer un clonage, ou tout simplement de restaurer chaque poste avec cette image.
 
 On ajoute dans le fichier perso.menu les lignes suivantes
 ```ssh 
@@ -264,9 +265,10 @@ MENU LABEL Clonezilla restore m72esciences (partimag)
 KERNEL clonezilla64/vmlinuz
 APPEND initrd=clonezilla64/initrd.img boot=live config noswap nolocales edd=on nomodeset  ocs_prerun="mount -t cifs //172.20.0.6/partimag /home/partimag/ -o user=clonezilla,password=clonezilla123"  ocs_live_run="ocs-sr  -e1 auto -e2  -r -j2  -p reboot restoredisk  m72esciencesv4 sda" ocs_live_extra_param="" keyboard-layouts="fr" ocs_live_batch="no" locales="fr_FR.UTF-8" vga=788 nosplash noprompt fetch=tftp://172.20.0.2/clonezilla64/filesystem.squashfs
  ```
+**Attention à la casse, ce qui derrière APPEND doit être sur une même ligne**
+Ici l'image du poste non intégré est stockée sur un serveur debian avec samba installé. Un partage "partimag" a été créé sur ce serveur.
 
-Ici l'image est stockée sur un serveur debian avec samba installé.
-
-Un compte local et samba clonezilla a été crée sans aucun accès ssh, ou bash car le mdp peut éventuellement être vu si le clonage est lancé devant les élèves.
+Un compte local et samba clonezilla a été crée sans aucun accès ssh, ou bash car le mdp *clonezilla123* va s'afficher très briévement à l'écran lors du montage automatique du partage samba.
 
 L'image appelée m72esciencesV4 restaurée va écraser tout le disque sda. Après clonage, le pc va redémarrer.
+Plus d'informations [ici](<http://wiki.dane.ac-versailles.fr/index.php?title=Clonage_presque_automatis%C3%A9_avec_clonezilla>)
