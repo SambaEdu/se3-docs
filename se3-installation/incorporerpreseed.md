@@ -401,7 +401,9 @@ L’image est là (dans le repertoire en cours), elle porte le nom my_wheezy_ins
 
 ### Sur un réseau virtuel
 
-Sur une VM, il n'y a rien a faire, on peut utiliser directement l'image iso.
+Sur une VM (Virtual Machine), il n'y a rien à faire, on peut utiliser directement l'image `iso`.
+
+D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée sur une VM. Cela vous permettra de la valider.
 
 
 ### Sur un `CD` ou Sur une clé `usb`
@@ -432,39 +434,24 @@ cp ./my_wheezy_install.iso /dev/sdX && sync
 
 ### Utilisation de la cle, du CD , ou de l'image iso
 
-La machine démarre, il n'y a rien a faire l'installation est completement automatique jusqu'a la première connexion en root
+La machine démarre, il n'y a rien à faire, l'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
 
 
-## Phase 3 : Se connecter en ROOT et installation du paquet SE3
+## Phase 3 : Se connecter en `ROOT` et installation du paquet `SE3`
 
-*****  Il est dit ici qu'il faut copier a ce moment le secrets.tdb ... en cas de migration... est on concerne par cela ? ou le script restaure_se3 s'occupe de tout ?
-http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur
+**Remarque :** Il est dit [ici](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur) qu'il faut copier à ce moment le **secrets.tdb**… en cas de migration… est-on concerné par cela ? Non. Ou le script **restaure_se3** s'occupe de tout ? Oui.
 
-Récupération du fichier nécessaire à l'installation du nouveau serveur
-On a besoin du fichier 'secrets.tdb' que l'on recupere sur son serveur SE3, il est sur /var/lib/samba/secrets.tdb
-et on le place sur le `CD` dans ./isonew/se3scripts
+Au redémarrage la connection en `root` est automatique (autologin).
+ - Il faut appuyer sur **Entrée** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
+ - Puis choisir **3** (sans serveur de communication) → peut-on rendre cela automatique ?
+ - Puis saisir le mot de passe pour `adminse3` → idem
+ - Enfin, saisir 2 fois le nouveau mot de passe pour `root` (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
 
-Sur le nouveau serveur
-Juste après le reboot, lorsque l'installation et le paramétrage du SE3 commencent à se faire (ligne mauve sur fond noir correspondant à la PHASE 3), on stoppe le script à l'aide de la combinaison CTRL+C 
-Il suffit pour cela de rajouter cela au debut du fichier install_phase2.sh :
-```sh
-if [ -e /secrets.tdb ]
-then
-    mv /secrets.tdb /var/lib/samba/private/
-fi
-```
-
-Au redémarrage la connection en root est automatique.
- - Il faut appuyer sur **Entree** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
- - Puis choisir **3** (sans serveur de communication) (je ne sais pas ou c'est, mais c'est pas dans install_phase2.sh)
- - Puis saisir le mot de passe pour `adminse3` (je ne sais pas ou c'est)
- - Enfin saisir 2 fois le nouveau mot de passe pour `root` (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
-
-On pourrait aussi rajouter les lignes suivantes avant le terminer dans install_phase2.sh
+On pourrait aussi rajouter les lignes suivantes avant de terminer dans install_phase2.sh
 ```sh
 apt-get --yes --force-yes se3-clamav se3-dhcp se3-clients-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius
 ```
-Pour se3-backup il y a une intervention a faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut etre completement automatisé
+Pour se3-backup il y a une intervention à faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut être complètement automatisé ?
 ```sh
 apt-get --yes --force-yes se3-backup
 ```
@@ -474,10 +461,18 @@ apt-get -qq update
 apt-get upgrade --quiet --assume-yes
 ```
 
-** NB ** Il faudrait essaye de terminer l'automatisation complete dans l'objectif d'une restauration ?
+Sans oublier de redémarrer le `se3` à la fin de la phase 3 :
+```sh
+reboot
+```
 
-Le se3 est pret a etre restauré.
-Il reste a tester que le se3 est vraiement ok, en tout cas il est accessible en [IPSE3]:909
+**NB** Il faudrait essayer de terminer l'automatisation complète de la phase 3 dans l'objectif d'une restauration ?
+
+Le se3 est pret à être restauré à partir d"une sauvegarde.
+
+
+Il reste à tester que le se3 est vraiment ok, en tout cas il est accessible en [IPSE3]:909
+
 
 ## Références
 
