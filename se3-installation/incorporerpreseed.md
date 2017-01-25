@@ -268,6 +268,7 @@ then
     cp /etc/inittab.orig /etc/inittab
 fi
 ```
+** NB** peut etre rajouter un rm -f /etc/inittab.orig dans ton if qu'il ne le fasse qu'une fois ...
 avant ces 2 lignes (vers la fin du script)
 ```sh
 [ "$DEBUG" != "yes" ] && rm -f /root/install_phase2.sh
