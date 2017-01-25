@@ -19,10 +19,9 @@
          * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
-    * [Sur un `CD`](#graver-un-cd)
-    * [Sur une clé `usb`](#utiliser-une-clé-usb)
-* [Phase 3 : installation du paquet SE3](#phase-3--se-connecter-en-root-et-installation-du-paquet-se3)
-* [Solution alternative](#solution-alternative)
+    * [Sur un `CD` ou sur une clé `usb`](#sur-un-CD-ou-sur-une-clé-usb)
+    * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb--du-CD--ou-de-limage-iso)
+* [Phase 3 : connexion en `root` et installation du paquet `se3`](#phase-3--connexion-en-root-et-installation-du-paquet-se3)
 * [Références](#références)
 
 
@@ -421,7 +420,7 @@ Sur une VM (Virtual Machine), il n'y a rien à faire, on peut utiliser directeme
 D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée sur une VM. Cela vous permettra de la valider.
 
 
-### Sur un `CD` ou Sur une clé `usb`
+### Sur un `CD` ou sur une clé `usb`
 
 **Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO].
 
@@ -447,12 +446,12 @@ On lance la commande qui va créer la clé USB.
 cp ./my_wheezy_install.iso /dev/sdX && sync
 ```
 
-### Utilisation de la cle, du CD , ou de l'image iso
+### Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`
 
 La machine démarre, il n'y a rien à faire, l'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
 
 
-## Phase 3 : Se connecter en `ROOT` et installation du paquet `SE3`
+## Phase 3 : connexion en `root` et installation du paquet `se3`
 
 **Remarque :** Il est dit [ici](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur) qu'il faut copier à ce moment le **secrets.tdb**… en cas de migration… est-on concerné par cela ? Non. Ou le script **restaure_se3** s'occupe de tout ? Oui.
 
