@@ -370,9 +370,9 @@ cp ./se3scripts/* ./isonew/se3scripts/
 Enfin on crée la nouvelle image `ISO` :
 ```sh
 cd isonew
-md5sum `find -follow -type f` > md5sum.txt
+md5sum `find -H -type f` > md5sum.txt
 ```
-→ ne marche pas, pb avec le lien symbolique… il y a une boucle… (cela provient du lien à propos de .DEBIAN) ceci dit, il n'y a aucun fichier qui sont dans le md5sum.txt (normal, à cause de l'erreur : le travail ne s'est pas fait) qui ont été modifié donc (il faut regarder toutes les causes…) cette étape ne sert à rien il me semble (s'il n'y a pas le lien symbolique .DEBIAN, cela fonctionne !). → en fait l'option -follow est obsolète, il faudrait mettre -L (d'après man find). Ou alors -H si problème avec -L.[TODO]
+→ l'option -follow est obsolète, il faudrait mettre -L (d'après man find). Ou alors -H si problème avec -L.
 
 ```sh
 apt-get install genisoimage
