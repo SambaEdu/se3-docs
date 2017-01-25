@@ -282,7 +282,8 @@ mv /target/etc/inittab /target/etc/inittab.orig
 mv inittab /target/etc/inittab
 cp /target/etc/inittab /target/root/
 ```
-** dans le fichier il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ? )tandis que sources.se3 existe mais est vide ... et n'est pas copier ... est il necessaire ?
+Dans le fichier il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ? )tandis que sources.se3 existe mais est vide ... et n'est pas copier ... est il necessaire ?
+**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 Et pour supprimer l'autologin lors des redémarrages suivants., on modifie la fin du script install_phase2.sh :
 ```sh
@@ -317,7 +318,7 @@ Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netin
 wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
 
-Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (non testée [TODO]):
+Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (non testée [TODO]ok teste aussi):
 ```sh
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
@@ -340,12 +341,17 @@ mkdir isoorig isonew
 ##### Dans le répertoire **isoorig**
 
 On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis on copie son contenu dans le répertoire isonew.
+Si vous utiliser l'archive **debian-7.11.0-amd64-netinst.iso**
 ```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
 Cela dit que l'image est montée en lecture seule c'est normal. 
-NB : si vous utiliser l'autre archive, il faudra remplacer : **debian-7.11.0-amd64-netinst.iso** par : **firmware-7.11.0-amd64-netinst.iso**
+NB : si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso**
+```sh
+mount -o loop -t iso9660 firmware-7.11.0-amd64-netinst.iso isoorig
+rsync -a -H isoorig/ isonew
+```
 
 
 ##### Dans le répertoire **isonew**
@@ -416,7 +422,6 @@ L’image est là (dans le repertoire en cours), elle porte le nom my_wheezy_ins
 ### Sur un réseau virtuel
 
 Sur une VM (Virtual Machine), il n'y a rien à faire, on peut utiliser directement l'image `iso`.
-
 D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée sur une VM. Cela vous permettra de la valider.
 
 
