@@ -372,7 +372,7 @@ Enfin on crée la nouvelle image `ISO` :
 cd isonew
 md5sum `find -H -type f` > md5sum.txt
 ```
-→ l'option -follow est obsolète, il faudrait mettre -L (d'après man find). Ou alors -H si problème avec -L.
+→ l'option -follow est obsolète ; il faudrait mettre -L (d'après man find), mais comme il y a un problème avec -L qui boucle de part un lien symbolique, on utilise -H (ne pas suivre les liens symboliques)
 
 ```sh
 apt-get install genisoimage
