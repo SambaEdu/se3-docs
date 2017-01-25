@@ -427,6 +427,20 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 
 ### Sur un `CD` ou sur une clé `usb`
 
+
+#### sur un CD
+```sh
+apt-get install wodim
+wodim -v dev=/dev/sr0 -dao ./my_wheezy_install.iso
+mkdir /mnt/cdrom
+mount /dev/sr0 /mnt/cdrom
+diff /mnt/cdrom/ ./isonew/
+umount /dev/cdrom
+```
+** A tester **
+
+#### sur une cle USB
+
 **Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO].
 
 Insérez votre clé USB d'une taille supérieur à la taille de l'image iso.
@@ -450,6 +464,8 @@ On lance la commande qui va créer la clé USB.
 ```sh
 cp ./my_wheezy_install.iso /dev/sdX && sync
 ```
+** A tester **
+
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
 
