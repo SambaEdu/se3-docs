@@ -315,9 +315,9 @@ mkdir isoorig isonew
 On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis on copie son contenu dans le répertoire isonew.
 ```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
-rsync -a -H –exclude=TRANS.TBL isoorig/ isonew
+rsync -a -H isoorig/ isonew
 ```
-Cela dit que l'image est montée en lecture seule c'est normal, et il y a une erreur sur TRANS.TBL car il n'existe pas dans l'archive téléchargée, c'est aussi normal. (En fait, ce fichier existe dans d'autres archives) … supprimer cette option ? [TODO]
+Cela dit que l'image est montée en lecture seule c'est normal, et il y a une erreur sur TRANS.TBL car il n'existe pas dans l'archive téléchargée, c'est aussi normal. (En fait, ce fichier existe dans d'autres archives)… supprimer cette option ? Oui.
 
 
 ##### Dans le répertoire **isonew**
