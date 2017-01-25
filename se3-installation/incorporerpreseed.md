@@ -154,6 +154,20 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
 Voila , le fichier **se3.preseed** est pret
 
 
+* **Modification facultative**
+
+Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en clair. Vous pouvez le crypter en utilisant la ligne commentée ci-dessous (si vous décommentez cette ligne, supprimez les 2 autres…) :
+```sh
+# Passwd super user
+# -----------------
+d-i passwd/make-user boolean false
+d-i passwd/root-password password Acet2605
+d-i passwd/root-password-again password Acet2605
+# printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
+#d-i passwd/root-password-crypted password ###_PASS_ROOT_###
+```
+
+
 ### Téléchargement et modifications de fichiers pour la phase 3
 
 Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrait laisser le fait de les telecharger en modifiant comme à l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
