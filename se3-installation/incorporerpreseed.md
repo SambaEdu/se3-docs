@@ -5,6 +5,7 @@
 * [Préliminaires](#préliminaires)
     * [Objectif](#objectif)
     * [Étapes de l'installation automatique d'un `se3`](#Étapes-de-linstallation-automatique-dun-se3)
+    * [Vue d'ensemble des préparatifs](#vue-densemble-des-préparatifs)
 * [Phase 1 : Les fichiers `preseed` et `setup_se3`](#phase-1--les-fichiers-preseed-et-setup_se3)
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
@@ -49,6 +50,19 @@ Pour la description de chaque phase, vous consulterez [la documentation ad hoc](
 Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers nécessaires lors de l'installation, en les incorporant, une fois pour toute, dans l'archive de l'installateur.
 
 Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation**.
+
+
+### Vue d'ensemble des préparatifs
+
+Lors de la phase 1 de l'installation classique sont créés les fichiers **se3.preseed** et **setup_se3.data** via l'interface de configuration.
+
+Une fois cela effectué, on modifie le fichier **se3.preseed** pour l'adapter à une préconfiguration de type `CD` ou `usb`, avec `preseed/file`.
+
+Ensuite on télécharge les fichiers nécessaires à la phase 3 pour les adapter aux objectifs poursuivis (un fichier non encore disponible est créé à cette occasion).
+
+Enfin, on incorpore l'ensemble des fichiers ci-dessus à l'archive d'installation, on modifie quelques fichiers d'amorçage pour qu'ils tiennent compte du fichier de préconfiguration et on regénére l'archive au format `iso`.
+
+Il suffit alors de démarrer une machine à partir d'un `CD` ou d'une clé `usb` contenant cette archive personnalisée pour que la phase 2 démarre et s'enchaîne automatiquement sur la phase 3 sans intervention.
 
 
 ## Phase 1 : Les fichiers `preseed` et `setup_se3`
