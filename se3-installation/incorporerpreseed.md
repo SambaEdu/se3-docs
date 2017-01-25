@@ -428,8 +428,6 @@ La machine démarre, il n'y a rien a faire l'installation est completement autom
 
 ## Phase 3 : Se connecter en ROOT et installation du paquet SE3
 
-Au redémarrage la connection en root est automatique.
-
 *****  Il est dit ici qu'il faut copier a ce moment le secret.tdb ... en cas de migration... est on concerne par cela ? ou le script restaure_se3 s'occupe de tout ?
 http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur
 
@@ -439,7 +437,7 @@ Il nous reste à y déposer le fichier cité :
 cp /var/lib/samba/secrets.tdb ./isonew/
 
 On passe sur le nouveau serveur
-Juste après le reboot, lorsque l'installation et le paramétrage du SE3 commencent à se faire (ligne mauve sur fond noir correspondant à la PHASE 3), on stoppe le script à l'aide de la combinaison CTRL+C et on se connecte en root avec le mot de passe temporaire (choisi lors de la configuration en ligne).
+Juste après le reboot, lorsque l'installation et le paramétrage du SE3 commencent à se faire (ligne mauve sur fond noir correspondant à la PHASE 3), on stoppe le script à l'aide de la combinaison CTRL+C 
 Il nous reste à y copier le fichier secrets.tdb :
 cp /cdrom/secrets.tdb /var/lib/samba/private/
 
@@ -449,6 +447,7 @@ cd /root
 Il n'y a plus qu'à attendre que cela se termine ;-). 
 *****
 
+Au redémarrage la connection en root est automatique.
 Il faut appuyer sur **Entree**
 (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
 Puis choisir **3** (sans serveur de communication)
@@ -460,7 +459,7 @@ Enfin saisir 2 fois le nouveau mot de passe pour `root`
 
 On peut rajouter les lignes suivantes avant le terminer dans install_phase2.sh (et enlever ce que l'on ne veut pas installer)
 ```sh
-apt-get --yes --force-yes se3-clamav se3-dhcp se3-clients-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius-
+apt-get --yes --force-yes se3-clamav se3-dhcp se3-clients-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius
 ```
 Pour se3-backup il y a une intervention a faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut etre automatique
 ```sh
@@ -471,6 +470,7 @@ Puis finir par un
 apt-get -qq update
 apt-get upgrade --quiet --assume-yes
 ```
+
 
 ** NB ** ne peut on pas terminer l'automatisation complete et automatiser  le dessus ?
 
