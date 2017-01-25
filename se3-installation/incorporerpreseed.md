@@ -428,7 +428,27 @@ La machine démarre, il n'y a rien a faire l'installation est completement autom
 
 ## Phase 3 : Se connecter en ROOT et installation du paquet SE3
 
-Au redémarrage la connection en root est automatique, mais 
+Au redémarrage la connection en root est automatique.
+
+*****  Il est dit ici qu'il faut copier a ce moment le secret.tdb ... en cas de migration... est on concerne par cela ? ou le script restaure_se3 s'occupe de tout ?
+http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur
+
+Récupération du fichier nécessaire à l'installation du nouveau serveur
+On aura besoin du fichier 'secrets.tdb' que l'on placera sur le `CD`
+Il nous reste à y déposer le fichier cité :
+cp /var/lib/samba/secrets.tdb ./isonew/
+
+On passe sur le nouveau serveur
+Juste après le reboot, lorsque l'installation et le paramétrage du SE3 commencent à se faire (ligne mauve sur fond noir correspondant à la PHASE 3), on stoppe le script à l'aide de la combinaison CTRL+C et on se connecte en root avec le mot de passe temporaire (choisi lors de la configuration en ligne).
+Il nous reste à y copier le fichier secrets.tdb :
+cp /cdrom/secrets.tdb /var/lib/samba/private/
+
+Une fois ceci effectué, on relance le script d'installation :
+cd /root
+./install_phase2.sh
+Il n'y a plus qu'à attendre que cela se termine ;-). 
+*****
+
 Il faut appuyer sur **Entree**
 (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
 Puis choisir **3** (sans serveur de communication)
@@ -438,9 +458,21 @@ Puis saisir le mot de passe pour `adminse3`
 Enfin saisir 2 fois le nouveau mot de passe pour `root`
 (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
 
+On peut rajouter les lignes suivantes avant le terminer dans install_phase2.sh (et enlever ce que l'on ne veut pas installer)
+```sh
+apt-get --yes --force-yes se3-clamav se3-dhcp se3-clients-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius-
+```
+Pour se3-backup il y a une intervention a faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut etre automatique
+```sh
+apt-get --yes --force-yes se3-backup
+```
+Puis finir par un 
+```sh
+apt-get -qq update
+apt-get upgrade --quiet --assume-yes
+```
 
-** NB ** ne peut on pas terminer l'automatisation complete et automatiser  le dessus ? et en profiter pour installer tous les paquets SE3  : se3-backup se3-clamav se3-dhcp se3-client-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius puis faire une mise a jour de tout ... ?
-**NB :** je ne me souviens plus ce qu'il faut mettre en place pour qu'au redémarrage on se trouve en root et qu'un script se lance.
+** NB ** ne peut on pas terminer l'automatisation complete et automatiser  le dessus ?
 
 Il reste a tester que le se3 est vraiement ok, en tout cas il est accessible en [IPSE3]:909
 
