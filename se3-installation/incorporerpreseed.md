@@ -248,7 +248,7 @@ nano ./se3scripts/se3-post-base-installer.sh
 
 En commentant la ligne suivante le fichier  **sources.list** n'existant pas :
 ```sh
-# mv sources.list /...
+#mv sources.list /target/etc/apt/sources.list
 ```
 En rajoutant les lignes suivantes à la fin pour la gestion du fichier inittab :
 ```sh
@@ -351,10 +351,7 @@ label install
 Ce qui ne marche pas :
 ```sh
    append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
-```
-ou
-```sh
-append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
+   append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
 ```
 
 Ensuite, éditez **isolinux/isolinux.cfg** et **isolinux/prompt.cfg** :  
