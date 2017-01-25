@@ -246,6 +246,10 @@ On met en place l'autologin pour le 1er redémarrage du se3 (début de la phase 
 nano ./se3scripts/se3-post-base-installer.sh
 ```
 
+En commentant la ligne suivante le fichier  **sources.list** n'existant pas :
+```sh
+# mv sources.list /...
+```
 En rajoutant les lignes suivantes à la fin pour la gestion du fichier inittab :
 ```sh
 # ajout pour l'autologin
@@ -424,8 +428,16 @@ La machine démarre, il n'y a rien a faire l'installation est completement autom
 
 ## Phase 3 : Se connecter en ROOT et installation du paquet SE3
 
-Au redémarrage se connecter en root, la suite de l'installation est automatique
-Il faut appuyer sur **Entree** puis choisir **3** (sans serveur de communication), puis saisir le mot de passe pour `adminse3` et saisir 2 fois le nouveau mot de passe pour `root`
+Au redémarrage la connection en root est automatique, mais 
+Il faut appuyer sur **Entree**
+(on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
+Puis choisir **3** (sans serveur de communication)
+(je ne sais pas ou c'est, mais c'est pas dans install_phase2.sh)
+Puis saisir le mot de passe pour `adminse3` 
+(je ne sais pas ou c'est)
+Enfin saisir 2 fois le nouveau mot de passe pour `root`
+(on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
+
 
 ** NB ** ne peut on pas terminer l'automatisation complete et automatiser  le dessus ? et en profiter pour installer tous les paquets SE3  : se3-backup se3-clamav se3-dhcp se3-client-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius puis faire une mise a jour de tout ... ?
 **NB :** je ne me souviens plus ce qu'il faut mettre en place pour qu'au redémarrage on se trouve en root et qu'un script se lance.
