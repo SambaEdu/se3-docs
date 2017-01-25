@@ -342,11 +342,11 @@ label install
 	menu label ^Install
 	menu default
 	kernel /install.amd/vmlinuz 
-	append language=fr locale=fr_FR.UTF-8 console-setup/layoutcode=fr_FR keyboard-configuration/xkb-keymap=fr languagechooser/language-name=French countrychooser/shortlist=FR console-keymaps-at/keymap=fr debian-installer/country=FR debian-installer/locale=fr_FR.UTF-8 preseed/file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
+	append locale=fr_FR keymap=fr(latin9) file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
 ```
 **Remarque :** Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.
 
-Ce qui ne marche pas :
+Ce qui ne marche pas (normal, car auto n'est prévu que pour une préconfiguration de type network, avec preseed/url) :
 ```sh
    append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
    append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
