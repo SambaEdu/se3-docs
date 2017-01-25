@@ -20,7 +20,7 @@
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
     * [Sur un `CD` ou sur une clé `usb`](#sur-un-cd-ou-sur-une-clé-usb)
-    * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb--du-cd--ou-de-limage-iso)
+    * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso)
 * [Phase 3 : connexion en `root` et installation du paquet `se3`](#phase-3--connexion-en-root-et-installation-du-paquet-se3)
 * [Références](#références)
 
@@ -446,7 +446,7 @@ On lance la commande qui va créer la clé USB.
 cp ./my_wheezy_install.iso /dev/sdX && sync
 ```
 
-### Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`
+### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
 
 La machine démarre, il n'y a rien à faire, l'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
 
