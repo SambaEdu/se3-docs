@@ -81,12 +81,10 @@ nano se3.preseed
 
 **Pour la langue**, modifiez les lignes correspondantes :
 ```sh
-# MODIFIE
-# langue et pays
-d-i localechooser/shortlist	select	fr
-d-i debian-installer/locale string fr_FR.UTF-8
-d-i debian-installer/language string fr
-d-i debian-installer/country string fr
+# MODIFIÉ
+# langue, pays et locale
+# mettre en append → locale=fr_FR
+d-i debian-installer/locale string fr_FR
 ```
 Attention : bugs dans le preseed de dimaker…
 ```sh
@@ -100,18 +98,16 @@ pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr da
 
 **Pour le clavier**, modifications des lignes correspondantes :
 ```sh
-#MODIFIE
-# clavier
-d-i console-keymaps-at/keymap select fr-latin9
-d-i debian-installer/keymap string fr-latin9
-d-i console-setup/modelcode string pc105
-d-i console-setup/layoutcode string fr
+# MODIFIÉ
+# clavier "azerty"
+# mettre en append → keymap=fr(latin9)
+d-i keymap select fr(latin9)
 ```
 
-**Pour un script inutile**, commentez la ligne :
+**Un script inutile**, commentez la ligne :
 ```sh
-#MODIFIE, pour éviter un problème de fichier corrompu avec netcfg.sh
-#mais cela poses peut être des problèmes par la suite car pas de réseau juste dans l'installateur
+# MODIFIÉ
+# netcfg.sh n'est à utiliser que dans le cas d'une préconfiguration de type network (avec preseed/url)
 #d-i preseed/run string netcfg.sh
 ```
 **NB :** il faudrait éclaircir cela. 
@@ -122,32 +118,34 @@ J'ai remarqué de grosses differences entre l'execution de l'iso modifie pour et
 
 **Pour les dépôts**, il faut ajouter ces lignes :
 ```sh
-#AJOUTE, pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
-#Mirror settings
-d-i mirror/protocol string http
+# AJOUTÉ
+# pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
+# Mirror settings
 d-i mirror/country string manual
-d-i mirror/http/hostname string ftp.fr.debian.org
+d-i mirror/http/hostname string httpredir.debian.org
 d-i mirror/http/directory string /debian
-d-i mirror/http/proxy string
 d-i mirror/suite string wheezy
+d-i mirror/http/proxy string
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 **Pour les statistiques**, une  ligne à rajouter :
 ```sh
-#AJOUTE, pour evite de répondre à la question
-#Some versions of the installer can report back on what software you have
-#installed, and what software you use. The default is not to report back,
-#but sending reports helps the project determine what software is most
-#popular and include it on CDs.
+# AJOUTE
+# pour evite de répondre à la question
+# Some versions of the installer can report back on what software you have
+# installed, and what software you use. The default is not to report back,
+# but sending reports helps the project determine what software is most
+# popular and include it on CDs.
 popularity-contest popularity-contest/participate boolean false
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 **Pour la mise en place de la phase 3**, modifiez les commandes à la fin :
 ```sh
-#MODIFIE Preseed commands
-#----------------
+# MODIFIÉ
+# Preseed commands : mise en place de l'autologin
+# ----------------
 d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     cp /cdrom/se3scripts/* ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
