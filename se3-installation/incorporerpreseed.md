@@ -19,8 +19,8 @@
          * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
-    * [Sur un `CD` ou sur une clé `usb`](#sur-un-CD-ou-sur-une-clé-usb)
-    * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb--du-CD--ou-de-limage-iso)
+    * [Sur un `CD` ou sur une clé `usb`](#sur-un-cd-ou-sur-une-clé-usb)
+    * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb--du-cd--ou-de-limage-iso)
 * [Phase 3 : connexion en `root` et installation du paquet `se3`](#phase-3--connexion-en-root-et-installation-du-paquet-se3)
 * [Références](#références)
 
