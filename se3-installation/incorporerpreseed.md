@@ -20,7 +20,7 @@
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
     * [Sur un `CD`](#graver-un-cd)
     * [Sur une clé `usb`](#utiliser-une-clé-usb)
-* [Phase 3 : installation du paquet SE3](#phase-3--installation-du-paquet-se3)
+* [Phase 3 : installation du paquet SE3](#phase-3--se-connecter-en-root-et-installation-du-paquet-se3)
 * [Solution alternative](#solution-alternative)
 * [Références](#références)
 
@@ -40,9 +40,9 @@ Pour la sauvegarde du `SE3`, vous consulterez avec profit [la documentation ad h
 ### Étapes de l'installation automatique d'un `se3`
 
 L'installation automatique d'un `se3` se déroule en 3 phases :
-* **Phase1 :** création des fichiers **se3.preseed** et **setup_se3.data**
-* **Phase2 :** installation du système d'exploitation `Debian` via le fichier **se3.preseed**
-* **Phase3 :** installation du paquet `se3` et consorts
+* **Phase 1 :** création des fichiers **se3.preseed** et **setup_se3.data**
+* **Phase 2 :** installation du système d'exploitation `Debian` via le fichier **se3.preseed**
+* **Phase 3 :** installation du paquet `se3` et consorts
 
 Pour la description de chaque phase, vous consulterez [la documentation ad hoc](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation_sous_Debian_Wheezy_en_mode_automatique).
 
@@ -51,7 +51,7 @@ Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers n�
 Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation**.
 
 
-## Phase1 : Les fichiers `preseed` et `setup_se3`
+## Phase 1 : Les fichiers `preseed` et `setup_se3`
 
 ### Création des fichiers `preseed` et `setup_se3`
 
