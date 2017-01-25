@@ -282,9 +282,9 @@ if [ -e /etc/inittab.orig ]
 then
     rm -f /etc/inittab
     cp /etc/inittab.orig /etc/inittab
+    rm -f /etc/inittab.orig
 fi
 ```
-** NB** peut etre rajouter un rm -f /etc/inittab.orig dans ton if qu'il ne le fasse qu'une fois ...
 avant ces 2 lignes (vers la fin du script)
 ```sh
 [ "$DEBUG" != "yes" ] && rm -f /root/install_phase2.sh
@@ -331,7 +331,8 @@ On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis o
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
-Cela dit que l'image est montée en lecture seule c'est normal, et il y a une erreur sur TRANS.TBL car il n'existe pas dans l'archive téléchargée, c'est aussi normal. (En fait, ce fichier existe dans d'autres archives)… supprimer cette option ? Oui.
+Cela dit que l'image est montée en lecture seule c'est normal. 
+NB : si vous utiliser l'autre archive, il faudra remplacer : **debian-7.11.0-amd64-netinst.iso** par : **firmware-7.11.0-amd64-netinst.iso**
 
 
 ##### Dans le répertoire **isonew**
