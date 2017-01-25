@@ -428,58 +428,51 @@ La machine démarre, il n'y a rien a faire l'installation est completement autom
 
 ## Phase 3 : Se connecter en ROOT et installation du paquet SE3
 
-*****  Il est dit ici qu'il faut copier a ce moment le secret.tdb ... en cas de migration... est on concerne par cela ? ou le script restaure_se3 s'occupe de tout ?
+*****  Il est dit ici qu'il faut copier a ce moment le secrets.tdb ... en cas de migration... est on concerne par cela ? ou le script restaure_se3 s'occupe de tout ?
 http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur
 
 Récupération du fichier nécessaire à l'installation du nouveau serveur
-On aura besoin du fichier 'secrets.tdb' que l'on placera sur le `CD`
-Il nous reste à y déposer le fichier cité :
-cp /var/lib/samba/secrets.tdb ./isonew/
+On a besoin du fichier 'secrets.tdb' que l'on recupere sur son serveur SE3, il est sur /var/lib/samba/secrets.tdb
+et on le place sur le `CD` dans ./isonew/se3scripts
 
-On passe sur le nouveau serveur
+Sur le nouveau serveur
 Juste après le reboot, lorsque l'installation et le paramétrage du SE3 commencent à se faire (ligne mauve sur fond noir correspondant à la PHASE 3), on stoppe le script à l'aide de la combinaison CTRL+C 
-Il nous reste à y copier le fichier secrets.tdb :
-cp /cdrom/secrets.tdb /var/lib/samba/private/
-
-Une fois ceci effectué, on relance le script d'installation :
-cd /root
-./install_phase2.sh
-Il n'y a plus qu'à attendre que cela se termine ;-). 
-*****
+Il suffit pour cela de rajouter cela au debut du fichier install_phase2.sh :
+```sh
+if [ -e /secrets.tdb ]
+then
+    mv /secrets.tdb /var/lib/samba/private/
+fi
+```
 
 Au redémarrage la connection en root est automatique.
-Il faut appuyer sur **Entree**
-(on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
-Puis choisir **3** (sans serveur de communication)
-(je ne sais pas ou c'est, mais c'est pas dans install_phase2.sh)
-Puis saisir le mot de passe pour `adminse3` 
-(je ne sais pas ou c'est)
-Enfin saisir 2 fois le nouveau mot de passe pour `root`
-(on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
+ - Il faut appuyer sur **Entree** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
+ - Puis choisir **3** (sans serveur de communication) (je ne sais pas ou c'est, mais c'est pas dans install_phase2.sh)
+ - Puis saisir le mot de passe pour `adminse3` (je ne sais pas ou c'est)
+ - Enfin saisir 2 fois le nouveau mot de passe pour `root` (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
 
-On peut rajouter les lignes suivantes avant le terminer dans install_phase2.sh (et enlever ce que l'on ne veut pas installer)
+On pourrait aussi rajouter les lignes suivantes avant le terminer dans install_phase2.sh
 ```sh
 apt-get --yes --force-yes se3-clamav se3-dhcp se3-clients-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius
 ```
-Pour se3-backup il y a une intervention a faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut etre automatique
+Pour se3-backup il y a une intervention a faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut etre completement automatisé
 ```sh
 apt-get --yes --force-yes se3-backup
 ```
-Puis finir par un 
+Puis finir par une mise à jour :
 ```sh
 apt-get -qq update
 apt-get upgrade --quiet --assume-yes
 ```
 
+** NB ** Il faudrait essaye de terminer l'automatisation complete dans l'objectif d'une restauration ?
 
-** NB ** ne peut on pas terminer l'automatisation complete et automatiser  le dessus ?
-
+Le se3 est pret a etre restauré.
 Il reste a tester que le se3 est vraiement ok, en tout cas il est accessible en [IPSE3]:909
 
 ## Références
 
 Voici quelques références que nous avons utilisé pour la rédaction de cette documentation :
-
 * Article du site [`Debian Facile`](https://debian-facile.org) : [preseed debian](https://debian-facile.org/doc:install:preseed) qui décrit l'incorporation d'un fichier `preseed`.
 * Article du site [`Debian Facile`](https://debian-facile.org) : [preseed debian](https://debian-facile.org/doc:install:usb-boot) qui décrit lacopie d'une image iso sur une cle usb.
 * La documentation officielle `Debian` concernant [l'installation via un preseed](https://www.debian.org/releases/wheezy/amd64/apb.html.fr).
