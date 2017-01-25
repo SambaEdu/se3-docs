@@ -5,7 +5,7 @@
 * [Préliminaires](#préliminaires)
     * [Objectif](#objectif)
     * [Étapes de l'installation automatique d'un `se3`](#Étapes-de-linstallation-automatique-dun-se3)
-* [Phase 1 : Les fichiers `preseed` et `setup_se3`](#phase1--les-fichiers-preseed-et-setup_se3)
+* [Phase 1 : Les fichiers `preseed` et `setup_se3`](#phase-1--les-fichiers-preseed-et-setup_se3)
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
