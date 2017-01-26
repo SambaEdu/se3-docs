@@ -431,17 +431,35 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 #### sur un CD
 
 Insérez votre CD vierge d'une taille supérieur à la taille de l'image iso (supérieur à 300Mo).
-Ici le graveur de cd est en /dev/sr0
 
-On install le programme puis on lance la copie :
+On install le programme puis on recupere les informations sur le graveur :
 ```sh
 apt-get install wodim
-wodim -v dev=/dev/sr0 -dao ./my_wheezy_install.iso
+wodim --device
+```
+Cela donne :
+```sh
+wodim: Overview of accessible drives (1 found) :
+-------------------------------------------------------------------------
+ 0  dev='/dev/sg1'	rwrw-- : 'VBOX' 'CD-ROM'
+-------------------------------------------------------------------------
+```
+Ici le graveur de cd est en /dev/sg1. ** Important ** Dans la suite, on remplace sg1 par l'identification de son graveur.
+
+Dnas le cas ou il est necessaire d'effacer le CD
+```sh
+wodim -v blank=fast dev=/dev/sg1
+```
+
+On demonte le graveur puis lance la gravure du cd :
+```sh
+umount /dev/sg1
+wodim -v dev=/dev/sg1 -dao ./my_wheezy_install.iso
 ```
 On verifie la copie :
 ```sh
 mkdir /mnt/cdrom
-mount /dev/sr0 /mnt/cdrom
+mount /dev/sg1 /mnt/cdrom
 diff /mnt/cdrom/ ./isonew/
 umount /dev/cdrom
 ```
@@ -456,7 +474,7 @@ En root, tapez
 ```sh
 fdisk –l
 ```
-
+Cela donne :
 ```sh
   Disk /dev/sdX: 3 GB, 3997486080 bytes 
   255 heads, 63 sectors/track, 486 cylinders 
