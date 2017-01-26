@@ -313,12 +313,12 @@ avant ces 2 lignes (vers la fin du script)
 
 Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés et modifiés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
 
-Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* devrait suffire.
+Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* suffit (testée).
 ```sh
 wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
 
-Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (non testée [TODO]ok teste aussi):
+Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (testée):
 ```sh
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
@@ -479,7 +479,8 @@ La machine démarre, il n'y a rien à faire, l'installation est complètement au
 Au redémarrage la connection en `root` est automatique (autologin).
  - Il faut appuyer sur **Entrée** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
  - Puis choisir **3** (sans serveur de communication) → peut-on rendre cela automatique ?
- - Puis saisir le mot de passe pour `adminse3` → idem
+ **NB :** il faudrait corriger ce truc, car il ne tient pas compte du preseed, non ?
+ - Puis saisir le mot de passe pour `adminse3` → c'est juste a la suite, comment l'eviter ?
  - Enfin, saisir 2 fois le nouveau mot de passe pour `root` (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
 
 On pourrait aussi rajouter les lignes suivantes avant de terminer dans install_phase2.sh
