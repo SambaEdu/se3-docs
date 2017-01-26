@@ -429,9 +429,17 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 
 
 #### sur un CD
+
+Insérez votre CD vierge d'une taille supérieur à la taille de l'image iso (supérieur à 300Mo).
+Ici le graveur de cd est en /dev/sr0
+
+On install le programme puis on lance la copie :
 ```sh
 apt-get install wodim
 wodim -v dev=/dev/sr0 -dao ./my_wheezy_install.iso
+```
+On verifie la copie :
+```sh
 mkdir /mnt/cdrom
 mount /dev/sr0 /mnt/cdrom
 diff /mnt/cdrom/ ./isonew/
@@ -441,29 +449,40 @@ umount /dev/cdrom
 
 #### sur une cle USB
 
-**Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO].
+**Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurances a remplacer 1 dans le fichier **txt.cfg* ligne **APPEND** et 2 dans le **se3.preseed** dans la partie **# Preseed commands : mise en place de l'autologin**
 
-Insérez votre clé USB d'une taille supérieur à la taille de l'image iso.
+Insérez votre clé USB d'une taille supérieur à la taille de l'image iso (supérieur à 300Mo).
 En root, tapez
 ```sh
 fdisk –l
 ```
 
 ```sh
-  Disk /dev/sdd: 3 GB, 3997486080 bytes 
+  Disk /dev/sdX: 3 GB, 3997486080 bytes 
   255 heads, 63 sectors/track, 486 cylinders 
   Units = cylinders of 16065 * 512 = 8225280 bytes 
  
      Device Boot      Start         End      Blocks   Id  System 
-  /dev/sdd1   *           1         487     3911796    6  FAT1
+  /dev/sdX1   *           1         487     3911796    6  FAT1
 ```
-Repérez le volume /dev/sdx à coté de Disk qui correspond à votre clé USB grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille. Dans l'exemple ici, c'est /dev/sdd
+Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé USB grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille.
 
-Attention, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur !
-On lance la commande qui va créer la clé USB.
+Attention, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur ! 
+** Important ** dans la suite on remplacera X par la lettre qui convient pour sa clé.
+
+Il est indispensable de démonter tous les points de montage de cette clé à l'aide de umount puis on lance la copie :
 ```sh
+umount /dev/sdX
 cp ./my_wheezy_install.iso /dev/sdX && sync
 ```
+On verifie la copie :
+```sh
+mkdir /mnt/usb
+mount /dev/sdX /mnt/usb
+diff /mnt/usb/ ./isonew/
+umount /dev/usb
+```
+Voila la clé crée permet d'installer votre se3.
 ** A tester **
 
 
