@@ -165,7 +165,10 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
-Voila , le fichier **se3.preseed** est pret
+Voila , le fichier **se3.preseed** est prêt. On peut tester sa conformité à l'aide de la commande suivante :
+```sh
+debconf-set-selections -c se3.preseed
+```
 
 
 * **Modification facultative**
@@ -459,7 +462,7 @@ rsync -a -H isoorig/ isonew
 une différence notable avec la méthode précédente est la modification du fichier **txt.cfg** de l'archive `iso`.
 ```sh
 nano ./isonew/txt.cfg
-```  
+```
 On le modifie ainsi :
 ```sh
 default install
@@ -468,7 +471,7 @@ label install
 	menu default
 	kernel linux
 	append locale=fr_FR keymap=fr(latin9) initrd=initrd.gz -- quiet
-```  
+```
 **Remarque :** on ne modifie pas les fichiers **isolinux.cfg** et **prompt.cfg**.
 
 * incorporation à l'archive **intitrd.gz**  
@@ -481,7 +484,7 @@ cp ../../se3.preseed preseed.cfg
 cp ../../setup_se3.data setup_se3.data
 cp ../../se3scripts se3scripts
 find . | cpio -o -H newc | gzip > ../initrd.gz
-```  
+```
 **Remarque :** on peut en profiter pour incorporer les firmwares nécessaires à l'installation. [TODO]
 
 * reconstitution de **l'archive `iso`**  
@@ -507,10 +510,11 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 ### Sur un `CD` ou sur une clé `usb`
 
 
-#### sur un CD
+#### sur un `CD`
 
-Insérez votre CD vierge d'une taille supérieur à la taille de l'image iso (supérieur à 300Mo).
-Installez le programme wodim (pour graver) puis récupérez les informations sur le graveur :
+Insérez votre CD vierge d'une taille supérieur à la taille de l'image `iso` (supérieur à 300Mo).
+
+Installez le programme **wodim** (pour graver) puis récupérez les informations sur le graveur :
 ```sh
 apt-get install wodim
 wodim --device
@@ -522,9 +526,9 @@ wodim: Overview of accessible drives (1 found) :
  0  dev='/dev/sg1'	rwrw-- : 'VBOX' 'CD-RW'
 -------------------------------------------------------------------------
 ```
-Ici le graveur de cd est en /dev/sg1. ** Important ** Dans la suite, remplacez sg1 par l'identification de son graveur.
+Ici le graveur de `CD` est en /dev/sg1. **Important** Dans la suite, remplacez sg1 par l'identification de son graveur.
 
-Dans le cas où il est necessaire d'effacer le CD
+Dans le cas où il est necessaire d'effacer le `CD` :
 ```sh
 wodim -v blank=fast dev=/dev/sg1
 ```
@@ -542,8 +546,9 @@ mount /dev/sg1 /mnt/cdrom
 diff /mnt/cdrom/ ./isonew/
 umount /dev/cdrom
 ```
-Le CD d'installation de votre se3 est prêt.
-** A tester **
+Le CD d'installation de votre `se3` est prêt.
+**À tester**
+
 
 #### sur une cle USB
 
@@ -565,8 +570,8 @@ Cela donne :
 ```
 Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé USB grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille.
 
-Attention, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur ! 
-** Important ** dans la suite, remplacez X par la lettre qui convient pour sa clé.
+Attention, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur !  
+**Important** dans la suite, remplacez X par la lettre qui convient pour sa clé.
 
 Il est indispensable de démonter tous les points de montage de cette clé à l'aide de umount puis lancez la copie :
 ```sh
@@ -581,7 +586,7 @@ diff /mnt/usb/ ./isonew/
 umount /dev/usb
 ```
 La clé d'installation de votre se3 est prête.
-** A tester **
+**À tester**
 
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
@@ -634,4 +639,4 @@ Voici quelques références que nous avons utilisé pour la rédaction de cette 
 * Article du site [`Debian Facile`](https://debian-facile.org) : [graver une cle usb](https://debian-facile.org/doc:install:usb-boot) qui décrit la copie d'une image `iso` sur une cle `usb`.
 * Article du site [`Debian Facile`](https://debian-facile.org) : [graver un cd](https://debian-facile.org/doc:systeme:wodim) qui décrit la copie d'une image `iso` sur un `CD`.
 * La documentation officielle `Debian` concernant [l'installation via un preseed](https://www.debian.org/releases/wheezy/amd64/apb.html.fr).
-* …
+* Un article sur [la modification de l'initrd](http://connect.ed-diamond.com/GNU-Linux-Magazine/GLMFHS-045/Une-installation-de-Debian-automatique).
