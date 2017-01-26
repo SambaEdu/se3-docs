@@ -427,6 +427,51 @@ Dans cette méthode, au lieu de placer les fichiers à la racine de l'archive `i
 
 La plupart des actions détaillées ci-dessus sont à reprendre avec quelques différences que nous allons préciser.
 
+* fichiers **se3.preseed** et **setup_se3.data**  
+les modifications sont pratiquement identiques sauf pour la partie "Preseed commands". Voici les modifications à apporter :
+```sh
+# MODIFIÉ
+# Preseed commands : mise en place de l'autologin
+# ----------------
+d-i preseed/early_command string cp se3scripts/* ./; \
+    chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
+    ./se3-early-command.sh se3-post-base-installer.sh 
+```
+
+* téléchargement des fichiers **pour la phase 3**  
+on place ces fichiers dans un répertoire se3scripts et on les modifie comme indiqué.
+
+* téléchargement de l'installateur **mini.iso**  
+on prend une archive plus petite, que l'on renomme **wheezy_mini.iso**
+```sh
+wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso -O wheezy_mini.iso
+```
+
+* création des répertoires **isoorig** et **isonew**  
+comme ci-dessus; on monte l'archive **wheezy_mini.iso** dans le répertoire **isoorig** et on copie le contenu dans le répertoire **isonew**.
+```sh
+mkdir isoorig isonew
+mount -o loop -t iso9660 wheezy_mini.iso isoorig
+rsync -a -H isoorig/ isonew
+```
+
+* modfication du fichier **txt.cfg**
+une différence notable avec la méthode précédente est la modification du fichier **txt.cfg** de l'archive `iso`.
+```sh
+nano ./isonew/txt.cfg
+```
+On le modifie ainsi :
+```sh
+default install
+label install
+	menu label ^Install
+	menu default
+	kernel linux
+	append locale=fr_FR keymap=fr(latin9) initrd=initrd.gz -- quiet
+```
+
+* 
+
 
 ## Phase 2 : Utiliser l'archive d'installation personnalisée
 
