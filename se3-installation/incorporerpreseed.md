@@ -431,8 +431,7 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 #### sur un CD
 
 Insérez votre CD vierge d'une taille supérieur à la taille de l'image iso (supérieur à 300Mo).
-
-On install le programme puis on recupere les informations sur le graveur :
+Installez le programme wodim (pour graver) puis récupérez les informations sur le graveur :
 ```sh
 apt-get install wodim
 wodim --device
@@ -441,28 +440,30 @@ Cela donne :
 ```sh
 wodim: Overview of accessible drives (1 found) :
 -------------------------------------------------------------------------
- 0  dev='/dev/sg1'	rwrw-- : 'VBOX' 'CD-ROM'
+ 0  dev='/dev/sg1'	rwrw-- : 'VBOX' 'CD-RW'
 -------------------------------------------------------------------------
 ```
-Ici le graveur de cd est en /dev/sg1. ** Important ** Dans la suite, on remplace sg1 par l'identification de son graveur.
+Ici le graveur de cd est en /dev/sg1. ** Important ** Dans la suite, remplacez sg1 par l'identification de son graveur.
 
-Dnas le cas ou il est necessaire d'effacer le CD
+Dans le cas où il est necessaire d'effacer le CD
 ```sh
 wodim -v blank=fast dev=/dev/sg1
 ```
 
-On demonte le graveur puis lance la gravure du cd :
+Démontez le graveur puis lancez la gravure du cd :
 ```sh
 umount /dev/sg1
 wodim -v dev=/dev/sg1 -dao ./my_wheezy_install.iso
 ```
-On verifie la copie :
+
+Vérifiez la copie :
 ```sh
 mkdir /mnt/cdrom
 mount /dev/sg1 /mnt/cdrom
 diff /mnt/cdrom/ ./isonew/
 umount /dev/cdrom
 ```
+Le CD d'installation de votre se3 est prêt.
 ** A tester **
 
 #### sur une cle USB
@@ -486,21 +487,21 @@ Cela donne :
 Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé USB grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille.
 
 Attention, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur ! 
-** Important ** dans la suite on remplacera X par la lettre qui convient pour sa clé.
+** Important ** dans la suite, remplacez X par la lettre qui convient pour sa clé.
 
-Il est indispensable de démonter tous les points de montage de cette clé à l'aide de umount puis on lance la copie :
+Il est indispensable de démonter tous les points de montage de cette clé à l'aide de umount puis lancez la copie :
 ```sh
 umount /dev/sdX
 cp ./my_wheezy_install.iso /dev/sdX && sync
 ```
-On verifie la copie :
+Vérifiez la copie :
 ```sh
 mkdir /mnt/usb
 mount /dev/sdX /mnt/usb
 diff /mnt/usb/ ./isonew/
 umount /dev/usb
 ```
-Voila la clé crée permet d'installer votre se3.
+La clé d'installation de votre se3 est prête.
 ** A tester **
 
 
@@ -511,7 +512,7 @@ La machine démarre, il n'y a rien à faire, l'installation est complètement au
 
 ## Phase 3 : connexion en `root` et installation du paquet `se3`
 
-**Remarque :** Il est dit [ici](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur) qu'il faut copier à ce moment le **secrets.tdb**… en cas de migration… est-on concerné par cela ? Non. Ou le script **restaure_se3** s'occupe de tout ? Oui.
+**Remarque :** Il est dit [ici](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur) qu'il faut copier à ce moment le **secrets.tdb** en cas de migration mais ce n'est pas necessaire. Le scripte **restaure_se3** s'occupe de tout.
 
 Au redémarrage la connection en `root` est automatique (autologin).
  - Il faut appuyer sur **Entrée** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
@@ -551,6 +552,7 @@ Il reste à tester que le se3 est vraiment ok, en tout cas il est accessible en 
 
 Voici quelques références que nous avons utilisé pour la rédaction de cette documentation :
 * Article du site [`Debian Facile`](https://debian-facile.org) : [preseed debian](https://debian-facile.org/doc:install:preseed) qui décrit l'incorporation d'un fichier `preseed`.
-* Article du site [`Debian Facile`](https://debian-facile.org) : [preseed debian](https://debian-facile.org/doc:install:usb-boot) qui décrit lacopie d'une image iso sur une cle usb.
+* Article du site [`Debian Facile`](https://debian-facile.org) : [graver une cle usb](https://debian-facile.org/doc:install:usb-boot) qui décrit la copie d'une image `iso` sur une cle `usb`.
+* Article du site [`Debian Facile`](https://debian-facile.org) : [graver un cd](https://debian-facile.org/doc:systeme:wodim) qui décrit la copie d'une image `iso` sur un `CD`.
 * La documentation officielle `Debian` concernant [l'installation via un preseed](https://www.debian.org/releases/wheezy/amd64/apb.html.fr).
 * …
