@@ -21,6 +21,8 @@
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
     * [Sur un `CD` ou sur une clé `usb`](#sur-un-cd-ou-sur-une-clé-usb)
+        * [Sur un `CD`](#sur-un-CD)
+        * [Sur une clé `usb`](#sur-une-clé-usb)
     * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso)
 * [Phase 3 : connexion en `root` et installation du paquet `se3`](#phase-3--connexion-en-root-et-installation-du-paquet-se3)
 * [Références](#références)
@@ -510,11 +512,11 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 ### Sur un `CD` ou sur une clé `usb`
 
 
-#### sur un `CD`
+#### Sur un `CD`
 
-Insérez votre CD vierge d'une taille supérieur à la taille de l'image `iso` (supérieur à 300Mo).
+* Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 300Mo).
 
-Installez le programme **wodim** (pour graver) puis récupérez les informations sur le graveur :
+* Installez le programme **wodim** (pour graver) puis récupérez les informations sur le graveur :
 ```sh
 apt-get install wodim
 wodim --device
@@ -526,35 +528,36 @@ wodim: Overview of accessible drives (1 found) :
  0  dev='/dev/sg1'	rwrw-- : 'VBOX' 'CD-RW'
 -------------------------------------------------------------------------
 ```
-Ici le graveur de `CD` est en /dev/sg1. **Important** Dans la suite, remplacez sg1 par l'identification de son graveur.
+Ici,le graveur de `CD` est en /dev/sg1.  
+**Important** Dans la suite, remplacez sg1 par l'identification de son graveur.
 
-Dans le cas où il est necessaire d'effacer le `CD` :
+* Dans le cas où il est necessaire d'effacer le `CD` :
 ```sh
 wodim -v blank=fast dev=/dev/sg1
 ```
 
-Démontez le graveur puis lancez la gravure du cd :
+* Démontez le graveur puis lancez la gravure du `CD` :
 ```sh
 umount /dev/sg1
 wodim -v dev=/dev/sg1 -dao ./my_wheezy_install.iso
 ```
 
-Vérifiez la copie :
+* Vérifiez la copie :
 ```sh
 mkdir /mnt/cdrom
 mount /dev/sg1 /mnt/cdrom
 diff /mnt/cdrom/ ./isonew/
 umount /dev/cdrom
 ```
-Le CD d'installation de votre `se3` est prêt.
+Le `CD` d'installation de votre `se3` est prêt.
 **À tester**
 
 
-#### sur une cle USB
+#### Sur une clé `usb`
 
 **Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurances a remplacer 1 dans le fichier **txt.cfg* ligne **APPEND** et 2 dans le **se3.preseed** dans la partie **# Preseed commands : mise en place de l'autologin**
 
-Insérez votre clé USB d'une taille supérieur à la taille de l'image iso (supérieur à 300Mo).
+* Insérez votre clé USB d'une taille supérieure à la taille de l'image `iso` (supérieure à 300 Mo).
 En root, tapez
 ```sh
 fdisk –l
@@ -568,17 +571,17 @@ Cela donne :
      Device Boot      Start         End      Blocks   Id  System 
   /dev/sdX1   *           1         487     3911796    6  FAT1
 ```
-Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé USB grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille.
+* Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé `usb` grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille.
 
 Attention, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur !  
 **Important** dans la suite, remplacez X par la lettre qui convient pour sa clé.
 
-Il est indispensable de démonter tous les points de montage de cette clé à l'aide de umount puis lancez la copie :
+* Il est indispensable de démonter tous les points de montage de cette clé à l'aide de umount puis lancez la copie :
 ```sh
 umount /dev/sdX
 cp ./my_wheezy_install.iso /dev/sdX && sync
 ```
-Vérifiez la copie :
+* Vérifiez la copie :
 ```sh
 mkdir /mnt/usb
 mount /dev/sdX /mnt/usb
