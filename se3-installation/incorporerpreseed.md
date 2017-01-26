@@ -17,6 +17,7 @@
          * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
          * [Dans le répertoire **isoorig**](#dans-le-répertoire-isoorig)
          * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
+* [Variante : méthode `initrd`](#variante--méthode-initrd)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
     * [Sur un `CD` ou sur une clé `usb`](#sur-un-cd-ou-sur-une-clé-usb)
@@ -414,6 +415,17 @@ genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -b
 cd ..
 ```
 L’image est là (dans le repertoire en cours), elle porte le nom my_wheezy_install.iso
+
+
+## Variante : méthode `initrd`
+
+L'archive de l'installateur `Debian` **debian-7.11.0-amd64-netinst.iso** (environ 220 Mo) permet d'utiliser la méthode `file` qui est décrite ci-dessus.
+
+Si l'on veut utiliser une archive moins volumineuse, comme la **mini.iso** (environ 25 Mo), il est nécessaire d'utiliser la méthode `initrd`.
+
+Dans cette méthode, au lieu de placer les fichiers à la racine de l'archive `iso`, on les place dans l'archive **initrd.gz** qui se trouve soit dans l'archive `iso` ou dans le répertoire *install.amd* de cette archive ; d'où le nom de cette méthode.
+
+La plupart des actions détaillées ci-dessus sont à reprendre avec quelques différences que nous allons préciser.
 
 
 ## Phase 2 : Utiliser l'archive d'installation personnalisée
