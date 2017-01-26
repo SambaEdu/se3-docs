@@ -439,10 +439,10 @@ d-i preseed/early_command string cp se3scripts/* ./; \
 ```
 
 * téléchargement des fichiers **pour la phase 3**  
-on place ces fichiers dans un répertoire se3scripts et on les modifie comme indiqué.
+on place ces fichiers dans un répertoire se3scripts et on les modifie comme indiqué ci-dessus.
 
 * téléchargement de l'installateur **mini.iso**  
-on prend une archive plus petite, que l'on renomme **wheezy_mini.iso**
+on prend une archive plus petite que la précédente, que l'on renomme **wheezy_mini.iso**
 ```sh
 wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso -O wheezy_mini.iso
 ```
@@ -455,7 +455,7 @@ mount -o loop -t iso9660 wheezy_mini.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
 
-* modfication du fichier **txt.cfg**
+* modification du fichier **txt.cfg**
 une différence notable avec la méthode précédente est la modification du fichier **txt.cfg** de l'archive `iso`.
 ```sh
 nano ./isonew/txt.cfg
@@ -470,7 +470,29 @@ label install
 	append locale=fr_FR keymap=fr(latin9) initrd=initrd.gz -- quiet
 ```
 
-* 
+**Remarque :** on ne modifie pas les fichiers **isolinux.cfg** et **prompt.cfg**.
+
+* incorporation à l'archive **intitrd.gz**
+on se place dans le répertoire isonew, on y crée un fichier *temp* dans lequel on se place et décompresse l'archive *initrd.gz*. Ensuite, on y copie les fichiers nécessaires à l'installation, que ce soit pour la phase 2 ou la phase 3. Et, pour finir, on reconstitue l'archive initrd.gz.
+```sh
+mkdir temp
+cd temp
+gunzip -dc ../initrd.gz | cpio -id --no-absolute-filenames
+cp ../../se3.preseed preseed.cfg
+cp ../../setup_se3.data setup_se3.data
+cp ../../se3scripts se3scripts
+find . | cpio -o -H newc | gzip > ../initrd.gz
+```
+
+* reconstitution de **l'archive `iso`**  
+```sh
+cd ..
+rm -rf temp/
+genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux.bin -c boot.cat ../isonew
+cd ..
+```
+
+Et voilà, vous avez une archive `iso` prête pour l'installation d'un `se3`.
 
 
 ## Phase 2 : Utiliser l'archive d'installation personnalisée
