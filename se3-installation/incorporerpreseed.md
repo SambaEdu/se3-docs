@@ -459,8 +459,8 @@ rsync -a -H isoorig/ isonew
 une différence notable avec la méthode précédente est la modification du fichier **txt.cfg** de l'archive `iso`.
 ```sh
 nano ./isonew/txt.cfg
-```
-  On le modifie ainsi :
+```  
+On le modifie ainsi :
 ```sh
 default install
 label install
@@ -468,9 +468,8 @@ label install
 	menu default
 	kernel linux
 	append locale=fr_FR keymap=fr(latin9) initrd=initrd.gz -- quiet
-```
-
-  **Remarque :** on ne modifie pas les fichiers **isolinux.cfg** et **prompt.cfg**.
+```  
+**Remarque :** on ne modifie pas les fichiers **isolinux.cfg** et **prompt.cfg**.
 
 * incorporation à l'archive **intitrd.gz**  
 on se place dans le répertoire isonew, on y crée un fichier *temp* dans lequel on se place et décompresse l'archive *initrd.gz*. Ensuite, on y copie les fichiers nécessaires à l'installation, que ce soit pour la phase 2 ou la phase 3. Et, pour finir, on reconstitue l'archive initrd.gz.
@@ -482,7 +481,8 @@ cp ../../se3.preseed preseed.cfg
 cp ../../setup_se3.data setup_se3.data
 cp ../../se3scripts se3scripts
 find . | cpio -o -H newc | gzip > ../initrd.gz
-```
+```  
+**Remarque :** on peut en profiter pour incorporer les firmwares nécessaires à l'installation. [TODO]
 
 * reconstitution de **l'archive `iso`**  
 ```sh
