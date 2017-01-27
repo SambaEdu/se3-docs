@@ -185,8 +185,8 @@ Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en 
 # Passwd super user
 # -----------------
 d-i passwd/make-user boolean false
-d-i passwd/root-password password Acet2605
-d-i passwd/root-password-again password Acet2605
+d-i passwd/root-password password MOTDEPASSEROOT
+d-i passwd/root-password-again password MOTDEPASSEROOT
 #d-i passwd/root-password-crypted password ###_PASS_ROOT_###
 ```
 Pour obtenir un mot de passe crypté à partir du mot de passe en clair (mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
