@@ -187,14 +187,12 @@ Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en 
 d-i passwd/make-user boolean false
 d-i passwd/root-password password MOTDEPASSEROOT
 d-i passwd/root-password-again password MOTDEPASSEROOT
-#d-i passwd/root-password-crypted password ###_PASS_ROOT_###
+#d-i passwd/root-password-crypted password $1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71
 ```
 Pour obtenir un mot de passe crypté à partir du mot de passe en clair (mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
 ```sh
 printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 ```
-Le résultat de cette commande sera mis à la place de ###_PASS_ROOT_###.
-
 
 
 ### Téléchargement et modifications de fichiers pour la phase 3
