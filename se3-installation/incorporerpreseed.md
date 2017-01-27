@@ -88,14 +88,15 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.
 
 pour une automatisation complète, il faut effectuer des modifications dans le fichier **se3.preseed** :
 
-On l'édite :
+* On l'édite :
 ```sh
 nano se3.preseed
 ```
 
 …quelques lignes à modifier :
 
-**Pour la langue**, modifiez les lignes correspondantes :
+* **Pour la langue**  
+modifiez les lignes correspondantes :
 ```sh
 # MODIFIÉ
 # langue, pays et locale
@@ -112,7 +113,8 @@ d-i     debian-installer/locale                            string fr_FR.UTF-8
 pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr dans la ligne du milieu ??
 → ce doit être un bug : outil de création du preseed à modifier ? 
 
-**Pour le clavier**, modifications des lignes correspondantes :
+* **Pour le clavier**  
+modifications des lignes correspondantes :
 ```sh
 # MODIFIÉ
 # clavier "azerty"
@@ -120,7 +122,8 @@ pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr da
 d-i keymap select fr(latin9)
 ```
 
-**Un script inutile**, commentez la ligne :
+* **Un script inutile**  
+commentez la ligne :
 ```sh
 # MODIFIÉ
 # netcfg.sh n'est à utiliser que dans le cas d'une préconfiguration de type network (avec preseed/url)
@@ -132,7 +135,8 @@ Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me
 [TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible .
 J'ai remarqué de grosses differences entre l'execution de l'iso modifie pour etre completement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'install avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
 
-**Pour les dépôts**, il faut ajouter ces lignes :
+* **Pour les dépôts**  
+il faut ajouter ces lignes :
 ```sh
 # AJOUTÉ
 # pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
@@ -145,7 +149,8 @@ d-i mirror/http/proxy string
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
-**Pour les statistiques**, une  ligne à rajouter :
+* **Pour les statistiques**  
+une  ligne à rajouter :
 ```sh
 # AJOUTE
 # pour evite de répondre à la question
@@ -157,7 +162,8 @@ popularity-contest popularity-contest/participate boolean false
 ```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
-**Pour la mise en place de la phase 3**, modifiez les commandes à la fin :
+* **Pour la mise en place de la phase 3**  
+modifiez les commandes à la fin :
 ```sh
 # MODIFIÉ
 # Preseed commands : mise en place de l'autologin
@@ -167,11 +173,11 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
+* Vérification de conformité  
 Voila , le fichier **se3.preseed** est prêt. On peut tester sa conformité à l'aide de la commande suivante :
 ```sh
 debconf-set-selections -c se3.preseed
 ```
-
 
 * **Modification facultative**
 
