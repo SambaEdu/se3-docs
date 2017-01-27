@@ -173,14 +173,13 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
-* Vérification de conformité  
+* **Vérification de conformité**  
 Voila , le fichier **se3.preseed** est prêt. On peut tester sa conformité à l'aide de la commande suivante :
 ```sh
 debconf-set-selections -c se3.preseed
 ```
 
-* **Modification facultative**
-
+* **Modification facultative**  
 Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en clair. Vous pouvez le crypter en utilisant la ligne commentée ci-dessous (si vous décommentez cette ligne, supprimez les 2 autres…) :
 ```sh
 # Passwd super user
@@ -188,9 +187,14 @@ Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en 
 d-i passwd/make-user boolean false
 d-i passwd/root-password password Acet2605
 d-i passwd/root-password-again password Acet2605
-# printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 #d-i passwd/root-password-crypted password ###_PASS_ROOT_###
 ```
+Pour obtenir un mot de passe crypté à partir du mot de passe en clair (mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
+```sh
+printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
+```
+Le résultat de cette commande sera mis à la place de ###_PASS_ROOT_###.
+
 
 
 ### Téléchargement et modifications de fichiers pour la phase 3
