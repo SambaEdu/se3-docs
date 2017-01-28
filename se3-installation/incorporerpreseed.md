@@ -58,7 +58,7 @@ Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en 
 
 Lors de la phase 1 de l'installation classique sont créés les fichiers **se3.preseed** et **setup_se3.data** via l'interface de configuration.
 
-Une fois cela effectué, on modifie le fichier **se3.preseed** pour l'adapter à une préconfiguration de type `CD` ou `usb`, avec `preseed/file`.
+Une fois cela effectué, on modifie le fichier **se3.preseed** pour l'adapter à une préconfiguration de type `CD` ou `usb`.
 
 Ensuite on télécharge les fichiers nécessaires à la phase 3 pour les adapter aux objectifs poursuivis (le fichier inittab, non encore disponible en téléchargement, est créé à cette occasion).
 
