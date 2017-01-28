@@ -86,7 +86,7 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.
 
 ### Modification du fichier `preseed`
 
-Pour une automatisation complète, il faut effectuer des modifications dans le fichier **se3.preseed** :
+Pour une automatisation complète, il est nécessaire de modifier certaines parties du fichier **se3.preseed** :
 
 * On l'édite :
 ```sh
@@ -95,7 +95,7 @@ nano se3.preseed
 
 …quelques lignes à modifier :
 
-* **Pour la langue**  
+* **Pour la langue, le pays et les locales (paramètres régionaux)**  
 Modifiez les lignes correspondant au language, au pays et aux locales en remplaçant ces 3 parties par la suivante :
 ```sh
 # MODIFIÉ
@@ -110,11 +110,11 @@ d-i     debian-installer/locale                            string fr_FR.UTF-8
 d-i     debian-installer/supported-locales                 string br_FR.UTF-8, en_US.UTF-8
 d-i     debian-installer/locale                            string fr_FR.UTF-8
 ```
-pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr dans la ligne du milieu ??
-→ ce doit être un bug : outil de création du preseed à modifier ? 
+Pourquoi une ligne est présente 2 fois ? Pourquoi il y a br au lieu de fr dans la ligne du milieu ?  
+→ ce doit être un bug : **outil de création du preseed à modifier ?**
 
 * **Pour le clavier**  
-Replacez les lignes correspondant au clavier (xkb-keymap, layoutcode et keymap) par la partie suivante :
+Remplacez les lignes correspondant au clavier (xkb-keymap, layoutcode et keymap) par la partie suivante :
 ```sh
 # MODIFIÉ
 # clavier "azerty"
@@ -123,20 +123,20 @@ d-i keymap select fr(latin9)
 ```
 
 * **Un script inutile**  
-commentez la ligne :
+Commentez la ligne :
 ```sh
 # MODIFIÉ
 # netcfg.sh n'est à utiliser que dans le cas d'une préconfiguration de type network (avec preseed/url)
 #d-i preseed/run string netcfg.sh
 ```
 **NB :** il faudrait éclaircir cela. 
-Ce fichier existe nul part dans une install avec preseed d'un wheezy, il a surement été rajouté par ceux qui ont fabriqué l'install du se3. Lorsqu'on l'enlève, il semble que il n'y a pas d'acces reseau pendnant l'execution du preseed mais elle réapparait apres c'est pourquoi j'ai ete oblige de telecharger les fichiers plus loin dans le preseed avant de faire l'install. ceux la : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts
-Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu ...
-[TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible .
-J'ai remarqué de grosses differences entre l'execution de l'iso modifie pour etre completement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'install avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
+Ce fichier existe nul part dans une install avec preseed d'un wheezy, il a surement été rajouté par ceux qui ont fabriqué l'install du se3. Lorsqu'on l'enlève, il semble qu'il n'y a pas d'accès reseau pendannt l'exécution du preseed mais elle réapparait après ; c'est pourquoi j'ai été obligé de télécharger les fichiers plus loin dans le preseed avant de faire l'install ; ceux-là : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts.  
+Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu…  
+[TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible.
+J'ai remarqué de grosses différences entre l'exécution de l'iso modifie pour être complètement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'installe avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
 
 * **Pour les dépôts**  
-il faut ajouter ces lignes :
+Il faut ajouter ces lignes :
 ```sh
 # AJOUTÉ
 # pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
@@ -150,7 +150,7 @@ d-i mirror/http/proxy string
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 * **Pour les statistiques**  
-une  ligne à rajouter :
+Une  ligne à rajouter :
 ```sh
 # AJOUTE
 # pour evite de répondre à la question
@@ -197,7 +197,7 @@ printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 
 ### Téléchargement et modifications de fichiers pour la phase 3
 
-Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrait laisser le fait de les telecharger en modifiant comme à l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
+Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrait laisser le fait de les télécharger en modifiant comme à l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
 ```sh
 mkdir ./se3scripts
 cd se3scripts
