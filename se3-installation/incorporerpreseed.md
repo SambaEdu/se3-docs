@@ -86,7 +86,7 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.
 
 ### Modification du fichier `preseed`
 
-pour une automatisation complète, il faut effectuer des modifications dans le fichier **se3.preseed** :
+Pour une automatisation complète, il faut effectuer des modifications dans le fichier **se3.preseed** :
 
 * On l'édite :
 ```sh
@@ -96,7 +96,7 @@ nano se3.preseed
 …quelques lignes à modifier :
 
 * **Pour la langue**  
-modifiez les lignes correspondantes :
+Modifiez les lignes correspondant au language, au pays et aux locales en remplaçant ces 3 parties par la suivante :
 ```sh
 # MODIFIÉ
 # langue, pays et locale
@@ -114,7 +114,7 @@ pourquoi une ligne est presente 2 fois ? Pourquoi il y avait br au lieu de fr da
 → ce doit être un bug : outil de création du preseed à modifier ? 
 
 * **Pour le clavier**  
-modifications des lignes correspondantes :
+Replacez les lignes correspondant au clavier (xkb-keymap, layoutcode et keymap) par la partie suivante :
 ```sh
 # MODIFIÉ
 # clavier "azerty"
