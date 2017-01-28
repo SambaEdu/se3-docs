@@ -33,11 +33,11 @@
 
 ### Objectif
 
-L'objectif est de créer un `CD d'installation` ou une clé `usb` complètement automatisé de son `SE3 Wheezy`.
+L'objectif est de créer un `CD d'installation` ou une clé `usb` complètement automatisé de son `se3 Wheezy`.
 
-Ainsi, avec ce `CD`, ou cette clé `usb`, *personnalisé* et une sauvegarde de son `SE3`, on pourra très rapidement (re)-mettre en production son `SE3`, que ce soit sur la même machine ou sur une autre machine.
+Ainsi, avec ce `CD` *personnalisé*, ou cette clé `usb`, et une sauvegarde de son `se3`, on pourra très rapidement (re)-mettre en production son `se3`, que ce soit sur la même machine ou sur une autre machine.
 
-Pour la sauvegarde du `SE3`, vous consulterez avec profit [la documentation ad hoc](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
+Pour la sauvegarde/restauration du `se3`, vous consulterez avec profit [la documentation ad hoc](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
 
 
 ### Étapes de l'installation automatique d'un `se3`
@@ -45,13 +45,13 @@ Pour la sauvegarde du `SE3`, vous consulterez avec profit [la documentation ad h
 L'installation automatique d'un `se3` se déroule en 3 phases :
 * **Phase 1 :** création des fichiers **se3.preseed** et **setup_se3.data**
 * **Phase 2 :** installation du système d'exploitation `Debian` via le fichier **se3.preseed**
-* **Phase 3 :** installation du paquet `se3` et consorts
+* **Phase 3 :** installation du paquet **`se3` et consorts**
 
 Pour la description de chaque phase, vous consulterez [la documentation ad hoc](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation_sous_Debian_Wheezy_en_mode_automatique).
 
 Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers nécessaires lors de l'installation, en les incorporant, une fois pour toute, dans l'archive de l'installateur.
 
-Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation**.
+Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation. Les tests en machines virtuelles sont concluantes. Il reste à effectuer la même chose sur des machines réelles**.
 
 
 ### Vue d'ensemble des préparatifs
@@ -60,9 +60,9 @@ Lors de la phase 1 de l'installation classique sont créés les fichiers **se3.p
 
 Une fois cela effectué, on modifie le fichier **se3.preseed** pour l'adapter à une préconfiguration de type `CD` ou `usb`, avec `preseed/file`.
 
-Ensuite on télécharge les fichiers nécessaires à la phase 3 pour les adapter aux objectifs poursuivis (un fichier non encore disponible est créé à cette occasion).
+Ensuite on télécharge les fichiers nécessaires à la phase 3 pour les adapter aux objectifs poursuivis (le fichier inittab, non encore disponible en téléchargement, est créé à cette occasion).
 
-Enfin, on incorpore l'ensemble des fichiers ci-dessus à l'archive d'installation, on modifie quelques fichiers d'amorçage pour qu'ils tiennent compte du fichier de préconfiguration et on regénére l'archive au format `iso`.
+Enfin, on incorpore l'ensemble des fichiers ci-dessus à l'archive d'installation, on modifie quelques fichiers d'amorçage pour qu'ils tiennent compte du fichier de préconfiguration et on regénére l'archive au format `iso`. Deux méthodes sont décrites : la méthode "file" et la méthode "initrd".
 
 Il suffit alors de démarrer une machine à partir d'un `CD` ou d'une clé `usb` contenant cette archive personnalisée pour que la phase 2 démarre et s'enchaîne automatiquement sur la phase 3 sans intervention.
 
