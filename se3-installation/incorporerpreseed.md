@@ -197,14 +197,15 @@ printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 
 ### Téléchargement et modifications de fichiers pour la phase 3
 
-Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires (cependant on pourrait laisser le fait de les télécharger en modifiant comme à l'origine le preseed mais avant il faut resourdre le probleme de cette ligne : d-i preseed/run string netcfg.sh
+Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires :
 ```sh
 mkdir ./se3scripts
 cd se3scripts
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-post-base-installer.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/sources.se3 http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/install_phase2.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
-Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts , j'ai deja ajouté la ligne pour le telechargement au dessus [TODO] Sinon, il faudra le fabriquer pour permettre un redémarrage en autologin pour la phase 3…
+* Cas du fichier **inittab**  
+Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts , j'ai déjà ajouté la ligne pour le téléchargement au-dessus [TODO] En attendant, il faut le créer car il est nécessaire pour permettre un redémarrage en autologin pour la phase 3…
 ```sh
 nano ./se3scripts/inittab
 ```
@@ -280,26 +281,27 @@ po::powerokwait:/etc/init.d/powerfail stop
 #T3:23:respawn:/sbin/mgetty -x0 -s 57600 ttyS3
 ```
 
-On met en place l'autologin pour le 1er redémarrage du se3 (début de la phase 3) en modifiant le script se3-post-base-installer.sh :
+* Mise en place de **l'autologin**  
+On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :
 ```sh
 nano ./se3scripts/se3-post-base-installer.sh
 ```
 
-En commentant la ligne suivante le fichier  **sources.list** n'existant pas :
+D'une part, commentez la ligne suivante, le fichier **sources.list** n'étant pas à cet endroit :  
 ```sh
 #mv sources.list /target/etc/apt/sources.list
 ```
-En rajoutant les lignes suivantes à la fin pour la gestion du fichier inittab :
+Et d'autre part, rajoutez les lignes suivantes à la fin pour la gestion du fichier inittab :  
 ```sh
 # ajout pour l'autologin
 mv /target/etc/inittab /target/etc/inittab.orig
 mv inittab /target/etc/inittab
 cp /target/etc/inittab /target/root/
 ```
-Dans le fichier il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ? )tandis que sources.se3 existe mais est vide ... et n'est pas copier ... est il necessaire ?
+Dans le fichier *se3-post-base-installer.sh*, il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ?) tandis que *sources.se3* existe, mais il est vide… et n'est pas copié… est-il nécessaire ?  
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
-Et pour supprimer l'autologin lors des redémarrages suivants., on modifie la fin du script install_phase2.sh :
+Et, pour supprimer l'autologin lors des redémarrages suivants du `se3`, on modifie la fin du script **install_phase2.sh** :
 ```sh
 nano ./se3scripts/install_phase2.sh
 ```
