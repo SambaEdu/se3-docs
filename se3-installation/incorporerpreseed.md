@@ -20,9 +20,8 @@
 * [Variante : méthode `initrd`](#variante--méthode-initrd)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
-    * [Sur un `CD` ou sur une clé `usb`](#sur-un-cd-ou-sur-une-clé-usb)
-        * [Sur un `CD`](#sur-un-CD)
-        * [Sur une clé `usb`](#sur-une-clé-usb)
+    * [Sur un `CD`](#sur-un-CD)
+    * [Sur une clé `usb`](#sur-une-clé-usb)
     * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso)
 * [Phase 3 : connexion en `root` et installation du paquet `se3`](#phase-3--connexion-en-root-et-installation-du-paquet-se3)
 * [Références](#références)
@@ -519,17 +518,14 @@ Sur une VM (Virtual Machine), il n'y a rien à faire, on peut utiliser directeme
 D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée sur une VM. Cela vous permettra de la valider.
 
 
-### Sur un `CD` ou sur une clé `usb`
-
-
-#### Sur un `CD`
+### Sur un `CD`
 
 * Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 300Mo).
 
 * Installez le programme **wodim** (pour graver) puis récupérez les informations sur le graveur :
 ```sh
 apt-get install wodim
-wodim --device
+wodim --devices
 ```
 Cela donne :
 ```sh
@@ -560,10 +556,10 @@ diff /mnt/cdrom/ ./isonew/
 umount /dev/cdrom
 ```
 Le `CD` d'installation de votre `se3` est prêt.
-**À tester**
+**À tester, mon graveur ne semble pas reconnu par linux, je n'ai pas pu tester cette partie**
 
 
-#### Sur une clé `usb`
+### Sur une clé `usb`
 
 **Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurances a remplacer 1 dans le fichier **txt.cfg* ligne **APPEND** et 2 dans le **se3.preseed** dans la partie **# Preseed commands : mise en place de l'autologin**
 
@@ -599,7 +595,7 @@ diff /mnt/usb/ ./isonew/
 umount /dev/usb
 ```
 La clé d'installation de votre se3 est prête.
-**À tester**
+**À tester, la gravure sur cle a été testé mais pas la cle obtenu**
 
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
