@@ -143,6 +143,10 @@ d-i mirror/http/directory string /debian
 d-i mirror/suite string wheezy
 d-i mirror/http/proxy string
 ```
+**NB : ** pour le proxy ne faut il pas mettre ? :
+```sh
+d-i mirror/http/proxy string http://192.168.1.1:3128
+```
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 * **Pour les statistiques**  
