@@ -173,6 +173,16 @@ Voila , le fichier **se3.preseed** est prêt. On peut tester sa conformité à l
 ```sh
 debconf-set-selections -c se3.preseed
 ```
+** NB ** Il me repond cela : 
+debconf-set-selections -c se3.preseed
+warning: Unknown type configuration, skipping line 42
+warning: Unknown type AUTO, skipping line 51
+warning: Unknown type AUTO, skipping line 56
+warning: Unknown type AUTO, skipping line 59
+warning: Unknown type AUTO, skipping line 61
+warning: Unknown type AUTO, skipping line 62
+warning: Unknown type bolean, skipping line 133
+Ca veut dire quoi? Il y a un problème ?
 
 * **Modification facultative**  
 Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en clair. Vous pouvez le crypter en utilisant la ligne commentée ci-dessous (si vous décommentez cette ligne, supprimez les 2 autres…) :
