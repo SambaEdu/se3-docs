@@ -95,10 +95,9 @@ nano se3.preseed
 …quelques lignes à modifier :
 
 * **Pour la langue, le pays et les locales (paramètres régionaux)**  
-Modifiez les lignes correspondant au language, au pays et aux locales en remplaçant ces 3 parties par la suivante :
+Modifiez les lignes correspondant au **Language**, au **Pays** et aux **Choix des paramètres régionaux** en remplaçant ces 3 parties par la suivante :
 ```sh
-# MODIFIÉ
-# langue, pays et locale
+# MODIFIER : langue, pays et parametres regionaux
 # mettre en append → locale=fr_FR
 d-i debian-installer/locale string fr_FR
 ```
@@ -113,18 +112,17 @@ Pourquoi une ligne est présente 2 fois ? Pourquoi il y a br au lieu de fr dans 
 → ce doit être un bug : **outil de création du preseed à modifier ?**
 
 * **Pour le clavier**  
-Remplacez les lignes correspondant au clavier (xkb-keymap, layoutcode et keymap) par la partie suivante :
+Remplacez les lignes correspondant au **Clavier** (xkb-keymap, layoutcode et keymap) par la partie suivante :
 ```sh
-# MODIFIÉ
-# clavier "azerty"
+# MODIFIER : clavier "azerty"
 # mettre en append → keymap=fr(latin9)
 d-i keymap select fr(latin9)
 ```
 
-* **Un script inutile**  
+* **Un script inutile dans Network configuration **  
 Commentez la ligne :
 ```sh
-# MODIFIÉ
+# MODIFIER :
 # netcfg.sh n'est à utiliser que dans le cas d'une préconfiguration de type network (avec preseed/url)
 #d-i preseed/run string netcfg.sh
 ```
@@ -137,8 +135,7 @@ J'ai remarqué de grosses différences entre l'exécution de l'iso modifie pour 
 * **Pour les dépôts**  
 Il faut ajouter ces lignes :
 ```sh
-# AJOUTÉ
-# pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
+# AJOUTER : pour indiquer le miroir et eventuellement le proxy pour atteindre le miroir
 # Mirror settings
 d-i mirror/country string manual
 d-i mirror/http/hostname string httpredir.debian.org
@@ -151,8 +148,7 @@ d-i mirror/http/proxy string
 * **Pour les statistiques**  
 Une  ligne à rajouter :
 ```sh
-# AJOUTE
-# pour evite de répondre à la question
+# AJOUTER : pour eviter de répondre à la question
 # Some versions of the installer can report back on what software you have
 # installed, and what software you use. The default is not to report back,
 # but sending reports helps the project determine what software is most
@@ -164,7 +160,7 @@ popularity-contest popularity-contest/participate boolean false
 * **Pour la mise en place de la phase 3**  
 modifiez les commandes à la fin :
 ```sh
-# MODIFIÉ
+# MODIFIER : 
 # Preseed commands : mise en place de l'autologin
 # ----------------
 d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
