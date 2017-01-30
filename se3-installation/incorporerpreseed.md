@@ -174,7 +174,6 @@ Voila , le fichier **se3.preseed** est prêt. On peut tester sa conformité à l
 debconf-set-selections -c se3.preseed
 ```
 ** NB ** Il me repond cela : 
-debconf-set-selections -c se3.preseed
 warning: Unknown type configuration, skipping line 42
 warning: Unknown type AUTO, skipping line 51
 warning: Unknown type AUTO, skipping line 56
@@ -303,7 +302,7 @@ mv /target/etc/inittab /target/etc/inittab.orig
 mv inittab /target/etc/inittab
 cp /target/etc/inittab /target/root/
 ```
-Dans le fichier *se3-post-base-installer.sh*, il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ?) tandis que *sources.se3* existe, mais il est vide… et n'est pas copié… est-il nécessaire ?  
+Dans le fichier **se3-post-base-installer.sh**, il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ?) tandis que **sources.se3** existe, mais il est vide… et n'est pas copié… est-il nécessaire ?  
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 Et, pour supprimer l'autologin lors des redémarrages suivants du `se3`, on modifie la fin du script **install_phase2.sh** :
@@ -367,12 +366,12 @@ Si vous utiliser l'archive **debian-7.11.0-amd64-netinst.iso**
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
-Cela dit que l'image est montée en lecture seule c'est normal. 
-NB : si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso**
+Si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso**
 ```sh
 mount -o loop -t iso9660 firmware-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
+Cela dit que l'image est montée en lecture seule c'est normal. 
 
 
 ##### Dans le répertoire **isonew**
