@@ -491,10 +491,11 @@ d-i preseed/early_command string cp se3scripts/* ./; \
 ```
 
 * téléchargement des fichiers **pour la phase 3**  
-on place ces fichiers dans un répertoire se3scripts et on les modifie comme indiqué ci-dessus.
+on place ces fichiers dans un répertoire **se3scripts** et on les modifie comme indiqué ci-dessus.
 
 * téléchargement de l'installateur **mini.iso**  
-on prend une archive plus petite que la précédente, que l'on renomme **wheezy_mini.iso**
+on prend une archive plus petite que la précédente,
+que l'on renomme, par exemple, **wheezy_mini.iso** :
 ```sh
 wget http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso -O wheezy_mini.iso
 ```
@@ -509,6 +510,8 @@ rsync -a -H isoorig/ isonew
 
 * modification du fichier **txt.cfg**  
 une différence notable avec la méthode précédente est la modification du fichier **txt.cfg** de l'archive `iso`.
+
+On l'édite :
 ```sh
 nano ./isonew/txt.cfg
 ```
@@ -524,7 +527,8 @@ label install
 **Remarque :** on ne modifie pas les fichiers **isolinux.cfg** et **prompt.cfg**.
 
 * incorporation à l'archive **intitrd.gz**  
-on se place dans le répertoire **isonew**, on y crée un répertoire *temp* dans lequel on se place et décompresse l'archive **initrd.gz**. Ensuite, on y copie les fichiers nécessaires à l'installation, que ce soit pour la phase 2 ou la phase 3. Et, pour finir, on reconstitue l'archive **initrd.gz**.
+on se place dans le répertoire **isonew**, on y crée un répertoire **temp** dans lequel on se place et décompresse l'archive **initrd.gz**.  
+Ensuite, on y copie les fichiers nécessaires à l'installation, que ce soit pour la phase 2 ou la phase 3. Et, pour finir, on reconstitue l'archive **initrd.gz**.
 ```sh
 mkdir temp
 cd temp
@@ -552,13 +556,14 @@ Et voilà, vous avez une archive `iso` prête pour l'installation d'un `se3`.
 
 ### Sur un réseau virtuel
 
-Sur une VM (Virtual Machine), il n'y a rien à faire, on peut utiliser directement l'image `iso`.
+Sur une VM (Virtual Machine), il n'y a rien à faire de plus, on peut utiliser directement l'image `iso`.
+
 D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée sur une VM. Cela vous permettra de la valider.
 
 
 ### Sur un `CD`
 
-* Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 300Mo).
+* Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 300 Mo).
 
 * Installez le programme **wodim** (pour graver) puis récupérez les informations sur le graveur :
 ```sh
@@ -593,16 +598,17 @@ mount /dev/sg1 /mnt/cdrom
 diff /mnt/cdrom/ ./isonew/
 umount /dev/cdrom
 ```
-Le `CD` d'installation de votre `se3` est prêt.
+Le `CD` d'installation de votre `se3` est prêt.  
 **À tester, mon graveur ne semble pas reconnu par linux, je n'ai pas pu tester cette partie**
 
 
 ### Sur une clé `usb`
 
-**Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurances a remplacer 1 dans le fichier **txt.cfg* ligne **APPEND** et 2 dans le **se3.preseed** dans la partie **# Preseed commands : mise en place de l'autologin**
+**Important :** dans la réalisation de l'archive `iso` ci-dessus, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurrences à remplacer : 1 dans le fichier **txt.cfg**, ligne **APPEND**, et 2 dans le fichier **se3.preseed**, dans la partie **# Preseed commands : mise en place de l'autologin**.
 
-* Insérez votre clé USB d'une taille supérieure à la taille de l'image `iso` (supérieure à 300 Mo).
-En root, tapez
+* Insérez votre clé `usb` d'une taille supérieure à la taille de l'image `iso` (supérieure à 300 Mo).
+
+En root, tapez :
 ```sh
 fdisk –l
 ```
@@ -617,10 +623,10 @@ Cela donne :
 ```
 * Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé `usb` grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille.
 
-Attention, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur !  
-**Important** dans la suite, remplacez X par la lettre qui convient pour sa clé.
+**Attention**, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur !  
+**Important** dans la suite, remplacez X par la lettre qui convient pour la clé.
 
-* Il est indispensable de démonter tous les points de montage de cette clé à l'aide de umount puis lancez la copie :
+* Il est indispensable de démonter tous les points de montage de cette clé à l'aide de la commande umount puis lancez la copie :
 ```sh
 umount /dev/sdX
 cp ./my_wheezy_install.iso /dev/sdX && sync
@@ -633,7 +639,7 @@ diff /mnt/usb/ ./isonew/
 umount /dev/usb
 ```
 La clé d'installation de votre se3 est prête.  
-**À tester, la gravure sur cle a été testé mais pas la cle obtenu**
+**À tester, la gravure sur cle a été testée mais pas la clé obtenue**
 
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
@@ -643,16 +649,16 @@ La machine démarre, il n'y a rien à faire, l'installation est complètement au
 
 ## Phase 3 : connexion en `root` et installation du paquet `se3`
 
-**Remarque :** Il est dit [ici](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur) qu'il faut copier à ce moment le **secrets.tdb** en cas de migration mais ce n'est pas necessaire. Le scripte **restaure_se3** s'occupe de tout.
+**Remarque :** Il est dit [ici](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur) qu'il faut copier à ce moment le **secrets.tdb** en cas de migration mais ce n'est pas nécessaire. Le script **restaure_se3** s'occupe de tout.
 
 Au redémarrage la connection en `root` est automatique (autologin).
  - Il faut appuyer sur **Entrée** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
  - Puis choisir **3** (sans serveur de communication) → peut-on rendre cela automatique ?
  **NB :** il faudrait corriger ce truc, car il ne tient pas compte du preseed, non ?
- - Puis saisir le mot de passe pour `adminse3` → c'est juste a la suite, comment l'eviter ?
+ - Puis saisir le mot de passe pour `adminse3` → c'est juste à la suite, comment l'éviter ?
  - Enfin, saisir 2 fois le nouveau mot de passe pour `root` (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
 
-On pourrait aussi rajouter les lignes suivantes avant de terminer dans install_phase2.sh
+On pourrait aussi rajouter les lignes suivantes, avant de terminer dans install_phase2.sh
 ```sh
 apt-get --yes --force-yes se3-clamav se3-dhcp se3-clients-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius
 ```
@@ -673,10 +679,10 @@ reboot
 
 >**NB** Il faudrait essayer de terminer l'automatisation complète de la phase 3 dans l'objectif d'une restauration ?
 
-Le se3 est pret à être restauré à partir d"une sauvegarde.
+Le `se3` est pret à être restauré à partir d"une sauvegarde.
 
 
-Il reste à tester que le se3 est vraiment ok, en tout cas il est accessible en [IPSE3]:909
+Il reste à tester que le `se3` est vraiment ok, en tout cas il est accessible en [IPSE3]:909.
 
 
 ## Références
