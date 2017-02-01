@@ -15,7 +15,7 @@
       * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
       * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
          * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
-         * [Dans le répertoire **isoorig**](#dans-le-répertoire-isoorig)
+         * [Du répertoire **isoorig** au répertoire **isonew**](#du-répertoire-isoorig-au-répertoire-isonew)
          * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
 * [Variante : méthode `initrd`](#variante--méthode-initrd)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
@@ -210,13 +210,14 @@ printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 
 ### Téléchargement et modifications de fichiers pour la phase 3
 
-On télécharge les fichiers suivants qui seront nécessaires pour la phase 3 :
+On télécharge les fichiers suivants qui seront nécessaires pour la phase 3, en les mettant dans un répertoire **se3scripts** (à créer) :
 ```sh
 mkdir ./se3scripts
 cd se3scripts
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-post-base-installer.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/sources.se3 http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/install_phase2.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
 cd ..
 ```
+
 * Cas du fichier **inittab**  
 Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO], j'ai déjà ajouté la ligne pour le téléchargement au-dessus. En attendant, il faut le créer car il est nécessaire pour permettre un redémarrage en autologin pour la phase 3…
 ```sh
@@ -295,16 +296,16 @@ po::powerokwait:/etc/init.d/powerfail stop
 ```
 
 * Mise en place de **l'autologin**  
-On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :  
-```sh  
-nano ./se3scripts/se3-post-base-installer.sh  
-```  
+On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :
+```sh
+nano ./se3scripts/se3-post-base-installer.sh
+```
   
-D'une part, commentez la ligne suivante, le fichier **sources.list** n'étant pas à cet endroit :  
-```sh  
+D'une part, commentez la ligne suivante, le fichier **sources.list** n'étant pas à cet endroit :
+```sh
 #mv sources.list /target/etc/apt/sources.list  
-```  
-Et d'autre part, rajoutez les lignes suivantes à la fin pour la gestion du fichier inittab :  
+```
+Et d'autre part, rajoutez les lignes suivantes à la fin pour la gestion du fichier inittab :
 ```sh
 # ajout pour l'autologin
 mv /target/etc/inittab /target/etc/inittab.orig
@@ -335,7 +336,7 @@ avant ces 2 lignes (vers la fin du script)
 . /etc/profile
 ```
 
->**NB :** on pourrait rajouter ces lignes dans le script disponible à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
+>**NB :** on pourrait rajouter ces lignes de suppression de l'autologin dans le script install_phase2.sh disponible à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
 
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
@@ -370,10 +371,10 @@ mkdir isoorig isonew
 ```
 
 
-##### Dans le répertoire **isoorig**
+##### Du répertoire **isoorig** au répertoire **isonew**
 
-On monte ensuite, dans le répertoire **isoorig**, l'iso téléchargée , puis on copie son contenu dans le répertoire isonew.
-Si vous utiliser l'archive **debian-7.11.0-amd64-netinst.iso**
+On monte ensuite, dans le répertoire **isoorig**, l'archive `iso` téléchargée , puis on copie son contenu dans le répertoire **isonew**.  
+Si vous utiliser l'archive **debian-7.11.0-amd64-netinst.iso** (sinon, voir la méthode de l'`initrd` décrite ci-dessous))
 ```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
@@ -383,19 +384,23 @@ Si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso**
 mount -o loop -t iso9660 firmware-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
-Cela dit que l'image est montée en lecture seule c'est normal. 
+Cela dit que l'image est montée en lecture seule, c'est normal.
 
 
 ##### Dans le répertoire **isonew**
 
 Les modifications suivantes seront à réaliser dans le répertoire **isonew**.
+
 On va maintenant faire en sorte que l'installateur se charge automatiquement.
+
 On donne les droits en écriture aux 3 fichiers à modifier :
 ```sh
 chmod 755 ./isonew/isolinux/txt.cfg ./isonew/isolinux/isolinux.cfg ./isonew/isolinux/prompt.cfg
 ```
+>**NB :**Est-ce nécessaire ?
 
-On modifie le fichier isolinux/txt.cfg pour l'utilisation du fichier preseed lors de l'installation.
+On modifie le fichier **isolinux/txt.cfg** pour l'utilisation du fichier `preseed` lors de l'installation (phase 2).
+
 On l'édite :
 ```sh
 nano ./isonew/isolinux/txt.cfg
@@ -410,22 +415,28 @@ label install
 	kernel /install.amd/vmlinuz 
 	append locale=fr_FR keymap=fr(latin9) file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
 ```
-**Remarque :** Veillez à adapter install.amd/initrd.gz selon l'architecture utilisée, ici 64bit. En cas de doute, regardez ce qu'il y a dans le répertoire isoorig.
+**Remarque :** Veillez à adapter **install.amd/initrd.gz** selon l'architecture utilisée, ici `64bit`. En cas de doute, regardez ce qu'il y a dans le répertoire **isoorig**.
 
-Ce qui ne marche pas (normal, car auto n'est prévu que pour une préconfiguration de type network, avec preseed/url) :
+>Ce qui ne marche pas (normal, car auto n'est prévu que pour une préconfiguration de type network, avec preseed/url) :  
 ```sh
    append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
    append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
 ```
 
-Ensuite, éditez **isolinux/isolinux.cfg** et **isolinux/prompt.cfg** :  
-changez *timeout 0* en *timeout 4* par exemple et *prompt 0* par *prompt 1*.
+Ensuite, éditez **isolinux/isolinux.cfg** :
 ```sh
 nano ./isonew/isolinux/isolinux.cfg
+```
+changez *timeout 0* en *timeout 4* (par exemple)
+
+…puis éditez **isolinux/prompt.cfg** :
+
+```sh
 nano ./isonew/isolinux/prompt.cfg
 ```
+changez *prompt 0* en *prompt 1*.
 
-Enfin, on copie les 2 fichiers du preseed à la racine du répertoire isonew et les fichiers se3scripts :
+Enfin, on copie les 2 fichiers du `preseed` à la racine du répertoire **isonew** et les fichiers contenus dans le sous-répertoire **se3scripts** :
 ```sh
 cp se3.preseed ./isonew/
 cp setup_se3.data ./isonew/
@@ -433,19 +444,19 @@ mkdir ./isonew/se3scripts
 cp ./se3scripts/* ./isonew/se3scripts/
 ```
 
-Enfin on crée la nouvelle image `ISO` :
+Enfin on crée la nouvelle image `iso` :
 ```sh
 cd isonew
 md5sum `find -H -type f` > md5sum.txt
 ```
-→ l'option -follow est obsolète ; il faudrait mettre -L (d'après man find), mais comme il y a un problème avec -L qui boucle de part un lien symbolique, on utilise -H (ne pas suivre les liens symboliques)
+>→ l'option -follow est obsolète ; il faudrait mettre -L (d'après man find), mais comme il y a un problème avec -L qui boucle de part un lien symbolique, on utilise -H (ne pas suivre les liens symboliques)
 
 ```sh
 apt-get install genisoimage
 genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux/isolinux.bin -c isolinux/boot.cat ../isonew
 cd ..
 ```
-L’image est là (dans le repertoire en cours), elle porte le nom my_wheezy_install.iso
+L’image est là (dans le repertoire en cours), elle porte le nom **my_wheezy_install.iso**.
 
 
 ## Variante : méthode `initrd`
@@ -503,7 +514,7 @@ label install
 **Remarque :** on ne modifie pas les fichiers **isolinux.cfg** et **prompt.cfg**.
 
 * incorporation à l'archive **intitrd.gz**  
-on se place dans le répertoire isonew, on y crée un fichier *temp* dans lequel on se place et décompresse l'archive *initrd.gz*. Ensuite, on y copie les fichiers nécessaires à l'installation, que ce soit pour la phase 2 ou la phase 3. Et, pour finir, on reconstitue l'archive initrd.gz.
+on se place dans le répertoire **isonew**, on y crée un répertoire *temp* dans lequel on se place et décompresse l'archive **initrd.gz**. Ensuite, on y copie les fichiers nécessaires à l'installation, que ce soit pour la phase 2 ou la phase 3. Et, pour finir, on reconstitue l'archive **initrd.gz**.
 ```sh
 mkdir temp
 cd temp
@@ -611,7 +622,7 @@ mount /dev/sdX /mnt/usb
 diff /mnt/usb/ ./isonew/
 umount /dev/usb
 ```
-La clé d'installation de votre se3 est prête.
+La clé d'installation de votre se3 est prête.  
 **À tester, la gravure sur cle a été testé mais pas la cle obtenu**
 
 
@@ -650,7 +661,7 @@ Sans oublier de redémarrer le `se3` à la fin de la phase 3 :
 reboot
 ```
 
-**NB** Il faudrait essayer de terminer l'automatisation complète de la phase 3 dans l'objectif d'une restauration ?
+>**NB** Il faudrait essayer de terminer l'automatisation complète de la phase 3 dans l'objectif d'une restauration ?
 
 Le se3 est pret à être restauré à partir d"une sauvegarde.
 
@@ -667,3 +678,4 @@ Voici quelques références que nous avons utilisé pour la rédaction de cette 
 * La documentation officielle `Debian` concernant [l'installation via un preseed](https://www.debian.org/releases/wheezy/amd64/apb.html.fr).
 * Un article sur [la modification de l'initrd](http://connect.ed-diamond.com/GNU-Linux-Magazine/GLMFHS-045/Une-installation-de-Debian-automatique).
 * La documentation pour [incorporer des firmwares](https://wiki.debian.org/fr/DebianInstaller/NetbootFirmware#Exemples_pour_Debian_7_.22Wheezy.22).
+
