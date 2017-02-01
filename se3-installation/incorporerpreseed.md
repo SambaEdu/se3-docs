@@ -92,7 +92,7 @@ Pour une automatisation complète, il est nécessaire de modifier certaines part
 nano se3.preseed
 ```
 
-…quelques lignes à modifier :
+    …quelques lignes à modifier :
 
 * **Pour la langue, le pays et les locales (paramètres régionaux)**  
 Modifiez les lignes correspondant au **Language**, au **Pays** et aux **Choix des paramètres régionaux** en remplaçant ces 3 parties par la suivante :
@@ -143,7 +143,7 @@ d-i mirror/http/directory string /debian
 d-i mirror/suite string wheezy
 d-i mirror/http/proxy string
 ```
->**NB : ** pour le proxy ne faut il pas mettre ? :
+>**NB :** pour le proxy ne faut-il pas mettre la ligne suivante ?
 >```sh
 d-i mirror/http/proxy string http://192.168.1.1:3128
 ```
@@ -173,12 +173,13 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
 * **Vérification de conformité**  
-Voila , le fichier **se3.preseed** est prêt. On peut tester sa conformité à l'aide de la commande suivante :
+Voila , le fichier **se3.preseed** est prêt.
+On peut tester sa conformité à l'aide de la commande suivante :
 ```sh
 debconf-set-selections -c se3.preseed
 
 ```
->** NB ** Il me repond cela :  
+>**NB** Il me répond cela :  
 ```sh
 warning: Unknown type configuration, skipping line 42
 warning: Unknown type AUTO, skipping line 51
@@ -201,10 +202,11 @@ d-i passwd/root-password password MOTDEPASSEROOT
 d-i passwd/root-password-again password MOTDEPASSEROOT
 #d-i passwd/root-password-crypted password $1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71
 ```
-Pour obtenir un mot de passe crypté à partir du mot de passe en clair (mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
-```sh
-printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
-```
+    Pour obtenir un mot de passe crypté à partir du mot de passe en clair
+    (mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
+    ```sh
+        printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
+    ```
 
 
 ### Téléchargement et modifications de fichiers pour la phase 3
