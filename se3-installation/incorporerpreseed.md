@@ -101,15 +101,15 @@ Modifiez les lignes correspondant au **Language**, au **Pays** et aux **Choix de
 # mettre en append → locale=fr_FR
 d-i debian-installer/locale string fr_FR
 ```
-Attention : bugs dans le preseed de dimaker…
-```sh
+>Attention : bugs dans le preseed de dimaker…
+>```sh
 # Choix des parametres regionaux (locales)
 d-i     debian-installer/locale                            string fr_FR.UTF-8
 d-i     debian-installer/supported-locales                 string br_FR.UTF-8, en_US.UTF-8
 d-i     debian-installer/locale                            string fr_FR.UTF-8
 ```
-Pourquoi une ligne est présente 2 fois ? Pourquoi il y a br au lieu de fr dans la ligne du milieu ?  
-→ ce doit être un bug : **outil de création du preseed à modifier ?**
+>Pourquoi une ligne est présente 2 fois ? Pourquoi il y a br au lieu de fr dans la ligne du milieu ?  
+>→ ce doit être un bug : **outil de création du preseed à modifier ?**
 
 * **Pour le clavier**  
 Remplacez les lignes correspondant au **Clavier** (xkb-keymap, layoutcode et keymap) par la partie suivante :
