@@ -11,7 +11,7 @@
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
     * [Téléchargement et modifications de fichiers pour la phase 3](#téléchargement-et-modifications-de-fichiers-pour-la-phase-3)
-    * [Incorporer le fichier `preseed` à l'archive d'installation](#incorporer-le-fichier-preseed-à-larchive-dinstallation)
+    * [Incorporer les fichiers à l'archive d'installation](#incorporer-les-fichiers-à-larchive-dinstallation)
       * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
       * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
          * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
@@ -52,7 +52,8 @@ Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers n�
 
 Ainsi, les 3 phases pourront s'enchaîner automatiquement.
 
->travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation. Les tests en machines virtuelles sont concluants.  
+>travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation.  
+Les tests en machines virtuelles sont concluants.  
 **Il reste à effectuer la même chose sur des machines réelles**.
 
 
@@ -132,8 +133,8 @@ Commentez la ligne :
 >**NB :** il faudrait éclaircir cela. 
 >Ce fichier existe nul part dans une install avec preseed d'un wheezy, il a surement été rajouté par ceux qui ont fabriqué l'install du se3. Lorsqu'on l'enlève, il semble qu'il n'y a pas d'accès reseau pendannt l'exécution du preseed mais elle réapparait après ; c'est pourquoi j'ai été obligé de télécharger les fichiers plus loin dans le preseed avant de faire l'install ; ceux-là : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts.  
 >Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu…  
->[TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible.
->J'ai remarqué de grosses différences entre l'exécution de l'iso modifie pour être complètement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'installe avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
+>[TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible.  
+>J'ai remarqué de grosses différences entre l'exécution de l'iso modifiée pour être complètement automatique (qui bloque sur netcfg.sh) et l'iso normale qui s'installe avec auto url=://dimaker… beaucoup de fichiers sont installés en plus dans la 2eme… entre autre netcfg et killall. Pourquoi ?
 
 * **Pour les dépôts**  
 Il faut ajouter ces lignes :
@@ -176,7 +177,7 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
     ./se3-early-command.sh se3-post-base-installer.sh 
 ```
 * **Vérification de conformité**  
-Voila , le fichier **se3.preseed** est prêt.
+Voila , le fichier **se3.preseed** est prêt.  
 On peut tester sa conformité à l'aide de la commande suivante :
 ```sh
 debconf-set-selections -c se3.preseed
@@ -192,8 +193,8 @@ warning: Unknown type AUTO, skipping line 61
 warning: Unknown type AUTO, skipping line 62
 warning: Unknown type bolean, skipping line 133
 ```
->Ca veut dire quoi? Il y a un problème ?  
->pour les 6 premiers warning, non mais pour le dernier oui : il faudrait boolean au lieu de bolean…
+>Ça veut dire quoi ? Il y a un problème ?  
+>→ pour les 6 premiers warning, non ; mais pour le dernier, oui : il faudrait boolean au lieu de bolean… Outil de création du preseed à modifier ? [TODO]
 
 * **Modification facultative**  
 Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en clair. Vous pouvez le crypter en utilisant la ligne commentée ci-dessous (si vous décommentez cette ligne, supprimez les 2 autres…) :
@@ -209,6 +210,7 @@ Pour obtenir un mot de passe crypté à partir du mot de passe en clair (mettons
 ```sh
 printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 ```
+Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71).
 
 
 ### Téléchargement et modifications de fichiers pour la phase 3
@@ -300,6 +302,8 @@ po::powerokwait:/etc/init.d/powerfail stop
 
 * Mise en place de **l'autologin**  
 On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :
+
+On l'édite :
 ```sh
 nano ./se3scripts/se3-post-base-installer.sh
 ```
@@ -316,7 +320,7 @@ mv inittab /target/etc/inittab
 cp /target/etc/inittab /target/root/
 ```
 >Dans le fichier **se3-post-base-installer.sh**, il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ?) tandis que **sources.se3** existe, mais il est vide… et n'est pas copié… est-il nécessaire ?  
-→non, il est réécrit à l'aide du script install_phase2.sh  
+→ non, il est réécrit à l'aide du script install_phase2.sh  
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 Et, pour supprimer l'autologin lors des redémarrages suivants du `se3`, on modifie la fin du script **install_phase2.sh** :
@@ -342,7 +346,7 @@ avant ces 2 lignes (vers la fin du script)
 >**NB :** on pourrait rajouter ces lignes de suppression de l'autologin dans le script install_phase2.sh disponible à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
 
 
-## Incorporer le fichier `preseed` à l'archive d'installation
+## Incorporer les fichiers à l'archive d'installation
 
 
 ### Téléchargement de l'installateur `Debian`
@@ -376,17 +380,19 @@ mkdir isoorig isonew
 
 ##### Du répertoire **isoorig** au répertoire **isonew**
 
-On monte ensuite, dans le répertoire **isoorig**, l'archive `iso` téléchargée , puis on copie son contenu dans le répertoire **isonew**.  
-Si vous utiliser l'archive **debian-7.11.0-amd64-netinst.iso** (sinon, voir la méthode de l'`initrd` décrite ci-dessous))
+On monte, dans le répertoire **isoorig**, l'archive `iso` téléchargée , puis on copie son contenu dans le répertoire **isonew**.
+
+* Si vous utiliser l'archive **debian-7.11.0-amd64-netinst.iso** (sinon, voir la méthode de l'`initrd` décrite ci-dessous))
 ```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
-Si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso**
+* Si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso** :
 ```sh
 mount -o loop -t iso9660 firmware-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
+
 Cela dit que l'image est montée en lecture seule, c'est normal.
 
 
@@ -423,6 +429,7 @@ label install
 >Ce qui ne marche pas (normal, car auto n'est prévu que pour une préconfiguration de type network, avec preseed/url) :  
 ```sh
    append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
+   
    append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
 ```
 
@@ -439,7 +446,7 @@ nano ./isonew/isolinux/prompt.cfg
 ```
 changez *prompt 0* en *prompt 1*.
 
-Enfin, on copie les 2 fichiers du `preseed` à la racine du répertoire **isonew** et les fichiers contenus dans le sous-répertoire **se3scripts** :
+Enfin, on copie les 2 fichiers du `preseed` à la racine du répertoire **isonew** et le sous-répertoire **se3scripts** (voir ci-dessus pour son contenu) :
 ```sh
 cp se3.preseed ./isonew/
 cp setup_se3.data ./isonew/
@@ -447,7 +454,7 @@ mkdir ./isonew/se3scripts
 cp ./se3scripts/* ./isonew/se3scripts/
 ```
 
-Enfin on crée la nouvelle image `iso` :
+Enfin on reconstitue le fichier des sommes de contrôle puis on crée la nouvelle image `iso` :
 ```sh
 cd isonew
 md5sum `find -H -type f` > md5sum.txt
@@ -459,7 +466,7 @@ apt-get install genisoimage
 genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux/isolinux.bin -c isolinux/boot.cat ../isonew
 cd ..
 ```
-L’image est là (dans le repertoire en cours), elle porte le nom **my_wheezy_install.iso**.
+L’image est là (dans le repertoire contenant isonew), elle porte le nom **my_wheezy_install.iso**.
 
 
 ## Variante : méthode `initrd`
