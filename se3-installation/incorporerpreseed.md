@@ -50,7 +50,10 @@ Pour la description de chaque phase, vous consulterez [la documentation ad hoc](
 
 Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers nécessaires lors de l'installation, en les incorporant, une fois pour toute, dans l'archive de l'installateur.
 
-Ainsi, les 3 phases pourront s'enchaîner automatiquement ; **travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation. Les tests en machines virtuelles sont concluantes. Il reste à effectuer la même chose sur des machines réelles**.
+Ainsi, les 3 phases pourront s'enchaîner automatiquement.
+
+>travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation. Les tests en machines virtuelles sont concluants.  
+**Il reste à effectuer la même chose sur des machines réelles**.
 
 
 ### Vue d'ensemble des préparatifs
