@@ -296,14 +296,14 @@ po::powerokwait:/etc/init.d/powerfail stop
 
 * Mise en place de **l'autologin**  
 On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :  
-```sh
-nano ./se3scripts/se3-post-base-installer.sh
-```
-
+```sh  
+nano ./se3scripts/se3-post-base-installer.sh  
+```  
+  
 D'une part, commentez la ligne suivante, le fichier **sources.list** n'étant pas à cet endroit :  
-```sh
-#mv sources.list /target/etc/apt/sources.list
-```
+```sh  
+#mv sources.list /target/etc/apt/sources.list  
+```  
 Et d'autre part, rajoutez les lignes suivantes à la fin pour la gestion du fichier inittab :  
 ```sh
 # ajout pour l'autologin
@@ -335,7 +335,7 @@ avant ces 2 lignes (vers la fin du script)
 . /etc/profile
 ```
 
->**NB :** on pourrait rajouter ces lignes dans le script disponible à l'`url http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
+>**NB :** on pourrait rajouter ces lignes dans le script disponible à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
 
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
