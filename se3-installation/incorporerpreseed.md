@@ -101,7 +101,7 @@ Modifiez les lignes correspondant au **Language**, au **Pays** et aux **Choix de
 # mettre en append → locale=fr_FR
 d-i debian-installer/locale string fr_FR
 ```
->Attention : bugs dans le preseed de dimaker…
+>Attention : bugs dans le preseed de dimaker… partie des locales
 >```sh
 # Choix des parametres regionaux (locales)
 d-i     debian-installer/locale                            string fr_FR.UTF-8
@@ -126,11 +126,11 @@ Commentez la ligne :
 # netcfg.sh n'est à utiliser que dans le cas d'une préconfiguration de type network (avec preseed/url)
 #d-i preseed/run string netcfg.sh
 ```
-**NB :** il faudrait éclaircir cela. 
-Ce fichier existe nul part dans une install avec preseed d'un wheezy, il a surement été rajouté par ceux qui ont fabriqué l'install du se3. Lorsqu'on l'enlève, il semble qu'il n'y a pas d'accès reseau pendannt l'exécution du preseed mais elle réapparait après ; c'est pourquoi j'ai été obligé de télécharger les fichiers plus loin dans le preseed avant de faire l'install ; ceux-là : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts.  
-Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu…  
-[TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible.
-J'ai remarqué de grosses différences entre l'exécution de l'iso modifie pour être complètement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'installe avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
+>**NB :** il faudrait éclaircir cela. 
+>Ce fichier existe nul part dans une install avec preseed d'un wheezy, il a surement été rajouté par ceux qui ont fabriqué l'install du se3. Lorsqu'on l'enlève, il semble qu'il n'y a pas d'accès reseau pendannt l'exécution du preseed mais elle réapparait après ; c'est pourquoi j'ai été obligé de télécharger les fichiers plus loin dans le preseed avant de faire l'install ; ceux-là : http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts.  
+>Lorsque je laisse cette ligne, l'installateur bloque avec un message rouge et me dit : le fichier netcfg.sh est corrompu…  
+>[TODO] remettre les wget dans le preseed à la fin ? lorsque cette command fonctionnera , ce sera possible.
+>J'ai remarqué de grosses différences entre l'exécution de l'iso modifie pour être complètement automatique (qui bloque sur netcfg.sh) et l'iso normal qui s'installe avec auto url=://dimaker ... beaucoup de fichiers sont installe en plus dans la 2eme ... entre autre netcfg et killall. Pourquoi ?
 
 * **Pour les dépôts**  
 Il faut ajouter ces lignes :
@@ -143,11 +143,11 @@ d-i mirror/http/directory string /debian
 d-i mirror/suite string wheezy
 d-i mirror/http/proxy string
 ```
-**NB : ** pour le proxy ne faut il pas mettre ? :
-```sh
+>**NB : ** pour le proxy ne faut il pas mettre ? :
+>```sh
 d-i mirror/http/proxy string http://192.168.1.1:3128
 ```
-**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
+>**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 * **Pour les statistiques**  
 Une  ligne à rajouter :
@@ -159,7 +159,7 @@ Une  ligne à rajouter :
 # popular and include it on CDs.
 popularity-contest popularity-contest/participate boolean false
 ```
-**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
+>**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 * **Pour la mise en place de la phase 3**  
 modifiez les commandes à la fin :
@@ -176,8 +176,10 @@ d-i preseed/early_command string cp /cdrom/setup_se3.data ./; \
 Voila , le fichier **se3.preseed** est prêt. On peut tester sa conformité à l'aide de la commande suivante :
 ```sh
 debconf-set-selections -c se3.preseed
+
 ```
-** NB ** Il me repond cela : 
+>** NB ** Il me repond cela :  
+```sh
 warning: Unknown type configuration, skipping line 42
 warning: Unknown type AUTO, skipping line 51
 warning: Unknown type AUTO, skipping line 56
@@ -185,7 +187,9 @@ warning: Unknown type AUTO, skipping line 59
 warning: Unknown type AUTO, skipping line 61
 warning: Unknown type AUTO, skipping line 62
 warning: Unknown type bolean, skipping line 133
-Ca veut dire quoi? Il y a un problème ?
+```
+>Ca veut dire quoi? Il y a un problème ?  
+>pour les 6 premiers warning, non mais pour le dernier oui : il faudrait boolean au lieu de bolean…
 
 * **Modification facultative**  
 Dans le fichier **se3.preseed**, le mot de passe du compte root du `se3` est en clair. Vous pouvez le crypter en utilisant la ligne commentée ci-dessous (si vous décommentez cette ligne, supprimez les 2 autres…) :
