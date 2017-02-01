@@ -92,7 +92,7 @@ Pour une automatisation complète, il est nécessaire de modifier certaines part
 nano se3.preseed
 ```
 
-    …quelques lignes à modifier :
+…quelques lignes à modifier :
 
 * **Pour la langue, le pays et les locales (paramètres régionaux)**  
 Modifiez les lignes correspondant au **Language**, au **Pays** et aux **Choix des paramètres régionaux** en remplaçant ces 3 parties par la suivante :
