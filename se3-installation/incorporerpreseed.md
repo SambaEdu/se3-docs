@@ -210,7 +210,7 @@ printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 
 ### Téléchargement et modifications de fichiers pour la phase 3
 
-Il faut maintenant télécharger les fichiers suivants qui seront aussi nécessaires :
+On télécharge les fichiers suivants qui seront nécessaires pour la phase 3 :
 ```sh
 mkdir ./se3scripts
 cd se3scripts
@@ -218,11 +218,11 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh 
 cd ..
 ```
 * Cas du fichier **inittab**  
-Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts , j'ai déjà ajouté la ligne pour le téléchargement au-dessus [TODO] En attendant, il faut le créer car il est nécessaire pour permettre un redémarrage en autologin pour la phase 3…
+Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO], j'ai déjà ajouté la ligne pour le téléchargement au-dessus. En attendant, il faut le créer car il est nécessaire pour permettre un redémarrage en autologin pour la phase 3…
 ```sh
 nano ./se3scripts/inittab
 ```
-Et copier à l'interieur ceci :
+Et copier/coller à l'interieur ceci :
 ```sh
 # /etc/inittab: init(8) configuration.
 # $Id: inittab,v 1.91 2002/01/25 13:35:21 miquels Exp $
@@ -295,7 +295,7 @@ po::powerokwait:/etc/init.d/powerfail stop
 ```
 
 * Mise en place de **l'autologin**  
-On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :
+On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :  
 ```sh
 nano ./se3scripts/se3-post-base-installer.sh
 ```
@@ -311,7 +311,8 @@ mv /target/etc/inittab /target/etc/inittab.orig
 mv inittab /target/etc/inittab
 cp /target/etc/inittab /target/root/
 ```
-Dans le fichier **se3-post-base-installer.sh**, il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ?) tandis que **sources.se3** existe, mais il est vide… et n'est pas copié… est-il nécessaire ?  
+>Dans le fichier **se3-post-base-installer.sh**, il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ?) tandis que **sources.se3** existe, mais il est vide… et n'est pas copié… est-il nécessaire ?  
+→non, il est réécrit à l'aide du script install_phase2.sh  
 **NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
 
 Et, pour supprimer l'autologin lors des redémarrages suivants du `se3`, on modifie la fin du script **install_phase2.sh** :
@@ -333,6 +334,8 @@ avant ces 2 lignes (vers la fin du script)
 [ "$DEBUG" != "yes" ] && rm -f /root/install_phase2.sh
 . /etc/profile
 ```
+
+>**NB :** on pourrait rajouter ces lignes dans le script disponible à l'`url http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
 
 
 ## Incorporer le fichier `preseed` à l'archive d'installation
