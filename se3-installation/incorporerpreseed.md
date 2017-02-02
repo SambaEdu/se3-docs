@@ -207,14 +207,14 @@ d-i passwd/root-password-again password MOTDEPASSEROOT
 #d-i passwd/root-password-crypted password $1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71
 ```
 
-    Pour obtenir un mot de passe crypté à partir du mot de passe en clair
+Pour obtenir un mot de passe crypté à partir du mot de passe en clair
 (mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
 
-    ```sh
+```sh
 printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 ```
 
-    Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71).
+Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71).
 
 
 ### Téléchargement et modifications de fichiers pour la phase 3
