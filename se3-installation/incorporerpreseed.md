@@ -208,11 +208,11 @@ d-i passwd/root-password-again password MOTDEPASSEROOT
 ```
 
     Pour obtenir un mot de passe crypté à partir du mot de passe en clair
-    (mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
+(mettons que ce soit MOTDEPASSEROOT), vous utiliserez la commande suivante :
 
     ```sh
-    printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
-    ```
+printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
+```
 
     Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71).
 
