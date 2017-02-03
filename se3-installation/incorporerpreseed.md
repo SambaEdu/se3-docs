@@ -410,7 +410,7 @@ On donne les droits en écriture aux 3 fichiers à modifier :
 ```sh
 chmod 755 ./isonew/isolinux/txt.cfg ./isonew/isolinux/isolinux.cfg ./isonew/isolinux/prompt.cfg
 ```
->**NB :**Est-ce nécessaire ?
+>**NB :** Est-ce nécessaire ? Si on est en root, non.
 
 On modifie le fichier **isolinux/txt.cfg** pour l'utilisation du fichier `preseed` lors de l'installation (phase 2).
 
@@ -429,13 +429,6 @@ label install
 	append locale=fr_FR keymap=fr(latin9) file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
 ```
 **Remarque :** Veillez à adapter **install.amd/initrd.gz** selon l'architecture utilisée, ici `64bit`. En cas de doute, regardez ce qu'il y a dans le répertoire **isoorig**.
-
->Ce qui ne marche pas (normal, car auto n'est prévu que pour une préconfiguration de type network, avec preseed/url) :  
-```sh
-   append auto=true vga=normal file=/cdrom/se3.preseed initrd=/install.amd/initrd.gz -- quiet
-   
-   append auto=true vga=788 preseed/file=/cdrom/se3.preseed priority=critical lang=fr locale=fr_FR.UTF-8 console-keymaps-at/keymap=fr-latin9 initrd=/install.amd/initrd.gz – quiet
-```
 
 Ensuite, éditez **isolinux/isolinux.cfg** :
 ```sh
