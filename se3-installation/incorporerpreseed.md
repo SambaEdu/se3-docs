@@ -541,13 +541,23 @@ cp ../../se3.preseed preseed.cfg
 cp ../../setup_se3.data setup_se3.data
 cp ../../se3scripts se3scripts
 find . | cpio -o -H newc | gzip > ../initrd.gz
-```
-**Remarque :** on peut en profiter pour incorporer les firmwares nécessaires à l'installation. [TODO]
-
-* reconstitution de **l'archive `iso`**  
-```sh
 cd ..
 rm -rf temp/
+```
+
+* incorporation des **firmwares** (non testée…)  
+si on souhaite incorporer les firmwares à l'archive d'installation, voici comment procéder :  
+dans le répertoire **isonews**, on télécharge le fichier **firmwares.cpio.gz** et on l'incorpore à l'archive **initrd.gz**.
+```sh
+cp -p initrd.gz initrd.gz.orig
+wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/wheezy/current/firmware.cpio.gz
+cat initrd.gz.orig firmware.cpio.gz > initrd.gz
+rm -f initrd.gz.orig firmware.cpio.gz
+```
+
+* reconstitution de **l'archive `iso`**  
+enfin, on reconstitue l'archive `iso` pour obtenir une archive personnalisée.
+```sh
 genisoimage -o ../my_wheezy_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux.bin -c boot.cat ../isonew
 cd ..
 ```
