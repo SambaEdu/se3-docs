@@ -36,10 +36,15 @@ mode_texte()
     echo "   -h : afficher cet aide-mémoire"
     echo "   -f : incorporer les firmwares"
     echo "sans paramètre, on n'incorpore pas les firmwares"
+    echo ""
 }
 
 gestion_parametres()
 {
+    # message début
+    echo ""
+    echo "Personnalisation d'une archive d'installation se3"
+    echo ""
     # on récupère un éventuel paramétre
     if [ ! "$#" = "0" ]
     then
@@ -69,9 +74,6 @@ gestion_parametres()
 
 verification_initiale()
 {
-    # message début
-    echo "personnalisation d'une archive d'installation se3"
-    echo ""
     # on vérifie la présence des fichiers se3.preseed et setup_se3
     test_preseed=$(ls | grep -x se3.preseed)
     if [ -z "${test_preseed}" ]
@@ -83,15 +85,17 @@ verification_initiale()
     then
         echo "le fichier setup_se3.data est absent…"
     fi
-    if [ -z "${test_setup}" -o -z "${test_setup}" ]
+    if [ -z "${test_preseed}" -o -z "${test_setup}" ]
     then
         echo "veuillez placer les fichiers se3.preseed et setup_se3.data dans le répertoire où se trouve le script $0"
         exit 3
     fi
     # on supprime les traces éventuelles des répertoires de travail…
     [ -d se3scripts/ ] && rm -rf se3scripts/
+    [ -f se3scripts.tar.gz ] && rm -f se3scripts.tar.gz
     [ -d isoorig/ ] && rm -rf isoorig/
     [ -d isonew/ ] && rm -rf isonew/
+    [ -f ${version}_mini.iso ] && rm -f ${version}_mini.iso
 }
 
 modifier_preseed()
@@ -147,7 +151,7 @@ incorporer_initrd()
     # on copie les fichiers et le répertoire se3scripts
     cp ../../se3.preseed preseed.cfg
     cp ../../setup_se3.data setup_se3.data
-    cp ../../se3scripts se3scripts
+    cp -r ../../se3scripts se3scripts
     # on reconstitue initrd.gz
     find . | cpio -o -H newc | gzip > ../initrd.gz
     cd ..
@@ -179,8 +183,7 @@ reconstituer_iso()
     # la nouvelle archive se nomme my_${version}_install.iso
     genisoimage -o ../my_${version}_install.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux.bin -c boot.cat ../isonew
     cd ..
-    "l'archive personnalisée my_${version}_install.iso est disponible"
-
+    echo "l'archive personnalisée my_${version}_install.iso est disponible"
 }
 
 menage_fin()
@@ -188,13 +191,14 @@ menage_fin()
     # on supprime les répertoires de travail
     rm -rf isoorig/
     rm -rf isonew/
-    rm -rf scripts/
+    rm -rf se3scripts/
     rm -f se3scripts.tar.gz
+    rm -f ${version}_mini.iso
 }
 
-gestion_parametres
+gestion_parametres "$@"
 verification_initiale
-modifier preseed
+modifier_preseed
 telecharger_scripts
 telecharger_mini_iso
 creer_repertoires_iso
