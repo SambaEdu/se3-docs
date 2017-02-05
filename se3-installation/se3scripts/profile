@@ -1,0 +1,21 @@
+# ~/.profile: executed by Bourne-compatible login shells.
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
+
+mesg n
+PATH="${PATH}:/usr/share/se3/sbin:/usr/share/se3/scripts"
+
+if [ -f /root/install_phase2.sh ]; then
+    . /root/install_phase2.sh 
+fi
+
+
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
+
+
