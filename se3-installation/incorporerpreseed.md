@@ -10,15 +10,17 @@
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Personnalisation de l'archive de l'installateur `Debian`](#personnalisation-de-larchive-de-linstallateur-debian)
-    * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
-    * [Téléchargement et modifications de fichiers pour la phase 3](#téléchargement-et-modifications-de-fichiers-pour-la-phase-3)
-    * [Incorporer les fichiers à l'archive d'installation](#incorporer-les-fichiers-à-larchive-dinstallation)
-      * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
-      * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
-         * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
-         * [Du répertoire **isoorig** au répertoire **isonew**](#du-répertoire-isoorig-au-répertoire-isonew)
-         * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
-* [Variante : méthode `initrd`](#variante--méthode-initrd)
+    * [Utilisation du script `install_phase1.sh`](#utilisation-du-script-install-phase1.sh)
+    * [Vue détaillée sur la personnalisation de l'installateur](#vue-détaillée-sur-la-personnalisation-de-linstallateur)
+        * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
+        * [La méthode `file`](#la-méthode-file)
+            * [Incorporer les fichiers à l'archive d'installation](#incorporer-les-fichiers-à-larchive-dinstallation)
+            * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
+            * [Mise en place des éléments pour l'incorporation](#mise-en-place-des-éléments-pour-lincorporation)
+            * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
+            * [Du répertoire **isoorig** au répertoire **isonew**](#du-répertoire-isoorig-au-répertoire-isonew)
+            * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
+        * [La méthode `initrd`](#la-méthode-initrd)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
     * [Sur un `CD`](#sur-un-CD)
@@ -119,9 +121,9 @@ bash install_phase1.sh -f
 ```
 
 
-#### Personnalisation détaillée de l'installateur
+#### Vue détaillée sur la personnalisation de l'installateur
 
-Ci-dessous, vous trouverez les détails qui vous permettront de comprendre ce que produit le script **install_phase1.sh** (le script utilise la méthode `initrd`).
+Ci-dessous, vous trouverez les détails qui vous permettront de comprendre ce que produit le script **install_phase1.sh** ; le script utilise la méthode `initrd` mais nous présentons d'abord la méthode `file`.
 
 
 ##### Modification du fichier `preseed`
@@ -254,7 +256,7 @@ printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71).
 
 
-##### Téléchargement et modifications de fichiers pour la phase 3
+##### La méthode `file`
 
 On télécharge les fichiers suivants qui seront nécessaires pour la phase 3, en les mettant dans un répertoire **se3scripts** (à créer) :
 ```sh
@@ -503,7 +505,7 @@ cd ..
 L’image est là (dans le repertoire contenant isonew), elle porte le nom **my_wheezy_install.iso**.
 
 
-###### Variante : méthode `initrd`
+###### La méthode `initrd`
 
 L'archive de l'installateur `Debian` **debian-7.11.0-amd64-netinst.iso** (environ 220 Mo) permet d'utiliser la méthode `file` qui est décrite ci-dessus.
 
