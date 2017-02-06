@@ -10,9 +10,7 @@
 #
 # L'archive iso obtenue pourra être gravée indifféremment sur un CD ou sur une clé usb
 #
-# Ce script sera lancé dans un répertoire contenant les fichiers se3.preseed et setup_se3.data
-# le fichier se3.preseed aura été modifié
-# sinon, le prévoir dans le script ?
+# Ce script sera lancé dans un répertoire contenant les fichiers se3.preseed et setup_se3.data obtenues par l'outil de configuration, sans modification
 #
 # Paramétres :  -f → incorporation des firmwares
 #               -h → aide
@@ -46,9 +44,9 @@ gestion_parametres()
     echo "Personnalisation d'une archive d'installation se3"
     echo ""
     # on récupère un éventuel paramétre
-    if [ ! "$#" = "0" ]
+    if [ ! "${#}" = "0" ]
     then
-        case $1 in
+        case "${1}" in
             -f)
                 # mode firmware
                 # l'iso doit incorporer les firmwares
@@ -96,15 +94,95 @@ verification_initiale()
     [ -d isoorig/ ] && rm -rf isoorig/
     [ -d isonew/ ] && rm -rf isonew/
     [ -f ${version}_mini.iso ] && rm -f ${version}_mini.iso
+    [ -f se3.preseed.orig ] && [ -f se3.preseed ] && rm -f se3.preseed
+    [ -f se3.preseed.orig ] && cp se3.preseed.orig se3.preseed && rm -f se3.preseed.orig
+    #sleep 5
 }
 
 modifier_preseed()
 {
-    # on adapte le fichier se3.preseed
-    # 2 options :
-    # → se3.preseed déjà modifié
-    # → le faire ici ?
-    true
+    # on modifie le fichier se3.preseed
+    # on en fait une copie pour conserver l'original
+    cp se3.preseed se3.preseed.orig
+    #
+    # remplacement des lignes de commandes
+    cat > texte << END
+# MODIFICATION, Preseed commands
+# mise en place de l'autologin et des fichiers pour la phase 3
+# ----------------
+d-i preseed/early_command string cp se3scripts/* ./; \\
+    chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \\
+    ./se3-early-command.sh se3-post-base-installer.sh
+
+# Finishing behaviour
+END
+    # remplacement entre 2 lignes
+    #sed -i '162,173 {:z;N;173! bz; s/^.*$/cat texte/e}' se3.preseed
+    # remplacement entre 2 motifs (c'est mieux, non ?)
+    sed -i '/# Preseed commands/,/# Finishing behaviour/ {:z;N;/# Finishing behaviour/! bz; s/^.*$/cat texte/e}' se3.preseed
+    #
+    # ajouter la réponse pour les stats
+    cat > texte << END
+d-i debian-installer/allow_unauthenticated boolean true
+
+# AJOUT, pour éviter de répondre à la question
+# Some versions of the installer can report back on what software you have
+# installed, and what software you use. The default is not to report back,
+# but sending reports helps the project determine what software is most
+# popular and include it on CDs.
+# ----------------
+popularity-contest popularity-contest/participate boolean false
+
+# Passwd super user
+END
+    #sed -i '147,148 {:z;N;148! bz; s/^.*$/cat texte/e}' se3.preseed
+    sed -i '/d-i debian-installer\/allow_unauthenticated boolean true/,/# Passwd super user/ {:z;N;/# Passwd super user/! bz; s/^.*$/cat texte/e}' se3.preseed
+    #
+    # correction du mot bolean en boolean
+    sed -i "s|bolean|boolean|g" se3.preseed
+    #
+    # ajouter les dépôts
+    cat > texte << END
+ ldapedu-server ldapedu-server/adminpassverif string se3chief
+
+# AJOUT, pour indiquer le miroir et éventuellement le proxy pour atteindre le miroir
+# Mirror settings
+# ----------------
+d-i mirror/country string manual
+d-i mirror/http/hostname string httpredir.debian.org
+d-i mirror/http/directory string /debian
+d-i mirror/suite string wheezy
+d-i mirror/http/proxy string
+
+# Standart drive controler
+END
+    #sed -i '65,66 {:z;N;66! bz; s/^.*$/cat texte/e}' se3.preseed
+    sed -i '/ ldapedu-server ldapedu-server\/adminpassverif string se3chief/,/#Standart drive controler/ {:z;N;/#Standart drive controler/! bz; s/^.*$/cat texte/e}' se3.preseed
+    #
+    # commenter la ligne run netcfg.sh
+    sed -i "/netcfg.sh/ s/^/#/" se3.preseed
+    #
+    # remplacement des lignes language et clavier
+    cat > texte << END
+# Language
+# MODIFICATION : langue, pays et parametres regionaux
+# mettre en append → locale=fr_FR
+# ----------------
+d-i debian-installer/locale string fr_FR
+
+# Disposition de clavier à utiliser
+# MODIFICATION : clavier "azerty"
+# mettre en append → keymap=fr(latin9)
+# ----------------
+d-i keymap select fr(latin9)
+
+# network configuration
+END
+    #sed -i '1,20 {:z;N;20! bz; s/^.*$/cat texte/e}' se3.preseed
+    sed -i '1,/#  network configuration/ {:z;N;/#  network configuration/! bz; s/^.*$/cat texte/e}' se3.preseed
+    #
+    # on supprime le fichier texte temporaire
+    rm -f texte
 }
 
 telecharger_scripts()
@@ -186,6 +264,15 @@ reconstituer_iso()
     echo "l'archive personnalisée my_${version}_install.iso est disponible"
 }
 
+retablir_original()
+{
+    # on donne le preseed modifié
+    cp se3.preseed se3.preseed.modif
+    # on rétablit le preseed original
+    cp se3.preseed.orig se3.preseed
+    rm -f se3.preseed.orig
+}
+
 menage_fin()
 {
     # on supprime les répertoires de travail
@@ -206,5 +293,6 @@ modifier_amorce
 incorporer_initrd
 incorporer_firmwares
 reconstituer_iso
+retablir_original
 menage_fin
 exit 0
