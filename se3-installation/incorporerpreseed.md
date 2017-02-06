@@ -9,7 +9,7 @@
 * [Phase 1 : Les fichiers `preseed` et `setup_se3`](#phase-1--les-fichiers-preseed-et-setup_se3)
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
-    * [Utilisation du script `install_phase1.sh`](#utilisation-du-script-install-phase1.sh)
+    * [Utilisation du script `install_phase1.sh`](#utilisation-du-script-install_phase1sh)
     * [Vue détaillée sur la personnalisation de l'installateur](#vue-détaillée-sur-la-personnalisation-de-linstallateur)
         * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
         * [La méthode `file`](#la-méthode-file)
@@ -33,7 +33,7 @@
 
 ### Objectif
 
-L'objectif est de créer un `CD d'installation` ou une clé `usb` complètement automatisé de son `se3 Wheezy`.
+L'objectif est de créer un `CD` ou une clé `usb` d'installation complètement automatisée de son `se3 Wheezy`.
 
 Ainsi, avec ce `CD` *personnalisé*, ou cette clé `usb`, et une sauvegarde de son `se3`, on pourra très rapidement (re)-mettre en production son `se3`, que ce soit sur la même machine ou sur une autre machine.
 
@@ -43,15 +43,16 @@ Pour la sauvegarde/restauration du `se3`, vous consulterez avec profit [la docum
 ### Étapes de l'installation automatique d'un `se3`
 
 L'installation automatique d'un `se3` se déroule en 3 phases :
-* **Phase 1 :** création des fichiers **se3.preseed** et **setup_se3.data**
-* **Phase 2 :** installation du système d'exploitation `Debian` via le fichier **se3.preseed**
-* **Phase 3 :** installation du paquet **`se3` et consorts**
+
+* **Phase 1 :** création des fichiers **se3.preseed** et **setup_se3.data** puis de l'archive personnalisée
+* **Phase 2 :** installation du système d'exploitation `Debian` via l'archive personnalisée
+* **Phase 3 :** installation du paquet **`se3` et consorts** et mise en place des mots de passe
 
 Pour la description de chaque phase, vous consulterez [la documentation ad hoc](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation_sous_Debian_Wheezy_en_mode_automatique).
 
 Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers nécessaires lors de l'installation, en les incorporant, une fois pour toute, dans l'archive de l'installateur.
 
-Ainsi, les 3 phases pourront s'enchaîner automatiquement.
+Ainsi, les 3 phases pourront s'enchaîner presque automatiquement.
 
 >travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation.  
 Les tests en machines virtuelles sont concluants.  
@@ -62,13 +63,11 @@ Les tests en machines virtuelles sont concluants.
 
 Lors de la phase 1 de l'installation classique sont créés les fichiers **se3.preseed** et **setup_se3.data** via l'interface de configuration.
 
-Une fois cela effectué, on modifie le fichier **se3.preseed** pour l'adapter à une préconfiguration de type `CD` ou `usb`.
+Une fois cela effectué, on utilise le script **install_phase1.sh** pour obtenir une archive d'installation personalisée incorporant les 2 fichiers ci-dessus.
 
-Ensuite on télécharge les fichiers nécessaires à la phase 3 pour les adapter aux objectifs poursuivis (le fichier inittab, non encore disponible en téléchargement, est créé à cette occasion).
+Deux méthodes sont décrites : la méthode "file" et la méthode "initrd". Le script utilise la méthode `initrd` qui a l'avantage de donner une archive pouvant être utilisée indifféremment via un `CD` ou via une clé `usb`.
 
-Enfin, on incorpore l'ensemble des fichiers ci-dessus à l'archive d'installation, on modifie quelques fichiers d'amorçage pour qu'ils tiennent compte du fichier de préconfiguration et on regénére l'archive au format `iso`. Deux méthodes sont décrites : la méthode "file" et la méthode "initrd".
-
-Il suffit alors de démarrer une machine à partir d'un `CD` ou d'une clé `usb` contenant cette archive personnalisée pour que la phase 2 démarre et s'enchaîne automatiquement sur la phase 3 sans intervention.
+Il suffit alors de démarrer une machine à partir d'un `CD` ou d'une clé `usb` contenant cette archive personnalisée pour que la phase 2 démarre et s'enchaîne sur la phase 3.
 
 
 ## Phase 1 : Les fichiers `preseed` et `setup_se3`
@@ -93,7 +92,7 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.
 Le script **install_phase1.sh** permet d'incorporer les fichiers **se3.preseed** et **setup_se3.data** à une archive **mini.iso** d'installation de `Debian/Wheezy`.
 
 * Préparation :  
-il suffit de placer le script et les 2 fichiers dans un répertoire puis de télécharger le script.
+Il suffit de placer le script et les 2 fichiers précédents dans un répertoire puis de télécharger le script dans ce répertoire.
 
 * Téléchargez le script **install_phase1.sh** :
 ```sh
@@ -110,12 +109,15 @@ su
 bash install_phase1.sh
 ```
 
+* Récupérez l'archive d'installation personnalisée **my_wheezy_install.iso**:  
 Vous obtenez ainsi une archive personnalisée nommée **my_wheezy_install.iso**, ainsi que le fichier **se3.preseed.modif** pour informations des modifications apportées au fichier se3.preseed pour son incorporation.
 
-**Remarque :** s'il est nécessaire d'utiliser des **firmwares non-free** pour la carte réseau du `se3`, il suffit de l'indiquer avec le paramètre `-f`.
+**Remarque 1 :** s'il est nécessaire d'utiliser des **firmwares non-free** pour la carte réseau du `se3`, il suffit de l'indiquer avec le paramètre `-f`.
 ```sh
 bash install_phase1.sh -f
 ```
+
+**Remarque 2 :** le script **install_phase1.sh** utilise une archive minimale [**mini.iso**](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso) ; s'il est nécessaire d'utiliser une autre archive, il suffira de modifier le script pour qu'il en tienne compte (voir notamment la fonction *telecharger_mini_iso* du script, sans oublier de tenir compte de l'arborescence interne de cette autre archive).
 
 
 ### Vue détaillée sur la personnalisation de l'installateur
@@ -257,140 +259,18 @@ Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwf
 
 ##### Préparation
 
-On télécharge les fichiers suivants qui seront nécessaires pour la phase 3, en les mettant dans un répertoire **se3scripts** (à créer) :
+On télécharge l'archive **se3scripts.tar.gz** qui contient les fichiers nécessaires pour la phase 3, en la décompressant dans un répertoire **se3scripts** :
 ```sh
-mkdir ./se3scripts
-cd se3scripts
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-early-command.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/se3-post-base-installer.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/sources.se3 http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/install_phase2.sh http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/profile http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/inittab http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts/bashrc
-cd ..
+wget https://github.com/SambaEdu/se3-docs/raw/master/se3-installation/se3scripts.tar.gz
+tar -xzf se3scripts.tar.gz
 ```
 
-* Cas du fichier **inittab**  
-Il faudra rajouter inittab dans http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO], j'ai déjà ajouté la ligne pour le téléchargement au-dessus. En attendant, il faut le créer car il est nécessaire pour permettre un redémarrage en autologin pour la phase 3…
-```sh
-nano ./se3scripts/inittab
-```
-Et copier/coller à l'interieur ceci :
-```sh
-# /etc/inittab: init(8) configuration.
-# $Id: inittab,v 1.91 2002/01/25 13:35:21 miquels Exp $
-
-# The default runlevel.
-id:2:initdefault:
-
-# Boot-time system configuration/initialization script.
-# This is run first except when booting in emergency (-b) mode.
-si::sysinit:/etc/init.d/rcS
-
-# What to do in single-user mode.
-~~:S:wait:/sbin/sulogin
-
-# /etc/init.d executes the S and K scripts upon change
-# of runlevel.
-#
-# Runlevel 0 is halt.
-# Runlevel 1 is single-user.
-# Runlevels 2-5 are multi-user.
-# Runlevel 6 is reboot.
-
-l0:0:wait:/etc/init.d/rc 0
-l1:1:wait:/etc/init.d/rc 1
-l2:2:wait:/etc/init.d/rc 2
-l3:3:wait:/etc/init.d/rc 3
-l4:4:wait:/etc/init.d/rc 4
-l5:5:wait:/etc/init.d/rc 5
-l6:6:wait:/etc/init.d/rc 6
-# Normally not reached, but fallthrough in case of emergency.
-z6:6:respawn:/sbin/sulogin
-
-# What to do when CTRL-ALT-DEL is pressed.
-ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
-
-# Action on special keypress (ALT-UpArrow).
-#kb::kbrequest:/bin/echo "Keyboard Request--edit /etc/inittab to let this work."
-
-# What to do when the power fails/returns.
-pf::powerwait:/etc/init.d/powerfail start
-pn::powerfailnow:/etc/init.d/powerfail now
-po::powerokwait:/etc/init.d/powerfail stop
-
-# /sbin/getty invocations for the runlevels.
-#
-# The "id" field MUST be the same as the last
-# characters of the device (after "tty").
-#
-# Format:
-#  <id>:<runlevels>:<action>:<process>
-#
-# Note that on most Debian systems tty7 is used by the X Window System,
-# so if you want to add more getty's go ahead but skip tty7 if you run X.
-#
-1:2345:respawn:/bin/login -f root tty1 </dev/tty1 >/dev/tty1 2>&1
-2:23:respawn:/sbin/getty 38400 tty2
-3:23:respawn:/sbin/getty 38400 tty3
-4:23:respawn:/sbin/getty 38400 tty4
-5:23:respawn:/sbin/getty 38400 tty5
-6:23:respawn:/sbin/getty 38400 tty6
-
-# Example how to put a getty on a serial line (for a terminal)
-#
-#T0:23:respawn:/sbin/getty -L ttyS0 9600 vt100
-#T1:23:respawn:/sbin/getty -L ttyS1 9600 vt100
-
-# Example how to put a getty on a modem line.
-#
-#T3:23:respawn:/sbin/mgetty -x0 -s 57600 ttyS3
-```
-
-* Mise en place de **l'autologin**  
-On met en place l'autologin pour le 1er redémarrage du `se3` (début de la phase 3) en modifiant le script **se3-post-base-installer.sh** :
-
-On l'édite :
-```sh
-nano ./se3scripts/se3-post-base-installer.sh
-```
-  
-D'une part, commentez la ligne suivante, le fichier **sources.list** n'étant pas à cet endroit :
-```sh
-#mv sources.list /target/etc/apt/sources.list  
-```
-Et d'autre part, rajoutez les lignes suivantes à la fin pour la gestion du fichier inittab :
-```sh
-# ajout pour l'autologin
-mv /target/etc/inittab /target/etc/inittab.orig
-mv inittab /target/etc/inittab
-cp /target/etc/inittab /target/root/
-```
->Dans le fichier **se3-post-base-installer.sh**, il y a un problème avec le fichier **sources.list** qui n'existe pas (mais pourrait être téléchargé sur se3scripts, un reste d'avant… ?) tandis que **sources.se3** existe, mais il est vide… et n'est pas copié… est-il nécessaire ?  
-→ non, il est réécrit à l'aide du script install_phase2.sh  
-**NB :** il faudrait que l'outil de création du preseed soit modifié, non ?
-
-Et, pour supprimer l'autologin lors des redémarrages suivants du `se3`, on modifie la fin du script **install_phase2.sh** :
-```sh
-nano ./se3scripts/install_phase2.sh
-```
-
-En rajoutant ces lignes :
-```sh
-if [ -e /etc/inittab.orig ]
-then
-    rm -f /etc/inittab
-    cp /etc/inittab.orig /etc/inittab
-    rm -f /etc/inittab.orig
-fi
-```
-avant ces 2 lignes (vers la fin du script)
-```sh
-[ "$DEBUG" != "yes" ] && rm -f /root/install_phase2.sh
-. /etc/profile
-```
-
->**NB :** on pourrait rajouter ces lignes de suppression de l'autologin dans le script install_phase2.sh disponible à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
+>**NB :** certains des fichiers, contenus dans cette archive **se3scripts.tar.gz**, ont été modifiés à partir des fichiers disponibles à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts. On a rajouté le fichier inittab qui est nécessaire pour la mise en place de l'autologin au début de la phase 3.
 
 
 ##### Téléchargement de l'installateur `Debian`
 
-Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés et modifiés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
+Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
 
 Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* suffit (testée).
 ```sh
@@ -401,7 +281,7 @@ Si votre serveur dispose de matériel (carte résau notamment) non reconnus car 
 ```sh
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
-NB : on peut aussi incorporer les firmwares à l'archive [TODO].
+**NB :** on peut aussi incorporer les firmwares à l'archive comme cela est fait dans le script install_phase1.sh.
 
 
 ##### Création des répertoires de travail **isoorig** et **isonew**
@@ -418,7 +298,7 @@ mkdir isoorig isonew
 
 On monte, dans le répertoire **isoorig**, l'archive `iso` téléchargée , puis on copie son contenu dans le répertoire **isonew**.
 
-* Si vous utiliser l'archive **debian-7.11.0-amd64-netinst.iso** (sinon, voir la méthode de l'`initrd` décrite ci-dessous))
+* Si vous utilisez l'archive **debian-7.11.0-amd64-netinst.iso** (sinon, voir la méthode de l'`initrd` décrite ci-dessous))
 ```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
@@ -462,18 +342,20 @@ label install
 ```
 **Remarque :** Veillez à adapter **install.amd/initrd.gz** selon l'architecture utilisée, ici `64bit`. En cas de doute, regardez ce qu'il y a dans le répertoire **isoorig**.
 
-Ensuite, éditez **isolinux/isolinux.cfg** :
+Ensuite, cela étant facultatif, éditez **isolinux/isolinux.cfg** :
 ```sh
 nano ./isonew/isolinux/isolinux.cfg
 ```
 changez *timeout 0* en *timeout 4* (par exemple)
 
-…puis éditez **isolinux/prompt.cfg** :
+…puis, tout aussi facultatif, éditez **isolinux/prompt.cfg** :
 
 ```sh
 nano ./isonew/isolinux/prompt.cfg
 ```
 changez *prompt 0* en *prompt 1*.
+
+**NB :** ces deux opérations facultatives ont pour effet de lancer directement l'installation une fois le `CD` lancé. Cela peut éventuellement posé un problème lors du 1er redémarrage si le `CD` (ou la clé `usb`) n'est pas retiré.
 
 Enfin, on copie les 2 fichiers du `preseed` à la racine du répertoire **isonew** et le sous-répertoire **se3scripts** (voir ci-dessus pour son contenu) :
 ```sh
@@ -483,7 +365,7 @@ mkdir ./isonew/se3scripts
 cp ./se3scripts/* ./isonew/se3scripts/
 ```
 
-Enfin on reconstitue le fichier des sommes de contrôle puis on crée la nouvelle image `iso` :
+Enfin, on reconstitue le fichier des sommes de contrôle (cela dépend en fait des installateurs utilisés) puis on crée la nouvelle image `iso` :
 ```sh
 cd isonew
 md5sum `find -H -type f` > md5sum.txt
@@ -520,7 +402,7 @@ d-i preseed/early_command string cp se3scripts/* ./; \
 ```
 
 * téléchargement des fichiers **pour la phase 3**  
-on place ces fichiers dans un répertoire **se3scripts** et on les modifie comme indiqué ci-dessus.
+on place ces fichiers dans un répertoire **se3scripts** comme indiqué ci-dessus.
 
 * téléchargement de l'installateur **mini.iso**  
 on prend une archive plus petite que la précédente,
@@ -643,7 +525,7 @@ Le `CD` d'installation de votre `se3` est prêt.
 
 ### Sur une clé `usb`
 
-**Important :** dans la réalisation de l'archive `iso` ci-dessus, **si vous utilisez la méthode `file`**, il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurrences à remplacer : 1 dans le fichier **txt.cfg**, ligne **APPEND**, et 2 dans le fichier **se3.preseed**, dans la partie **# Preseed commands : mise en place de l'autologin**.
+**Important :** dans la réalisation de l'archive `iso` ci-dessus, **si vous utilisez la méthode `file`** (le cas n'étant pas à envisager pour la méthode `initrd`), il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurrences à remplacer : 1 dans le fichier **txt.cfg**, ligne **append**, et 2 dans le fichier **se3.preseed**, dans la partie **# Preseed commands : mise en place de l'autologin**.
 
 * Insérez votre clé `usb` d'une taille supérieure à la taille de l'image `iso` (supérieure à 300 Mo).
 
@@ -683,7 +565,9 @@ La clé d'installation de votre se3 est prête.
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
 
-La machine démarre, il n'y a rien à faire, l'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
+La machine démarre, il n'y a rien à faire, si ce n'est d'appuyer sur la touche `Entrée` au début, l'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
+
+**NB :** n'oubliez pas de retirer le `CD` ou la clé `usb` lors du 1er redémarrage, entre la phase 2 et la phase 3.
 
 
 ## Phase 3 : connexion en `root` et installation du paquet `se3`
