@@ -9,6 +9,7 @@
 * [Phase 1 : Les fichiers `preseed` et `setup_se3`](#phase-1--les-fichiers-preseed-et-setup_se3)
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
+    * [Personnalisation de l'archive de l'installateur `Debian`](#personnalisation-de-larchive-de-linstallateur-debian)
     * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
     * [Téléchargement et modifications de fichiers pour la phase 3](#téléchargement-et-modifications-de-fichiers-pour-la-phase-3)
     * [Incorporer les fichiers à l'archive d'installation](#incorporer-les-fichiers-à-larchive-dinstallation)
@@ -87,7 +88,43 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.
 ```
 
 
-### Modification du fichier `preseed`
+### Personnalisation de l'archive de l'installateur `Debian`
+
+#### Utilisation du script `install_phase1.sh`
+
+Le script **install_phase1.sh** permet d'incorporer les fichiers **se3.preseed** et **setup_se3.data** à une archive **mini.iso** d'installation de `Debian/Wheezy`.
+
+Pour cela, il suffit de placer le script et les 2 fichiers dans un répertoire puis de lancer le script en tant que `root`.
+
+* Téléchargez le script **install_phase1.sh** :
+```sh
+wget https://github.com/SambaEdu/se3-docs/raw/master/se3-installation/install_phase1.sh
+```
+
+* Passez en `root` :
+```sh
+su
+```
+
+* Lancez le script :
+```sh
+bash install_phase1.sh
+```
+
+Vous obtenez ainsi une archive personnalisée nommée **my_wheezy_install.iso**, ainsi que le fichier **se3.preseed.modif** pour informations des modifications apportées au fichier se3.preseed pour son incorporation.
+
+**Remarque :** s'il est nécessaire d'utiliser des **firmwares non-free** pour la carte réseau du `se3`, il suffit de l'indiquer avec le paramètre `-f`.
+```sh
+bash install_phase1.sh -f
+```
+
+
+#### Personnalisation détaillée de l'installateur
+
+Ci-dessous, vous trouverez les détails qui vous permettront de comprendre ce que produit le script **install_phase1.sh** (le script utilise la méthode `initrd`).
+
+
+##### Modification du fichier `preseed`
 
 Pour une automatisation complète, il est nécessaire de modifier certaines parties du fichier **se3.preseed** :
 
@@ -217,7 +254,7 @@ printf "MOTDEPASSEROOT" | mkpasswd -s -m md5
 Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwfh.sIK52ZXkAJcLtzQ71).
 
 
-### Téléchargement et modifications de fichiers pour la phase 3
+##### Téléchargement et modifications de fichiers pour la phase 3
 
 On télécharge les fichiers suivants qui seront nécessaires pour la phase 3, en les mettant dans un répertoire **se3scripts** (à créer) :
 ```sh
@@ -350,10 +387,10 @@ avant ces 2 lignes (vers la fin du script)
 >**NB :** on pourrait rajouter ces lignes de suppression de l'autologin dans le script install_phase2.sh disponible à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts [TODO].
 
 
-## Incorporer les fichiers à l'archive d'installation
+##### Incorporer les fichiers à l'archive d'installation
 
 
-### Téléchargement de l'installateur `Debian`
+###### Téléchargement de l'installateur `Debian`
 
 Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés et modifiés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
 
@@ -369,10 +406,10 @@ wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware
 NB : on peut aussi incorporer les firmwares à l'archive [TODO].
 
 
-#### Mise en place des éléments pour l'incorporation
+###### Mise en place des éléments pour l'incorporation
 
 
-##### Création des répertoires de travail **isoorig** et **isonew**
+####### Création des répertoires de travail **isoorig** et **isonew**
 
 Pour mener à bien la modification de l'installateur `Debian`, on va créer deux répertoires :
 * **isoorig :** il contiendra le contenu de l'image d'origine
@@ -382,7 +419,7 @@ mkdir isoorig isonew
 ```
 
 
-##### Du répertoire **isoorig** au répertoire **isonew**
+####### Du répertoire **isoorig** au répertoire **isonew**
 
 On monte, dans le répertoire **isoorig**, l'archive `iso` téléchargée , puis on copie son contenu dans le répertoire **isonew**.
 
@@ -400,7 +437,7 @@ rsync -a -H isoorig/ isonew
 Cela dit que l'image est montée en lecture seule, c'est normal.
 
 
-##### Dans le répertoire **isonew**
+####### Dans le répertoire **isonew**
 
 Les modifications suivantes seront à réaliser dans le répertoire **isonew**.
 
@@ -466,7 +503,7 @@ cd ..
 L’image est là (dans le repertoire contenant isonew), elle porte le nom **my_wheezy_install.iso**.
 
 
-## Variante : méthode `initrd`
+###### Variante : méthode `initrd`
 
 L'archive de l'installateur `Debian` **debian-7.11.0-amd64-netinst.iso** (environ 220 Mo) permet d'utiliser la méthode `file` qui est décrite ci-dessus.
 
