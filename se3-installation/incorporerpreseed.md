@@ -122,7 +122,7 @@ voici la liste des différentes possibilités pour ce paramétre :
 **-mf** → utilisation d'une mini.iso et incorporation des firmwares  
 **-n**  → utilisation d'une nestinst.iso mais sans incorporation des firmwares  
 **-nf** → utilisation d'une nestinst.iso avec incorporation des firmwares  
-**-i**  → utilisation d'une iso fournie mais sans incorporation des firmwares  
+**-i**  → utilisation d'une iso fournie  
 *indiquer le nom de l'iso en complément du paramétre -i*
 
 Le mieux est de commencer par essayer une [ wheezy mini.iso](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/) (avec ou sans les firmwares non-free) ou une [debian-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/) ou une [firmware-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/).
