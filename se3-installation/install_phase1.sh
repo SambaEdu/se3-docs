@@ -16,7 +16,7 @@
 #               -mf → utilisation d'une mini.iso et incorporation des firmwares
 #               -n  → utilisation d'une nestinst.iso mais sans incorporation des firmwares
 #               -nf → utilisation d'une nestinst.iso avec incorporation des firmwares
-#               -i  → utilisation d'une iso fournie mais sans incorporation des firmwares
+#               -i  → utilisation d'une iso fournie
 #                     nom de l'iso en complément du paramétre
 #               -h  → aide
 #
