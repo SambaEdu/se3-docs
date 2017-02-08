@@ -104,20 +104,29 @@ wget https://github.com/SambaEdu/se3-docs/raw/master/se3-installation/install_ph
 su
 ```
 
-* Lancez le script :
+* Lancez le script :  
+par exemple avec le paramétre -m (voir ci-dessous)
 ```sh
-bash install_phase1.sh
+bash install_phase1.sh -m
 ```
 
 * Récupérez l'archive d'installation personnalisée **my_wheezy_install.iso**:  
 Vous obtenez ainsi une archive personnalisée nommée **my_wheezy_install.iso**, ainsi que le fichier **se3.preseed.modif** pour informations des modifications apportées au fichier se3.preseed pour son incorporation.
 
-**Remarque 1 :** s'il est nécessaire d'utiliser des **firmwares non-free** pour la carte réseau du `se3`, il suffit de l'indiquer avec le paramètre `-f`.
-```sh
-bash install_phase1.sh -f
-```
+* **les paramétres du script :**  
+Le script **install_phase1.sh** s'utilise avec plusieurs paramétres.  
+En voici la liste :  
+ **-h**  → aide-mémoire
+ **-m**  → utilisation d'une mini.iso mais sans incorporation des firmwares
+ **-mf** → utilisation d'une mini.iso et incorporation des firmwares
+ **-n**  → utilisation d'une nestinst.iso mais sans incorporation des firmwares
+ **-nf** → utilisation d'une nestinst.iso avec incorporation des firmwares
+ **-i**  → utilisation d'une iso fournie mais sans incorporation des firmwares
+*indiquer le nom de l'iso en complément du paramétre -i*
 
-**Remarque 2 :** le script **install_phase1.sh** utilise une archive minimale [**mini.iso**](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/mini.iso) ; s'il est nécessaire d'utiliser une autre archive, il suffira de modifier le script pour qu'il en tienne compte (voir notamment la fonction *telecharger_mini_iso* du script, sans oublier de tenir compte de l'arborescence interne de cette autre archive).
+Le mieux est de commencer par essayer une [ wheezy mini.iso](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/) (avec ou sans les firmwares non-free) ou une [debian-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/) ou une [firmware-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/).
+
+Cependant, certains machines nécessitent un installateur non classique : il suffira de le télécharger ou de le concevoir et de le placer dans le même répertoire que le script et les 2 fichiers.
 
 
 ### Vue détaillée sur la personnalisation de l'installateur
