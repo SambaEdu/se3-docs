@@ -91,20 +91,21 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.
 
 Le script **install_phase1.sh** permet d'incorporer les fichiers **se3.preseed** et **setup_se3.data** à une archive **mini.iso** d'installation de `Debian/Wheezy`.
 
-* Préparation :  
+* Préparation  
 Il suffit de placer le script et les 2 fichiers précédents dans un répertoire puis de télécharger le script dans ce répertoire.
 
-* Téléchargez le script **install_phase1.sh** :
+* Téléchargez le script **install_phase1.sh**  
 ```sh
 wget https://github.com/SambaEdu/se3-docs/raw/master/se3-installation/install_phase1.sh
 ```
 
-* Passez en `root` :
+* Passez en `root`  
+Il faudra donner le mot de passe du compte root.
 ```sh
 su
 ```
 
-* Lancez le script :  
+* Lancez le script  
 par exemple avec le paramétre -m (voir ci-dessous)
 ```sh
 bash install_phase1.sh -m
@@ -113,9 +114,9 @@ bash install_phase1.sh -m
 * Récupérez l'archive d'installation personnalisée **my_wheezy_install.iso**:  
 Vous obtenez ainsi une archive personnalisée nommée **my_wheezy_install.iso**, ainsi que le fichier **se3.preseed.modif** pour informations des modifications apportées au fichier se3.preseed pour son incorporation.
 
-* **les paramétres du script :**  
-Le script **install_phase1.sh** s'utilise avec plusieurs paramétres.  
-En voici la liste :  
+* **les paramétres du script**  
+Le script **install_phase1.sh** s'utilise avec un paramétre.  
+voici la liste des différentes possibilités pour ce paramétre :  
  **-h**  → aide-mémoire  
  **-m**  → utilisation d'une mini.iso mais sans incorporation des firmwares  
  **-mf** → utilisation d'une mini.iso et incorporation des firmwares  
