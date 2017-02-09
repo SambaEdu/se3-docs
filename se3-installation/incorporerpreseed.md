@@ -582,7 +582,9 @@ L'installation est complètement automatique jusqu'à la première connexion en 
 
 **Remarque :** Il est dit [ici](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/FaqInstallnewserver#R.C3.A9cup.C3.A9ration_du_fichier_n.C3.A9cessaire_.C3.A0_l.27installation_du_nouveau_serveur) qu'il faut copier à ce moment le **secrets.tdb** en cas de migration mais ce n'est pas nécessaire. Le script **restaure_se3** s'occupe de tout.
 
-Au redémarrage la connection en `root` est automatique (autologin).
+Au redémarrage la connection en `root` est automatique (autologin) :
+![instal_auto_02](images/instal_auto_02.png)
+
  - Il faut appuyer sur **Entrée** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
  - Puis choisir **3** (sans serveur de communication) → peut-on rendre cela automatique ?
  **NB :** il faudrait corriger ce truc, car il ne tient pas compte du preseed, non ?
