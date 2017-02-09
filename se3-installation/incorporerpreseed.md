@@ -16,9 +16,9 @@
         * [La méthode `file`](#la-méthode-file)
         * [La méthode `initrd`](#la-méthode-initrd)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
-    * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
-    * [Sur un `CD`](#sur-un-cd)
-    * [Sur une clé `usb`](#sur-une-clé-usb)
+    * [Test sur un réseau virtuel](#test-sur-un-réseau-virtuel)
+    * [Graver sur un `CD`](#graver-sur-un-cd)
+    * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
     * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso)
 * [Phase 3 : connexion en `root` et installation du paquet `se3`](#phase-3--connexion-en-root-et-installation-du-paquet-se3)
 * [Références](#références)
@@ -480,14 +480,14 @@ Et voilà, vous avez une archive `iso` prête pour l'installation d'un `se3`.
 ## Phase 2 : Utiliser l'archive d'installation personnalisée
 
 
-### Sur un réseau virtuel
+### Test sur un réseau virtuel
 
 Sur une VM (Virtual Machine), il n'y a rien à faire de plus, on peut utiliser directement l'image `iso`.
 
 D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée sur une VM. Cela vous permettra de la valider.
 
 
-### Sur un `CD`
+### Graver sur un `CD`
 
 * Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 300 Mo).
 
@@ -528,7 +528,7 @@ Le `CD` d'installation de votre `se3` est prêt.
 **À tester, mon graveur ne semble pas reconnu par linux, je n'ai pas pu tester cette partie**
 
 
-### Sur une clé `usb`
+### Copier sur une clé `usb`
 
 **Important :** dans la réalisation de l'archive `iso` ci-dessus, **si vous utilisez la méthode `file`** (le cas n'étant pas à envisager pour la méthode `initrd`), il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurrences à remplacer : 1 dans le fichier **txt.cfg**, ligne **append**, et 2 dans le fichier **se3.preseed**, dans la partie **# Preseed commands : mise en place de l'autologin**.
 
@@ -570,7 +570,7 @@ La clé d'installation de votre se3 est prête.
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
 
-La machine démarre, il n'y a rien à faire, si ce n'est d'appuyer sur la touche `Entrée` au début :
+Le média (`CD` ou clé `usb`) étant connecté, la machine démarre sur ce média (paramétrez le `Bios` si besoin), il n'y a rien à faire, si ce n'est d'appuyer sur la touche `Entrée` au début :
 ![instal_auto_01](images/instal_auto_01.png)
 
 L'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
