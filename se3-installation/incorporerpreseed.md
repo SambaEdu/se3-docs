@@ -10,7 +10,7 @@
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Utilisation du script `install_phase1.sh`](#utilisation-du-script-install_phase1sh)
-    * [Que fait le script **install_phase1.sh** ?](#que-fait-le-script-install_phase1sh--)
+    * [Que fait le script **install_phase1.sh** ?](#que-fait-le-script-install_phase1sh-)
         * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
         * [La méthode `file`](#la-méthode-file)
         * [La méthode `initrd`](#la-méthode-initrd)
