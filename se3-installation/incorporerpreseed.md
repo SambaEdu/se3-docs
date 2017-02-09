@@ -585,37 +585,55 @@ L'installation est complètement automatique jusqu'à la première connexion en 
 Au redémarrage la connection en `root` est automatique (autologin) :
 ![instal_auto_02](images/instal_auto_02.png)
 
- - Il faut appuyer sur **Entrée** (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
- - Puis choisir **3** (sans serveur de communication) → peut-on rendre cela automatique ?
- **NB :** il faudrait corriger ce truc, car il ne tient pas compte du preseed, non ?
- - Puis saisir le mot de passe pour `adminse3` → c'est juste à la suite, comment l'éviter ?
- - Enfin, saisir 2 fois le nouveau mot de passe pour `root` (on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas)
+ - Il faut appuyer sur **Entrée**  
 
-On pourrait aussi rajouter les lignes suivantes, avant de terminer dans install_phase2.sh
+> on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas : est-ce souhaitable ?
+
+![instal_auto_03](images/instal_auto_03.png)
+ - Choisir **3** s'il n'y a pas de serveur de communication, via un Amon par exemple
+
+> **NB :**  → peut-on rendre cela automatique à partir du **setup_se3.data** ? Il faudrait corriger ce truc, car il ne tient pas compte de la configuration initiale, non ?
+
+![instal_auto_04](images/instal_auto_04.png)
+ - Saisir le mot de passe pour `adminse3`
+
+> → c'est juste à la suite, comment l'éviter ? Est-ce souhaitable ?
+
+![instal_auto_05](images/instal_auto_05.png)
+ - Saisir le nouveau mot de passe pour le compte `root` du se3.
+ 
+![instal_auto_06](images/instal_auto_0.png)
+ - Confirmer le mot de passe…
+
+> on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas
+
+ - Redémarrer le `se3` à la fin de la phase 3 :
+```sh
+reboot
+```
+
+Le `se3` est pret à être utilisé ou, selon le cas, restauré à partir d'une sauvegarde.
+
+
+* Commentaires au sujet de l'utilisation de cette méthode d'installation d'un serveur se3 :
+
+>Il reste à tester que le `se3` est vraiment ok, en tout cas il est accessible via un navigateur [IPSE3]:909.
+
+>On pourrait aussi rajouter les lignes suivantes, avant de terminer dans install_phase2.sh
 ```sh
 apt-get --yes --force-yes se3-clamav se3-dhcp se3-clients-linux se3-wpkg se3-ocs se3-clonage se3-pla se3-radius
 ```
-Pour se3-backup il y a une intervention à faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut être complètement automatisé ?
+>Pour se3-backup il y a une intervention à faire en selectionnant apache2 puis ok, donc je ne sais pas si cela peut être complètement automatisé ?
 ```sh
 apt-get --yes --force-yes se3-backup
 ```
-Puis finir par une mise à jour :
+>Puis finir par une mise à jour :
 ```sh
 apt-get -qq update
 apt-get upgrade --quiet --assume-yes
 ```
 
-Sans oublier de redémarrer le `se3` à la fin de la phase 3 :
-```sh
-reboot
-```
-
 >**NB** Il faudrait essayer de terminer l'automatisation complète de la phase 3 dans l'objectif d'une restauration ?
-
-Le `se3` est pret à être restauré à partir d"une sauvegarde.
-
-
-Il reste à tester que le `se3` est vraiment ok, en tout cas il est accessible en [IPSE3]:909.
 
 
 ## Références
