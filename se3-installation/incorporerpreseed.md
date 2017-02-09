@@ -10,14 +10,9 @@
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Utilisation du script `install_phase1.sh`](#utilisation-du-script-install_phase1sh)
-    * [Vue détaillée sur la personnalisation de l'installateur](#vue-détaillée-sur-la-personnalisation-de-linstallateur)
+    * [Que fait le script **install_phase1.sh** ?](#que-fait-le-script-install_phase1sh--)
         * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
         * [La méthode `file`](#la-méthode-file)
-            * [Préparation](#préparation)
-            * [Téléchargement de l'installateur `Debian`](#téléchargement-de-linstallateur-debian)
-            * [Création des répertoires de travail **isoorig** et **isonew**](#création-des-répertoires-de-travail-isoorig-et-isonew)
-            * [Du répertoire **isoorig** au répertoire **isonew**](#du-répertoire-isoorig-au-répertoire-isonew)
-            * [Dans le répertoire **isonew**](#dans-le-répertoire-isonew)
         * [La méthode `initrd`](#la-méthode-initrd)
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Sur un réseau virtuel](#sur-un-réseau-virtuel)
@@ -130,7 +125,7 @@ Le mieux est de commencer par essayer une [ wheezy mini.iso](http://ftp.fr.debia
 Cependant, certains machines nécessitent un installateur non classique : il suffira de le télécharger ou de le concevoir et de le placer dans le même répertoire que le script et les 2 fichiers.
 
 
-### Vue détaillée sur la personnalisation de l'installateur
+### Que fait le script **install_phase1.sh** ?
 
 Ci-dessous, vous trouverez les détails qui vous permettront de comprendre ce que produit le script **install_phase1.sh** ; le script utilise la méthode `initrd` mais nous présentons d'abord la méthode `file`.
 
@@ -267,8 +262,7 @@ Le résultat sera copié/collé à la place de celui en exemple ($1$HMEw.SQy$Vwf
 
 #### La méthode `file`
 
-##### Préparation
-
+* Préparation :  
 On télécharge l'archive **se3scripts.tar.gz** qui contient les fichiers nécessaires pour la phase 3, en la décompressant dans un répertoire **se3scripts** :
 ```sh
 wget https://github.com/SambaEdu/se3-docs/raw/master/se3-installation/se3scripts.tar.gz
@@ -278,11 +272,10 @@ tar -xzf se3scripts.tar.gz
 >**NB :** certains des fichiers, contenus dans cette archive **se3scripts.tar.gz**, ont été modifiés à partir des fichiers disponibles à l'`url` http://dimaker.tice.ac-caen.fr/dise3wheezy/se3scripts. On a rajouté le fichier inittab qui est nécessaire pour la mise en place de l'autologin au début de la phase 3.
 
 
-##### Téléchargement de l'installateur `Debian`
-
+* Téléchargement de l'installateur `Debian` :  
 Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
 
-Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinstall* suffit (testée).
+Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinst* suffit (testée).
 ```sh
 wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
@@ -291,11 +284,10 @@ Si votre serveur dispose de matériel (carte résau notamment) non reconnus car 
 ```sh
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
+
 **NB :** on peut aussi incorporer les firmwares à l'archive comme cela est fait dans le script install_phase1.sh.
 
-
-##### Création des répertoires de travail **isoorig** et **isonew**
-
+* Création des répertoires de travail **isoorig** et **isonew** :  
 Pour mener à bien la modification de l'installateur `Debian`, on va créer deux répertoires :
 * **isoorig :** il contiendra le contenu de l'image d'origine
 * **isonew :** il contiendra le contenu de votre image personnalisée
@@ -303,17 +295,16 @@ Pour mener à bien la modification de l'installateur `Debian`, on va créer deux
 mkdir isoorig isonew
 ```
 
-
-##### Du répertoire **isoorig** au répertoire **isonew**
-
+* Du répertoire **isoorig** au répertoire **isonew**  
 On monte, dans le répertoire **isoorig**, l'archive `iso` téléchargée , puis on copie son contenu dans le répertoire **isonew**.
 
-* Si vous utilisez l'archive **debian-7.11.0-amd64-netinst.iso** (sinon, voir la méthode de l'`initrd` décrite ci-dessous))
+Si vous utilisez l'archive **debian-7.11.0-amd64-netinst.iso** :
 ```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
-* Si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso** :
+
+Si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso** :
 ```sh
 mount -o loop -t iso9660 firmware-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
@@ -321,9 +312,7 @@ rsync -a -H isoorig/ isonew
 
 Cela dit que l'image est montée en lecture seule, c'est normal.
 
-
-##### Dans le répertoire **isonew**
-
+* Dans le répertoire **isonew**  
 Les modifications suivantes seront à réaliser dans le répertoire **isonew**.
 
 On va maintenant faire en sorte que l'installateur se charge automatiquement.
@@ -336,12 +325,12 @@ chmod 755 ./isonew/isolinux/txt.cfg ./isonew/isolinux/isolinux.cfg ./isonew/isol
 
 On modifie le fichier **isolinux/txt.cfg** pour l'utilisation du fichier `preseed` lors de l'installation (phase 2).
 
-On l'édite :
+→ On l'édite :
 ```sh
 nano ./isonew/isolinux/txt.cfg
 ```
 
-On le modifie ainsi :
+→ On le modifie ainsi :
 ```sh
 default install
 label install
@@ -367,7 +356,7 @@ changez *prompt 0* en *prompt 1*.
 
 **NB :** ces deux opérations facultatives ont pour effet de lancer directement l'installation une fois le `CD` lancé. Cela peut éventuellement posé un problème lors du 1er redémarrage si le `CD` (ou la clé `usb`) n'est pas retiré.
 
-Enfin, on copie les 2 fichiers du `preseed` à la racine du répertoire **isonew** et le sous-répertoire **se3scripts** (voir ci-dessus pour son contenu) :
+→ On copie les 2 fichiers du `preseed` à la racine du répertoire **isonew** et le sous-répertoire **se3scripts** (voir ci-dessus pour son contenu) :
 ```sh
 cp se3.preseed ./isonew/
 cp setup_se3.data ./isonew/
@@ -375,7 +364,7 @@ mkdir ./isonew/se3scripts
 cp ./se3scripts/* ./isonew/se3scripts/
 ```
 
-Enfin, on reconstitue le fichier des sommes de contrôle (cela dépend en fait des installateurs utilisés) puis on crée la nouvelle image `iso` :
+→ Enfin, on reconstitue le fichier des sommes de contrôle (cela dépend en fait des installateurs utilisés) puis on crée la nouvelle image `iso` :
 ```sh
 cd isonew
 md5sum `find -H -type f` > md5sum.txt
