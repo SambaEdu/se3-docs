@@ -304,13 +304,13 @@ mkdir isoorig isonew
 * Du répertoire **isoorig** au répertoire **isonew**  
 On monte, dans le répertoire **isoorig**, l'archive `iso` téléchargée , puis on copie son contenu dans le répertoire **isonew**.
 
-Si vous utilisez l'archive **debian-7.11.0-amd64-netinst.iso** :
+→ Si vous utilisez l'archive **debian-7.11.0-amd64-netinst.iso** :
 ```sh
 mount -o loop -t iso9660 debian-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
 ```
 
-Si vous utiliser l'autre archive, **firmware-7.11.0-amd64-netinst.iso** :
+→ Si vous utilisez l'autre archive, **firmware-7.11.0-amd64-netinst.iso** :
 ```sh
 mount -o loop -t iso9660 firmware-7.11.0-amd64-netinst.iso isoorig
 rsync -a -H isoorig/ isonew
