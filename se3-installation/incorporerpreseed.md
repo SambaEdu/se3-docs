@@ -78,7 +78,7 @@ On pourra bien entendu utiliser un fichier **se3.preseed** existant, dans le cas
 
 Une fois les fichiers **se3.preseed** et **setup_se3.data** ainsi créés, il s'agira de les télécharger en remplaçant les xxxx par le nombre qui convient (voir message de l'interface de création) :
 ```sh
-wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/se3.preseed http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/setup_se3.data
+wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/{se3.preseed,setup_se3.data}
 ```
 
 
@@ -120,9 +120,9 @@ voici la liste des différentes possibilités pour ce paramétre :
 **-i**  → utilisation d'une iso fournie  
 *indiquer le nom de l'iso en complément du paramétre -i*
 
-Le mieux est de commencer par essayer une [ wheezy mini.iso](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/) (avec ou sans les firmwares non-free) ou une [debian-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/) ou une [firmware-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/).
+Le mieux est de commencer par essayer une [ wheezy mini.iso](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/) (avec ou sans les firmwares non-free) ou une [debian-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/) ou une [firmware-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/). Pour ces deux archives netinst, le temps de téléchargement est important. C'est nettement plus rapide avec une mini.iso. Pour les firmwares à incorporer à la mini.iso, le temps de téléchargement est important aussi…
 
-Cependant, certains machines nécessitent un installateur non classique : il suffira de le télécharger ou de le concevoir et de le placer dans le même répertoire que le script et les 2 fichiers.
+Cependant, certaines machines nécessitent un installateur non classique : il suffira de le télécharger ()ou de le concevoir car je ne sais s'il en existe pour wheezy…) et de le placer dans le même répertoire que le script et les 2 fichiers. Ensuite, utilisez le paramétre -i suivi du nom de l'archive iso.
 
 
 ### Que fait le script **install_phase1.sh** ?
@@ -275,12 +275,12 @@ tar -xzf se3scripts.tar.gz
 * Téléchargement de l'installateur `Debian` :  
 Comme nous allons incorporer les fichiers d'installation `Wheezy`, créés précédemment, dans un `cd` ou une clé `usb`, il nous faut pour cela une archive `Debian Wheezy`.
 
-Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinst* suffit (testée).
+Tout d'abord, récupérez une image d'installation de `Debian`. Une image *netinst* suffit (testée) :
 ```sh
-wget http://cdimage.debian.org/cdimage/archive/latest-oldstable/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
+wget http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso
 ```
 
-Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (testée):
+Si votre serveur dispose de matériel (carte résau notamment) non reconnus car nécessitant des firmwares non libres, préférez cette image (testée) :
 ```sh
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/firmware-7.11.0-amd64-netinst.iso
 ```
