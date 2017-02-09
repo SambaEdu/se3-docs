@@ -10,6 +10,7 @@
     * [Création des fichiers `preseed` et `setup_se3`](#création-des-fichiers-preseed-et-setup_se3)
     * [Téléchargement des fichiers](#téléchargement-des-fichiers)
     * [Utilisation du script `install_phase1.sh`](#utilisation-du-script-install_phase1sh)
+    * [Les paramétres du script](#es-paramétres-du-script)
     * [Que fait le script **install_phase1.sh** ?](#que-fait-le-script-install_phase1sh-)
         * [Modification du fichier `preseed`](#modification-du-fichier-preseed)
         * [La méthode `file`](#la-méthode-file)
@@ -84,7 +85,7 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/{se3.preseed,setup_se3.data
 
 ### Utilisation du script `install_phase1.sh`
 
-Le script **install_phase1.sh** permet d'incorporer les fichiers **se3.preseed** et **setup_se3.data** à une archive **mini.iso** d'installation de `Debian/Wheezy`.
+Le script **install_phase1.sh** permet d'incorporer les fichiers **se3.preseed** et **setup_se3.data** à une archive `iso` d'installation de `Debian/Wheezy`.
 
 * Préparation  
 Il suffit de placer le script et les 2 fichiers précédents dans un répertoire puis de télécharger le script dans ce répertoire.
@@ -101,7 +102,7 @@ su
 ```
 
 * Lancez le script  
-par exemple avec le paramétre -m (voir ci-dessous)
+par exemple avec le paramétre -m (si on veut utiliser une **mini.iso**)
 ```sh
 bash install_phase1.sh -m
 ```
@@ -109,7 +110,9 @@ bash install_phase1.sh -m
 * Récupérez l'archive d'installation personnalisée **my_wheezy_install.iso**:  
 Vous obtenez ainsi une archive personnalisée nommée **my_wheezy_install.iso**, ainsi que le fichier **se3.preseed.modif** pour informations des modifications apportées au fichier se3.preseed pour son incorporation.
 
-* **les paramétres du script**  
+
+### Les paramétres du script
+
 Le script **install_phase1.sh** s'utilise avec un paramétre.  
 voici la liste des différentes possibilités pour ce paramétre :  
 **-h**  → aide-mémoire  
