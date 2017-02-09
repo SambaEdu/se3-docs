@@ -584,28 +584,19 @@ L'installation est complètement automatique jusqu'à la première connexion en 
 
 Au redémarrage la connection en `root` est automatique (autologin) :
 ![instal_auto_02](images/instal_auto_02.png)
-
  - Il faut appuyer sur **Entrée**  
-
-> on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas : est-ce souhaitable ?
 
 ![instal_auto_03](images/instal_auto_03.png)
  - Choisir **3** s'il n'y a pas de serveur de communication, via un Amon par exemple
 
-> **NB :**  → peut-on rendre cela automatique à partir du **setup_se3.data** ? Il faudrait corriger ce truc, car il ne tient pas compte de la configuration initiale, non ?
-
 ![instal_auto_04](images/instal_auto_04.png)
  - Saisir le mot de passe pour `adminse3`
-
-> → c'est juste à la suite, comment l'éviter ? Est-ce souhaitable ?
 
 ![instal_auto_05](images/instal_auto_05.png)
  - Saisir le nouveau mot de passe pour le compte `root` du se3.
  
 ![instal_auto_06](images/instal_auto_06.png)
  - Confirmer le mot de passe…
-
-> on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas
 
  - Redémarrer le `se3` à la fin de la phase 3 :
 ```sh
@@ -616,6 +607,12 @@ Le `se3` est pret à être utilisé ou, selon le cas, restauré à partir d'une 
 
 
 * Commentaires au sujet de l'utilisation de cette méthode d'installation d'un serveur se3 :
+
+> on peut commenter un passage de install_phase2.sh pour que l'étape "appuyer sur la touche Entrée" soit éviter : est-ce souhaitable ?
+
+> pour le choix du serveur de communication, peut-on rendre cela automatique à partir du **setup_se3.data** ? Il faudrait corriger ce truc, car il ne tient pas compte de la configuration initiale, non ?
+
+> de même pour le mot de passe adminse3, c'est juste à la suite, comment l'éviter ? Est-ce souhaitable ?
 
 >Il reste à tester que le `se3` est vraiment ok, en tout cas il est accessible via un navigateur [IPSE3]:909.
 
