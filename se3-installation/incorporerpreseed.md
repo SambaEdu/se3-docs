@@ -602,7 +602,7 @@ Au redémarrage la connection en `root` est automatique (autologin) :
 ![instal_auto_05](images/instal_auto_05.png)
  - Saisir le nouveau mot de passe pour le compte `root` du se3.
  
-![instal_auto_06](images/instal_auto_0.png)
+![instal_auto_06](images/instal_auto_06.png)
  - Confirmer le mot de passe…
 
 > on peut commenter un passage de install_phase2.sh pour qu'il ne le fasse pas
