@@ -113,19 +113,22 @@ Vous obtenez ainsi une archive personnalisée nommée **my_wheezy_install.iso**,
 
 ### Les paramétres du script
 
-Le script **install_phase1.sh** s'utilise avec un paramétre.  
-voici la liste des différentes possibilités pour ce paramétre :  
+Le script **install_phase1.sh** s'utilise avec un paramétre.
+voici la liste des différentes possibilités pour ce paramétre :
+
 **-h**  → aide-mémoire  
 **-m**  → utilisation d'une mini.iso mais sans incorporation des firmwares  
 **-mf** → utilisation d'une mini.iso et incorporation des firmwares  
 **-n**  → utilisation d'une nestinst.iso mais sans incorporation des firmwares  
 **-nf** → utilisation d'une nestinst.iso avec incorporation des firmwares  
-**-i**  → utilisation d'une iso fournie  
+**-i**  → utilisation d'une iso fournie dans le même répertoire que le script  
 *indiquer le nom de l'iso en complément du paramétre -i*
 
-Le mieux est de commencer par essayer une [ wheezy mini.iso](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/) (avec ou sans les firmwares non-free) ou une [debian-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/) ou une [firmware-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/). Pour ces deux archives netinst, le temps de téléchargement est important. C'est nettement plus rapide avec une mini.iso. Pour les firmwares à incorporer à la mini.iso, le temps de téléchargement est important aussi…
+Le mieux est de commencer par essayer une [ wheezy mini.iso](http://ftp.fr.debian.org/debian/dists/wheezy/main/installer-amd64/current/images/netboot/) (avec ou sans les firmwares non-free) ou une [debian-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/) ou une [firmware-7.11.0-amd64-netinst.iso](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/7.11.0+nonfree/amd64/iso-cd/).
 
-Cependant, certaines machines nécessitent un installateur non classique : il suffira de le télécharger ()ou de le concevoir car je ne sais s'il en existe pour wheezy…) et de le placer dans le même répertoire que le script et les 2 fichiers. Ensuite, utilisez le paramétre -i suivi du nom de l'archive iso.
+Pour ces deux archives netinst, le temps de téléchargement est important. C'est nettement plus rapide avec une mini.iso. Pour les firmwares à incorporer à la mini.iso, le temps de téléchargement est important aussi…
+
+Cependant, certaines machines nécessitent un installateur non classique : il suffira de le télécharger (ou de le concevoir car je ne sais s'il en existe pour wheezy…) et de le placer dans le même répertoire que le script et les 2 fichiers. Ensuite, utilisez le paramétre -i suivi du nom de l'archive iso.
 
 
 ### Que fait le script **install_phase1.sh** ?
