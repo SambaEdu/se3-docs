@@ -570,7 +570,10 @@ La clé d'installation de votre se3 est prête.
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
 
-La machine démarre, il n'y a rien à faire, si ce n'est d'appuyer sur la touche `Entrée` au début, l'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
+La machine démarre, il n'y a rien à faire, si ce n'est d'appuyer sur la touche `Entrée` au début :
+![instal_auto_01](images/instal_auto_01.png)
+
+L'installation est complètement automatique jusqu'à la première connexion en root : début de la phase 3.
 
 **NB :** n'oubliez pas de retirer le `CD` ou la clé `usb` lors du 1er redémarrage, entre la phase 2 et la phase 3.
 
