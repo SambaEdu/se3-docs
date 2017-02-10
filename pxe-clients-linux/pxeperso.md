@@ -252,9 +252,50 @@ Une fois le système installé, il faudra (selon l'usage de cette machine) suppr
 
 ### Installer `Debian Stretch`
 
-… *à venir* …
+La version `Stretch` de `Debian` étant bientôt en stable, vous pouvez d'ors et déjà l'essayer via une installation `netboot`.
+
+
+* Télécharger l'archive
+
+On crée un répertoire temporaire et on y télécharge l'archive netboot.tar.gz et on la décompresse.
+```sh
+mkdir /tftpboot/tempstretch
+cd /tftpboot/tempstretch
+wget http://ftp.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/netboot.tar.gz -O stretch_netboot.tar.gz
+tar -xzf stretch_netboot.tar.gz
+cd ..
+```
+
+* Copier les fichiers d'amorçage
+
+On crée le répertoire /tftpboot/stretch et on y copie le répertoire amd64 de l'archive netboot décompressée ci-dessus et on peut supprimer le répertoire temporaire.
+```sh
+mkdir /tftpboot/stretch_netboot
+cp -r /tftpboot/tempstretch/debian-installer/amd64 /tftpboot/stretch/amd64
+rm -rf /tftpboot/tempstretch
+```
+
+* Mise en place d'une entrée dans le menu pxe
+
+On édite le fichier **perso.menu** puis on ajoute les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
+
+```sh
+…
+LABEL Installation manuelle stretch amd64
+     MENU LABEL ^Netboot en manuel stretch (amd64)
+     KERNEL stretch/amd64/linux
+     APPEND vga=normal initrd=stretch/amd64/initrd.gz --quiet
+     TEXT HELP
+     Installation manuelle de Debian stretch amd64
+     ENDTEXT
+…
+```
+
+Bonne installation :-)
+
 
 ## restaurer une image clonezilla stockée sur un partage samba (se3 ou un autre serveur)
+
 L'intéret est de pouvoir stocker des images propres d'un type de poste non intégré. En cas de contamination d'une salle par un virus, il est facile de restaurer un poste, de l'intégrer puis de lancer un clonage, ou tout simplement de restaurer chaque poste avec cette image.
 
 On ajoute dans le fichier perso.menu les lignes suivantes
