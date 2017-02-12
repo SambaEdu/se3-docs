@@ -190,14 +190,16 @@ Ainsi, un PC qui aura son adresse IP de réservée dans le dhcp du se3 aura le m
 Si le PC n'a pas son adresse IP de réservée, le client lourd prendra un nom de la forme `ltsp553` ...
 
 Tout comme le module se3-clonage, **toute mise à jour (ou action) faite** sur le serveur `dhcp `via l'interface web du se3 fera perdre cette directive ...
+
 Il est néanmoins possibible de créer un script qui ajoutera automatiquement cette ligne dans le fichier /etc/dhcp/dhcpd.conf si elle est absente.
+Ce script peut être ajouté en tache cron au se3.
 ```sh 
 #!/bin/bash
 
 #le contenu de la ligne 18 est mis dans une variable ligne18
 ligne18=$(sed -n "18 p" /etc/dhcp/dhcpd.conf)
 
-#si le contenu de la ligne 18 est "use-host-decl-names on;" on ne fait rien sinon on lance l'ajout de \use-host-decl-names on; suivi de la relance du service dhcpd
+#si le contenu de la ligne 18 est "use-host-decl-names on;" on ne fait rien sinon on lance l'ajout de 'use-host-decl-names on;' suivi de la relance du service dhcd
 if [ "$ligne18" = 'use-host-decl-names on;' ]; then  exit
 
 else    sed -i "18i\use-host-decl-names on;\n" /etc/dhcp/dhcpd.conf
