@@ -501,7 +501,7 @@ Dans le menu contextuel, choisir **Graver sur le disque…**
 
 ![instal_auto_07](images/instal_auto_07.png)
 * Lancez la gravure du `CD`  
-Cliquez sur **Graver**
+Cliquez sur **Graver**  
 ![instal_auto_08](images/instal_auto_08.png)
 Cliquez sur **Effacer le disque**
 
