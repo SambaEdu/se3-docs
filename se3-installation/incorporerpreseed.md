@@ -585,9 +585,15 @@ mount /dev/sdX /mnt/usb
 diff /mnt/usb/ ./isonew/
 umount /dev/usb
 ```
-La clé d'installation de votre se3 est prête.  
+La clé d'installation de votre se3 devrait être prête mais…
 
-> 
+>Pour l'utilisation d'une clé usb, cela ne fonctionne pas
+
+>En fait, cela n'est pas étonnant car les archives mini.iso ou netinst.iso disponibles sur le site de Debian ont une structure spéciale qui permet (j'imagine, mais y a-t-il d'autres raisons ?) que la clé ne prenne pas le nom sda à la place du disque dur de la machine.
+
+>Lorsqu'on reconstitue l'archive iso via la commande geneisoimage, on perd cette structure et ensuite la clé n'est pas bootable quand on utilise un cp archive.iso /dev/sdb.
+
+>Il faudrait voir s'il n'y a pas un paquet debian qui permettrait de reconstituer l'archive iso avec cette structure spéciale. Ou alors il faudrait comprendre comment obtenir cette structure spéciale… 
 
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
