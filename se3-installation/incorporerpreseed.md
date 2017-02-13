@@ -523,8 +523,8 @@ lsblk
 ```
 ![instal_auto_09](images/instal_auto_09.png)  
 
-Ici,l'identificateur du graveur de `CD` est **/dev/sr0** et le `CD` est monté dans le répertoire **/media/cdrom0**.  
-**NB** Dans la suite, remplacez *sr0* et */media/cdrom0* si ces indications sont différentes.
+Ici, l'identificateur du graveur de `CD` est **/dev/sr0** et le `CD` est monté dans le répertoire **/media/cdrom0**.  
+**NB :** Dans les commandes suivantes, remplacez *sr0* et */media/cdrom0* si ces indications sont différentes.
 
 * Passez en `root` pour démonter le `CD` et vérifiez  
 Il vous sera demandé le mot de passe root…
@@ -541,9 +541,14 @@ wodim -v blank=fast dev=/dev/sr0
 ```
 
 * Lancez la gravure du `CD`  
-*…plus ou moins long selon la taille de l'archive `iso à graver.*
+*…plus ou moins long selon la taille de l'archive `iso` à graver.*
 ```sh
 wodim -v dev=/dev/sr0 -dao ./my_wheezy_install.iso
+```
+
+* Éjectez le `CD`  
+```sh
+wodim -eject
 ```
 
 Le `CD` personnalisé d'installation de votre `se3` est prêt à être utilisé : [voir ci-dessous](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso).
@@ -568,7 +573,7 @@ Cela donne :
      Device Boot      Start         End      Blocks   Id  System 
   /dev/sdX1   *           1         487     3911796    6  FAT1
 ```
-* Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé `usb` grâce au système de fichier (FAT 16 ou FAT 32) et à sa taille.
+* Repérez le volume /dev/sdX à coté de Disk qui correspond à votre clé `usb` grâce au système de fichier (`FAT 16` ou `FAT 32`) et à sa taille.
 
 **Attention**, soyez certain de votre repérage. Si vous vous trompez de lettre, vous pouvez effacer un disque dur !  
 **Important** dans la suite, remplacez X par la lettre qui convient pour la clé.
