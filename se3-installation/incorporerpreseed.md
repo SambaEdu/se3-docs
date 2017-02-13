@@ -515,43 +515,38 @@ Le `CD` personnalisé d'installation de votre `se3` est prêt à être utilisé 
 
 #### En ligne de commande, via un `terminal`
 
-* Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 20 Mo ou à 300 Mo selon le cas).
+* Insérez un `CD` d'une taille supérieure à la taille de l'image `iso` (supérieur à 20 Mo ou à 300 Mo selon le cas).  
 
-* Installez le programme **wodim** (pour graver) puis récupérez les informations sur le graveur :
+* Repérez l'identificateur du graveur  
 ```sh
-apt-get install wodim
-wodim --devices
+lsblk
 ```
-Cela donne :
-```sh
-wodim: Overview of accessible drives (1 found) :
--------------------------------------------------------------------------
- 0  dev='/dev/sg1'	rwrw-- : 'VBOX' 'CD-RW'
--------------------------------------------------------------------------
-```
-Ici,le graveur de `CD` est en /dev/sg1.  
-**Important** Dans la suite, remplacez sg1 par l'identification de son graveur.
+![instal_auto_09](images/instal_auto_09.png)  
 
-* Dans le cas où il est necessaire d'effacer le `CD` :
-```sh
-wodim -v blank=fast dev=/dev/sg1
-```
+Ici,l'identificateur du graveur de `CD` est **/dev/sr0** et le `CD` est monté dans le répertoire **/media/cdrom0**.  
+**NB** Dans la suite, remplacez *sr0* et */media/cdrom0* si ces indications sont différentes.
 
-* Démontez le graveur puis lancez la gravure du `CD` :
+* Passez en `root` pour démonter le `CD` et vérifiez  
+Il vous sera demandé le mot de passe root…
 ```sh
-umount /dev/sg1
-wodim -v dev=/dev/sg1 -dao ./my_wheezy_install.iso
+su
+umount /media/cdrom0
+lsblk
+```
+![instal_auto_10](images/instal_auto_10.png)  
+
+* Dans le cas où il est nécessaire d'effacer le `CD`  
+```sh
+wodim -v blank=fast dev=/dev/sr0
 ```
 
-* Vérifiez la copie :
+* Lancez la gravure du `CD`  
+*…plus ou moins long selon la taille de l'archive `iso à graver.*
 ```sh
-mkdir /mnt/cdrom
-mount /dev/sg1 /mnt/cdrom
-diff /mnt/cdrom/ ./isonew/
-umount /dev/cdrom
+wodim -v dev=/dev/sr0 -dao ./my_wheezy_install.iso
 ```
-Le `CD` d'installation de votre `se3` est prêt.  
-**À tester, mon graveur ne semble pas reconnu par linux, je n'ai pas pu tester cette partie**
+
+Le `CD` personnalisé d'installation de votre `se3` est prêt à être utilisé : [voir ci-dessous](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso).
 
 
 ### Copier sur une clé `usb`
