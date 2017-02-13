@@ -497,18 +497,19 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 Avec une taille supérieure à la taille de l'image `iso` (supérieure à 20 Mo ou à 300 Mo selon le cas)
 
 * Cliquez-droit sur l'archive personnalisée **my_wheezy_install.iso**  
-Dans le menu contextuel, choisir **Graver sur le disque…**
-
+Dans le menu contextuel, choisir **Graver sur le disque…**  
+Vous obtenez la fenêtre suivante :  
 ![instal_auto_07](images/instal_auto_07.png)
+
 * Lancez la gravure du `CD`  
 Cliquez sur **Graver**  
-![instal_auto_08](images/instal_auto_08.png)
+![instal_auto_08](images/instal_auto_08.png)  
 Cliquez sur **Effacer le disque**
 
 * Plusieurs étapes lors de la gravure  
 Après l'effacement du disque, a lieu la gravure de l'archive `iso`, la fermeture du disque, la création d'une somme de contrôle et enfin l'éjection du disque gravé.
 
-Le `CD` personnalisé d'installation de votre `se3` est prêt.
+Le `CD` personnalisé d'installation de votre `se3` est prêt à être utilisé : [voir ci-dessous](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso).
 
 
 #### En ligne de commande, via un `terminal`
