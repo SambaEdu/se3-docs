@@ -503,6 +503,7 @@ Vous obtenez la fenêtre suivante :
 
 * Lancez la gravure du `CD`  
 Cliquez sur **Graver**  
+Une confirmation est demandée…  
 ![instal_auto_08](images/instal_auto_08.png)  
 Cliquez sur **Effacer le disque**
 
