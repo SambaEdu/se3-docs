@@ -18,6 +18,8 @@
 * [Phase 2 : Utiliser l'archive d'installation personnalisée](#phase-2--utiliser-larchive-dinstallation-personnalisée)
     * [Test sur un réseau virtuel](#test-sur-un-réseau-virtuel)
     * [Graver sur un `CD`](#graver-sur-un-cd)
+        * [En mode graphique](#en-mode-graphique)
+        * [En ligne de commande, via un `terminal`](#en-ligne-de-commande-via-un-terminal)
     * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
     * [Utilisation de la clé `usb`, du `CD` , ou de l'image `iso`](#utilisation-de-la-clé-usb-du-cd-ou-de-limage-iso)
 * [Phase 3 : connexion en `root` et installation du paquet `se3`](#phase-3--connexion-en-root-et-installation-du-paquet-se3)
@@ -51,8 +53,8 @@ Il s'agit, dans ce qui suit, de minimiser la manipulation des divers fichiers n�
 Ainsi, les 3 phases pourront s'enchaîner presque automatiquement.
 
 >travail encore en chantier actuellement puisque nous sommes dans une phase de mise au point de ce projet d'automatisation.  
-Les tests en machines virtuelles sont concluants.  
-**Il reste à effectuer la même chose sur des machines réelles**.
+Les tests en machines virtuelles sont concluants ainsi que l'utilisation d'un `CD` sur une machine réelle.  
+**Il reste à réaliser la même chose via une clé `usb`**.
 
 
 ### Vue d'ensemble des préparatifs
@@ -489,7 +491,29 @@ D'ailleurs, nous vous conseillons de tester votre archive `iso` personnalisée s
 
 ### Graver sur un `CD`
 
-* Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 300 Mo).
+#### En mode graphique
+
+* Insérez un `CD` dans le lecteur de votre ordinateur  
+Avec une taille supérieure à la taille de l'image `iso` (supérieure à 20 Mo ou à 300 Mo selon le cas)
+
+* Cliquez-droit sur l'archive personnalisée **my_wheezy_install.iso**  
+Dans le menu contextuel, choisir **Graver sur le disque…**
+
+![instal_auto_07](images/instal_auto_07.png)
+* Lancez la gravure du `CD`  
+Cliquez sur **Graver**
+![instal_auto_08](images/instal_auto_08.png)
+Cliquez sur **Effacer le disque**
+
+* Plusieurs étapes lors de la gravure  
+Après l'effacement du disque, a lieu la gravure de l'archive `iso`, la fermeture du disque, la création d'une somme de contrôle et enfin l'éjection du disque gravé.
+
+Le `CD` personnalisé d'installation de votre `se3` est prêt.
+
+
+#### En ligne de commande, via un `terminal`
+
+* Insérez votre `CD` vierge d'une taille supérieure à la taille de l'image `iso` (supérieur à 20 Mo ou à 300 Mo selon le cas).
 
 * Installez le programme **wodim** (pour graver) puis récupérez les informations sur le graveur :
 ```sh
@@ -532,7 +556,7 @@ Le `CD` d'installation de votre `se3` est prêt.
 
 **Important :** dans la réalisation de l'archive `iso` ci-dessus, **si vous utilisez la méthode `file`** (le cas n'étant pas à envisager pour la méthode `initrd`), il faudra remplacer **cdrom** par **hd-media** si on veut l'utiliser via une clé `usb`. Non encore testé [TODO]. Il y a 3 occurrences à remplacer : 1 dans le fichier **txt.cfg**, ligne **append**, et 2 dans le fichier **se3.preseed**, dans la partie **# Preseed commands : mise en place de l'autologin**.
 
-* Insérez votre clé `usb` d'une taille supérieure à la taille de l'image `iso` (supérieure à 300 Mo).
+* Insérez votre clé `usb` d'une taille supérieure à la taille de l'image `iso` (supérieure à 20 Mo ou à 300 Mo selon le cas).
 
 En root, tapez :
 ```sh
@@ -565,7 +589,8 @@ diff /mnt/usb/ ./isonew/
 umount /dev/usb
 ```
 La clé d'installation de votre se3 est prête.  
-**À tester, la gravure sur clé a été testée mais pas la clé obtenue**
+
+> 
 
 
 ### Utilisation de la clé `usb`, du `CD`, ou de l'image `iso`
