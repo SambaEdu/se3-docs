@@ -250,8 +250,6 @@ END
     #
     # ajouter les dépôts
     cat > texte << END
- ldapedu-server ldapedu-server/adminpassverif string se3chief
-
 # AJOUT, pour indiquer le miroir et éventuellement le proxy pour atteindre le miroir
 # Mirror settings
 # ----------------
@@ -262,9 +260,16 @@ d-i mirror/suite string wheezy
 d-i mirror/http/proxy string
 
 # Standart drive controler
+# ----------------
+d-i hw-detect/load_firmware boolean true
+#d-i partman-auto/disk string /dev/sda
+
+# Partitioning disk in several partitions without lvm
+# ----------------
+# choice no LVM
 END
     #sed -i '65,66 {:z;N;66! bz; s/^.*$/cat texte/e}' se3.preseed
-    sed -i '/ ldapedu-server ldapedu-server\/adminpassverif string se3chief/,/#Standart drive controler/ {:z;N;/#Standart drive controler/! bz; s/^.*$/cat texte/e}' se3.preseed
+    sed -i '/#Standart drive controler/,/# choice no LVM/ {:z;N;/# choice no LVM/! bz; s/^.*$/cat texte/e}' se3.preseed
     #
     # commenter la ligne run netcfg.sh
     sed -i "/netcfg.sh/ s/^/#/" se3.preseed
