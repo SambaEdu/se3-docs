@@ -214,11 +214,14 @@ modifier_preseed()
     #
     # remplacement des lignes de commandes
     # cas d'un se3/jessie (prévision des évolutions)
+    # il faudra modifier la fin de install_phase2.sh en conséquence [TODO]
     cat > texte << END
 # MODIFICATION, Preseed commands
 # mise en place de l'autologin et des fichiers pour la phase 3
 # ----------------
 d-i preseed/early_command string cp se3scripts/* ./; \\
+    mkdir  /target/etc/se3; \\
+    cp setup_se3.data /target/etc/se3/setup_se3.data; \\
     chmod +x install_phase2.sh; \\
     mkdir /target/root/bin; \\
     cp install_phase2.sh /target/root/bin/install_phase2.sh; \\
@@ -230,7 +233,7 @@ d-i preseed/early_command string cp se3scripts/* ./; \\
 
 # Finishing behaviour
 END
-    # cas d'un se3/wheezy (à supprimer lors du passage en jessie)
+    # cas d'un se3/wheezy (à supprimer lors du passage à se3/jessie)
     cat > texte << END
 # MODIFICATION, Preseed commands
 # mise en place de l'autologin et des fichiers pour la phase 3
