@@ -213,6 +213,24 @@ modifier_preseed()
     cp se3.preseed se3.preseed.orig
     #
     # remplacement des lignes de commandes
+    # cas d'un se3/jessie (prévision des évolutions)
+    cat > texte << END
+# MODIFICATION, Preseed commands
+# mise en place de l'autologin et des fichiers pour la phase 3
+# ----------------
+d-i preseed/early_command string cp se3scripts/* ./; \\
+    chmod +x install_phase2.sh; \\
+    mkdir /target/root/bin; \\
+    cp install_phase2.sh /target/root/bin/install_phase2.sh; \\
+    mv /target/usr/sbin/gdm3 /target/usr/sbin/gdm3.save; \\
+    cp gdm3 /target/usr/sbin/gdm3; \\
+    chmod 755 /target/usr/sbin/gdm3; \\
+    mkdir -p /target/etc/systemd/system/getty@tty1.service.d/; \\
+    cp autologin_debian.conf /target/etc/systemd/system/getty@tty1.service.d/
+
+# Finishing behaviour
+END
+    # cas d'un se3/wheezy (à supprimer lors du passage en jessie)
     cat > texte << END
 # MODIFICATION, Preseed commands
 # mise en place de l'autologin et des fichiers pour la phase 3
@@ -256,7 +274,7 @@ END
 d-i mirror/country string manual
 d-i mirror/http/hostname string httpredir.debian.org
 d-i mirror/http/directory string /debian
-d-i mirror/suite string wheezy
+d-i mirror/suite string ${version}
 d-i mirror/http/proxy string
 
 # Standart drive controler
