@@ -219,7 +219,7 @@ modifier_preseed()
 # MODIFICATION, Preseed commands
 # mise en place de l'autologin et des fichiers pour la phase 3
 # ----------------
-d-i preseed/early_command string cp se3scripts/* ./; \\
+d-i preseed/late_command string cp se3scripts/* ./; \\
     mkdir  /target/etc/se3; \\
     cp setup_se3.data /target/etc/se3/setup_se3.data; \\
     chmod +x install_phase2.sh; \\
@@ -238,7 +238,7 @@ END
 # MODIFICATION, Preseed commands
 # mise en place de l'autologin et des fichiers pour la phase 3
 # ----------------
-d-i preseed/early_command string cp se3scripts/* ./; \\
+d-i preseed/late_command string cp se3scripts/* ./; \\
     chmod +x se3-early-command.sh se3-post-base-installer.sh install_phase2.sh; \\
     ./se3-early-command.sh se3-post-base-installer.sh
 
