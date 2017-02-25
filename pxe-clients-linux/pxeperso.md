@@ -59,7 +59,7 @@ Dans le menu `maintenance.menu`, il apparaîtra maintenant une entrée vers votr
 
 **Menu de base :**
 
-Au début du fichier `perso.menu`, mettez les commandes qui permettent de revenir au menu précédent qui est le menu `maintenance.menu` :
+Au début du fichier `perso.menu` (nano /tftpboot/pxelinux.cfg/perso.menu), mettez les commandes qui permettent de revenir au menu précédent qui est le menu `maintenance.menu` :
 ```ssh
 menu title Perso
 
@@ -151,7 +151,7 @@ Une fois les fichiers en place, on peut supprimer quelques éléments dans le r�
 
 #### Mise en place du menu pxe
 
-Dans le fichier `perso.menu`, rajoutez les lignes suivantes
+Dans le fichier `perso.menu` (nano /tftpboot/pxelinux.cfg/perso.menu), rajoutez les lignes suivantes
 (en remplaçant *IP-du-se3* par la valeur correspondant à votre réseau) :
 ```ssh
 LABEL GParted
@@ -210,7 +210,7 @@ Il faut donc adapter un des fichiers preseed disponibles dans le répertoire */h
 
 #### Mise en place dans le menu `pxe`
 
-Dans le fichier `perso.menu`, rajoutez, par exemple, les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
+Dans le fichier `perso.menu` (nano /tftpboot/pxelinux.cfg/perso.menu), rajoutez, par exemple, les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
 ```ssh
 …
 LABEL DebianJessiesemiautoamd64
@@ -277,7 +277,7 @@ rm -rf /tftpboot/tempstretch
 
 * Mise en place d'une entrée dans le menu pxe
 
-On édite le fichier **perso.menu** puis on ajoute les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
+On édite le fichier **perso.menu** (nano /tftpboot/pxelinux.cfg/perso.menu) puis on ajoute les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
 
 ```sh
 …
@@ -298,7 +298,7 @@ Bonne installation :-)
 
 L'intéret est de pouvoir stocker des images propres d'un type de poste non intégré. En cas de contamination d'une salle par un virus, il est facile de restaurer un poste, de l'intégrer puis de lancer un clonage, ou tout simplement de restaurer chaque poste avec cette image.
 
-On ajoute dans le fichier perso.menu les lignes suivantes
+On ajoute dans le fichier perso.menu (nano /tftpboot/pxelinux.cfg/perso.menu) les lignes suivantes
 ```ssh 
 ...
 label Clonezilla-live 
