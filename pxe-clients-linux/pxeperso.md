@@ -270,7 +270,7 @@ cd ..
 
 On crée le répertoire /tftpboot/stretch et on y copie le répertoire amd64 de l'archive netboot décompressée ci-dessus et on peut supprimer le répertoire temporaire.
 ```sh
-mkdir /tftpboot/stretch_netboot
+mkdir /tftpboot/stretch
 cp -r /tftpboot/tempstretch/debian-installer/amd64 /tftpboot/stretch/amd64
 rm -rf /tftpboot/tempstretch
 ```
