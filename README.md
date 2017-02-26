@@ -54,7 +54,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Gestion des `clients-linux`
 
-* Documentation de [l'installation automatique](pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) des `clients-linux`
+* Documentation de [l'installation/intégration/post-installation automatique](pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) des `clients-linux`
 * Documentation de [la gestion](se3-clients-linux/README.md#gestion-des-stations-de-travail-debian-ou-ubuntu-dans-un-domaine-sambaÉdu-avec-le-paquet-se3-clients-linux) des `clients-linux`
 
 
@@ -72,7 +72,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Des documentations sur Debian
 
-* Une documentation pour [les débutants](http://lescahiersdudebutant.fr/)
-* La documentation de Raphaël Hertzog : [le cahier de l'administrateur Debian](https://debian-handbook.info/browse/fr-FR/stable/)
+* Une documentation du projet `DFLinux` pour [les débutants](http://lescahiersdudebutant.fr/)
+* La documentation de *Raphaël Hertzog* et *Roland Mas* : [le cahier de l'administrateur `Debian`](https://debian-handbook.info/browse/fr-FR/stable/)
 
 
