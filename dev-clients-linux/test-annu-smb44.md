@@ -61,7 +61,8 @@ Vous obtenez ainsi un fichier **\_tmp\_export.ldif** que vous enregistrez : vous
 
 On commence par charger le script **test-ldap-smb44.sh** sur la machine virtuelle en le récupérant sur le dépot `Git` à l'aide de la commande suivante :
 ```sh
-wget https://gist.githubusercontent.com/SambaEdu/bc0c2b4166c9152cbf786cefb271b2e8/raw/f9bce505cbd545ce05230c149892b0bee72b1830/test-ldap-smb44.sh
+wget 
+https://gist.githubusercontent.com/SambaEdu/bc0c2b4166c9152cbf786cefb271b2e8/raw/fe2f6eef0ee4c5495c619770e0e32d8ec5e5a098/test-ldap-smb44.sh
 ```
 
 On dépose, dans le même dossier, un export de son annuaire de production que l'on veut tester : [voir ci-dessus pour obtenir un export](#comment-obtenir-un-export-de-lannuaire-). Par exemple, mettons qu'il se nomme **\_tmp\_export.ldif** ; mais ce n'est pas obligatoire : il peut s'appeler autrement.
