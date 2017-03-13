@@ -23,10 +23,22 @@ Voici ce que nous vous proposons pour la fabrication des images des disques du `
 
 ## Préparation d'un `CD` `Clonezilla`
 
+Il s'agit de télécharger `Clonezilla` et de le graver sur un `CD` ou de le copier sur une clé `usb`, les deux solutions étant possibles.
+
+* Télécharger une archive
+```sh
+wget 
+```
+
 
 
 ## Clonage d'un disque du `se3`
 
+Une fois un `CD` ou une clé `usb` prêt, on peut redémarrer le `se3`, et lancer la création des images des disques durs.
+
+Évidemment, le serveur sera indisponible pendant un certain temps… Pensez à prévenir les utilisateurs ; mais le mieux est de choisir un moment où aucun utilisateur n'est présent, ou du moins le moins possible.
+
+Cette opération sera à répeter **avant et après** (si tout s'est bien déroulé) chaque changement important concernant le `se3`. Une gestion rigoureuse n'est pas à négliger…
 
 
 ## Restauration d'une image sur un des disques du `se3`
