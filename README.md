@@ -44,6 +44,8 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 * La documentation pour [les scripts `sauve_se3.sh` et `restaure_se3.sh`](se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3)
 
+* La documentation pour [cloner les disques](se3-sauvegarde/clonerse3.md#cloner-un-se3) de votre `se3`
+
 
 ### Tester ou remonter des bugs
 

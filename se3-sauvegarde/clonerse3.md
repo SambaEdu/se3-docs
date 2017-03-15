@@ -1,5 +1,7 @@
 # Cloner un `se3`
 
+… article en chantier …
+
 * [Présentation](#présentation)
 * [Préparation de `Clonezilla`](#préparation-de-clonezilla)
     * [Télécharger `Clonezilla`](#télécharger-clonezilla)
