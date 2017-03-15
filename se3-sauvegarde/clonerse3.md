@@ -4,6 +4,8 @@
 * [Préparation de `Clonezilla`](#préparation-de-clonezilla)
     * [Télécharger `Clonezilla`](#télécharger-clonezilla)
     * [Graver sur un `CD`](#graver-sur-un-cd)
+        * [En mode graphique](#en-mode-graphique)
+        * [En ligne de commande](#en-ligne-de-commande)
     * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
 * [Clonage d'un disque du `se3`](#clonage-dun-disque-du-se3)
 * [Restauration d'une image sur un des disques du `se3`](#restauration-dune-image-sur-un-des-disques-du-se3)
@@ -48,6 +50,31 @@ wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_stable/2.
 
 ### Graver sur un `CD`
 
+#### En mode graphique
+
+* Insérez un `CD` dans le lecteur de votre ordinateur  
+Avec une taille supérieure à la taille de l'image `iso` (supérieure à 100 Mo environ)
+
+* Cliquez-droit sur l'archive téléchargée **clonezilla-live-2.5.0-25-amd64.iso**  
+Dans le menu contextuel, choisir **Graver sur le disque…**  
+Vous obtenez la fenêtre suivante :  
+![graver_cd_01](images/graver_cd_01.png)
+
+* Lancez la gravure du `CD`  
+Cliquez sur **Graver**  
+Une confirmation est demandée…  
+![graver_cd_02](images/graver_cd_02.png)  
+Cliquez sur **Effacer le disque**
+
+* Plusieurs étapes lors de la gravure  
+Après l'effacement du disque, a lieu la gravure de l'archive `iso`, la fermeture du disque, la création d'une somme de contrôle et enfin l'éjection du disque gravé.
+
+Le `CD` contenant `Clonezilla` est prêt à être utilisé : [voir ci-dessous](#clonage-dun-disque-du-se3).
+
+
+#### En ligne de commande
+
+… à venir …
 
 
 ### Copier sur une clé `usb`
