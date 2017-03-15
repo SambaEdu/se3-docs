@@ -1,7 +1,7 @@
 # Cloner un `se3`
 
 * [Présentation](#présentation)
-* [Préparation d'un `CD` `Clonezilla`](#préparation-dun-cd-clonezilla)
+* [Préparation de `Clonezilla`](#préparation-de-clonezilla)
     * [Télécharger `Clonezilla`](#télécharger-clonezilla)
     * [Graver sur un `CD`](#graver-sur-un-cd)
     * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
@@ -24,7 +24,7 @@ Voici ce que nous vous proposons pour la fabrication des images des disques du `
 - recommencer, avec le 2ème disque qui contient `/home` (par exemple), les étapes 3, 4 et 5
 
 
-## Préparation d'un `CD` `Clonezilla`
+## Préparation de `Clonezilla`
 
 Il s'agit de télécharger `Clonezilla` et de le graver sur un `CD` ou de le copier sur une clé `usb`, les deux solutions étant possibles.
 
