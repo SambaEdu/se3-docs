@@ -2,6 +2,9 @@
 
 * [Présentation](#présentation)
 * [Préparation d'un `CD` `Clonezilla`](#préparation-dun-cd-clonezilla)
+    * [Télécharger `Clonezilla`](#télécharger-clonezilla)
+    * [Graver sur un `CD`](#graver-sur-un-cd)
+    * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
 * [Clonage d'un disque du `se3`](#clonage-dun-disque-du-se3)
 * [Restauration d'une image sur un des disques du `se3`](#restauration-dune-image-sur-un-des-disques-du-se3)
 * [Références](#Références)
@@ -25,10 +28,20 @@ Voici ce que nous vous proposons pour la fabrication des images des disques du `
 
 Il s'agit de télécharger `Clonezilla` et de le graver sur un `CD` ou de le copier sur une clé `usb`, les deux solutions étant possibles.
 
-* Télécharger une archive
+
+### Télécharger `Clonezilla`
+
+On télécharge une archive de `Clonezilla`
 ```sh
 wget 
 ```
+
+### Graver sur un `CD`
+
+
+
+### Copier sur une clé `usb`
+
 
 
 
