@@ -79,7 +79,7 @@ Le `CD` contenant `Clonezilla` est prêt à être utilisé : [voir ci-dessous](#
 
 ### Copier sur une clé `usb`
 
-
+… à venir …
 
 
 ## Clonage d'un disque du `se3`
