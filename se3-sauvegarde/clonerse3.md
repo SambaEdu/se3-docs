@@ -11,7 +11,7 @@
     * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
 * [Clonage d'un disque du `se3`](#clonage-dun-disque-du-se3)
 * [Restauration d'une image sur un des disques du `se3`](#restauration-dune-image-sur-un-des-disques-du-se3)
-* [Références](#Références)
+* [Références](#références)
 
 
 ## Présentation
