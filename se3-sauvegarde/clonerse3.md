@@ -95,11 +95,14 @@ Cette opération sera à répeter **avant et après** (si tout s'est bien dérou
 
 ## Restauration d'une image sur un des disques du `se3`
 
+Et oui, la catastrophe est arrivée… mais vous avez une image `Clonezilla` qui va vous permettre de remettre en ordre de marche votre `se3`. Suivez le guide !
+
+… à venir …
 
 
 ## Références
 
-
-
-
+* Le site de [Clonezilla](http://clonezilla.org/) : of course !
+* La page [Clonezilla d'Ubuntu](https://doc.ubuntu-fr.org/clonezilla), à ne pas négliger
+* Un tutoriel d'[utilisation de Clonezilla](http://www.fredzone.org/tutoriel-clonezilla-sauvegarde-restauration-disque-dur)
 
