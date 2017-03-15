@@ -53,7 +53,7 @@ wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_stable/2.
 #### En mode graphique
 
 * Insérez un `CD` dans le lecteur de votre ordinateur  
-Avec une taille supérieure à la taille de l'image `iso` (supérieure à 100 Mo environ)
+Avec une taille supérieure à la taille de l'image `iso` (supérieure à 205 Mo environ)
 
 * Cliquez-droit sur l'archive téléchargée **clonezilla-live-2.5.0-25-amd64.iso**  
 Dans le menu contextuel, choisir **Graver sur le disque…**  
