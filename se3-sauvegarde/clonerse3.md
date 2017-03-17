@@ -110,13 +110,16 @@ Choisir :
 → la bonne *langue* et le bon codage *clavier*  
 → le mode *débutant*  
 → le mode *device image-partition vers image-partition*  
-→ monter un périphérique local **Marc peux-tu préciser cela ? Sur quel répertoire ?**
-```sh
-mount ??
-```
+→ *monter un périphérique local* . Une liste des périphériques possibles apparait.
+
 
 On attend ensuite quelques secondes que le disque soit bien pris en charge par le système, puis :  
-→ on choisit le bon disque de sauvegarde qui sera monté par le `livecd` en `/home/partimag` ( home qui n'a rien à voir avec celui du ,`se3` évidemment) **Marc peux-tu préciser cela ? Il faut créer un répertoire ?**  
+→ on choisit le bon disque de sauvegarde. Le disque va être monté automatiquement.
+Clonezilla étant un livecd basé sur débian (ou Ubuntu selon la version choisie) , il possède une arborescence Linux et donc un répertoire 'home'. Clonezilla a donc besoin de créer la sauvegarde dans son répertoire '/home/partimag/'. 
+Le disque de sauvegarde sera monté automatiquement par le `livecd` comme son `/home/partimag` ( home qui n'a rien à voir avec celui du ,`se3` évidemment, clonezilla faisant exactement la même chose pour une image d'un poste Windows) .
+
+*Aucun répertoire ou manipulation en ligne de commande n'est à faire.*  
+
 → on choisit *le type de sauvegarde* : `savedisk` pour le disque entier ou `saveparts` pour ne sauvegarder que quelques partitions  
 (On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`, on utilisera `saveparts`)  
 → Choisir *le nom de la sauvegarde* (ex: se3-wheezy-avant-samba-4.4_date)  
