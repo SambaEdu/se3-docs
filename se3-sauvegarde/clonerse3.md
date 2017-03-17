@@ -103,10 +103,10 @@ Une fois un `CD` ou une clé `usb` prêt, on peut redémarrer le `se3`, et lance
 
 Si le serveur est sur des partitions classiques sans `LVM`, et que les `home` et `/var/se3` sont sur des disques séparés, alors la sauvegarde sera relativement rapide (compter une demi-heure pour la sauvegarde suivie de vérification). En effet, le disque ne contient que la racine `/`, la partition `/var` et le `swap`.
 
-Cette opération sera à répeter **avant et après** (si tout s'est bien déroulé) chaque changement important concernant le `se3`. Une gestion rigoureuse n'est pas à négliger…
+Cette opération sera à répeter **avant** chaque changement important concernant le `se3` (et aussi **après**, si tout s'est bien déroulé). Une gestion rigoureuse n'est pas à négliger…
 
-... les images arrivent bientôt ...
-Choisir:  
+... les images arrivent bientôt ...  
+Choisir :  
 → la bonne langue et le bon codage clavier  
 → le mode débutant  
 → le mode 'device image-partition vers image-partition'  
@@ -115,8 +115,7 @@ Choisir:
 On attend ensuite quelques secondes que le disque soit bien pris en charge par le système, puis :  
 → on choisit le bon disque de sauvegarde qui sera monté par le livecd en /home/partimag ( home qui n'a rien à voir avec celui du se3 évidemment)  
 → on choisit le type de sauvegarde : savedisk pour le disque entier ou saveparts pour ne sauvegarder que quelques partitions  
-(On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des home et /var/se3, on utilisera saveparts)
-
+(On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`, on utilisera `saveparts`)  
 → Choisir le nom de la sauvegarde (ex: se3-wheezy-avant-samba-4.4)  
 → Choisir de vérifier l'image sauvegardée (utile que pour les partitions linux)  
 → appuyer sur yes pour lancer la sauvegarde
