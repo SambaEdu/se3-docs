@@ -92,7 +92,7 @@ La sauvegarde peut-être faite sur un partage `samba`, mais il sera bien plus pr
 
 Le disque dur peut-être en partition `fat32`, `ntfs`, `ext3` ou `ext4`. Un très grand nombre de formats sont pris en charge par `Clonezilla`. La sauvegarde est découpée en fichiers de 4Go, donc le format `fat32` est aussi valable.
 
-Le disque peut contenir d'autres fichiers. De ce fait, l'utilisation du disque dur externe servant à la sauvegarde par le script **sauve_se3.sh** peut convenir.
+Le disque peut contenir d'autres fichiers. De ce fait, l'utilisation du disque dur externe servant à [la sauvegarde par le script **sauve_se3.sh**](sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3) peut convenir.
 
 
 ## Clonage d'un disque du `se3`
