@@ -9,7 +9,7 @@
         * [En mode graphique](#en-mode-graphique)
         * [En ligne de commande](#en-ligne-de-commande)
     * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
-* [Préparation du support de sauvegarde](#préparation-du-disque-de-sauvegarde)
+* [Préparation du support de sauvegarde](#pr%C3%A9paration-du-support-de-sauvegarde)
 * [Clonage d'un disque du `se3`](#clonage-dun-disque-du-se3)
 * [Restauration d'une image sur un des disques du `se3`](#restauration-dune-image-sur-un-des-disques-du-se3)
 * [Références](#références)
@@ -99,6 +99,21 @@ Une fois un `CD` ou une clé `usb` prêt, on peut redémarrer le `se3`, et lance
 Si le serveur est sur des partitions classiques sans LVM, et que les home et  /var/se3 sont sur des disques séparés, alors la sauvegarde sera relativement rapide (compter une demi-heure pour la sauvegarde suivie de vérification). En effet, le disque ne contient que la racine, la partition var et le swap.
 
 Cette opération sera à répeter **avant et après** (si tout s'est bien déroulé) chaque changement important concernant le `se3`. Une gestion rigoureuse n'est pas à négliger…
+
+... les images arrivent bientôt ...
+Choisir:
+--> la bonne langue et le bon codage clavier
+-->le mode débutant.
+-->le mode 'device image-partition vers image-partition'
+--> Monter un périphérique local
+On attend ensuite quelques seconde que le disque soit bien pris en charge par le système.
+--> on choisit le bon disque de sauvegarde qui sera monté par le livecd en /home/partimag ( home qui n'a rien à voir avec celui du se3 évidemment)
+--> on choisit le type de sauvegarde : savedisk pour le disque entier ou saveparts pour ne sauvegarder que quelques partitions
+(On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines, var et swapp parce qu'on a d'autres sauvegardes des home et /var/se3, on utilisera saveparts)
+
+--> Choisir le nom de la sauvegarde (ex: se3-wheezy-avant-samba-4.4)
+--> Choisir de vérifier l'image sauvegardée (utile que pour les partitions linux)
+--> appuyer sur yes pour lancer la sauvegarde.
 
 
 ## Restauration d'une image sur un des disques du `se3`
