@@ -107,24 +107,28 @@ Cette opération sera à répeter **avant** chaque changement important concerna
 
 ... les images arrivent bientôt ...  
 Choisir :  
-→ la bonne langue et le bon codage clavier  
-→ le mode débutant  
-→ le mode 'device image-partition vers image-partition'  
-→ Monter un périphérique local
+→ la bonne *langue* et le bon codage *clavier*  
+→ le mode *débutant*  
+→ le mode *device image-partition vers image-partition*  
+→ monter un périphérique local **Marc peux-tu préciser cela ? Sur quel répertoire ?**
+```sh
+mount ??
+```
 
 On attend ensuite quelques secondes que le disque soit bien pris en charge par le système, puis :  
-→ on choisit le bon disque de sauvegarde qui sera monté par le livecd en /home/partimag ( home qui n'a rien à voir avec celui du se3 évidemment)  
-→ on choisit le type de sauvegarde : savedisk pour le disque entier ou saveparts pour ne sauvegarder que quelques partitions  
+→ on choisit le bon disque de sauvegarde qui sera monté par le `livecd` en `/home/partimag` ( home qui n'a rien à voir avec celui du ,`se3` évidemment) **Marc peux-tu préciser cela ? Il faut créer un répertoire ?**  
+→ on choisit *le type de sauvegarde* : `savedisk` pour le disque entier ou `saveparts` pour ne sauvegarder que quelques partitions  
 (On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`, on utilisera `saveparts`)  
-→ Choisir le nom de la sauvegarde (ex: se3-wheezy-avant-samba-4.4)  
+→ Choisir *le nom de la sauvegarde* (ex: se3-wheezy-avant-samba-4.4_date)  
 → Choisir de vérifier l'image sauvegardée (utile que pour les partitions linux)  
-→ appuyer sur yes pour lancer la sauvegarde
+→ appuyer sur `yes` pour lancer la sauvegarde
 
 
 ## Restauration d'une image sur un des disques du `se3`
 
 Et oui, la catastrophe est arrivée… mais vous avez une image `Clonezilla` qui va vous permettre de remettre en ordre de marche votre `se3`. Suivez le guide !
-Avant de commencer la sauvegarde, il convient de préciser qu'une restauration doit toujours être faite avec une version de Clonezilla pau moins aussi récente.
+
+Avant de commencer la sauvegarde, il convient de préciser qu'une restauration doit toujours être faite avec une version de `Clonezilla` au moins aussi récente.
 
 … à venir …
 
