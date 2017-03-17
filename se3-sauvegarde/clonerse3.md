@@ -87,33 +87,39 @@ Le `CD` contenant `Clonezilla` est prêt à être utilisé : [voir ci-dessous](#
 … à venir …
 
 ## Préparation du support de sauvegarde
-La sauvegarde peut-être faite sur un partage samba, mais il sera bien plus pratique d'effectuer cette sauvegarde sur un disque dur externe. 
-Le disque dur peut-être en partition fat32,ntfs,ext3,ext4. Un très grand nombre de formats sont pris en charge par clonezilla. La sauvegarde est découpée en fichiers de 4Go, donc fat32 est aussi valable.
-Le disque peut contenir d'autres fichiers. De ce fait, l'utilisation du disque dur externe servant à la sauvegarde par script peut convenir.
+
+La sauvegarde peut-être faite sur un partage `samba`, mais il sera bien plus pratique d'effectuer cette sauvegarde sur un disque dur externe.
+
+Le disque dur peut-être en partition `fat32`, `ntfs`, `ext3` ou `ext4`. Un très grand nombre de formats sont pris en charge par `Clonezilla`. La sauvegarde est découpée en fichiers de 4Go, donc le format `fat32` est aussi valable.
+
+Le disque peut contenir d'autres fichiers. De ce fait, l'utilisation du disque dur externe servant à la sauvegarde par le script **sauve_se3.sh** peut convenir.
+
 
 ## Clonage d'un disque du `se3`
 
 Une fois un `CD` ou une clé `usb` prêt, on peut redémarrer le `se3`, et lancer la création des images des disques durs.
 
 Évidemment, le serveur sera indisponible pendant un certain temps… Pensez à prévenir les utilisateurs ; mais le mieux est de choisir un moment où aucun utilisateur n'est présent, ou du moins le moins possible.
-Si le serveur est sur des partitions classiques sans LVM, et que les home et  /var/se3 sont sur des disques séparés, alors la sauvegarde sera relativement rapide (compter une demi-heure pour la sauvegarde suivie de vérification). En effet, le disque ne contient que la racine, la partition var et le swap.
+
+Si le serveur est sur des partitions classiques sans `LVM`, et que les `home` et `/var/se3` sont sur des disques séparés, alors la sauvegarde sera relativement rapide (compter une demi-heure pour la sauvegarde suivie de vérification). En effet, le disque ne contient que la racine `/`, la partition `/var` et le `swap`.
 
 Cette opération sera à répeter **avant et après** (si tout s'est bien déroulé) chaque changement important concernant le `se3`. Une gestion rigoureuse n'est pas à négliger…
 
 ... les images arrivent bientôt ...
-Choisir:
---> la bonne langue et le bon codage clavier
--->le mode débutant.
--->le mode 'device image-partition vers image-partition'
---> Monter un périphérique local
-On attend ensuite quelques seconde que le disque soit bien pris en charge par le système.
---> on choisit le bon disque de sauvegarde qui sera monté par le livecd en /home/partimag ( home qui n'a rien à voir avec celui du se3 évidemment)
---> on choisit le type de sauvegarde : savedisk pour le disque entier ou saveparts pour ne sauvegarder que quelques partitions
-(On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines, var et swapp parce qu'on a d'autres sauvegardes des home et /var/se3, on utilisera saveparts)
+Choisir:  
+→ la bonne langue et le bon codage clavier  
+→ le mode débutant  
+→ le mode 'device image-partition vers image-partition'  
+→ Monter un périphérique local
 
---> Choisir le nom de la sauvegarde (ex: se3-wheezy-avant-samba-4.4)
---> Choisir de vérifier l'image sauvegardée (utile que pour les partitions linux)
---> appuyer sur yes pour lancer la sauvegarde.
+On attend ensuite quelques secondes que le disque soit bien pris en charge par le système, puis :  
+→ on choisit le bon disque de sauvegarde qui sera monté par le livecd en /home/partimag ( home qui n'a rien à voir avec celui du se3 évidemment)  
+→ on choisit le type de sauvegarde : savedisk pour le disque entier ou saveparts pour ne sauvegarder que quelques partitions  
+(On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des home et /var/se3, on utilisera saveparts)
+
+→ Choisir le nom de la sauvegarde (ex: se3-wheezy-avant-samba-4.4)  
+→ Choisir de vérifier l'image sauvegardée (utile que pour les partitions linux)  
+→ appuyer sur yes pour lancer la sauvegarde
 
 
 ## Restauration d'une image sur un des disques du `se3`
