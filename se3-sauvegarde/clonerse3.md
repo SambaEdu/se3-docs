@@ -18,6 +18,8 @@
 
 Le but est de se sortir très rapidement d'une situation critique à l'aide d'images récentes des disques du se3. Cela peut se produire lors d'une mise à jour du se3 pouvant poser problème ou si lors d'une migration (par exemple de Wheezy à Jessie) a lieu une coupure du réseau électrique ou autre événement imprévu de cet ordre, événement improbable mais dont la probabilité n'est pas à négliger.
 
+Il est aussi tout à fait possible de restaurer cette image sur une machine virtuelle pour ses tests personnels. Ainsi, vous disposez d'une vm ayant exactement les mêmes paramêtres que le serveur de prod. Il faut quand même faire quelques ajustements (proxy, utiliser un routeur virtuel ayant le même plan d'adressage ip que le se3).
+
 Voici ce que nous vous proposons pour la fabrication des images des disques du `se3` :
 
 - graver `Clonezilla` sur un `CD`
@@ -89,6 +91,7 @@ Le `CD` contenant `Clonezilla` est prêt à être utilisé : [voir ci-dessous](#
 Une fois un `CD` ou une clé `usb` prêt, on peut redémarrer le `se3`, et lancer la création des images des disques durs.
 
 Évidemment, le serveur sera indisponible pendant un certain temps… Pensez à prévenir les utilisateurs ; mais le mieux est de choisir un moment où aucun utilisateur n'est présent, ou du moins le moins possible.
+Si le serveur est sur des partitions classiques sans LVM, et que les home et  /var/se3 sont sur des disques séparés, alors la sauvegarde sera relativement rapide (compter une demi-heure pour la sauvegarde suivie de vérification). En effet, le disque ne contient que la racine, la partition var et le swap.
 
 Cette opération sera à répeter **avant et après** (si tout s'est bien déroulé) chaque changement important concernant le `se3`. Une gestion rigoureuse n'est pas à négliger…
 
