@@ -9,6 +9,7 @@
         * [En mode graphique](#en-mode-graphique)
         * [En ligne de commande](#en-ligne-de-commande)
     * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
+* [Préparation du support de sauvegarde](#Préparation-du-disque-de-sauvegarde3)
 * [Clonage d'un disque du `se3`](#clonage-dun-disque-du-se3)
 * [Restauration d'une image sur un des disques du `se3`](#restauration-dune-image-sur-un-des-disques-du-se3)
 * [Références](#références)
@@ -85,6 +86,10 @@ Le `CD` contenant `Clonezilla` est prêt à être utilisé : [voir ci-dessous](#
 
 … à venir …
 
+## Préparation du support de sauvegarde
+La sauvegarde peut-être faite sur un partage samba, mais il sera bien plus pratique d'effectuer cette sauvegarde sur un disque dur externe. 
+Le disque dur peut-être en partition fat32,ntfs,ext3,ext4. Un très grand nombre de formats sont pris en charge par clonezilla. La sauvegarde est découpée en fichiers de 4Go, donc fat32 est aussi valable.
+Le disque peut contenir d'autres fichiers. De ce fait, l'utilisation du disque dur externe servant à la sauvegarde par script peut convenir.
 
 ## Clonage d'un disque du `se3`
 
@@ -99,6 +104,7 @@ Cette opération sera à répeter **avant et après** (si tout s'est bien dérou
 ## Restauration d'une image sur un des disques du `se3`
 
 Et oui, la catastrophe est arrivée… mais vous avez une image `Clonezilla` qui va vous permettre de remettre en ordre de marche votre `se3`. Suivez le guide !
+Avant de commencer la sauvegarde, il convient de préciser qu'une restauration doit toujours être faite avec une version de Clonezilla pau moins aussi récente.
 
 … à venir …
 
