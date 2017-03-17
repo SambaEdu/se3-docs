@@ -108,12 +108,15 @@ Cette opération sera à répeter **avant** chaque changement important concerna
 ... les images arrivent bientôt ...  
 Choisir :  
 → la bonne *langue* et le bon codage *clavier*  
+Si le clavier est toujours en qwerty, il faut alors faire *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*
 → le mode *débutant*  
 → le mode *device image-partition vers image-partition*  
+![image2](images/clonezilla2.jpg)
+
 → *monter un périphérique local* . Une liste des périphériques possibles apparait.
+![periphérique-à-choisir](images/choix_type_sauvegarde.png)
 
-
-On attend ensuite quelques secondes que le disque soit bien pris en charge par le système, puis :  
+On attend ensuite quelques secondes que le disque soit bien pris en charge par le système, puis on appuie sur 'entrée':  
 → on choisit le bon disque de sauvegarde. Le disque va être monté automatiquement.
 Clonezilla étant un livecd basé sur débian (ou Ubuntu selon la version choisie) , il possède une arborescence Linux et donc un répertoire 'home'. Clonezilla a donc besoin de créer la sauvegarde dans son répertoire '/home/partimag/'. 
 Le disque de sauvegarde sera monté automatiquement par le `livecd` comme son `/home/partimag` ( home qui n'a rien à voir avec celui du ,`se3` évidemment, clonezilla faisant exactement la même chose pour une image d'un poste Windows) .
