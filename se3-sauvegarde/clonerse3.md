@@ -9,7 +9,7 @@
         * [En mode graphique](#en-mode-graphique)
         * [En ligne de commande](#en-ligne-de-commande)
     * [Copier sur une clé `usb`](#copier-sur-une-clé-usb)
-* [Préparation du support de sauvegarde](#Préparation-du-disque-de-sauvegarde3)
+* [Préparation du support de sauvegarde](#préparation-du-disque-de-sauvegarde)
 * [Clonage d'un disque du `se3`](#clonage-dun-disque-du-se3)
 * [Restauration d'une image sur un des disques du `se3`](#restauration-dune-image-sur-un-des-disques-du-se3)
 * [Références](#références)
