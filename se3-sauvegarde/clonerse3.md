@@ -91,6 +91,7 @@ Le `CD` contenant `Clonezilla` est prêt à être utilisé : [voir ci-dessous](#
 La sauvegarde peut-être faite sur un partage `samba`, mais il sera bien plus pratique d'effectuer cette sauvegarde sur un disque dur externe.
 
 Le disque dur peut-être en partition `fat32`, `ntfs`, `ext3` ou `ext4`. Un très grand nombre de formats sont pris en charge par `Clonezilla`. La sauvegarde est découpée en fichiers de 4Go, donc le format `fat32` est aussi valable.
+Les sauvegardes sont compressées, un disque de 1To peut donc servir de sauvegarde pour un se3 placé sur un disque de 2 To.
 
 Le disque peut contenir d'autres fichiers. De ce fait, l'utilisation du disque dur externe servant à [la sauvegarde par le script **sauve_se3.sh**](sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3) peut convenir.
 
@@ -105,11 +106,10 @@ Si le serveur est sur des partitions classiques sans `LVM`, et que les `home` et
 
 Cette opération sera à répeter **avant** chaque changement important concernant le `se3` (et aussi **après**, si tout s'est bien déroulé). Une gestion rigoureuse n'est pas à négliger…
 
-... les images arrivent bientôt ...  
 Choisir :  
 → la bonne *langue* et le bon codage *clavier*  
 Si le clavier est toujours en qwerty, il faut alors faire *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
-→ le mode *débutant*  
+→ le mode *débutant*  (à choisir plus tard)
 → le mode *device-image disque/partition vers/depuis image*  
 
 ![image2](images/clonezilla2.jpg)
@@ -119,7 +119,14 @@ Si le clavier est toujours en qwerty, il faut alors faire *Choisir un clavier da
 ![periphérique-à-choisir](images/choix_type_sauvegarde.png)
 
 On attend ensuite quelques secondes que le disque soit bien pris en charge par le système, puis on appuie sur `Entrée` :  
-→ on choisit le bon disque de sauvegarde. Le disque va être monté automatiquement.
+![disques détectés](images/diskdetect.png)
+
+* Ici Clonezilla a bien détecté le disque du se3 de 2 To (sda), et le disque dur de sauvegarde (1To) 
+Une analyse de chaque partition va être faite.
+![disques détectés](images/diskdetect2.png)
+
+→ on choisit le bon disque de sauvegarde (sdb dans le cas présent).
+![choix-disque-de-sauvegarde](images/choix-disque-dav.png)
 
 `Clonezilla` étant un `livecd` basé sur `Débian` (ou `Ubuntu` selon la version choisie) , il possède une arborescence `Linux` et donc un répertoire `home`. `Clonezilla` a donc besoin de créer la sauvegarde dans son répertoire `/home/partimag/`. 
 
@@ -127,13 +134,32 @@ Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son 
 
 *Aucun répertoire ou manipulation en ligne de commande n'est à faire.*
 
+On peut choisir de placer l'image du 'se3' (contenue dans un répertoire) directement à la racine du disque (faire "done") ou dans un sous-répertoire.
+![choix-rep-de-sauvegarde](images/choix-rep-sav.png)
+
 → on choisit *le type de sauvegarde* : `savedisk` pour le disque entier ou `saveparts` pour ne sauvegarder que quelques partitions .
+![choix-sav-ou-parts](images/savdisk.png)
 
 (On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`, on utilisera `saveparts`)  
-→ Choisir le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)  
-→ Choisir *le nom de la sauvegarde* (ex: se3-wheezy-avant-samba-4.4_date)  
-→ Choisir de vérifier l'image sauvegardée (utile que pour les partitions `Linux`)  
-→ appuyer sur `yes` pour lancer la sauvegarde
+→ Choisir le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`).
+'Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde, il n'apparait plus dans la liste des disques à sauvegarder.'
+![choix-disque-se3](images/disk-a-sauvegarder.png)
+
+
+→ Choisir *le nom de la sauvegarde* (ex: se3-wheezy-avant-samba-4.4_date)
+![choix-nom-image](images/nom-image.png)
+
+→ Choisir de vérifier le disque du se3  (utile que pour les partitions `Linux`) 
+![verif-disque-se3](images/verif-et-repare.png)
+
+→ Choisir de vérifier l'image sauvegardée 
+![verif-image-se3](images/verif-sauvegarde.png)
+
+→ appuyer sur `yes` pour lancer la sauvegarde après la demande de validation.
+![validation-sav](images/derniere-validation.png)
+
+La sauvegarde du se3 est en cours
+![sav-en-cours](images/sav-en-cours.png)
 
 
 ## Restauration d'une image sur un des disques du `se3`
