@@ -60,7 +60,7 @@ https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw
 https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/restaure_se3.sh --no-check-certificate
 ```
 
-Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) peuvent ne pas correspondre aux versions disponibles sur votre `se3` : il y a donc eu des améliorations et que ces nouvelles versions ne sont pas encore passées en *stable*. Vous pourrez alors télécharger ces versions pour bénéficier de ces améliorations en utilisant les commandes ci-dessus.
+Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) peuvent ne pas correspondre aux versions disponibles sur votre `se3` : il y a donc eu des améliorations et ces nouvelles versions ne sont pas encore passées en *stable*. Vous pourrez alors télécharger ces versions pour bénéficier de ces améliorations en utilisant les commandes ci-dessus.
 
 **Remarque :** certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Caen pour qu'un collègue vous guide pour leur utilisation.
 
