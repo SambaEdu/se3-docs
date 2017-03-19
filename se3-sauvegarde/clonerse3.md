@@ -149,24 +149,28 @@ Une analyse de chaque partition va être faite
 
 Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son `/home/partimag` (home qui n'a rien à voir avec celui du `se3` évidemment, `Clonezilla` faisant exactement la même chose pour une image d'un poste Windows). Aucun répertoire n'est à créer et aucune manipulation en ligne de commande n'est à faire.
 
-On peut choisir de placer l'image du `se3` (contenue dans un répertoire. **Marc, lequel ?**) :
-* directement à la racine du disque (choisir *done*)  
-* ou dans un sous-répertoire (**Marc, que faut-il faire pour cela ?**)  
+→ Où placer l'image du `se3` (contenue dans un répertoire. **Marc, lequel ?**) :  
+* directement à la racine du disque (choisir *Done*)  
+* ou dans un sous-répertoire (choisir *Browse*)  
+
+Si on choisit *Done*, donc à la racine du disque :
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
 
 → Le type de sauvegarde :  
 * `savedisk` pour le disque entier  
 * ou `saveparts` pour ne sauvegarder que quelques partitions  
-![choix-sav-ou-parts](images/savedisk.png)  
 
 **Remarque :** on peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`. Dans ces cas, on utilisera `saveparts`.
 
+Si on choisit un disque entier :  
+![choix-sav-ou-parts](images/savedisk.png)  
+
 → Le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)  
-Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde, il n'apparait plus dans la liste des disques à sauvegarder.  
+Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde, il n'apparait plus dans la liste des disques à sauvegarder  
 ![choix-disque-se3](images/disk-a-sauvegarder.png)  
 
 → Le nom de la sauvegarde (exemple : se3-wheezy-avant-samba-4.4_date)  
-![choix-nom-image](images/nom-image.png)
+![choix-nom-image](images/nom-image.png)  
 
 → Vérifier le disque du `se3` (utile uniquement pour les partitions `Linux`)  
 ![verif-disque-se3](images/verif-et-repare.png)  
