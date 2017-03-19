@@ -130,7 +130,7 @@ Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier
 → Le mode *device-image disque/partition vers/depuis image*  
 ![image2](images/clonezilla2.jpg)
 
- → Monter un périphérique local  
+→ Monter un périphérique local  
 Une liste des périphériques possibles apparait. **Marc, à quel endroit ?**  
 ![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
 On attend ensuite quelques secondes que le disque (**Marc, c'est le disque externe ?**) soit bien pris en charge par le système (**Marc, cela apparaît comment ?**),  
@@ -166,7 +166,8 @@ Si on choisit un disque entier :
 ![choix-sav-ou-parts](images/savedisk.png)  
 
 → Le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)  
-Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde, il n'apparait plus dans la liste des disques à sauvegarder  
+Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde,  
+il n'apparait plus dans la liste des disques à sauvegarder  
 ![choix-disque-se3](images/disk-a-sauvegarder.png)  
 
 → Le nom de la sauvegarde (exemple : se3-wheezy-avant-samba-4.4_date)  
