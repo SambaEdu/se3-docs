@@ -157,7 +157,7 @@ On peut choisir de placer l'image du `se3` (contenue dans un répertoire. **Marc
 → Le type de sauvegarde :  
 * `savedisk` pour le disque entier  
 * ou `saveparts` pour ne sauvegarder que quelques partitions  
-![choix-sav-ou-parts](images/savdisk.png)  
+![choix-sav-ou-parts](images/savedisk.png)  
 
 **Remarque :** on peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`. Dans ces cas, on utilisera `saveparts`.
 
