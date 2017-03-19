@@ -109,7 +109,7 @@ Cette opération sera à répeter **avant** chaque changement important concerna
 Choisir :  
 → la bonne *langue* et le bon codage *clavier*  
 Si le clavier est toujours en qwerty, il faut alors faire *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
-→ le mode *débutant*  (à choisir plus tard)
+→ le mode *débutant*  (à choisir plus tard)  
 → le mode *device-image disque/partition vers/depuis image*  
 
 ![image2](images/clonezilla2.jpg)
