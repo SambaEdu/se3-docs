@@ -39,22 +39,30 @@ La solution proposée ici est indépendante du module `Backuppc` du serveur `se3
 
 ## Les scripts
 
-Les scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, seront maintenant disponibles directement sur votre serveur `se3`.
+Les nouvelles versions des scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, sont maintenant disponibles directement sur votre serveur `se3` depuis la **version 3.0.2** pour un **se3/wheezy**.
 
-Les 2 scripts se trouveront dans le répertoire `/usr/share/se3/sbin` du `se3` dans une prochaine mise à jour prévue en 2017.
+**Important :** ces 2 scripts `sauve_se3.sh` et `restaure_se3.sh` se trouvent dans le répertoire `/usr/share/se3/sbin` du `se3`. Si ce n'est pas le cas, et s'il y a toujours les scripts *sauve_serveur.sh* et *restaure_serveur.sh* qui sont obsolètes, c'est que votre `se3` n'est pas à jour : il faut donc le mettre à jour.
+
+Pour vérifier :
 ```sh
 ls /usr/share/se3/sbin/sauve_se3.sh /usr/share/se3/sbin/restaure_se3.sh
 ```
 
-Si ces deux scripts ne sont pas disponibles dans le répertoire `/usr/share/se3/sbin` du `se3` ou si vous n'êtes pas en `Wheezy` mais dans une version antérieure, telle que `Lenny` ou `Squeeze`, il faudra mettre en place les scripts `sauve_se3.sh` et `restaure_se3.sh` en les téléchargeant.
+Si ces deux scripts ne sont pas disponibles dans le répertoire `/usr/share/se3/sbin` du `se3` ou si vous n'êtes pas en `Wheezy` mais dans une version antérieure, telle que `Lenny` ou `Squeeze`, il faudra mettre en place les scripts `sauve_se3.sh` et `restaure_se3.sh` en les téléchargeant, en attendant de mettre à jour votre `se3`.
 ```sh
 wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/sauve_se3.sh
 wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/restaure_se3.sh
 ```
 
-Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) correspondent à cette documentation.
+**NB :** si vous avez un **Amon** comme passerelle, les deux commandes de téléchargement ci-dessus risquent de ne pas fonctionner. Essayez ceci (en remplaçant ip_passerelle par l'ip de la passerelle et, éventuellement, 3128 par le port du proxy) :
+```sh
+https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/sauve_se3.sh --no-check-certificate
+https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/restaure_se3.sh --no-check-certificate
+```
 
-**Remarque :** certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Cæn pour qu'un collègue vous guide pour leur utilisation.
+Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) peuvent ne pas correspondre aux versions disponibles sur votre `se3` : il y a donc eu des améliorations et que ces nouvelles versions ne sont pas encore passées en *stable*. Vous pourrez alors télécharger ces versions pour bénéficier de ces améliorations en utilisant les commandes ci-dessus.
+
+**Remarque :** certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Caen pour qu'un collègue vous guide pour leur utilisation.
 
 
 ## Où sauvegarder ?
