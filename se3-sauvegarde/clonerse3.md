@@ -123,7 +123,9 @@ On met le `CD` dans le lecteur de `CD` ou bien on branche la clé `usb` sur le p
 Choisir, successivement :  
 → la bonne *langue* et le bon codage *clavier*  
 Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
+
 → le mode *débutant*  (à choisir plus tard. **Marc, pourquoi ?**)  
+
 → le mode *device-image disque/partition vers/depuis image*  
 ![image2](images/clonezilla2.jpg)
 
@@ -133,7 +135,7 @@ Une liste des périphériques possibles apparait. **Marc, à quel endroit ?**
 On attend ensuite quelques secondes que le disque soit bien pris en charge par le système,  
 puis on appuie sur `Entrée` :  
 ![disques détectés](images/diskdetect.png)  
-* Ici Clonezilla a bien détecté le disque du se3 de 2 To (sda), et le disque dur de sauvegarde de 1To (sdb)  
+Ici, `Clonezilla` a bien détecté le disque du `se3` de 2 To (sda), et le disque dur de sauvegarde de 1To (sdb)  
 Une analyse de chaque partition va être faite.  
 ![disques détectés](images/diskdetect2.png)  
 
@@ -146,13 +148,17 @@ Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son 
 
 *Aucun répertoire ou manipulation en ligne de commande n'est à faire*.
 
-On peut choisir de placer l'image du 'se3' (contenue dans un répertoire) directement à la racine du disque (faire "done") ou dans un sous-répertoire (**Marc, que faut-il faire pour cela ?**).  
+On peut choisir de placer l'image du `se3` (contenue dans un répertoire. **Marc, lequel ?**) :  
+* directement à la racine du disque (choisir *done*)  
+* ou dans un sous-répertoire (**Marc, que faut-il faire pour cela ?**)  
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
 
-→ on choisit *le type de sauvegarde* : `savedisk` pour le disque entier ou `saveparts` pour ne sauvegarder que quelques partitions   
+→ on choisit *le type de sauvegarde* :  
+* `savedisk` pour le disque entier  
+* ou `saveparts` pour ne sauvegarder que quelques partitions  
 ![choix-sav-ou-parts](images/savdisk.png)  
 
-On peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`, on utilisera `saveparts`
+**Remarque :** on peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`. Dans ces cas, on utilisera `saveparts`.
 
 → Choisir le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)  
 Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde, il n'apparait plus dans la liste des disques à sauvegarder.  
@@ -162,21 +168,21 @@ Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde, il n'appara
 ![choix-nom-image](images/nom-image.png)
 
 → Choisir de vérifier le disque du se3  (utile que pour les partitions `Linux`)  
-![verif-disque-se3](images/verif-et-repare.png)
+![verif-disque-se3](images/verif-et-repare.png)  
 
 → Choisir de vérifier l'image sauvegardée  
-![verif-image-se3](images/verif-sauvegarde.png)
+![verif-image-se3](images/verif-sauvegarde.png)  
 
-→ appuyer sur `yes` pour lancer la sauvegarde après la demande de validation  
-![validation-sav](images/derniere-validation.png)
+→ appuyer sur la touche `y` pour lancer la sauvegarde après la demande de validation  
+![validation-sav](images/derniere-validation.png)  
 
 La sauvegarde du `se3` est en cours…  
-![sav-en-cours](images/sav-en-cours.png)
+![sav-en-cours](images/sav-en-cours.png)  
 
 
 ### Redémarrer le `se3`
 
-Une fois l'image effectuée, vous pouvez redémarrer le `se3` pour reprendre son fonctionnement normal.
+Une fois l'image effectuée, et s'il ny en a pas d'autres à réaliser, vous pouvez redémarrer le `se3` pour reprendre son fonctionnement normal.
 
 N'oubliez pas d'enlever le `CD` ou la clé `usb`.
 
