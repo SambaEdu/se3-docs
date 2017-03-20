@@ -122,13 +122,13 @@ On met le `CD` dans le lecteur de `CD` ou bien on branche la clé `usb` sur le p
 
 Un certain nombre de choix successifs doivent être réalisés :
 
-**1. Choisir la bonne \*langue\* et le bon codage \*clavier\***  
+**1. Choisir la bonne *langue* et le bon codage *clavier***  
 Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
 
 **2. Choisir le mode *débutant* ? À choisir plus tard**  
 Le mode *débutant* est bien plus simple à utiliser que le mode *expert* qui propose des options inutiles pour une simple sauvegarde du se3.  
 
-**3. Choisir le mode \*device-image disque/partition vers/depuis image\***  
+**3. Choisir le mode *device-image disque/partition vers/depuis image***  
 ![image2](images/clonezilla2.jpg)
 
 **4. Choisir de monter un périphérique local**  
@@ -146,14 +146,15 @@ Comme indiqué sur l'image, on effectue la combinaison de touches 'CTRL+C' pour 
 Une analyse de chaque partition va être faite  
 ![disques détectés](images/diskdetect2.png)  
 
-5. Choisir le bon disque de sauvegarde (sdb dans le cas présent)  
+**5. Choisir le bon disque de sauvegarde**  
+sdb dans le cas présent…  
 ![choix-disque-de-sauvegarde](images/choix-disque-dav.png)  
-
+  
 `Clonezilla` étant un `livecd` basé sur `Débian` (ou `Ubuntu` selon la version choisie) , il possède une arborescence `Linux` et donc un répertoire `home`. `Clonezilla` a donc besoin de créer la sauvegarde dans son répertoire `/home/partimag/`.
-
+  
 Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son `/home/partimag` (home qui n'a rien à voir avec celui du `se3` évidemment, `Clonezilla` faisant exactement la même chose pour une image d'un poste Windows). Aucun répertoire n'est à créer et aucune manipulation en ligne de commande n'est à faire.
 
-6. Choisir où placer l'image du `se3`  
+**6. Choisir où placer l'image du `se3`**  
 Cette image sera mise *automatiquement* dans un répertoire qui portera le nom que vous donnerez à l'image :  
 * directement à la racine du disque (choisir *Done*)  
 * ou dans un sous-répertoire (choisir *Browse*)  
@@ -163,33 +164,33 @@ Si on choisit *Done*, l'image sera donc à la racine du disque :
   
 **Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez faire 'CTRL+F2' pour ouvrir un deuxième terminal. On se connecte en root en faisant 'sudo su' puis 'entrée. Il faut ensuite aller dans /home/partimag et faire 'mkdir nomdurépertoire". Une fois celui-ci créé, on retourne dans l'écran précédent en faisant 'CTRL+F1'
 
-7. Choisir le type de sauvegarde :  
-* `savedisk` pour le disque entier  
-* ou `saveparts` pour ne sauvegarder que quelques partitions  
+**7. Choisir le type de sauvegarde :**  
+- ou `savedisk` pour le disque entier  
+- ou `saveparts` pour ne sauvegarder que quelques partitions  
   
 **Remarque :** on peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`. Dans ces cas, on utilisera `saveparts`.
   
 Si on choisit un disque entier :  
 ![choix-sav-ou-parts](images/savedisk.png)  
 
-8. Choisir le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)  
+**8. Choisir le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)**  
 Le disque de sauvegarde (sdb), ayant été choisi pour la sauvegarde,  
 n'apparait plus dans la liste des disques à sauvegarder  
 ![choix-disque-se3](images/disk-a-sauvegarder.png)  
 
-9. Choisir le nom de la sauvegarde (exemple : se3-wheezy-avant-samba-4.4_date)  
+**9. Choisir le nom de la sauvegarde (exemple : se3-wheezy-avant-samba-4.4_date)**  
 ![choix-nom-image](images/nom-image.png)  
 
-10. Choisir de vérifier le disque du `se3` (utile uniquement pour les partitions `Linux`)  
+**10. Choisir de vérifier le disque du `se3` (utile uniquement pour les partitions `Linux`)**  
 ![verif-disque-se3](images/verif-et-repare.png)  
 
-11. Choisir de vérifier l'image sauvegardée  
+**11. Choisir de vérifier l'image sauvegardée**  
 ![verif-image-se3](images/verif-sauvegarde.png)  
 
-12. Appuyer sur la touche `y` pour enfin lancer la sauvegarde après la demande de validation  
+**12. Appuyer sur la touche `y` pour enfin lancer la sauvegarde après la demande de validation**  
 ![validation-sav](images/derniere-validation.png)  
 
-Et voilà, la sauvegarde du `se3` est en cours…  
+**Et voilà, la sauvegarde du `se3` est en cours…**  
 ![sav-en-cours](images/sav-en-cours.png)  
 
 
