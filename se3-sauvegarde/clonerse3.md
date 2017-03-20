@@ -120,47 +120,50 @@ Cette opération sera à répeter **avant** chaque changement important concerna
 
 On met le `CD` dans le lecteur de `CD` ou bien on branche la clé `usb` sur le port `usb` puis on redémarre le `se3` sur ce média pour obtenir `Clonezilla` en `live`.
 
-Choisir, successivement :
+Un certain nombre de choix successifs doivent être réalisés :
 
-→ La bonne *langue* et le bon codage *clavier*  
+→ Choisir la bonne *langue* et le bon codage *clavier*  
 Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
 
-→ Le mode *débutant*  (à choisir plus tard. Le mode débutant est bien plus simple à utiliser que le mode expert qui propose des options inutiles pour une simple sauvegarde du se3. )  
+→ Choisir le mode *débutant* ? **À choisir plus tard**  
+Le mode *débutant* est bien plus simple à utiliser que le mode *expert* qui propose des options inutiles pour une simple sauvegarde du se3.  
 
-→ Le mode *device-image disque/partition vers/depuis image*  
+→ Choisir le mode *device-image disque/partition vers/depuis image*  
 ![image2](images/clonezilla2.jpg)
 
 
-Une liste des supports possibles de sauvegarde apparait (disque dur, partage samba, connexion en ssh,etc...)
-→ Choisir monter un périphérique local  
+Une liste des supports possibles de sauvegarde apparait (disque dur, partage samba, connexion en ssh,etc...)  
+→ Choisir de monter un périphérique local  
 ![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
-On branche le disque dur externe puis on attend quelques secondes que le disque dur externe soit bien détecté par le système (on ne voit pas ici si le disque est bien reconnu, mais on pourra le vérifier dans l'étape d'après.).  
-On appuie sur `Entrée`. Clonezilla va donc faire un listing de tous les disques locaux.
+On branche le disque dur externe puis on attend quelques secondes que le disque dur externe soit bien détecté par le système (on ne voit pas, ici, si le disque est bien reconnu, mais on pourra le vérifier dans l'étape d'après).  
+**On appuie sur `Entrée`**  
+Clonezilla va donc faire un listing de tous les disques locaux.
 
 Sur la photo suivante, `Clonezilla` a bien détecté le disque du `se3` de 2 To (sda), et le disque dur de sauvegarde de 1To (sdb)  
 ![disques détectés](images/diskdetect.png)  
-Comme indiqué sur l'image, on fait 'CTRL+C' pour quitter cette fenêtre et passer à la suivante.
+Comme indiqué sur l'image, on effectue la combinaison de touches 'CTRL+C' pour quitter cette fenêtre et passer à la suivante.
 
 Une analyse de chaque partition va être faite  
 ![disques détectés](images/diskdetect2.png)  
 
-→ Le bon disque de sauvegarde (sdb dans le cas présent)  
+→ Choisir le bon disque de sauvegarde (sdb dans le cas présent)  
 ![choix-disque-de-sauvegarde](images/choix-disque-dav.png)  
 
 `Clonezilla` étant un `livecd` basé sur `Débian` (ou `Ubuntu` selon la version choisie) , il possède une arborescence `Linux` et donc un répertoire `home`. `Clonezilla` a donc besoin de créer la sauvegarde dans son répertoire `/home/partimag/`.
 
 Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son `/home/partimag` (home qui n'a rien à voir avec celui du `se3` évidemment, `Clonezilla` faisant exactement la même chose pour une image d'un poste Windows). Aucun répertoire n'est à créer et aucune manipulation en ligne de commande n'est à faire.
 
-→ Où placer l'image du `se3` (mise *** automatiquement *** dans un répertoire qui portera le nom que vous donnerez à l'image) :  
+→ Choisir où placer l'image du `se3`  
+Cette image sera mise *automatiquement* dans un répertoire qui portera le nom que vous donnerez à l'image :  
 * directement à la racine du disque (choisir *Done*)  
 * ou dans un sous-répertoire (choisir *Browse*)  
 
 Si on choisit *Done*, donc à la racine du disque :
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
 
-Si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez faire 'CTRL+F2' pour ouvrir un deuxième terminal. On se connecte en root en faisant 'sudo su' puis 'entrée. Il faut ensuite aller dans /home/partimag et faire 'mkdir nomdurépertoire". Une fois celui-ci créé, on retourne dans l'écran précédent en faisant 'CTRL+F1'
+**Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez faire 'CTRL+F2' pour ouvrir un deuxième terminal. On se connecte en root en faisant 'sudo su' puis 'entrée. Il faut ensuite aller dans /home/partimag et faire 'mkdir nomdurépertoire". Une fois celui-ci créé, on retourne dans l'écran précédent en faisant 'CTRL+F1'
 
-→ Le type de sauvegarde :  
+→ Choisir le type de sauvegarde :  
 * `savedisk` pour le disque entier  
 * ou `saveparts` pour ne sauvegarder que quelques partitions  
 
@@ -169,18 +172,18 @@ Si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez 
 Si on choisit un disque entier :  
 ![choix-sav-ou-parts](images/savedisk.png)  
 
-→ Le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)  
-Le disque de sauvegarde (sdb) ayant été choisi pour la sauvegarde,  
-il n'apparait plus dans la liste des disques à sauvegarder  
+→ Choisir le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)  
+Le disque de sauvegarde (sdb), ayant été choisi pour la sauvegarde,  
+n'apparait plus dans la liste des disques à sauvegarder  
 ![choix-disque-se3](images/disk-a-sauvegarder.png)  
 
-→ Le nom de la sauvegarde (exemple : se3-wheezy-avant-samba-4.4_date)  
+→ Choisir le nom de la sauvegarde (exemple : se3-wheezy-avant-samba-4.4_date)  
 ![choix-nom-image](images/nom-image.png)  
 
-→ Vérifier le disque du `se3` (utile uniquement pour les partitions `Linux`)  
+→ Choisir de vérifier le disque du `se3` (utile uniquement pour les partitions `Linux`)  
 ![verif-disque-se3](images/verif-et-repare.png)  
 
-→ Vérifier l'image sauvegardée  
+→ Choisir de vérifier l'image sauvegardée  
 ![verif-image-se3](images/verif-sauvegarde.png)  
 
 → Appuyer sur la touche `y` pour lancer la sauvegarde après la demande de validation  
