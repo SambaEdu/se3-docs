@@ -137,9 +137,11 @@ Une liste des supports possibles de sauvegarde apparait
 ![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
 On branche le disque dur externe puis on attend quelques secondes que le disque dur externe soit bien détecté par le système (on ne voit pas, ici, si le disque est bien reconnu, mais on pourra le vérifier dans l'étape d'après).  
 **On appuie sur `Entrée`**  
-Clonezilla va donc faire un listing de tous les disques locaux.
+Clonezilla va donc faire un du listing de tous les disques locaux.
 
-Sur la photo suivante, `Clonezilla` a bien détecté le disque du `se3` de 2 To (sda), et le disque dur de sauvegarde de 1To (sdb)  
+Sur la photo suivante, `Clonezilla` a bien détecté :  
+→ le disque dur du `se3` à sauvegarder de 2 To (sda)  
+→ le disque dur de sauvegarde de 1To (sdb)  
 ![disques détectés](images/diskdetect.png)  
 Comme indiqué sur l'image, on effectue la combinaison de touches `CTRL+C` pour quitter cette fenêtre et passer à la suivante.
 
