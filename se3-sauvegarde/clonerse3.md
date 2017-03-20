@@ -99,7 +99,7 @@ Les sauvegardes sont compressées, un disque de 1To peut donc servir de sauvegar
 Le disque peut contenir d'autres fichiers. De ce fait, l'utilisation du disque dur externe servant à [la sauvegarde par le script **sauve_se3.sh**](sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3) peut convenir.
 
 
-**NB : Marc, faut-il ou peut-on créer un répertoire sur ce disque externe pour stocker les différentes images ? Si oui, peut-on nommer ce répertoire comme on veut ?**
+**NB :  L'image clonezilla constituée de plusieurs fichiers en tout genre sera enregistrée automatiquement dans un répertoire portant le nom que vous donnerez à cette image. Si vous souhaitez que cette image soit dans un sous-répertoire, alors il faut le créer avant. Ce sous-répertoire ne doit pas contenir d'espace.**
 
 
 ## Clonage d'un disque du `se3`
@@ -125,19 +125,21 @@ Choisir, successivement :
 → La bonne *langue* et le bon codage *clavier*  
 Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
 
-→ Le mode *débutant*  (à choisir plus tard. **Marc, pourquoi ?**)  
+→ Le mode *débutant*  (à choisir plus tard. Le mode débutant est bien plus simple à utiliser que le mode expert qui propose des options inutiles pour une simple sauvegarde du se3. )  
 
 → Le mode *device-image disque/partition vers/depuis image*  
 ![image2](images/clonezilla2.jpg)
 
-→ Monter un périphérique local  
-Une liste des périphériques possibles apparait. **Marc, à quel endroit ?**  
-![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
-On attend ensuite quelques secondes que le disque (**Marc, c'est le disque externe ?**) soit bien pris en charge par le système (**Marc, cela apparaît comment ?**),  
-puis on appuie sur `Entrée`.
 
-Ici, `Clonezilla` a bien détecté le disque du `se3` de 2 To (sda), et le disque dur de sauvegarde de 1To (sdb)  
+Une liste des supports possibles de sauvegarde apparait (disque dur, partage samba, connexion en ssh,etc...)
+→ Choisir monter un périphérique local  
+![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
+On branche le disque dur externe puis on attend quelques secondes que le disque dur externe soit bien détecté par le système (on ne voit pas ici si le disque est bien reconnu, mais on pourra le vérifier dans l'étape d'après.).  
+On appuie sur `Entrée`. Clonezilla va donc faire un listing de tous les disques locaux.
+
+Sur la photo suivante, `Clonezilla` a bien détecté le disque du `se3` de 2 To (sda), et le disque dur de sauvegarde de 1To (sdb)  
 ![disques détectés](images/diskdetect.png)  
+Comme indiqué sur l'image, on fait 'CTRL+C' pour quitter cette fenêtre et passer à la suivante.
 
 Une analyse de chaque partition va être faite  
 ![disques détectés](images/diskdetect2.png)  
@@ -149,12 +151,14 @@ Une analyse de chaque partition va être faite
 
 Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son `/home/partimag` (home qui n'a rien à voir avec celui du `se3` évidemment, `Clonezilla` faisant exactement la même chose pour une image d'un poste Windows). Aucun répertoire n'est à créer et aucune manipulation en ligne de commande n'est à faire.
 
-→ Où placer l'image du `se3` (contenue dans un répertoire. **Marc, lequel ?**) :  
+→ Où placer l'image du `se3` (mise *** automatiquement *** dans un répertoire qui portera le nom que vous donnerez à l'image) :  
 * directement à la racine du disque (choisir *Done*)  
 * ou dans un sous-répertoire (choisir *Browse*)  
 
 Si on choisit *Done*, donc à la racine du disque :
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
+
+Si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez faire 'CTRL+F2' pour ouvrir un deuxième terminal. On se connecte en root en faisant 'sudo su' puis 'entrée. Il faut ensuite aller dans /home/partimag et faire 'mkdir nomdurépertoire". Une fois celui-ci créé, on retourne dans l'écran précédent en faisant 'CTRL+F1'
 
 → Le type de sauvegarde :  
 * `savedisk` pour le disque entier  
