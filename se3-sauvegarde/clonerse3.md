@@ -122,18 +122,18 @@ On met le `CD` dans le lecteur de `CD` ou bien on branche la clé `usb` sur le p
 
 Un certain nombre de choix successifs doivent être réalisés :
 
-→ Choisir la bonne *langue* et le bon codage *clavier*  
+1. Choisir la bonne *langue* et le bon codage *clavier*  
 Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
 
-→ Choisir le mode *débutant* ? **À choisir plus tard**  
+2. Choisir le mode *débutant* ? **À choisir plus tard**  
 Le mode *débutant* est bien plus simple à utiliser que le mode *expert* qui propose des options inutiles pour une simple sauvegarde du se3.  
 
-→ Choisir le mode *device-image disque/partition vers/depuis image*  
+3. Choisir le mode *device-image disque/partition vers/depuis image*  
 ![image2](images/clonezilla2.jpg)
 
-
-Une liste des supports possibles de sauvegarde apparait (disque dur, partage samba, connexion en ssh,etc...)  
-→ Choisir de monter un périphérique local  
+4. Choisir de monter un périphérique local  
+Une liste des supports possibles de sauvegarde apparait  
+(disque dur, partage samba, connexion en ssh,…).  
 ![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
 On branche le disque dur externe puis on attend quelques secondes que le disque dur externe soit bien détecté par le système (on ne voit pas, ici, si le disque est bien reconnu, mais on pourra le vérifier dans l'étape d'après).  
 **On appuie sur `Entrée`**  
@@ -146,7 +146,7 @@ Comme indiqué sur l'image, on effectue la combinaison de touches 'CTRL+C' pour 
 Une analyse de chaque partition va être faite  
 ![disques détectés](images/diskdetect2.png)  
 
-→ Choisir le bon disque de sauvegarde (sdb dans le cas présent)  
+5. Choisir le bon disque de sauvegarde (sdb dans le cas présent)  
 ![choix-disque-de-sauvegarde](images/choix-disque-dav.png)  
 
 `Clonezilla` étant un `livecd` basé sur `Débian` (ou `Ubuntu` selon la version choisie) , il possède une arborescence `Linux` et donc un répertoire `home`. `Clonezilla` a donc besoin de créer la sauvegarde dans son répertoire `/home/partimag/`.
