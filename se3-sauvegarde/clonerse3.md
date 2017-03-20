@@ -141,7 +141,7 @@ Clonezilla va donc faire un listing de tous les disques locaux.
 
 Sur la photo suivante, `Clonezilla` a bien détecté le disque du `se3` de 2 To (sda), et le disque dur de sauvegarde de 1To (sdb)  
 ![disques détectés](images/diskdetect.png)  
-Comme indiqué sur l'image, on effectue la combinaison de touches 'CTRL+C' pour quitter cette fenêtre et passer à la suivante.
+Comme indiqué sur l'image, on effectue la combinaison de touches `CTRL+C` pour quitter cette fenêtre et passer à la suivante.
 
 Une analyse de chaque partition va être faite  
 ![disques détectés](images/diskdetect2.png)  
@@ -162,7 +162,7 @@ Cette image sera mise *automatiquement* dans un répertoire qui portera le nom q
 Si on choisit *Done*, l'image sera donc à la racine du disque :
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
   
-**Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez faire 'CTRL+F2' pour ouvrir un deuxième terminal. On se connecte en root en faisant 'sudo su' puis 'entrée. Il faut ensuite aller dans /home/partimag et faire 'mkdir nomdurépertoire". Une fois celui-ci créé, on retourne dans l'écran précédent en faisant 'CTRL+F1'
+**Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez utiliser la combinaison de touches `CTRL+F2` pour ouvrir un deuxième terminal. On se connecte en root en faisant `sudo su` puis `Entrée`. Il faut ensuite aller dans le répertoire `/home/partimag` et créer le sous-répertoire `mkdir nom_du_répertoire`. Une fois celui-ci créé, on retourne dans l'écran précédent en utilisant la combinaison de touches `CTRL+F1`.
 
 **7. Choisir le type de sauvegarde :**  
 - ou `savedisk` pour le disque entier  
