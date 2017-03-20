@@ -122,16 +122,16 @@ On met le `CD` dans le lecteur de `CD` ou bien on branche la clé `usb` sur le p
 
 Un certain nombre de choix successifs doivent être réalisés :
 
-1. Choisir la bonne *langue* et le bon codage *clavier*  
+**1. Choisir la bonne \*langue\* et le bon codage \*clavier\***  
 Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
 
-2. Choisir le mode *débutant* ? **À choisir plus tard**  
+**2. Choisir le mode *débutant* ? À choisir plus tard**  
 Le mode *débutant* est bien plus simple à utiliser que le mode *expert* qui propose des options inutiles pour une simple sauvegarde du se3.  
 
-3. Choisir le mode *device-image disque/partition vers/depuis image*  
+**3. Choisir le mode \*device-image disque/partition vers/depuis image\***  
 ![image2](images/clonezilla2.jpg)
 
-4. Choisir de monter un périphérique local  
+**4. Choisir de monter un périphérique local**  
 Une liste des supports possibles de sauvegarde apparait  
 (disque dur, partage samba, connexion en ssh,…).  
 ![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
@@ -157,18 +157,18 @@ Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son 
 Cette image sera mise *automatiquement* dans un répertoire qui portera le nom que vous donnerez à l'image :  
 * directement à la racine du disque (choisir *Done*)  
 * ou dans un sous-répertoire (choisir *Browse*)  
-
-Si on choisit *Done*, donc à la racine du disque :
+  
+Si on choisit *Done*, l'image sera donc à la racine du disque :
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
-
+  
 **Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez faire 'CTRL+F2' pour ouvrir un deuxième terminal. On se connecte en root en faisant 'sudo su' puis 'entrée. Il faut ensuite aller dans /home/partimag et faire 'mkdir nomdurépertoire". Une fois celui-ci créé, on retourne dans l'écran précédent en faisant 'CTRL+F1'
 
 7. Choisir le type de sauvegarde :  
 * `savedisk` pour le disque entier  
 * ou `saveparts` pour ne sauvegarder que quelques partitions  
-
+  
 **Remarque :** on peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`. Dans ces cas, on utilisera `saveparts`.
-
+  
 Si on choisit un disque entier :  
 ![choix-sav-ou-parts](images/savedisk.png)  
 
@@ -189,7 +189,7 @@ n'apparait plus dans la liste des disques à sauvegarder
 12. Appuyer sur la touche `y` pour enfin lancer la sauvegarde après la demande de validation  
 ![validation-sav](images/derniere-validation.png)  
 
-La sauvegarde du `se3` est en cours…  
+Et voilà, la sauvegarde du `se3` est en cours…  
 ![sav-en-cours](images/sav-en-cours.png)  
 
 
