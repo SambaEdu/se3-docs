@@ -170,18 +170,21 @@ Si on choisit *Done*, l'image sera donc à la racine du disque :
   
 **Remarque :** on peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`. Dans ces cas, on utilisera `saveparts`.
   
-Si on choisit un disque entier :  
+Si on choisit un disque entier, avec `savedisk` :  
 ![choix-sav-ou-parts](images/savedisk.png)  
 
-**8. Choisir le disque qui sera sauvegardé (donc celui qui contient la racine du `se3`)**  
-Le disque de sauvegarde (sdb), ayant été choisi pour la sauvegarde,  
+**8. Choisir le disque qui sera sauvegardé**  
+celui qui contient la racine du `se3`  
+**NB :** le disque de sauvegarde (sdb), ayant été choisi pour y mettre l'image du disque,  
 n'apparait plus dans la liste des disques à sauvegarder  
 ![choix-disque-se3](images/disk-a-sauvegarder.png)  
 
-**9. Choisir le nom de la sauvegarde (exemple : se3-wheezy-avant-samba-4.4_date)**  
+**9. Choisir le nom de la sauvegarde**  
+Par exemple : se3-wheezy-avant-samba-4.4_date  
 ![choix-nom-image](images/nom-image.png)  
 
-**10. Choisir de vérifier le disque du `se3` (utile uniquement pour les partitions `Linux`)**  
+**10. Choisir de vérifier le disque du `se3`**  
+utile uniquement pour les partitions `Linux`  
 ![verif-disque-se3](images/verif-et-repare.png)  
 
 **11. Choisir de vérifier l'image sauvegardée**  
