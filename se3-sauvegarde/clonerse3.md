@@ -212,7 +212,24 @@ Et oui, la catastrophe est arrivée… mais vous avez une image `Clonezilla` qui
 
 Avant de commencer la sauvegarde, il convient de préciser qu'une restauration doit toujours être faite avec une version de `Clonezilla` au moins aussi récente.
 
-… à venir …
+La procédure est quasi similaire à celle de la sauvegarde, à l'exeption près qu'il faudra choisir "restore disk" au lieu de "save disk".
+
+- choisir "device-image disque/partition vers/depuis image/partition"
+- choisir "Monter un périphérique local"
+- Brancher le disque du externe contenant les sauvegardes et attendre quelques secondes
+- On vérifie que le disque de sauvegarde et le disque du se3 sont bien détectés (CTRL+C pour continuer).
+- On choisit le disque dur de sauvegarde pour être monté sous /home/partimag du livecd
+- On se place dans le répertoire contenant la sauvegarde puis on va sur 'done' (la racine si on a pas utilisé de sous répertoire. Dans ce cas, le nom de la sauvegarde apparait dans la liste).
+- On choisit le 'mode déburant' (le mode expert n'est pas utile pour une restauration simple).
+- On choisit 'restoredisk' si on veut restaurer le disque entier, ou 'restoreparts' si on veur restaurer seulement une partition du se3.
+- On choisit la sauvegarde que l'on souhaite restaurer (exemple : se3-avant-samba-4.4).
+- On indique quel disque dur sera à restaurer (l'idéal étant de ne garder dans le serveur seulement le disque à rstaurer pour éviter toute confusion. Si tous les disques sont présents, il faut bien regarder la taille des disques our éviter d'écraser le mauvais).
+* Si l'image a été vérifiée lors de sa création, il n'est pas utile de vérifier si elle est bien restaurable.
+- CHoisir ce que fera le livecd après restauration (reboot, halt).
+- Valider *deux fois* pour lancer la restauration.
+
+Une fois le disque restauré, on rallume le serveur normalement après avoir oté le live-cd cd 'Clonezilla'.
+
 
 
 ## Références
