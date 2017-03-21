@@ -146,7 +146,6 @@ Sur la photo suivante, `Clonezilla` a bien détecté :
 Comme indiqué sur l'image, on effectue la combinaison de touches `CTRL+C` pour quitter cette fenêtre et passer à la suivante.
 
 Une analyse de chaque partition va être faite  
-![disques détectés](images/diskdetect2.png)  
 
 **5. Choisir le bon disque de sauvegarde**  
 sdb dans le cas présent…  
@@ -171,9 +170,6 @@ Si on choisit *Done*, l'image sera donc à la racine du disque :
 - ou `saveparts` pour ne sauvegarder que quelques partitions  
   
 **Remarque :** on peut restaurer seulement quelques partitions avec une image de disque entier. De même, si on ne souhaite sauvegarder que les partitions racines `/`, `/var` et `swap` parce qu'on a d'autres sauvegardes des `home` et `/var/se3`. Dans ces cas, on utilisera `saveparts`.
-  
-Si on choisit un disque entier, avec `savedisk` :  
-![choix-sav-ou-parts](images/savedisk.png)  
 
 **8. Choisir le disque qui sera sauvegardé**  
 celui qui contient la racine du `se3`  
@@ -186,14 +182,12 @@ Par exemple : se3-wheezy-avant-samba-4.4_date
 ![choix-nom-image](images/nom-image.png)  
 
 **10. Choisir de vérifier le disque du `se3`**  
-utile uniquement pour les partitions `Linux`  
-![verif-disque-se3](images/verif-et-repare.png)  
+Utile uniquement pour les partitions `Linux` ,ce qui est donc le cas ici. On en prendra pas l'option "réparer automatiquement". 
 
 **11. Choisir de vérifier l'image sauvegardée**  
 ![verif-image-se3](images/verif-sauvegarde.png)  
 
 **12. Appuyer sur la touche `y` pour enfin lancer la sauvegarde après la demande de validation**  
-![validation-sav](images/derniere-validation.png)  
 
 **Et voilà, la sauvegarde du `se3` est en cours…**  
 ![sav-en-cours](images/sav-en-cours.png)  
