@@ -7,6 +7,8 @@ Voici la procédure pour intégrer un `windows10` à un domaine géré par un `s
 
 Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.2**.
 
+Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement avec `windows10`, rien d'autre. Et avec un espace libre pour installer un `client-linux`.
+
 
 ## Intégration
 
@@ -16,4 +18,10 @@ Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.2**.
 cela va ajouter les clés de registre à la base de registre et le répertoire `netlogon` devient accessible comme sur un `windows7`.
 4. Exécuter **rejointSE3.exe**
 la suite devrait être identique à l'intégration d'un `windows7`.
+
+
+## Références
+
+* recommendations pour les [clients-windows](se3-clients-windows/clients-windows.md#prérequis-pour-lintégration-de-clients-windows).
+* installation des [clients-linux](pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique).
 
