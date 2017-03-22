@@ -125,13 +125,11 @@ Un certain nombre de choix successifs doivent être réalisés :
 **1. Choisir la bonne *langue* et le bon codage *clavier***  
 Si le clavier est toujours en qwerty, il faut alors utiliser *Choisir un clavier dans la liste complète, puis PC-azerty-Same As X11*  
 
-**2. Choisir le mode *débutant* ? À choisir plus tard**  
-Le mode *débutant* est bien plus simple à utiliser que le mode *expert* qui propose des options inutiles pour une simple sauvegarde du se3.  
 
-**3. Choisir le mode *device-image disque/partition vers/depuis image***  
+**2. Choisir le mode *device-image disque/partition vers/depuis image***  
 ![image2](images/clonezilla2.jpg)
 
-**4. Choisir de monter un périphérique local**  
+**3. Choisir de monter un périphérique local**  
 Une liste des supports possibles de sauvegarde apparait  
 (disque dur, partage samba, connexion en ssh,…).  
 ![periphérique-à-choisir](images/choix_type_sauvegarde.png)  
@@ -147,7 +145,7 @@ Comme indiqué sur l'image, on effectue la combinaison de touches `CTRL+C` pour 
 
 Une analyse de chaque partition va être faite  
 
-**5. Choisir le bon disque de sauvegarde**  
+**4. Choisir le bon disque de sauvegarde**  
 sdb dans le cas présent…  
 ![choix-disque-de-sauvegarde](images/choix-disque-dav.png)  
   
@@ -155,7 +153,7 @@ sdb dans le cas présent…
   
 Le disque de sauvegarde sera monté *automatiquement* par le `livecd` comme son `/home/partimag` (home qui n'a rien à voir avec celui du `se3` évidemment, `Clonezilla` faisant exactement la même chose pour une image d'un poste Windows). Aucun répertoire n'est à créer et aucune manipulation en ligne de commande n'est à faire.
 
-**6. Choisir où placer l'image du `se3`**  
+**5. Choisir où placer l'image du `se3`**  
 Cette image sera mise *automatiquement* dans un répertoire qui portera le nom que vous donnerez à l'image :  
 * directement à la racine du disque (choisir *Done*)  
 * ou dans un sous-répertoire (choisir *Browse*)  
@@ -164,6 +162,9 @@ Si on choisit *Done*, l'image sera donc à la racine du disque :
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
   
 **Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez utiliser la combinaison de touches `CTRL+ALT+F2` pour ouvrir un deuxième terminal. On se connecte en root en faisant `sudo su` puis `Entrée`. Il faut ensuite aller dans le répertoire `/home/partimag` et créer le sous-répertoire `mkdir nom_du_répertoire`. Une fois celui-ci créé, on retourne dans l'écran précédent en utilisant la combinaison de touches `CTRL+ALT+F`.
+
+**6. Choisir le mode *débutant**  
+Le mode *débutant* est bien plus simple à utiliser que le mode *expert* qui propose des options inutiles pour une simple sauvegarde du se3.  
 
 **7. Choisir le type de sauvegarde :**  
 - ou `savedisk` pour le disque entier  
@@ -213,11 +214,14 @@ La procédure est quasi similaire à celle de la sauvegarde, à l'exeption près
 - Brancher le disque du externe contenant les sauvegardes et attendre quelques secondes
 - On vérifie que le disque de sauvegarde et le disque du se3 sont bien détectés (CTRL+C pour continuer).
 - On choisit le disque dur de sauvegarde pour être monté sous /home/partimag du livecd
+![restore3](images/restore1.png)
 - On se place dans le répertoire contenant la sauvegarde puis on va sur 'done' (la racine si on a pas utilisé de sous répertoire. Dans ce cas, le nom de la sauvegarde apparait dans la liste).
-- On choisit le 'mode déburant' (le mode expert n'est pas utile pour une restauration simple).
+- On choisit le 'mode débutant' (le mode expert n'est pas utile pour une restauration simple).
 - On choisit 'restoredisk' si on veut restaurer le disque entier, ou 'restoreparts' si on veur restaurer seulement une partition du se3.
 - On choisit la sauvegarde que l'on souhaite restaurer (exemple : se3-avant-samba-4.4).
+![restore3](images/restore3.png)
 - On indique quel disque dur sera à restaurer (l'idéal étant de ne garder dans le serveur seulement le disque à rstaurer pour éviter toute confusion. Si tous les disques sont présents, il faut bien regarder la taille des disques our éviter d'écraser le mauvais).
+![restore3](images/restore4.png)
 * Si l'image a été vérifiée lors de sa création, il n'est pas utile de vérifier si elle est bien restaurable.
 - CHoisir ce que fera le livecd après restauration (reboot, halt).
 - Valider *deux fois* pour lancer la restauration.
