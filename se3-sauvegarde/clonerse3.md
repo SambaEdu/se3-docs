@@ -30,8 +30,8 @@ Voici ce que nous vous proposons pour la fabrication des images des disques du `
 - redémarrer le `se3` via le `CD` pour se trouver avec `Clonezilla` en `live`
 - repérer le disque à transformer en une image
 - repérer un périphérique local : un disque externe `usb` convient (ou un `NAS`) ? Si j'ai la place, je peux utiliser celui qui me sert pour la vraie sauvegarde en créant à sa racine un répertoire /image_se3 par exemple.
-- lancer le clonage → temps indicatif ?
-- recommencer, avec le 2ème disque qui contient `/home` (par exemple), les étapes 3, 4 et 5
+- lancer le clonage → la sauvegarde du disque dur contenant uniquement la racine, var et le swap a durée 24 minutes montre en main sur un disque externe usb 2.0. Cette sauvegarde fait une vingtaine de Go.
+- recommencer, avec le 2ème disque qui contient `/home` (par exemple), les étapes 3, 4 et 5 (si on a une autre vraie sauvegarde par script, cette opération n'est peut-être pas utile, mais sait-on jamais...)
 
 
 ## Préparation de `Clonezilla`
