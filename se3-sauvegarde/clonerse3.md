@@ -1,6 +1,6 @@
 # Cloner un `se3`
 
-… article en chantier …
+… article en chantier...mais qui avance! …
 
 * [Présentation](#présentation)
 * [Préparation de `Clonezilla`](#préparation-de-clonezilla)
