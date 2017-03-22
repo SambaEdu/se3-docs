@@ -163,7 +163,7 @@ Cette image sera mise *automatiquement* dans un répertoire qui portera le nom q
 Si on choisit *Done*, l'image sera donc à la racine du disque :
 ![choix-rep-de-sauvegarde](images/choix-rep-sav.png)  
   
-**Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez utiliser la combinaison de touches `CTRL+F2` pour ouvrir un deuxième terminal. On se connecte en root en faisant `sudo su` puis `Entrée`. Il faut ensuite aller dans le répertoire `/home/partimag` et créer le sous-répertoire `mkdir nom_du_répertoire`. Une fois celui-ci créé, on retourne dans l'écran précédent en utilisant la combinaison de touches `CTRL+F1`.
+**Remarque :** si vous vouliez que cette sauvegarde soit dans un sous-répertoire, vous pouvez utiliser la combinaison de touches `CTRL+ALT+F2` pour ouvrir un deuxième terminal. On se connecte en root en faisant `sudo su` puis `Entrée`. Il faut ensuite aller dans le répertoire `/home/partimag` et créer le sous-répertoire `mkdir nom_du_répertoire`. Une fois celui-ci créé, on retourne dans l'écran précédent en utilisant la combinaison de touches `CTRL+ALT+F`.
 
 **7. Choisir le type de sauvegarde :**  
 - ou `savedisk` pour le disque entier  
