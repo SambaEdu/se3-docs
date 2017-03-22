@@ -48,6 +48,8 @@ Si des intérrogations surgissent au cours de la lecture de cet article, n'hési
 **Remarque 3 :** Vous pourrez vous entraîner sur un réseau `se3 virtuel`, ce qui vous permettra de le faire ensuite plus sereinement sur votre précieux `se3` si cela vous semble nécessaire. Bien sûr, ce n'est pas obligatoire et le script fonctionne très bien maintenant. L'article ci-dessous, un peu ancien et il faudrait le mettre à jour, vous guidera pour la mise en place d'un réseau virtuel.
 > http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_r%C3%A9seau_SE3_avec_VirtualBox
 
+**Remarque 4:** Si vous n'êtes pas zen à l'idée de lancer la procédure de migration, vous pouvez fabriquer une image de votre serveur actuel avec un disque dur externe et le logiciel open-source 'Clonezilla'. Ainsi, en cas de problème, il sera possible de restaurer facilement et rapidement le se3 dans sa configuration d' avant migration.
+Plus d'informations [ici](https://github.com/SambaEdu/se3-docs/blob/master/se3-sauvegarde/clonerse3.md#cloner-un-se3).
 
 ## Préparation du `se3 Squeeze`
 
