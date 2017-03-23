@@ -205,7 +205,7 @@ N'oubliez pas d'enlever le `CD` ou la clé `usb`.
 
 Et oui, la catastrophe est arrivée… mais vous avez une image `Clonezilla` qui va vous permettre de remettre en ordre de marche votre `se3`. Suivez le guide !
 
-Avant de commencer la sauvegarde, il convient de préciser qu'une restauration doit toujours être faite avec une version de `Clonezilla` au moins aussi récente.
+Avant de commencer, il convient de préciser qu'une restauration doit toujours être faite avec une version de `Clonezilla` au moins aussi récente que celle ayant servi à la sauvegarde (il peut-être indiqué "disque cible trop petit" alors que le disque fait pourtant la bonne taille.
 
 La procédure est quasi similaire à celle de la sauvegarde, à l'exeption près qu'il faudra choisir "restore disk" au lieu de "save disk".
 
@@ -227,6 +227,8 @@ La procédure est quasi similaire à celle de la sauvegarde, à l'exeption près
 - Valider *deux fois* pour lancer la restauration.
 
 Une fois le disque restauré, on rallume le serveur normalement après avoir oté le live-cd cd 'Clonezilla'.
+
+Remarque: Si vous diposez d'un second disque dur identique à celui du se3, il peut-être judicieux de restaurer la sauvegarde sur ce disque (avec un ordinateur ouvert et déconnecté du réseau pour éviter un conflit d'ip avec 'deux se3'), déjà pour vérifier que tout fonctionne bien et aussi pour gagner du temps en cas de crash disque/problème logiciel puisqu'il suffira de les échanger. Les ordinateurs de l'établissement pourront fonctionner en attendant qu'une restauration des homes et var/se3 soit faite.
 
 
 
