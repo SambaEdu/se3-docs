@@ -505,11 +505,32 @@ ntp_servers:
 #ntp_admin_email: 'foo@bar.tld'
 ```
 
-Et voilà, on a créé notre rôle ansible `ntp`. On peut le considérer
+Et voilà, on a créé notre rôle ansible `ntp`. Si Ansible était un langage de programmation
+(ce qu'il n'est pas réellement), on pourrait considérer notre rôle `ntp`
 comme une sorte de « fonctions » générique qui admet
-ici deux variables (`ntp_servers` et `ntp_admin_email`) et
+ici deux variables (`ntp_servers` et `ntp_admin_email`),
 qui permet de mettre en place une configuration du service
-ntp.
+ntp et surtout qui sera réutilisable dans différents playbooks
+tout en évitant la duplication de code ansible.
+
+```cfg
+# Il faut vraiment voir le rôle `ntp` comme une sorte de fonction autonome à
+# deux variables qui pourra être appelée (utilisée) dans différents playbooks,
+# sachant que dans cet exemple la variable ntp_servers admet une valeur par
+# défaut (utilisée si la variable n'est pas explicitement définie) mais la
+# variable ntp_admin_email, elle, n'admet pas de valeur par défaut (et devra
+# donc être systématiquement définie explicitement dès que le rôle est utilisé).
+#
++---------------------+
+|     rôle `ntp`      |
++---------------------+
+| Variables du rôle : |
+|                     |
+| * ntp_servers       |
+| * ntp_admin_email   |
+|                     |
++---------------------+
+```
 
 
 
