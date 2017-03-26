@@ -209,7 +209,7 @@ aux bonnes pratiques au niveau de l'organisation des fichiers
 voir plus bas).
 
 Un playbook est un fichier YAML utilisé par Ansible pour
-mettre en place des configuration sur un ou plusieurs clients. Créons
+mettre en place des configurations sur un ou plusieurs clients. Créons
 ce fichier `~/myplaybook.yaml` :
 
 ```yaml
