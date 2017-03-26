@@ -8,8 +8,8 @@
 Ansible est un **logiciel de déploiement de
 configurations**. On installe Ansible sur une machine qui
 fera office de « *serveur ansible* » et avec une commande
-(accompagné de code ansible), on déploie de la configuration
-sur une ensemble de machines qu'on peut appeler du coup des
+(accompagnée de code ansible), on déploie de la configuration
+sur un ensemble de machines qu'on peut appeler du coup des
 « *clients ansible* ».
 
 ```
@@ -37,7 +37,7 @@ Au niveau installation il faut :
 
 Les appellations de « serveur ansible » et « clients ansible »
 sont incorrectes d'un point de vue réseau. En effet, d'un
-point de vue, un serveur est une application qui tourne en
+point de vue réseau, un serveur est une application qui tourne en
 tant que service et qui écoute sur un port, comme par
 exemple Apache2 qui est un service qui écoute sur le port 80.
 Ici ce n'est pas le cas : Ansible n'est pas un service et
