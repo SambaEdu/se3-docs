@@ -698,8 +698,7 @@ ntp_servers:
   - '2.debian.pool.ntp.org'
 ```
 
-pour le fichier `/etc/ansible/group_vars/sambaedu.yaml` (sauf
-pour la valeur  (en fait
+pour le fichier `/etc/ansible/group_vars/sambaedu.yaml` (en fait
 on pourrait même ne rien mettre car la valeur par défaut du
 rôle `ntp` nous conviendrait parfaitement) et enfin pour le
 fichier `/etc/ansible/group_vars/linuxclients.yaml` :
