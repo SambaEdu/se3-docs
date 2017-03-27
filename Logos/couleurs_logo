@@ -5,6 +5,11 @@ R=60
 G=98
 B=123
 
+samba_bleu_entourage : #a6b8cb
+R=166
+G=184
+B=203
+
 samba_orange : #f3b527
 R=243
 G=181
