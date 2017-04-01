@@ -69,7 +69,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Utilitaires
 
-* Une brêve documentation pour [l'utilisation d'une session `screen`](../dev-clients-linux/screen.md#utilisation-dune-session-screen)
+* Une brêve documentation pour [l'utilisation d'une session `screen`](dev-clients-linux/screen.md#utilisation-dune-session-screen)
 * Un petit memo concernant [reprepro](reprepro/memo.md#petit-memo-sur-reprepro)
 
 
