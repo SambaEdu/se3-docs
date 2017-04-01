@@ -11,8 +11,9 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
     * [Tester ou remonter des bugs](#tester-ou-remonter-des-bugs)
 * [Gestion des `clients-linux`](#gestion-des-clients-linux)
 * [Gestion des `clients-windows`](#gestion-des-clients-windows)
-* [Utilitaires](#utilitaires)
-* [Des documentations sur Debian](#des-documentations-sur-debian)
+* [Utilitaires et veille technologique](#utilitaires-et-veille-technologique)
+* [Autres documentations sur le projet `se3`](#autres-documentations-sur-le-projet-se3)
+* [De la documentation sur Debian](#de-la-documentation-sur-debian)
 
 
 ## Pour contribuer au projet
@@ -67,13 +68,20 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * Gestion des imprimantes : [utiliser une console `MMC`](se3-clients-windows/imprimantes.md#gestion-des-imprimantes-pour-les-clients-windows)
 
 
-## Utilitaires
+## Utilitaires et veille technologique
 
 * Une brêve documentation pour [l'utilisation d'une session `screen`](dev-clients-linux/screen.md#utilisation-dune-session-screen)
 * Un petit memo concernant [reprepro](reprepro/memo.md#petit-memo-sur-reprepro)
+* Un petit memo prometteur pour [Ansible](dev-clients-linux/labs/ansible/tuto-ansible.md#petit-tutoriel-sur-ansible)
 
 
-## Des documentations sur Debian
+## Autres documentations sur le projet `se3`
+
+* La documentation de [Caen](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Table_des_mati%C3%A8res)
+* La documentation de [Versailles](http://www.samba-edu.ac-versailles.fr/)
+
+
+## De la documentation sur Debian
 
 * Une documentation du projet `DFLinux` pour [les débutants](http://lescahiersdudebutant.fr/)
 * La documentation de *Raphaël Hertzog* et *Roland Mas* : [le cahier de l'administrateur `Debian`](https://debian-handbook.info/browse/fr-FR/stable/)
