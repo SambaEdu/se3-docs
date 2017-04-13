@@ -4,7 +4,7 @@
 * [Pourquoi ça peut être intéressant pour SambaÉdu ?](#pourquoi-ça-peut-être-intéressant-pour-sambaÉdu-)
 * [Mise en place du petit laboratoire pour faire les manipulations](#mise-en-place-du-petit-laboratoire-pour-faire-les-manipulations)
 * [Installation et échanges des clés SSH](#installation-et-échanges-des-clés-ssh)
-* [Mise en place du fichier « d'inventaire » des clients ansible](#mise-en-place-du-fichier-d'inventaire-des-clients-ansible)
+* [Mise en place du fichier « d'inventaire » des clients ansible](#mise-en-place-du-fichier--dinventaire--des-clients-ansible)
 * [Un petit playbook simple comme premier exemple](#un-petit-playbook-simple-comme-premier-exemple)
 * [La bonne pratique des rôles pour l'organisation des fichiers](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers)
 * [Mais comment on l'utilise notre rôle ntp maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
