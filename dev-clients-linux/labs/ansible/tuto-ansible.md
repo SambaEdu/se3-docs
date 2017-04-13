@@ -1,5 +1,15 @@
 # Petit tutoriel sur Ansible
 
+* [Introduction](#introduction)
+* [Pourquoi ça peut être intéressant pour SambaÉdu ?](#pourquoi-ça-peut-être intéressant-pour-sambadu-)
+* [Mise en place du petit laboratoire pour faire les manipulations](#mise-en-place-du-petit-laboratoire-pour-faire-les manipulations)
+* [Installation et échanges des clés SSH](#installation-et-échanges-des-clés-ssh)
+* [Mise en place du fichier « d'inventaire » des clients ansible](#mise-en-place-du-fichier-d'inventaire-des- clients-ansible)
+* [Un petit playbook simple comme premier exemple](#un-petit-playbook-simple-comme-premier-exemple)
+* [La bonne pratique des rôles pour l'organisation des fichiers](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers)
+* [Mais comment on l'utilise notre rôle ntp maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
+* [Utilisation des variables d'hôtes et de groupes](#utilisation-des-variables-dhôtes-et-de-groupes)
+* [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul client)
 
 
 
@@ -344,7 +354,7 @@ Et dans le playbook mettre quelque chose comme ça :
 
 
 
-## La bonne pratique des rôle pour l'organisation des fichiers
+## La bonne pratique des rôles pour l'organisation des fichiers
 
 
 L'idée des rôles c'est de rendre un playbook autonome et
@@ -535,7 +545,7 @@ tout en évitant la duplication de code ansible.
 
 
 
-## Mais comment on l'utilise notre rôle ntp maintenant ?
+## Mais comment on utilise notre rôle ntp maintenant ?
 
 Et bien avec un playbook qui, comme on va le voir, va se retrouver
 très réduit en taille, l'essentiel du code étant *encapsulé* dans
@@ -610,7 +620,7 @@ ansible linuxclients -a 'ntpq -pn4'
 
 
 
-## Utilisation des variables d'hôtes et de groupes.
+## Utilisation des variables d'hôtes et de groupes
 
 En fait, mettre les variables directement dans les playbooks n'est
 pas non plus une bonne pratique. On voit par exemple que la valeur

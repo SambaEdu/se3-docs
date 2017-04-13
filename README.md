@@ -79,6 +79,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 * La documentation de [Caen](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Table_des_mati%C3%A8res)
 * La documentation de [Versailles](http://www.samba-edu.ac-versailles.fr/)
+* La page [`SambaÉdu` Wikipedia](https://fr.wikipedia.org/wiki/SambaEdu)
 
 
 ## De la documentation sur Debian
