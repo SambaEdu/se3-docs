@@ -1,7 +1,7 @@
 # Petit tutoriel sur Ansible
 
 * [Introduction](#introduction)
-* [Pourquoi ça peut être intéressant pour SambaÉdu ?](#pourquoi-ça-peut-être-intéressant-pour-sambadu)
+* [Pourquoi ça peut être intéressant pour SambaÉdu ?](#pourquoi-ça-peut-être-intéressant-pour-sambaÉdu-)
 * [Mise en place du petit laboratoire pour faire les manipulations](#mise-en-place-du-petit-laboratoire-pour-faire-les-manipulations)
 * [Installation et échanges des clés SSH](#installation-et-échanges-des-clés-ssh)
 * [Mise en place du fichier « d'inventaire » des clients ansible](#mise-en-place-du-fichier-d'inventaire-des-clients-ansible)
