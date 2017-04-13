@@ -16,11 +16,15 @@
 ## Introduction
 
 Ansible est un **logiciel de déploiement de
-configurations**. On installe Ansible sur une machine qui
+configurations**.
+
+On installe Ansible sur une machine qui
 fera office de « *serveur ansible* » et avec une commande
 (accompagnée de code ansible), on déploie de la configuration
 sur un ensemble de machines qu'on peut appeler du coup des
 « *clients ansible* ».
+
+Voici un réseau minimal pour ce tutoriel :
 
 ```
 +----------------------+                                              +------------------------+
@@ -40,8 +44,8 @@ sur un ensemble de machines qu'on peut appeler du coup des
 
 Au niveau installation il faut :
 
-* installer Ansible sur le « serveur ansible » (normal).
-* installer un serveur SSH et Python sur les « clients ansible » (ce qui est assez faible comme contrainte).
+* installer Ansible sur une machine qui fera office de « serveur ansible » (normal).
+* installer un serveur SSH et Python sur les machines du réseau qui seront alors des « clients ansible » (ce qui est assez faible comme contrainte).
 
 **Remarque importante sur la notion de clients/serveur**
 
@@ -70,18 +74,16 @@ on déploie de la configuration) sont quand même bien
 pratiques pour signifier de qui on parle.
 
 
-
-
 ## Pourquoi ça peut être intéressant pour SambaÉdu ?
 
 On peut imaginer que ça puisse être très utile dans le
-management des clients Linux où le serveur SambaÉdu serait
-le serveur Ansible et les clients Linux seraient les clients
+management des clients-Linux où le serveur SambaÉdu serait
+le serveur Ansible et les clients-Linux seraient les clients
 Ansible. L'intégration (qui est typiquement une mise en
 place de configuration) pourrait par exemple se faire via
 Ansible.
 
-Domaine inconnu pour moi mais il semble que Ansible puisse
+**Remarque :** domaine inconnu pour moi, mais il semble que Ansible puisse
 aussi manager du Windows.
 
 Ansible pourrait sans doute aussi s'avérer utile dans la
@@ -90,7 +92,9 @@ L'installation complète d'un serveur SambaÉdu pourrait très
 bien se résumer à l'installation de l'OS Debian puis à
 l'exécution d'un playbook ansible (c'est le nom qu'on donne
 à du code ansible) pour installer et configurer toute la
-couche SambaÉdu. Cela pourrait aussi être l'intermédiaire
+couche SambaÉdu.
+
+Cela pourrait aussi être l'intermédiaire
 **unique** de l'interface d'administration Web du serveur
 SambaÉdu dès que la configuration du serveur est modifiée :
 une modification de la configuration du serveur via
@@ -98,12 +102,10 @@ l'interface Web déclencherait automatiquement un playbook
 ansible.
 
 
-
-
 ## Mise en place du petit laboratoire pour faire les manipulations
 
 On va se donner 3 machines sous Debian Jessie,
-toutes les 3 sur le même réseau IP :
+toutes les 3 sur le même réseau IP (voir le schéma ci-dessus) :
 
 * se3.athome.priv
 * client1.athome.priv
@@ -118,8 +120,6 @@ On supposera que :
    python est installé.
 
 
-
-
 ## Installation et échanges des clés SSH
 
 C'est sur se3 qu'on installe Ansible :
@@ -129,6 +129,7 @@ C'est sur se3 qu'on installe Ansible :
 # C'est marqué dans la doc Ansible :
 #
 #   http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-apt-debian
+# Cependant, en utilisant le dépôt jessie-backports, on peut obtenir une version plus récente, même si ce n'est pas la dernière version comme avec le dépôt ci-dessous…
 #
 echo deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main > /etc/apt/sources.list.d/ansible.list
 
@@ -163,7 +164,9 @@ les 3 fqdn sans mot de passe.
 ## Mise en place du fichier « d'inventaire » des clients ansible
 
 Il faut éditer le fichier `/etc/ansible/hosts` et y placer
-nos clients. Entre crochet, on définit des groupes de clients.
+nos clients.
+
+Entre crochets, on définit des groupes de clients.
 
 ```ini
 # Une adresse IP est possible à la place d'un fqdn.
@@ -199,8 +202,7 @@ ansible 'client1*' -m ping
 ansible 'client1.athome.priv' -m setup
 ```
 
-
-Et au passage, on est en mesure d'exécuter n'importe quelle commande shell
+Et, au passage, on est en mesure d'exécuter n'importe quelle commande shell
 sur un ou plusieurs clients. Par exemple :
 
 ```sh
@@ -208,19 +210,18 @@ ansible all -a 'ls -al --color /tmp'
 ```
 
 
-
-
 ## Un petit playbook simple comme premier exemple
 
 **Attention :** ceci est un exemple simple pour commencer
 et comprendre les principes de base mais il ne correspond pas
-aux bonnes pratiques au niveau de l'organisation des fichiers
-(la bonne pratiques est d'utiliser des « rôles » ansible,
-voir plus bas).
+aux bonnes pratiques au niveau de l'organisation des fichiers ;
+la bonne pratique est d'utiliser des « rôles » ansible,
+voir plus bas.
 
 Un playbook est un fichier YAML utilisé par Ansible pour
-mettre en place des configurations sur un ou plusieurs clients. Créons
-ce fichier `~/myplaybook.yaml` :
+mettre en place des configurations sur un ou plusieurs clients.
+
+Créons ce fichier `~/myplaybook.yaml` :
 
 ```yaml
 ---
@@ -305,11 +306,11 @@ restrict 127.0.0.1
 restrict ::1
 
 {% if ansible_distribution_release == 'jessie' %}
-# Configuration spécifique si on est sur une Jessie...
+# Configuration spécifique si on est sur une Jessie…
 {% elif ansible_distribution_release == 'xenial' %}
-# Configuration spécifique si on est sur une Xenial...
+# Configuration spécifique si on est sur une Xenial…
 {% else %}
-# Configuration par defaut...
+# Configuration par defaut…
 {% endif %}
 ```
 
@@ -324,8 +325,8 @@ ansible-playbook ./myplaybook.yaml --diff
 **Remarque :** on peut donc adapter un template en fonction du
 client et de son OS par exemple (si c'est une Xenial ou une
 Jessie etc.) avec des `{% if %}` (entre autres). Mais si le template
-devient trop complexe et illisible, alors il plus sage de
-créer des fichiers templates différents par exemple avec :
+devient trop complexe et illisible, alors il est plus sage de
+créer des fichiers templates différents, par exemple avec :
 
 ```cfg
 # Il faut reconnaître que ntp n'est pas un bon exemple pour
@@ -338,7 +339,7 @@ créer des fichiers templates différents par exemple avec :
 Et dans le playbook mettre quelque chose comme ça :
 
 ```yaml
-# [...]
+# […]
     - name: write NTP config file /etc/ntp.conf
       template:
         src: 'ntp.conf_{{ansible_distribution_release}}.j2' # <= Changement ici.
@@ -348,7 +349,7 @@ Et dans le playbook mettre quelque chose comme ça :
         mode: '0644'
       notify:
         - restart ntp
-# [...]
+# […]
 ```
 
 
@@ -356,9 +357,8 @@ Et dans le playbook mettre quelque chose comme ça :
 
 ## La bonne pratique des rôles pour l'organisation des fichiers
 
-
 L'idée des rôles c'est de rendre un playbook autonome et
-générique, comme un peu petit « module » ou une sorte de
+générique, comme un « module » ou une sorte de
 lib, afin qu'il puisse être utilisable ensuite dans d'autres
 playbooks avec un système « d'include ».
 
@@ -470,11 +470,11 @@ restrict 127.0.0.1
 restrict ::1
 
 {% if ansible_distribution_release == 'jessie' %}
-# Configuration spécifique si on est sur une Jessie...
+# Configuration spécifique si on est sur une Jessie…
 {% elif ansible_distribution_release == 'xenial' %}
-# Configuration spécifique si on est sur une Xenial...
+# Configuration spécifique si on est sur une Xenial…
 {% else %}
-# Configuration par defaut...
+# Configuration par defaut…
 {% endif %}
 ```
 
@@ -491,7 +491,7 @@ Pas de surprises pour le fichier `/etc/ansible/roles/ntp/handlers/main.yaml` :
 
 Il nous reste le fichier `/etc/ansible/roles/ntp/defaults/main.yaml`.
 Il sert à définir des valeurs par défaut pertinentes pour
-certaines variables... quand c'est possible (par exemple
+certaines variables… quand c'est possible (par exemple
 pour une variable `password` il vaut mieux éviter d'en
 définir une sachant que par défaut ansible provoque une
 erreur si une variable se retrouve non définie).
@@ -515,12 +515,14 @@ ntp_servers:
 #ntp_admin_email: 'foo@bar.tld'
 ```
 
-Et voilà, on a créé notre rôle ansible `ntp`. Si Ansible était un langage de programmation
+Et voilà, on a créé notre rôle ansible `ntp`.
+
+Si Ansible était un langage de programmation
 (ce qu'il n'est pas réellement), on pourrait considérer notre rôle `ntp`
-comme une sorte de « fonctions » générique qui admet
+comme une sorte de « fonction » générique qui admet
 ici deux variables (`ntp_servers` et `ntp_admin_email`),
 qui permet de mettre en place une configuration du service
-ntp et surtout qui sera réutilisable dans différents playbooks
+ntp et, surtout, qui sera réutilisable dans différents playbooks
 tout en évitant la duplication de code ansible.
 
 ```cfg
@@ -543,17 +545,17 @@ tout en évitant la duplication de code ansible.
 ```
 
 
-
-
 ## Mais comment on utilise notre rôle ntp maintenant ?
 
-Et bien avec un playbook qui, comme on va le voir, va se retrouver
+Et bien, avec un playbook qui, comme on va le voir, va se retrouver
 très réduit en taille, l'essentiel du code étant *encapsulé* dans
-notre rôle (ici on a qu'un rôle mais dans la pratique un playbook
+notre rôle (ici on n''a qu'un rôle mais, dans la pratique, un playbook
 appliquera toute une série de rôles).
 
-On va créer nos playbook à la racine du répertoire `/etc/ansible/`
-à côté du répertoire `./roles/`. Par exemple on va créer un playbook
+On va créer nos playbooks à la racine du répertoire `/etc/ansible/`
+à côté du répertoire `./roles/`.
+
+Par exemple on va créer un playbook
 `sambaedu.yaml` qui s'appliquera au groupe `sambaedu` (qui
 ne contient que se3) comme ceci :
 
@@ -591,7 +593,7 @@ Voici un exemple pour notre fichier `/etc/ansible/sambaedu.yaml` :
     - ntp
 #   - roleA
 #   - roleB
-#   - ....    <= dans la vraie vie, on appliquera toute une série de rôles.
+#   - …    <= dans la vraie vie, on appliquera toute une série de rôles.
 ```
 
 Créons également le playbook `/etc/ansible/linuxclients.yaml` comme ceci :
@@ -601,7 +603,7 @@ Créons également le playbook `/etc/ansible/linuxclients.yaml` comme ceci :
 - hosts: linuxclients
   vars:
     ntp_servers:
-      - '192.168.0.10' # <= mettons l'IP de se3 dans le cas des clients Linux.
+      - '192.168.0.10' # <= mettons l'IP de se3 dans le cas des clients-Linux.
     ntp_admin_email: 'flaf@domain.tld'
   roles:
     - ntp
@@ -623,9 +625,9 @@ ansible linuxclients -a 'ntpq -pn4'
 ## Utilisation des variables d'hôtes et de groupes
 
 En fait, mettre les variables directement dans les playbooks n'est
-pas non plus une bonne pratique. On voit par exemple que la valeur
+pas non plus une bonne pratique. On voit, par exemple, que la valeur
 de la variable `ntp_admin_email` est présente à deux endroits
-différents (la duplication de données, c'est le mal).
+différents (la duplication de données, *c'est le mal*).
 
 On va utiliser les variables de groupes qui sont définies dans
 des fichiers YAML (encore et toujours) dans des fichiers de
@@ -668,7 +670,7 @@ On a alors :
 ├── host_vars
 │   └── client1.athome.priv.yaml
 ├── roles
-│   └── ntp/...
+│   └── ntp/…
 ├── ansible.cfg
 ├── hosts
 ├── linuxclients.yaml
@@ -698,7 +700,7 @@ ntp_admin_email: '{{ admin_email }}'
 En revanche, la variable `ntp_servers` n'est pas encore définie.
 On veut que cela soit les serveurs NTP du pool Debian pour se3 mais que
 ce soit l'IP du se3 pour client1 et client2 (et pour tous les
-clients Linux en somme). Du coup, on a :
+clients-Linux en somme). Du coup, on a :
 
 ```yaml
 ---
@@ -741,9 +743,9 @@ besoin du tout de la clé `vars`. On peut se contenter de :
 ```
 
 Dans notre exemple simpliste, les deux playbooks contiennent
-les mêmes rôles mais on peut imaginer que, dans le cas de
+les mêmes rôles, mais on peut imaginer que, dans le cas de
 sambaedu, il y aura des rôles supplémentaires propres à se3 qu'on
-ne retrouvera pas dans le playbook des clients Linux.
+ne retrouvera pas dans le playbook des clients-Linux.
 
 On peut à nouveau lancer nos playbook, normalement on devrait
 avoir le résultat souhaité :
@@ -757,7 +759,7 @@ ansible linuxclients -a 'ntpq -pn4'
 Mais imaginons que pour une raison particulière (peu importe
 laquelle), il faut que client1 utilise lui aussi les
 serveurs NTP du pool Debian pour sa synchronisation (juste
-lui, on imagine c'est une exception parmi les clients Linux)
+lui, on imagine c'est une exception parmi les clients-Linux)
 alors on peut utiliser le fichier `/etc/ansible/host_vars/client1.athome.priv.yaml`
 et y mettre :
 
@@ -781,15 +783,15 @@ du plus général au plus précis et c'est la dernière assignation
 qui l'emporte.
 
 
-
-
 ## Petite astuce pour appliquer un playbook en le limitant à un seul client
 
-En fait, dans notre cas pratique, on imagine mal les clients Linux
-tous allumés en même temps et par exemple dans le cas d'une intégration
+En fait, dans notre cas pratique, on imagine mal les clients-Linux
+tous allumés en même temps et, par exemple, dans le cas d'une intégration
 d'un client, on voudra sans doute lancer le playbook sur un seul
-client (celui qu'on veut intégrer). Pour limiter notre playbook
-à un client en particulier, on va utiliser l'astuce suivante :
+client (celui qu'on veut intégrer).
+
+Pour limiter notre playbook à un client en particulier,
+on va utiliser l'astuce suivante :  
 on va utiliser une variable `target` qui ne sera définie nulle part et
 qu'on définira en ligne de commandes directement.
 
@@ -815,6 +817,5 @@ ansible-playbook /etc/ansible/linuxclients.yaml --diff
 # Le playbook est lancé ici seulement sur le client client1.athome.priv.
 ansible-playbook /etc/ansible/linuxclients.yaml --diff --extra-vars target='client1.athome.priv'
 ```
-
 
 
