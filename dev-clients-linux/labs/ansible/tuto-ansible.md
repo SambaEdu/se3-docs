@@ -1,19 +1,30 @@
 # Petit tutoriel sur Ansible
 
 * [Introduction](#introduction)
-* [Pourquoi ça peut être intéressant pour SambaÉdu ?](#pourquoi-ça-peut-être-intéressant-pour-sambaÉdu-)
-* [Mise en place du petit laboratoire pour faire les manipulations](#mise-en-place-du-petit-laboratoire-pour-faire-les-manipulations)
-* [Installation et échanges des clés SSH](#installation-et-échanges-des-clés-ssh)
-* [Mise en place du fichier « d'inventaire » des clients ansible](#mise-en-place-du-fichier--dinventaire--des-clients-ansible)
+    * [Le logiciel Ansible](#le-logiciel-ansible)
+    * [Pré-requis](#pré-requis)
+    * [Remarque importante sur la notion de clients/serveur](#remarque-importante-sur-la-notion-de-clients/serveur)
+    * [Pourquoi ça peut être intéressant pour SambaÉdu ?](#pourquoi-ça-peut-être-intéressant-pour-sambaÉdu-)
+* [Mise en place d'un petit laboratoire pour faire les manipulations](#mise-en-place-dun-petit-laboratoire-pour-faire-les-manipulations)
+    * [Un réseau minimal](#un-réseau-minimal)
+    * [Hypothèses pour ce réseau minimal](#hypothèses-pour-ce-réseau-minimal)
+    * [Installation et échanges des clés `ssh`](#installation-et-échanges-des-clés-ssh)
+        * [Installation d'Ansible](#installation-dAnsible)
+        * [Échanges des clés `ssh`](#échanges-des-clés-ssh)
+    * [Mise en place du fichier « d'inventaire » des clients ansible](#mise-en-place-du-fichier--dinventaire--des-clients-ansible)
 * [Un petit playbook simple comme premier exemple](#un-petit-playbook-simple-comme-premier-exemple)
 * [La bonne pratique des rôles pour l'organisation des fichiers](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers)
 * [Mais comment on l'utilise notre rôle ntp maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
 * [Utilisation des variables d'hôtes et de groupes](#utilisation-des-variables-dhôtes-et-de-groupes)
 * [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul-client)
+* [Exercices](#exercices)
+    * [Exercice 1](#exercice-1)
 
 
 
 ## Introduction
+
+### Le logiciel Ansible
 
 Ansible est un **logiciel de déploiement de
 configurations**.
@@ -24,30 +35,14 @@ fera office de « *serveur ansible* » et avec une commande
 sur un ensemble de machines qu'on peut appeler du coup des
 « *clients ansible* ».
 
-Voici un réseau minimal pour ce tutoriel :
-
-```
-+----------------------+                                              +------------------------+
-|                      |    Déploiement de configuration via SSH      |                        |
-|   se3.athome.priv    |-------------------------------------------->>|  client1.athome.priv   |
-|                      |                                              |                        |
-| Ansible est installé |                                              +------------------------+
-|  sur cette machine   |
-|                      |---------------------+                        +------------------------+
-+----------------------+                     |                        |                        |
-            |       |                        +---------------------->>|  client1.athome.priv   |
-            |       |                                                 |                        |
-            +--<<---+                                                 +------------------------+
-    Le « serveur ansible » peut très bien avoir lui-même
-    comme « client ansible » (ce sera le cas dans ce tutoriel).
-```
+### Pré-requis
 
 Au niveau installation il faut :
 
 * installer Ansible sur une machine qui fera office de « serveur ansible » (normal).
 * installer un serveur SSH et Python sur les machines du réseau qui seront alors des « clients ansible » (ce qui est assez faible comme contrainte).
 
-**Remarque importante sur la notion de clients/serveur**
+### Remarque importante sur la notion de clients/serveur
 
 Les appellations de « serveur ansible » et « clients ansible »
 sont incorrectes d'un point de vue réseau. En effet, d'un
@@ -74,7 +69,7 @@ on déploie de la configuration) sont quand même bien
 pratiques pour signifier de qui on parle.
 
 
-## Pourquoi ça peut être intéressant pour SambaÉdu ?
+### Pourquoi ça peut être intéressant pour SambaÉdu ?
 
 On peut imaginer que ça puisse être très utile dans le
 management des clients-Linux où le serveur SambaÉdu serait
@@ -102,14 +97,37 @@ l'interface Web déclencherait automatiquement un playbook
 ansible.
 
 
-## Mise en place du petit laboratoire pour faire les manipulations
+## Mise en place d'un petit laboratoire pour faire les manipulations
 
-On va se donner 3 machines sous Debian Jessie,
-toutes les 3 sur le même réseau IP (voir le schéma ci-dessus) :
+### Un réseau minimal
+
+On va se donner 3 machines sous Debian Jessie
+(mais on pourrait prendre des distributions différentes),
+toutes les 3 sur le même réseau IP :
 
 * se3.athome.priv
 * client1.athome.priv
 * client2.athome.priv
+
+Cela constitue un réseau minimal pour ce tutoriel :
+
+```
++----------------------+                                              +------------------------+
+|                      |    Déploiement de configuration via SSH      |                        |
+|   se3.athome.priv    |-------------------------------------------->>|  client1.athome.priv   |
+|                      |                                              |                        |
+| Ansible est installé |                                              +------------------------+
+|  sur cette machine   |
+|                      |---------------------+                        +------------------------+
++----------------------+                     |                        |                        |
+            |       |                        +---------------------->>|  client1.athome.priv   |
+            |       |                                                 |                        |
+            +--<<---+                                                 +------------------------+
+    Le « serveur ansible » peut très bien avoir lui-même
+    comme « client ansible » (ce sera le cas dans ce tutoriel).
+```
+
+### Hypothèses pour ce réseau minimal
 
 On supposera que :
 
@@ -120,16 +138,21 @@ On supposera que :
    python est installé.
 
 
-## Installation et échanges des clés SSH
+### Installation et échanges des clés `ssh`
 
-C'est sur se3 qu'on installe Ansible :
+#### Installation d'Ansible
+
+C'est sur se3 (mais ce pourrait être une autre machine du réseau) qu'on installe Ansible :
 
 ```sh
 # Oui, c'est curieux il faut mettre "trusty" alors qu'on est sur Jessie.
 # C'est marqué dans la doc Ansible :
 #
 #   http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-apt-debian
-# Cependant, en utilisant le dépôt jessie-backports, on peut obtenir une version plus récente, même si ce n'est pas la dernière version comme avec le dépôt ci-dessous…
+#
+# Cependant, en utilisant le dépôt jessie-backports,
+# on peut obtenir une version qui pourrait convenir (à confirmer),
+# même si ce n'est pas la dernière version comme avec le dépôt ci-dessous…
 #
 echo deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main > /etc/apt/sources.list.d/ansible.list
 
@@ -138,6 +161,8 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
 apt-get update && apt-get install ansible
 ```
+
+#### Échanges des clés `ssh`
 
 Il faut créer une paire de clés SSH sur se3 et échanger la clé
 publique sur tous les « clients » ansible. En clair, sur se3,
@@ -161,7 +186,7 @@ les 3 fqdn sans mot de passe.
 
 
 
-## Mise en place du fichier « d'inventaire » des clients ansible
+### Mise en place du fichier « d'inventaire » des clients ansible
 
 Il faut éditer le fichier `/etc/ansible/hosts` et y placer
 nos clients.
@@ -817,5 +842,16 @@ ansible-playbook /etc/ansible/linuxclients.yaml --diff
 # Le playbook est lancé ici seulement sur le client client1.athome.priv.
 ansible-playbook /etc/ansible/linuxclients.yaml --diff --extra-vars target='client1.athome.priv'
 ```
+
+## Exercices
+
+Voici quelques exercices qui pourront vous être utiles pour la gestion de clients-Linux.
+
+### Exercice 1
+
+Vous avez quelques machines sur lesquelles sont installées des systèmes GNU/Linux : écrire un Playbook pour les mettre à jour.
+
+**Solution :** avant de regarder [une solution](), cherchez un peu…
+
 
 
