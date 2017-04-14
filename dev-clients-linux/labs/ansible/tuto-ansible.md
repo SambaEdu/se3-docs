@@ -17,7 +17,13 @@
         * [Informations sur les clients](#informations-sur-les-clients)
         * [Une commande shell sur les clients](#une-commande-shell-sur-les-clients)
 * [Un petit playbook simple comme premier exemple](#un-petit-playbook-simple-comme-premier-exemple)
+    * [Un playbook, qu'est-ce que c'est ?](#un-playbook-quest-ce-que-cest--)
+    * [Un playbook pour comprendre le principe](#un-playbook-pour-comprendre-le-principe)
+    * [Utilisons notre playbook](#utilisons-notre-playbook)
 * [La bonne pratique des rôles pour l'organisation des fichiers](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers)
+    * [Un rôle, qu'est-ce que c'est ?](#un-rôle-quest-ce-que-cest--)
+    * [Le répertoire `/etc/ansible/`](#le-répertoire-etcansible)
+    * [Création du rôle ntp](#création-du-rôle-ntp)
 * [Mais comment on l'utilise notre rôle ntp maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
 * [Utilisation des variables d'hôtes et de groupes](#utilisation-des-variables-dhôtes-et-de-groupes)
 * [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul-client)
@@ -257,13 +263,17 @@ ansible all -a 'ls -al --color /tmp'
 **Attention :** ceci est un exemple simple pour commencer
 et comprendre les principes de base mais il ne correspond pas
 aux bonnes pratiques au niveau de l'organisation des fichiers ;
-la bonne pratique est d'utiliser des « rôles » ansible,
-voir plus bas.
+la bonne pratique est d'[utiliser des « rôles » ansible](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers).
 
-Un playbook est un fichier YAML utilisé par Ansible pour
+### Un playbook, qu'est-ce que c'est ?
+
+Un **playbook** est un fichier YAML utilisé par Ansible pour
 mettre en place des configurations sur un ou plusieurs clients.
 
-Créons ce fichier `~/myplaybook.yaml` :
+
+### Un playbook pour comprendre le principe
+
+Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
 
 ```yaml
 ---
@@ -356,6 +366,8 @@ restrict ::1
 {% endif %}
 ```
 
+### Utilisons notre playbook
+
 On va pouvoir lancer notre playbook avec la commande :
 
 ```sh
@@ -395,16 +407,22 @@ Et dans le playbook mettre quelque chose comme ça :
 ```
 
 
-
-
 ## La bonne pratique des rôles pour l'organisation des fichiers
+
+### Un rôle, qu'est-ce que c'est ?
 
 L'idée des rôles c'est de rendre un playbook autonome et
 générique, comme un « module » ou une sorte de
 lib, afin qu'il puisse être utilisable ensuite dans d'autres
 playbooks avec un système « d'include ».
 
-Par défaut, le répertoire `/etc/ansible/` contient ceci :
+Un rôle est donc un module perso.
+
+
+### Le répertoire `/etc/ansible/`
+
+Par défaut (lors de l'installation du paquet Ansible),
+le répertoire `/etc/ansible/` contient ceci :
 
 ```
 /etc/ansible/
@@ -413,10 +431,14 @@ Par défaut, le répertoire `/etc/ansible/` contient ceci :
 └── roles/
 ```
 
+
+### Création du rôle ntp
+
 On va utiliser le répertoire `/etc/ansible/roles/` pour stocker
 notre playbook de l'exemple précédent (qui configure ntp) sous
-la forme d'un rôle qu'on appellera `ntp`. On va créer cette
-arborescence :
+la forme d'un rôle qu'on appellera `ntp`.
+
+On va créer cette arborescence :
 
 ```cfg
 # On va retrouver, éclaté dans plusieurs fichiers dans
