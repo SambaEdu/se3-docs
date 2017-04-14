@@ -8,7 +8,7 @@ Vous trouverez ci-dessous des propositions de solutions aux exercices du tutorie
 Vous avez quelques machines sur lesquelles sont installées des systèmes GNU/Linux : écrire un Playbook pour les mettre à jour.
 
 **Une solution :**  
-Voici le contenu d'un playbook ansible répondant au problème.
+Voici le contenu d'un playbook ansible `update.yaml` répondant au problème.
 ```yaml
 ---
 - hosts: maison
