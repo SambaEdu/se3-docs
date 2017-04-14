@@ -890,7 +890,6 @@ Voici quelques exercices qui pourront vous être utiles pour la gestion de clien
 
 Vous avez quelques machines sur lesquelles sont installées des systèmes GNU/Linux : écrire un Playbook pour les mettre à jour.
 
-**Solution :** avant de regarder [une solution](solutions.md#solutions-des-exercices#exercice-1), cherchez un peu…
-
+**Solution :** avant de regarder [une solution](solutions.md#exercice-1), cherchez un peu…
 
 
