@@ -12,6 +12,10 @@
         * [Installation d'Ansible](#installation-dansible)
         * [Échanges des clés `ssh`](#Échanges-des-clés-ssh)
     * [Mise en place du fichier « d'inventaire » des clients ansible](#mise-en-place-du-fichier--dinventaire--des-clients-ansible)
+    * [Vérification de bon fonctionnement](#vérification-de-bon-fonctionnement)
+        * [Envoyer un Ping sur les clients](#envoyer-un-ping-sur-les-clients)
+        * [Informations sur les clients](#informations-sur-les-clients)
+        * [Une commande shell sur les clients](#une-commande-shell-sur-les-clients)
 * [Un petit playbook simple comme premier exemple](#un-petit-playbook-simple-comme-premier-exemple)
 * [La bonne pratique des rôles pour l'organisation des fichiers](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers)
 * [Mais comment on l'utilise notre rôle ntp maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
@@ -204,7 +208,12 @@ se3.athome.priv
 client[1:2].athome.priv
 ```
 
+### Vérification de bon fonctionnement
+
 On peut maintenant vérifier que ça fonctionne bien avec :
+
+
+#### Envoyer un Ping sur les clients
 
 ```sh
 # "all" est un groupe pré-défini qui contient tous les clients.
@@ -213,7 +222,12 @@ ansible all -m ping
 ansible linuxclients -m ping
 
 ansible 'client1*' -m ping
+```
 
+
+#### Informations sur les clients
+
+```sh
 # On peut afficher des informations sur un ou plusieurs clients.
 #
 # Toutes les variables affichées par cette commande seront
@@ -226,6 +240,9 @@ ansible 'client1*' -m ping
 # On utilisera plus loin cette variable.
 ansible 'client1.athome.priv' -m setup
 ```
+
+
+#### Une commande shell sur les clients
 
 Et, au passage, on est en mesure d'exécuter n'importe quelle commande shell
 sur un ou plusieurs clients. Par exemple :
