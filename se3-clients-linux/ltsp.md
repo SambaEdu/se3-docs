@@ -33,7 +33,7 @@ de clients lourds : tout PC ayant un boot PXE et relié au réseau pédagogique 
 * le serveur Se3 **n'a pas** besoin d'être très puissant car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
 et ne **gérer que des clients lourds** (fat client) : pour pouvoir gérer aussi des clients légers (commme des Raspberry avec le projet Berryterminal), 
 il faudra installer un `serveur d'applications ltsp` **puissant**, en plus du se3. Ce dernier ne devra pas nécessairement tourner 
-sous Debian Wheezy : il pourra tourner sous `Debian Jessie` (ou sur Ubuntu Xenial ?).
+sous Debian Wheezy : il pourra tourner sous `Debian Jessie` (ou Stretch ? ou sur Ubuntu Xenial ?).
 On pourra se reporter à l'article suivant pour plus de détail (paragraphe `Mise en place d'un cluster de serveurs LTSP`) :
 
 [Wiki de la DANE Versailles LTSP sur Debian Wheezy](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Wheezy%29_dans_un_r%C3%A9seau_Se3)
@@ -79,16 +79,21 @@ une `agrégation de liens` (en mode balance-tlb ou en mode balance-alb).
 chmod u+x /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
 ```
 
-ou, pour un bureau Debian Stretch Mate :
-
-```sh
-chmod u+x /home/netlogon/clients-linux/ltsp/Stretch_LTSP_sur_SE3_wheezy.sh
-```
-
 ou, pour un bureau Ubuntu Xenial Mate :
 
 ```sh
 chmod u+x /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
+```
+
+ou, pour un bureau Debian Stretch Mate, télécharger le script suivant :
+
+```sh
+wget https://raw.githubusercontent.com/SambaEdu/se3-clients-linux/master/src/home/netlogon/clients-linux/ltsp/Stretch_LTSP_sur_SE3_wheezy.sh
+```
+
+Puis :
+```sh
+chmod u+x Stretch_LTSP_sur_SE3_wheezy.sh
 ```
 
 * Puis l'exécuter :
@@ -96,14 +101,14 @@ chmod u+x /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
 /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
 ```
 
-ou, pour un bureau Debian Stretch Mate :
-```sh
-/home/netlogon/clients-linux/ltsp/Stretch_LTSP_sur_SE3_wheezy.sh
-```
-
 ou, pour un bureau Ubuntu Xenial Mate :
 ```sh
 /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
+```
+
+ou, pour un bureau Debian Stretch Mate :
+```sh
+./Stretch_LTSP_sur_SE3_wheezy.sh
 ```
 
 Pendant l'installation (qui dure environ une heure), il est demandé, dans l'ordre :
@@ -117,7 +122,7 @@ Avec `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la 
 ## Que fait le script d'installation ?
 
 Le script d'installation précédent va seulement :
-* créer un répertoire `/opt/ltsp/i386` qui contiendra l'environnement (le chroot) des clients lourds Debian Jessie ou Ubuntu Xenial.
+* créer un répertoire `/opt/ltsp/i386` qui contiendra l'environnement (le chroot) des clients lourds Debian ou Ubuntu Xenial.
 * installer et configurer les services `NFS et NBD` qui mettra à disposition des clients lourds leur environnement i386.
 * créer un répertoire `/tftpboot/ltsp` contenant l'initrd et le kernel pour le boot PXE des clients lourds.
 * ajouter une entrée au menu PXE `/tftpboot/pxelinux.cfg/default` afin qu'un utilisateur puisse faire démarrer un PC en client lourd LTSP.
@@ -127,7 +132,7 @@ et `le montage automatique de deux partages Samba du se3 (Docs et Classes)`.
 de restaurer le chroot des clients lourds en 5 minutes, en cas de problèmes lors de son administration.
 
 Seul **un service supplémentaire** va être lancé sur le serveur se3, ce sera :
-* le service nfs si c'est le bureau Debian Jessie Mate qui est installé dans l'environnement des clients lourds.
+* le service nfs si c'est le bureau Debian Mate qui est installé dans l'environnement des clients lourds.
 * le service nbd si c'est le bureau Ubuntu Xenial Mate qui est installé dans l'environnement des clients lourds.
 
 L'environnement des clients lourds est configuré pour être au maximum **autonome** et **impacter au minimum le serveur se3**. 
