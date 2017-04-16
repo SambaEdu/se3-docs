@@ -10,9 +10,13 @@ grâce au réseau ethernet et sans avoir besoin de son disque dur.
 Le bureau des clients lourds retenu est Mate, pour sa légereté, et pourra être sous la distribution :
 * soit `Debian Jessie`.
 * soit `Ubuntu Xenial`.
+* soit `Debian Stretch`.
 
 L'environnement des clients lourds étant isolé dans un `chroot`, il est ainsi possible de faire tourner les clients lourds avec les dernières versions 
-de Debian (Jessie) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
+de Debian (Jessie ou Stretch) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
+
+A noter : la version Stretch de Debian ne prend plus en charge les architectures i486 et i586. Les PCs du réseau ayant cette architecture
+matérielle ne pourront donc pas démarrer en tant que client lourd ltsp.
 
 Le démarrage d'un PC en `mode client lourd` peut :
 * être laissé **au choix de l'utilisateur** via le menu PXE du se3 qui apparaît pendant quelques secondes au démarrage : 
@@ -75,6 +79,12 @@ une `agrégation de liens` (en mode balance-tlb ou en mode balance-alb).
 chmod u+x /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
 ```
 
+ou, pour un bureau Debian Stretch Mate :
+
+```sh
+chmod u+x /home/netlogon/clients-linux/ltsp/Stretch_LTSP_sur_SE3_wheezy.sh
+```
+
 ou, pour un bureau Ubuntu Xenial Mate :
 
 ```sh
@@ -84,6 +94,11 @@ chmod u+x /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
 * Puis l'exécuter :
 ```sh
 /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
+```
+
+ou, pour un bureau Debian Stretch Mate :
+```sh
+/home/netlogon/clients-linux/ltsp/Stretch_LTSP_sur_SE3_wheezy.sh
 ```
 
 ou, pour un bureau Ubuntu Xenial Mate :
