@@ -1,7 +1,7 @@
-# Petit tutoriel sur Ansible
+# Petit tutoriel sur `Ansible`
 
 * [Introduction](#introduction)
-    * [Le logiciel Ansible](#le-logiciel-ansible)
+    * [Le logiciel `Ansible`](#le-logiciel-ansible)
     * [Pré-requis](#pré-requis)
     * [Remarque importante sur la notion de clients/serveur](#remarque-importante-sur-la-notion-de-clientsserveur)
     * [Pourquoi ça peut être intéressant pour `SambaÉdu` ?](#pourquoi-ça-peut-être-intéressant-pour-sambaÉdu-)
@@ -19,6 +19,7 @@
 * [Un petit playbook simple comme premier exemple](#un-petit-playbook-simple-comme-premier-exemple)
     * [Un playbook, qu'est-ce que c'est ?](#un-playbook-quest-ce-que-cest-)
     * [Un playbook pour comprendre le principe](#un-playbook-pour-comprendre-le-principe)
+    * [Les modules `Ansible`](#les-modules-ansible)
     * [Utilisons notre playbook](#utilisons-notre-playbook)
 * [La bonne pratique des rôles pour l'organisation des fichiers](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers)
     * [Un rôle, qu'est-ce que c'est ?](#un-rôle-quest-ce-que-cest-)
@@ -34,12 +35,11 @@
 
 ## Introduction
 
-### Le logiciel Ansible
+### Le logiciel `Ansible`
 
-Ansible est un **logiciel de déploiement de
-configurations**.
+`Ansible` est un **logiciel de déploiement de configurations**.
 
-On installe Ansible sur une machine qui
+On installe `Ansible` sur une machine qui
 fera office de « *serveur ansible* » et avec une commande
 (accompagnée de code ansible), on déploie de la configuration
 sur un ensemble de machines qu'on peut appeler du coup des
@@ -49,25 +49,30 @@ sur un ensemble de machines qu'on peut appeler du coup des
 
 Au niveau installation il faut :
 
-* installer Ansible sur une machine qui fera office de « serveur ansible » (normal).
-* installer un serveur SSH et Python sur les machines du réseau qui seront alors des « clients ansible » (ce qui est assez faible comme contrainte).
+* installer `Ansible` sur une machine qui fera office de « serveur ansible » (normal).
+* installer un serveur `SSH` et `Python` sur les machines du réseau qui seront alors des « clients ansible » (ce qui est assez faible comme contrainte).
 
 ### Remarque importante sur la notion de clients/serveur
 
 Les appellations de « serveur ansible » et « clients ansible »
-sont incorrectes d'un point de vue réseau. En effet, d'un
-point de vue réseau, un serveur est une application qui tourne en
+sont incorrectes d'un point de vue réseau.
+
+En effet, d'un point de vue réseau,
+un serveur est une application qui tourne en
 tant que service et qui écoute sur un port, comme par
-exemple Apache2 qui est un service qui écoute sur le port 80.
-Ici ce n'est pas le cas : Ansible n'est pas un service et
+exemple `Apache2` qui est un service qui écoute sur le port 80.
+Ici ce n'est pas le cas : `Ansible` n'est pas un service et
 donc il n'écoute a fortiori sur aucun port. C'est un
 programme qu'on lance à la demande (sur le « serveur ansible »)
-comme on pourrait lancer un wget en ligne de commandes par
-exemple. Mieux, en vérité, le programme ansible est un
+comme on pourrait lancer un wget en ligne de commandes par exemple.
+
+Mieux, en vérité, le programme `Ansible` est un
 client d'un point de vue réseau : en effet lorsqu'on lance
-ansible sur le « serveur ansible », le programme ansible
-contacte les « clients ansible » en SSH pour déployer les
-configurations. Donc en vérité, d'un point de vue réseau :
+`Ansible` sur le « serveur ansible », le programme `Ansible`
+contacte les « clients ansible » en `SSH` pour déployer les
+configurations.
+
+Donc, en vérité, d'un point de vue réseau :
 
 * le « serveur ansible » est un client SSH,
 * les « clients ansible » sont des serveurs SSH.
@@ -83,15 +88,15 @@ pratiques pour signifier de qui on parle.
 
 On peut imaginer que ça puisse être très utile dans le
 management des clients-Linux où le serveur `SambaÉdu` serait
-le serveur Ansible et les clients-Linux seraient les clients
-Ansible. L'intégration (qui est typiquement une mise en
+le serveur ansible et les clients-Linux seraient les clients
+ansible. L'intégration (qui est typiquement une mise en
 place de configuration) pourrait par exemple se faire via
-Ansible.
+`Ansible`.
 
-**Remarque :** domaine inconnu pour moi, mais il semble que Ansible puisse
-aussi manager du Windows.
+**Remarque :** domaine inconnu pour moi, mais il semble que `Ansible` puisse
+aussi manager du `Windows`.
 
-Ansible pourrait sans doute aussi s'avérer utile dans la
+`Ansible` pourrait sans doute aussi s'avérer utile dans la
 gestion de configuration du serveur `SambaÉdu` lui-même.
 L'installation complète d'un serveur `SambaÉdu` pourrait très
 bien se résumer à l'installation de l'OS Debian puis à
@@ -150,9 +155,11 @@ On supposera que :
 
 ### Installation et échanges des clés `ssh`
 
-#### Installation d'Ansible
+#### Installation d'`Ansible`
 
-C'est sur le serveur `se3` (mais ce pourrait être une autre machine du réseau) qu'on installe Ansible :
+C'est sur le serveur `se3`
+(mais ce pourrait être une autre machine du réseau)
+qu'on installe `Ansible` :
 
 ```sh
 # Oui, c'est curieux il faut mettre "trusty" alors qu'on est sur Jessie.
@@ -174,10 +181,10 @@ apt-get update && apt-get install ansible
 
 #### Échanges des clés `ssh`
 
-Il faut créer une paire de clés SSH sur le serveur`se3` et échanger la clé
+Il faut créer une paire de clés `SSH` sur le serveur`se3` et échanger la clé
 publique sur tous les « clients » ansible. En clair, sur le serveur`se3`,
-il faut être en mesure de se connecter sur les « clients »
-ansible de manière non-interactive.
+il faut être en mesure de se connecter sur les « clients » ansible
+de manière non-interactive.
 
 
 ```sh
@@ -201,7 +208,9 @@ les 3 fqdn sans mot de passe.
 Il faut éditer le fichier `/etc/ansible/hosts` et y placer
 nos clients.
 
-Entre crochets, on définit des groupes de clients. Par exemple le groupe `sambaedu` qui ne contient que le le serveur`se3` et le groupe `linuxclients` qui contient les clients-Linux.
+Entre crochets, on définit des groupes de clients.
+Par exemple le groupe `sambaedu` qui ne contient que le le serveur`se3`
+et le groupe `linuxclients` qui contient les clients-Linux.
 
 ```ini
 # Une adresse IP est possible à la place d'un fqdn.
@@ -216,7 +225,7 @@ client[1:2].athome.priv
 
 ### Vérification de bon fonctionnement
 
-On peut maintenant vérifier que ça fonctionne bien avec :
+On peut maintenant vérifier que ça fonctionne bien avec les actions suivantes :
 
 
 #### Envoyer un Ping sur les clients
@@ -267,7 +276,7 @@ la bonne pratique est d'[utiliser des « rôles » ansible](#la-bonne-pratique-d
 
 ### Un playbook, qu'est-ce que c'est ?
 
-Un **playbook** est un fichier YAML utilisé par Ansible pour
+Un **playbook** est un fichier `YAML` utilisé par Ansible pour
 mettre en place des configurations sur un ou plusieurs clients.
 
 
@@ -276,7 +285,7 @@ mettre en place des configurations sur un ou plusieurs clients.
 Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
 
 ```yaml
----
+--- # <=================== Un fichier `yaml` commence toujours par 3 tirets.
 # Cette entrée ici (avec le tiret en début de ligne) marque
 # le début d'un « play » dans le langage ansible, ie un
 # machin qui va configurer des trucs sur un ensemble de
@@ -293,14 +302,14 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
       - '2.debian.pool.ntp.org'
     admin_email: 'flaf@domain.tld' # Variable dont l'existence est artificielle ici, c'est pour l'exemple.
   remote_user: root
-  tasks: # <======================== Les tasks sont toujours appliquées dans l'ordre où elles écrites.
+  tasks: # <============== Les tasks sont toujours appliquées dans l'ordre où elles écrites.
     - name: ensure NTP installation
       apt:
         name: ntp
         state: latest
     - name: write NTP config file /etc/ntp.conf
       template:
-        src: ntp.conf.j2 # <== Ici on utilise un template Jinja2 (la syntaxe est très simple).
+        src: ntp.conf.j2 # <== Ici on utilise un template `Jinja2` (la syntaxe est très simple).
         dest: /etc/ntp.conf
         owner: root
         group: root
@@ -319,16 +328,22 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
         state: restarted
 ```
 
+
+### Les modules `Ansible`
+
 `template`, `service`, `apt` etc. s'appellent des **modules
 ansibles**. Ce sont des mini-programmes pour exécuter des
-actions sur les clients Ansible. Chaque module admet des
-options (par exemple `mode` est une option du module ansible
-`template`) et tout cela est documenté. Ansible possède
-toute une panoplie de modules dont on peut voir la liste
-[ici](http://docs.ansible.com/ansible/list_of_all_modules.html)
-(il existe par exemple un module `mount` pour assurer un montage,
-un autre module `shell` pour exécuter une commande shell etc. etc).
+actions sur les clients Ansible.
 
+Chaque module admet des options ;
+par exemple `mode` est une option du module ansible `template`.
+Et tout cela est documenté.
+
+Ansible possède toute
+[une panoplie de modules](http://docs.ansible.com/ansible/list_of_all_modules.html)
+mise à la disposition des utilisateurs de Ansible
+(il existe par exemple un module `mount` pour assurer un montage,
+un autre module `shell` pour exécuter une commande shell, etc.).
 
 Et voici notre fichier `~/ntp.conf.j2` qu'il faut créer au
 même en endroit que notre playbook car on a mis le chemin
@@ -362,9 +377,13 @@ restrict ::1
 {% elif ansible_distribution_release == 'xenial' %}
 # Configuration spécifique si on est sur une Xenial…
 {% else %}
-# Configuration par defaut…
+# Configuration si on n'est ni sur une Xenial, ni sur une Jessie…
 {% endif %}
+# Configuration par defaut dans tous les cas…
 ```
+
+**Remarque :** ce fichier de configuration a été copié à partir du fichier de configuration **ntp.conf** du paquet `ntp` ; certaines parties ont été adaptées pour tenir compte des spécificités de notre réseau (par exemple la liste des serveurs de temps).
+
 
 ### Utilisons notre playbook
 
