@@ -20,12 +20,19 @@
     * [Un playbook, qu'est-ce que c'est ?](#un-playbook-quest-ce-que-cest-)
     * [Un playbook pour comprendre le principe](#un-playbook-pour-comprendre-le-principe)
     * [Les modules `Ansible`](#les-modules-ansible)
+    * [Un fichier de configuration `template`](#un-fichier-de-configuration-template)
     * [Utilisons notre playbook](#utilisons-notre-playbook)
 * [La bonne pratique des rôles pour l'organisation des fichiers](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers)
     * [Un rôle, qu'est-ce que c'est ?](#un-rôle-quest-ce-que-cest-)
     * [Le répertoire `/etc/ansible/`](#le-répertoire-etcansible)
-    * [Création du rôle ntp](#création-du-rôle-ntp)
-* [Mais comment on l'utilise notre rôle ntp maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
+    * [Création du rôle `ntp`](#création-du-rôle-ntp)
+        * [Création de l'arborescence pour le rôle `ntp`](#création-de-larborescence-pour-le-rôle-ntp)
+        * [Création de la clé `tasks` du rôle `ntp`](#création-de-la-clé-tasks-du-rôle-ntp)
+        * [Création du fichier de `template` du rôle `ntp`](#création-du-fichier-de-template-du-rôle-ntp)
+        * [Création de la clé `handlers` du rôle `ntp`](#création-de-la-clé-handlers-du-rôle-ntp)
+        * [Les valeurs par défaut de variables du rôle `ntp`](#les-valeurs-par-défaut-de-variables-du-rôle-ntp)
+        * [Quelques précisions sur le rôle `ntp`](#quelques-précisions-sur-le-rôle-ntp)
+    * [Mais comment on utilise notre rôle `ntp` maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
 * [Utilisation des variables d'hôtes et de groupes](#utilisation-des-variables-dhôtes-et-de-groupes)
 * [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul-client)
 * [Exercices](#exercices)
@@ -429,7 +436,8 @@ On va pouvoir lancer notre playbook *myplaybook.yaml* avec la commande :
 ansible-playbook ./myplaybook.yaml --diff
 ```
 
-
+Vous pourrez ensuite vérifier que les clients ansible ont été configurés
+pour que leur base de temps soit le serveur `se3`.
 
 
 ## La bonne pratique des rôles pour l'organisation des fichiers
@@ -457,7 +465,9 @@ le répertoire `/etc/ansible/` contient ceci :
 ```
 
 
-### Création du rôle ntp
+### Création du rôle `ntp`
+
+#### Création de l'arborescence pour le rôle `ntp`
 
 On va utiliser le répertoire `/etc/ansible/roles/` pour stocker
 notre playbook de l'exemple précédent (qui configure ntp) sous
@@ -497,6 +507,9 @@ mkdir -p /etc/ansible/roles/ntp/templates/
 touch    /etc/ansible/roles/ntp/templates/ntp.conf.j2
 ```
 
+
+#### Création de la clé `tasks` du rôle `ntp`
+
 Voici le contenu du fichier `/etc/ansible/roles/ntp/tasks/main.yaml` :
 
 ```yaml
@@ -522,6 +535,9 @@ Voici le contenu du fichier `/etc/ansible/roles/ntp/tasks/main.yaml` :
     state: started
     enabled: yes
 ```
+
+
+#### Création du fichier de `template` du rôle `ntp`
 
 Le contenu de notre template `/etc/ansible/roles/ntp/templates/ntp.conf.j2`
 va être légèrement modifié car une bonne pratique dans un
@@ -567,6 +583,9 @@ restrict ::1
 {% endif %}
 ```
 
+
+#### Création de la clé `handlers` du rôle `ntp`
+
 Pas de surprises pour le fichier `/etc/ansible/roles/ntp/handlers/main.yaml` :
 
 ```yaml
@@ -577,6 +596,9 @@ Pas de surprises pour le fichier `/etc/ansible/roles/ntp/handlers/main.yaml` :
     name: ntp
     state: restarted
 ```
+
+
+#### Les valeurs par défaut de variables du rôle `ntp`
 
 Il nous reste le fichier `/etc/ansible/roles/ntp/defaults/main.yaml`.
 Il sert à définir des valeurs par défaut pertinentes pour
@@ -603,6 +625,9 @@ ntp_servers:
 #
 #ntp_admin_email: 'foo@bar.tld'
 ```
+
+
+#### Quelques précisions sur le rôle `ntp`
 
 Et voilà, on a créé notre rôle ansible `ntp`.
 
@@ -634,11 +659,11 @@ tout en évitant la duplication de code ansible.
 ```
 
 
-## Mais comment on utilise notre rôle ntp maintenant ?
+### Mais comment on utilise notre rôle `ntp` maintenant ?
 
 Et bien, avec un playbook qui, comme on va le voir, va se retrouver
 très réduit en taille, l'essentiel du code étant *encapsulé* dans
-notre rôle (ici on n''a qu'un rôle mais, dans la pratique, un playbook
+notre rôle (ici on n'a qu'un rôle mais, dans la pratique, un playbook
 appliquera toute une série de rôles).
 
 On va créer nos playbooks à la racine du répertoire `/etc/ansible/`
