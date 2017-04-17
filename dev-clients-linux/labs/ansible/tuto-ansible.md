@@ -34,6 +34,11 @@
         * [Quelques précisions sur le rôle `ntp`](#quelques-précisions-sur-le-rôle-ntp)
     * [Mais comment on utilise notre rôle `ntp` maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
 * [Utilisation des variables d'hôtes et de groupes](#utilisation-des-variables-dhôtes-et-de-groupes)
+    * [La bonne pratique pour les variables](#la-bonne-pratique-pour-les-variables)
+    * [Complément de l'arborescence](#complément-de-larborescence)
+    * [Les variables pour le rôle `ntp`](#les-variables-pour-le-rôle-ntp)
+    * [Abandon de la clé vars pour le rôle `ntp`](#abandon-de-la-clé-vars-pour-le-rôle-ntp)
+    * [Utilisation des playbooks](#utilisation-des-playbooks)
 * [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul-client)
 * [Exercices](#exercices)
     * [Exercice 1](#exercice-1)
@@ -738,13 +743,17 @@ ansible linuxclients -a 'ntpq -pn4'
 
 ## Utilisation des variables d'hôtes et de groupes
 
+### La bonne pratique pour les variables
+
 En fait, mettre les variables directement dans les playbooks n'est
-pas non plus une bonne pratique. On voit, par exemple, que la valeur
+pas non plus une bonne pratique.
+
+On voit, par exemple, que la valeur
 de la variable `ntp_admin_email` est présente à deux endroits
 différents (la duplication de données, *c'est le mal*).
 
-On va utiliser les variables de groupes qui sont définies dans
-des fichiers YAML (encore et toujours) dans des fichiers de
+On va utiliser les **variables de groupes** qui sont définies dans
+des fichiers YAML (encore et toujours), fichiers de
 la forme :
 
 ```cfg
@@ -753,13 +762,16 @@ la forme :
 /etc/ansible/group_vars/<non-du-groupe>.yaml
 ```
 
-On peut aussi définir des variables pour un hôte en particulier
+On peut aussi définir des **variables pour un hôte en particulier**
 avec des fichiers de la forme :
 
 ```cfg
 # Le nom de l'hôte tel qu'indiqué dans le fichier /etc/ansible/hosts.
 /etc/ansible/host_vars/<non-de-l-hôte>.yaml
 ```
+
+
+### Complément de l'arborescence
 
 Il faut d'abord créer les fichiers et répertoires qui n'existent
 pas par défaut :
@@ -791,6 +803,9 @@ On a alors :
 └── sambaedu.yaml
 ```
 
+
+### Les variables pour le rôle `ntp`
+
 Dans le fichier `/etc/ansible/group_vars/all.yaml`, on va
 définir des variables suivantes :
 
@@ -814,7 +829,9 @@ ntp_admin_email: '{{ admin_email }}'
 En revanche, la variable `ntp_servers` n'est pas encore définie.
 On veut que cela soit les serveurs NTP du pool Debian pour le serveur`se3` mais que
 ce soit l'IP du se3 pour client1 et client2 (et pour tous les
-clients-Linux en somme). Du coup, on a :
+clients-Linux en somme).
+
+Du coup, on a, pour le fichier `/etc/ansible/group_vars/sambaedu.yaml` :
 
 ```yaml
 ---
@@ -824,9 +841,11 @@ ntp_servers:
   - '2.debian.pool.ntp.org'
 ```
 
-pour le fichier `/etc/ansible/group_vars/sambaedu.yaml` (en fait
+En fait,
 on pourrait même ne rien mettre car la valeur par défaut du
-rôle `ntp` nous conviendrait parfaitement) et enfin pour le
+rôle `ntp` nous conviendrait parfaitement.
+
+Et enfin pour le
 fichier `/etc/ansible/group_vars/linuxclients.yaml` :
 
 ```yaml
@@ -837,6 +856,9 @@ fichier `/etc/ansible/group_vars/linuxclients.yaml` :
 ntp_servers:
   - '{{ sambaedu_ip }}'
 ```
+
+
+### Abandon de la clé vars pour le rôle `ntp`
 
 On peut alors rééditer nos playbooks car nous n'avons plus
 besoin du tout de la clé `vars`. On peut se contenter de :
@@ -860,6 +882,9 @@ Dans notre exemple simpliste, les deux playbooks contiennent
 les mêmes rôles, mais on peut imaginer que, dans le cas de
 `sambaedu`, il y aura des rôles supplémentaires propres au serveur `SambaÉdu` qu'on
 ne retrouvera pas dans le playbook des clients-Linux.
+
+
+### Utilisation des playbooks
 
 On peut à nouveau lancer nos playbook, normalement on devrait
 avoir le résultat souhaité :
