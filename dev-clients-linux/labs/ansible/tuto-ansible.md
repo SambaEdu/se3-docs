@@ -269,11 +269,6 @@ ansible all -a 'ls -al --color /tmp'
 
 ## Un petit playbook simple comme premier exemple
 
-**Attention :** ceci est un exemple simple pour commencer
-et comprendre les principes de base mais il ne correspond pas
-aux bonnes pratiques au niveau de l'organisation des fichiers ;
-la bonne pratique est d'[utiliser des « rôles » ansible](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers).
-
 ### Un playbook, qu'est-ce que c'est ?
 
 Un **playbook** est un fichier `YAML` utilisé par Ansible pour
@@ -281,6 +276,11 @@ mettre en place des configurations sur un ou plusieurs clients.
 
 
 ### Un playbook pour comprendre le principe
+
+**Attention :** ceci est un exemple simple pour commencer
+et comprendre les principes de base mais il ne correspond pas
+aux bonnes pratiques au niveau de l'organisation des fichiers ;
+la bonne pratique est d'[utiliser des « rôles » ansible](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers).
 
 Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
 
@@ -333,21 +333,25 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
 
 `template`, `service`, `apt` etc. s'appellent des **modules
 ansibles**. Ce sont des mini-programmes pour exécuter des
-actions sur les clients Ansible.
+actions sur les clients ansible.
 
 Chaque module admet des options ;
 par exemple `mode` est une option du module ansible `template`.
-Et tout cela est documenté.
 
-Ansible possède toute
+Et tout cela est documenté ; ainsi vous pourrez consulter [la documentation pour le module `template`](http://docs.ansible.com/ansible/template_module.html).
+
+`Ansible` possède toute
 [une panoplie de modules](http://docs.ansible.com/ansible/list_of_all_modules.html)
 mise à la disposition des utilisateurs de Ansible
 (il existe par exemple un module `mount` pour assurer un montage,
 un autre module `shell` pour exécuter une commande shell, etc.).
 
-Et voici notre fichier `~/ntp.conf.j2` qu'il faut créer au
-même en endroit que notre playbook car on a mis le chemin
-relatif `src: ntp.conf.j2` dans le playbook :
+
+### Un fichier de configuration `template`
+
+Et voici notre fichier `~/ntp.conf.j2`
+qu'il faut créer au même en endroit que notre playbook
+car on a mis le chemin relatif `src: ntp.conf.j2` dans le playbook :
 
 ```cfg
 # Ce fichier est managé par Ansible. Merci de ne pas
@@ -382,22 +386,11 @@ restrict ::1
 # Configuration par defaut dans tous les cas…
 ```
 
-**Remarque :** ce fichier de configuration a été copié à partir du fichier de configuration **ntp.conf** du paquet `ntp` ; certaines parties ont été adaptées pour tenir compte des spécificités de notre réseau (par exemple la liste des serveurs de temps).
+**Remarque 1 :** ce fichier de configuration a été copié à partir du fichier de configuration **ntp.conf** du paquet `ntp` ; certaines parties ont été adaptées pour tenir compte des spécificités de notre réseau (par exemple la liste des serveurs de temps avec un `{% for %}`).
 
-
-### Utilisons notre playbook
-
-On va pouvoir lancer notre playbook avec la commande :
-
-```sh
-# L'option --diff permet de voir les lignes supprimées/ajoutées losqu'un
-# fichier texte (un fichier de configuration) est modifié par ansible.
-ansible-playbook ./myplaybook.yaml --diff
-```
-
-**Remarque :** on peut donc adapter un template en fonction du
-client et de son OS par exemple (si c'est une Xenial ou une
-Jessie etc.) avec des `{% if %}` (entre autres). Mais si le template
+**Remarque 2 :** on peut donc adapter un template en fonction du
+client et de son `OS` par exemple (si c'est une Xenial ou une
+Jessie, etc.) avec des `{% if %}` (entre autres). Mais si le template
 devient trop complexe et illisible, alors il est plus sage de
 créer des fichiers templates différents, par exemple avec :
 
@@ -424,6 +417,19 @@ Et dans le playbook mettre quelque chose comme ça :
         - restart ntp
 # […]
 ```
+
+
+### Utilisons notre playbook
+
+On va pouvoir lancer notre playbook *myplaybook.yaml* avec la commande :
+
+```sh
+# L'option --diff permet de voir les lignes supprimées/ajoutées losqu'un
+# fichier texte (un fichier de configuration) est modifié par ansible.
+ansible-playbook ./myplaybook.yaml --diff
+```
+
+
 
 
 ## La bonne pratique des rôles pour l'organisation des fichiers
