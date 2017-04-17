@@ -4,7 +4,7 @@
     * [Le logiciel Ansible](#le-logiciel-ansible)
     * [Pré-requis](#pré-requis)
     * [Remarque importante sur la notion de clients/serveur](#remarque-importante-sur-la-notion-de-clientsserveur)
-    * [Pourquoi ça peut être intéressant pour SambaÉdu ?](#pourquoi-ça-peut-être-intéressant-pour-sambaÉdu-)
+    * [Pourquoi ça peut être intéressant pour `SambaÉdu` ?](#pourquoi-ça-peut-être-intéressant-pour-sambaÉdu-)
 * [Mise en place d'un petit laboratoire pour faire les manipulations](#mise-en-place-dun-petit-laboratoire-pour-faire-les-manipulations)
     * [Un réseau minimal](#un-réseau-minimal)
     * [Hypothèses pour ce réseau minimal](#hypothèses-pour-ce-réseau-minimal)
@@ -79,10 +79,10 @@ on déploie de la configuration) sont quand même bien
 pratiques pour signifier de qui on parle.
 
 
-### Pourquoi ça peut être intéressant pour SambaÉdu ?
+### Pourquoi ça peut être intéressant pour `SambaÉdu` ?
 
 On peut imaginer que ça puisse être très utile dans le
-management des clients-Linux où le serveur SambaÉdu serait
+management des clients-Linux où le serveur `SambaÉdu` serait
 le serveur Ansible et les clients-Linux seraient les clients
 Ansible. L'intégration (qui est typiquement une mise en
 place de configuration) pourrait par exemple se faire via
@@ -92,16 +92,16 @@ Ansible.
 aussi manager du Windows.
 
 Ansible pourrait sans doute aussi s'avérer utile dans la
-gestion de configuration du serveur SambaÉdu lui-même.
-L'installation complète d'un serveur SambaÉdu pourrait très
+gestion de configuration du serveur `SambaÉdu` lui-même.
+L'installation complète d'un serveur `SambaÉdu` pourrait très
 bien se résumer à l'installation de l'OS Debian puis à
 l'exécution d'un playbook ansible (c'est le nom qu'on donne
 à du code ansible) pour installer et configurer toute la
-couche SambaÉdu.
+couche `SambaÉdu`.
 
 Cela pourrait aussi être l'intermédiaire
 **unique** de l'interface d'administration Web du serveur
-SambaÉdu dès que la configuration du serveur est modifiée :
+`SambaÉdu` dès que la configuration du serveur est modifiée :
 une modification de la configuration du serveur via
 l'interface Web déclencherait automatiquement un playbook
 ansible.
@@ -142,7 +142,7 @@ Cela constitue un réseau minimal pour ce tutoriel :
 On supposera que :
 
 1. Quitte à mettre en place un serveur DNS ou alors en éditant
-   le fichier `/etc/hosts` de se3, l'hôte se3 sera capable de
+   le fichier `/etc/hosts` du serveur `se3`, l'hôte `se3` sera capable de
    résoudre correctement en adresse IP les fqdn ci-dessus.
 2. Sur les trois hôtes, un serveur ssh est en place et
    python est installé.
@@ -152,7 +152,7 @@ On supposera que :
 
 #### Installation d'Ansible
 
-C'est sur se3 (mais ce pourrait être une autre machine du réseau) qu'on installe Ansible :
+C'est sur le serveur `se3` (mais ce pourrait être une autre machine du réseau) qu'on installe Ansible :
 
 ```sh
 # Oui, c'est curieux il faut mettre "trusty" alors qu'on est sur Jessie.
@@ -174,8 +174,8 @@ apt-get update && apt-get install ansible
 
 #### Échanges des clés `ssh`
 
-Il faut créer une paire de clés SSH sur se3 et échanger la clé
-publique sur tous les « clients » ansible. En clair, sur se3,
+Il faut créer une paire de clés SSH sur le serveur`se3` et échanger la clé
+publique sur tous les « clients » ansible. En clair, sur le serveur`se3`,
 il faut être en mesure de se connecter sur les « clients »
 ansible de manière non-interactive.
 
@@ -191,7 +191,7 @@ ssh-copy-id root@client2.athome.priv
 ssh-copy-id root@se3.athome.priv
 ```
 
-Bien vérifier ensuite que, sur se3, on peut se « ssher » sur
+Bien vérifier ensuite que, sur le serveur`se3`, on peut se « ssher » sur
 les 3 fqdn sans mot de passe.
 
 
@@ -201,7 +201,7 @@ les 3 fqdn sans mot de passe.
 Il faut éditer le fichier `/etc/ansible/hosts` et y placer
 nos clients.
 
-Entre crochets, on définit des groupes de clients.
+Entre crochets, on définit des groupes de clients. Par exemple le groupe `sambaedu` qui ne contient que le le serveur`se3` et le groupe `linuxclients` qui contient les clients-Linux.
 
 ```ini
 # Une adresse IP est possible à la place d'un fqdn.
@@ -621,7 +621,7 @@ On va créer nos playbooks à la racine du répertoire `/etc/ansible/`
 
 Par exemple on va créer un playbook
 `sambaedu.yaml` qui s'appliquera au groupe `sambaedu` (qui
-ne contient que se3) comme ceci :
+ne contient que le serveur`se3`) comme ceci :
 
 ```sh
 touch /etc/ansible/sambaedu.yaml
@@ -642,7 +642,7 @@ Voici un exemple pour notre fichier `/etc/ansible/sambaedu.yaml` :
 
 ```yaml
 ---
-- hosts: sambaedu # Ici c'est le groupe "sambaedu" (réduit à un seul hôte).
+- hosts: sambaedu # Ici c'est le groupe `sambaedu` (réduit à un seul hôte).
   vars:
     # On pourrait laisser non définie la variable ntp_servers et c'est sa
     # valeur par défaut dans le rôle "ntp" qui serait utilisée. Par contre,
@@ -667,7 +667,7 @@ Créons également le playbook `/etc/ansible/linuxclients.yaml` comme ceci :
 - hosts: linuxclients
   vars:
     ntp_servers:
-      - '192.168.0.10' # <= mettons l'IP de se3 dans le cas des clients-Linux.
+      - '192.168.0.10' # <= mettons l'IP du serveur`se3` dans le cas des clients-Linux.
     ntp_admin_email: 'flaf@domain.tld'
   roles:
     - ntp
@@ -762,7 +762,7 @@ ntp_admin_email: '{{ admin_email }}'
 ```
 
 En revanche, la variable `ntp_servers` n'est pas encore définie.
-On veut que cela soit les serveurs NTP du pool Debian pour se3 mais que
+On veut que cela soit les serveurs NTP du pool Debian pour le serveur`se3` mais que
 ce soit l'IP du se3 pour client1 et client2 (et pour tous les
 clients-Linux en somme). Du coup, on a :
 
@@ -808,7 +808,7 @@ besoin du tout de la clé `vars`. On peut se contenter de :
 
 Dans notre exemple simpliste, les deux playbooks contiennent
 les mêmes rôles, mais on peut imaginer que, dans le cas de
-sambaedu, il y aura des rôles supplémentaires propres à se3 qu'on
+`sambaedu`, il y aura des rôles supplémentaires propres au serveur `SambaÉdu` qu'on
 ne retrouvera pas dans le playbook des clients-Linux.
 
 On peut à nouveau lancer nos playbook, normalement on devrait
@@ -890,6 +890,6 @@ Voici quelques exercices qui pourront vous être utiles pour la gestion de clien
 
 Vous avez quelques machines sur lesquelles sont installées des systèmes GNU/Linux : écrire un Playbook pour les mettre à jour.
 
-**Solution :** avant de regarder [une solution](solutions.md#exercice-1), cherchez un peu…
+**Solution :** avant de regarder [une proposition de solution](solutions.md#exercice-1), cherchez un peu…
 
 
