@@ -30,7 +30,7 @@
         * [Création de la clé `tasks` du rôle `ntp`](#création-de-la-clé-tasks-du-rôle-ntp)
         * [Création du fichier de `template` du rôle `ntp`](#création-du-fichier-de-template-du-rôle-ntp)
         * [Création de la clé `handlers` du rôle `ntp`](#création-de-la-clé-handlers-du-rôle-ntp)
-        * [Les valeurs par défaut de variables du rôle `ntp`](#les-valeurs-par-défaut-de-variables-du-rôle-ntp)
+        * [Les valeurs par défaut des variables du rôle `ntp`](#les-valeurs-par-défaut-des-variables-du-rôle-ntp)
         * [Quelques précisions sur le rôle `ntp`](#quelques-précisions-sur-le-rôle-ntp)
     * [Mais comment on utilise notre rôle `ntp` maintenant ?](#mais-comment-on-utilise-notre-rôle-ntp-maintenant-)
 * [Utilisation des variables d'hôtes et de groupes](#utilisation-des-variables-dhôtes-et-de-groupes)
@@ -488,7 +488,7 @@ On va créer cette arborescence :
 ├── ansible.cfg
 ├── hosts
 └── roles
-    └── ntp # <======= Notre role "ntp". Le dossier roles/ est amené à contenir plusieurs rôles bien sûr.
+    └── ntp # <================= Notre role `ntp`. Le dossier roles/ est amené à contenir plusieurs rôles bien sûr.
         ├── defaults
         │   └── main.yaml   # <= Sert à définir les valeurs par défaut de nos variables (quand c'est pertinent).
         ├── handlers
@@ -591,7 +591,7 @@ restrict ::1
 
 #### Création de la clé `handlers` du rôle `ntp`
 
-Pas de surprises pour le fichier `/etc/ansible/roles/ntp/handlers/main.yaml` :
+Pas de surprise pour le fichier `/etc/ansible/roles/ntp/handlers/main.yaml` :
 
 ```yaml
 ---
@@ -603,7 +603,7 @@ Pas de surprises pour le fichier `/etc/ansible/roles/ntp/handlers/main.yaml` :
 ```
 
 
-#### Les valeurs par défaut de variables du rôle `ntp`
+#### Les valeurs par défaut des variables du rôle `ntp`
 
 Il nous reste le fichier `/etc/ansible/roles/ntp/defaults/main.yaml`.
 Il sert à définir des valeurs par défaut pertinentes pour
@@ -710,9 +710,9 @@ Voici un exemple pour notre fichier `/etc/ansible/sambaedu.yaml` :
     ntp_admin_email: 'flaf@domain.tld'
   roles:
     - ntp
-#   - roleA
+#   - roleA <= dans la vraie vie, on appliquera toute une série de rôles.
 #   - roleB
-#   - …    <= dans la vraie vie, on appliquera toute une série de rôles.
+#   - … 
 ```
 
 Créons également le playbook `/etc/ansible/linuxclients.yaml` comme ceci :
@@ -727,6 +727,9 @@ Créons également le playbook `/etc/ansible/linuxclients.yaml` comme ceci :
   roles:
     - ntp
 ```
+
+**Remarque :** dans les deux playbooks ci-dessus, on a indiqué des clés vars
+mais ce n'est pas une bonne pratique ; [La bonne pratique pour les variables](#utilisation-des-variables-dhôtes-et-de-groupes) est d'utiliser des **variables de groupes** ou des **variables d'hôtes**.
 
 On pourra lancer nos playbooks comme ceci :
 
