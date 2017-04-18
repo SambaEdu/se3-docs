@@ -43,6 +43,7 @@
 * [Résumé des bonnes pratiques « Ansible »](#résumé-des-bonnes-pratiques--ansible-)
 * [Exercices](#exercices)
     * [Exercice 1](#exercice-1)
+* [Références](#références)
 
 
 
@@ -987,5 +988,11 @@ Voici quelques exercices qui pourront vous être utiles pour la gestion de clien
 Vous avez quelques machines sur lesquelles sont installées des systèmes GNU/Linux : écrire un Playbook pour les mettre à jour.
 
 **Solution :** avant de regarder [une proposition de solution](solutions.md#exercice-1), cherchez un peu…
+
+
+## Références
+
+* Article sur [Ansible et les inventaires php et mysql](https://ancel1.fr/2016/04/20/ansible-inventaire-dynamique/)
+
 
 
