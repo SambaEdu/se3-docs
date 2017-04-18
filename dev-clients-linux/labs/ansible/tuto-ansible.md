@@ -40,6 +40,7 @@
     * [Abandon de la clé `vars` pour le rôle `ntp`](#abandon-de-la-clé-vars-pour-le-rôle-ntp)
     * [Utilisation des playbooks](#utilisation-des-playbooks)
 * [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul-client)
+* [Résumé des bonnes pratiques « Ansible »](#résumé-des-bonnes-pratiques-ansible)
 * [Exercices](#exercices)
     * [Exercice 1](#exercice-1)
 
@@ -312,14 +313,14 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
       - '0.debian.pool.ntp.org'
       - '1.debian.pool.ntp.org'
       - '2.debian.pool.ntp.org'
-    admin_email: 'flaf@domain.tld' # Variable dont l'existence est artificielle ici, c'est pour l'exemple.
-  remote_user: root
-  tasks: # <============== Les tasks sont toujours appliquées dans l'ordre où elles écrites.
-    - name: ensure NTP installation
+    admin_email: 'flaf@domain.tld' # Variable dont l'existence est artificielle ; ici, c'est pour l'exemple.
+  remote_user: root # <=== 
+  tasks: # <============================= Les tasks sont toujours appliquées dans l'ordre où elles sont écrites.
+    - name: ensure NTP installation # <== On installe le paquet `ntp` à l'aide du module `apt`.
       apt:
         name: ntp
         state: latest
-    - name: write NTP config file /etc/ntp.conf
+    - name: write NTP config file /etc/ntp.conf # <== on configure le serveur de temps à l'aide du module `template`.
       template:
         src: ntp.conf.j2 # <== Ici on utilise un template `Jinja2` (la syntaxe est très simple).
         dest: /etc/ntp.conf
@@ -327,14 +328,14 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
         group: root
         mode: '0644'
       notify:
-        - restart ntp
-    - name: ensure ntp is running (and enable it at boot)
+        - restart ntp # <== On redémarre le service (à lier avec les handlers, voir ci-dessous).
+    - name: ensure ntp is running (and enable it at boot) # <== on s'assure que le service `ntp` est en fonction, y compris au boot, à l'aide du module `service`.
       service:
         name: ntp
         state: started
         enabled: yes
   handlers:
-    - name: restart ntp
+    - name: restart ntp # <== 
       service:
         name: ntp
         state: restarted
@@ -343,7 +344,7 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
 
 ### Les modules `Ansible`
 
-`template`, `service`, `apt` etc. s'appellent des **modules
+`template`, `service`, `apt` s'appellent des **modules
 ansibles**. Ce sont des mini-programmes pour exécuter des
 actions sur les clients ansible.
 
@@ -480,7 +481,7 @@ le répertoire `/etc/ansible/` contient ceci :
 #### Création de l'arborescence pour le rôle `ntp`
 
 On va utiliser le répertoire `/etc/ansible/roles/` pour stocker
-notre playbook de l'exemple précédent (qui configure ntp) sous
+notre playbook de l'exemple précédent (qui configure `ntp`) sous
 la forme d'un rôle qu'on appellera `ntp`.
 
 On va créer cette arborescence :
@@ -550,9 +551,9 @@ Voici le contenu du fichier `/etc/ansible/roles/ntp/tasks/main.yaml` :
 #### Création du fichier de `template` du rôle `ntp`
 
 Le contenu de notre template `/etc/ansible/roles/ntp/templates/ntp.conf.j2`
-va être légèrement modifié car une bonne pratique dans un
-rôle est de **préfixer le nom des variables d'un rôle par le
-nom du rôle**. On va donc procéder aux changements suivants :
+va être légèrement modifié car une bonne pratique dans un rôle
+est de **préfixer le nom des variables d'un rôle par le nom du rôle**.
+On va donc procéder aux changements suivants :
 
 ```cfg
 ntp_servers => ntp_servers     # Lui reste inchangé, coup de chance.
@@ -969,6 +970,13 @@ ansible-playbook /etc/ansible/linuxclients.yaml --diff
 # Le playbook est lancé ici seulement sur le client client1.athome.priv.
 ansible-playbook /etc/ansible/linuxclients.yaml --diff --extra-vars target='client1.athome.priv'
 ```
+
+
+## Résumé des bonnes pratiques « Ansible »
+
+* Utiliser [des rôles](#la-bonne-pratique-des-rôles-pour-lorganisation-des-fichiers) pour structurer vos playbooks
+* Préfixer [le nom des variables](#création-du-fichier-de-template-du-rôle-ntp) d'un rôle par le nom du rôle
+* Utiliser [des variables d'hôtes et des variables de groupes](#utilisation-des-variables-dhôtes-et-de-groupes)
 
 
 ## Exercices
