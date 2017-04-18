@@ -37,7 +37,7 @@
     * [La bonne pratique pour les variables](#la-bonne-pratique-pour-les-variables)
     * [Complément de l'arborescence](#complément-de-larborescence)
     * [Les variables pour le rôle `ntp`](#les-variables-pour-le-rôle-ntp)
-    * [Abandon de la clé vars pour le rôle `ntp`](#abandon-de-la-clé-vars-pour-le-rôle-ntp)
+    * [Abandon de la clé `vars` pour le rôle `ntp`](#abandon-de-la-clé-vars-pour-le-rôle-ntp)
     * [Utilisation des playbooks](#utilisation-des-playbooks)
 * [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul-client)
 * [Exercices](#exercices)
@@ -444,6 +444,11 @@ ansible-playbook ./myplaybook.yaml --diff
 Vous pourrez ensuite vérifier que les clients ansible ont été configurés
 pour que leur base de temps soit le serveur `se3`.
 
+# Pour vérifier notamment que la synchronisation ntp des clients
+# Linux se fait bien sur l'IP du se3
+ansible linuxclients -a 'ntpq -pn4'
+```
+
 
 ## La bonne pratique des rôles pour l'organisation des fichiers
 
@@ -519,8 +524,8 @@ Voici le contenu du fichier `/etc/ansible/roles/ntp/tasks/main.yaml` :
 
 ```yaml
 ---
-# On met le contenu de la clé "tasks" de notre playbook précédent
-# mais on ne met pas la clé "tasks" elle-même (juste le contenu).
+# On met le contenu de la clé `tasks` de notre playbook précédent
+# mais on ne met pas la clé `tasks` elle-même (juste le contenu).
 - name: ensure NTP installation
   apt:
     name: ntp
@@ -595,7 +600,7 @@ Pas de surprise pour le fichier `/etc/ansible/roles/ntp/handlers/main.yaml` :
 
 ```yaml
 ---
-# Là aussi, on ne met pas la clé "handlers:" mais juste le contenu de cette clé.
+# Là aussi, on ne met pas la clé `handlers` mais juste le contenu de cette clé.
 - name: restart ntp
   service:
     name: ntp
@@ -618,8 +623,8 @@ première peut avoir une valeur par défaut raisonnable, d'où :
 
 ```yaml
 ---
-# Ce fichier correspond au contenu de la clé "vars:" dans
-# notre playbook précédent mais là encore sans la clé "vars:"
+# Ce fichier correspond au contenu de la clé `vars` dans
+# notre playbook précédent mais là encore sans la clé `vars`
 # elle-même.
 ntp_servers:
   - '0.debian.pool.ntp.org'
@@ -726,9 +731,10 @@ Créons également le playbook `/etc/ansible/linuxclients.yaml` comme ceci :
     ntp_admin_email: 'flaf@domain.tld'
   roles:
     - ntp
+#   - … <= dans la vraie vie, on appliquera toute une série de rôles.
 ```
 
-**Remarque :** dans les deux playbooks ci-dessus, on a indiqué des clés vars
+**Remarque :** dans les deux playbooks ci-dessus, on a indiqué des clés `vars`
 mais ce n'est pas une bonne pratique ; [La bonne pratique pour les variables](#utilisation-des-variables-dhôtes-et-de-groupes) est d'utiliser des **variables de groupes** ou des **variables d'hôtes**.
 
 On pourra lancer nos playbooks comme ceci :
@@ -861,7 +867,7 @@ ntp_servers:
 ```
 
 
-### Abandon de la clé vars pour le rôle `ntp`
+### Abandon de la clé `vars` pour le rôle `ntp`
 
 On peut alors rééditer nos playbooks car nous n'avons plus
 besoin du tout de la clé `vars`. On peut se contenter de :
@@ -878,7 +884,7 @@ besoin du tout de la clé `vars`. On peut se contenter de :
   roles:
     - ntp
 
-# La clé "vars" a été supprimée dans les deux fichiers.
+# La clé `vars` a été supprimée dans les deux fichiers.
 ```
 
 Dans notre exemple simpliste, les deux playbooks contiennent
@@ -889,19 +895,20 @@ ne retrouvera pas dans le playbook des clients-Linux.
 
 ### Utilisation des playbooks
 
-On peut à nouveau lancer nos playbook, normalement on devrait
-avoir le résultat souhaité :
+On peut à nouveau lancer nos playbooks,
+normalement on devrait avoir le résultat souhaité :
 
 ```sh
 ansible-playbook /etc/ansible/sambaedu.yaml --diff
 ansible-playbook /etc/ansible/linuxclients.yaml --diff
+# on vérifie :
 ansible linuxclients -a 'ntpq -pn4'
 ```
 
-Mais imaginons que pour une raison particulière (peu importe
-laquelle), il faut que client1 utilise lui aussi les
-serveurs NTP du pool Debian pour sa synchronisation (juste
-lui, on imagine c'est une exception parmi les clients-Linux)
+Mais imaginons que, pour une raison particulière (peu importe
+laquelle), il faut que *client1* utilise lui aussi les
+serveurs `NTP` du *pool Debian* pour sa synchronisation (juste
+lui, on imagine que c'est une exception parmi les clients-Linux)
 alors on peut utiliser le fichier `/etc/ansible/host_vars/client1.athome.priv.yaml`
 et y mettre :
 
@@ -911,11 +918,14 @@ ntp_servers:
 ```
 
 Avec `ansible-playbook /etc/ansible/linuxclients.yaml --diff`, on
-verra que seul client1 va changer son serveur ntp de référence.
-L'idée ici est que pour l'hôte client1, la variable `ntp_servers`
+verra que seul *client1* va changer son serveur `ntp` de référence.
+
+L'idée ici est que, pour l'hôte *client1*, la variable `ntp_servers`
 est définie dans plusieurs fichiers mais c'est le fichier le
-plus « précis » qui l'emporte. En fait, pour l'hôte client1,
-Ansible lit dans cette ordre :
+plus « précis » qui l'emporte.
+
+En fait, pour l'hôte *client1*,
+`Ansible` lit dans cette ordre :
 
 1. Les assignations de variables dans `./group_vars/all.yaml`,
 2. Les assignations de variables dans `./group_vars/linuxclients.yaml`,
@@ -934,7 +944,7 @@ client (celui qu'on veut intégrer).
 
 Pour limiter notre playbook à un client en particulier,
 on va utiliser l'astuce suivante :  
-on va utiliser une variable `target` qui ne sera définie nulle part et
+on va utiliser **une variable `target`** qui ne sera définie nulle part et
 qu'on définira en ligne de commandes directement.
 
 Dans le fichier `/etc/ansible/linuxclients.yaml`, changer la valeur
@@ -959,6 +969,7 @@ ansible-playbook /etc/ansible/linuxclients.yaml --diff
 # Le playbook est lancé ici seulement sur le client client1.athome.priv.
 ansible-playbook /etc/ansible/linuxclients.yaml --diff --extra-vars target='client1.athome.priv'
 ```
+
 
 ## Exercices
 
