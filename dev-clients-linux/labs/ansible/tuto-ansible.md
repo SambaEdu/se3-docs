@@ -743,12 +743,10 @@ On pourra lancer nos playbooks comme ceci :
 ```sh
 ansible-playbook /etc/ansible/sambaedu.yaml --diff
 ansible-playbook /etc/ansible/linuxclients.yaml --diff
-
 # Pour vérifier notamment que la synchronisation ntp des clients
 # Linux se fait bien sur l'IP du se3
 ansible linuxclients -a 'ntpq -pn4'
 ```
-
 
 
 ## Utilisation des variables d'hôtes et de groupes
