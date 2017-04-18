@@ -445,6 +445,7 @@ ansible-playbook ./myplaybook.yaml --diff
 Vous pourrez ensuite vérifier que les clients ansible ont été configurés
 pour que leur base de temps soit le serveur `se3`.
 
+```sh
 # Pour vérifier notamment que la synchronisation ntp des clients
 # Linux se fait bien sur l'IP du se3
 ansible linuxclients -a 'ntpq -pn4'
