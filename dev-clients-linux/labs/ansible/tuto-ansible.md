@@ -40,7 +40,7 @@
     * [Abandon de la clé `vars` pour le rôle `ntp`](#abandon-de-la-clé-vars-pour-le-rôle-ntp)
     * [Utilisation des playbooks](#utilisation-des-playbooks)
 * [Petite astuce pour appliquer un playbook en le limitant à un seul client](#petite-astuce-pour-appliquer-un-playbook-en-le-limitant-à-un-seul-client)
-* [Résumé des bonnes pratiques « Ansible »](#résumé-des-bonnes-pratiques-ansible)
+* [Résumé des bonnes pratiques « Ansible »](#résumé-des-bonnes-pratiques--ansible-)
 * [Exercices](#exercices)
     * [Exercice 1](#exercice-1)
 
