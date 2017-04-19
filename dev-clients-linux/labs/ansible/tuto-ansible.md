@@ -149,7 +149,7 @@ Cela constitue un réseau minimal pour ce tutoriel :
 |  sur cette machine   |
 |                      |---------------------+                        +------------------------+
 +----------------------+                     |                        |                        |
-            |       |                        +---------------------->>|  client1.athome.priv   |
+            |       |                        +---------------------->>|  client2.athome.priv   |
             |       |                                                 |                        |
             +--<<---+                                                 +------------------------+
     Le « serveur ansible » peut très bien avoir lui-même
@@ -914,6 +914,7 @@ alors on peut utiliser le fichier `/etc/ansible/host_vars/client1.athome.priv.ya
 et y mettre :
 
 ```yaml
+---
 ntp_servers:
   - '0.debian.pool.ntp.org'
 ```
