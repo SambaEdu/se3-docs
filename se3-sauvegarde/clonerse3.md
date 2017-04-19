@@ -1,7 +1,5 @@
 # Cloner un `se3`
 
-… article en chantier...mais qui avance! …
-
 * [Présentation](#présentation)
 * [Préparation de `Clonezilla`](#préparation-de-clonezilla)
     * [Télécharger `Clonezilla`](#télécharger-clonezilla)
@@ -228,7 +226,11 @@ La procédure est quasi similaire à celle de la sauvegarde, à l'exeption près
 
 Une fois le disque restauré, on rallume le serveur normalement après avoir oté le live-cd cd 'Clonezilla'.
 
-Remarque: Si vous diposez d'un second disque dur identique à celui du se3, il peut-être judicieux de restaurer la sauvegarde sur ce disque (avec un ordinateur ouvert et déconnecté du réseau pour éviter un conflit d'ip avec 'deux se3'), déjà pour vérifier que tout fonctionne bien et aussi pour gagner du temps en cas de crash disque/problème logiciel puisqu'il suffira de les échanger. Les ordinateurs de l'établissement pourront fonctionner en attendant qu'une restauration des homes et var/se3 soit faite.
+*Remarque: Si vous diposez d'un second disque dur identique à celui du se3, il peut-être judicieux de restaurer la sauvegarde sur ce disque (avec un ordinateur ouvert et déconnecté du réseau pour éviter un conflit d'ip avec 'deux se3'), déjà pour vérifier que tout fonctionne bien et aussi pour gagner du temps en cas de crash disque/problème logiciel puisqu'il suffira de les échanger. Les ordinateurs de l'établissement pourront fonctionner en attendant qu'une restauration des homes et var/se3 soit faite.
+
+**ATTENTION: Si vous restaurez l'image sur un autre serveur, il est probable que la carte réseau ne soit plus reconnue comme eth0. Il faut alors éditer le fichier /etc/network/interfaces pour modifier eth0 par eth1,2,ou plus. Une modification dans l'interface de la configuration du dhcp sera aussi à faire pour remplacer eth0 par la nouvelle valeur.
+
+
 
 
 
