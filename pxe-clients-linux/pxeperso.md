@@ -256,7 +256,7 @@ Une fois le système installé, il faudra (selon l'usage de cette machine) suppr
 La version `Stretch` de `Debian` étant bientôt en stable, vous pouvez d'ors et déjà l'essayer via une installation `netboot`.
 
 
-* Télécharger l'archive
+* **Télécharger l'archive**
 
 On crée un répertoire temporaire et on y télécharge l'archive netboot.tar.gz et on la décompresse.
 ```sh
@@ -267,7 +267,7 @@ tar -xzf stretch_netboot.tar.gz
 cd ..
 ```
 
-* Copier les fichiers d'amorçage
+* **Copier les fichiers d'amorçage**
 
 On crée le répertoire /tftpboot/stretch et on y copie le répertoire amd64 de l'archive netboot décompressée ci-dessus et on peut supprimer le répertoire temporaire.
 ```sh
@@ -276,7 +276,7 @@ cp -r /tftpboot/tempstretch/debian-installer/amd64 /tftpboot/stretch/amd64
 rm -rf /tftpboot/tempstretch
 ```
 
-* Mise en place d'une entrée dans le menu pxe
+* **Mise en place d'une entrée dans le menu pxe**
 
 On édite le fichier **perso.menu** (nano /tftpboot/pxelinux.cfg/perso.menu) puis on ajoute les lignes suivantes (les … indiquent que l'on peut avoir des lignes avant et des lignes après):
 
@@ -299,9 +299,9 @@ Bonne installation :-)
 
 L'intéret est de pouvoir stocker des images propres d'un type de poste non intégré. En cas de contamination d'une salle par un virus, il est facile de restaurer un poste, de l'intégrer puis de lancer un clonage, ou tout simplement de restaurer chaque poste avec cette image.
 
-L'image clonezilla est stockée sur u partage samba qui peut être se3 ou un autre serveur.
+L'image clonezilla est stockée sur un partage samba qui peut être le serveur `se3` ou un autre serveur.
 
-On ajoute dans le fichier perso.menu (nano /tftpboot/pxelinux.cfg/perso.menu) les lignes suivantes
+On ajoute dans le fichier `perso.menu` (*nano /tftpboot/pxelinux.cfg/perso.menu*) les lignes suivantes
 ```ssh 
 ...
 label Clonezilla-live 
