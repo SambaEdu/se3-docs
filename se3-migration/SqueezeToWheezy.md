@@ -1,4 +1,4 @@
-# Migration de se3-squeeze vers se3-wheezy
+# Migration de `se3/squeeze` vers `se3/wheezy`
 
 * [Présentation](#présentation)
 * [Préparation du `se3 Squeeze`](#préparation-du-se3-squeeze)
