@@ -38,7 +38,8 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ### Migrer un `se3`
 
-* Procédure pour migrer [de se3-squeeze à se3-wheezy](se3-migration/SqueezeToWheezy.md#migration-de-se3-squeeze-vers-se3-wheezy)
+* Procédure pour migrer [de se3/lenny à se3/wheezy](se3-migration/LennyToWheezy.md#migration-de-se3-lenny-vers-se3-wheezy)
+* Procédure pour migrer [de se3/squeeze à se3/wheezy](se3-migration/SqueezeToWheezy.md#migration-de-se3-squeeze-vers-se3-wheezy)
 
 
 ### Sauvegarder et restaurer un `se3`

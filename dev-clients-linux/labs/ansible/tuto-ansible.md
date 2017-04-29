@@ -328,7 +328,7 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
         owner: root
         group: root
         mode: '0644'
-      notify:
+      notify: # <========== meta-rôle servant à jouer un rôle conditionnel (= handlers)
         - restart ntp # <== On redémarre le service (à lier avec les handlers, voir ci-dessous).
     - name: ensure ntp is running (and enable it at boot) # <== on s'assure que le service `ntp` est en fonction, y compris au boot, à l'aide du module `service`.
       service:
@@ -336,7 +336,7 @@ Créons ce fichier pour notre premier exemple `~/myplaybook.yaml` :
         state: started
         enabled: yes
   handlers:
-    - name: restart ntp # <== 
+    - name: restart ntp # <== un rôle conditionnel joué en fonction des changement de conf
       service:
         name: ntp
         state: restarted
