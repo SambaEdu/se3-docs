@@ -41,7 +41,7 @@ acl allow execute always = True
 
 ## Références
 
-* Procédure pour migrer [de `se3/squeeze` à `se3/wheezy`](../se3-migration/SqueezeToWheezy.md#migration-de-se3-squeeze-vers-se3-wheezy)
+* Procédure pour migrer [de `se3/squeeze` à `se3/wheezy`](../se3-migration/SqueezeToWheezy.md#migration-de-se3squeeze-vers-se3wheezy)
 * La documentation pour [les scripts `sauve_se3.sh` et `restaure_se3.sh`](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3)
 * La documentation pour [cloner les disques](../se3-sauvegarde/clonerse3.md#cloner-un-se3) de votre `se3`
 
