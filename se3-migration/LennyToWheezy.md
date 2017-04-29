@@ -1,4 +1,4 @@
-# Migration de se3-lenny vers se3-wheezy
+# Migration de `se3/lenny` vers `se3/wheezy`
 
 * [Présentation](#présentation)
 * [Procédure](#procédure)
