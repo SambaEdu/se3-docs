@@ -39,9 +39,11 @@ La solution proposée ici est indépendante du module `Backuppc` du serveur `se3
 
 ## Les scripts
 
-Les nouvelles versions des scripts, de sauvegarde `sauve_se3.sh` et de restauration `restaure_se3.sh`, sont maintenant disponibles directement sur votre serveur `se3` depuis la **version 3.0.2** pour un **se3/wheezy**.
+Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) peuvent ne pas correspondre aux versions disponibles sur votre `se3` : il y a donc eu des améliorations et ces nouvelles versions ne sont pas encore passées en *stable*. Vous pourrez alors télécharger ces versions pour bénéficier de ces améliorations en utilisant les commandes ci-dessus. C'est notamment le cas pour `restaure_se3.sh` : il faudra utiliser la version disponible sur `GitHub` (voir ci-dessous).
 
-**Important :** ces 2 scripts `sauve_se3.sh` et `restaure_se3.sh` se trouvent dans le répertoire `/usr/share/se3/sbin` du `se3`. Si ce n'est pas le cas, et s'il y a toujours les scripts *sauve_serveur.sh* et *restaure_serveur.sh* qui sont obsolètes, c'est que votre `se3` n'est pas à jour : il faut donc le mettre à jour.
+Les 2 scripts `sauve_se3.sh` et `restaure_se3.sh` se trouvent dans le répertoire `/usr/share/se3/sbin` de votre serveur `se3` depuis la **version 3.0.2** pour un **se3/wheezy**, mais pas forcément dans leurs versions les plus à jour.
+
+**Important :** Si, dans le répertoire `/usr/share/se3/sbin`, il y a toujours les scripts *sauve_serveur.sh* et *restaure_serveur.sh* qui sont obsolètes, c'est que votre `se3` n'est pas à jour : il faut donc le mettre à jour ou réaliser la migration vers la version `se3/wheezy`.
 
 Pour vérifier :
 ```sh
@@ -59,8 +61,6 @@ wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3maste
 https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/sauve_se3.sh --no-check-certificate
 https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/restaure_se3.sh --no-check-certificate
 ```
-
-Les [versions en développement des scripts](../../../../se3master/tree/master/usr/share/se3/sbin) peuvent ne pas correspondre aux versions disponibles sur votre `se3` : il y a donc eu des améliorations et ces nouvelles versions ne sont pas encore passées en *stable*. Vous pourrez alors télécharger ces versions pour bénéficier de ces améliorations en utilisant les commandes ci-dessus.
 
 **Remarque :** certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Caen pour qu'un collègue vous guide pour leur utilisation.
 
