@@ -22,17 +22,21 @@ Vous pouvez aussi consulter la documentation de migration de `se3/Squeeze` vers 
 * sauvegarde via le script **sauve_se3.sh** (voir la doc pour les détails)
 * installer `se3/wheezy` : voir la doc sur GitHub ; il y a plusieurs procédures, manuelles, automatiques,…
 * mettre en place les modules comme sur l'ancien `se3` + messagerie + onduleur (voir la doc)
-* lancer la restauration via le script **restaure_se3.sh** (idem pour les détails)
-* appliquer quelques correctifs (ils ne sont pas encore intégrés au script de restauration) → voir les compléments ci-dessous
+* lancer la restauration via le script **restaure_se3.sh** (remarque importante c-dessous)
 * vérifier que tout fonctionne → à préciser…
+* appliquer éventuellement quelques correctifs (ils sont intégrés au script de restauration) → voir les compléments ci-dessous
 * remettre en place la sauvegarde via **sauve_se3.sh**
 * on peut aussi mettre en place un clonage via clonezilla : voir la doc sur GitHub de même
+
+**Remarque :** suite aux divers essais effectués, des modifications du script `restaure_se3.sh` ont incorporés quelques correctifs. Cette version du script n'est donc pas encore disponible directement sur le `se3/wheezy` installé : il faudra la télécharger directement depuis GitHub (voir la doc).
 
 
 ## Compléments
 
 - Si problème de `SID` sur l’interface web, lancer **correctSID.sh**
-- Lancer **update-smbconf.sh**
+
+Pour mémoire :  
+- Lancer **update-smbconf.sh** (inutile avec la nouvelle version du script de restauration)
 - Vérifier que le fichier `/etc/samba/smb_Vista.conf` a bien la ligne suivante en bas de la section [netlogon]
 ```ini
 acl allow execute always = True
@@ -41,7 +45,8 @@ acl allow execute always = True
 
 ## Références
 
-* Procédure pour migrer [de `se3/squeeze` à `se3/wheezy`](../se3-migration/SqueezeToWheezy.md#migration-de-se3squeeze-vers-se3wheezy)
 * La documentation pour [les scripts `sauve_se3.sh` et `restaure_se3.sh`](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3)
+* Installer un se3/wheezy en [mode manuel](../se3-installation/installationmanuelle.md#installation-manuelle-dun-se3) ou [mode automatique](se3-installation/incorporerpreseed.md#installation-automatique-dun-se3)
+* Procédure pour migrer [de `se3/squeeze` à `se3/wheezy`](../se3-migration/SqueezeToWheezy.md#migration-de-se3squeeze-vers-se3wheezy)
 * La documentation pour [cloner les disques](../se3-sauvegarde/clonerse3.md#cloner-un-se3) de votre `se3`
 
