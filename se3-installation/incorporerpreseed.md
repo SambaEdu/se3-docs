@@ -100,6 +100,13 @@ Une fois les fichiers **se3.preseed** et **setup_se3.data** ainsi créés, il s'
 wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/{se3.preseed,setup_se3.data}
 ```
 
+**Cas de l'installation semi-automatique :**  
+Dans ce cas, il suffit de supprimer toutes les lignes du fichier **se3.preseed** qui concernent le partitionnement. Elles commencent à partir des lignes suivantes :
+```ini
+#Standart drive controler
+# ----------------------------
+```
+
 
 ### Utilisation du script `install_phase1.sh`
 
