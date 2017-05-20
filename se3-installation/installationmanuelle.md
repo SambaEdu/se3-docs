@@ -1,6 +1,7 @@
 # Installation manuelle d'un `Se3`
 
 * [Préliminaire](#préliminaire)
+    * [Installation ou ré-installation](#installation-ou-ré-installation)
     * [Paramètres à préparer](#paramètres-à-préparer)
     * [Automatiser l'installation : le fichier `preseed`](#automatiser-linstallation--le-fichier-preseed)
 * [Fichier d'installation par le réseau](#fichier-dinstallation-par-le-réseau)
@@ -24,6 +25,8 @@
 
 
 ## Préliminaire
+
+### Installation ou ré-installation
 
 Cette documentation présente une installation manuelle d'un `se3` version `Wheezy`.
 
