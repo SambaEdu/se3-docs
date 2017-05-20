@@ -4,6 +4,7 @@
 
 * [Préliminaires](#préliminaires)
     * [Objectif](#objectif)
+    * [Installation semi-automatique](#installation-semi-automatique)
     * [Étapes de l'installation automatique d'un `se3`](#Étapes-de-linstallation-automatique-dun-se3)
     * [Vue d'ensemble des préparatifs](#vue-densemble-des-préparatifs)
 * [Phase 1 : Les fichiers `preseed` et `setup_se3`](#phase-1--les-fichiers-preseed-et-setup_se3)
@@ -36,6 +37,21 @@ L'objectif est de créer un `CD` ou une clé `usb` d'installation complètement 
 Ainsi, avec ce `CD` *personnalisé*, ou cette clé `usb`, et une sauvegarde de son `se3`, on pourra très rapidement (re)-mettre en production son `se3`, que ce soit sur la même machine ou sur une autre machine.
 
 Pour la sauvegarde/restauration du `se3`, vous consulterez avec profit [la documentation ad hoc](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
+
+
+### Installation semi-automatique
+
+L'installation ne pourra pas se faire entièrement automatiquement dans les cas suivants :  
+* installation sur plusieurs disques durs
+* ré-installation en gardant les données des partitions `/home` et `/var/se3`
+
+L'interface de création du fichier **se3.preseed** n'et prévu que pour 1 disque dur. Si vous avez plusieurs disques, une astuce consiste à créer le fichier **se3.preseed** via l'interface puis de supprimer la section concernant le partitionnement.
+
+La conséquence est que l'installation ne sera plus totalement automatique puisque les questions concernant le partitionement vous seront posées au cours du processus ; une fois les réponses données pour le partitionnement des disques, le processus automatique reprendra.
+
+Cette astuce sera aussi indispensable en cas de ré-installation en gardant les contenus des partitions `/home` et `/var/se3`.
+
+Pour les détails concernant le partitionnement, reportez-vous à [la documentation de l'installation manuelle](installationmanuelle.md#partitionnement-des-disques).
 
 
 ### Étapes de l'installation automatique d'un `se3`
