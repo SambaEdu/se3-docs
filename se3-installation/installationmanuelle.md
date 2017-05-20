@@ -27,6 +27,14 @@
 
 Cette documentation présente une installation manuelle d'un `se3` version `Wheezy`.
 
+On pourra l'utiliser de plusieurs façons :  
+* installation complète d'un `se3`
+* ré-installation du `se3` en gardant les partitions `/home` et `/var/se3`
+
+Dans ce deuxième cas, la différence essentielle se situe
+au moment du [paramétrage du partitionement des disques](#partitionnement-des-disques).
+
+
 ### Paramètres à préparer
 
 Un certain nombre de paramètres doivent être préparés avant de se lancer dans l'installation.
