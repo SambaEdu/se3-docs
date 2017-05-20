@@ -231,21 +231,20 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 
 **Cas d'une ré-installation :** dans ce cas, il est possible de garder les partitions (et donc les données) `/home` et `/var/se3` sans les formater ; cela accélérera la remise en service du serveur et vous évitera d'avoir à restaurer les données.
 
-
 * Détecter les disques : `Entrée`
 * Partitionner les disques : `Entrée`
     * Méthode de partitionnement : **Manuel**
     ![instal_manuel_06](images/instal_manuel_06.png)
     * Choisir le disque sda puis utiliser la touche `Entrée`
     ![instal_manuel_07](images/instal_manuel_07.png)
-    * Créer une nouvelle table des partitions : **Oui**
+    * Créer une nouvelle table des partitions : **Oui** (*sauf, éventuellement, en cas de ré-installation*)
     * Type de la table des partitions : **msdos**
 
-**Attention :** il ne faudra pas créer une nouvelle table de partition si l'on souhaite conserver les partitions `/home` et `/var/se3` et si ces partitions sont sur le disque concerné.
+**Cas d'une ré-installation :** il ne faudra pas créer une nouvelle table de partition si l'on souhaite conserver les partitions `/home` et `/var/se3` et si ces partitions sont sur le disque concerné.
 
-Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et 2 partitions logiques (**/var/se3** et **/home**).
+Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et, sauf éventuellement en cas de ré-installation, 2 partitions logiques (**/var/se3** et **/home**).
 
-Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions primaires (**swap**, **/** et **/var**) et 1 partition logique (/var/se3) et le deuxième (**sdb**) en une seule partition primaire (**/home**).
+Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions primaires (**swap**, **/** et **/var**) et 1 partition logique (**/var/se3**) et le deuxième (**sdb**) en une seule partition primaire (**/home**).
 
 * Paramétrage de la 1ère partition (**swap**)
     * Se positionner sur l'espace libre du 1er disque (**sda** dans notre exemple)
@@ -286,7 +285,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Type de la nouvelle partition : **Logique**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
-    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée` (sauf en cas de ré-installation)
     * point de montage : **/var/se3** il faudra utiliser **Autre choix** dans la liste des noms de partitions proposées
     * Fin du paramétrage de cette partition
 * Paramétrage de la 5ème partition (**/home**)
@@ -296,7 +295,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Type de la nouvelle partition : **Logique**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
-    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée`
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée` (sauf en cas de ré-installation)
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
     
