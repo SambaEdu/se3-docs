@@ -229,6 +229,9 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 
 **Remarque importante :** si vous avez utilisé une clé `usb` pour l'archive d'installation, **il faut la retirer avant de lancer la détection des disques**. Pour la suite, elle ne servira plus car l'archive d'installation a été chargée dans la mémoire vive de la machine.
 
+**Cas d'une ré-installation :** dans ce cas, il est possible de garder les partitions (et donc les données) `/home` et `/var/se3` sans les formater ; cela accélérera la remise en service du serveur et vous évitera d'avoir à restaurer les données.
+
+
 * Détecter les disques : `Entrée`
 * Partitionner les disques : `Entrée`
     * Méthode de partitionnement : **Manuel**
@@ -237,6 +240,8 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
     ![instal_manuel_07](images/instal_manuel_07.png)
     * Créer une nouvelle table des partitions : **Oui**
     * Type de la table des partitions : **msdos**
+
+**Attention :** il ne faudra pas créer une nouvelle table de partition si l'on souhaite conserver les partitions `/home` et `/var/se3` et si ces partitions sont sur le disque concerné.
 
 Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et 2 partitions logiques (**/var/se3** et **/home**).
 
@@ -295,7 +300,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
     
-    Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées.
+    Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées. **Attention :** Il faudra que les **F** ne soient pas indiqués pour les partitions `/home` et `/var/se3` si l'on souhaite conserver les données de ces partitions.
     ![instal_manuel_11](images/instal_manuel_11.png)
 * Terminer le partitionnemnt et appliquer les changements : `Entrée`
 
