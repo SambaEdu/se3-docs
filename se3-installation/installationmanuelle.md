@@ -245,7 +245,7 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 
 **Cas d'une ré-installation :** il ne faudra pas créer une nouvelle table de partition si l'on souhaite conserver les partitions `/home` et `/var/se3` et si ces partitions sont sur le disque concerné.
 
-Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et, sauf éventuellement en cas de ré-installation, 2 partitions logiques (**/var/se3** et **/home**).
+Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et, **sauf éventuellement en cas de ré-installation**, 2 partitions logiques (**/var/se3** et **/home**).
 
 Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions primaires (**swap**, **/** et **/var**) et 1 partition logique (**/var/se3**) et le deuxième (**sdb**) en une seule partition primaire (**/home**).
 
@@ -302,8 +302,9 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
     
-    Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées. **Attention :** Il faudra que les **F** ne soient pas indiqués pour les partitions `/home` et `/var/se3` si l'on souhaite conserver les données de ces partitions.
+    Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées.  
     ![instal_manuel_11](images/instal_manuel_11.png)
+    **Attention :** Dans le cas d'une ré-installation, il faudra que les **F** ne soient pas indiqués pour les partitions `/home` et `/var/se3` si l'on souhaite conserver les données de ces partitions. À la place, on aura des **K**.  
 * Terminer le partitionnemnt et appliquer les changements : `Entrée`
 
 ![instal_manuel_12](images/instal_manuel_12.png)
