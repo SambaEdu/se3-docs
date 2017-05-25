@@ -245,7 +245,7 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
 
 **Cas d'une ré-installation :** il ne faudra pas créer une nouvelle table de partition si l'on souhaite conserver les partitions `/home` et `/var/se3` et si ces partitions sont sur le disque concerné.
 
-Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et, **sauf éventuellement en cas de ré-installation**, 2 partitions logiques (**/var/se3** et **/home**).
+Dans ce qui suit, on va partitionner le disque (**sda**) en 3 partitions primaires (**swap**, **/** et **/var**) et 2 partitions logiques (**/var/se3** et **/home**). Ces deux dernières partitions ne seront pas formatées dans le cas d'une ré-installation, si on désire conserver les données.
 
 Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions primaires (**swap**, **/** et **/var**) et 1 partition logique (**/var/se3**) et le deuxième (**sdb**) en une seule partition primaire (**/home**).
 
