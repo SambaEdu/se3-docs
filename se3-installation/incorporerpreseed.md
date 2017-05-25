@@ -45,7 +45,7 @@ L'installation ne pourra pas se faire entièrement automatiquement dans les cas 
 * installation sur plusieurs disques durs
 * ré-installation en gardant les données des partitions `/home` et `/var/se3`
 
-L'interface de création du fichier **se3.preseed** n'et prévu que pour 1 disque dur. Si vous avez plusieurs disques, une astuce consiste à créer le fichier **se3.preseed** via l'interface puis de supprimer la section concernant le partitionnement.
+L'interface de création du fichier **se3.preseed** n'et prévu que pour 1 disque dur. Si vous avez plusieurs disques, une astuce consiste à créer le fichier **se3.preseed** via l'interface puis de supprimer une grande partie de la section concernant le partitionnement.
 
 La conséquence est que l'installation ne sera plus totalement automatique puisque les questions concernant le partitionement vous seront posées au cours du processus ; une fois les réponses données pour le partitionnement des disques, le processus automatique reprendra.
 
@@ -115,7 +115,7 @@ d-i hw-detect/load_firmware boolean true
 ```
 
 **Attention :** il ne faudra pas supprimer les lignes ci-dessus
-car elles sont utilisées dans le script **install_phase1.sh**.
+car elles sont utilisées dans le script **install_phase1.sh**. Vous supprimerez uniquement les lignes qui sont situées entre *# Hard drive partitionning section* et le début de la section suivante *# Time server*.
 
 
 ### Utilisation du script `install_phase1.sh`

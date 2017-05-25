@@ -240,7 +240,7 @@ On peut profiter du serveur de temps de la passerelle, que ce soit un `Amon` ou 
     ![instal_manuel_06](images/instal_manuel_06.png)
     * Choisir le disque sda puis utiliser la touche `Entrée`
     ![instal_manuel_07](images/instal_manuel_07.png)
-    * Créer une nouvelle table des partitions : **Oui** (*sauf, éventuellement, en cas de ré-installation*)
+    * Créer une nouvelle table des partitions : **Oui** (**sauf, éventuellement, en cas de ré-installation**)
     * Type de la table des partitions : **msdos**
 
 **Cas d'une ré-installation :** il ne faudra pas créer une nouvelle table de partition si l'on souhaite conserver les partitions `/home` et `/var/se3` et si ces partitions sont sur le disque concerné.
@@ -288,7 +288,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Type de la nouvelle partition : **Logique**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
-    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée` (sauf en cas de ré-installation)
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée` (**sauf en cas de ré-installation**)
     * point de montage : **/var/se3** il faudra utiliser **Autre choix** dans la liste des noms de partitions proposées
     * Fin du paramétrage de cette partition
 * Paramétrage de la 5ème partition (**/home**)
@@ -298,7 +298,7 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Type de la nouvelle partition : **Logique**
     * Emplacement : début
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
-    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée` (sauf en cas de ré-installation)
+    * Formater la partition : **Oui, formater** → utiliser la touche `Entrée` (**sauf en cas de ré-installation**)
     * point de montage : **/home**
     * Fin du paramétrage de cette partition
     
