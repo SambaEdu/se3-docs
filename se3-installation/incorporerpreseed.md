@@ -101,11 +101,21 @@ wget http://dimaker.tice.ac-caen.fr/dise3wheezy/xxxx/{se3.preseed,setup_se3.data
 ```
 
 **Cas de l'installation semi-automatique :**  
-Dans ce cas, il suffit de supprimer toutes les lignes du fichier **se3.preseed** qui concernent le partitionnement. Elles commencent à partir des lignes suivantes :
+Dans ce cas, il suffit de supprimer toutes les lignes du fichier **se3.preseed** qui concernent le partitionnement. Elles commencent après les lignes suivantes :
 ```ini
 #Standart drive controler
 # ----------------------------
+d-i hw-detect/load_firmware boolean true
+#d-i partman-auto/disk string /dev/sda
+
+# Partitioning disk in several partitions without lvm
+# ---------------------------------------
+# choice no LVM
+# Hard drive partitionning section
 ```
+
+**Attention :** il ne faudra pas supprimer les lignes ci-dessus
+car elles sont utilisées dans le script **install_phase1.sh**.
 
 
 ### Utilisation du script `install_phase1.sh`
