@@ -300,10 +300,9 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     * Utiliser comme : avec la touche `Entrée`, choisir le système **XFS**
     * Formater la partition : **Oui, formater** → utiliser la touche `Entrée` (**sauf en cas de ré-installation**)
     * point de montage : **/home**
-    * Fin du paramétrage de cette partition
-    
+    * Fin du paramétrage de cette partition  
+    ![instal_manuel_11](images/instal_manuel_11.png)  
     Notez bien le **B** pour la partition d'amorçage **/** et le **F** qui indique que toutes les partitions vont être formatées.  
-    ![instal_manuel_11](images/instal_manuel_11.png)
     **Attention :** Dans le cas d'une ré-installation, il faudra que les **F** ne soient pas indiqués pour les partitions `/home` et `/var/se3` si l'on souhaite conserver les données de ces partitions. À la place, on aura des **K**.  
 * Terminer le partitionnemnt et appliquer les changements : `Entrée`
 
