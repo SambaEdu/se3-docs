@@ -306,7 +306,8 @@ Si vous avez 2 disques, le premier (**sda**) sera partitionné en 3 partitions p
     **Attention :** Dans le cas d'une ré-installation, il faudra que les **F** ne soient pas indiqués pour les partitions `/home` et `/var/se3` si l'on souhaite conserver les données de ces partitions. À la place, on aura des **K**.  
 * Terminer le partitionnemnt et appliquer les changements : `Entrée`
 
-![instal_manuel_12](images/instal_manuel_12.png)
+    ![instal_manuel_12](images/instal_manuel_12.png)  
+    **Attention :** dans le cas d'une ré-installation avec conservation des données, les partitions n°5 et n°6 ne devraient pas être indiquées comme devant être formatées. Il ne devrait y avoir, dans ce cas, que les partitions n°1, n°2 et n°3.
 * Faut-il appliquer les changements sur les disques : **Oui**
 
 
