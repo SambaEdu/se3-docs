@@ -8,12 +8,11 @@ Tout PC disposant d'une carte ethernet avec un boot PXE et d'au moins 512 Mo de 
 grâce au réseau ethernet et sans avoir besoin de son disque dur.
 
 Le bureau des clients lourds retenu est Mate, pour sa légereté, et pourra être sous la distribution :
-* soit `Debian Jessie`.
 * soit `Ubuntu Xenial`.
 * soit `Debian Stretch`.
 
 L'environnement des clients lourds étant isolé dans un `chroot`, il est ainsi possible de faire tourner les clients lourds avec les dernières versions 
-de Debian (Jessie ou Stretch) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
+de Debian (Stretch) et d'Ubuntu (Xenial) alors que le serveur se3 est sous Debian Wheezy.
 
 A noter : la version Stretch de Debian ne prend plus en charge les architectures i486 et i586. Les PCs du réseau ayant cette architecture
 matérielle ne pourront donc pas démarrer en tant que client lourd ltsp.
@@ -25,6 +24,7 @@ c'est la configuration mise en place par défaut par le script d'installation de
 (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
 La configuration ltsp appliquée au serveur Se3 l'impacte peu :
+* seuls deux services supplémentaires sont exécutés sur le se3 : nfs et nbd.
 * l'environnement (chroot) des clients lourds est configuré afin de les rendre `autonomes` du se3 ; en particulier, l'identification 
 des utilisateurs est réalisée par l'environnement (chroot) des clients lourds et non par le serveur se3.
 * les clients lourds **ne font pas partie d'un sous-réseau** du réseau pédagogique : ltsp est configuré ici en mode `1 carte réseau` pour faciliter 
@@ -33,7 +33,7 @@ de clients lourds : tout PC ayant un boot PXE et relié au réseau pédagogique 
 * le serveur Se3 **n'a pas** besoin d'être très puissant car ltsp est configuré ici pour n'être qu'un `serveur d'environnement ltsp`
 et ne **gérer que des clients lourds** (fat client) : pour pouvoir gérer aussi des clients légers (commme des Raspberry avec le projet Berryterminal), 
 il faudra installer un `serveur d'applications ltsp` **puissant**, en plus du se3. Ce dernier ne devra pas nécessairement tourner 
-sous Debian Wheezy : il pourra tourner sous `Debian Jessie` (ou Stretch ? ou sur Ubuntu Xenial ?).
+sous Debian Wheezy : il pourra tourner sous `Debian Stretch` (ou sur Ubuntu Xenial ?).
 On pourra se reporter à l'article suivant pour plus de détail (paragraphe `Mise en place d'un cluster de serveurs LTSP`) :
 
 [Wiki de la DANE Versailles LTSP sur Debian Wheezy](http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_de_clients_l%C3%A9gers_%28LTSP_sous_Debian_Wheezy%29_dans_un_r%C3%A9seau_Se3)
@@ -73,91 +73,71 @@ une `agrégation de liens` (en mode balance-tlb ou en mode balance-alb).
 ## Installation de LTSP
 
 * Se connecter au serveur SE3 en tant que root (en ssh par exemple).
-* Pour obtenir des clients lourds avec le bureau Debian Jessie Mate, rendre le script suivant executable :
-
+* Télécharger le dernier script disponible sur github à l'endroit suivant :
 ```sh
-chmod u+x /home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
+wget https://raw.githubusercontent.com/SambaEdu/se3-clients-linux/master/src/home/netlogon/clients-linux/ltsp/LTSP_sur_SE3_wheezy.sh
 ```
 
-ou, pour un bureau Ubuntu Xenial Mate :
-
+Par défaut, c'est l'architecture i386 et ubuntu xenial qui est déployé mais il est possible de changer cela avec les deux variables de début de script.
+Par exemple, pour construire un environnement Debian Strech en architecture 64 bits, modifié les deux variables de la façon suivante :
 ```sh
-chmod u+x /home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
+ENVIRONNEMENT=amd64
+DISTRIB=stretch
 ```
 
-ou, pour un bureau Debian Stretch Mate, télécharger le script suivant :
-
+* Puis exécuter le script :
 ```sh
-wget https://raw.githubusercontent.com/SambaEdu/se3-clients-linux/master/src/home/netlogon/clients-linux/ltsp/Stretch_LTSP_sur_SE3_wheezy.sh
+./LTSP_sur_SE3_wheezy.sh
 ```
 
-Puis :
-```sh
-chmod u+x Stretch_LTSP_sur_SE3_wheezy.sh
-```
-
-* Puis l'exécuter :
-```sh
-/home/netlogon/clients-linux/ltsp/Jessie_LTSP_sur_SE3_wheezy.sh
-```
-
-ou, pour un bureau Ubuntu Xenial Mate :
-```sh
-/home/netlogon/clients-linux/ltsp/Xenial_LTSP_sur_SE3_wheezy.sh
-```
-
-ou, pour un bureau Debian Stretch Mate :
-```sh
-./Stretch_LTSP_sur_SE3_wheezy.sh
-```
-
-Pendant l'installation (qui dure environ une heure), il est demandé, dans l'ordre :
+Pendant l'installation (qui peut durer une heure), il est demandé, dans l'ordre :
 * Le mot de passe du compte `root` de l'environnement des clients lourds
 * Le mot de passe du compte `local` enseignant
 
 **Attention !!!**
 
-Avec `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
+Sous `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
 
 ## Que fait le script d'installation ?
 
 Le script d'installation précédent va seulement :
-* créer un répertoire `/opt/ltsp/i386` qui contiendra l'environnement (le chroot) des clients lourds Debian ou Ubuntu Xenial.
-* installer et configurer les services `NFS et NBD` qui mettra à disposition des clients lourds leur environnement i386.
+* créer un répertoire `/opt/ltsp/i386` (ou `/opt/ltsp/amd64`)  qui contiendra l'environnement (le chroot) des clients lourds Debian ou Ubuntu.
+* installer et configurer les services `NFS et NBD` afin que les clients lourds puissent monter, via le réseau, leur environnement à leur démarrage.
 * créer un répertoire `/tftpboot/ltsp` contenant l'initrd et le kernel pour le boot PXE des clients lourds.
 * ajouter une entrée au menu PXE `/tftpboot/pxelinux.cfg/default` afin qu'un utilisateur puisse faire démarrer un PC en client lourd LTSP.
-* configurer l'environnement i386 des clients lourds pour réaliser l'`identification des utilisateurs avec l annuaire ldap du se3` 
+* configurer l'environnement i386 (ou amd64) des clients lourds pour réaliser l'`identification des utilisateurs avec l annuaire ldap du se3` 
 et `le montage automatique de deux partages Samba du se3 (Docs et Classes)`.
 * créer une sauvegarde, à la fin de l'installation, de l'environnement des clients lourds dans /var/se3/ltsp/i386-originale : cela permettra 
 de restaurer le chroot des clients lourds en 5 minutes, en cas de problèmes lors de son administration.
 
-Seul **un service supplémentaire** va être lancé sur le serveur se3, ce sera :
-* le service nfs si c'est le bureau Debian Mate qui est installé dans l'environnement des clients lourds.
-* le service nbd si c'est le bureau Ubuntu Xenial Mate qui est installé dans l'environnement des clients lourds.
+Seulement ** deux services supplémentaires ** sont lancés sur le serveur se3 :
+* le service nbd accessible depuis le menu PXE du se3 par tous les utilisateurs de clients lourds du réseau.
+* le service nfs accessible depuis le sous-menu `divers` du menu maintenance du se3, pour tester des installations dans l'environneement des clients lourds.
 
 L'environnement des clients lourds est configuré pour être au maximum **autonome** et **impacter au minimum le serveur se3**. 
-Par soucis de simplicité, **un seul environnement** en architecture i386 est construit pour l'ensemble du parc : cet environnement 
+Par défaut, par souci de simplicité, **un seul environnement** en architecture i386 est construit pour l'ensemble du parc : cet environnement 
 devra contenir toutes les applications utiles aux utilisateurs et sera utilisé à la fois par les clients lourds i386 et amd64.
 
 ## nfs et nbd, quelle différence ?
-nfs et nbd sont deux services utilisés pour desservir via le réseau ethernet, l'environnement (le chroot) aux clients lourds.
-nfs est plus souple (et robuste) mais moins performant que nbd : il est utilisé par défaut sur Debian contrairement à Ubuntu qui utilise nbd.
+nfs et nbd sont deux services utilisés pour desservir (via le réseau ethernet) l'environnement aux clients lourds.
+nfs est plus souple mais moins performant que nbd : nfs ne nécessite pas de reconstruire l'image squashfs avec la commande ltsp-update-image.
+C'est pourquoi on le concerve dans un sous-menu du menu maintenance du PXE du se3, afin de pouvoir faire des tests plus rapidement.
 
 ## Comment administrer le serveur LTSP ?
 
-L'administration du service LTSP consiste principalement à personnaliser l'environnement i386 des clients lourds (le chroot).
+L'administration du service LTSP consiste principalement à personnaliser l'environnement i386 (ou amd64) des clients lourds.
 
 Cette administration peut se faire simplement en ligne de commande en se connectant en root au se3 (via ssh par exemple) puis en se mettant sur 
-la racine de l'environnement (le "chroot") des clients lourds avec une des deux commandes :
+la racine de l'environnement (le "chroot") des clients lourds avec une des deux commandes suivantes :
 
 ```sh
-ltsp-chroot -a i386
+ltsp-chroot -a i386		   # ou ltsp-chroot -a amd64 (si c'est l'architecture amd64 qui a été choisie)
 ```
 
 ou
 
 ```sh
-ltsp-chroot -a -m i386
+ltsp-chroot -a -m i386     # ou ltsp-chroot -a -m amd64 (si c'est l'architecture amd64 qui a été choisie)
 ```
 
 Une fois l'administration terminée, sortir du chroot avec la commande :
@@ -166,17 +146,18 @@ Une fois l'administration terminée, sortir du chroot avec la commande :
 exit
 ```
 
+Pour tester l'installation réalisée dans le chroot, démarrer un client lourd via le sous-menu `divers` du menu maintenance du PXE du se3 (nfs est ainsi utilisé).
+Si tout fonctionne correctement, reconstruire l'image squashfs en saisissant sur le se3, en tant que root :
+```sh
+ltsp-update-image i386     # ou ltsp-update-image amd64 (si c'est l'architecture amd64 qui a été choisie)
+```
+
 **Remarques:**
 
 * l'option -m permet de monter dans le chroot deux répertoires du se3  : elle est parfois nécessaire à certaines installations dans le chroot. 
 Par contre, elle ne devrait être utilisé que lorsqu'aucun client lourd n'est en fonctionnement (si des clients lourds sont en fonctionnement, 
 la commande exit ne parvient pas à réaliser le démontage des 2 repertoires : il faut alors arrêter le service nfs, ce qui revient à déconnecter 
 tous les clients lourds du réseau ...)
-
-* Pour Ubuntu qui utilise le service nbd, ne pas oublier de reconstruire l'image squashfs (cela dure quelques minutes) :
-```sh
-ltps-update-image i386
-```
 
 * Toutes les commandes shell exécutables sur un client linux "classique" peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
 
@@ -241,8 +222,6 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 1. `construire_squashfs_image.sh` :
 
 	Ce script construit l'image squashfs des clients lourds, lorsque le service nbd est utilisé.
-
-	Il doit être lancé **uniquement** avec `Ubuntu`, **à la fin**, une fois les tâches d'administration terminées.
 
 	Il entraîne l'arrêt du service nbd : il doit donc être lancé **lorsqu'aucun client lourd n'est utilisé**.
 
