@@ -51,6 +51,7 @@ Si des intérrogations surgissent au cours de la lecture de cet article, n'hési
 **Remarque 4:** Si vous n'êtes pas zen à l'idée de lancer la procédure de migration, vous pouvez fabriquer une image de votre serveur actuel avec un disque dur externe et le logiciel open-source 'Clonezilla'. Ainsi, en cas de problème, il sera possible de restaurer facilement et rapidement le se3 dans sa configuration d' avant migration.
 Plus d'informations [ici](https://github.com/SambaEdu/se3-docs/blob/master/se3-sauvegarde/clonerse3.md#cloner-un-se3).
 
+
 ## Préparation du `se3 Squeeze`
 
 ### Configurer `apt`
@@ -341,6 +342,7 @@ apt-get install rsyslog
 
 Au lieu d'utiliser le script de migration ci-dessus, une autre solution est la suivante :
 
+* créer le répertoire /run/lock (nécessaire au fonctionnement du script `sauve_se3.sh`)
 * sauvegarder votre serveur (script `sauve_se3.sh`)
 * installer un `se3-wheezy`, par la méthode de votre choix
 * configurer les modules adaptés à votre situation
@@ -350,7 +352,12 @@ Cette méthode sera à utiliser si vous avez une version antérieure à celle de
 
 Ces deux scripts (`sauve_se3.sh` et `restaure_se3.sh`) sont proposés sur le site ci-dessous, ainsi que la documentation d'utilisation.
 
-Il est à noter que ces deux scripts sont sur votre `se3-squeeze`, s'il est à jour bien entendu, mais dans une version insuffisante pour la restauration sur un `se3-wheezy`. Dans ce cas, il faudra utiliser [les versions les plus récentes](../../../../se3master/tree/master/usr/share/se3/sbin) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
+Il est à noter que ces deux scripts ne sont pas sur votre `se3-squeeze` dans une version la plus à jour possible (et tenant compte des divers correctifs et modifications apportés). Il faudra donc utiliser [les versions les plus récentes](../../../../se3master/tree/master/usr/share/se3/sbin) dont vous pourrez consulter [la doc d'utilisation](../se3-sauvegarde/sauverestaure.md#sauvegarder-et-restaurer-un-serveur-se3).
+
+**Remarque :** le répertoire `/run/lock/` n'est disponible qu'à partir de la version `Wheezy` et sert à poser un verrou pour éviter de lancer le script `sauve_se3.sh` si une sauvegarde est toujours en cours. La création de ce répertoire ne sera plus nécessaire pour les versions à partir de `Wheezy`. Pour la création de ce répertoire, on pourra utiliser la commande suivante :
+```sh
+mkdir -p /run/lock
+```
 
 
 ### Correction du problème de l'annuaire

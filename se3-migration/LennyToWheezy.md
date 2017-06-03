@@ -19,6 +19,7 @@ Vous pouvez aussi consulter la documentation de migration de `se3/Squeeze` vers 
 
 ## Procédure
 
+* Créer le répertoire `/run/lock` (nécessaire au fonctionnement du script `sauve_se3.sh`)
 * sauvegarde via le script **sauve_se3.sh** (voir la doc pour les détails)
 * installer `se3/wheezy` : voir la doc sur GitHub ; il y a plusieurs procédures, manuelles, automatiques,…
 * mettre en place les modules comme sur l'ancien `se3` + messagerie + onduleur (voir la doc)
@@ -28,7 +29,12 @@ Vous pouvez aussi consulter la documentation de migration de `se3/Squeeze` vers 
 * remettre en place la sauvegarde via **sauve_se3.sh**
 * on peut aussi mettre en place un clonage via clonezilla : voir la doc sur GitHub de même
 
-**Remarque :** suite aux divers essais effectués, des modifications du script `restaure_se3.sh` ont incorporés quelques correctifs. Cette version du script n'est donc pas encore disponible directement sur le `se3/wheezy` installé : il faudra la télécharger directement depuis GitHub (voir la doc).
+**Remarque 1 :** suite aux divers essais effectués, des modifications du script `restaure_se3.sh` ont incorporés quelques correctifs. Cette version du script n'est donc sans doute pas encore disponible directement sur le `se3/wheezy` installé : il faudra la télécharger directement depuis GitHub (voir la doc).
+
+**Remarque 2 :** le répertoire `/run/lock/` n'est disponible qu'à partir de la version `Wheezy` et sert à poser un verrou pour éviter de lancer le script si une sauvegarde est toujours en cours. La création de ce répertoire ne sera plus nécessaire pour les versions à partir de `Wheezy`. Pour la création de ce répertoire, on pourra utiliser la commande suivante :
+```sh
+mkdir -p /run/lock
+```
 
 
 ## Compléments
