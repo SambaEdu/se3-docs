@@ -62,6 +62,12 @@ https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw
 https_proxy='http://ip_passerelle:3128' wget -P /usr/share/se3/sbin/ https://raw.githubusercontent.com/SambaEdu/se3master/master/usr/share/se3/sbin/restaure_se3.sh --no-check-certificate
 ```
 
+**Important :** dans tous les cas, si vous avez téléchargé une version des scripts, n'oubliez pas de le rendre exécutable :
+```share
+chmod u+x /usr/share/se3/sbin/sauve_se3.sh
+chmod u+x /usr/share/se3/sbin/restaure_se3.sh
+```
+
 **Remarque :** certaines commandes utilisées dans cet article ne seront pas disponibles sur un `se3` en `Lenny` mais on pourra utiliser des commandes de remplacement telles que `parted` ou `fdisk`. Si ces commandes ne vous sont pas familières, utilisez le forum versaillais ou la liste de discussion de Caen pour qu'un collègue vous guide pour leur utilisation.
 
 
