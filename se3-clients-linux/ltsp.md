@@ -179,13 +179,16 @@ Se reporter à l'annexe pour une description.
 Il existe deux endroits sur le serveur se3 qui permettent de personnaliser le "home" de l'utilisateur
 
 * /opt/ltsp/i386[ou amd64]/etc/skel
-Tous les fichiers et répertoires déposés dans ce répertoire sont copiés, via le réseau, **à chaque ouverture** de session et **pour chaque utilisateur** dans son home.
+Tous les fichiers et répertoires déposés dans ce répertoire sont copiés via le réseau **à chaque ouverture** de session et **pour chaque utilisateur** dans son home.
 Il est donc important que la taille de ce répertoire ne soit pas très importante (10 Mo au plus).
 
 * /opt/ltsp/i386[ou amd64]/etc/skel2
-Tous les fichiers et répertoires déposés dans ce répertoire sont copiés, via le réseau, **à la 1ère ouverture** de session et **pour chaque utilisateur** dans son partage //Docs/.i386/ sur le se3.
-Ces fichiers et répertoires sont ainsi rendus "persistants" et personnalisables par l'utilisateur. Ils doivent avoir les droits 755.
+Tous les répertoire/fichiers de ce répertoire doivent avoir les droits 755.
+Tous les fichiers et répertoires déposés dans ce répertoire sont copiés via le réseau **uniquement à la 1ère ouverture** de session et **pour chaque utilisateur** dans son partage //Docs/.i386/ sur le se3.
+Ces fichiers et répertoires sont ainsi rendus "persistants" et personnalisables par l'utilisateur.
 Il est possible d'y mettre les fichiers/répertoires qui ont une taille importantes (.mozilla et .wine par exemple) et qu'on souhaite rendre personnalisable par l'utilisateur.
+A l'ouverture de session, c'est le script /usr/local/bin/logon.sh du client lourd automatiquement lancé par l'utilisateur qui se loggue qui se charge de faire cette copie.
+Un fichier de log de ce script est présent dans /home/$USER/.logon.log
 
 Ainsi, pour personnaliser le profil firefox et le rendre personnalisable, il suffit :
 - de se logguer sur un client lourd avec le compte admin par exemple.
@@ -207,6 +210,13 @@ update-rc.d nbd-server disable
 ```
 
 ## TODO : derniers points à régler ##
+
+* Certains éléments du home de l'utilisateur (ceux déposés dans /opt/ltsp/i386/etc/skel2 sur le serveur se3) sont personnalisables et rendus persistants dans le partage //Docs/.i386 de l'utilisateur
+Comment gérer une mise à jour d'un élément de /opt/ltsp/i386/etc/skel2 autrement qu'en faisant, sur le se3, en tant que root, un :
+```sh
+rm -rf --one-file-system /home/*/Docs/.i386/repertoire_a_mettre_a_jour
+```
+Peut-être créant un fichier texte de version dans chaque /opt/ltsp/i386/etc/skel2/repertoire/ ?
 
 * La "mise à jour" du module se3-clonage (ou certaines actions dans le menu tftp de l'interface web du se3) va faire perdre le menu PXE suivant :
 
