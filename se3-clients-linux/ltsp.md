@@ -24,9 +24,9 @@ c'est la configuration mise en place par défaut par le script d'installation de
 (voir la rubrique "Administrer" pour mettre en place simplement cette configuration)
 
 La configuration ltsp appliquée au serveur Se3 l'impacte peu :
-* seuls deux services supplémentaires sont exécutés sur le se3 : nfs et nbd.
+* seuls deux services supplémentaires sont exécutés sur le se3 : les services nfs et nbd.
 * l'environnement (chroot) des clients lourds est configuré afin de les rendre `autonomes` du se3 ; en particulier, l'identification 
-des utilisateurs est réalisée par l'environnement (chroot) des clients lourds et non par le serveur se3.
+des utilisateurs est réalisée par l'environnement (chroot) des clients lourds et non sur le serveur se3.
 * les clients lourds **ne font pas partie d'un sous-réseau** du réseau pédagogique : ltsp est configuré ici en mode `1 carte réseau` pour faciliter 
 sa mise en place : il **n'est pas nécessaire** d'équiper le se3 d'une 2ème carte réseau, **ni** d'investir dans un commutateur réseau dédié au sous-réseau 
 de clients lourds : tout PC ayant un boot PXE et relié au réseau pédagogique pourra démarrer en client lourd, n'importe où dans l'établissement.
@@ -55,8 +55,8 @@ Les utilisations peuvent être nombreuses. Par exemple :
 
 * Le serveur `Se3` **doit** être sous `Debian Wheezy` et disposait d'au moins une `carte 1 Gbs` relié à un port 1 Gbs d'un commutateur réseau.
 * Les modules `Serveur DHCP` (se3-dhcp), `Support des clients GNU/Linux` (se3-clients-linux) et `Sauvegarde / Clonage - Restauration de stations` (se3-clonage) doivent être activés sur le se3. 
-* La partition `racine /` doit disposer d'environ `5 Go` (7 Go pour Ubuntu) pour contenir l'environnement (chroot) des clients lourds.
-* La partition `/var/se3` doit disposer d'environ `5 Go` pour contenir la sauvegarde originale du chroot faite pendant l'installation.
+* La partition `racine /` doit disposer d'environ `15 Go` pour contenir l'environnement (chroot) des clients lourds.
+* La partition `/var/se3` doit disposer d'environ `10 Go` pour contenir la sauvegarde originale du chroot faite pendant l'installation.
 * Le service ltsp est configuré en "mode client lourd" **uniquement** : autrement dit, le `serveur se3` n'a donc pas besoin d'être très puissant car
 les applications sont exécutés avec les ressources des clients lourds. C'est surtout les **accès en lecture au(x) disque(s) dur(s)** qui vont être 
 sollicités sur le se3 (service **nfs ou nbd**) : si le choix se présente, il est donc préférable d'opter dans un `disque dur SSD`
@@ -78,11 +78,11 @@ une `agrégation de liens` (en mode balance-tlb ou en mode balance-alb).
 wget https://raw.githubusercontent.com/SambaEdu/se3-clients-linux/master/src/home/netlogon/clients-linux/ltsp/LTSP_sur_SE3_wheezy.sh
 ```
 
-Par défaut, c'est l'architecture i386 et ubuntu xenial qui est déployé mais il est possible de changer cela avec les deux variables de début de script.
-Par exemple, pour construire un environnement Debian Strech en architecture 64 bits, modifié les deux variables de la façon suivante :
+Par défaut, c'est l'architecture i386 et debian stretch qui est déployé mais il est possible de changer cela avec les deux variables de début de script.
+Par exemple, pour construire un environnement Ubuntu Xenial en architecture 64 bits, modifié les deux variables de la façon suivante :
 ```sh
 ENVIRONNEMENT=amd64
-DISTRIB=stretch
+DISTRIB=xenial
 ```
 
 * Puis exécuter le script :
@@ -97,6 +97,10 @@ Pendant l'installation (qui peut durer une heure), il est demandé, dans l'ordre
 **Attention !!!**
 
 Sous `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
+
+**Remarque :**
+Ce scritp peut être éxécuté plusieurs fois sur le se3 (le script est idempotent). Il est par exemple possible de le lancer une 1ère fois en stretch i386 
+puis une 2de fois en xenial amd64 afin de disposer de deux environnements différents.
 
 ## Que fait le script d'installation ?
 
@@ -118,13 +122,22 @@ L'environnement des clients lourds est configuré pour être au maximum **autono
 Par défaut, par souci de simplicité, **un seul environnement** en architecture i386 est construit pour l'ensemble du parc : cet environnement 
 devra contenir toutes les applications utiles aux utilisateurs et sera utilisé à la fois par les clients lourds i386 et amd64.
 
+## xenial et stretch, quelle différence ?
+L'environnement Debian stretch est plus récent (Juin 2017) que celui d'Ubuntu Xenial (Avril 2016). 
+Certaines applications (telles que Scratch 2 ou OpenSankore) ne sont parfois fonctionnels que sur l'un des deux.
+
+## i386 et amd64, quelle différence ?
+Si tous les PC bootable PXE du réseau sont en architecture amd64 (64 bits), il est conseillé de construire un environnement amd64 pour les clients lourds
+car certaines applications (telles que OpenBoard ou mBlock) ne sont parfois disponibles qu'en architecture 64 bits.
+
+## nfs et nbd, quelle différence ?
+
 ## nfs et nbd, quelle différence ?
 nfs et nbd sont deux services utilisés pour desservir (via le réseau ethernet) l'environnement aux clients lourds.
 nfs est plus souple mais moins performant que nbd : nfs ne nécessite pas de reconstruire l'image squashfs avec la commande ltsp-update-image.
 C'est pourquoi on le concerve dans un sous-menu du menu maintenance du PXE du se3, afin de pouvoir faire des tests plus rapidement.
 
 ## Comment administrer le serveur LTSP ?
-
 L'administration du service LTSP consiste principalement à personnaliser l'environnement i386 (ou amd64) des clients lourds.
 
 Cette administration peut se faire simplement en ligne de commande en se connectant en root au se3 (via ssh par exemple) puis en se mettant sur 
@@ -154,15 +167,44 @@ ltsp-update-image i386     # ou ltsp-update-image amd64 (si c'est l'architectur
 
 **Remarques:**
 
-* l'option -m permet de monter dans le chroot deux répertoires du se3  : elle est parfois nécessaire à certaines installations dans le chroot. 
-Par contre, elle ne devrait être utilisé que lorsqu'aucun client lourd n'est en fonctionnement (si des clients lourds sont en fonctionnement, 
-la commande exit ne parvient pas à réaliser le démontage des 2 repertoires : il faut alors arrêter le service nfs, ce qui revient à déconnecter 
-tous les clients lourds du réseau ...)
+* l'option -m permet de monter dans le chroot deux répertoires du se3 (/dev et /proc) : elle est parfois nécessaire à certaines installations dans le chroot. 
 
 * Toutes les commandes shell exécutables sur un client linux "classique" peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
 
-Toutefois, pour faciliter l'administration, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
+Pour faciliter l'administration, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
+Ces scripts ne sont fonctionels que pour un chroot en architecture i386.
 Se reporter à l'annexe pour une description.
+
+## Comment personnaliser le "home" de l'utilisateur ?
+Il existe deux endroits sur le serveur se3 qui permettent de personnaliser le "home" de l'utilisateur
+
+* /opt/ltsp/i386[ou amd64]/etc/skel
+Tous les fichiers et répertoires déposés dans ce répertoire sont copiés, via le réseau, **à chaque ouverture** de session et **pour chaque utilisateur** dans son home.
+Il est donc important que la taille de ce répertoire ne soit pas très importante (10 Mo au plus).
+
+* /opt/ltsp/i386[ou amd64]/etc/skel2
+Tous les fichiers et répertoires déposés dans ce répertoire sont copiés, via le réseau, **à la 1ère ouverture** de session et **pour chaque utilisateur** dans son partage //Docs/.i386/ sur le se3.
+Ces fichiers et répertoires sont ainsi rendus "persistants" et personnalisables par l'utilisateur. Ils doivent avoir les droits 755.
+Il est possible d'y mettre les fichiers/répertoires qui ont une taille importantes (.mozilla et .wine par exemple) et qu'on souhaite rendre personnalisable par l'utilisateur.
+
+Ainsi, pour personnaliser le profil firefox et le rendre personnalisable, il suffit :
+- de se logguer sur un client lourd avec le compte admin par exemple.
+- de lancer l'application que l'on souhaite personnaliser, par exemple firefox.
+- de repérer dans /home/admin le répertoire de conf de l'application, pour firefox, c'est .mozilla.
+- de vérifier que le répertoire de conf de l'application a les droits 755.
+- d'ouvrir un terminal et d'adapter la commande suivante :
+
+```sh
+rsync -avz --delete-after /home/admin/.mozilla root@ip_du_se3:/opt/ltsp/i386/etc/skel2/
+```
+ 
+## Comment désactiver ltsp sur le se3 ?
+Il suffit simplement de désactiver les deux services nfs-kernel-server et nbd-server en saisissant sur le se3, en tant que root, les commandes suivantes :
+
+```sh
+update-rc.d nfs-kernel-server disable
+update-rc.d nbd-server disable
+```
 
 ## TODO : derniers points à régler ##
 
@@ -211,6 +253,7 @@ exit 0
 
 ## ANNEXE ##
 Ces scripts sont accessibles à partir d'un client lourd du réseau, en se connectant avec le **compte admin du se3** (ce compte est le seul à avoir accès au partage précédent).
+Il ne sont fonctionnels que pour un chroot construire en architecture i386.
 
 * Se connecter sur un client lourd du réseau, avec le compte admin du se3.
 * Se rendre dans le partage Samba du se3 `Clients-linux/ltsp/administrer` accessible depuis le bureau du compte admin du se3.
@@ -233,31 +276,7 @@ Voici une description du rôle et du fonctionnement de ces scripts :
 
 3. `deployer_mon_skel.sh` :
 
-	Ce script permet de personnaliser le `home` par défaut des utilisateurs de client lourd.
-	* Personnaliser vos applications (votre navigateur web par exemple).
-	* Repérer les dossiers de configuration de vos application (par exemple, `/home/admin/.mozilla` pour le navigateur firefox).
-	* Copier ces dossiers dans le partage Samba du se3 `Clients-linux/ltsp/skel`, accessible depuis le bureau du compte admin du se3.
-	* Double-cliquer sur le script `deployer_mon_skel.sh`
-	
-	**Attention !!!**
-	
-	Cet `"home"` est téléchargé via le réseau ethernet `par chaque client lourd` après `chaque ouverture de session` de l'utilisateur :
-	il est donc **important** que le dossier `Clients-linux/ltsp/skel` garde une petite taille (20 Mo maximum) afin que l'ouverture de session 
-	se déroule en un temps raisonnable, de ne pas saturer la ram des clients lourds et de ne pas saturer le réseau pédagogique.
-	
-	`TODO` : Solution alternative (**non fonctionnelle car non finalisée**)
-	
-	Créer sur le se3 un `profil linux persistent` pour chaque utilisateur, profil qui serait monté à l'ouverture de session via cifs :
-	* utiliser la fonction `mount_fat_client_home_with_cifs 'i386' 'IP_DU_SE3'` de la librairie lib.sh pour monter automatiquement 
-	le partage à l'ouverture de session.
-	* mettre en commentaire la ligne qui crée le `home directory` dans le fichier de configuration pam `/opt/ltsp/i386/etc/pam.d/lightdm` :
-	```sh
-	#session required pam_mkhomedir.so skel=/etc/skel umask=0077`
-	```
-	* Sur le se3, créer un dossier /home/$USER/profil-linux pour l'ensemble des utilisateurs de l'annuaire ldap du se3 [à faire].
-	
-	De cette façon, les données du `home` de l'utilisateur ne sont téléchargées via le réseau éthernet dans la ram du client lourd `que 
-	lorsqu'il les utilise` et les préférences utilisateurs (personnalisation du bureau, du navigateur web, ...) seront ainsi persistentes.
+	Obsolète : à ne pas utiliser.
 	
 4. `deployer_imprimantes.sh` :
 
