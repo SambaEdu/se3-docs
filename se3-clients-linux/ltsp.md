@@ -122,9 +122,15 @@ L'environnement des clients lourds est configuré pour être au maximum **autono
 Par défaut, par souci de simplicité, **un seul environnement** en architecture i386 est construit pour l'ensemble du parc : cet environnement 
 devra contenir toutes les applications utiles aux utilisateurs et sera utilisé à la fois par les clients lourds i386 et amd64.
 
+## Quelles applications seront disponibles sur les clients lourds ?
+En plus des applications disponibles par défaut sur le bureau mate, il est installé dans l'environnement des clients lourds :
+* des applications pour l'enseignement d'informatique ICN/ISN : python avec pygame, blocly-arduino, mblock, processing, wireshark, sonic-pi.
+* des applications pour l'enseignement des mathmétiques : geogebra 5, algobox, xcas, scilab, python, scratch.
+* et plein d'autres applications ... à décrouvrir !
+
 ## xenial et stretch, quelle différence ?
 L'environnement Debian stretch est plus récent (Juin 2017) que celui d'Ubuntu Xenial (Avril 2016). 
-Certaines applications (telles que Scratch 2 ou OpenSankore) ne sont parfois fonctionnels que sur l'un des deux.
+Certaines applications (telles que Scratch 2 ou OpenSankore) ne sont parfois fonctionnels que sur l'un (xenial) et pas sur l'autre.
 
 ## i386 et amd64, quelle différence ?
 Si tous les PC bootable PXE du réseau sont en architecture amd64 (64 bits), il est conseillé de construire un environnement amd64 pour les clients lourds
@@ -183,23 +189,23 @@ Tous les fichiers et répertoires déposés dans ce répertoire sont copiés via
 Il est donc important que la taille de ce répertoire ne soit pas très importante (10 Mo au plus).
 
 * /opt/ltsp/i386[ou amd64]/etc/skel2
-Tous les répertoire/fichiers de ce répertoire doivent avoir les droits 755.
-Tous les fichiers et répertoires déposés dans ce répertoire sont copiés via le réseau **uniquement à la 1ère ouverture** de session et **pour chaque utilisateur** dans son partage //Docs/.i386/ sur le se3.
-Ces fichiers et répertoires sont ainsi rendus "persistants" et personnalisables par l'utilisateur.
-Il est possible d'y mettre les fichiers/répertoires qui ont une taille importantes (.mozilla et .wine par exemple) et qu'on souhaite rendre personnalisable par l'utilisateur.
-A l'ouverture de session, c'est le script /usr/local/bin/logon.sh du client lourd automatiquement lancé par l'utilisateur qui se loggue qui se charge de faire cette copie.
+Tous les répertoires de ce dossier doivent avoir les droits 755.
+Tous les répertoires déposés dans ce dossier seront copiés via le réseau **uniquement à la 1ère ouverture** de session et **pour chaque utilisateur** dans son partage //Docs/.i386/ sur le se3.
+Ces répertoires sont ainsi rendus "persistants" et personnalisables par l'utilisateur.
+Il est possible d'y mettre les répertoires qui ont une taille importantes (.mozilla et .wine par exemple) et qu'on souhaite rendre personnalisables par l'utilisateur.
+A l'ouverture de session, le script /usr/local/bin/logon.sh sur le client lourd est automatiquement lancé par l'utilisateur qui se loggue et se charge de faire cette copie.
 Un fichier de log de ce script est présent dans /home/$USER/.logon.log
 
 Ainsi, pour personnaliser le profil firefox et le rendre personnalisable, il suffit :
 - de se logguer sur un client lourd avec le compte admin par exemple.
-- de lancer l'application que l'on souhaite personnaliser, par exemple firefox.
+- de lancer l'application que l'on souhaite personnaliser, par exemple firefox et de la personnaliser (en installant le plugin codeblender pour que blockly-arduino soit fonctionnel par exemple).
 - de repérer dans /home/admin le répertoire de conf de l'application, pour firefox, c'est .mozilla.
 - de vérifier que le répertoire de conf de l'application a les droits 755.
 - d'ouvrir un terminal et d'adapter la commande suivante :
 
 ```sh
 rsync -avz --delete-after /home/admin/.mozilla root@ip_du_se3:/opt/ltsp/i386/etc/skel2/
-```
+``` 
  
 ## Comment désactiver ltsp sur le se3 ?
 Il suffit simplement de désactiver les deux services nfs-kernel-server et nbd-server en saisissant sur le se3, en tant que root, les commandes suivantes :
