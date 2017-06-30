@@ -85,12 +85,17 @@ ENVIRONNEMENT=amd64
 DISTRIB=xenial
 ```
 
-* Puis exécuter le script :
+* Rendre le script executable :
+```sh
+chmod +x LTSP_sur_SE3_wheezy.sh
+```
+
+* Puis l'exécuter :
 ```sh
 ./LTSP_sur_SE3_wheezy.sh
 ```
 
-Pendant l'installation (qui peut durer une heure), il est demandé, dans l'ordre :
+Pendant l'installation (qui peut durer une heure selon la puissance du serveur et le débit vers Internet), il est demandé, dans l'ordre :
 * Le mot de passe du compte `root` de l'environnement des clients lourds
 * Le mot de passe du compte `local` enseignant
 
@@ -99,8 +104,10 @@ Pendant l'installation (qui peut durer une heure), il est demandé, dans l'ordre
 Sous `Ubuntu`, **les mots de passe saisis** sont avec un **clavier querty** (la locale est changée pendant l'installation)
 
 **Remarque :**
-Ce scritp peut être éxécuté plusieurs fois sur le se3 (le script est idempotent). Il est par exemple possible de le lancer une 1ère fois en stretch i386 
-puis une 2de fois en xenial amd64 afin de disposer de deux environnements différents.
+Ce script peut être éxécuté plusieurs fois sur le se3 (le script est idempotent). 
+Il est par exemple possible : 
+- de relancer une 2de fois le script si on souhaite supprimer et reconstruire l'environnement des clients lourds.
+- ou de le lancer une 1ère fois en stretch i386 puis une 2de fois en xenial amd64 afin de disposer de deux environnements différents, un sous Debian et l'autre sous Ubuntu.
 
 ## Que fait le script d'installation ?
 
@@ -174,6 +181,16 @@ ltsp-update-image i386     # ou ltsp-update-image amd64 (si c'est l'architectur
 * l'option -m permet de monter dans le chroot deux répertoires du se3 (/dev et /proc) : elle est parfois nécessaire à certaines installations dans le chroot. 
 
 * Toutes les commandes shell exécutables sur un client linux "classique" peuvent "en principe" être éxécutés dans ce chroot et s'appliquer à tous les clients lourds du réseau.
+
+* Par défaut, une tache cron éteint tous les clients lourds en fonctionnement à 19h.
+
+* Lors de l'installation du service ltsp, une copie de l'environnement (le chroot) des clients lourds est réalisée dans /var/se3/ltsp/originale/i386-originale.
+Il est possible de restaurer en quelques minutes l'environnement des clients lourds tel qu'il était juste à la fin de l'installation, en saisissant sur le se3 en tant que root :
+```sh
+rm -rf --one-file-system /opt/ltsp/i386
+cp -a /var/se3/ltsp/originale/i386-originale /opt/ltsp/i386
+ltsp-update-image i386
+```
 
 Pour faciliter l'administration, un ensemble de scripts est à disposition dans le partage Samba du se3 `Clients-linux/ltsp/administrer`.
 Ces scripts ne sont fonctionels que pour un chroot en architecture i386.
