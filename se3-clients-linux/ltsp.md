@@ -222,6 +222,13 @@ find ~ -type f -mmin -1
 Il suffit simplement de désactiver les deux services nfs-kernel-server et nbd-server en saisissant sur le se3, en tant que root, les commandes suivantes :
 
 ```sh
+service nfs-kernel-server stop
+service nbd-server stop
+```
+
+Et pour les désactiver de façon permanente (même après un reboot du serveur) :
+
+```sh
 update-rc.d nfs-kernel-server disable
 update-rc.d nbd-server disable
 ```
