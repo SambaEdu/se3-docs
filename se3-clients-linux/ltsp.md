@@ -137,8 +137,6 @@ Si tous les PC bootable PXE du réseau sont en architecture amd64 (64 bits), il 
 car certaines applications (telles que OpenBoard ou mBlock) ne sont parfois disponibles qu'en architecture 64 bits.
 
 ## nfs et nbd, quelle différence ?
-
-## nfs et nbd, quelle différence ?
 nfs et nbd sont deux services utilisés pour desservir (via le réseau ethernet) l'environnement aux clients lourds.
 nfs est plus souple mais moins performant que nbd : nfs ne nécessite pas de reconstruire l'image squashfs avec la commande ltsp-update-image.
 C'est pourquoi on le concerve dans un sous-menu du menu maintenance du PXE du se3, afin de pouvoir faire des tests plus rapidement.
@@ -187,25 +185,38 @@ Il existe deux endroits sur le serveur se3 qui permettent de personnaliser le "h
 * /opt/ltsp/i386[ou amd64]/etc/skel
 Tous les fichiers et répertoires déposés dans ce répertoire sont copiés via le réseau **à chaque ouverture** de session et **pour chaque utilisateur** dans son home.
 Il est donc important que la taille de ce répertoire ne soit pas très importante (10 Mo au plus).
+Tous les fichiers/répertoires déposés dans ce dossier sont donc non personnalisables par les utilisateurs.car non persistants d'une session à l'autre.
+
 
 * /opt/ltsp/i386[ou amd64]/etc/skel2
-Tous les répertoires de ce dossier doivent avoir les droits 755.
-Tous les répertoires déposés dans ce dossier seront copiés via le réseau **uniquement à la 1ère ouverture** de session et **pour chaque utilisateur** dans son partage //Docs/.i386/ sur le se3.
-Ces répertoires sont ainsi rendus "persistants" et personnalisables par l'utilisateur.
-Il est possible d'y mettre les répertoires qui ont une taille importantes (.mozilla et .wine par exemple) et qu'on souhaite rendre personnalisables par l'utilisateur.
+Tous les répertoires déposés dans ce dossier doivent avoir les droits 755.
+Ces derniers seront copiés via le réseau **uniquement à la 1ère ouverture** de session et **pour chaque utilisateur** dans son partage //Docs/.i386/ sur le se3.
+Ces répertoires sont ainsi personnalisables par l'utilisateur car rendus persistants d'une session à l'autre.
+Il est possible d'y mettre les répertoires qui ont une taille importantes (.mozilla et .wine par exemple).
 A l'ouverture de session, le script /usr/local/bin/logon.sh sur le client lourd est automatiquement lancé par l'utilisateur qui se loggue et se charge de faire cette copie.
 Un fichier de log de ce script est présent dans /home/$USER/.logon.log
 
-Ainsi, pour personnaliser le profil firefox et le rendre personnalisable, il suffit :
-- de se logguer sur un client lourd avec le compte admin par exemple.
-- de lancer l'application que l'on souhaite personnaliser, par exemple firefox et de la personnaliser (en installant le plugin codeblender pour que blockly-arduino soit fonctionnel par exemple).
-- de repérer dans /home/admin le répertoire de conf de l'application, pour firefox, c'est .mozilla.
+Ainsi, pour rendre un répertoire personnalisable par l'utilisateur et persistant d'une ouverture de session à l'autre, il suffit :
+- de se logguer sur un client lourd avec le **compte local enseignant**.
+- de lancer l'application que l'on souhaite personnaliser, par exemple firefox et de la personnaliser (en installant le plugin codeblender pour pouvoir téléverser avec blockly-arduino par example).
+- de repérer dans /home/enseignant le répertoire de conf de l'application, pour firefox, c'est .mozilla.
 - de vérifier que le répertoire de conf de l'application a les droits 755.
 - d'ouvrir un terminal et d'adapter la commande suivante :
 
 ```sh
-rsync -avz --delete-after /home/admin/.mozilla root@ip_du_se3:/opt/ltsp/i386/etc/skel2/
+rsync -avz --delete-after /home/enseignant/.mozilla root@ip_du_se3:/opt/ltsp/i386/etc/skel2/
 ``` 
+
+**Remarques :**
+- Il est important d'utiliser le compte local enseignant pour éviter les liens symboliques éventuellement présents dans le home des comptes utilisateurs du se3.
+- Il est possible de trouver le nom du répertoire de configuration d'une application en saisissant rapidement, après avoir configuré l'application, dans un émulateur de terminal, 
+la commande suivante (qui permet d'indiquer les fichiers modifiés il y a moins d'une minute dans le home de l'utilisateur) :
+
+```sh
+find ~ -type f -mmin -1
+``` 
+
+- La commande rsync présente l'avantage de copier les liens symboliques, contrairement à la commande scp -r qui suit les liens symboliques et copie leur contenu.
  
 ## Comment désactiver ltsp sur le se3 ?
 Il suffit simplement de désactiver les deux services nfs-kernel-server et nbd-server en saisissant sur le se3, en tant que root, les commandes suivantes :
@@ -215,14 +226,15 @@ update-rc.d nfs-kernel-server disable
 update-rc.d nbd-server disable
 ```
 
-## TODO : derniers points à régler ##
+## TODO : derniers points à régler
 
-* Certains éléments du home de l'utilisateur (ceux déposés dans /opt/ltsp/i386/etc/skel2 sur le serveur se3) sont personnalisables et rendus persistants dans le partage //Docs/.i386 de l'utilisateur
-Comment gérer une mise à jour d'un élément de /opt/ltsp/i386/etc/skel2 autrement qu'en faisant, sur le se3, en tant que root, un :
+* Comment gérer une mise à jour d'un dossier présent dans `/opt/ltsp/i386/etc/skel2` autrement qu'en faisant, sur le se3, en tant que root, un :
+
 ```sh
 rm -rf --one-file-system /home/*/Docs/.i386/repertoire_a_mettre_a_jour
 ```
-Peut-être créant un fichier texte de version dans chaque /opt/ltsp/i386/etc/skel2/repertoire/ ?
+
+-> Peut-être en créant un fichier texte de version dans chaque /opt/ltsp/i386/etc/skel2/repertoire/ ?
 
 * La "mise à jour" du module se3-clonage (ou certaines actions dans le menu tftp de l'interface web du se3) va faire perdre le menu PXE suivant :
 
