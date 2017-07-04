@@ -20,8 +20,8 @@ cela va ajouter les clés de registre à la base de registre et le répertoire `
 la suite devrait être identique à l'intégration d'un `windows7`.
 
 **Astuce :** afin de ne pas avoir à utiliser de clé `usb`, on ne se connecte pas à netlogon :
-- Accès à \\se3 puis login / pass admin
-- ensuite progs\install\domscripts ---> qui est un lien vers \\se3\netlogon\domscripts
+- Accès à \\\\se3 puis login / pass admin
+- ensuite progs\install\domscripts → qui est un lien vers \\\se3\netlogon\domscripts
 - Fusion du .reg
 - Lancement de rejoinSE3.exe. La suite fonctionne puisque l'accès à netlogon est autorisé par le .reg précédent.
 - enjoy
