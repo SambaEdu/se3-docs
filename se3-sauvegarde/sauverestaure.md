@@ -398,6 +398,9 @@ tail -f /var/log/syslog
 * Redémarrez le serveur
 * Tentez une connexion
 
+**NB :** : on accède à l'interface web `setup` (*mode sans échec*) du `se3` via l'url : 
+*http://adresse_ip_du_se3:909/setup/index.php*
+
 
 ### En cas de problème insoluble
 
