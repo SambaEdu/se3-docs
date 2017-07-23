@@ -48,9 +48,9 @@ wget https://osdn.net/projects/clonezilla/downloads/67927/clonezilla-live-201706
 * pour une clé `usb`
 ```sh
 wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_alternative/20170626-zesty/clonezilla-live-20170626-zesty-amd64.zip
-```
 
-**Remarque :** la version stable indiquée dans les lignes de commande ci-dessus est la **2.5.0-25**. Vérifiez [sur le site de Clonezilla](http://clonezilla.org/downloads/download.php?branch=stable) que c'est bien toujours la version stable et, si elle a changé, n'hésitez pas à modifier la référence correspondante.
+
+**Remarque :** la version stable indiquée dans les lignes de commande ci-dessus est la **20170626-zesty(basée sur Ubuntu)**. Vérifiez [sur le site de Clonezilla](http://clonezilla.org/downloads/download.php?branch=stable ou http://clonezilla.org/downloads/download.php?branch=alternative) que c'est bien toujours la version stable/alternative et, si elle a changé, n'hésitez pas à modifier la référence correspondante.
 
 
 ### Graver sur un `CD`
@@ -60,7 +60,7 @@ wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_alternati
 * Insérez un `CD` dans le lecteur de votre ordinateur  
 Avec une taille supérieure à la taille de l'image `iso` (supérieure à 205 Mo environ)
 
-* Cliquez-droit sur l'archive téléchargée **clonezilla-live-2.5.0-25-amd64.iso**  
+* Cliquez-droit sur l'archive téléchargée **clonezilla-live-20170626-zesty-amd64.zip**  
 Dans le menu contextuel, choisir **Graver sur le disque…**  
 Vous obtenez la fenêtre suivante :  
 ![graver_cd_01](images/graver_cd_01.png)
