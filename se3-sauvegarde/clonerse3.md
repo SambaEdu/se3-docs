@@ -39,16 +39,15 @@ Il s'agit de télécharger `Clonezilla` et de le graver sur un `CD` ou de le cop
 
 ### Télécharger `Clonezilla`
 
-On télécharge une archive de `Clonezilla` selon le média utilisé : `CD` ou clé `usb`.
+On télécharge une archive de `Clonezilla` selon le média utilisé : `CD` ou clé `usb`. Comme le but est de mettre clonezilla sur un support externe, il sera bien plus pratique d'utiliser un client linux ou windows plutôt que de télécharger l'archive sur le se3 lui-même.
 
 * pour un `CD`
 ```sh
-wget https://osdn.net/projects/clonezilla/downloads/67139/clonezilla-live-2.5.0-25-amd64.iso
-```
+wget https://osdn.net/projects/clonezilla/downloads/67927/clonezilla-live-20170626-zesty-amd64.iso
 
 * pour une clé `usb`
 ```sh
-wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_stable/2.5.0-25/clonezilla-live-2.5.0-25-amd64.zip
+wget wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_alternative/20170626-zesty/clonezilla-live-20170626-zesty-amd64.zip
 ```
 
 **Remarque :** la version stable indiquée dans les lignes de commande ci-dessus est la **2.5.0-25**. Vérifiez [sur le site de Clonezilla](http://clonezilla.org/downloads/download.php?branch=stable) que c'est bien toujours la version stable et, si elle a changé, n'hésitez pas à modifier la référence correspondante.
