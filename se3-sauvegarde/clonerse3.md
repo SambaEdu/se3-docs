@@ -44,11 +44,12 @@ On télécharge une archive de `Clonezilla` selon le média utilisé : `CD` ou c
 * pour un `CD`
 ```sh
 wget https://osdn.net/projects/clonezilla/downloads/67927/clonezilla-live-20170626-zesty-amd64.iso
+```
 
 * pour une clé `usb`
 ```sh
 wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_alternative/20170626-zesty/clonezilla-live-20170626-zesty-amd64.zip
-
+```
 
 **Remarque :** la version stable indiquée dans les lignes de commande ci-dessus est la **20170626-zesty(basée sur Ubuntu)**. Vérifiez [sur le site de Clonezilla](http://clonezilla.org/downloads/download.php?branch=stable ou http://clonezilla.org/downloads/download.php?branch=alternative) que c'est bien toujours la version stable/alternative et, si elle a changé, n'hésitez pas à modifier la référence correspondante.
 
