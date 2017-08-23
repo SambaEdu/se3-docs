@@ -22,6 +22,7 @@
     * [Le fichier `setup_se3.data`](#le-fichier-setup_se3data)
     * [Le script `install_phase2.sh`](#le-script-install_phase2sh)
     * [Lancement du script de la phase 2](#lancement-du-script-de-la-phase-2)
+* [Réinstallation sur la même machine avec le dossier save](#réinstallation-sur-la-même-machine-avec-le-dossier-save)
 
 
 ## Préliminaire
@@ -416,3 +417,47 @@ Toujours avec la session en **root** via `ssh` sur le serveur, on lance le scrip
 À partir de là, vous pourrez vous référer à [l'installation automatique (phase3)](http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Installation#Phase_3_:_Apr.C3.A8s_le_reboot_installation_automatique_du_paquet_se3_et_consort) pour la suite de l'installation.
 
 
+## Réinstallation sur la même machine avec le dossier save
+
+On peut utiliser le dossier de sauvegarde quotien /var/se3/save pour réinstaller facilement le serveur suite à un crash ou si on souhaite migrer d'une architecture 32 bits en 64 bits par exemple. Il contient une sauvegarde de l'annuaire ldap, de la base mysql se3db et du sid du domaine.
+
+Ce dossier ne contient par contre pas certains éléments qui peuvent être utiles :
+
+* Le fichier samba de configuration des partages personnalisés /etc/samba/smb_etab.conf,
+* La configuration des imprimantes,
+* La liste des paquets se3 installés,
+* Le fichier de configuation automatique setup_se3.data.
+
+Il faut aussi vérifier que les fichiers de sauvegarde ldap et mysql ne sont pas vides (de taille nulle... ce qui arrive si l'annuaire ldap est très cassé.)
+
+La réinstallation se passe en 3 étapes :
+ ### Etape 1 : SID du domaine
+ 
+ Avant de lancer le script install_phase2.sh on va copier le fichier secrets.tdb au bon endroit :
+  ```sh 
+ cd /var/lib/samba 2&> || mkdir /var/lib/samba && cp -f /var/se3/save/secrets.tdb /var/lib/samba/secrets.tdb && chmod 600 /var/lib/samba/secrets.tdb
+ ```
+ Cette ligne crée le dossier /var/lib/samba s'il n'existe pas et y copie (de force!) le fichier secrets.tdb de l'ancien serveur en lui attribuant les bons droits.
+ 
+On installe en suite SE3 avec le script
+```sh
+./install_phase2.sh
+```
+Il est essentiel de réinstaller le serveur avec les mêmes paramètres que l'ancien! lorsque SE3 est installé on réinstalle les modules puis on passe à la suite.
+ 
+ ### Etape 2 : ldap
+ 
+ On lance le script de restauration de l'annuaire ldap :
+ ```sh 
+ restaure_ldap.sh
+ ```
+ et on se laisse guider en choisisant le jour de restauration.
+ 
+ ### Etape 3 : mysql
+ 
+ On restaure la base mysql au même jour que l'annuaire ldap :
+ ```sh 
+ mysql se3db < /var/se3/save/mysql/se3db.$JOUR.sql
+ ```
+ 
+ Et c'est terminé...
