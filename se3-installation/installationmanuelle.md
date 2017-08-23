@@ -419,7 +419,7 @@ Toujours avec la session en **root** via `ssh` sur le serveur, on lance le scrip
 
 ## Réinstallation sur la même machine avec le dossier save
 
-On peut utiliser le dossier de sauvegarde quotien /var/se3/save pour réinstaller facilement le serveur suite à un crash ou si on souhaite migrer d'une architecture 32 bits en 64 bits par exemple. Il contient une sauvegarde de l'annuaire ldap, de la base mysql se3db et du sid du domaine.
+On peut utiliser le dossier de sauvegarde quotidien /var/se3/save pour réinstaller facilement le serveur suite à un crash ou si on souhaite migrer d'une architecture 32 bits en 64 bits par exemple. Il contient une sauvegarde de l'annuaire ldap, de la base mysql se3db et du sid du domaine.
 
 Ce dossier ne contient par contre pas certains éléments qui peuvent être utiles :
 
@@ -431,7 +431,8 @@ Ce dossier ne contient par contre pas certains éléments qui peuvent être util
 Il faut aussi vérifier que les fichiers de sauvegarde ldap et mysql ne sont pas vides (de taille nulle... ce qui arrive si l'annuaire ldap est très cassé.)
 
 La réinstallation se passe en 3 étapes :
- ### Etape 1 : SID du domaine
+
+ ### Étape 1 : SID du domaine
  
  Avant de lancer le script install_phase2.sh on va copier le fichier secrets.tdb au bon endroit :
   ```sh 
@@ -445,7 +446,7 @@ On installe en suite SE3 avec le script
 ```
 Il est essentiel de réinstaller le serveur avec les mêmes paramètres que l'ancien! lorsque SE3 est installé on réinstalle les modules puis on passe à la suite.
  
- ### Etape 2 : ldap
+ ### Étape 2 : ldap
  
  On lance le script de restauration de l'annuaire ldap :
  ```sh 
@@ -453,11 +454,11 @@ Il est essentiel de réinstaller le serveur avec les mêmes paramètres que l'an
  ```
  et on se laisse guider en choisisant le jour de restauration.
  
- ### Etape 3 : mysql
+ ### Étape 3 : mysql
  
  On restaure la base mysql au même jour que l'annuaire ldap :
  ```sh 
  mysql se3db < /var/se3/save/mysql/se3db.$JOUR.sql
  ```
  
- Et c'est terminé...
+ Et c'est terminé…
