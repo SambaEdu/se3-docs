@@ -426,7 +426,7 @@ Ce dossier ne contient par contre pas certains éléments qui peuvent être util
 * Le fichier samba de configuration des partages personnalisés /etc/samba/smb_etab.conf,
 * La configuration des imprimantes,
 * La liste des paquets se3 installés,
-* Le fichier de configuation automatique setup_se3.data.
+* Le fichier de configuation automatique setup_se3.data. Voici un [lien vers un script] qui crée ce fichier. (https://github.com/samgon/se3-scripts/blob/master/0-cree_se3data.sh)
 
 Il faut aussi vérifier que les fichiers de sauvegarde ldap et mysql ne sont pas vides (de taille nulle... ce qui arrive si l'annuaire ldap est très cassé.)
 
