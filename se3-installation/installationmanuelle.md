@@ -456,9 +456,10 @@ Il est essentiel de réinstaller le serveur avec les mêmes paramètres que l'an
  
  ### Étape 3 : mysql
  
- On restaure la base mysql au même jour que l'annuaire ldap :
+ On restaure la base mysql au même jour que l'annuaire ldap et on paramètre le serveur dhcp (si vous avez activé le module):
  ```sh 
  mysql se3db < /var/se3/save/mysql/se3db.$JOUR.sql
+ makedhcpdconf
  ```
  
  Et c'est terminé…
