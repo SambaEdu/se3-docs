@@ -26,6 +26,7 @@
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
     * [Quelques vérifications](#quelques-vérifications)
+    * [Cas d'un `se3 32-bits`](#Cas-dun-se3-32-bits)
 * [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
     * [Une solution alternative](#une-solution-alternative)
     * [Correction du problème de l'annuaire](#correction-du-problème-de-lannuaire)
@@ -333,6 +334,16 @@ rsyslog:
 Il faut alors l'installer :
 ```sh
 apt-get install rsyslog
+```
+
+
+### Cas d'un `se3 32-bits`
+
+Si à la suite de la migration d'un `se3 32-bits` `squeeze` vers `wheezy` il est impossible de se connecter sur les postes, alors que tout est vert sur l'interface de diagnostique, il se peut que le paquet `samba-vfs-modules` ne soit pas installé sur le serveur.
+
+La commande suivante devrait résoudre le problème :
+```sh
+apt-get install samba-vfs-modules
 ```
 
 
