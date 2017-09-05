@@ -26,7 +26,7 @@
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
     * [Quelques vérifications](#quelques-vérifications)
-    * [Cas d'un `se3 32-bits`](#Cas-dun-se3-32-bits)
+    * [Cas d'un `se3 32-bits`](#cas-dun-se3-32-bits)
 * [Utiliser les scripts de sauvegarde/restauration](#utiliser-les-scripts-de-sauvegarderestauration)
     * [Une solution alternative](#une-solution-alternative)
     * [Correction du problème de l'annuaire](#correction-du-problème-de-lannuaire)
