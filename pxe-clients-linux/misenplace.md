@@ -13,8 +13,8 @@
         * [Présence éventuelle d'autres systèmes d'exploitation](#présence-éventuelle-dautres-systèmes-dexploitation)
 * [Configuration du serveur `TFTP`](#configuration-du-serveur-tftp)
     * [Le mot de passe](#le-mot-de-passe)
-    * [Les environnements de Bureau](#les-environnements-de-bureau)
     * [Mise en place du mécanisme](#mise-en-place-du-mécanisme)
+    * [Les environnements de Bureau](#les-environnements-de-bureau)
     * [Mise à jour](#mise-à-jour)
     * [Fichier de log de la mise en place](#fichier-de-log-de-la-mise-en-place)
     * [Le miroir local](#le-miroir-local)
@@ -128,6 +128,14 @@ Nous en avons déjà parlé dans les prérequis : indispensable !
 ![module tftp mot de passe](images/pxe_tftp_01.png)
 
 
+### Mise en place du mécanisme
+
+Pour déclencher la mise en place du dispositif : **cliquez sur le bouton `Lancer le Téléchargement`**.
+![module tftp téléchargement](images/mise_en_place_dispositif.png)
+
+La configuration des menus obtenus en pxe s'opère en **cliquant sur le bouton `Valider`** de la partie concernant le choix de l'environnement de Bureau.
+
+
 ### Les environnements de Bureau
 
 Choisissez votre environnement de Bureau parmi ceux proposés dans l'interface web du `se3` :
@@ -144,16 +152,11 @@ Vous pouvez aussi choisir **une installation manuelle** : il faudra alors répon
 **Remarque :** le choix de la distribution, `Debian` ou `Ubuntu`, sera fait lors de l'utilisation du dispositif, devant le `client-linux` à installer, via le mode `PXE`.
 
 
-### Mise en place du mécanisme
-
-La validation du ou des choix effectués déclenchera la mise en place du dispositif : **cliquez sur le bouton `Valider`** de la partie concernant le choix de l'environnement de Bureau.
-
-
 ### Mise à jour
 
-Si une nouvelle version du paquet `pxe-client-linux` est proposée, il suffira de cliquer à nouveau sur ce bouton de la partie concernant le choix de l'environnement de Bureau pour effectuer la mise à jour sur votre serveur `se3`.
+Si une nouvelle version du paquet `pxe-client-linux` est proposée, il suffira de cocher la case qui permet de supprimer le dispositif et de le retélécharger puis de valider (voir ci-dessus la copie d'écran).
 
-De même, si les archives netboot `Ubuntu` ou `Debian` ont changé, cliquez à nouveau sur ce bouton de la partie concernant le choix de l'environnement de Bureau pour mettre à jour les fichiers d'amorce de l'installation via le mode `PXE`.
+De même, si les archives netboot `Ubuntu` ou `Debian` ont changé, mettez à jour le mécanisme.
 
 
 ### Fichier de log de la mise en place
