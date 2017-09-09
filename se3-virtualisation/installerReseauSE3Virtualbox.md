@@ -6,6 +6,8 @@ L'objectif est d'obtenir un réseau LAN sous VirtualBox avec la possibilité d'i
 
 On reprend son souffle, en image cela donne:
 
+![virtu_01_topo_reseau](images/virtu_01_topo_reseau.png)
+
 Tout ce travail dans l'optique de tester :
 * les actions de maintenance du SE3 avant de les reproduire sur le vrai serveur ;
 * l'intégration de systèmes d'exploitation différents ;
@@ -44,6 +46,8 @@ _--> Coming soon <--_
 ### Vue générale après l'installation
 
 Voici à quoi ressemble la console de VirtualBox, elle contient déjà ici quelques systèmes d'exploitation. 
+
+![virtu_02_console_virtualbox](images/virtu_02_console_virtualbox.png)
 
 ### Réglages après l'installation
 
@@ -165,8 +169,7 @@ _Il est possible d'accéder à l'interface depuis le côté WAN, se référer à
 
 Accéder à l'interface d'administration d'IPCop via l'url https://172.16.1.254:8443, accepter le certificat et saisir le login 'admin' et mot de passe pour arriver sur cette page :
 
-InterfaceIpcopAccueil.png
-
+![virtu_03_interface_ipcop](images/virtu_03_interface_ipcop.png)
 
 Depuis le menu **Système**, sélectionner **Mises à jour** et appliquer la mise à jour disponible.
 
@@ -268,7 +271,7 @@ Carte 1 | Mode d'accès réseau : Réseau interne | Nom : intnet | Mode Promiscu
 
 Double cliquer sur la machine virtuelle pour la démarrer, puis sélectionner Install avec la touche Entrée :
 
-AccueilInstallDebian.png
+![virtu_04_install_debian](images/virtu_04_install_debian.png)
 
 Saisir les paramètres de localisation :
 
