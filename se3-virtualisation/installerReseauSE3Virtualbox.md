@@ -1,5 +1,37 @@
 # Installer un réseau SE3 avec VirtualBox
 
+* [Introduction](#introduction)
+* [Installation de VirtualBox](#installation-de-virtualbox)
+  * [Installation](#installation)
+    * [Windows](#windows)
+    * [Ubuntu](#ubuntu)
+    * [Debian](#debian)
+  * [Vue générale après l'installation](#vue-générale-après-linstallation)
+  * [Réglages après l'installation](#réglages-après-linstallation)
+* [Installation des machines virtuelles](#installation-des-machines-virtuelles)
+  * [Etape 1 : Installation d'IPCop](#etape-1--installation-dipcop)
+    * [Récupération de tout le nécessaire](#récupération-de-tout-le-nécessaire)
+    * [Création de la machine virtuelle](#création-de-la-machine-virtuelle)
+    * [Installation](#installation)
+    * [Paramétrage post-installation](#paramétrage-post-installation)
+  * [Etape 2 : Installation du SE3](#etape-2--installation-du-se3)
+    * [Récupération de tout le nécessaire](#récupération-de-tout-le-nécessaire)
+    * [Création du fichier Setup_se3.data](#création-du-fichier-setup_se3data)
+    * [Création de la machine virtuelle](#création-de-la-machine-virtuelle)
+    * [Installation d'un système debian basique](#installation-dun-système-debian-basique)
+    * [Installation des paquets SE3](#installation-des-paquets-se3)
+    * [Configuration post-installation](#configuration-post-installation)
+    * [Cas particuliers d'installation](#cas-particuliers-dinstallation)
+  * [Etape 3 : Installation des clients virtuels](#etape-3--installation-des-clients-virtuels)
+    * [Paramètres réseau des VMs](#paramètres-réseau-des-vms)
+    * [Client Windows 7](#client-windows-7)
+    * [Client Windows 10](#client-windows-10)
+    * [Client Linux](#client-linux)
+* [Virtualisation d'un réseau avec une autre passerelle](#virtualisation-dun-réseau-avec-une-autre-passerelle)
+  * [SLIS 4](#slis-4)
+  * [AMON](#amon)
+* [Disques durs virtuels prêts à l'usage](#disques-durs-virtuels-prêts-à-lusage)
+
 ## Introduction
 
 L'objectif est d'obtenir un réseau LAN sous VirtualBox avec la possibilité d'installer assez facilement un réseau de machines virtuelles administrées par un serveur SE3, lui aussi virtuel le tout derrière une passerelle/proxy sous IPCop.
@@ -17,15 +49,15 @@ Tout ce travail dans l'optique de tester :
 
 ___
 
-_En fonction des capacités de la machine hôte il pourra être difficile d'avoir accès à tout les systèmes virtuels en même temps de façon confortable. Une bonne quantité de mémoire vive et disposer d'un disque dur dédié aux images virtuelles des systèmes est un plus. ;-)_
+>_En fonction des capacités de la machine hôte il pourra être difficile d'avoir accès à tout les systèmes virtuels en même temps de façon confortable. Une bonne quantité de mémoire vive et disposer d'un disque dur dédié aux images virtuelles des systèmes est un plus. ;-)_
 
-_La procédure proposée par la suite implique une configuration avec une IP distribuée par un serveur DHCP à la carte réseau côté WAN du serveur IP-Cop. Si l'environnement est différent il sera nécessaire d'adapter la configuration RED à l'installation d'IP-Cop._
+>_La procédure proposée par la suite implique une configuration avec une IP distribuée par un serveur DHCP à la carte réseau côté WAN du serveur IP-Cop. Si l'environnement est différent il sera nécessaire d'adapter la configuration RED à l'installation d'IP-Cop._
 
 ## Installation de VirtualBox
 
 ### Installation
 
-* Windows©
+#### Windows
 
 Pour télécharger le programme d'installation sous Windows©, il suffit de se rendre sur le site de [VirtualBox](https://www.virtualbox.org/).
 
@@ -35,17 +67,17 @@ Si vous souhaitez utiliser des périphériques USB sur les systèmes virtuels, i
 
 Pour se dernier un simple double-clic sur le fichier après avoir installé Virtualbox en permet l'installation.
 
-* Ubuntu©
+#### Ubuntu
 
 _--> Coming soon <--_
 
-* Installation Debian©
+#### Debian
 
 _--> Coming soon <--_
 
 ### Vue générale après l'installation
 
-Voici à quoi ressemble la console de VirtualBox, elle contient déjà ici quelques systèmes d'exploitation. 
+Voici à quoi ressemble la fenêtre de VirtualBox, elle contient déjà ici quelques VMs. 
 
 ![virtu_02_console_virtualbox](images/virtu_02_console_virtualbox.png)
 
@@ -57,14 +89,14 @@ Vous pouvez alors indiquer où vous souhaitez enregistrer les fichiers pour les 
 
 ## Installation des machines virtuelles
 
-### Étape 1 - Installation d'IPCop
+### Etape 1 : Installation d'IPCop
 
-**Récupération de tout le nécessaire :**
+#### Récupération de tout le nécessaire
 * [Image ISO (Sourceforge)](https://sourceforge.net/projects/ipcop/files/IPCop/IPCop%202.1.8/ipcop-2.1.8-install-cd.i486.iso/download)
 * [Manuel d'installation (EN)](http://www.ipcop.org/2.0.0/en/install/html/)
 * [Manuel d'administration (EN)](http://www.ipcop.org/2.0.0/en/admin/html/)
 
-**Création de la machine virtuelle :**
+#### Création de la machine virtuelle
 
 Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton 'Nouveau' avec les paramètres suivants : 
 
@@ -89,10 +121,10 @@ Insérer l'iso d'IPCop dans le lecteur optique virtuel
 *Carte 2 | Mode d'accès réseau : Réseau interne | Nom : intnet (ou à votre convenance) | Mode Promiscuité : Autoriser les VMs
 ```
 
-**Installation**
+#### Installation
 
 Double cliquer sur la machine virtuelle pour la démarrer, à l'écran 'boot :', appuyer simplement sur entrée pour lancer l'installation et saisir les paramètres suivants :
-_Navigation avec la touche Tab et sélection des listes de choix avec Espace ;-)_
+>_Navigation avec la touche Tab et sélection des listes de choix avec Espace ;-)_
 
 ```sh
 * Langue : French | Valider écran suivant par Ok | Clavier : fr | Fuseau horaire : Europe/Paris | Date - Heure : Contrôler et valider par Ok
@@ -117,7 +149,8 @@ La configuration du système commence, saisir les paramètres suivants en valida
 ```
 
 A l'écran 'Affectation des cartes', il est nécessaire d'affecter la carte 1 (eth0) en "Accès par pont" au réseau RED (côté WAN) et la carte 2 (eth1) en "Réseau interne" au réseau GREEN (côté LAN). Pour cela mettre en surbrillance la carte et choisir l'option "'Sélectionner'" avec Tab. Dans le menu choisir RED ou GREEN en fonction du cas puis "'Assigner'". Une fois fini, valider par "'Continuer'"
-_Normalement à cette étape, la première carte du menu est eth0 et la seconde eth1, si vous avez un doute vérifiez les adresses MAC. Les paramètres réseau de la VM sont accessibles depuis l'icône en bas de la fenêtre de virtualisation ou depuis le fenêtre principale de VirtualBox._
+
+>_Normalement à cette étape, la première carte du menu est eth0 et la seconde eth1, si vous avez un doute vérifiez les adresses MAC. Les paramètres réseau de la VM sont accessibles depuis l'icône en bas de la fenêtre de virtualisation ou depuis le fenêtre principale de VirtualBox._
 
 Pour les écrans suivants, saisir les paramètres ci-dessous :
 
@@ -140,7 +173,7 @@ Pour les écrans suivants, saisir les paramètres ci-dessous :
 Passer cette étape
 ```
 
-_(sauf si vous n'utilisez pas de DHCP sur le réseau physique)_
+> _(sauf si vous n'utilisez pas de DHCP sur le réseau physique)_
 
 * Configuration du serveur DHCP :
 
@@ -148,19 +181,19 @@ _(sauf si vous n'utilisez pas de DHCP sur le réseau physique)_
 Passer cette étape
 ```
 
-_(On se servira du SE3 comme DHCP par la suite, en attendant il suffira de déclarer manuellement les paramètres réseau sur les autres VMs)_
+> _On se servira du SE3 comme DHCP par la suite, en attendant il suffira de déclarer manuellement les paramètres réseau sur les autres VMs_
 
 Il reste à définir les différents mots de passe pour 'root', 'admin' et la clé de cryptage.
 
-_6 caractères minimum sont requis, dans le cadre de serveurs de test 'admin!' pour chaque compte peut convenir, évidemment sur des serveurs en production c'est une bien mauvaise idée. ;-)_
+> _6 caractères minimum sont requis, dans le cadre de serveurs de test 'admin!' pour chaque compte peut convenir pour se simplifier la vie, évidemment sur des serveurs en production c'est une bien mauvaise idée. ;-)_
 
 Valider l'écran de fin via "'Félicitations!'". Le serveur IPCop redémarre et est presque prêt à être utilisé, il ne reste que quelques paramétrages à réaliser via son interface web. 
 
-**Paramétrage post-installation :**
+#### Paramétrage post installation
 
 Pour cela il va nous falloir un client sur le réseau LAN virtuel :
 
-_Il est possible d'accéder à l'interface depuis le côté WAN, se référer à la doc (EN) ou prendre un peu d'avance en installant un client qui servira par la suite._
+>_Il est possible d'accéder à l'interface depuis le côté WAN, se référer à la doc (EN) ou prendre un peu d'avance en installant un client qui servira par la suite._
 
 ```sh
 * choisir l'OS qui vous plaît et l'installer sur une VM avec pour la configuration réseau : 'Mode d'accès réseau : Réseau interne' | Nom : intnet | Mode Promiscuité : Autoriser les VMs
@@ -185,16 +218,18 @@ Depuis le menu **Services**, sélectionner **Serveur mandataire (proxy)** et sai
 
 La passerelle/proxy est prête ! 
 
-### Étape 2 - Installation du SE3
+### Etape 2 : Installation du SE3
 
-**Récupération de tout le nécessaire :**
+#### Récupération de tout le nécessaire
 
 * [ISO Debian 7.11.0 i386](http://cdimage.debian.org/cdimage/archive/7.11.0/i386/iso-cd/debian-7.11.0-i386-netinst.iso)
 * [ISO Debian 7.11.0 amd64](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso)
 
-**Création du fichier Setup_se3.data :**
+#### Création du fichier Setup_se3.data
 
-Compléter le formulaire [Créer un fichier setup_se3.data](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy) avec les paramètres suivants _(conserver bien l'adresse URL du fichier de sortie que l'on ira chercher avec un wget par la suite)_ : 
+Compléter le formulaire [Créer un fichier setup_se3.data](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy) avec les paramètres suivants 
+
+>_Conserver bien l'adresse URL du fichier de sortie que l'on ira chercher avec un wget par la suite_
 
 ```sh
 Hôte et domaine :
@@ -243,7 +278,7 @@ Paramètres de samba :
 
 Ou pour les moins courageux, télécharger celui-ci [Setup se3.zip](http://wiki.dane.ac-versailles.fr/index.php?title=Fichier:Setup_se3.zip), qu'il faudra copier sur le serveur via une clé USB. 
 
-**Création de la machine virtuelle :**
+#### Création de la machine virtuelle
 
 Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton 'Nouveau' avec les paramètres suivants :
 
@@ -267,7 +302,7 @@ Insérer l'iso de debian dans le lecteur optique virtuel
 Carte 1 | Mode d'accès réseau : Réseau interne | Nom : intnet | Mode Promiscuité : Autoriser les VMs
 ```
 
-**Installation d'un système debian basique :**
+#### Installation d'un système debian basique
 
 Double cliquer sur la machine virtuelle pour la démarrer, puis sélectionner Install avec la touche Entrée :
 
@@ -331,12 +366,9 @@ serveur d'impression | serveur SSH | Utilitaires usuels du système
 Puis continuer, à la demande d'installation du Grub, répondre Oui pour arriver sur l'écran de fin. Sélectionner **Continuer** pour redémarrer.
 
 
-**Installation des paquets SE3 & complémentaires :**
-
-[Fichier:LoginDebian.png]
+#### Installation des paquets SE3
 
 Après le redémarrage du système debian, nous allons passer à l'installation des paquets SAMBAEDU3, pour cela connecter vous en tant que 'root' et utiliser le fichier data pour automatiser la fin de l'installation.
-
 
 * Récupération et déplacement du fichier setup_se3.data, saisir une après l'autre les commandes suivantes :
 
@@ -378,14 +410,14 @@ chmod +x install_phase2.sh
 
 La seconde partie de l'installation commence à cet instant. Si le fichier setup_se3.data est au bon endroit et complet ; la suite se poursuivra sans vous pour la configuration, sinon le script demandera les détails en mode interactif. L'installation se termine avec la mise à jour vers la dernière version ainsi que le changement de mot de passe 'root'. Le serveur est alors fonctionnel et administrable via l'interface web.
 
-**Configuration post-installation :**
+#### Configuration post installation
 
 Depuis le client qui a servi pour IPCop précédemment, connecter vous à l'interface http://172.16.1.253:909 et activer puis configurer immédiatement le serveur DHCP.
 
 Par la suite importer les clés de registres, installer les autres modules,... Administration classique d'un serveur SE3, cela ne devrait plus avoir de secret pour vous! ;-)
 
 
-**Cas particulier d'installation :**
+#### Cas particuliers d'installation
 
 _--> Partie non révisée. <--_
 
@@ -411,9 +443,9 @@ DD3 : 1 partition avec /home
 
 **Remarque :** pour des disques réels, cela dépend des capacités disponibles. Cependant, pour le disque dur 1, les recommandations sont de 2 Go pour le swap, 10 Go pour la partition /, 28 Go pour /var et le reste pour la partition /home/admin, ce qui permet d'être à l'aise pour le compte admin, sans gêner la place disponible pour les autres comptes. Ces répartitions du disque 1 ont été calculées pour un disque dur de 160 Go. 
 
-### Étape 3 - Installation des clients virtuels
+### Etape 3 : Installation des clients virtuels
 
-**Paramètres réseau des VMs :**
+#### Paramètres réseau des VMs
 
 * Dans la console VirtualBox, sélectionner Préférences > Onglet 'Réseau' :
 
@@ -421,11 +453,20 @@ DD3 : 1 partition avec /home
 Carte 1 | Mode d'accès réseau : Réseau interne | Nom : intnet | Mode Promiscuité : Autoriser les VMs
 ```
 
-**Client Windows 7**
+#### Client Windows 7
 
 Rien de particulier à dire, vous avez sans doute l'expérience d'une installation de Windows, le déroulement est identique. Prévoir 40 go minimum d'espace disque pour avoir la place d'y installer quelques logiciels.
 
+#### Client Windows 10
+
+_--> Coming soon <--_
+
+#### Client Linux
+
+_--> Coming soon <--_
+
 ## Virtualisation d'un réseau avec une autre passerelle
+
 ### SLIS 4
 
 _--> Coming soon <--_
