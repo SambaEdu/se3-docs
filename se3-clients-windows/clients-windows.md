@@ -22,6 +22,7 @@ L'installeur peut être téléchargé directement chez `Microsoft` sans restrict
 * **`Windows7` Pro 32 et 64 bits**  
 Il faut utiliser une version officielle sans personnalisations `OEM`, il est admis d'y ajouter les mises à jour ainsi que les drivers à l'aide d'outils tiers : voir
 [les outils](#outils) plus bas. En revanche aucune personnalistion de type `GPO` ne doit avoir été faite.
+En pratique, pour avoir un système à jour il faut déployer des milliers de mises à jour. C'est très lent ! Il vaut mieux installer W10 !
 
 * **`WindowsXP` n'est plus supporté**, ni par `SE3`, ni par `Microsoft`, ni par les applications récentes.  
 Si vous vous posez la question d'installer des postes `windowsXP`, [installez des `clients-linux`](../pxe-clients-linux/README.md#installation-de-clients-linux-debian-et-ubuntu-via-se3--intégration-automatique) !
@@ -61,16 +62,18 @@ Tous les drivers utiles doivent être installés et à jour : voir
 
 Pour `Windows7` il faut activer à l'aide d'un outil tiers…
 
-Pour `Windows10`, aucune activation n'est requise si le poste est éligible à une installation `OEM`. Ceci implique généralement que les clés OEM SLIC V2.4 soient intégrées au Bios. Ce n'est malheureusement pas toujours le cas. On a alors deux possibilités légales pour éviter de devoir faire l'activation : intégrer les clés au Bios si on les possède, ou installer à partir du DVD OEM du constructeur.
+Pour `Windows10`, théoriquement aucune activation n'est requise si le poste est éligible à une installation `OEM`. Ceci implique généralement que les clés OEM SLIC V2.4 soient intégrées au Bios. Ce n'est malheureusement pas toujours le cas. Il est possible de récupérer la licence du bios, l'intégration se3 le fera automatiquement en cas de besoin.
+En cas d'absence d'activation, un message s'affiche en fond d'écran, mais à part cela tout fonctionne. 
 
 **Attention** Ne pas télécharger et utiliser Windows Loader pour Windows 10 : c'est un faux, qui en revanche installe de vrais virus !
 
 ## Préparation et mise à jour
 
 **Sur un serveur à jour, aucune opération manuelle n'est nécessaire pour intégrer windows 10**
+
 **A VERIFIER**
 
-Il faut avoir crée un fichier témoin `temoin_w10.txt` vide dans le répertoire `netlogon\domscripts\`. Ensuite il suffit de se connecter sur lancer `\\se3\admhomes` avec le compte`admin` et de lancer `\\se3\admhomes\netlogon\domscripts\rejointse3.exe`.
+Il faut avoir créé un fichier témoin `temoin_w10.txt` vide dans le répertoire `netlogon\domscripts\`. Ensuite il suffit de se connecter sur `\\se3\admhomes` avec le compte `admin` et de lancer `\\se3\admhomes\netlogon\domscripts\rejointse3.exe`.
 
 ## ancienne méthode
 
