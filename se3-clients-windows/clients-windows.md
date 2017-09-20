@@ -66,6 +66,15 @@ Pour `Windows10`, aucune activation n'est requise si le poste est éligible à u
 **Attention** Ne pas télécharger et utiliser Windows Loader pour Windows 10 : c'est un faux, qui en revanche installe de vrais virus !
 
 ## Préparation et mise à jour
+
+**Sur un serveur à jour, aucune opération manuelle n'est nécessaire pour intégrer windows 10**
+**A VERIFIER**
+
+Il faut avoir crée un fichier témoin `temoin_w10.txt` vide dans le répertoire `netlogon\domscripts\`. Ensuite il suffit de se connecter sur lancer `\\se3\admhomes` avec le compte`admin` et de lancer `\\se3\admhomes\netlogon\domscripts\rejointse3.exe`.
+
+## ancienne méthode
+
+
 Il est possible d'automatiser un certain nombre de réglages, dans l'optique de faire une image de la machine avant l'intégration. À vous de choisir parmi les commandes suivantes, celles qui vous conviennent et les mettre dans un fichier `.bat`.
 
 * Désactiver les 3 pare-feux de Windows7 :
