@@ -41,7 +41,7 @@ Le test d’envoi de message de l’interface web devrait fonctionner : dans la 
 
 Pour recevoir un mail immédiatement à une adresse donnée, on pourra aussi lancer la commande suivante, via un terminal en ssh sur le `se3` :
 
-sh```
+```sh
 echo "test" | mail mon@dresse.tld
 ```
 
