@@ -1,6 +1,8 @@
 # Configurer la messagerie du `se3`
 
-sommaire
+* [Des infos à recueillir](#des-infos-à-recueillir)
+* [Configuration via l'interface `web`](#configuration-via-linterface-web)
+* [Vérification](#vérification)
 
 ## Des infos à recueillir
 
