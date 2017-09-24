@@ -35,7 +35,7 @@ Vous validez et vous devriez recevoir un message de confirmation de la part du `
 ## Vérification
 
 Le test d’envoi de message de l’interface web devrait fonctionner : dans la page diagnostic, vous cliquez sur le bouclier vert correspondant à la ligne "Configuration de l'expédition des mails" et un menu contextuel permettra d'envoyer un message de test.
-![messagerie_03](images/messagerie_03.png)
+![messagerie_02](images/messagerie_03.png)
 
 Pour recevoir un mail immédiatement à une adresse donnée, on pourra aussi lancer la commande suivante, via un terminal en ssh sur le `se3` :
 
