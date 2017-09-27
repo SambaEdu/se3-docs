@@ -2,15 +2,15 @@
 
 * [Préambule](#préambule)
 * [Trouver les pilotes](#trouver-les-drivers)
-* [Préparer la console `MMC`](#préparer-la-console-mmc)
-    * [Ouvrir la console `MMC`](#ouvrir-la-console-mmc)
-    * [Ajouter le module de gestion des imprimantes](#ajouter-le-module-de-gestion-des-imprimantes)
-    * [Ajouter le serveur `se3`](#ajouter-le-serveur-se3)
 * [Gestion d'une imprimante](#gestion-dune-imprimante)
     * [1ère étape : sur l'interface web du `se3`](#1ère-étape--sur-linterface-web-du-se3)
         * [Ajouter l'imprimante](#ajouter-limprimante)
         * [Ajouter l'imprimante au parc](#ajouter-limprimante-au-parc)
-    * [2ème étape : sur la console `MMC`](#2ème-étape--sur-la-console-mmc)
+    * [2ème étape : Préparer la console `MMC`](#2ème-étape--préparer-la-console-mmc)
+        * [Ouvrir la console `MMC`](#ouvrir-la-console-mmc)
+        * [Ajouter le module de gestion des imprimantes](#ajouter-le-module-de-gestion-des-imprimantes)
+        * [Ajouter le serveur `se3`](#ajouter-le-serveur-se3)
+    * [3ème étape : sur la console `MMC`](#3ème-étape--sur-la-console-mmc)
         * [Lister les imprimantes](#lister-les-imprimantes)
         * [Ajouter les pilotes](#ajouter-les-pilotes)
         * [Affecter les pilotes à l'imprimante](#affecter-les-pilotes-à-limprimante)
@@ -24,9 +24,6 @@ On se propose ici de décrire la mise en place d'une **imprimante réseau** sur 
 * Clients `windows 7` 32 bits et 64 bits
 
 Dans cet exemple et sur les copies d'écran, il s'agit d'une imprimante réseau `HP Laserjet 1022n` dont l'adresse `IP` est `172.16.108.100`.
-
-Pour l'ensemble des étapes qui suivent, on utilisera un poste sous `Windows 7` 64 bits, faisant partie du **même parc que l'imprimante**, et sur lequel on aura ouvert la session `admin`.
-
 
 ## Trouver les drivers
 
@@ -90,32 +87,7 @@ On renomme ensuite les lignes
 `[Kyocera.NTamd64.6.0]` par`[Kyocera.NTamd64]`
 On enregistre. Les drivers peuvent ensuite être uploadés avec la console mmc vers le se3.
 
-## Préparer la console `MMC`
-
-### Ouvrir la console `MMC`
-
-Ouvrir la console `MMC` en lançant la commande `mmc.exe`
-
-![Consolle MMC vide](images/imprimantes_console_mmc_vide.png)
-
-
-### Ajouter le module de gestion des imprimantes
-
-Menu `Fichier` → `Ajouter/Supprimer un composant logiciel enfichable`
-
-Sélectionner `Gestion de l'impression` dans la colonne de gauche, cliquer sur `Ajouter`, puis valider.
-
-![Console MMC : Ajout du module de gestion des imprimantes](images/imprimantes_console_mmc_ajout_module.png)
-
-
-### Ajouter le serveur `se3`
-
-Clic droit sur `Gestion de l'impression` → `Ajouter/Supprimer des serveurs`
-
-Cliquer sur `Parcourir`, afin de sélectionner le serveur `se3` soit par son nom, soit par son adresse `IP`, puis cliquer sur `Ajouter à la liste`, et valider.
-
-![Console MMC : Ajout d'un serveur](images/imprimantes_console_mmc_ajout_serveur.png)
-
+[Il faudrait préciser ce que l'on fait avec les pilotes WHQL]
 
 ## Gestion d'une imprimante
 
@@ -124,6 +96,7 @@ Cliquer sur `Parcourir`, afin de sélectionner le serveur `se3` soit par son nom
 #### Ajouter l'imprimante
 
 Sur le serveur, menu `Imprimantes` → `Nouvelle imprimante`
+(Attention dans le cas de la remise en place d'une imprimante existant deja il est conseillé de la suprimer totalement puis de la rajouter en changeant son ip et son nom pour eviter les conflits)
 
 Saisir les informations concernant l'imprimante :
 * Un nom (8 caractères max, pas d'espace)
@@ -147,12 +120,43 @@ Menu `Imprimantes` → `Ajout à un parc`
 Sélectionner le parc, puis l'imprimante à intégrer.
 
 
-### 2ème étape : sur la console `MMC`
+### 2ème étape : Préparer la console `MMC`
+
+Pour l'ensemble des étapes qui suivent, il est obligatoire de faire partie du **même parc que l'imprimante**, et sur lequel on aura ouvert la session `admin`.
+Si on a fait l'étape precedente sur la meme session il est conseillé de se deconnecter et de se reconnecter du reseau afin que le parc reconnaisse ses imprimantes nouvellement créés(peut être qu'un relancer connexion peut aussi suffire)
+
+#### Ouvrir la console `MMC`
+
+Ouvrir la console `MMC` en lançant la commande `mmc.exe`
+
+![Consolle MMC vide](images/imprimantes_console_mmc_vide.png)
+
+
+#### Ajouter le module de gestion des imprimantes
+
+Menu `Fichier` → `Ajouter/Supprimer un composant logiciel enfichable`
+
+Sélectionner `Gestion de l'impression` dans la colonne de gauche, cliquer sur `Ajouter`, puis valider.
+
+![Console MMC : Ajout du module de gestion des imprimantes](images/imprimantes_console_mmc_ajout_module.png)
+
+
+#### Ajouter le serveur `se3`
+
+Clic droit sur `Gestion de l'impression` → `Ajouter/Supprimer des serveurs`
+
+Cliquer sur `Parcourir`, afin de sélectionner le serveur `se3` soit par son nom, soit par son adresse `IP`, puis cliquer sur `Ajouter à la liste`, et valider.
+
+![Console MMC : Ajout d'un serveur](images/imprimantes_console_mmc_ajout_serveur.png)
+
+
+### 3ème étape : sur la console `MMC`
 
 
 #### Lister les imprimantes
 
 Vérifier que la branche `Serveur d'impression` → `Se3` → `Imprimantes` contient bien l'imprimante précédemment créée via l'interface web du `se3`.
+Sinon se deconnecter et se reconnecter en `admin` sur un poste qui fait partie du **même parc que l'imprimante** afin que le parc reconnaisse ses imprimantes nouvellement créés (peut être qu'un relancer connexion peut aussi suffire)
 
 ![Console MMC](images/imprimantes_console_mmc.png)
 
@@ -208,4 +212,3 @@ L'imprimante est maintenant déployable automatiquement sur l'ensemble des machi
 
 **Remarque :** Si le pilote est non packagé, Il se peut qu'un message demandant l'autorisation d'installer l'imprimante apparaisse une fois sur les postes du parcs. À priori, un simple utilisateur du domaine peut répondre `oui`, et le message n'apparaît plus par la suite.
 C'est la sécurité mise en place pour éviter l'installation de virus via le téléchargement de pilotes non packagés. Elle n'est pas contournable par des `GPO`.
-
