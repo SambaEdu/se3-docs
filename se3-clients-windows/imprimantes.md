@@ -25,6 +25,7 @@ On se propose ici de décrire la mise en place d'une **imprimante réseau** sur 
 
 Dans cet exemple et sur les copies d'écran, il s'agit d'une imprimante réseau `HP Laserjet 1022n` dont l'adresse `IP` est `172.16.108.100`.
 
+
 ## Trouver les drivers
 
 La première étape consiste à télécharger les drivers sur le site du constructeur. En général il faut privilégier les `Universal Drivers`, qui sont conçus pour des installations centralisées et ont donc plus de chances d'être aux normes.
@@ -32,7 +33,6 @@ La première étape consiste à télécharger les drivers sur le site du constru
 De plus, cela réduit le nombre de manips car il suffit de mettre un pilote par fabricant sur le serveur.
 
 Quelques liens sont donnés ci-dessous, mais ils peuvent expirer, recherchez donc `Universal driver` sur votre moteur de recherche favori…
-
 
 **Attention :**
 Depuis juillet 2016, `Microsoft` a fermé un trou de sécurité, ce qui rend **impossible l'installation totalement silencieuse des pilotes qui ne sont pas au format `packaged`**.
@@ -70,7 +70,6 @@ On va ensuite dans la catégorie
 `[Manufacturer]
 "Kyocera"=Kyocera,NTx86.5.1,NTamd64.5.1,NTx86.6.0,NTamd64.6.0`
 
-
 Et remplacer cela par
 `[Manufacturer]
 "Kyocera"=Kyocera,NTx86,NTamd64`
@@ -81,7 +80,6 @@ Il faut supprimer toute la partie (cette ligne et le listing des imprimantes qui
 puis la partie
 `[Kyocera.NTamd64.5.1]`
 
-
 On renomme ensuite les lignes
 `[Kyocera.NTx86.6.0]` par `[Kyocera.NTx86]`
 `[Kyocera.NTamd64.6.0]` par`[Kyocera.NTamd64]`
@@ -89,14 +87,16 @@ On enregistre. Les drivers peuvent ensuite être uploadés avec la console mmc v
 
 [Il faudrait préciser ce que l'on fait avec les pilotes WHQL]
 
+
 ## Gestion d'une imprimante
+
 
 ### 1ère étape : sur l'interface web du `se3`
 
 #### Ajouter l'imprimante
 
 Sur le serveur, menu `Imprimantes` → `Nouvelle imprimante`
-(Attention dans le cas de la remise en place d'une imprimante existant deja il est conseillé de la suprimer totalement puis de la rajouter en changeant son ip et son nom pour eviter les conflits)
+(Attention dans le cas de la remise en place d'une imprimante existant deja il est conseillé de la supprimer totalement puis de la rajouter en changeant son ip et son nom pour eviter les conflits)
 
 Saisir les informations concernant l'imprimante :
 * Un nom (8 caractères max, pas d'espace)
@@ -122,8 +122,8 @@ Sélectionner le parc, puis l'imprimante à intégrer.
 
 ### 2ème étape : Préparer la console `MMC`
 
-Pour l'ensemble des étapes qui suivent, il est obligatoire de faire partie du **même parc que l'imprimante**, et sur lequel on aura ouvert la session `admin`.
-Si on a fait l'étape precedente sur la meme session il est conseillé de se deconnecter et de se reconnecter du reseau afin que le parc reconnaisse ses imprimantes nouvellement créés(peut être qu'un relancer connexion peut aussi suffire)
+Pour l'ensemble des étapes qui suivent, il est obligatoire de faire partie du **même parc que l'imprimante**, et sur lequel on aura ouvert la session `admin`. Si on a fait l'étape précédente sur la meme session il est conseillé de fermer la session et d'en rouvrir une en `admin` afin que le parc reconnaisse ses imprimantes nouvellement créés (peut être qu'un relancer connexion peut aussi suffire).
+
 
 #### Ouvrir la console `MMC`
 
@@ -155,8 +155,7 @@ Cliquer sur `Parcourir`, afin de sélectionner le serveur `se3` soit par son nom
 
 #### Lister les imprimantes
 
-Vérifier que la branche `Serveur d'impression` → `Se3` → `Imprimantes` contient bien l'imprimante précédemment créée via l'interface web du `se3`.
-Sinon se deconnecter et se reconnecter en `admin` sur un poste qui fait partie du **même parc que l'imprimante** afin que le parc reconnaisse ses imprimantes nouvellement créés (peut être qu'un relancer connexion peut aussi suffire)
+Vérifier que la branche `Serveur d'impression` → `Se3` → `Imprimantes` contient bien l'imprimante précédemment créée via l'interface web du `se3`. Sinon fermer la sessionet en rouvrir une en `admin` sur un poste qui fait partie du **même parc que l'imprimante** afin que le parc reconnaisse ses imprimantes nouvellement créés (peut être qu'un relancer connexion peut aussi suffire).
 
 ![Console MMC](images/imprimantes_console_mmc.png)
 
