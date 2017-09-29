@@ -77,8 +77,14 @@ Il faut avoir créé un fichier témoin `temoin_w10.txt` vide dans le répertoir
 
 ## ancienne méthode
 
+* pour les postes en w10
 
-Il est possible d'automatiser un certain nombre de réglages, dans l'optique de faire une image de la machine avant l'intégration. À vous de choisir parmi les commandes suivantes, celles qui vous conviennent et les mettre dans un fichier `.bat`.
+Désactiver la mise en veille pour surveiller le poste pendant son intégration l'intégration.
+Fusionner le fichier .reg placé dans  \\se3\progs\install\domscripts (voir article windows10) .
+
+Il est possible d'automatiser un certain nombre de réglages, dans l'optique de faire une **image de la machine** avant l'intégration. À vous de choisir parmi les commandes suivantes, celles qui vous conviennent et les mettre dans un fichier `.bat`. 
+
+*Si l'image de la machine possède déjà l'utilisateurs adminse3, et que le mdp d'adminse3 est bien donné qu compte administrateur, alors l'intégration à distance de l'image déployée pourra se faire directement par l'interface.*
 
 * Désactiver les 3 pare-feux de Windows7 :
 
