@@ -16,6 +16,9 @@ Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement a
 2. Se connecter à \\\\ip_du_serveur_se3\Progs\install\domscripts ou \\\\se3\progs\install\domscripts avec l'identifiant "adminse3"  
 3. Fusionner **Win10-Samba44.reg** (clique droit sur Win10-Samba44.reg → Fusionner)  
 cela va ajouter les clés de registre à la base de registre et le répertoire `netlogon` devient accessible comme sur un `windows7`  
+
+Parfois un problème de droits empêche la fusion du fichier.reg. Il faut alors le copier sur un disque local et le fusionner depuis ce disque. 
+
 4. Exécuter **rejointSE3.exe**  
 la suite est identique à l'intégration d'un `windows7`
 
