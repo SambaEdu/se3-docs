@@ -32,7 +32,7 @@ Si vous vous posez la question d'installer des postes `windowsXP`, [installez de
 
 Installation en mode `Legacy Bios`. **Surtout pas d'`UEFI` !**.
 
-Une seule partition `windows` + la petite partition de boot qui est créée automatiquement par l'installeur. Pour cette partition, 100 Go sont largement suffisant.
+Une seule partition `windows` + la petite partition de boot qui est créée automatiquement par l'installeur. Pour cette partition, 100 Go sont largement suffisants.
 
 Une astuce permet d'éviter la création de la partition de boot de 100Mo créée automatiquement à l'installation de Windows 7. Cela simplifie le clonage et la création d'images. Voici comment procéder.
 
