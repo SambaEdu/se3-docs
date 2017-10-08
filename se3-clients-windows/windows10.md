@@ -30,7 +30,7 @@ Il arrive que l'intégration bloque à une étape, il suffit de redémarrer le p
 **Astuce 2 :** Il faut bien penser à **désactiver la mise en veille** des postes pour que l'intégration se fasse correctement.
 
 
-**Astuce 3 :** Si le poste était auparavent intégré en W7/w10 , et que w10 a été déployé avec une image contenant
+**Astuce 3 :** Si le poste était auparavant intégré en W7/w10 , et que w10 a été déployé avec une image contenant
 les utilisateurs *administrateur* et *adminse3* , utilisateurs faisant bien partie du groupe *administrateur*,que la fusion du fichier **Win10-Samba44.reg** a été faite sur cette image, alors l'integration peut se faire à distance par l'interface. On va dans le *module DHCP*, *réservations actives*, puis *réintégrer le poste*.
 
 
