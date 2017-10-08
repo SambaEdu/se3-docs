@@ -17,13 +17,21 @@ Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement a
 3. Fusionner **Win10-Samba44.reg** (clique droit sur Win10-Samba44.reg → Fusionner)  
 cela va ajouter les clés de registre à la base de registre et le répertoire `netlogon` devient accessible comme sur un `windows7`  
 
-Parfois un problème de droits empêche la fusion du fichier.reg. Il faut alors le copier sur un disque local et le fusionner depuis ce disque. 
+Parfois un problème de droits sur le fichier **Win10-Samba44.reg**  empêche la fusion dans la base de registre du poste. Il faut alors le copier sur le bureau tout simplement et le fusionner depuis cet endroit. 
 
 4. Exécuter **rejointSE3.exe**  
 la suite est identique à l'intégration d'un `windows7`
 
+Il arrive que l'intégration bloque à une étape, il suffit de redémarrer le poste pour que la procédure continue.
+
 **Astuce :** afin de pouvoir fusionner le fichier reg directement sans passer par une clé `usb`, on ne se connecte pas à \\\se3\netlogon\domscripts directement mais au dossier cité précedemment qui est un lien.
 
+
+**Astuce 2 :** Il faut bien penser à **désactiver la mise en veille** des postes pour que l'intégration se fasse correctement.
+
+
+**Astuce 3 :** Si le poste était auparavent intégré en W7/w10 , et que w10 a été déployé avec une image contenant
+les utilisateurs *administrateur* et *adminse3* , utilisateurs faisant bien partie du groupe *administrateur*,que la fusion du fichier **Win10-Samba44.reg** a été faite sur cette image, alors l'integration peut se faire à distance par l'interface. On va dans le *module DHCP*, *réservations actives*, puis *réintégrer le poste*.
 
 
 ## Références
