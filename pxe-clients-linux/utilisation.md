@@ -16,6 +16,7 @@
         * [Problème 5 : système de fichiers racines](#problème-5--système-de-fichiers-racines)
         * [Problème 6 : montage d'un système de fichiers](#problème-6--montage-dun-système-de-fichiers)
         * [Problème 7 : corruption de miroir](#problème-7--corruption-de-miroir)
+        * [Problème 8 : absence du module du noyau](#problème-8--absence du module du noyau)
         * [Analyser un problème](#analyser-un-problème)
 * [Réservation de l'`IP` du `client-linux`](#réservation-de-lip-du-client-linux)
     * [Cas d'une nouvelle machine](#cas-dune-nouvelle-machine)
@@ -158,7 +159,7 @@ L'installation s'arrête sur un message d'erreur : `Pas de système de fichiers 
 L'installation s'arrête sur le message d'erreur suivant :
 ![probleme-installation](images/probleme_netboot.png)
 
-**Solution :** mettre à jour les archives netboot `Ubuntu` ou `Debian`, qui ont dû changer lors d'une évolution de version, en revalidant le choix de l'environnement du Bureau (Voir le module `Serveur TFTP` de l'interface du `se3`).
+**Solution :** mettre à jour les archives netboot `Ubuntu` ou `Debian`, qui ont dû changer lors d'une évolution de version, en [supprimant et retéléchargeant le dispositif](misenplace.md#mise-à-jour) (Voir le module `Serveur TFTP` de l'interface du `se3`).
 
 
 #### Problème 7 : corruption de miroir
@@ -167,6 +168,14 @@ L'installation s'arrête sur un message de corruption du miroir
 ![probleme-miroir](images/probleme_miroir.png)
 
 **Solution :** rétablir la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation.
+
+
+#### Problème 8 : absence du module du noyau
+
+L'installation s'arrête sur un message à propos du module du noyau
+![module_noyau.png](images/module_noyau.png)
+
+**Solution :** même solution que pour le problème 6.
 
 
 #### Analyser un problème
