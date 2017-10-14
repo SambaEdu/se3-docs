@@ -16,7 +16,7 @@
         * [Problème 5 : système de fichiers racines](#problème-5--système-de-fichiers-racines)
         * [Problème 6 : montage d'un système de fichiers](#problème-6--montage-dun-système-de-fichiers)
         * [Problème 7 : corruption de miroir](#problème-7--corruption-de-miroir)
-        * [Problème 8 : absence du module du noyau](#problème-8--absence du module du noyau)
+        * [Problème 8 : absence du module du noyau](#problème-8--absence-du-module-du-noyau)
         * [Analyser un problème](#analyser-un-problème)
 * [Réservation de l'`IP` du `client-linux`](#réservation-de-lip-du-client-linux)
     * [Cas d'une nouvelle machine](#cas-dune-nouvelle-machine)
