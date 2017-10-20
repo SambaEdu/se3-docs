@@ -8,8 +8,8 @@ le se3 par connexion ssh.**
 **SOMMAIRE**
 
 * [Première partie : installation de clonezilla sur le serveur](#installation-de-clonezilla-sur-le-serveur)
-* [Deuxième partie : modification des entrées du menu PXE](#deuxième--partie-modification-des-entrées-du-menu-pxe)
-* [Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE](#troisième-partie--sauvegardes-et-restauration-de-partitions-dans-le-menu-pxe)
+* [Deuxième partie : modification des entrées du menu PXE](#modification-des-entrées-du-menu-pxe)
+* [Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE](#sauvegardes-et-restauration-de-partitions-dans-le-menu-pxe)
 
 
 Une connexion en ssh sur le serveur se3 se fera par défaut dans le répertoire /home/partimag/
@@ -17,7 +17,7 @@ Une connexion en ssh sur le serveur se3 se fera par défaut dans le répertoire 
 Il peut être judicieux de rajouter un disque dur interne sur le se3. Ce disque sera monté de façon permanente en /home/partimag.
 Il pourrait contenir des images de chaque type de PC, des partitions spécifiques à des pc d’une salle si des logiciels spécifiques ne peuvent être déployées par WPKG.
 
-Un disque dur séparé n’est pas obligatoire mais permettra de faire des clonages sans que l’activité du serveur ne s’en trouve diminuée. Le format peut-être en ext3,ntfs, fat32 ou autre puisque les images générées sont découpées en fichiers de taille inférieure à 2 G0.
+Un disque dur séparé n’est pas obligatoire mais permettra de faire des clonages sans que l’activité du serveur ne s’en trouve diminuée. Le format peut-être en ext3, ntfs, fat32 ou autre puisque les images générées sont découpées en fichiers de taille inférieure à 2 G0.
 
 Clonezilla permet aussi de copier une image de partition vers une autre partition locale, servant ainsi de sauvegarde à la première, comme le fait le module du se3.
 
@@ -73,7 +73,7 @@ Depuis le client linux
 
 Une fois décompressé, le fichier.zip peut être effacé.
 
-## Deuxième partie : modification des entrées du menu PXE
+## Modification des entrées du menu PXE
 
 Le module PXE doit être activé au niveau du se3, ainsi que la mise en place d’un mot de passe.
 
@@ -155,7 +155,7 @@ Les fichiers clonezilla.menu et maintenance.menu sont dans l’archive suivante.
 
 Fichier ZIP
 
-## Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE
+## Sauvegardes et restauration de partitions dans le menu PXE
 
 Le but de cette nouvelle partie est de créer deux entrées au PXE , permettant à un professeur passant beaucoup de temps dans une salle informatique de lancer des sauvegardes , de les restaurer sans avoir besoin de mots de passe admin ou root.
 
