@@ -1,8 +1,8 @@
 # Configurer l’onduleur
 
-* [L’interface graphique](#L’interface graphique)
-* [Cas d’un port usb](#Cas d’un port usb)
-* [Cas d’un port série](#Cas d’un port série)
+* [L’interface graphique](#l’interface-graphique)
+* [Cas d’un port usb](#cas-d’un-port-usb)
+* [Cas d’un port série](#cas-d’un-port-série)
 
 
 ## L’interface graphique
