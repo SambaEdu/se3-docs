@@ -5,6 +5,13 @@
 Ces images peuvent être stockées localement sur une partition, un disque dur externe ou tout simplement sur 
 le se3 par connexion ssh.**
 
+**SOMMAIRE**
+
+* [Première partie : installation de clonezilla sur le serveur](#première-partie-:-installation-de-clonezilla-sur-le-serveur)
+* [Deuxième partie : modification des entrées du menu PXE](#deuxième-partie-:-modification-des-entrées-du-menu-pxe)
+* [Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE](#troisième-partie-:-sauvegardes-et-restauration-de-partitions-dans-le-menu-pxe)
+
+
 Une connexion en ssh sur le serveur se3 se fera par défaut dans le répertoire /home/partimag/
 
 Il peut être judicieux de rajouter un disque dur interne sur le se3. Ce disque sera monté de façon permanente en /home/partimag.
