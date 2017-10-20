@@ -7,7 +7,7 @@ le se3 par connexion ssh.**
 
 **SOMMAIRE**
 
-* [Première partie : installation de clonezilla sur le serveur](#première-partie-installation-de-clonezilla-sur-le-serveur)
+* [Première partie : installation de clonezilla sur le serveur](#installation-de-clonezilla-sur-le-serveur)
 * [Deuxième partie : modification des entrées du menu PXE](#deuxième--partie-modification-des-entrées-du-menu-pxe)
 * [Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE](#troisième-partie--sauvegardes-et-restauration-de-partitions-dans-le-menu-pxe)
 
@@ -23,7 +23,7 @@ Clonezilla permet aussi de copier une image de partition vers une autre partitio
 
 Le but est de pouvoir démarrer Clonezilla sur le poste client directement en PXE en vue de le restaurer/creer une image du poste, ou tout simplement faire une sauvegarde/restauration de partitions.
 
-## Première partie : installation de clonezilla sur le serveur
+## Installation de clonezilla sur le serveur
 
 Les images au format ZIP de clonezilla peuvent être téléchargées aux adresses suivantes :
 
