@@ -2,7 +2,7 @@
 
 Pour configurer l’onduleur, utilisez **l’interface web du se3** : 
 
-- avec le module Configuration générale, rentrer dans le menu Onduleur :
+- avec le module **Configuration générale**, rentrer dans le menu **Onduleur** :
 
 ![fenêtre menu](images/onduleur-3fcf7.png)
 
@@ -20,7 +20,7 @@ Pour configurer l’onduleur, utilisez **l’interface web du se3** :
 
 # Cas d’un port usb
 
-- **Tentez une configuration via l’interface web**
+**0. Tentez une configuration via l’interface web**
 Si la tentative ci-dessus de configuration de l’onduleur, par l’intermédiaire de l’interface graphique, ne permet pas d’obtenir une configuration de l’onduleur…
 
 → dans le menu Onduleur, tout n’est pas au vert…
@@ -37,7 +37,7 @@ Pour compléter cette configuration, si cela est nécessaire (tout n’est pas a
 
 Pour cela, **dans le cas d’un port usb**, nous vous proposons la procédure suivante.
 
-- **Repérer des informations de l’onduleur**
+**1. Repérer des informations de l’onduleur**
 
 À l’aide de la commande suivante : 
 ```
@@ -53,7 +53,7 @@ Dans cet exemple, 002 est le bus, 008 est le périphérique, 051d est le vendori
 
 **Remarque** : vous obtiendrez sans doute des informations différentes pour votre se3 ; il suffira d’adapter en conséquence les lignes de commandes et indications qui suivent. Pour ces commandes, nous prendrons les informations de l’exemple ci-dessus (cas d’un smart-ups 750).
 
-- **Analyser les droits sur le bus de l’onduleurRetour ligne automatique**
+**2. Analyser les droits sur le bus de l’onduleur**
 
     À l’aide de la commande suivante (si 002 est le bus et 008 le périphérique) : 
     
@@ -66,9 +66,9 @@ ls -l /dev/bus/usb/002/008
 
     chgrp nut /dev/bus/usb/002/008
     
-**nota** : relancez la commande ls -l /dev/bus/usb/002/008 pour vérifier
+**nota** : relancez la commande *ls -l /dev/bus/usb/002/008* pour vérifier
 
-- **Arrêter le service nut**
+**3. Arrêter le service nut**
 
 Comme nous allons modifier des fichiers de configuration du paquet nut, le mieux est d’arrêter le service nut. Il sera remis en fonction à l’étape 9. 
 
@@ -76,7 +76,7 @@ Comme nous allons modifier des fichiers de configuration du paquet nut, le mieux
 /etc/init.d/nut-server stop
 ```
 
-- **Vérification/modification du fichier /etc/nut/ups.conf**
+**4. Vérification/modification du fichier /etc/nut/ups.conf**
 
 → nano /etc/nut/ups.conf
 
@@ -86,7 +86,7 @@ Rajouter, si nécessaire, dans le fichier /etc/nut/ups.conf les 2 lignes suivant
     vendorid=051d
     productid=0003
     
-- **Vérification/modification du fichier /lib/udev/rules.d/52-nut-usbups.rules**
+**5. Vérification/modification du fichier /lib/udev/rules.d/52-nut-usbups.rules**
 
 → nano /lib/udev/rules.d/52-nut-usbups.rules
 
@@ -105,7 +105,7 @@ mkdir -p /lib/udev/rules.d
 touch /lib/udev/rules.d/52-nut-usbups.rules
 ```
 
-- **Vérification des autres fichiers**
+**6. Vérification des autres fichiers**
 
     Nous donnons ici quelques indications à titre de vérification. Normalement, il ne devrait pas y avoir de modification à faire.
 
@@ -142,11 +142,11 @@ touch /lib/udev/rules.d/52-nut-usbups.rules
     # define the shutdown comand
     SHUTDOWNCMD "/sbin/shutdown -h now"
 
-nota : repérez les paramètres communs aux fichiers /etc/nut/upsd.users et /etc/nut/upsmon.conf. qui peuvent être différents de ceux indiqués ici. 
+**nota** : repérez les paramètres communs aux fichiers /etc/nut/upsd.users et /etc/nut/upsmon.conf. qui peuvent être différents de ceux indiqués ici. 
 
-- **Donner les droits de lecture de la configuration**
+**7. Donner les droits de lecture de la configuration**
 
-À l’aide des commandes suivante :
+À l’aide des commandes suivantes :
 
 ```
 chown root:nut /etc/nut/upsd.* /etc/nut/upsmon.conf
@@ -156,7 +156,7 @@ chown root:nut /etc/nut/upsd.* /etc/nut/upsmon.conf
 chmod u=rw,g=r,o= /etc/nut/upsd.* /etc/nut/upsmon.conf
 ```
 
-- **Lancer le pilote de l’onduleur**
+**8. Lancer le pilote de l’onduleur**
 
 Vérification de la configuration à l’aide de la commande suivante : 
 
@@ -184,7 +184,7 @@ upsdrvctl start
 
 **nota** : Il se peut qu’il y ait un message à propos de pollonly : à ignorer, comme nous le confirme la lecture de la page [usbhid-ups](http://networkupstools.org/docs/man/usbhid-ups.html).
 
-- **Démarrage du service nut**
+**9. Démarrage du service nut**
 
 À l’aide de la commande suivante : 
 
@@ -192,7 +192,7 @@ upsdrvctl start
 /etc/init.d/nut-server start
 ```
 
-- **Démarrage du daemon**
+**10. Démarrage du daemon**
 
 À l’aide de la commande suivante : 
 
@@ -201,7 +201,7 @@ upsdrvctl start
 /etc/init.d/nut-server status
 ```
 
-- **Vérifier le fonctionnement de l’onduleur**
+**11. Vérifier le fonctionnement de l’onduleur**
 
 À l’aide de la commande suivante : 
 
@@ -210,7 +210,7 @@ upsdrvctl start
 upsc myups
 ```
 
-- **Vérifier l’interface web du se3**
+**12. Vérifier l’interface web du se3**
 
 Dans l’interface web, page **Diagnostic** ou page **Onduleur**, tout doit être au vert ::smiley:
 
