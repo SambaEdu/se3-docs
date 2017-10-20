@@ -53,3 +53,78 @@ Depuis le client linux
 
 # wget http://downloads.sourceforge.net/project/clonezilla/clonezilla_live_alternative/20140518-trusty/clonezilla-live-20140518-trusty-amd64.zip
 ```
+*Décompression de l’archive clonezilla.*
+
+
+```sh
+# unzip -j clonezilla-live-*.zip
+```
+
+**Différents fichiers se retrouvent alors dans ce répertoire**
+
+![fenêtre menu1](images/fichiers_clonezilla_decompresses-3.jpg.png)
+
+Une fois décompressé, le fichier.zip peut être effacé.
+
+## Deuxième partie : modification des entrées du menu PXE
+
+Le module PXE doit être activé au niveau du se3, ainsi que la mise en place d’un mot de passe.
+
+Le menu PXE contient certaines lignes préremplies (lancement de Slitaz, de Sysrescuecd, etc. ).
+
+Pour ajouter ou supprimer des entées à ce menu, il va donc falloir modifier certains fichiers sur le se3.
+
+Ces fichiers se trouvent dans le répertoire/tftpboot/pxelinux.cfg/ 
+
+Il faudra modifier le fichier Linux.menu si vous voulez que les entrées apparaissent dans la partie maintenance.
+
+Il y a alors deux possibilités :
+
+- Soit vous éditez à la main le fichier maintenance.menu (ou clonage.menu) en ajoutant le lancement de clonezilla
+
+- Soit vous allez ajouter un fichier clonezilla.menu qui contiendra toutes les informations de lancement, sauvegarde/restauration personnalisées.
+
+La deuxième méthode sera clairement plus simple pour la mise en place, et pour la gestion des futures mises à jour du paquet se3-clonage.
+
+### Première méthode
+
+Pour éditer les fichiers, les non spécialistes du terminal (comme moi) pourront utiliser Filezilla et se connecter dessus en ssh. (aller dans le gestionnaire de sites)
+
+[Filezilla est disponible pour windows, Linux et Mac.](https://filezilla-project.org/download.php?type=client)
+
+![fenêtre menu2](images/connexion_en_ssh_avec_filezilla-2.jpg.png)
+
+Un déplacement dans le répertoire /tftpboot/pxelinux.cfg/ se fera par simples clics
+
+Les fichiers pourront alors être édités par gedit par un simple clic droit sur le fichier.
+
+![fenêtre menu3](images/modification_de_fichier_avec_filezilla.jpg.png)
+
+
+```sh
+# cd /tftpboot/pxelinux.cfg (ou se déplacer jusqu’à cet emplacement)
+```
+Ajouter à maintenance.menu les lignes suivantes en adaptant l’ip du serveur se3 à votre configuration
+
+
+```sh
+label Clonezilla-live
+MENU LABEL Clonezilla Live (Ramdisk)
+
+KERNEL clonezilla/vmlinuz
+
+APPEND initrd=clonezilla/initrd.img boot=live config noswap nolocales edd=on nomodeset ocs_live_run="ocs-live-general" ocs_live_extra_param="" keyboard-layouts="fr" ocs_live_batch="no" locales="" vga=788 nosplash noprompt fetch=tftp://IPDUSE3/clonezilla/filesystem.squashfs
+```
+ATTENTION : CE QUI SUIT « APPEND » EST SENSE ETRE SUR UNE SEULE LIGNE, IL NE FAUT DONC PAS APPUYER SUR ENTRER
+
+![fenêtre menu4](images/fichier_linux.menu_avec_gedit.jpg.png)
+
+Enregistrer et quitter le fichier. (si on utilise filezilla bien préciser « envoyer à nouveau le fichier vers le serveur » en cliquant sur oui)
+
+![fenêtre menu5](images/enregistrement_des_modifs_avec_filezilla.jpg.png)
+
+Cette commande permettra seulement de démarrer clonezilla par le PXE. Toutes les options (langue,clavier, sauvegarde,restauration...) devront être entrées devant le poste.
+
+Clonezilla apparaît maintenant dans le menu maintenance.
+
+![fenêtre menu6](images/menu_pxe_avec_clonezilla_seul.jpg.png)
