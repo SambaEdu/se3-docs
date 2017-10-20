@@ -7,9 +7,9 @@ le se3 par connexion ssh.**
 
 **SOMMAIRE**
 
-* [Première partie : installation de clonezilla sur le serveur](#installation-de-clonezilla-sur-le-serveur)
-* [Deuxième partie : modification des entrées du menu PXE](#modification-des-entrées-du-menu-pxe)
-* [Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE](#sauvegardes-et-restauration-de-partitions-dans-le-menu-pxe)
+* [Première partie : installation de clonezilla sur le serveur](#1-installation-de-clonezilla-sur-le-serveur)
+* [Deuxième partie : modification des entrées du menu PXE](#2-modification-des-entrées-du-menu-pxe)
+* [Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE](#3-sauvegardes-et-restauration-de-partitions-dans-le-menu-pxe)
 
 
 Une connexion en ssh sur le serveur se3 se fera par défaut dans le répertoire /home/partimag/
@@ -23,7 +23,7 @@ Clonezilla permet aussi de copier une image de partition vers une autre partitio
 
 Le but est de pouvoir démarrer Clonezilla sur le poste client directement en PXE en vue de le restaurer/creer une image du poste, ou tout simplement faire une sauvegarde/restauration de partitions.
 
-## Installation de clonezilla sur le serveur
+## 1-Installation de clonezilla sur le serveur
 
 Les images au format ZIP de clonezilla peuvent être téléchargées aux adresses suivantes :
 
@@ -73,7 +73,7 @@ Depuis le client linux
 
 Une fois décompressé, le fichier.zip peut être effacé.
 
-## Modification des entrées du menu PXE
+## 2-Modification des entrées du menu PXE
 
 Le module PXE doit être activé au niveau du se3, ainsi que la mise en place d’un mot de passe.
 
@@ -155,7 +155,7 @@ Les fichiers clonezilla.menu et maintenance.menu sont dans l’archive suivante.
 
 Fichier ZIP
 
-## Sauvegardes et restauration de partitions dans le menu PXE
+## 3-Sauvegardes et restauration de partitions dans le menu PXE
 
 Le but de cette nouvelle partie est de créer deux entrées au PXE , permettant à un professeur passant beaucoup de temps dans une salle informatique de lancer des sauvegardes , de les restaurer sans avoir besoin de mots de passe admin ou root.
 
