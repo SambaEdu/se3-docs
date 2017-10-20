@@ -1,4 +1,4 @@
-# Configurer l’onduleur
+# Configurer l’onduleur (auteurs : Stéphane Laine, Michel Suquet)
 
 * [L’interface graphique](#linterface-graphique)
 * [Cas d’un port usb](#cas-dun-port-usb)
