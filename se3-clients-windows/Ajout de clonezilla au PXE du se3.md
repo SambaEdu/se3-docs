@@ -1,5 +1,5 @@
 
-# Ajout de clonezilla au PXE du se3. Utilisation en clonage, sauvegarde, restauration
+# Ajout de clonezilla au PXE du se3. Utilisation en clonage, sauvegarde, restauration (par Marc Bansse)
 
 **Clonezilla est un Logiciel opensource permettant de faire/restaurer des images de disques, de partitions. 
 Ces images peuvent être stockées localement sur une partition, un disque dur externe ou tout simplement sur 
