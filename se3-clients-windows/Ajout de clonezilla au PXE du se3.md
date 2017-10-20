@@ -39,3 +39,7 @@ Ouvrir une session root au choix sur le serveur, sur un poste client Windows ave
 
 Depuis le client linux
 
+
+```sh
+# ssh -22 root@ipduse3
+```
