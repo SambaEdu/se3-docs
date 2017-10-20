@@ -60,3 +60,124 @@ Dans cet exemple, 002 est le bus, 008 est le périphérique, 051d est le vendori
 ```
 ls -l /dev/bus/usb/002/008
 ```
+→ on devrait avoir une ligne avec root : nut
+
+→ si on n’a pas cela mais par exemple un root:root, c’est qu’il y a un problème de droits et on rétablit ces droits avec la commande suivante (002 est le bus, 008 le périphérique) :
+
+    chgrp nut /dev/bus/usb/002/008
+    
+**nota** : relancez la commande ls -l /dev/bus/usb/002/008 pour vérifier
+
+- **Arrêter le service nut**
+
+Comme nous allons modifier des fichiers de configuration du paquet nut, le mieux est d’arrêter le service nut. Il sera remis en fonction à l’étape 9. 
+
+```
+/etc/init.d/nut-server stop
+```
+
+- **Vérification/modification du fichier /etc/nut/ups.conf**
+
+→ nano /etc/nut/ups.conf
+
+Rajouter, si nécessaire, dans le fichier /etc/nut/ups.conf les 2 lignes suivantes (voir ci-dessus pour le vendorid et le productid) :
+
+    [...]
+    vendorid=051d
+    productid=0003
+    
+- **Vérification/modification du fichier /lib/udev/rules.d/52-nut-usbups.rules**
+
+→ nano /lib/udev/rules.d/52-nut-usbups.rules
+
+J’ai ajouté/modifié les lignes suivantes (voir ci-dessus pour le vendorid et le productid) :
+
+    # APC
+    # my particular APC UPS - usbhid-ups
+    ATTR(idVendor)=="051d", ATTR(idProduct)=="0003", MODE="664", GROUP="nut"
+
+**Remarque** : ne sachant pas si cette étape 5 est nécessaire, je la mentionne ; elle vous sera peut-être utile et il faudra alors créer ce fichier s’il n’existe pas :
+
+```
+mkdir -p /lib/udev/rules.d
+```
+```
+touch /lib/udev/rules.d/52-nut-usbups.rules
+```
+
+- **Vérification des autres fichiers**
+
+    Nous donnons ici quelques indications à titre de vérification. Normalement, il ne devrait pas y avoir de modification à faire.
+
+→ nano /etc/nut/nut.conf
+
+    MODE=standalone
+
+→ nano /etc/nut/upsd.conf
+
+    # /etc/nut/upsd.conf
+    ACL all 0.0.0.0/0
+    ACL localhost 127.0.0.1/32
+    ACCEPT localhost
+    REJECT all
+
+→ nano /etc/default/nut
+
+    # /etc/default/nut
+    START_UPSD=yes
+    START_UPSMON=yes
+
+→ nano /etc/nut/upsd.users
+
+    # define the user rights according to the ACL in upsd.conf
+    [user]
+    password = mypassword
+    allowfrom = localhost lan
+    upsmon master
+
+→ nano /etc/nut/upsmon.conf
+
+    # define the ups to monitor and the permissions
+    MONITOR myups@localhost 1 user mypassword master
+    # define the shutdown comand
+    SHUTDOWNCMD "/sbin/shutdown -h now"
+
+nota : repérez les paramètres communs aux fichiers /etc/nut/upsd.users et /etc/nut/upsmon.conf. qui peuvent être différents de ceux indiqués ici. 
+
+- **Donner les droits de lecture de la configuration**
+
+À l’aide des commandes suivante :
+
+```
+chown root:nut /etc/nut/upsd.* /etc/nut/upsmon.conf
+```
+
+```
+chmod u=rw,g=r,o= /etc/nut/upsd.* /etc/nut/upsmon.conf
+```
+
+- **Lancer le pilote de l’onduleur**
+
+Vérification de la configuration à l’aide de la commande suivante : 
+
+```upsdrvctl start
+```
+
+Un bug du paquet nut peut mettre en échec cette vérification : le répertoire /var/run/nut n’étant pas créer.
+
+Pour contourner ce bug, il faut créer le répertoire /var/run/nut et lui affecter nut comme propriétaire et aussi comme groupe :
+
+
+```
+mkdir /var/run/nut
+```
+```
+chown nut.nut /var/run/nut
+```
+
+On relance la vérification :
+
+```upsdrvctl start
+```
+
+**nota** : Il se peut qu’il y ait un message à propos de pollonly : à ignorer, comme nous le confirme la lecture de la page usbhid-ups.
