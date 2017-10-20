@@ -3,6 +3,7 @@
 Pour configurer l’onduleur, utilisez **l’interface web du se3** : 
 
 - avec le module Configuration générale, rentrer dans le menu Onduleur :
+![fenêtre menu](images/onduleur-3fcf7.png)
 
 - choisir ensuite votre onduleur grâce aux menus déroulants :
 
