@@ -81,7 +81,7 @@ Le menu PXE contient certaines lignes préremplies (lancement de Slitaz, de Sysr
 
 Pour ajouter ou supprimer des entées à ce menu, il va donc falloir modifier certains fichiers sur le se3.
 
-Ces fichiers se trouvent dans le répertoire/tftpboot/pxelinux.cfg/ 
+Ces fichiers se trouvent dans le répertoire **/tftpboot/pxelinux.cfg/**
 
 Il faudra modifier le fichier Linux.menu si vous voulez que les entrées apparaissent dans la partie maintenance.
 
