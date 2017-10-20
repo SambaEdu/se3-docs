@@ -160,7 +160,8 @@ chmod u=rw,g=r,o= /etc/nut/upsd.* /etc/nut/upsmon.conf
 
 Vérification de la configuration à l’aide de la commande suivante : 
 
-```upsdrvctl start
+```
+upsdrvctl start
 ```
 
 Un bug du paquet nut peut mettre en échec cette vérification : le répertoire /var/run/nut n’étant pas créer.
@@ -177,7 +178,8 @@ chown nut.nut /var/run/nut
 
 On relance la vérification :
 
-```upsdrvctl start
+```
+upsdrvctl start
 ```
 
 **nota** : Il se peut qu’il y ait un message à propos de pollonly : à ignorer, comme nous le confirme la lecture de la page usbhid-ups.
