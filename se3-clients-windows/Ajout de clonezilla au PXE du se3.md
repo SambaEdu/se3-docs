@@ -9,6 +9,7 @@ Une connexion en ssh sur le serveur se3 se fera par défaut dans le répertoire 
 
 Il peut être judicieux de rajouter un disque dur interne sur le se3. Ce disque sera monté de façon permanente en /home/partimag.
 Il pourrait contenir des images de chaque type de PC, des partitions spécifiques à des pc d’une salle si des logiciels spécifiques ne peuvent être déployées par WPKG.
+
 Un disque dur séparé n’est pas obligatoire mais permettra de faire des clonages sans que l’activité du serveur ne s’en trouve diminuée. Le format peut-être en ext3,ntfs, fat32 ou autre puisque les images générées sont découpées en fichiers de taille inférieure à 2 G0.
 
 Clonezilla permet aussi de copier une image de partition vers une autre partition locale, servant ainsi de sauvegarde à la première, comme le fait le module du se3.
@@ -29,9 +30,9 @@ Version alternative basée sur Ubuntu raring (utilisée sur mon se3)
 
 http://downloads.sourceforge.net/project/clonezilla/clonezilla_live_alternative/20130819-raring/clonezilla-live-20130819-raring-i386.zip
 
-Remarque. Je n’ai testé que la version "raring" dans mon établissement. Les autres sont peut-être plus ou moins performantes ou reconnues.
+**Remarque** : Je n’ai testé que la version "raring" dans mon établissement. Les autres sont peut-être plus ou moins performantes ou reconnues.
 
-En cas de maj , les liens ne seront plus valides, mais les archives pourront être téléchargées ici :
+En cas de maj, les liens ne seront plus valides, mais les archives pourront être téléchargées ici :
 
 http://clonezilla.org/downloads/download.php?branch=stable
 
