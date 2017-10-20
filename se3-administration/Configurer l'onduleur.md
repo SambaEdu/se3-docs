@@ -164,7 +164,7 @@ Vérification de la configuration à l’aide de la commande suivante :
 upsdrvctl start
 ```
 
-Un bug du paquet nut peut mettre en échec cette vérification : le répertoire /var/run/nut n’étant pas créer.
+[Un bug du paquet nut](https://bugzilla.redhat.com/show_bug.cgi?id=1187286) peut mettre en échec cette vérification : le répertoire /var/run/nut n’étant pas créer.
 
 Pour contourner ce bug, il faut créer le répertoire /var/run/nut et lui affecter nut comme propriétaire et aussi comme groupe :
 
@@ -182,4 +182,46 @@ On relance la vérification :
 upsdrvctl start
 ```
 
-**nota** : Il se peut qu’il y ait un message à propos de pollonly : à ignorer, comme nous le confirme la lecture de la page usbhid-ups.
+**nota** : Il se peut qu’il y ait un message à propos de pollonly : à ignorer, comme nous le confirme la lecture de la page [usbhid-ups](http://networkupstools.org/docs/man/usbhid-ups.html).
+
+- **Démarrage du service nut**
+
+À l’aide de la commande suivante : 
+
+```
+/etc/init.d/nut-server start
+```
+
+- **Démarrage du daemon**
+
+À l’aide de la commande suivante : 
+
+
+```
+/etc/init.d/nut-server status
+```
+
+- **Vérifier le fonctionnement de l’onduleur**
+
+À l’aide de la commande suivante : 
+
+
+```
+upsc myups
+```
+
+- **Vérifier l’interface web du se3**
+
+Dans l’interface web, page **Diagnostic** ou page **Onduleur**, tout doit être au vert ::smiley:
+
+
+![fenêtre menu7](images/onduleur_01-bea0d.png)
+
+
+# Cas d’un port série
+
+Pour un onduleur n’ayant pas de port usb mais un port série, il devrait suffire d’ajouter nut au groupe dialout avec la commande suivante :
+
+```
+addgroup nut dialout
+```
