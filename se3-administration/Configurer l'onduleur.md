@@ -25,10 +25,21 @@ Si la tentative ci-dessus de configuration de l’onduleur, par l’intermédiai
 
 → dans le menu Onduleur, tout n’est pas au vert…
 
+![fenêtre menu5](images/onduleur_03-55401.png)
+
 → ou dans la page Diagnostic, le bouclier n’est pas au vert…
+
+![fenêtre menu6](images/onduleur_08-1b583.png)
 
 … **elle est tout de même indispensable** car la procédure ci-dessus a mis en place et configuré, bien que partiellement, des fichiers que nous n’aurons plus qu’à vérifier ou à modifier légèrement.
 
 Pour compléter cette configuration, si cela est nécessaire (tout n’est pas au vert, y compris dans la page **Diagnostic**), nous allons utiliser la ligne de commande via un terminal en root sur le serveur se3.
 
 Pour cela, **dans le cas d’un port usb**, nous vous proposons la procédure suivante.
+
+- **Repérer des informations de l’onduleur**
+
+À l’aide de la commande suivante : 
+```
+lsusb
+```
