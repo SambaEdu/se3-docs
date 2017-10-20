@@ -1,4 +1,11 @@
-# L’interface graphique
+# Configurer l’onduleur
+
+* [L’interface graphique](#L’interface graphique)
+* [Cas d’un port usb](#Cas d’un port usb)
+* [Cas d’un port série](#Cas d’un port série)
+
+
+## L’interface graphique
 
 Pour configurer l’onduleur, utilisez **l’interface web du se3** : 
 
@@ -18,7 +25,7 @@ Pour configurer l’onduleur, utilisez **l’interface web du se3** :
 
 **Remarque** : dans cet article, on a pris comme exemple un onduleur smart-ups 750 ; si votre onduleur est différent, il faudra adapter les différentes commandes en conséquence.
 
-# Cas d’un port usb
+## Cas d’un port usb
 
 **0. Tentez une configuration via l’interface web**
 Si la tentative ci-dessus de configuration de l’onduleur, par l’intermédiaire de l’interface graphique, ne permet pas d’obtenir une configuration de l’onduleur…
@@ -218,7 +225,7 @@ Dans l’interface web, page **Diagnostic** ou page **Onduleur**, tout doit êtr
 ![fenêtre menu7](images/onduleur_01-bea0d.png)
 
 
-# Cas d’un port série
+## Cas d’un port série
 
 Pour un onduleur n’ayant pas de port usb mais un port série, il devrait suffire d’ajouter nut au groupe dialout avec la commande suivante :
 
