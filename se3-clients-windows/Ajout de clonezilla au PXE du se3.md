@@ -44,3 +44,12 @@ Depuis le client linux
 ```sh
 # ssh -22 root@ipduse3
 ```
+![fenêtre menu](images/connexion_ssh_au_serveur.jpg.png)
+
+```sh
+# mkdir /tftpboot/clonezilla
+
+# cd /tftpboot/clonezilla
+
+# wget http://downloads.sourceforge.net/project/clonezilla/clonezilla_live_alternative/20140518-trusty/clonezilla-live-20140518-trusty-amd64.zip
+```
