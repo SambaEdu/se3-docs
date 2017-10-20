@@ -1,6 +1,6 @@
 # Configurer l’onduleur 
 
-(auteurs : Stéphane Laine, Michel Suquet)
+(auteurs :  Michel Suquet, Stéphane Laine)
 
 * [L’interface graphique](#linterface-graphique)
 * [Cas d’un port usb](#cas-dun-port-usb)
