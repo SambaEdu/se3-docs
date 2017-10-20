@@ -128,3 +128,108 @@ Cette commande permettra seulement de démarrer clonezilla par le PXE. Toutes le
 Clonezilla apparaît maintenant dans le menu maintenance.
 
 ![fenêtre menu6](images/menu_pxe_avec_clonezilla_seul.jpg.png)
+
+### Deuxième méthode
+
+Une mise à jour du paquet se3-clonage écrasera le fichier linux.menu
+
+Il faut donc mieux créer un fichier clonezilla.menu qui contiendra toutes les lignes de lancement de clonezilla, ainsi que les lignes de sauvegarde/restauration personnalisées. Ce fichier ne sera pas écrasé par une mise à jour. Il faudra néanmoins préciser au menu de lancer cet ajout dans le pxe en rajoutant au fichier maintenance.menu
+
+
+```sh
+LABEL Clonezilla
+      MENU LABEL ^Clonezilla
+      KERNEL menu.c32
+      APPEND pxelinux.cfg/clonezilla.menu
+```
+Cet ajout sera à faire à chaque maj du paquet se3-clonage.
+
+Les fichiers clonezilla.menu et maintenance.menu sont dans l’archive suivante. Il faudra évidemment changer les paramètres selon la configuration de votre serveur se3, ainsi que selon vos partitions de sauvegarde/restauration.
+
+Fichier ZIP
+
+## Troisième partie : Sauvegardes et restauration de partitions dans le menu PXE
+
+Le but de cette nouvelle partie est de créer deux entrées au PXE , permettant à un professeur passant beaucoup de temps dans une salle informatique de lancer des sauvegardes , de les restaurer sans avoir besoin de mots de passe admin ou root.
+
+Il aura seulement besoin du mot de passe du menu PXE.
+
+Les disques durs de mes postes clients ont tous une partition de sauvegarde sda4. La partition windows étant sda1. Les lignes suivantes devront être adaptées à la configuation des postes.
+
+De même on pourra ajouter plusieurs fois les paragraphes mais en changeant l’intitulé (LABEL) et en lui donnant par exemple le label "sauvegarde pc salle sx-y".
+
+Ajouter au fichier .menu ces deux parties après la première
+
+
+```sh
+label Clonezilla-live
+MENU LABEL Clonezilla Live-test-sauvegarde-sda1-vers-sda4
+KERNEL clonezilla/vmlinuz
+APPEND initrd=clonezilla/initrd.img boot=live config noswap nolocales edd=on nomodeset  ocs_prerun="mount -t auto /dev/sda4 /home/partimag/" ocs_live_run="ocs-sr -q2 -c -j2 -z1 -i 2000 -fsck-src-part -k -p true saveparts save sda1" ocs_live_extra_param="" keyboard-layouts="fr" ocs_live_batch="no" locales="" vga=788 nosplash noprompt fetch=tftp://IPDUSE3/clonezilla/filesystem.squashfs
+
+
+
+label Clonezilla-live
+MENU LABEL Clonezilla Live-test-restauration-sda4-vers-sda1
+KERNEL clonezilla/vmlinuz
+APPEND initrd=clonezilla/initrd.img boot=live config noswap nolocales edd=on nomodeset  ocs_prerun="mount -t auto /dev/sda4 /home/partimag" ocs_live_run="ocs-sr  -e1 auto -e2 -c -r -j2 -k -p true restoreparts  ask_user sda1" ocs_live_extra_param="" keyboard-layouts="fr" ocs_live_batch="no" locales="" vga=788 nosplash noprompt fetch=tftp://IPDUSE3/clonezilla/filesystem.squashfs
+```
+
+Enregistrer et quitter
+
+Les trois entrées doivent maintenant apparaître dans le menu **/maintenance/sauvegarde/restauration**
+
+![fenêtre menu7](images/pxe_avec_3_choix.jpg.png)
+
+Chaque sauvegarde s’appellera « save+date ». Plusieurs sauvegardes peuvent se retrouver sur sda4 tant qu’il reste de la place. La date est ajoutée automatiquement au nom de la sauvegarde.
+
+Dans le cas de la restauration, il faudra choisir manuellement devant chaque poste la sauvegarde à utiliser.
+
+## Dernière partie : Utilisation de clonezilla pour fabriquer des images des disques ou partitions à envoyer vers le serveur ou sur un disque externe.
+
+On vient de fabriquer un poste modèle optimisé, possédant plusieurs partitions différentes (NTFS,EXT3,FAT32,etc). La présence de grub ne pose strictement aucun problème puisque clonezilla supporte un nombre impressionnant de type de format.
+
+On désire maintenant envoyer cette image vers le se3 dans le /home/partimag en vue de déployer cette image vers d’autres pc ou sur un disque dur neuf.
+
+Démarrer le poste à sauvegarder par le pxe. Choisir clonezilla live (ramdisk)
+
+Choisir Francais. Modifier le codage clavier>azerty> latin9
+
+Si on ne change pas le mode de clavier, il sera simplement en qwerty. Attention donc au mdp root à rentrer.
+
+**Attention** : Parfois le changement ne se fait quand même pas bien, vérifier donc si le clavier n’est pas en qwerty ou continuer mais il faudra s’en rappeler.
+
+Choisir Disque-Image
+
+![fenêtre menu8](images/utilisation_clonezilla_disque-image1.jpg.png)
+
+Sélectionner « ssh_server » puis choisir l’ip du se3, le port 22 et le compte-root ( Le choix d’un disque local (usb) est tout à fait possible. Il faudra juste le choisir local dev puis choisir le disque cible désiré.)
+
+![fenêtre menu9](images/utilisation_clonezilla_ssh_2.jpg.png)
+
+Choisir le répertoire où seront copiées les images (par défaut /home/partimag/)
+Laisser le mode débutant.
+
+Choisir savedisk pour créer un image du disk entier (marche avec tout type de partition !)
+Sinon choisir saveparts pour une sauvegarde de partition.
+
+![fenêtre menu10](images/utilisation_clonezilla_save-restore3.jpg.png)
+
+Pour la restauration ce sera exactement pareil, mais il faudra choisir restoredisk ou restoreparts.
+
+Choisir le nom de l’image incluant le modèle de PC/salle +divers à ajouter, la date sera mise d’office sur le nom.
+
+La copie commence dès que l’utilisateur à confirmé. Dans le cas de la restauration il faut confirmer **deux fois**.
+
+Il vous sera proposé d’éditer un fichier contenant les options lancées, ce qui peut s’avérer utile pour modifier ou créer de nouvelles entrées dans le PXE.
+
+![fenêtre menu11](images/emplacement_options.png)
+
+A la fin, un écran vous demandera si vous voulez éteindre/redémarer ou continuer en ligne de commande.
+
+
+![fenêtre menu12](images/final.png)
+
+La liste complète des options de clonezilla peut se trouver [ici](http://restonux.wikispaces.com/documentation+clonezilla)
+
+Bonne installation !
