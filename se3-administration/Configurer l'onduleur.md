@@ -8,7 +8,13 @@ Pour configurer l’onduleur, utilisez **l’interface web du se3** :
 
 - choisir ensuite votre onduleur grâce aux menus déroulants :
 
+![fenêtre menu2](images/onduleur_06-6e559.png)
+
+![fenêtre menu3](images/onduleur_05-e3940.png)
+
 - vous devriez obtenir le résultat suivant ::smiley:
+
+![fenêtre menu4](images/onduleur_01-bea0d.png)
 
 **Remarque** : dans cet article, on a pris comme exemple un onduleur smart-ups 750 ; si votre onduleur est différent, il faudra adapter les différentes commandes en conséquence.
 
