@@ -20,7 +20,7 @@ Vous avez besoin de connaître les paramètres suivants :
 
 Éventuellement, si c'est nécessaire, vous aurez aussi besoin de connaître l'Identifiant de connexion au serveur `SMTP` de votre `FAI` et si vous utilisez le mode sécurisé `TLS` ou `STARTTLS`.
 
-Dans ce qui suit, nous supposons que, d'une part, le `FAI` est **completel.com** (son `SMTP` est **smtp.completel.net**, information que l'on peut trouver via un moteur de recherche), et d'autre part, que la boîte de réception est celle de votre adresse de messagerie académique.
+Dans ce qui suit, nous supposons que, d'une part, le `FAI` est **completel.com** (son `SMTP` est **smtp.completel.net**, information que l'on peut trouver via un moteur de recherche), et d'autre part, que la boîte de réception est celle de votre adresse de messagerie académique. Vous adapterez en fonction de votre situation.
 
 
 ## Configuration via l'interface `web`
