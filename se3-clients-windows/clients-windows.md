@@ -17,7 +17,8 @@ Ceci correspond aux configurations testées et validées pour l'intégration de 
 Il faut impérativement partir d'un poste fraîchement installé. Le temps perdu à refaire une installation propre sera toujours du temps qu'on ne perdra pas ensuite à résoudre des incompatibilités.
 
 * **`Windows10` Pro 64 bits**  
-L'installeur peut être téléchargé directement chez `Microsoft` sans restrictions particulières, et installé sur une clé `USB`.
+L'image peut être téléchargé directement chez `Microsoft` sans restrictions particulières, et installée automatiquement à l'aide du paquet `sambaedu-client-windows`.
+https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md
 
 * **`Windows7` Pro 32 et 64 bits**  
 Il faut utiliser une version officielle sans personnalisations `OEM`, il est admis d'y ajouter les mises à jour ainsi que les drivers à l'aide d'outils tiers : voir
@@ -32,7 +33,9 @@ Si vous vous posez la question d'installer des postes `windowsXP`, [installez de
 
 Installation en mode `Legacy Bios`. **Surtout pas d'`UEFI` !**.
 
-Une seule partition `windows` + la petite partition de boot qui est créée automatiquement par l'installeur. Pour cette partition, 100 Go sont largement suffisants.
+**le paquet sambaedu-client-windows crée automatiquement la bonne structure de disque**
+
+Une seule partition `windows` + éventuellement la petite partition de boot qui est créée automatiquement par l'installeur. Pour cette partition, 100 Go sont largement suffisants. 
 
 Une astuce permet d'éviter la création de la partition de boot de 100Mo créée automatiquement à l'installation de Windows 7. Cela simplifie le clonage et la création d'images. Voici comment procéder.
 
@@ -71,11 +74,9 @@ En cas d'absence d'activation, un message s'affiche en fond d'écran, mais à pa
 
 **Sur un serveur à jour, aucune opération manuelle n'est nécessaire pour intégrer windows 10**
 
-**A VERIFIER**
 
-Il faut avoir créé un fichier témoin `temoin_w10.txt` vide dans le répertoire `netlogon\domscripts\`. Ensuite il suffit de se connecter sur `\\se3\admhomes` avec le compte `admin` et de lancer `\\se3\admhomes\netlogon\domscripts\rejointse3.exe`.
 
-## ancienne méthode
+## ancienne méthode (obsolète)
 
 * pour les postes en w10
 
