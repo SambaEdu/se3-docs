@@ -5,11 +5,14 @@ Voici la procédure pour intégrer un `windows10` à un domaine géré par un `s
 
 ## Prérequis
 
-Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.5**. Le paquet **sambaedu-client-windows** doit être installé
+**_La procédure "domscripts" issue du paquet se3-domain est obsolète et ne doit plus être utilisé !_**
+
+Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.5**. Le paquet **sambaedu-client-windows** doit être installé (sources testing pour le moment)
 
 Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement avec `windows10`, rien d'autre. Ou refaites une installation propre à l'aide du paquet **sambaedu-client-windows**, c'est automatisé et cela permet d'avoir un poste compatible à 100 % avec SambaEdu
 
 Les instructions complètes sont ici  :
+[installation windows 10](https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md)
 
 
 
