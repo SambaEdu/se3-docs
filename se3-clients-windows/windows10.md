@@ -20,8 +20,15 @@ Les instructions complètes sont ici  :
 **note**
 Pour le moment l'installation automatique ne permet pas de partitionner le disque  avec un espace libre pour installer un `client-linux`.
 
+## Intégration au domaine d'un poste déjà installé
 
-## Intégration (osbsolète, ne pas utiliser !!!)
+*Il est possible d'intégrer un poste déjà installé. Néanmoins sysprep est assez chatouilleux, et donc le succès n'est pas garanti Il faut que le poste soit à jour*
+- depuis l'interface se3, menu dhcp-> intégrer. Attention, ne fonctionnera que si le poste a déjà l'UAC desactivée.
+- sur le poste, en administrateur local, connecter le lecteur `z:` à `\\se3\install` en s'identifiant en `adminse3` et lancer  `z:\os\netinst\rejointse3.cmd`, ou cliquer directement sur `\\se3\install\os\netinst\rejointse3.cmd` 
+- il est possible renommer un poste déjà intégré : menu dhcp->renommer un poste windows. 
+
+
+## Intégration ancienne méthode domscripts (obsolète, ne pas utiliser pour w10 !!!)
 
 1. Ouvrir une session en administrateur local  
 2. Se connecter à \\\\ip_du_serveur_se3\Progs\install\domscripts ou \\\\se3\progs\install\domscripts avec l'identifiant "adminse3"  
