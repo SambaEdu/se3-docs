@@ -344,6 +344,7 @@ La voici :
 function ouverture_perso ()
 {
     …
+    # Gestion des profils Firefox pour les profs
     if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
     then
         rm -Rf "$REP_HOME/.mozilla/firefox"
@@ -367,6 +368,7 @@ On peut modifier la méthode précédente à l'aide d'un lien si on veut sépare
 function ouverture_perso ()
 {
     …
+    # Gestion des profils Firefox pour les profs
     if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
     then
         rm -Rf "$REP_HOME/.mozilla"
@@ -383,6 +385,44 @@ function ouverture_perso ()
 
 C'est cette méthode que j'utilise pour le réseau de mon collège. Pour les nouveaux comptes, le profil du skel est mis en place : chaque utilisateur pourra ensuite le personnaliser.
 
+Cependant, **si un prof ouvre une session dans sa salle puis veut aussi ouvrir une session en salle des profs**, il y aura alors des conflits et cela finit au bout d'un temps certain avec un profil corrompu.
+
+Pour éviter ce problème, il suffit de tester si Firefox a été lancé avant de supprimer le répertoire .mozilla lambda ; si c'est le cas, il ne faut pas le supprimer et ne pas créer de lien. Le collègue pourra alors naviguer sur la toile sans corrompre son profil.
+
+Voici comment modifier la partie dans le logon_perso :
+
+```sh
+function ouverture_perso ()
+{
+    …
+    # Gestion des profils Firefox pour les profs
+    if est_dans_liste "$LISTE_GROUPES_LOGIN" "Profs"
+    then
+        # on teste s'il y a un profil perso, sinon on le copie depuis le skel
+        if [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux/.mozilla" ]
+        then
+            [ ! -e "/mnt/_$LOGIN/Docs/.profile-linux" ] & mkdir -p /mnt/_$LOGIN/Docs/.profile-linux
+            cp -R /mnt/netlogon/distribs/jessie/skel/.mozilla /mnt/_$LOGIN/Docs/.profile-linux/
+        fi
+        # on cherche s'il y a un fichier lock dans le profil du prof
+        test_firefox=$(find /mnt/_$LOGIN/Docs/.profile-linux/.mozilla/firefox/*.default -type l -name lock -print)
+        if [ -z "${test_firefox}" ]
+        then
+            # cas "il n'y a pas le fichier lock"
+            # on efface le répertoire .mozilla standard et on crée le lien vers celui du prof
+            rm -Rf "$REP_HOME/.mozilla"
+            creer_lien "Docs/.profile-linux/.mozilla" "$REP_HOME/.mozilla"
+        else
+            # cas "il y a le fichier lock"
+            # il y a donc une session ouverte sur un autre poste
+            # on garde le répertoire .mozilla standard pour ne pas corrompre le profil perso
+            true
+        fi
+    fi
+    …
+}
+```
+
 
 ### Méthode à l'aide de `rsync`
 
@@ -393,6 +433,7 @@ J'ai testé aussi une solution via `rsync`, proposée par *Frédéric Sauvage* s
 function ouverture_perso ()
 {
     …
+    # Gestion des profils Firefox pour les profs
     # Synchronisation des préférences, favoris, historique... des applis
     # Le tout est enregistré dans un répertoire caché appelé .profile-linux
     # ce répertoire est stocké dans le répertoire Documents de la session de l'utilisateur.
@@ -427,7 +468,7 @@ function fermeture_perso ()
 }
 ```
 
-Cette méthode fonctionne bien mais il peut y avoir *des effets de bord* lors de la transition entre le .mozilla du `skel` et celui de l'utilisateur. Pour l'instant je n'ai eu qu'un seul cas dont la gestion s'est faite *à la mano*, avant de changer pour la méthode à l'aide d'un lien.
+Cette méthode fonctionne bien mais il peut y avoir *des effets de bord* lors de la transition entre le .mozilla du `skel` et celui de l'utilisateur. Pour l'instant je n'ai eu qu'un seul cas dont la gestion s'est faite *à la mano*, avant de changer pour la méthode à l'aide d'un lien (voir ci-dessus).
 
 
 ## Quelques bricoles pour les perfectionnistes
