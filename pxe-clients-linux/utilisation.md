@@ -167,7 +167,7 @@ L'installation s'arrête sur le message d'erreur suivant :
 L'installation s'arrête sur un message de corruption du miroir
 ![probleme-miroir](images/probleme_miroir.png)
 
-**Solution :** rétablir la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation.
+**Solution :** comme cela est mentionné dans le message d'erreur, il y a plusieurs causes et d'autant de solutions. Commencez par vérifier la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation. Si tout va bien, le mieux est d'appliquer [la solution au problème n°6](#problème-6--montage-dun-système-de-fichiers).
 
 
 #### Problème 8 : absence du module du noyau
