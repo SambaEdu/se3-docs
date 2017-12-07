@@ -199,8 +199,8 @@ Au début, le menu principal est en anglais mais une fois les locales configuré
     * protocole de téléchargements (**http**) : `Entrée`
     * pays du miroir (**France**) : `Entrée`
     * miroir de l'archive Debian (**ftp.fr.debian.org**) : `Entrée`
-    * mandataire http (à laiser vide) : `Entrée`
-    **Attention :** derrière un serveur Amon il faut renseigner le proxy mandataire sous la forme "http://IP\_AMON:3128/" ou activer le proxy transparent sur Amon le temps de l'installation
+    * mandataire http (à laiser vide) : `Entrée`  
+**Attention :** derrière un serveur Amon il faut renseigner le proxy mandataire sous la forme `http://IP_AMON:3128/` ou activer le proxy transparent sur Amon le temps de l'installation  
     * version de Debian à installer (**wheezy - ancienne version stable**) : `Entrée`
 
 * Télécharger des composants d'installation : `Entrée`
