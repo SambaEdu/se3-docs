@@ -12,7 +12,7 @@ Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.5**. Le 
 Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement avec `windows10`, rien d'autre. Ou refaites une installation propre à l'aide du paquet **sambaedu-client-windows**, c'est automatisé et cela permet d'avoir un poste compatible à 100 % avec SambaEdu
 
 Les instructions complètes sont ici  :
-[installation windows 10](https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md)
+[installation windows 10](../../sambaedu-client-windows/README.md#sambaedu-client-windows) https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md
 
 
 
