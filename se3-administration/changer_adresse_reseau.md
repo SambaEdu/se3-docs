@@ -24,11 +24,11 @@ Nous vous proposons ici les principales étapes à suivre pour mener à bien cet
 
 - contacter la `DSI` pour faire changer l'IP pédagogique du SE3 et les adresses au niveau des switchs/VLAN.
 
-- modifir le service `DHCP` du SE3 avec les nouveaux paramètres.
+- modifier le service `DHCP` du SE3 avec les nouveaux paramètres.
 
-- modifier le proxy firefox et la page de démarrage firefox personnalisée.
+- modifier le proxy firefox et la page de démarrage firefox personnalisée (si besoin).
 
-- supprimer les anciennes réservations d'adresses IP et renseigner les nouvelles. pour cela, on pourra s'aider des possibilités de l'interface web du se3 : http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Le_module_DHCP#Modifier_le_plan_d.27adressage_des_machines_clientes  
+- supprimer les anciennes réservations d'adresses IP et renseigner les nouvelles. Pour cela, on pourra s'aider des possibilités de l'interface web du se3 : http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Le_module_DHCP#Modifier_le_plan_d.27adressage_des_machines_clientes  
 Le principe consiste à exporter les données de l'annuaire dans un fichier au format csv avant de les envoyer dans cette page qui se charge de faire un remplacement automatique des adresses.
 
 - modifier les `IP` des machines en `IP fixes` : serveur antivirus, NAS pédagogique, imprimantes, bornes Wi-Fi…
