@@ -9,9 +9,9 @@
 
 ## Position du problème
 
-Votre réseau a un adressage ne pouvant gérer qu'un nombre très limité de machines. C'est le cas d'un réseau ayant pour adresse `192.168.1.0/24` (le masque s'occupant des 3 premiers octets : 3×8 = 24 est donc `255.255.255.0`).
+Votre réseau a un adressage ne pouvant gérer qu'un nombre très limité de machines. C'est le cas d'un réseau ayant pour adresse `192.168.1.0/24` (le masque s'occupant des 3 premiers octets, 3×8 = 24, est donc `255.255.255.0`).
 
-Pour augmenter nettement le nombre d'IP disponible, on peut envisager de passer à une adresse telle que `172.16.0.0/16` ou bien `192.168.0.0/16` (le masque s'occupant des 2 premiers octets : 2×8 = 16 est donc `255.255.0.0`).
+Pour augmenter nettement le nombre d'IP disponible, on peut envisager de passer à une adresse telle que `172.16.0.0/16` ou bien `192.168.0.0/16` (le masque s'occupant des 2 premiers octets, 2×8 = 16, est donc `255.255.0.0`).
 
 Nous vous proposons ici les principales étapes à suivre pour mener à bien cette opération de changement de l'adresse du réseau.
 
@@ -20,13 +20,13 @@ Nous vous proposons ici les principales étapes à suivre pour mener à bien cet
 
 ## Étapes du changement
 
-- le script chg_ip_se3.sh en indiquant la nouvelle IP, masque, passerelle, DNS.
+- utiliser le script `chg_ip_se3.sh` en indiquant la nouvelle IP, masque, passerelle, DNS.
 
-- contacter la `DSI` pour faire changer l'IP pédagogique du SE3 et les adresses au niveau des switchs/VLAN.
+- contacter la `DSI` pour faire changer l'IP pédagogique du `se3` et les adresses au niveau des switchs/VLAN.
 
 - modifier le service `DHCP` du SE3 avec les nouveaux paramètres.
 
-- modifier le proxy firefox et la page de démarrage firefox personnalisée (si besoin).
+- modifier le proxy Firefox et la page de démarrage Firefox personnalisée (si besoin).
 
 - supprimer les anciennes réservations d'adresses IP et renseigner les nouvelles. Pour cela, on pourra s'aider des possibilités de l'interface web du se3 : http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Le_module_DHCP#Modifier_le_plan_d.27adressage_des_machines_clientes  
 Le principe consiste à exporter les données de l'annuaire dans un fichier au format csv avant de les envoyer dans cette page qui se charge de faire un remplacement automatique des adresses.
