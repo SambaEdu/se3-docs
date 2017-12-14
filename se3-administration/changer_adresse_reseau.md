@@ -2,7 +2,7 @@
 # Changer l'adresse du réseau
 
 * [Position du problème](#position-du-problème)
-* [Étapes du changement](#étapes-du-changement)
+* [Étapes du changement](#Étapes-du-changement)
 * [Vérifications](#vérifications)
 * [Problèmes éventuels](#problèmes-éventuels)
 
