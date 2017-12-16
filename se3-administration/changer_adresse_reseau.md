@@ -46,4 +46,7 @@ La vérification est simple : dans chaque parc de machines, ouvrir une session s
 **Solution :** vérifier s'il n'y a pas une *coquille* dans le masque de sous-réseau (ou un autre paramètre) lors de la procédure de changement d'adresse ip…
 
 
+**Problème 2 :** Depuis le changement de plan d'adressage IP, les profils Windows ne sont plus complets : seul le partage K est disponible dans les lecteurs réseaux. Plus de fond d’écran, de documents sur le bureau, les pages d’accueil et proxy ne descendent plus sous Firefox (mais bien sous IE ou Chrome) alors qu’ils sont bien renseignés sur l’interface web du se3.
+
+**Solution :** aucune pour l'instant…
 
