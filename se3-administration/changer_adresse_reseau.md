@@ -22,11 +22,11 @@ Nous vous proposons ici les principales étapes à suivre pour mener à bien cet
 
 - utiliser le script `chg_ip_se3.sh` en indiquant la nouvelle IP, masque, passerelle, DNS.
 
-- contacter la `DSI` pour faire changer l'IP pédagogique du `se3` et les adresses au niveau des switchs/VLAN.
+- contacter la `DSI` pour faire changer les adresses au niveau des switchs/VLAN et l'IP de la passerelle du réseau pédagogique ; passerelle qui, dans le cas de l'Amon, dépend de la `DSI`. Dans le cas d'un `Slis`, normalement on peut le changer sans passer par la `DSI`.
 
 - modifier le service `DHCP` du SE3 avec les nouveaux paramètres.
 
-- modifier le proxy Firefox et la page de démarrage Firefox personnalisée (si besoin).
+- modifier, si besoin, le proxy Firefox et la page de démarrage Firefox personnalisée.
 
 - supprimer les anciennes réservations d'adresses IP et renseigner les nouvelles. Pour cela, on pourra s'aider des possibilités de l'interface web du se3 : http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Le_module_DHCP#Modifier_le_plan_d.27adressage_des_machines_clientes  
 Le principe consiste à exporter les données de l'annuaire dans un fichier au format csv avant de les envoyer dans cette page qui se charge de faire un remplacement automatique des adresses.
