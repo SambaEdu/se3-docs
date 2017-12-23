@@ -173,7 +173,7 @@ Vérification de la configuration à l’aide de la commande suivante :
 upsdrvctl start
 ```
 
-[Un bug du paquet nut](https://bugzilla.redhat.com/show_bug.cgi?id=1187286) peut mettre en échec cette vérification : le répertoire /var/run/nut n’étant pas créer.
+[Un bug du paquet nut](https://bugzilla.redhat.com/show_bug.cgi?id=1187286) peut mettre en échec cette vérification : le répertoire /var/run/nut n’étant pas créé.
 
 Pour contourner ce bug, il faut créer le répertoire /var/run/nut et lui affecter nut comme propriétaire et aussi comme groupe :
 
