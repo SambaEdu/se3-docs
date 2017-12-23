@@ -60,9 +60,9 @@ lsusb
 → cette commande donne le bus, le périphérique, le vendorid, le productid et le constructeur
 
 → mettons que l’on ait, par exemple, les informations suivantes :
-
-    Bus 002 Device 008 ID 051d:0003 American Power Conversion UPS
-
+```
+Bus 002 Device 008 ID 051d:0003 American Power Conversion UPS
+```
 Dans cet exemple, 002 est le bus, 008 est le périphérique, 051d est le vendorid et 0003 est le productid. Le constructeur est American Power Conversion UPS.
 
 **Remarque** : vous obtiendrez sans doute des informations différentes pour votre se3 ; il suffira d’adapter en conséquence les lignes de commandes et indications qui suivent. Pour ces commandes, nous prendrons les informations de l’exemple ci-dessus (cas d’un smart-ups 750).
@@ -70,8 +70,8 @@ Dans cet exemple, 002 est le bus, 008 est le périphérique, 051d est le vendori
 
 **2. Analyser les droits sur le bus de l’onduleur**
 
-    À l’aide de la commande suivante (si 002 est le bus et 008 le périphérique) : 
-    
+À l’aide de la commande suivante (si 002 est le bus et 008 le périphérique) :
+
 ```
 ls -l /dev/bus/usb/002/008
 ```
