@@ -31,6 +31,7 @@ Pour configurer l’onduleur, utilisez **l’interface web du se3** :
 ## Cas d’un port usb
 
 **0. Configuration via l’interface web**
+
 La configuration de l’onduleur par l’intermédiaire de l’interface graphique ne permet pas d’obtenir une configuration de l’onduleur…
 
 → dans le menu Onduleur, tout n’est pas au vert…
@@ -52,7 +53,7 @@ Pour compléter cette configuration, si cela est nécessaire (tout n’est pas a
 
 **1. Repérer des informations de l’onduleur**
 
-À l’aide de la commande suivante : 
+À l’aide de la commande suivante :
 ```
 lsusb
 ```
@@ -105,6 +106,7 @@ Rajouter, si nécessaire, dans le fichier /etc/nut/ups.conf les 2 lignes suivant
     […]
 ```
 
+
 **5. Vérification/modification du fichier /lib/udev/rules.d/52-nut-usbups.rules**
 
 → nano /lib/udev/rules.d/52-nut-usbups.rules
@@ -117,6 +119,7 @@ J’ai ajouté/modifié les lignes suivantes (voir ci-dessus pour le vendorid et
     # my particular APC UPS - usbhid-ups
     ATTR(idVendor)=="051d", ATTR(idProduct)=="0003", MODE="664", GROUP="nut"
     […]
+```
 
 **Remarque** : ne sachant pas si cette étape 5 est nécessaire, je la mentionne ; elle vous sera peut-être utile et il faudra alors créer ce fichier s’il n’existe pas :
 
@@ -126,9 +129,10 @@ mkdir -p /lib/udev/rules.d
 touch /lib/udev/rules.d/52-nut-usbups.rules
 ```
 
+
 **6. Vérification des autres fichiers**
 
-    Nous donnons ici quelques indications à titre de vérification. Normalement, il ne devrait pas y avoir de modification à faire.
+Nous donnons ici quelques indications à titre de vérification. Normalement, il ne devrait pas y avoir de modification à faire.
 
 → nano /etc/nut/nut.conf
 ```
@@ -170,6 +174,7 @@ touch /lib/udev/rules.d/52-nut-usbups.rules
 
 **nota** : repérez les paramètres communs aux fichiers /etc/nut/upsd.users et /etc/nut/upsmon.conf. qui peuvent être différents de ceux indiqués ici. 
 
+
 **7. Donner les droits de lecture de la configuration**
 
 À l’aide des commandes suivantes :
@@ -181,6 +186,7 @@ chown root:nut /etc/nut/upsd.* /etc/nut/upsmon.conf
 ```
 chmod u=rw,g=r,o= /etc/nut/upsd.* /etc/nut/upsmon.conf
 ```
+
 
 **8. Lancer le pilote de l’onduleur**
 
@@ -209,6 +215,7 @@ upsdrvctl start
 
 **nota** : Il se peut qu’il y ait un message à propos de pollonly : à ignorer, comme nous le confirme la lecture de la page [usbhid-ups](http://networkupstools.org/docs/man/usbhid-ups.html).
 
+
 **9. Démarrage du service nut**
 
 À l’aide de la commande suivante : 
@@ -216,6 +223,7 @@ upsdrvctl start
 ```
 /etc/init.d/nut-server start
 ```
+
 
 **10. Démarrage du daemon**
 
@@ -226,6 +234,7 @@ upsdrvctl start
 /etc/init.d/nut-server status
 ```
 
+
 **11. Vérifier le fonctionnement de l’onduleur**
 
 À l’aide de la commande suivante : 
@@ -234,6 +243,7 @@ upsdrvctl start
 ```
 upsc myups
 ```
+
 
 **12. Vérifier l’interface web du se3**
 
