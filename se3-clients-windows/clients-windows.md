@@ -19,6 +19,7 @@ Il faut impérativement partir d'un poste fraîchement installé. Le temps perdu
 * **`Windows10` Pro 64 bits**  
 L'image peut être téléchargé directement chez `Microsoft` sans restrictions particulières, et installée automatiquement à l'aide du paquet `sambaedu-client-windows`.
 https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md
+
 __Attention !!__ _En aucun cas l'ancienne méthode `netlogon\domscripts\rejointse3.exe` ne doit être utilisée. Elle est définitivement incompatible avecs les versions récentes de Windows 10. Même si dans un premier temps vous pouvez croire que cela fonctionne, cela va casser à la première mise à jour de Windows !_
 
 * **`Windows7` Pro 32 et 64 bits**  
