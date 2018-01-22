@@ -78,16 +78,15 @@ En cas d'absence d'activation, un message s'affiche en fond d'écran, mais à pa
 
 ## Préparation et mise à jour
 
-**Sur un serveur à jour, aucune opération manuelle n'est nécessaire pour intégrer windows 10**
+**Sur un serveur à jour, AUCUNE opération manuelle n'est nécessaire pour intégrer windows 10**, il faut utiliser le paquet sambaedu-client-windows.
+https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md
 
 
+## ancienne méthode (obsolète, windows 7 uniquement !!!)
 
-## ancienne méthode (obsolète)
-
-* pour les postes en w10
+* ne fonctionne pas pour les postes en w10 !
 
 Désactiver la mise en veille pour surveiller le poste pendant son intégration l'intégration.
-Fusionner le fichier .reg placé dans  \\se3\progs\install\domscripts (voir article windows10) .
 
 Il est possible d'automatiser un certain nombre de réglages, dans l'optique de faire une **image de la machine** avant l'intégration. À vous de choisir parmi les commandes suivantes, celles qui vous conviennent et les mettre dans un fichier `.bat`. 
 
