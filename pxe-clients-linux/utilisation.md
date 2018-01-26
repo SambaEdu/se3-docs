@@ -169,6 +169,26 @@ L'installation s'arrête sur un message de corruption du miroir
 
 **Solution :** comme cela est mentionné dans le message d'erreur, il y a plusieurs causes et d'autant de solutions. Commencez par vérifier la connexion avec l'internet soit du `se3`, soit de la `passerelle` puis relancer l'installation. Si tout va bien, le mieux est d'appliquer [la solution au problème n°6](#problème-6--montage-dun-système-de-fichiers).
 
+Si ces actions ne résolvent pas le problème,
+la cause peut venir d'un mauvais positionnement des droits
+sur le répertoire `/var/se3/apt-cacher-ng/`
+
+Pour rétablir les droits, utilisez la commande suivante :
+```sh
+chown -R apt-cacher-ng.apt-cacher-ng /var/se3/apt-cacher-ng/
+```
+
+Pour l'utilisation du proxy, vous rajoutez la ligne suivante dans le fichier /etc/apt-cacher-ng/acng.conf :
+```
+Proxy: http://172.16.0.1:3128
+```
+
+Il reste à relancer le service pour la prise en compte des changements :
+Pour l'utilisation du proxy, vous rajoutez la ligne suivante dans le fichier /etc/apt-cacher-ng/acng.conf :
+```sh
+service apt-cacher-ng restart
+```
+
 
 #### Problème 8 : absence du module du noyau
 
