@@ -178,13 +178,12 @@ Pour rétablir les droits, utilisez la commande suivante :
 chown -R apt-cacher-ng.apt-cacher-ng /var/se3/apt-cacher-ng/
 ```
 
-Pour l'utilisation du proxy, vous rajoutez la ligne suivante dans le fichier /etc/apt-cacher-ng/acng.conf :
+Pour l'utilisation du proxy (en général c'est la passerelle et supposons que son IP soit 172.16.0.1 avec le port classique 3128), vous rajoutez la ligne suivante dans le fichier `/etc/apt-cacher-ng/acng.conf` :
 ```
 Proxy: http://172.16.0.1:3128
 ```
 
 Il reste à relancer le service pour la prise en compte des changements :
-Pour l'utilisation du proxy, vous rajoutez la ligne suivante dans le fichier /etc/apt-cacher-ng/acng.conf :
 ```sh
 service apt-cacher-ng restart
 ```
