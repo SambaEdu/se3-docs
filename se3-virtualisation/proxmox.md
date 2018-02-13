@@ -384,7 +384,8 @@ Pour la restauration, on se placera sur l'espace de stockage dédié aux sauvega
 On insère le périphérique USB dans le serveur (et non la machine qui accède à l'interface web).
 On peut vérifier que le périphérique est bien reconnu en allant sur la console du serveur et en tapant
 ```
-fdisk -l ``` 
+fdisk -l
+``` 
 
 (si c'est un espace de stockage) ou alors
 
@@ -439,7 +440,7 @@ On peut voir ici que l'utilisateur documentaliste ne perçoit que la VM concern�
 
 
 ## Migration d'un serveur physique existant vers une VM
-*En cours de rédaction*
+
 Le principe est simple: on va faire une image clonezilla du serveur existant. Il suffira ensuite de créer une VM ayant des caractéristiques identiques et de restaurer l'image clonezilla sur cette VM. 
 
 
