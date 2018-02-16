@@ -22,7 +22,7 @@
     * [`Grub` et partitions `GPT`](#grub-et-partitions-gpt)
 * [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
-    * [Annuaire incompatible](#annuaire incompatible)
+    * [Annuaire incompatible](#annuaire-incompatible)
     * [Plus de réseau](#plus-de-réseau)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
