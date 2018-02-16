@@ -23,6 +23,7 @@
 * [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
     * [Annuaire incompatible](#annuaire-incompatible)
+    * [Compléments sur la compatibilité de l'annuaire `ldap`](#compléments-sur-la-compatibilité-de-lannuaire-ldap)
     * [Plus de réseau](#plus-de-réseau)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
@@ -281,7 +282,10 @@ Pour cela, voici une procédure, proposée par François-Xavier Vial :
 - Vérifier que tous les utilisateurs ont bien un gidNumber positionné à 5005. Si ce n'est pas le cas, utiliser le script `se3-corrige-gidNumber.sh` qui va redresser les choses
 - re-modifier le fichier `/etc/samba/smb.conf` avec un `ldapsam:trusted = Yes`
 - redémarrer samba
-- vérifier que ça fonctionne 
+- vérifier que ça fonctionne
+
+### Compléments sur la compatibilité de l'annuaire `ldap`
+… À venir …
 
 ### Plus de réseau
 Après migration, impossible de faire un ping sur la passerelle `Amon` ou sur une adresse externe. Je me suis alors aperçu que la carte réseau `eth0` était maintenant devenue `eth1`.
