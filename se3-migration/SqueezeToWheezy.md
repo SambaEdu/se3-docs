@@ -22,6 +22,7 @@
     * [`Grub` et partitions `GPT`](#grub-et-partitions-gpt)
 * [Configurer l'onduleur](#configurer-londuleur)
 * [Post-migration](#post-migration)
+    * [Annuaire incompatible](#annuaire incompatible)
     * [Plus de réseau](#plus-de-réseau)
     * [Les modules](#les-modules)
     * [Remettre en place les disques de sauvegarde](#remettre-en-place-les-disques-de-sauvegarde)
@@ -262,6 +263,25 @@ Cependant, il vaudra mieux configurer l'onduleur **avant la migration** car s'il
 
 
 ## Post-migration
+
+### Annuaire incompatible
+Si après le passage à Wheezy il est impossible d'ouvrir une session, sauf celle du compte admin et si dans l'interface web le bouclier de vérification du compte adminse3 d'intégration des comptes est au rouge, c'est que votre annuaire n'est pas compatible.
+
+La cause est un défaut de structure de l'annuaire : le GID des utilisateurs n'est pas correctement renseigné.
+
+Pour régler temporairement cette situation, le temps de rendre compatible l'annuaire, il suffit de changer un paramètre de Yes à No dans le fichier `/etc/samba/smb.conf`. Dans ce fichier, trouvez la ligne correspondant à `ldapsam:trusted` et changez `Yes` en `No`.
+
+Ensuite, **il faut rendre compatible l'annuaire ldap**. Indispensable !
+
+Pour cela, voici une procédure, proposée par François-Xavier Vial :
+
+- Modifier (ou vérifier) sur l'interface pour le groupe lcs-users le GID Number à 5005
+- Modifier (ou vérifier) sur l'interface dans Configuration générale - Paramètres serveur la valeur de la ligne Groupe par défaut à 5005
+- Dans l'annuaire en utilisant PhpLdapAdmin, vérifier que le groupe lcs-users a bien 5005 commme gidNumber
+- Vérifier que tous les utilisateurs ont bien un gidNumber positionné à 5005. Si ce n'est pas le cas, utiliser le script `se3-corrige-gidNumber.sh` qui va redresser les choses
+- re-modifier le fichier `/etc/samba/smb.conf` avec un `ldapsam:trusted = Yes`
+- redémarrer samba
+- vérifier que ça fonctionne 
 
 ### Plus de réseau
 Après migration, impossible de faire un ping sur la passerelle `Amon` ou sur une adresse externe. Je me suis alors aperçu que la carte réseau `eth0` était maintenant devenue `eth1`.
