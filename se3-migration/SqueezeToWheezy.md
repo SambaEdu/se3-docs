@@ -290,21 +290,27 @@ Il faut exporter en ldif pour y regarder de plus près. Le plus souvent c'est un
 **La bonne valeur, c'est 5005 pour tout le monde** qui lui même correspond à `lcs-users` qui doit être mappé sur le groupe windows "utilisateurs du domaine" dont le primary group SID se termine par 513.
 
 **Exemple :**
+Sur un compte lambda `hugov`, on devrait obtenir :
 ```sh
-ldapsearch -xLLL uid=hugov gidnumber sambaPrimaryGroupSID
+# ldapsearch -xLLL uid=hugov gidnumber sambaPrimaryGroupSID
 dn: uid=hugov,ou=People,ou=stage,ou=ac-rouen,ou=education,o=gouv,c=fr
-gidNumber: 5005 ---> OK
-sambaPrimaryGroupSID: S-1-5-21-3271951266-3673128075-3782327119-513 --> OK
-
-getent group lcs-users
-lcs-users:x:5005:admin --> ok
-
-net groupmap list | grep lcs-users
-Utilisateurs du domaine (S-1-5-21-3271951266-3673128075-3782327119-513) -> ok
-lcs-users
+gidNumber: 5005
+sambaPrimaryGroupSID: S-1-5-21-3271951266-3673128075-3782327119-513
 ```
 
-On notera que le sid des "Utilisateurs du domaine" du domaine est le même que celui déclaré dans l’attribut  sambaPrimaryGroupSID de l'utilisateur.
+Et pour le groupe lcs-users, on devrait obtenir :
+```sh
+# getent group lcs-users
+lcs-users:x:5005:admin
+```
+
+À comparer avec :
+```sh
+# net groupmap list | grep lcs-users
+Utilisateurs du domaine (S-1-5-21-3271951266-3673128075-3782327119-513) -> lcs-users
+```
+
+On notera que le SID des "Utilisateurs du domaine" du domaine est le même que celui déclaré dans l’attribut sambaPrimaryGroupSID de l'utilisateur.
 
 Si tu as juste un ldif, tu ne pourras pas faire "net groupmap" mais tu vas trouver ceci dans ton ldif (toujours dans le même exemple) :
 
@@ -324,7 +330,7 @@ description: Domain Unix group
 
 Là dans mon exemple tout est cohérent et donc tout va bien.
 
-S'il y a visiblement un de ces éléments qui ne va pas, reste à trouver lequel. En général c'est gidNumber qui ne correspond pas. Pour corrigé cela, voir ci-dessus la procédure proposée par François-Xavier.
+S'il y a visiblement un de ces éléments qui ne va pas, reste à trouver lequel. En général c'est gidNumber qui ne correspond pas. Pour corriger cela, voir ci-dessus la procédure proposée par François-Xavier.
 
 
 ### Plus de réseau
