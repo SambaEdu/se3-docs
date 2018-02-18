@@ -285,14 +285,16 @@ Pour cela, voici une procédure, proposée par François-Xavier Vial :
 - vérifier que ça fonctionne
 
 ### Compléments sur la compatibilité de l'annuaire `ldap`
-Il faut exporter en ldif pour y regarder de plus près. Le plus souvent c'est une incohérence entre Guidnumber / Mappage du groupe par défaut.
+Pour savoir si l'annuaire `ldap` est compatible, on peut l'exporter au format `ldif` (via l'interface web du `se3`) pour y regarder de plus près. Le plus souvent c'est une incohérence entre Guidnumber / Mappage du groupe par défaut.
 
 **La bonne valeur, c'est 5005 pour tout le monde** qui lui même correspond à `lcs-users` qui doit être mappé sur le groupe windows "utilisateurs du domaine" dont le primary group SID se termine par 513.
+
+On peut aussi avoir des informations via quelques commandes à l'aide de `ldapsearch`, `getent` et `net groupmap`.
 
 **Exemple :**
 Sur un compte lambda `hugov`, on devrait obtenir :
 ```sh
-# ldapsearch -xLLL uid=hugov gidnumber sambaPrimaryGroupSID
+#> ldapsearch -xLLL uid=hugov gidnumber sambaPrimaryGroupSID
 dn: uid=hugov,ou=People,ou=stage,ou=ac-rouen,ou=education,o=gouv,c=fr
 gidNumber: 5005
 sambaPrimaryGroupSID: S-1-5-21-3271951266-3673128075-3782327119-513
@@ -300,19 +302,19 @@ sambaPrimaryGroupSID: S-1-5-21-3271951266-3673128075-3782327119-513
 
 Et pour le groupe lcs-users, on devrait obtenir :
 ```sh
-# getent group lcs-users
+#> getent group lcs-users
 lcs-users:x:5005:admin
 ```
 
 À comparer avec :
 ```sh
-# net groupmap list | grep lcs-users
+#> net groupmap list | grep lcs-users
 Utilisateurs du domaine (S-1-5-21-3271951266-3673128075-3782327119-513) -> lcs-users
 ```
 
-On notera que le SID des "Utilisateurs du domaine" du domaine est le même que celui déclaré dans l’attribut sambaPrimaryGroupSID de l'utilisateur.
+On notera que le `SID` des "Utilisateurs du domaine" du domaine est le même que celui déclaré dans l’attribut `sambaPrimaryGroupSID` de l'utilisateur.
 
-Si tu as juste un ldif, tu ne pourras pas faire "net groupmap" mais tu vas trouver ceci dans ton ldif (toujours dans le même exemple) :
+Si tu as juste un export de l'annuaire au format `ldif`, tu ne pourras pas utiliser la commande `net groupmap` mais tu vas trouver ceci dans ton export ldif (toujours dans le même exemple) :
 
 ```
 dn: cn=lcs-users,ou=Groups,ou=stage,ou=ac-rouen,ou=education,o=gouv,c=fr
@@ -330,7 +332,7 @@ description: Domain Unix group
 
 Là dans mon exemple tout est cohérent et donc tout va bien.
 
-S'il y a visiblement un de ces éléments qui ne va pas, reste à trouver lequel. En général c'est gidNumber qui ne correspond pas. Pour corriger cela, voir ci-dessus la procédure proposée par François-Xavier.
+S'il y a visiblement un de ces éléments qui ne va pas, reste à trouver lequel. En général c'est gidNumber qui ne correspond pas (rappel : il faut qu'il soit à 5005). Pour corriger cela, voir ci-dessus la procédure proposée par François-Xavier.
 
 
 ### Plus de réseau
