@@ -279,7 +279,8 @@ Pour cela, voici une procédure, proposée par François-Xavier Vial :
 - Modifier (ou vérifier) sur l'interface pour le groupe `lcs-users` le GID Number à 5005
 - Modifier (ou vérifier) sur l'interface dans Configuration générale - Paramètres serveur la valeur de la ligne Groupe par défaut à 5005
 - Dans l'annuaire en utilisant `PhpLdapAdmin`, vérifier que le groupe `lcs-users` a bien 5005 commme gidNumber
-- Vérifier que tous les utilisateurs ont bien un gidNumber positionné à 5005. Si ce n'est pas le cas, utiliser le script `se3-corrige-gidNumber.sh` qui va redresser les choses
+- Vérifier que tous les utilisateurs ont bien un gidNumber positionné à 5005
+- Si ce n'est pas le cas, utiliser le script `se3-corrige-gidNumber.sh` qui va redresser les choses
 - Vérifier que le paquet inetutils-inetd est installé : **dpkg --status inetutils-inetd | grep Status**
 - S'il n'est pas installé : **apt-get install inetutils-inetd**
 - Re-modifier le fichier `/etc/samba/smb.conf` avec un `ldapsam:trusted = Yes`
