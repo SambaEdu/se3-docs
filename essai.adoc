@@ -58,11 +58,12 @@ auxiliary information.
 Its purpose is determined by the label
 at the beginning of the paragraph.
 
-NOTE: An `admonition paragraph` draws the reader's attention to +
+. Titre de cette note
+NOTE: An `admonition paragraph` draws the reader's attention to + 1*
 auxiliary information. +
 Its purpose is determined by the label
 at the beginning of the paragraph.
-
+1* on retourne à la ligne volontairement…
 
 TIP: Pro tip...
 
@@ -75,7 +76,7 @@ CAUTION: Ensure that...
 
 == Deuxième Partie
 
-=== Inclure du code dans un cadre
+=== Inclure du code ou autre texte dans un cadre
 
 du code pour essai
 
@@ -94,6 +95,11 @@ sda      8:0    0 698,7G  0 disk
 └─sda6   8:6    0 653,3G  0 part /home
 sr0     11:0    1  1024M  0 rom
 ----
+
+[source,ruby]
+.Résultat
+puts "Hello, World!"
+
 
 === citation
 
@@ -142,17 +148,17 @@ Question 2:: Answer 2
 
 === Les tableaux
 
-.Un example de tableau
+.Un exemple de tableau
 [options="header,footer"]
 |=======================
-|Col 1|Col 2      |Col 3
+|header Colonne 1|Colonne 2 |Colonne 3
 |1    |Item 1     |a
 |2    |Item 2     |b
 |3    |Item 3     |c
 |6    |Three items|d
 |=======================
 
-.CSV data, 15% each column avec des options
+.Un autre exemple
 [format="csv",width="60%",cols="4"]
 [frame="topbot",grid="none"]
 |======
@@ -169,9 +175,4 @@ ID,FName,LName,Address,Phone
 2,X,Y,"*A*,B",45**6**78
 |===========================
 
-
-=== un cadre
-
-[source,ruby]
-puts "Hello, World!"
 
