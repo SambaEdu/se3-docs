@@ -6,7 +6,7 @@
 
 Une introduction à http://asciidoc.org[AsciiDoc].
 
-essai de documentation
+essai de documentation et d'essais de mise en formes diverses
 
 == Première Partie
 
@@ -85,13 +85,17 @@ Séquence de touches kbd:[Alt+F11]
 un essai avec tip
 ====
 
-ATTENTION: un essai avec note…
+WARNING: un essai avec note…
+
 
 === autres mises en forme
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
-du texte [.underline]souligné en partie
+du texte +++<u>souligné</u>+++ en partie
+
+de la *[red]##c##[green]##ou##[purple]##l##[fuchsia]##e##[blue]##ur##*
+
 
 [source,ruby]
 puts "Hello, World!"
