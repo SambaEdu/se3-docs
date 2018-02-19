@@ -95,13 +95,59 @@ un essai avec tip
 WARNING: un essai avec note…
 
 
-=== autres mises en forme
+=== gras, italiques et autres mises en forme
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
 du texte +++<u>souligné</u>+++ en partie
 
 de la *[red]##c##[green]##ou##[purple]##l##[fuchsia]##e##[blue]##ur##*
+
+(C) (R) (TM) -- ... -> <- => <= &#182;
+
+''''
+
+(C) (R) (TM) -- ... -> <- => <= &#182;
+
+Term 1::
+    Definition 1
+Term 2::
+    Definition 2
+
+[qanda]
+.Q&A
+Question 1::
+    Answer 1
+Question 2:: Answer 2
+
+=== Les tableaux
+
+.An example table
+[options="header,footer"]
+|=======================
+|Col 1|Col 2      |Col 3
+|1    |Item 1     |a
+|2    |Item 2     |b
+|3    |Item 3     |c
+|6    |Three items|d
+|=======================
+
+.CSV data, 15% each column
+[format="csv",width="60%",cols="4"]
+[frame="topbot",grid="none"]
+|======
+1,2,3,4
+a,b,c,d
+A,B,C,D
+|======
+
+[grid="rows",format="csv"]
+[options="header",cols="^,<,<s,<,>m"]
+|===========================
+ID,FName,LName,Address,Phone
+1,Vasya,Pupkin,London,+123
+2,X,Y,"A,B",45678
+|===========================
 
 
 [source,ruby]
