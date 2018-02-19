@@ -1,6 +1,6 @@
-= Hello, AsciiDoc!
+= Bonjour, AsciiDoc!
 Doc Writer <doc@example.com>
-:toc:
+:toc: left
 :toc-title: Table des matières
 
 Une introduction à http://asciidoc.org[AsciiDoc].
