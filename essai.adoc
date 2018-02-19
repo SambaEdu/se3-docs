@@ -16,12 +16,6 @@ Une table des matières est mise en place automatiquement.
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
-du texte +++<u>souligné</u>+++ en partie pass:q[<u>underline *me*</u>] est-il souligné ?
-
-de la *[red]##c##[green]##ou##[purple]##l##[fuchsia]##e##[blue]##ur##*
-
-un #groupe de mots# mis en évidence
-
 
 === Symboles et ligne de séparation
 
@@ -193,5 +187,12 @@ menu:View[Zoom > Reset]
 Pressez le bouton btn:[OK] quand vous avez fini.
 
 Séquence de touches kbd:[Alt+F11]
+
+du texte +++<u>souligné</u>+++ en partie pass:q[<u>underline *me*</u>] est-il souligné ?
+
+de la *[red]##c##[green]##ou##[purple]##l##[fuchsia]##e##[blue]##ur##*
+
+un #groupe de mots# mis en évidence
+
 
 
