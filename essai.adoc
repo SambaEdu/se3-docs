@@ -32,7 +32,7 @@ CAUTION: Ensure that...
 
 == Deuxième Partie
 
-=== Inclure du code
+=== Inclure du code dans un cadre
 
 du code pour essai
 
@@ -52,6 +52,13 @@ sda      8:0    0 698,7G  0 disk
 sr0     11:0    1  1024M  0 rom
 ----
 
+=== citation
+
+.Titre optionnel
+[quote, anonyme, la météo]
+____
+après la pluie le beau temps.
+____
 
 === autre listes
 
