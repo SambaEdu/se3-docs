@@ -16,9 +16,12 @@ Une table des matières est mise en place automatiquement.
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
-du texte +++<u>souligné</u>+++ en partie
+du texte +++<u>souligné</u>+++ en partie pass:q[<u>underline *me*</u>] est-il souligné ?
 
 de la *[red]##c##[green]##ou##[purple]##l##[fuchsia]##e##[blue]##ur##*
+
+un #groupe de mots# mis en évidence
+
 
 === Symboles et ligne de séparation
 
@@ -51,6 +54,18 @@ du texte ici en dessous de la ligne de séparation
     .. sousliste b
     .. sousliste c
 
+* [*] coché
+* [x] coché de même
+* [ ] non coché
+*     item normal
+
+[%interactive]
+* [*] coché
+* [x] coché de même
+* [ ] non coché
+*     item normal
+
+
 === des anotations et remarques
 
 NOTE: An `admonition paragraph` draws the reader's attention to
@@ -59,7 +74,8 @@ Its purpose is determined by the label
 at the beginning of the paragraph.
 
 . Titre de cette note
-NOTE: An `admonition paragraph` draws the reader's attention to + 1*
+[NOTE]
+An `admonition paragraph` draws the reader's attention to + 1*
 auxiliary information. +
 Its purpose is determined by the label
 at the beginning of the paragraph.
@@ -72,6 +88,14 @@ IMPORTANT: Don't forget...
 WARNING: Watch out for...
 
 CAUTION: Ensure that...
+
+==== citation
+
+.Dicton atmosphérique
+[quote, anonyme, la grenouille]
+____
+Après la pluie le beau temps.
+____
 
 
 == Deuxième Partie
@@ -101,18 +125,6 @@ sr0     11:0    1  1024M  0 rom
 puts "Hello, World!"
 
 
-=== citation
-
-.Dicton atmosphérique
-[quote, anonyme, la grenouille]
-____
-Après la pluie le beau temps.
-____
-
-
-=== Avec Latex
-
-- latexmath:[$R_x = 10.0 \times \sin(R_\phi)$]
 
 
 === Inclure des images
@@ -121,14 +133,6 @@ voici une image
 
 image::essai.png[essai]
 
-
-=== des boutons ?
-
-menu:View[Zoom > Reset]
-
-Pressez le bouton btn:[OK] quand vous avez fini.
-
-Séquence de touches kbd:[Alt+F11]
 
 
 === Les labels
@@ -149,9 +153,9 @@ Question 2:: Answer 2
 === Les tableaux
 
 .Un exemple de tableau
-[options="header,footer"]
+[options="header"]
 |=======================
-|header Colonne 1|Colonne 2 |Colonne 3
+| Colonne 1|Colonne 2 |Colonne 3
 |1    |Item 1     |a
 |2    |Item 2     |b
 |3    |Item 3     |c
@@ -174,5 +178,20 @@ ID,FName,LName,Address,Phone
 1,Vasya,Pupkin,London,+123
 2,X,Y,"*A*,B",45**6**78
 |===========================
+
+
+=== ceux qui ne fonctionnent pas…
+
+==== Avec Latex
+
+- latexmath:[$R_x = 10.0 \times \sin(R_\phi)$]
+
+==== des boutons ?
+
+menu:View[Zoom > Reset]
+
+Pressez le bouton btn:[OK] quand vous avez fini.
+
+Séquence de touches kbd:[Alt+F11]
 
 
