@@ -1,5 +1,5 @@
 = Bonjour, AsciiDoc! : essai d'un tutoriel
-:toc: left
+:toc: right
 :toclevels: 4
 :toc-title: Table des matières
 :experimental:
@@ -79,12 +79,6 @@ link:++ http://asciidoc.org ++
 * [ ] non coché
 *     item normal
 
-[%interactive]
-* [*] coché
-* [x] coché de même
-* [ ] non coché
-*     item normal
-
 
 === des anotations et remarques
 
@@ -93,7 +87,6 @@ auxiliary information.
 Its purpose is determined by the label
 at the beginning of the paragraph.
 
-. Titre de cette note
 [NOTE]
 An `admonition paragraph` draws the reader's attention to +
 auxiliary information. +
@@ -213,6 +206,12 @@ ID,FName,LName,Address,Phone
 menu:View[Zoom > Reset]
 
 Pressez le bouton btn:[OK] quand vous avez fini.
+
+[%interactive]
+* [*] coché
+* [x] coché de même
+* [ ] non coché
+*     item normal
 
 ==== mises en forme ?
 
