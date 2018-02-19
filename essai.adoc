@@ -1,16 +1,15 @@
 = Hello, AsciiDoc!
 Doc Writer <doc@example.com>
 :toc:
+:toc-title: Table des matières
 
-An introduction to http://asciidoc.org[AsciiDoc].
+Une introduction à http://asciidoc.org[AsciiDoc].
 
 essai de documentation
 
-toc::[Sommaire]
+== Première Partie
 
-== Première Section
-
-=== sous-section
+=== des listes
 
 * item 1
 * item 2
@@ -30,9 +29,9 @@ WARNING: Watch out for...
 
 CAUTION: Ensure that...
 
-== Deuxième section
+== Deuxième Partie
 
-=== sous-section
+=== Inclure du code
 
 du code pour essai
 
@@ -41,19 +40,12 @@ du code pour essai
 $ c'est du code
 essai
 
-# commande
+# lsblk
 réponse
 ----
 
-Autre essai
 
-.Exemple
-****
-# c'est di code
-essai
-****
-
-du texte pour essai
+=== autre listes
 
 . liste 1
 .. sousliste a
@@ -71,7 +63,7 @@ un essai avec tip
 
 WARNING: un essai avec note…
 
-=== encore une sous-section
+=== autres mises en forme
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
