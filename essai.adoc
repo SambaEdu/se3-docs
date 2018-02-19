@@ -71,7 +71,8 @@ sr0     11:0    1  1024M  0 rom
 === Inclure des images
 
 voici une image
-image::essai.png[]
+
+image::essai.png[essai]
 
 [TIP]
 ====
