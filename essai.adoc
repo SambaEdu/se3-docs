@@ -63,6 +63,10 @@ sr0     11:0    1  1024M  0 rom
 .. sousliste b
 .. sousliste c
 
+=== Avec Latex
+
+- latexmath:[$R_x = 10.0 \times \sin(R_\phi)$]
+
 [TIP]
 ====
 un essai avec tip
