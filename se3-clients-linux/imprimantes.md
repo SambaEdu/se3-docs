@@ -40,6 +40,78 @@ Cette commande doit être, en principe, exécutée une seule fois sur le client 
 
 Si tout va bien, vous devriez ensuite (même après redémarrage du système) être en mesure d'imprimer tout ce que vous souhaitez à travers vos applications favorites (navigateur Web, traitement de texte, lecteur de PDF etc).
 
+### Cas des copieurs Kyocera avec un code utilisateur
+Pour pouvoir imprimer sur un copieur Kyocera qui nécessite un code utilisateur individuel, il va falloir faire deux manipulations:
+
+La première sur les **clients Linux** (mais qui peut se faire avec un script unefois.bat).
+
+La deuxième sur le **script de logon_perso** situé sur le se3.
+
+Il faut déjà installer le logiciel kyodialog".
+On le trouvera sur cette page, dans la catégorie **Linux** (Linux UPD driver with extended feature support).
+Il faut décompresser l'archive et garder le package "LinuxPhase4/KyoceraPackageLinux/Debian/EU/kyodialog_amd64/kyodialog_4.0-0_amd64.deb
+
+On l'installe en faisant:
+
+```sh
+dpkg -i kyodialog_4.0-0_amd64.deb
+```
+
+Il est possible qu'un problème de dépendance se pose. Il faut alors le regler en faisant
+```sh
+apt-get install -f
+```
+
+Le logiciel kyodialog s'installe donc (Kyocera Print Panel), ainsi qu'un grand nombre de drivers PPD qui se mettent dans `/usr/share/ppd/kyocera/`
+
+Il suffit ensuite d'installer les imprimantes de façon classique:
+```
+lpadmin -p copieur-sdp3 -v socket://172.20.71.100:9100 -E -P /usr/share/ppd/kyocera/Kyocera_TASKalfa_4550ci.ppd
+```
+
+On lance kKyocera Print Panel. Les trois imprimantes doivent s'y trouver.
+Il suffit de cliquer sur une imprimante, puis `Travail`. On coche `comptabilisation des Travaux` puis `Utiliser un numero de compte spécifique`. On valide . On refait de même sur les autres imprimantes.
+Il est maintenant possible d'écrire sur les copieurs.
+
+Concrêtement, Kyocera Print Panel a ajouté des lignes à un fichier de configuration situé dans /home/login/.cups/lpoptions
+contenant entre autres le code utilisatur dans la partir " KmManagment=12345".
+
+A chaque connexion d'utilisateur, le fichier /home/login/.cups/lpoptions est recrée puis effacé!, Il faut donc refaire la manip avec `Kyocera Print Panel` à chaque fois.
+
+On peut contourner cela en faisant ainsi:
+On va modifier le script de logon_perso de la sorte
+
+```sh
+nano /home/netlogon/clinets-linux/bin/logon_perso
+```
+
+On ajoute les lignes suivantes (à adapter bien sur à votre réseau) dans la partie `ouverture_perso`
+
+```
+#on va créer le fichier lpoptions dans un partage réseau existant lisible uniquement par l'utilisateur (ex doc).
+touch  "$REP_HOME"/Documents/.lpoptions
+mkdir -p "$REP_HOME/.cups"
+#On créer un lien symbolique pour que le fichier puisse être modifiable par kyodialog.
+ln -s  "$REP_HOME"/Documents/.lpoptions "$REP_HOME"/.cups/lpoptions
+
+#installation es imprimantes de la sdp
+
+if appartient_au_parc "sprof1" "$NOM_HOTE"; then
+    # La machine appartient au parc sprof1
+lpadmin -p copieur-sdp3 -v socket://172.20.71.102:9100 -E -P /usr/share/ppd/kyocera/Kyocera_TASKalfa_4501i.ppd
+lpadmin -p copieur-sdp-couleur -v socket://172.20.71.100:9100 -E -P /usr/share/ppd/kyocera/Kyocera_TASKalfa_4550ci.ppd
+lpadmin -p copieur-sdp2 -v socket://172.20.71.101:9100 -E -P /usr/share/ppd/kyocera/Kyocera_TASKalfa_4501i.ppd
+else
+# La machine n'appartient pas au parc S121, on supprime les imprimantes(inutile sauf si on enleve une machine d'un parc.).
+lpadmin -x copieur-sdp3
+lpadmin -x copieur-sdp-couleur
+lpadmin -x copieur-sdp2
+    
+fi
+
+```
+
+Maintenant, lorsque un utilisateur va entrer ses codes dans le logiciel, ils seront enregistrés dans le fichier .lpoptions
 
 ## Imprimante par défaut
 
