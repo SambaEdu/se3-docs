@@ -74,12 +74,18 @@ voici une image
 
 image::essai.png[essai]
 
+menu:View[Zoom > Reset]
+
+Pressez le bouton btn:[OK] quand vous avez fini.
+
+Séquence de touches kbd:[Alt+F11]
+
 [TIP]
 ====
 un essai avec tip
 ====
 
-WARNING: un essai avec note…
+ATTENTION: un essai avec note…
 
 === autres mises en forme
 
