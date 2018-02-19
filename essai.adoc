@@ -3,11 +3,9 @@ Doc Writer <doc@example.com>
 
 An introduction to http://asciidoc.org[AsciiDoc].
 
-****
 essai de documentation
-****
 
-toc::[]
+toc::[Sommaire]
 
 == Première Section
 
@@ -15,6 +13,21 @@ toc::[]
 
 * item 1
 * item 2
+
+NOTE: An admonition paragraph draws the reader's attention to
+auxiliary information.
+Its purpose is determined by the label
+at the beginning of the paragraph.
+
+Here are the other built-in admonition types:
+
+TIP: Pro tip...
+
+IMPORTANT: Don't forget...
+
+WARNING: Watch out for...
+
+CAUTION: Ensure that...
 
 == Deuxième section
 
