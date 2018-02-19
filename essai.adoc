@@ -7,6 +7,8 @@ An introduction to http://asciidoc.org[AsciiDoc].
 essai de documentation
 ****
 
+toc::[]
+
 == Première Section
 
 === sous-section
@@ -19,16 +21,21 @@ essai de documentation
 === sous-section
 
 du code pour essai
+
 .Exemple
 ----
-c'est di code
+$ c'est du code
 essai
+
+# commande
+réponse
 ----
 
 Autre essai
+
 .Exemple
 ****
-c'est di code
+# c'est di code
 essai
 ****
 
@@ -44,15 +51,17 @@ du texte pour essai
 .. sousliste c
 
 [TIP]
+====
 un essai avec tip
+====
 
-NOTE: un essai avec note…
+WARNING: un essai avec note…
 
 === encore une sous-section
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
-du texte [.underline]#souligné# en partie
+du texte [.underline]souligné en partie
 
 [source,ruby]
 puts "Hello, World!"
