@@ -48,7 +48,11 @@ La première sur les **clients Linux** (mais qui peut se faire avec un script un
 La deuxième sur le **script de logon_perso** situé sur le se3.
 
 Il faut déjà installer le logiciel kyodialog".
-On le trouvera sur cette page, dans la catégorie **Linux** (Linux UPD driver with extended feature support).
+On le trouvera sur cette page
+`
+https://www.kyoceradocumentsolutions.fr/index/service___assistance/telechargement.false.driver.TASKALFA4550CI._.FR.html`
+
+, dans la catégorie **Linux** (Linux UPD driver with extended feature support).
 Il faut décompresser l'archive et garder le package "LinuxPhase4/KyoceraPackageLinux/Debian/EU/kyodialog_amd64/kyodialog_4.0-0_amd64.deb
 
 On l'installe en faisant:
