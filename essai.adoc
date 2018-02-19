@@ -20,6 +20,10 @@ Une table des matières est mise en place automatiquement.
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
+=== des touches
+
+Séquence de touches kbd:[Alt+F11]
+
 
 === Symboles et ligne de séparation
 
@@ -28,7 +32,7 @@ du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^
 On peut utiliser le signe "fin de paragraphe" :
 &#182;
 
-Et aussi rajouter une ligne :
+Et aussi rajouter une ligne de séparation :
 
 ''''
 
@@ -46,10 +50,10 @@ http://asciidoc.org
 
 * autre exemple encore
 
-link:++http://asciidoc.org ++
+link:++ http://asciidoc.org ++
 
 
-=== Références dans le documentation
+=== Références dans le document
 
 À venir…
 
@@ -76,10 +80,10 @@ link:++http://asciidoc.org ++
 *     item normal
 
 [%interactive]
-[*] coché
-[x] coché de même
-[ ] non coché
-    item normal
+* [*] coché
+* [x] coché de même
+* [ ] non coché
+*     item normal
 
 
 === des anotations et remarques
@@ -91,13 +95,11 @@ at the beginning of the paragraph.
 
 . Titre de cette note
 [NOTE]
-An `admonition paragraph` draws the reader's attention to + # <1>
-auxiliary information. + # <2>
+An `admonition paragraph` draws the reader's attention to +
+auxiliary information. +
 Its purpose is determined by the label
 at the beginning of the paragraph.
 
-<1> on retourne à la ligne volontairement…
-<2> là aussi !
 
 TIP: Pro tip...
 
@@ -106,6 +108,7 @@ IMPORTANT: Don't forget...
 WARNING: Watch out for...
 
 CAUTION: Ensure that...
+
 
 ==== citation
 
@@ -125,7 +128,7 @@ du code pour essai
 .Exemple
 ----
 $ c'est du code
-essai
+essai # <1>
 
 # lsblk
 NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
@@ -137,6 +140,7 @@ sda      8:0    0 698,7G  0 disk
 └─sda6   8:6    0 653,3G  0 part /home
 sr0     11:0    1  1024M  0 rom
 ----
+<1> c'est la réponse
 
 [source,ruby]
 .Résultat
@@ -200,7 +204,7 @@ ID,FName,LName,Address,Phone
 
 === ceux qui ne fonctionnent pas…
 
-==== Avec Latex
+==== Avec Latex ?
 
 - latexmath:[$R_x = 10.0 \times \sin(R_\phi)$]
 
@@ -209,8 +213,6 @@ ID,FName,LName,Address,Phone
 menu:View[Zoom > Reset]
 
 Pressez le bouton btn:[OK] quand vous avez fini.
-
-Séquence de touches kbd:[Alt+F11]
 
 ==== mises en forme ?
 
