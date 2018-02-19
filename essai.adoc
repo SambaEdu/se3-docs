@@ -58,6 +58,12 @@ auxiliary information.
 Its purpose is determined by the label
 at the beginning of the paragraph.
 
+NOTE: An `admonition paragraph` draws the reader's attention to +
+auxiliary information. +
+Its purpose is determined by the label
+at the beginning of the paragraph.
+
+
 TIP: Pro tip...
 
 IMPORTANT: Don't forget...
@@ -91,8 +97,8 @@ sr0     11:0    1  1024M  0 rom
 
 === citation
 
-.Titre optionnel
-[quote, anonyme, la météo]
+.Dicton atmosphérique
+[quote, anonyme, la grenouille]
 ____
 Après la pluie le beau temps.
 ____
@@ -155,13 +161,12 @@ a,b,c,d
 A,B,C,D
 |======
 
-. Encore un tableau
 [grid="rows",format="csv"]
 [options="header",cols="^,<,<s,<,>m"]
 |===========================
 ID,FName,LName,Address,Phone
 1,Vasya,Pupkin,London,+123
-2,X,Y,"A,B",45678
+2,X,Y,"*A*,B",45**6**78
 |===========================
 
 
