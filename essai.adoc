@@ -2,6 +2,10 @@
 :toc: left
 :toclevels: 4
 :toc-title: Table des matières
+:experimental:
+:description: Example AsciiDoc document
+:keywords: AsciiDoc
+:icons: font
 :imagesdir: ./images
 
 Une introduction à http://asciidoc.org[AsciiDoc].
@@ -30,6 +34,24 @@ Et aussi rajouter une ligne :
 
 du texte ici en dessous de la ligne de séparation
 
+=== des liens
+
+* exemple
+
+http://asciidoc.org[AsciiDoc]
+
+* autre exemple
+
+http://asciidoc.org
+
+* autre exemple encore
+
+link:++http://asciidoc.org ++
+
+
+=== Références dans le documentation
+
+À venir…
 
 === des listes
 
@@ -54,10 +76,10 @@ du texte ici en dessous de la ligne de séparation
 *     item normal
 
 [%interactive]
-* [*] coché
-* [x] coché de même
-* [ ] non coché
-*     item normal
+[*] coché
+[x] coché de même
+[ ] non coché
+    item normal
 
 
 === des anotations et remarques
@@ -69,11 +91,13 @@ at the beginning of the paragraph.
 
 . Titre de cette note
 [NOTE]
-An `admonition paragraph` draws the reader's attention to + 1*
-auxiliary information. +
+An `admonition paragraph` draws the reader's attention to + # <1>
+auxiliary information. + # <2>
 Its purpose is determined by the label
 at the beginning of the paragraph.
-1* on retourne à la ligne volontairement…
+
+<1> on retourne à la ligne volontairement…
+<2> là aussi !
 
 TIP: Pro tip...
 
@@ -188,11 +212,19 @@ Pressez le bouton btn:[OK] quand vous avez fini.
 
 Séquence de touches kbd:[Alt+F11]
 
+==== mises en forme ?
+
 du texte +++<u>souligné</u>+++ en partie pass:q[<u>underline *me*</u>] est-il souligné ?
 
 de la *[red]##c##[green]##ou##[purple]##l##[fuchsia]##e##[blue]##ur##*
 
 un #groupe de mots# mis en évidence
 
+==== des icônes ?
 
+icon:comment[] This is a comment icon
+
+icon:file[] And a file icon
+
+icon:battery-full[] And a battery icon
 
