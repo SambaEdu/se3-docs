@@ -3,6 +3,10 @@ Doc Writer <doc@example.com>
 
 An introduction to http://asciidoc.org[AsciiDoc].
 
+****
+essai de documentation
+****
+
 == Première Section
 
 === sous-section
@@ -14,18 +18,41 @@ An introduction to http://asciidoc.org[AsciiDoc].
 
 === sous-section
 
+du code pour essai
+.Exemple
+----
+c'est di code
+essai
+----
+
+Autre essai
+.Exemple
+****
+c'est di code
+essai
+****
+
 du texte pour essai
 
-1. liste 1
-2. liste 2
+. liste 1
+.. sousliste a
+.. sousliste b
+. liste 2
+. liste encore
+.. sousliste a
+.. sousliste b
+.. sousliste c
 
-TIP: un essai avec tip
+[TIP]
+un essai avec tip
 
 NOTE: un essai avec note…
 
 === encore une sous-section
 
-du texte *en gras* ou en -italique-
+du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
+
+du texte [.underline]#souligné# en partie
 
 [source,ruby]
 puts "Hello, World!"
