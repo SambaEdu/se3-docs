@@ -1,7 +1,8 @@
-= Bonjour, AsciiDoc!
-Doc Writer <doc@example.com>
+= Bonjour, AsciiDoc! : essai d'un tutoriel
 :toc: left
+:toclevels: 4
 :toc-title: Table des matières
+:imagesdir: ./images
 
 Une introduction à http://asciidoc.org[AsciiDoc].
 
@@ -14,7 +15,7 @@ essai de documentation
 * item 1
 * item 2
 
-NOTE: An admonition paragraph draws the reader's attention to
+NOTE: An `admonition paragraph` draws the reader's attention to
 auxiliary information.
 Its purpose is determined by the label
 at the beginning of the paragraph.
@@ -66,6 +67,11 @@ sr0     11:0    1  1024M  0 rom
 === Avec Latex
 
 - latexmath:[$R_x = 10.0 \times \sin(R_\phi)$]
+
+=== Inclure des images
+
+voici une image
+image::essai.png[]
 
 [TIP]
 ====
