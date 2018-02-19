@@ -43,9 +43,9 @@ Si tout va bien, vous devriez ensuite (même après redémarrage du système) ê
 ### Cas des copieurs Kyocera avec un code utilisateur
 Pour pouvoir imprimer sur un copieur Kyocera qui nécessite un code utilisateur individuel, il va falloir faire deux manipulations:
 
-La première sur les clients Linux (mais qui peut se faire avec un script unefois.bat).
+La première sur les **clients Linux** (mais qui peut se faire avec un script unefois.bat).
 
-La deuxième sur le script de logon_perso situé sur le se3.
+La deuxième sur le **script de logon_perso** situé sur le se3.
 
 Il faut déjà installer le logiciel kyodialog".
 On le trouvera sur cette page, dans la catégorie **Linux** (Linux UPD driver with extended feature support).
@@ -95,8 +95,6 @@ mkdir -p "$REP_HOME/.cups"
 ln -s  "$REP_HOME"/Documents/.lpoptions "$REP_HOME"/.cups/lpoptions
 
 #installation es imprimantes de la sdp
-
-On installe les imprimantes concernées
 
 if appartient_au_parc "sprof1" "$NOM_HOTE"; then
     # La machine appartient au parc sprof1
