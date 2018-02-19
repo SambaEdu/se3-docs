@@ -1,6 +1,8 @@
 = Hello, AsciiDoc!
 Doc Writer <doc@example.com>
+
 :toc:
+
 An introduction to http://asciidoc.org[AsciiDoc].
 
 essai de documentation
