@@ -3,10 +3,29 @@ Doc Writer <doc@example.com>
 
 An introduction to http://asciidoc.org[AsciiDoc].
 
-== First Section
+== Première Section
+
+=== sous-section
 
 * item 1
 * item 2
+
+== Deuxième section
+
+=== sous-section
+
+du texte pour essai
+
+1. liste 1
+2. liste 2
+
+TIP: un essai avec tip
+
+NOTE: un essai avec note…
+
+=== encore une sous-section
+
+du texte *en gras* ou en -italique-
 
 [source,ruby]
 puts "Hello, World!"
