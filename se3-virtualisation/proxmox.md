@@ -40,12 +40,13 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
 
 ## Présentation
 
-Proxmox 5 est un puissant système libre (le support est néanmoins payant) de virtualisation basé sur Debian et qui utilise l'hyperviseur KVM (pour de la virtualisation complète), ou des containeurs lxc Il permet à la façon de virtualbox (mais cette fois pour un usage pro) de créer des  snapshots de machine, des sauvegardes complètes et beaucoup d'autres fonctionnalités. 
+Proxmox 5 (version actuelle 5.1) est un puissant système libre (le support est néanmoins payant) de virtualisation basé sur Debian et qui utilise l'hyperviseur KVM (pour de la virtualisation complète), ou des containeurs lxc Il permet à la façon de virtualbox (mais cette fois pour un usage pro) de créer des  snapshots de machine, des sauvegardes complètes et beaucoup d'autres fonctionnalités. 
 
 Le serveur et les vms peuvent se gérer à partir d'une **interface web**, et une gestion possible des comptes utilisateurs va permettre de laisser à des tiers un accès avec plus ou moins de droits sur une machine (comme le serveur bcdi par exemple).  
 
 L'installation pourra se faire avec les paquets proxmox, mais il sera bien plus pratique d'utiliser l'iso toute faite sur le site officiel de proxmox:
-https://www.proxmox.com/en/downloads
+
+https://www.proxmox.com/en/downloads/item/proxmox-ve-5-1-iso-installer-3rd-iso-release
 
 Virtualiser un serveur va avoir plusieurs avantages:
 Le premier sera de pouvoir installer plusieurs serveurs sur un même machine physique.
@@ -79,6 +80,11 @@ Par ordre de performance :
 
 ## Pool de stockage
 PVE propose à l'installation de créer directement un poll de stockage global pour tout le systmèe. C'est une bonne idée, car il est très facile de l'étendre ensuite.
+
+Quelques infos concernant les différents types de RAID:
+
+https://buzut.fr/tirez-le-meilleur-de-vos-disques-durs-avec-raid/
+
 
 Deux solutions sont possibles :
 ### RAID 5/6
@@ -114,9 +120,9 @@ ZFS permet d'avoir un cache en écriture (log) et en lecture (cache). Un petit S
 
 ## Installation de base du serveur
 
-L'installation est très simple: très peu de choses sont demandées. On regrêtera cependant le peu de choix concernant le partionnement du serveur.
+L'installation est **très** simple: très peu de choses sont demandées. On regrêtera cependant le peu de choix concernant le partionnement du serveur.
 
-Dans l'installation présentée, il y a trois disques dur:
+Dans l'installation présentée ici, il y a trois disques dur:
 
 sda 500 Go
 sdb 100 Go 
@@ -124,7 +130,7 @@ sdc 500 Go
 
 ![01](images/01.png)
 
-On choisit d'installer proxmox sur l premier disque sda.  Les autres disques serviront à stocker des sauvegardes de machines (les snapshots sont placés dans le même espace de stockage que les machines), des fichiers iso de livecd pour les machines,etc...
+On choisit d'installer proxmox sur le premier disque sda.  Les autres disques serviront à stocker des sauvegardes de machines (les snapshots sont placés dans le même espace de stockage que les machines), des fichiers iso de livecd pour les machines,etc...
 
 Pour virtualiser un serveur comme le `se3`, il sera clairement conseillé de mettre plusieurs disques identiques et d'utiliser un système zfs avec du cache ( aller voir dans `options`) pour de meilleurs performances.
 
@@ -239,7 +245,7 @@ image iso | livecd ou autre image de cd.
 conteneur et images disques | vm ou conteneur lxc (et snapshots mis automatiquement au même endroit).
 fichier sauvegarde vzdump | export de machine pour sauvegarde complète.
 
-Ensuite, nous tronvons le premier serveur de vm. 
+Ensuite, nous trouvons le premier serveur de vm. 
 
 noeud PVE1| rôles
 -----------|--------
@@ -253,7 +259,8 @@ Ensuite, nous trouvons une ligne pour chaque espace de stockage. Le disque de d�
 *local(pve)* qui prend environ 1/5 du disque sda .
 *local-lvm  (pve)*, l'espace restant 
 
-On pourra ajouter d'autres espaces (voir la suite)
+On pourra ajouter d'autres espaces (*voir la suite*).
+
 Sans modification,les VMS/conteneurs/snapshots sont placés dans la LVM alors que les iso et sauvegardes sont dans le système de base.
 
 ![08](images/08.png)
@@ -339,7 +346,7 @@ On peut choisir le nombre de coeurs du processeur. L'aide indique que l'on peut 
 
 ### **Mémoire**
 
-On indique la quantité de RAM à allouer à la VM. On peut utiliser une quantité dynamique pour les serveurs fonctionnant par intermittence.
+On indique la quantité de RAM à allouer à la VM. On peut utiliser une *quantité dynamique* pour les serveurs fonctionnant par intermittence.
 
 
 ### **Réseau**
