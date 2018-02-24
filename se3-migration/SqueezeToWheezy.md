@@ -272,7 +272,7 @@ La cause est un défaut de structure de l'annuaire : le GID des utilisateurs n'e
 
 Pour régler temporairement cette situation, le temps de rendre compatible l'annuaire, il suffit de changer un paramètre de Yes à No dans le fichier `/etc/samba/smb.conf`. Dans ce fichier, trouvez la ligne correspondant à `ldapsam:trusted` et changez `Yes` en `No`.
 
-Ensuite, **il faut rendre compatible l'annuaire ldap**. Indispensable !
+Ensuite, **il faut rendre compatible l'annuaire ldap**. Indispensable ! Voir ci-dessous quelques compléments qui vous permettront d'analyse votre annuaire.
 
 Pour cela, voici une procédure, proposée par François-Xavier Vial :
 
@@ -283,9 +283,17 @@ Pour cela, voici une procédure, proposée par François-Xavier Vial :
 - Si ce n'est pas le cas, utiliser le script **se3-corrige-gidNumber.sh** qui va redresser les choses
 - Vérifier que le paquet inetutils-inetd est installé : **dpkg --status inetutils-inetd | grep Status**
 - S'il n'est pas installé : **apt-get install inetutils-inetd**
+- Vérifier les attributs du groupe `lcs-users` (voir ci-dessous) et les ajouter/modifier si nécessaire
 - Re-modifier le fichier `/etc/samba/smb.conf` avec un `ldapsam:trusted = Yes`
 - Redémarrer samba
 - Vérifier que ça fonctionne
+
+Lors de la vérification des attributs du groupe `lcs-users`, il sera sans doute nécessaire d'effectuer les actions suivantes pour ce groupe, via l'interface web du se3 (Annuaire → Administration LDAP → phpldapadmin : Explorateur LDAP):
+* ajouter un objetClass : sambaGroupMapping
+* mettre sambaGroupType à 2
+* mettre sambaSID avec le sambaSID des utilisateurs que l'on retrouve dans la branche people
+* ajouter un nouvel attribut description : Domain Unix group
+* ajouter un nouvel attribut displayName : Utilisateurs du domaine. 
 
 ### Compléments sur la compatibilité de l'annuaire `ldap`
 Pour savoir si l'annuaire `ldap` est compatible, on peut l'exporter au format `ldif` (via l'interface web du `se3`) pour y regarder de plus près. Le plus souvent c'est une incohérence entre Guidnumber / Mappage du groupe par défaut.
