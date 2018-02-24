@@ -343,7 +343,7 @@ description: Domain Unix group
 
 Là dans mon exemple tout est cohérent et donc tout va bien.
 
-S'il y a visiblement un de ces éléments qui ne va pas, reste à trouver lequel. En général c'est gidNumber qui ne correspond pas (rappel : il faut qu'il soit à 5005). Pour corriger cela, voir ci-dessus la procédure proposée par François-Xavier.
+S'il y a visiblement un de ces éléments qui ne va pas, reste à trouver lequel. En général c'est gidNumber qui ne correspond pas (rappel : il faut qu'il soit à 5005). Pour corriger cela, voir ci-dessus [la procédure proposée par François-Xavier](#annuaire-incompatible).
 
 
 ### Plus de réseau
