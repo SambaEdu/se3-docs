@@ -274,7 +274,7 @@ Pour régler temporairement cette situation, le temps de rendre compatible l'ann
 
 Ensuite, **il faut rendre compatible l'annuaire ldap**. Indispensable ! Voir ci-dessous [quelques compléments](#compléments-sur-la-compatibilité-de-lannuaire-ldap) qui vous permettront d'analyse votre annuaire.
 
-Pour cela, voici une procédure, proposée par François-Xavier Vial :
+**Pour rendre compatible votre annuaire**, voici une procédure, proposée par François-Xavier Vial :
 
 - Modifier (ou vérifier) sur l'interface pour le groupe `lcs-users` le GID Number à 5005
 - Modifier (ou vérifier) sur l'interface dans Configuration générale - Paramètres serveur la valeur de la ligne Groupe par défaut à 5005
