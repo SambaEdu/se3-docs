@@ -272,7 +272,7 @@ La cause est un défaut de structure de l'annuaire : le GID des utilisateurs n'e
 
 Pour régler temporairement cette situation, le temps de rendre compatible l'annuaire, il suffit de changer un paramètre de Yes à No dans le fichier `/etc/samba/smb.conf`. Dans ce fichier, trouvez la ligne correspondant à `ldapsam:trusted` et changez `Yes` en `No`.
 
-Ensuite, **il faut rendre compatible l'annuaire ldap**. Indispensable ! Voir ci-dessous quelques compléments qui vous permettront d'analyse votre annuaire.
+Ensuite, **il faut rendre compatible l'annuaire ldap**. Indispensable ! Voir ci-dessous [quelques compléments](#compléments-sur-la-compatibilité-de-lannuaire-ldap) qui vous permettront d'analyse votre annuaire.
 
 Pour cela, voici une procédure, proposée par François-Xavier Vial :
 
