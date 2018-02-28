@@ -114,7 +114,24 @@ b. liste nb
 des anotations et remarques
 ---------------------------
 
-À venir…
+.. Error:: C'est une erreur ?
+
+.. Important::
+   * c'est important
+   * bien le lire
+   * se concentrer
+   * se reposer…
+
+.. Note::
+    - une liste
+    - est possible
+    - À noter genre remarque…
+
+.. WARNING::
+    * comme ci-dessus
+    * on peut avoir une liste
+
+.. Attention:: on peut faire aussi attention :-)
 
 
 citation et commentaire non affiché
