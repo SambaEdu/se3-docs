@@ -17,7 +17,7 @@ Première Partie
 
 gras, italiques et autres mises en forme
 --------------------------------------------
-du texte **en gras** ou en *italique* ou bien **considérablement** ou bien *essai*
+du texte **en gras** ou en *italique* ou bien **considérablement** ou bien `essai` et encore ``essai``
 
 des touches
 -----------
