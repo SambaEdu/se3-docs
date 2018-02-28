@@ -19,13 +19,17 @@ gras, italiques et autres mises en forme
 --------------------------------------------
 du texte **en gras** ou en *italique* ou encore ``essai mis en cadre dans la phrase``.
 
+Pour du texte souligné ?
+
+
 des touches ?
 -------------
 
-Séquence de touches kbd::[Alt+F11]
+Séquence de touches ? kbd::[Alt+F11]
 
-Symboles et ligne de séparation
--------------------------------
+
+Symboles ? et ligne de séparation
+---------------------------------
 
 (C) (R) (TM) -- ... -> <- => <= 
 
@@ -36,7 +40,7 @@ Et aussi rajouter une ligne de séparation :
 
 ----
 
-du texte ici en dessous de la ligne de séparation
+du texte ici en dessous de la ligne de séparation.
 
 
 des liens
@@ -63,12 +67,16 @@ Références dans le document
 des listes
 ----------
 
+liste non numérotée :
+
 * item 1
     * sous-item
         * encore un sous-item
         * dfgt
 * item 2
 * item 3
+
+liste numérotée :
 
 1) liste 1
     1. sousliste a
@@ -85,25 +93,25 @@ a. liste n
 
 b. liste nb
 
+
 des anotations et remarques
 ---------------------------
 
 À venir…
 
 
-citation
---------
+citation et commentaire non affiché
+-----------------------------------
 
     Après la pluie le beau temps.
 
     C'est la fête à la grenouille !
 
-.. un commentaire qui n'apparaît pas à l'affichage !
-
+avec un commentaire qui n'apparaît pas dans l'affichage, juste entre les deux lignes ci-dessous :-)
 
 ----
 
-entre deux lignes
+.. un commentaire qui n'apparaît pas à l'affichage !
 
 ----
 
@@ -133,6 +141,7 @@ autre exemple ::
       return 0;
   }
 
+
 Inclure des images
 ------------------
 
@@ -148,8 +157,9 @@ Les labels
 Term 1
     Definition 1
 
-**Term 2**
-        Definition 2
+Term 2
+    Definition 2
+
 
 Les tableaux
 ------------
@@ -166,6 +176,3 @@ True   False  True
 False  True   True
 True   True   True
 =====  =====  ======
-
-
-
