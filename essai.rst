@@ -4,7 +4,7 @@ ReStructuredText (rst): plain text markup
 
 .. sectnum::
 
-.. contents:: The tiny table of contents
+.. contents:: La table des matières
 
 What is reStructuredText?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
