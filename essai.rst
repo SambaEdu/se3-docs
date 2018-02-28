@@ -2,7 +2,7 @@ ReStructuredText (rst): plain text markup
 -----------------------------------------
 
 
-.. sectnum::
+.. sectnum:: Un essai pour maîtriser l'écriture de la doc…
 
 .. contents:: La table des matières
 
