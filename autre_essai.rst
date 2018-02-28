@@ -75,24 +75,24 @@ liste non numérotée :
         * dfgt
 * item 2
 * item 3
+    * sous-item
+    * sous-item
 
 liste numérotée automatiquement :
 
 #. liste 1
-    1. sousliste a
-    2. sousliste b
-
+    #. sousliste a
+    #. sousliste b
 #. liste 2
 #. liste suivante
-    1. sousliste a
-        1. sous-sous-liste
-    2. sousliste b
-    3. sousliste c
+    #. sousliste a
+        #. sous-sous-liste
+    #. sousliste b
+    #. sousliste c
 
 liste encore avec numérotation :
 
 a. liste n
-
 b. liste nb
 
 
