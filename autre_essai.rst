@@ -106,3 +106,35 @@ Deuxième Partie
 
 Inclure du code ou autre texte dans un cadre
 --------------------------------------------
+
+Voici du code ::
+
+    # lsblk
+    NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+    sda      8:0    0 698,7G  0 disk
+    ├─sda1   8:1    0  19,9G  0 part /
+    ├─sda2   8:2    0  19,9G  0 part
+    ├─sda3   8:3    0     1K  0 part
+    ├─sda5   8:5    0   5,5G  0 part [SWAP]
+    └─sda6   8:6    0 653,3G  0 part /home
+    sr0     11:0    1  1024M  0 rom
+
+autre exemple ::
+
+  int main ( int argc, char *argv[] ) {
+      printf("Hello World\n");
+      return 0;
+  }
+
+Inclure des images
+------------------
+
+voici une image :
+
+.. figure:: images/essai.png
+    :width: 300pt
+
+
+Les labels
+----------
+
