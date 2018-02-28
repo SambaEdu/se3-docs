@@ -1,6 +1,6 @@
 
 Bonjour, ReStructuredText ! : essai d'un tutoriel
-=================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Une introduction à https://fr.wikipedia.org/wiki/ReStructuredText
 
