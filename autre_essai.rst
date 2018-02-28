@@ -76,18 +76,20 @@ liste non numérotée :
 * item 2
 * item 3
 
-liste numérotée :
+liste numérotée automatiquement :
 
-1) liste 1
+#. liste 1
     1. sousliste a
     2. sousliste b
 
-2. liste 2
-3. liste suivante
+#. liste 2
+#. liste suivante
     1. sousliste a
         1. sous-sous-liste
     2. sousliste b
     3. sousliste c
+
+liste encore avec numérotation :
 
 a. liste n
 
@@ -114,6 +116,18 @@ avec un commentaire qui n'apparaît pas dans l'affichage, juste entre les deux l
 .. un commentaire qui n'apparaît pas à l'affichage !
 
 ----
+
+
+des notes
+---------
+
+on peut avoir une note [#]_ et une autre note [#]_ qui devraient être numérotées automatiquement.
+
+autre texte éventuel…
+
+.. [#] c'est la 1ère note.
+.. [#] c'est la 2e note. 
+
 
 
 Deuxième Partie
