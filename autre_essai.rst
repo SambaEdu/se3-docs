@@ -17,19 +17,19 @@ Première Partie
 
 gras, italiques et autres mises en forme
 --------------------------------------------
-du texte **en gras** ou en *italique* ou bien **considérablement** ou bien `essai` et encore ``essai``
+du texte **en gras** ou en *italique* ou encore ``essai mis en cadre dans la phrase``.
 
-des touches
------------
+des touches ?
+-------------
 
-Séquence de touches kbd:[Alt+F11]
+Séquence de touches kbd::[Alt+F11]
 
 Symboles et ligne de séparation
 -------------------------------
 
 (C) (R) (TM) -- ... -> <- => <= 
 
-On peut utiliser le signe "fin de paragraphe" :
+On peut utiliser le signe "fin de paragraphe" ?
 &#182;
 
 Et aussi rajouter une ligne de séparation :
@@ -37,6 +37,7 @@ Et aussi rajouter une ligne de séparation :
 ----
 
 du texte ici en dessous de la ligne de séparation
+
 
 des liens
 ---------
@@ -93,10 +94,16 @@ des anotations et remarques
 citation
 --------
 
-  Après la pluie le beau temps.
+    Après la pluie le beau temps.
 
-  C'est la fête à la grenouille !
+    C'est la fête à la grenouille !
 
+.. un commentaire qui n'apparaît pas à l'affichage !
+
+
+----
+
+entre deux lignes
 
 ----
 
@@ -137,4 +144,28 @@ voici une image :
 
 Les labels
 ----------
+
+Term 1
+    Definition 1
+
+**Term 2**
+        Definition 2
+
+Les tableaux
+------------
+
+Voici un tableau :
+
+=====  =====  ======
+   Inputs     Output
+------------  ------
+  A      B    A or B
+=====  =====  ======
+False  False  False
+True   False  True
+False  True   True
+True   True   True
+=====  =====  ======
+
+
 
