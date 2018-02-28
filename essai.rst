@@ -4,7 +4,7 @@ ReStructuredText (rst): plain text markup
 
 .. sectnum:: Un essai pour maîtriser l'écriture de la doc…
 
-.. contents:: 
+.. contents::  
 
 What is reStructuredText?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
