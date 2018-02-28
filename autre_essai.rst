@@ -9,6 +9,8 @@ essai de documentation et d'essais de mise en formes diverses.
 
 Une table des matières est mise en place automatiquement.
 
+.. sectnum:: Un essai pour maîtriser l'écriture de la doc…
+
 .. contents:: Table des matières
 
 
