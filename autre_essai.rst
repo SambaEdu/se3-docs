@@ -16,7 +16,7 @@ Première Partie
 ===============
 
 gras, italiques et autres mises en forme
---------------------------------------------
+----------------------------------------
 du texte **en gras** ou en *italique* ou encore ``essai mis en cadre dans la phrase``.
 
 Pour du texte souligné ?
@@ -61,7 +61,13 @@ Une phrase avec un lien vers restrutured_ et `le site de SambaÉDU`_.
 Références dans le document
 ---------------------------
 
-À venir…
+On peut revenir sur un titre de la table des matières, par exemple `gras, italiques et autres mises en forme`_ ou bien `Les tableaux`_.
+
+On peut aussi créer une ancre et ensuite s'y référer au cours du texte ; voir un lien dans le § `Les tableaux`_.
+
+.. _monAncre:
+
+C'est pratique, non ?
 
 
 des listes
@@ -81,18 +87,27 @@ liste non numérotée :
 liste numérotée automatiquement :
 
 #. liste 1
+
     #. sousliste a
+    
     #. sousliste b
+    
 #. liste 2
+
 #. liste suivante
+
     #. sousliste a
+    
         #. sous-sous-liste
+        
     #. sousliste b
+    
     #. sousliste c
 
 liste encore avec numérotation :
 
 a. liste n
+
 b. liste nb
 
 
@@ -190,3 +205,5 @@ True   False  True
 False  True   True
 True   True   True
 =====  =====  ======
+
+On peut revenir dans le texte à l'ancre monAncre_.
