@@ -1,15 +1,5 @@
-
 Bonjour, ReStructuredText ! : essai d'un tutoriel
-=================================================
-
-
-.. sectnum:: Un essai pour maîtriser l'écriture de la doc…
-
-.. contents:: Table des matières
-
-
-Première Partie
-===============
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Une introduction à https://fr.wikipedia.org/wiki/ReStructuredText
 
@@ -18,10 +8,15 @@ essai de documentation et d'essais de mise en formes diverses.
 Une table des matières est mise en place automatiquement.
 
 
+.. contents:: Table des matières
+
+
+Première Partie
+===============
+
 *gras*, _italiques_ et autres mises en forme
 --------------------------------------------
-
-du texte **en gras** ou en *italique* ou bien **consi**déra*ble*ment ou bien _essai_ et encore : 3^2 et d~1~, d_2^4
+du texte **en gras** ou en *italique* ou bien **considérablement** ou bien *essai*
 
 des touches
 -----------
@@ -38,7 +33,7 @@ On peut utiliser le signe "fin de paragraphe" :
 
 Et aussi rajouter une ligne de séparation :
 
------
+----
 
 du texte ici en dessous de la ligne de séparation
 
@@ -155,6 +150,7 @@ Voici un tableau :
 +-----------+-----------+---------+
 |6          |Three items|d        |
 +-----------+-----------+---------+
+
 
 
 
