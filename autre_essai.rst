@@ -1,5 +1,6 @@
+=================================================
 Bonjour, ReStructuredText ! : essai d'un tutoriel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=================================================
 
 Une introduction à https://fr.wikipedia.org/wiki/ReStructuredText
 
@@ -7,7 +8,7 @@ essai de documentation et d'essais de mise en formes diverses.
 
 Une table des matières est mise en place automatiquement.
 
-
+.. sectnum::
 .. contents:: Table des matières
 
 
@@ -48,7 +49,7 @@ https://fr.wikipedia.org/wiki/ReStructuredText
 
 Une phrase avec un lien vers restrutured_ et `le site de SambaÉDU`_.
 
-.. _restrutured_ : https://fr.wikipedia.org/wiki/ReStructuredText
+.. _restrutured : https://fr.wikipedia.org/wiki/ReStructuredText
 .. _le site de SambaÉDU : https://www.sambaedu.org/
 
 Références dans le document
@@ -75,9 +76,6 @@ des listes
         1) sous-sous-liste
     2) sousliste b
     3) sousliste c
-
-#) liste n
-#) liste nb
 
 
 des anotations et remarques
