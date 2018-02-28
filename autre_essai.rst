@@ -2,9 +2,14 @@
 Bonjour, ReStructuredText ! : essai d'un tutoriel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 .. sectnum:: Un essai pour maîtriser l'écriture de la doc…
 
 .. contents:: Table des matières
+
+
+Première Partie
+===============
 
 Une introduction à https://fr.wikipedia.org/wiki/ReStructuredText
 
@@ -12,8 +17,6 @@ essai de documentation et d'essais de mise en formes diverses.
 
 Une table des matières est mise en place automatiquement.
 
-Première Partie
-===============
 
 *gras*, _italiques_ et autres mises en forme
 --------------------------------------------
