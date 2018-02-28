@@ -1,6 +1,6 @@
 
 Bonjour, ReStructuredText ! : essai d'un tutoriel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=================================================
 
 
 .. sectnum:: Un essai pour maîtriser l'écriture de la doc…
