@@ -52,7 +52,7 @@ cp -R /home/* /home2
 
 * Modifier le fichier /etc/fstab pour qu’au démarrage la nouvelle partition soit montée sur home à la place de l’ancienne en remplaçant l'UUID de l'ancien disque par celui du nouveau.
 
->_La commande blkid en root donne en réponse la liste de toutes les partitions montées, ainsi que leurs UUIDs, labels et type de partition.
+>La commande blkid en root donne en réponse la liste de toutes les partitions montées, ainsi que leurs UUIDs, labels et type de partition.
 
 ```sh
 blkid
@@ -65,7 +65,6 @@ Retour type de la commande :
 /dev/sda3: LABEL="Home" UUID="8244710a-5cce-49ad-8b93-a92b5d2e53a0" TYPE="ext4" 
 /dev/sda4: UUID="DCF041AFF0419126" TYPE="ntfs" 
 ```
-_
 
 * Rebooter le serveur.
 
