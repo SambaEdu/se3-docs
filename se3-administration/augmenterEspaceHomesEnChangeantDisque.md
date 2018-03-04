@@ -6,7 +6,7 @@
 
 ## Introduction
 
-L’espace dévolu aux données des utilisateur est devenu trop étroit.Vous avez acheté un beau disque dur tout neuf de 2 To. Comment l’installer ?
+L’espace dévolu aux données des utilisateurs est devenu trop étroit. Vous avez acheté un beau disque dur tout neuf de 2 To. Comment l’installer ?
 
 Tout d’abord, il faut bien comprendre que vous n’allez pas étendre l’espace des homes mais copier ce qui existe vers un espace plus grand. La partition actuellement dévolue aux données des utilisateurs sera inutilisée à l’issue de cette manipulation.
 
@@ -26,7 +26,7 @@ cfdisk /dev/sdb
 
 * Créer une nouvelle partition en utilisant le menu de l’application ("new" pour créer la partition, "write" pour sauvegarder les changements et enfin "quit" pour sortir de l’application).
 
-* Quitter cfdisk et retourner en mode condole pour formater en XFS la partition nouvellement créée :
+* Quitter cfdisk et retourner en mode console pour formater en XFS la partition nouvellement créée :
 
 ```sh
 mkfs.xfs /dev/sdb1
