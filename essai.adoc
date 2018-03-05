@@ -54,7 +54,7 @@ Vous consulterez ce site : http://asciidoc.org
 
 === Références dans le document
 
-On peut revenir sur un titre de la table des matières, par exemple <<gras, _italiques_ et autres mises en forme>> ou bien <<Les tableaux>>.
+On peut revenir sur un titre de la table des matières, par exemple <<gras\, _italiques_ et autres mises en forme>> ou bien <<Les tableaux>>.
 
 On peut aussi créer une ancre et ensuite s'y référer au cours du texte ; voir un lien dans le § <<Les tableaux>>.
 
@@ -208,7 +208,8 @@ ID,FName,LName,Address,Phone
 
 ==== Avec Latex ?
 
-- latexmath:[$R_x = 10.0 \times \sin(R_\phi)$]
+- latexmath:[\(R_x = 10.0 \times \sin(R_\phi)\)]
+Cherchons a, b et c tels que latexmath:[\(a^2 + b^2 = c^2\)]
 
 
 ==== des boutons ?
