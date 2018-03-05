@@ -45,7 +45,7 @@ du texte ici en dessous de la ligne de séparation
 
 * exemple
 
-Pour information, voir le site :http://asciidoc.org[AsciiDoc] et aussi voir notre site :https://www.sambaedu.org/[SambaÉdu].
+Pour information, voir le site http://asciidoc.org[AsciiDoc] et aussi voir notre site https://www.sambaedu.org/[SambaÉdu].
 
 * autre exemple
 
@@ -54,9 +54,9 @@ Vous consulterez ce site : http://asciidoc.org
 
 === Références dans le document
 
-On peut revenir sur un titre de la table des matières, par exemple <<*gras*, _italiques_ et autres mises en forme>> ou bien <<Les tableaux>>.
+On peut revenir sur un titre de la table des matières, par exemple <<gras, italiques et autres mises en forme>> ou bien <<Les tableaux>>.
 
-On peut aussi créer une ancre et ensuite s'y référer au cours du texte ; voir un lien dans le § `Les tableaux`_.
+On peut aussi créer une ancre et ensuite s'y référer au cours du texte ; voir un lien dans le § <<Les tableaux>>.
 
 [[monAncre]]
 . retour vers cette ancre
