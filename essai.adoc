@@ -17,7 +17,7 @@ Une table des matières est mise en place automatiquement.
 
 == Première Partie
 
-=== *gras*, _italiques_ et autres mises en forme
+=== gras, _italiques_ et autres mises en forme
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
 
@@ -54,7 +54,7 @@ Vous consulterez ce site : http://asciidoc.org
 
 === Références dans le document
 
-On peut revenir sur un titre de la table des matières, par exemple <<gras, italiques et autres mises en forme>> ou bien <<Les tableaux>>.
+On peut revenir sur un titre de la table des matières, par exemple <<gras, _italiques_ et autres mises en forme>> ou bien <<Les tableaux>>.
 
 On peut aussi créer une ancre et ensuite s'y référer au cours du texte ; voir un lien dans le § <<Les tableaux>>.
 
