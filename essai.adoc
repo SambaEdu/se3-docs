@@ -19,7 +19,7 @@ Une table des matières est mise en place automatiquement.
 
 === gras, _italiques_ et autres mises en forme
 
-du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
+du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^ ou bien un `mot` à mettre en `relief`.
 
 
 === des touches
@@ -59,7 +59,7 @@ On peut revenir sur un titre de la table des matières, par exemple <<gras\, _it
 On peut aussi créer une ancre et ensuite s'y référer au cours du texte ; voir un lien dans le § <<Les tableaux>>.
 
 [[monAncre]]
-. retour vers cette ancre
+.Retour vers cette ancre
 
 C'est pratique, non ?
 
@@ -208,8 +208,8 @@ ID,FName,LName,Address,Phone
 
 ==== Avec Latex ?
 
-- latexmath:[\(R_x = 10.0 \times \sin(R_\phi)\)]
-Cherchons a, b et c tels que latexmath:[\(a^2 + b^2 = c^2\)]
+- latexmath:[$ R_x = 10.0 \times \sin(R_\phi) $]
+Cherchons a, b et c tels que latexmath:[a^2 + b^2 = c^2]
 
 
 ==== des boutons ?
