@@ -14,11 +14,13 @@ essai de documentation et d'essais de mise en formes diverses.
 
 Une table des matières est mise en place automatiquement.
 
+
 == Première Partie
 
 === *gras*, _italiques_ et autres mises en forme
 
 du texte *en gras* ou en _italique_ ou #bien# **consi**déra**__ble__**ment 3^2^ et d~1~, d~2~^4^
+
 
 === des touches
 
@@ -38,24 +40,29 @@ Et aussi rajouter une ligne de séparation :
 
 du texte ici en dessous de la ligne de séparation
 
+
 === des liens
 
 * exemple
 
-http://asciidoc.org[AsciiDoc]
+Pour information, voir le site :http://asciidoc.org[AsciiDoc] et aussi voir notre site :https://www.sambaedu.org/[SambaÉdu].
 
 * autre exemple
 
-http://asciidoc.org
-
-* autre exemple encore
-
-link:++ http://asciidoc.org ++
+Vous consulterez ce site : http://asciidoc.org
 
 
 === Références dans le document
 
-À venir…
+On peut revenir sur un titre de la table des matières, par exemple <<*gras*, _italiques_ et autres mises en forme>> ou bien <<Les tableaux>>.
+
+On peut aussi créer une ancre et ensuite s'y référer au cours du texte ; voir un lien dans le § `Les tableaux`_.
+
+[[monAncre]]
+. retour vers cette ancre
+
+C'est pratique, non ?
+
 
 === des listes
 
@@ -106,7 +113,7 @@ CAUTION: Ensure that...
 ==== citation
 
 .Dicton atmosphérique
-[quote, anonyme, la grenouille]
+[quote, anonyme]
 ____
 Après la pluie le beau temps.
 ____
@@ -177,6 +184,8 @@ Question 2:: Answer 2
 |6    |Three items|d
 |=======================
 
+Voir aussi <<monAncre>>
+
 .Un autre exemple
 [format="csv",width="60%",cols="4"]
 [frame="topbot",grid="none"]
@@ -201,6 +210,7 @@ ID,FName,LName,Address,Phone
 
 - latexmath:[$R_x = 10.0 \times \sin(R_\phi)$]
 
+
 ==== des boutons ?
 
 menu:View[Zoom > Reset]
@@ -213,6 +223,7 @@ Pressez le bouton btn:[OK] quand vous avez fini.
 * [ ] non coché
 *     item normal
 
+
 ==== mises en forme ?
 
 du texte +++<u>souligné</u>+++ en partie pass:q[<u>underline *me*</u>] est-il souligné ?
@@ -221,6 +232,7 @@ de la *[red]##c##[green]##ou##[purple]##l##[fuchsia]##e##[blue]##ur##*
 
 un #groupe de mots# mis en évidence
 
+
 ==== des icônes ?
 
 icon:comment[] This is a comment icon
@@ -228,4 +240,5 @@ icon:comment[] This is a comment icon
 icon:file[] And a file icon
 
 icon:battery-full[] And a battery icon
+
 
