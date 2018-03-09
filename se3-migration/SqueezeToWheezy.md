@@ -283,7 +283,7 @@ Ensuite, **il faut rendre compatible l'annuaire ldap**. Indispensable ! Voir ci-
 - Si ce n'est pas le cas, utiliser le script **se3-corrige-gidNumber.sh** qui va redresser les choses
 - Vérifier que le paquet inetutils-inetd est installé : **dpkg --status inetutils-inetd | grep Status**
 - S'il n'est pas installé : **apt-get install inetutils-inetd**
-- Vérifier les attributs du groupe `lcs-users` (voir ci-dessous) et les ajouter/modifier si nécessaire
+- Vérifier les attributs du groupe `lcs-users` (voir ci-dessous) et, si nécessaire, lancer le script `restaure_ldap.sh`
 - Re-modifier le fichier `/etc/samba/smb.conf` avec un `ldapsam:trusted = Yes`
 - Redémarrer samba
 - Vérifier que ça fonctionne
@@ -293,7 +293,10 @@ Lors de la vérification des attributs du groupe `lcs-users`, il sera sans doute
 * mettre sambaGroupType à 2
 * mettre sambaSID avec le sambaSID des utilisateurs que l'on retrouve dans la branche people
 * ajouter un nouvel attribut description : Domain Unix group
-* ajouter un nouvel attribut displayName : Utilisateurs du domaine. 
+* ajouter un nouvel attribut displayName : Utilisateurs du domaine.
+
+**Remarque :** cette modification des attributs est faite par le script `restaure_ldap.sh` : il faut donc l'utiliser si les attributs ne sont pas corrects.
+
 
 ### Compléments sur la compatibilité de l'annuaire `ldap`
 Pour savoir si l'annuaire `ldap` est compatible, on peut l'exporter au format `ldif` (via l'interface web du `se3`) pour y regarder de plus près. Le plus souvent c'est une incohérence entre Guidnumber / Mappage du groupe par défaut.
