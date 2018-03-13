@@ -11,6 +11,7 @@ Ceci correspond aux configurations testées et validées pour l'intégration de 
 * [Logiciels](#logiciels)
 * [Outils](#outils)
 
+Pour l'intégration au domaine voir https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md
 
 ## Système
 
@@ -39,7 +40,7 @@ Installation en mode `Legacy Bios`. **Surtout pas d'`UEFI` !**.
 
 Une seule partition `windows` + éventuellement la petite partition de boot qui est créée automatiquement par l'installeur. Pour cette partition, 100 Go sont largement suffisants. 
 
-### remarque pour Windows 7 uniquement
+### remarque pour Windows 7 uniquement (obsolète)
 
 Une astuce permet d'éviter la création de la partition de boot de 100Mo créée automatiquement à l'installation de Windows 7. Cela simplifie le clonage et la création d'images. Voici comment procéder.
 
@@ -76,15 +77,16 @@ En cas d'absence d'activation, un message s'affiche en fond d'écran, mais à pa
 
 **Attention** Ne pas télécharger et utiliser Windows Loader pour Windows 10 : c'est un faux, qui en revanche installe de vrais virus !
 
-## Préparation et mise à jour
+## Intégration au domaine et mise à jour
 
-**Sur un serveur à jour, AUCUNE opération manuelle n'est nécessaire pour intégrer windows 10**, il faut utiliser le paquet sambaedu-client-windows.
+**Sur un serveur à jour, AUCUNE opération manuelle n'est nécessaire pour intégrer windows 10 et 7**, il faut utiliser le paquet sambaedu-client-windows.
 https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md
 
 
 ## ancienne méthode (obsolète, windows 7 uniquement !!!)
 
 * ne fonctionne pas pour les postes en w10 !
+* obsolète et non maintenue pour w7
 
 Désactiver la mise en veille pour surveiller le poste pendant son intégration l'intégration.
 
