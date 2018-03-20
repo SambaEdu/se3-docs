@@ -6,6 +6,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * [Pour contribuer au projet](#pour-contribuer-au-projet)
 * [Pour gérer un serveur `se3`](#pour-gérer-un-serveur-se3)
     * [Installer un `se3`](#installer-un-se3)
+    * [Administrer un `se3`](#administrer-un-se3)
     * [Migrer un `se3`](#migrer-un-se3)
     * [Sauvegarder et restaurer un `se3`](#sauvegarder-et-restaurer-un-se3)
     * [Tester ou remonter des bugs](#tester-ou-remonter-des-bugs)
@@ -32,8 +33,13 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * Documentation pour une [installation manuelle](se3-installation/installationmanuelle.md#installation-manuelle-dun-se3) d'un `se3`
 * Documentation pour une [installation automatique](se3-installation/incorporerpreseed.md#installation-automatique-dun-se3) d'un `se3`
 * Documentation pour installer [un réseau virtuel `se3`](se3-virtualisation/installerReseauSE3Virtualbox.md#installer-un-réseau-se3-avec-virtualbox) avec `VirtualBox`
+
+
+### Administrer un `se3`
+
 * Documentation pour configurer [l'onduleur](se3-administration/configurer_onduleur.md#configurer-londuleur)
 * Documentation pour configurer [la messagerie](se3-administration/messagerie.md#configurer-la-messagerie-du-se3)
+* Documentation pour [changer l'adresse](se3-administration/changer_adresse_reseau.md#changer-ladresse-du-réseau) du réseau pédagogique
 
 
 ### Migrer un `se3`
