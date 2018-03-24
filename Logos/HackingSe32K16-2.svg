@@ -16,7 +16,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="HackingSe32K16-2.svg">
+   sodipodi:docname="HackingSe32K16-2.svg"
+   inkscape:export-filename="/home/lmds/Documents/Depot_Github/se3-docs/Logos/HackingSe32K16-2.png"
+   inkscape:export-xdpi="72"
+   inkscape:export-ydpi="72">
   <defs
      id="defs4">
     <linearGradient
@@ -1518,7 +1521,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.73964844"
-     inkscape:cx="554.53895"
+     inkscape:cx="261.15633"
      inkscape:cy="376.54067"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -1536,7 +1539,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
