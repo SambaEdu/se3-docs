@@ -7,6 +7,7 @@ Ceci correspond aux configurations testées et validées pour l'intégration de 
 * [Ordre de boot](#ordre-de-boot)
 * [Drivers](#drivers)
 * [Licence et activation](#licence-et-activation)
+* [Antivirus Trend](#antivirus-trend)
 * [Préparation et mise à jour](#préparation-et-mise-à-jour)
 * [Logiciels](#logiciels)
 * [Outils](#outils)
@@ -89,6 +90,9 @@ Pour `Windows10`, théoriquement aucune activation n'est requise si le poste est
 En cas d'absence d'activation, un message s'affiche en fond d'écran, mais à part cela tout fonctionne. 
 
 **Attention** Ne pas télécharger et utiliser Windows Loader pour Windows 10 : c'est un faux, qui en revanche installe de vrais virus !
+
+## Antivirus Trend
+Si l'établissement dispose d'un serveur antivirus Trend, alors celui-ci doit impérativement être à jour pour que le client puisse s'installer sur les postes Windows 10 en version 1709.
 
 ## Intégration au domaine et mise à jour
 
