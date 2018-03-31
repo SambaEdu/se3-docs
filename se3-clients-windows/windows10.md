@@ -7,51 +7,17 @@ Voici la procédure pour intégrer un `windows10` à un domaine géré par un `s
 
 **_La procédure "domscripts" issue du paquet se3-domain est obsolète et ne doit plus être utilisé !_**
 
-Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.5**. Le paquet **sambaedu-client-windows** doit être installé (sources testing pour le moment)
+Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.5**. Le paquet **sambaedu-client-windows** doit être installé. Ce paquet s'installe 
 
-Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement avec `windows10`, rien d'autre. Ou refaites une installation propre à l'aide du paquet **sambaedu-client-windows**, c'est automatisé et cela permet d'avoir un poste compatible à 100 % avec SambaEdu
+Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement avec `windows10` (version actuelle 1709), rien d'autre. Ou refaites une installation propre à l'aide du paquet **sambaedu-client-windows**, c'est automatisé et cela permet d'avoir un poste compatible à 100 % avec SambaEdu. 
 
 Les instructions complètes sont ici  :
 [installation windows 10](https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md#sambaedu-client-windows)
 
 
 
-
 **note**
 Pour le moment l'installation automatique ne permet pas de partitionner le disque  avec un espace libre pour installer un `client-linux`.
-
-## Intégration au domaine d'un poste déjà installé
-
-*Il est possible d'intégrer un poste déjà installé. Néanmoins sysprep est assez chatouilleux, et donc le succès n'est pas garanti Il faut que le poste soit à jour*
-- depuis l'interface se3, menu dhcp-> intégrer. Attention, ne fonctionnera que si le poste a déjà l'UAC desactivée.
-- sur le poste, en administrateur local, connecter le lecteur `z:` à `\\se3\install` en s'identifiant en `adminse3` et lancer  `z:\os\netinst\rejointse3.cmd`, ou cliquer directement sur `\\se3\install\os\netinst\rejointse3.cmd` 
-- il est possible renommer un poste déjà intégré : menu dhcp->renommer un poste windows. 
-
-
-## Intégration ancienne méthode domscripts (obsolète, ne pas utiliser pour w10 !!!)
-
-1. Ouvrir une session en administrateur local  
-2. Se connecter à \\\\ip_du_serveur_se3\Progs\install\domscripts ou \\\\se3\progs\install\domscripts avec l'identifiant "adminse3"  
-3. Fusionner **Win10-Samba44.reg** (clique droit sur Win10-Samba44.reg → Fusionner)  
-cela va ajouter les clés de registre à la base de registre et le répertoire `netlogon` devient accessible comme sur un `windows7`  
-
-Parfois un problème de droits sur le fichier **Win10-Samba44.reg**  empêche la fusion dans la base de registre du poste. Il faut alors le copier sur le bureau tout simplement et le fusionner depuis cet endroit. 
-
-4. Exécuter **rejointSE3.exe**  
-la suite est identique à l'intégration d'un `windows7`
-
-Il arrive que l'intégration bloque à une étape, il suffit de redémarrer le poste pour que la procédure continue.
-
-**Astuce :** afin de pouvoir fusionner le fichier reg directement sans passer par une clé `usb`, on ne se connecte pas à \\\se3\netlogon\domscripts directement mais au dossier cité précedemment qui est un lien.
-
-
-**Astuce 2 :** Il faut bien penser à **désactiver la mise en veille** des postes pour que l'intégration se fasse correctement.
-
-
-**Astuce 3 :** Si le poste était auparavant intégré en W7/w10 , et que w10 a été déployé avec une image contenant
-les utilisateurs *administrateur* et *adminse3* , utilisateurs faisant bien partie du groupe *administrateur*,que la fusion du fichier **Win10-Samba44.reg** a été faite sur cette image, alors l'integration peut se faire à distance par l'interface. On va dans le *module DHCP*, *réservations actives*, puis *réintégrer le poste*.
-
-
 ## Références
 
 * recommendations pour les [clients-windows](../se3-clients-windows/clients-windows.md#prérequis-pour-lintégration-de-clients-windows).
