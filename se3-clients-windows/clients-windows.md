@@ -1,7 +1,7 @@
 # Prérequis pour l'intégration de `clients-windows`
 
 Ceci correspond aux configurations testées et validées pour l'intégration de postes `Windows` à un domaine `SE3`. Vu l'infinité de situations possibles, seules ces configurations sont supportées et feront l'objet d'une assistance.
-
+* [Prérequis](#prerequis)
 * [Système](#système)
 * [Installation](#installation)
 * [Ordre de boot](#ordre-de-boot)
@@ -12,6 +12,19 @@ Ceci correspond aux configurations testées et validées pour l'intégration de 
 * [Outils](#outils)
 
 Pour l'intégration au domaine voir https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md
+
+
+Voici la procédure pour intégrer un `windows10` à un domaine géré par un `se3`.
+
+
+## Prérequis
+
+Il est nécessaire que le serveur `se3` soit au minimum en **Wheezy 3.0.5**. Le paquet **sambaedu-client-windows** doit être installé. Ce paquet s'installe 
+
+Une recommendation : partez d'un `windows10` de base, c'est-à-dire uniquement avec `windows10` (version actuelle 1709), rien d'autre. Ou refaites une installation propre à l'aide du paquet **sambaedu-client-windows**, c'est automatisé et cela permet d'avoir un poste compatible à 100 % avec SambaEdu. 
+
+Les instructions complètes sont ici  :
+[installation windows 10](https://github.com/SambaEdu/sambaedu-client-windows/blob/master/README.md#sambaedu-client-windows)
 
 ## Système
 
