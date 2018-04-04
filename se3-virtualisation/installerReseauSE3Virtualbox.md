@@ -40,6 +40,8 @@ On reprend son souffle, en image cela donne:
 
 ![virtu_01_topo_reseau](images/virtu_01_topo_reseau.png)
 
+**Remarque :** on peut voir que le réseau virtuel a pour adresse `172.16.1.0/24` et le réseau physique a pour adresse `192.168.0.0/24`. Ce sont ces paramètres qui seront repris dans les exemples de cette documentation. On pourra bien entendu avoir d'autres paramètres pour le réseau physique et le réseau virtuel.
+
 Tout ce travail dans l'optique de tester :
 * les actions de maintenance du `SE3` avant de les reproduire sur le vrai serveur ;
 * l'intégration de systèmes d'exploitation différents ;
@@ -81,7 +83,7 @@ _--> Coming soon <--_
 
 ### Vue générale après l'installation
 
-Voici à quoi ressemble la fenêtre de `VirtualBox`, elle contient déjà ici quelques `VMs`. 
+Voici à quoi ressemble la fenêtre de `VirtualBox`, elle contient déjà ici quelques `VMs` (machines virtuelles). 
 
 ![virtu_02_console_virtualbox](images/virtu_02_console_virtualbox.png)
 
