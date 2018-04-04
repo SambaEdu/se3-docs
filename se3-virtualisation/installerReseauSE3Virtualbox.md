@@ -34,24 +34,25 @@
 
 ## Introduction
 
-L'objectif est d'obtenir un réseau LAN sous VirtualBox avec la possibilité d'installer assez facilement un réseau de machines virtuelles administrées par un serveur SE3, lui aussi virtuel le tout derrière une passerelle/proxy sous IPCop.
+L'objectif est d'obtenir un réseau `LAN` sous `VirtualBox` avec la possibilité d'installer assez facilement un réseau de machines virtuelles administrées par un serveur `SE3`, lui aussi virtuel, le tout derrière une passerelle/proxy sous `IPCop`.
 
 On reprend son souffle, en image cela donne:
 
 ![virtu_01_topo_reseau](images/virtu_01_topo_reseau.png)
 
 Tout ce travail dans l'optique de tester :
-* les actions de maintenance du SE3 avant de les reproduire sur le vrai serveur ;
+* les actions de maintenance du `SE3` avant de les reproduire sur le vrai serveur ;
 * l'intégration de systèmes d'exploitation différents ;
-* l'installation de logiciels via WPKG sur les clients ;
+* l'installation de logiciels via `WPKG` sur les clients-windows ;
 * des bidouilles sans casser un serveur en production ;
-* ...
+* …
 
 ___
 
->_En fonction des capacités de la machine hôte il pourra être difficile d'avoir accès à tout les systèmes virtuels en même temps de façon confortable. Une bonne quantité de mémoire vive et disposer d'un disque dur dédié aux images virtuelles des systèmes est un plus. ;-)_
+>_En fonction des capacités de la machine hôte il pourra être difficile d'avoir accès à tous les systèmes virtuels en même temps de façon confortable. Une bonne quantité de mémoire vive et disposer d'un disque dur dédié aux images virtuelles des systèmes est un plus. ;-)_
 
->_La procédure proposée par la suite implique une configuration avec une IP distribuée par un serveur DHCP à la carte réseau côté WAN du serveur IP-Cop. Si l'environnement est différent il sera nécessaire d'adapter la configuration RED à l'installation d'IP-Cop._
+>_La procédure proposée par la suite implique une configuration avec une `IP` distribuée par un serveur `DHCP` à la carte réseau côté `WAN` du serveur `IP-Cop`. Si l'environnement est différent il sera nécessaire d'adapter la configuration RED à l'installation d'`IP-Cop`._
+
 
 ## Installation de VirtualBox
 
@@ -59,27 +60,31 @@ ___
 
 #### Windows
 
-Pour télécharger le programme d'installation sous Windows©, il suffit de se rendre sur le site de [VirtualBox](https://www.virtualbox.org/).
+Pour télécharger le programme d'installation sous `Windows©`, il suffit de se rendre sur le site de [VirtualBox](https://www.virtualbox.org/).
 
-Il suffit, ensuite, de double-cliquer sur le fichier exécutable téléchargé. L'installation est classique pour un logiciel sous Windows© en choisissant l'installation standard.
+Il suffit, ensuite, de double-cliquer sur le fichier exécutable téléchargé. L'installation est classique pour un logiciel sous `Windows©` en choisissant l'installation standard.
 
-Si vous souhaitez utiliser des périphériques USB sur les systèmes virtuels, il est intéressant d'installer également [le pack d'extension](http://download.virtualbox.org/virtualbox/5.1.26/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack).
+Si vous souhaitez utiliser des périphériques `USB` sur les systèmes virtuels, il est intéressant d'installer également [le pack d'extension](http://download.virtualbox.org/virtualbox/5.1.26/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack).
 
-Pour se dernier un simple double-clic sur le fichier après avoir installé Virtualbox en permet l'installation.
+Pour se dernier un simple double-clic sur le fichier après avoir installé `Virtualbox` en permet l'installation.
+
 
 #### Ubuntu
 
 _--> Coming soon <--_
 
+
 #### Debian
 
 _--> Coming soon <--_
 
+
 ### Vue générale après l'installation
 
-Voici à quoi ressemble la fenêtre de VirtualBox, elle contient déjà ici quelques VMs. 
+Voici à quoi ressemble la fenêtre de `VirtualBox`, elle contient déjà ici quelques `VMs`. 
 
 ![virtu_02_console_virtualbox](images/virtu_02_console_virtualbox.png)
+
 
 ### Réglages après l'installation
 
@@ -87,14 +92,16 @@ Les seuls paramètres que j'ai modifié sont les chemins de stockage des fichier
 
 Vous pouvez alors indiquer où vous souhaitez enregistrer les fichiers pour les dossiers par défaut des machines dans l'onglet Général.
 
+
 ## Installation des machines virtuelles
 
-### Etape 1 : Installation d'IPCop
+### Étape 1 : Installation d'IPCop
 
 #### Récupération de tout le nécessaire
 * [Image ISO (Sourceforge)](https://sourceforge.net/projects/ipcop/files/IPCop/IPCop%202.1.8/ipcop-2.1.8-install-cd.i486.iso/download)
 * [Manuel d'installation (EN)](http://www.ipcop.org/2.0.0/en/install/html/)
 * [Manuel d'administration (EN)](http://www.ipcop.org/2.0.0/en/admin/html/)
+
 
 #### Création de la machine virtuelle
 
