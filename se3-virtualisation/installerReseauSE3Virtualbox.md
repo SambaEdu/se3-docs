@@ -66,10 +66,6 @@ Pour télécharger le programme d'installation sous `Windows©`, il suffit de se
 
 Il suffit, ensuite, de double-cliquer sur le fichier exécutable téléchargé. L'installation est classique pour un logiciel sous `Windows©` en choisissant l'installation standard.
 
-Si vous souhaitez utiliser des périphériques `USB` sur les systèmes virtuels, il est intéressant d'installer également [le pack d'extension](http://download.virtualbox.org/virtualbox/5.1.26/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack).
-
-Pour se dernier un simple double-clic sur le fichier après avoir installé `Virtualbox` en permet l'installation.
-
 
 #### Ubuntu
 
@@ -96,6 +92,11 @@ apt-get update
 apt-get install virtualbox-5.2
 ```
 
+Par la suite, les mises à jour se feront en même temps que les mises à jour de `Debian/Stretch` :
+```sh
+apt-get update && apt-get upgrade
+```
+
 
 ### Vue générale après l'installation
 
@@ -109,6 +110,8 @@ Voici à quoi ressemble la fenêtre de `VirtualBox`, elle contient déjà ici qu
 Les seuls paramètres que j'ai modifié sont les chemins de stockage des fichiers correspondants aux machines virtuelles. Pour cela, dans la barre des menus de la console, vous cliquez sur Fichier puis sur Paramètres.
 
 Vous pouvez alors indiquer où vous souhaitez enregistrer les fichiers pour les dossiers par défaut des machines dans l'onglet Général.
+
+Si vous souhaitez utiliser des périphériques `USB` sur les systèmes virtuels, il est intéressant d'installer également [le pack d'extension](https://download.virtualbox.org/virtualbox/5.2.8/Oracle_VM_VirtualBox_Extension_Pack-5.2.8.vbox-extpack). Téléchargez-le puis, dans l'interface de gestion de VirtualBox, l'entrée `Fichiers/paramètres/extension` vous permettra de l'ajouter.
 
 
 ## Installation des machines virtuelles
