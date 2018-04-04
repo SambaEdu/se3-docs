@@ -78,7 +78,23 @@ _--> Coming soon <--_
 
 #### Debian
 
-_--> Coming soon <--_
+Conformément à [la documentation sur le Wiki/Debian](https://wiki.debian.org/VirtualBox#Debian_9_.22Stretch.22), à partir de la version 9 (`Debian/Stretch`), on peut utiliser le dépôt `Oracle` qui propose la version stable la plus à jour.
+
+Les commandes suivantes se feront en `root` et concernent une `Debian/Stretch`.
+
+- Ajout du dépôt
+```sh
+deb -q https://download.virtualbox.org/virtualbox/debian stretch contrib
+```
+- Ajout de la clé publique du dépôt
+```sh
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+```
+- Rechargement de la liste des paquets et installation de VirtualBox
+```sh
+apt-get update
+apt-get install virtualbox-5.2
+```
 
 
 ### Vue générale après l'installation
