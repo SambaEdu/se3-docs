@@ -9,12 +9,12 @@
   * [Vue générale après l'installation](#vue-générale-après-linstallation)
   * [Réglages après l'installation](#réglages-après-linstallation)
 * [Installation des machines virtuelles](#installation-des-machines-virtuelles)
-  * [Etape 1 : Installation d'IPCop](#etape-1--installation-dipcop)
+  * [Étape 1 : Installation d'IPCop](#etape-1--installation-dipcop)
     * [Récupération de tout le nécessaire](#récupération-de-tout-le-nécessaire)
     * [Création de la machine virtuelle](#création-de-la-machine-virtuelle)
     * [Installation](#installation)
     * [Paramétrage post-installation](#paramétrage-post-installation)
-  * [Etape 2 : Installation du SE3](#etape-2--installation-du-se3)
+  * [Étape 2 : Installation du SE3](#etape-2--installation-du-se3)
     * [Récupération de tout le nécessaire](#récupération-de-tout-le-nécessaire)
     * [Création du fichier Setup_se3.data](#création-du-fichier-setup_se3data)
     * [Création de la machine virtuelle](#création-de-la-machine-virtuelle)
@@ -22,7 +22,7 @@
     * [Installation des paquets SE3](#installation-des-paquets-se3)
     * [Configuration post-installation](#configuration-post-installation)
     * [Cas particuliers d'installation](#cas-particuliers-dinstallation)
-  * [Etape 3 : Installation des clients virtuels](#etape-3--installation-des-clients-virtuels)
+  * [Étape 3 : Installation des clients virtuels](#etape-3--installation-des-clients-virtuels)
     * [Paramètres réseau des VMs](#paramètres-réseau-des-vms)
     * [Client Windows 7](#client-windows-7)
     * [Client Windows 10](#client-windows-10)
@@ -145,8 +145,8 @@ Insérer l'iso d'IPCop dans le lecteur optique virtuel
 * Onglet 'Réseau' :
 
 ```sh
-*Carte 1 | Mode d'accès réseau : Accès par pont | Mode Promiscuité : Tout autoriser
-*Carte 2 | Mode d'accès réseau : Réseau interne | Nom : intnet (ou à votre convenance) | Mode Promiscuité : Autoriser les VMs
+* Carte 1 | Mode d'accès réseau : Accès par pont | Mode Promiscuité : Tout autoriser
+* Carte 2 | Mode d'accès réseau : Réseau interne | Nom : intnet (ou à votre convenance) | Mode Promiscuité : Autoriser les VMs
 ```
 
 #### Installation
@@ -171,12 +171,12 @@ Les derniers fichiers sont copiés, à l'écran 'Restaurer', sélectionner Passe
 La configuration du système commence, saisir les paramètres suivants en validant par 'Ok' :
 
 ```sh
-*Nom d'hôte : ipcop 
-*Nom de domaine : localvm
-*interface RED : DHCP
+* Nom d'hôte : ipcop 
+* Nom de domaine : localvm
+* interface RED : DHCP
 ```
 
-A l'écran 'Affectation des cartes', il est nécessaire d'affecter la carte 1 (eth0) en "Accès par pont" au réseau RED (côté WAN) et la carte 2 (eth1) en "Réseau interne" au réseau GREEN (côté LAN). Pour cela mettre en surbrillance la carte et choisir l'option "'Sélectionner'" avec Tab. Dans le menu choisir RED ou GREEN en fonction du cas puis "'Assigner'". Une fois fini, valider par "'Continuer'"
+À l'écran 'Affectation des cartes', il est nécessaire d'affecter la carte 1 (eth0) en "Accès par pont" au réseau RED (côté WAN) et la carte 2 (eth1) en "Réseau interne" au réseau GREEN (côté LAN). Pour cela mettre en surbrillance la carte et choisir l'option "'Sélectionner'" avec Tab. Dans le menu choisir RED ou GREEN en fonction du cas puis "'Assigner'". Une fois fini, valider par "'Continuer'"
 
 >_Normalement à cette étape, la première carte du menu est eth0 et la seconde eth1, si vous avez un doute vérifiez les adresses MAC. Les paramètres réseau de la VM sont accessibles depuis l'icône en bas de la fenêtre de virtualisation ou depuis le fenêtre principale de VirtualBox._
 
@@ -246,7 +246,7 @@ Depuis le menu **Services**, sélectionner **Serveur mandataire (proxy)** et sai
 
 La passerelle/proxy est prête ! 
 
-### Etape 2 : Installation du SE3
+### Étape 2 : Installation du SE3
 
 #### Récupération de tout le nécessaire
 
@@ -471,7 +471,7 @@ DD3 : 1 partition avec /home
 
 **Remarque :** pour des disques réels, cela dépend des capacités disponibles. Cependant, pour le disque dur 1, les recommandations sont de 2 Go pour le swap, 10 Go pour la partition /, 28 Go pour /var et le reste pour la partition /home/admin, ce qui permet d'être à l'aise pour le compte admin, sans gêner la place disponible pour les autres comptes. Ces répartitions du disque 1 ont été calculées pour un disque dur de 160 Go. 
 
-### Etape 3 : Installation des clients virtuels
+### Étape 3 : Installation des clients virtuels
 
 #### Paramètres réseau des VMs
 
