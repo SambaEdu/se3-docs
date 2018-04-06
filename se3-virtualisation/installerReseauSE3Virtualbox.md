@@ -1,7 +1,7 @@
-# Installer un réseau SE3 avec VirtualBox
+# Installer un réseau `SE3` avec `VirtualBox`
 
 * [Introduction](#introduction)
-* [Installation de VirtualBox](#installation-de-virtualbox)
+* [Installation de `VirtualBox`](#installation-de-virtualbox)
   * [Installation](#installation)
     * [Windows](#windows)
     * [Ubuntu](#ubuntu)
@@ -9,20 +9,20 @@
   * [Vue générale après l'installation](#vue-générale-après-linstallation)
   * [Réglages après l'installation](#réglages-après-linstallation)
 * [Installation des machines virtuelles](#installation-des-machines-virtuelles)
-  * [Étape 1 : Installation d'IPCop](#etape-1--installation-dipcop)
+  * [Étape 1 : Installation d'`IPCop`](#Étape-1--installation-dipcop)
     * [Récupération de tout le nécessaire](#récupération-de-tout-le-nécessaire)
     * [Création de la machine virtuelle](#création-de-la-machine-virtuelle)
     * [Installation](#installation)
     * [Paramétrage post-installation](#paramétrage-post-installation)
-  * [Étape 2 : Installation du SE3](#etape-2--installation-du-se3)
+  * [Étape 2 : Installation du `SE3`](#Étape-2--installation-du-se3)
     * [Récupération de tout le nécessaire](#récupération-de-tout-le-nécessaire)
-    * [Création du fichier Setup_se3.data](#création-du-fichier-setup_se3data)
+    * [Création du fichier `Setup_se3.data`](#création-du-fichier-setup_se3data)
     * [Création de la machine virtuelle](#création-de-la-machine-virtuelle)
     * [Installation d'un système debian basique](#installation-dun-système-debian-basique)
-    * [Installation des paquets SE3](#installation-des-paquets-se3)
+    * [Installation des paquets `SE3`](#installation-des-paquets-se3)
     * [Configuration post-installation](#configuration-post-installation)
     * [Cas particuliers d'installation](#cas-particuliers-dinstallation)
-  * [Étape 3 : Installation des clients virtuels](#etape-3--installation-des-clients-virtuels)
+  * [Étape 3 : Installation des clients virtuels](#Étape-3--installation-des-clients-virtuels)
     * [Paramètres réseau des VMs](#paramètres-réseau-des-vms)
     * [Client Windows 7](#client-windows-7)
     * [Client Windows 10](#client-windows-10)
@@ -56,7 +56,7 @@ ___
 >_La procédure proposée par la suite implique une configuration avec une `IP` distribuée par un serveur `DHCP` à la carte réseau côté `WAN` du serveur `IP-Cop`. Si l'environnement est différent il sera nécessaire d'adapter la configuration RED à l'installation d'`IP-Cop`._
 
 
-## Installation de VirtualBox
+## Installation de `VirtualBox`
 
 ### Installation
 
@@ -116,7 +116,7 @@ Si vous souhaitez utiliser des périphériques `USB` sur les systèmes virtuels,
 
 ## Installation des machines virtuelles
 
-### Étape 1 : Installation d'IPCop
+### Étape 1 : Installation d'`IPCop`
 
 #### Récupération de tout le nécessaire
 * [Image ISO (Sourceforge)](https://sourceforge.net/projects/ipcop/files/IPCop/IPCop%202.1.8/ipcop-2.1.8-install-cd.i486.iso/download)
@@ -246,14 +246,14 @@ Depuis le menu **Services**, sélectionner **Serveur mandataire (proxy)** et sai
 
 La passerelle/proxy est prête ! 
 
-### Étape 2 : Installation du SE3
+### Étape 2 : Installation du `SE3`
 
 #### Récupération de tout le nécessaire
 
 * [ISO Debian 7.11.0 i386](http://cdimage.debian.org/cdimage/archive/7.11.0/i386/iso-cd/debian-7.11.0-i386-netinst.iso)
 * [ISO Debian 7.11.0 amd64](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso)
 
-#### Création du fichier Setup_se3.data
+#### Création du fichier `Setup_se3.data`
 
 Compléter le formulaire [Créer un fichier setup_se3.data](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy) avec les paramètres suivants 
 
@@ -394,7 +394,7 @@ serveur d'impression | serveur SSH | Utilitaires usuels du système
 Puis continuer, à la demande d'installation du Grub, répondre Oui pour arriver sur l'écran de fin. Sélectionner **Continuer** pour redémarrer.
 
 
-#### Installation des paquets SE3
+#### Installation des paquets `SE3`
 
 Après le redémarrage du système debian, nous allons passer à l'installation des paquets SAMBAEDU3, pour cela connecter vous en tant que 'root' et utiliser le fichier data pour automatiser la fin de l'installation.
 
