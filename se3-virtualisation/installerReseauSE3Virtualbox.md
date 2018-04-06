@@ -28,9 +28,10 @@
     * [Client `Windows 10`](#client-windows-10)
     * [Client `Linux`](#client-linux)
 * [Virtualisation d'un réseau avec une autre passerelle](#virtualisation-dun-réseau-avec-une-autre-passerelle)
-  * [SLIS 4](#slis-4)
-  * [AMON](#amon)
+  * [`SLIS 4`](#slis-4)
+  * [`AMON`](#amon)
 * [Disques durs virtuels prêts à l'usage](#disques-durs-virtuels-prêts-à-lusage)
+
 
 ## Introduction
 
@@ -310,12 +311,12 @@ Paramètres de samba :
 * Nom Netbios du serveur : se3
 ```
 
-Ou pour les moins courageux, télécharger celui-ci [Setup se3.zip](http://wiki.dane.ac-versailles.fr/index.php?title=Fichier:Setup_se3.zip), qu'il faudra copier sur le serveur via une clé USB. 
+Ou pour les moins courageux, télécharger celui-ci [Setup se3.zip](http://wiki.dane.ac-versailles.fr/index.php?title=Fichier:Setup_se3.zip), qu'il faudra copier sur le serveur via une clé `USB`.
 
 
 #### Création de la machine virtuelle
 
-Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton *Nouveau* avec les paramètres suivants :
+Sur `VirtualBox`, créer une nouvelle machine virtuelle en cliquant sur le bouton *Nouveau* avec les paramètres suivants :
 
 ```sh
 * Nom : SE3 | Type : Linux | Version : Debian (32-bit)
@@ -340,7 +341,7 @@ Carte 1 | Mode d'accès réseau : Réseau interne | Nom : intnet | Mode Promiscu
 
 #### Installation d'un système `Debian` basique
 
-Double cliquer sur la machine virtuelle pour la démarrer, puis sélectionner Install avec la touche Entrée :
+Double-cliquer sur la machine virtuelle pour la démarrer, puis sélectionner *Install* avec la touche *Entrée* :
 
 ![virtu_04_install_debian](images/virtu_04_install_debian.png)
 
@@ -352,7 +353,7 @@ Saisir les paramètres de localisation :
 * Configurer le clavier : Français
 ```
 
-Le système charge des fichiers, puis enchaîne avec la configuration réseau qui échoue sans DHCP, saisir Continuer dans la fenêtre puis saisir :
+Le système charge des fichiers, puis enchaîne avec la configuration réseau qui échoue sans `DHCP`, saisir `Continuer` dans la fenêtre puis saisir :
 
 ```sh
 * Configurer le réseau : Configurer vous-même le réseau
@@ -375,7 +376,7 @@ Le système demande ensuite la création des utilisateurs et leurs mots de passe
 
 On arrive ensuite sur l'étape de partitionnement manuel du disque :
 
-Saisir les partitions suivantes _(La table de partition ci-dessous est prévue pur un disque virtuel de 80 Go, si vous faites plus grand, augmenter en priorité la taille de /home puis /var/se3/ )_:
+Saisir les partitions suivantes _(La table de partition ci-dessous est prévue pur un disque virtuel de 80 Go, si vous faites plus grand, augmenter en priorité la taille de `/home` puis `/var/se3/` )_:
 
 ```sh
 * 5 GB | Primaire | Début | Système de fichier ext 3 | Point de montage : /
@@ -393,20 +394,22 @@ L'installation se déroule puis demande la saisie des paramètres de miroirs pou
 * Proxy : http://172.16.1.254:3128
 ```
 
-À l'écran Sélection des logiciels sélectionner :
+À l'écran *Sélection des logiciels*, sélectionner :
 
 ```sh
 serveur d'impression | serveur SSH | Utilitaires usuels du système
 ```
 
-Puis continuer, à la demande d'installation du Grub, répondre Oui pour arriver sur l'écran de fin. Sélectionner **Continuer** pour redémarrer.
+Puis continuer, à la demande d'installation du `Grub`, répondre *Oui* pour arriver sur l'écran de fin. Sélectionner **Continuer** pour redémarrer.
 
 
 #### Installation des paquets `SE3`
 
-Après le redémarrage du système debian, nous allons passer à l'installation des paquets SAMBAEDU3, pour cela connecter vous en tant que 'root' et utiliser le fichier data pour automatiser la fin de l'installation.
+Après le redémarrage du système `Debian`, nous allons passer à l'installation des paquets `SAMBAEDU3`, pour cela connecter vous en tant que *root* et utiliser le fichier **setup_se3.data** pour automatiser la fin de l'installation.
 
-* Récupération et déplacement du fichier setup_se3.data, saisir une après l'autre les commandes suivantes :
+* Récupération et déplacement du fichier **setup_se3.data**
+
+saisir une après l'autre les commandes suivantes :
 
 ```sh
 cd /root
@@ -426,7 +429,10 @@ _Adapter l'URL à votre fichier!_
 mv setup_se3.data /etc/se3/
 ```
 
-* Récupération du script install_phase2.sh, saisir une après l'autre les commandes suivantes :
+* Récupération du script **install_phase2.sh**
+
+
+saisir une après l'autre les commandes suivantes :
 
 ```sh
 cd /root
@@ -444,13 +450,16 @@ chmod +x install_phase2.sh
 ./install_phase2.sh
 ```
 
-La seconde partie de l'installation commence à cet instant. Si le fichier setup_se3.data est au bon endroit et complet ; la suite se poursuivra sans vous pour la configuration, sinon le script demandera les détails en mode interactif. L'installation se termine avec la mise à jour vers la dernière version ainsi que le changement de mot de passe 'root'. Le serveur est alors fonctionnel et administrable via l'interface web.
+La seconde partie de l'installation commence à cet instant. Si le fichier **setup_se3.data** est au bon endroit et complet, la suite se poursuivra sans vous pour la configuration, sinon le script demandera les détails en mode interactif.
+
+L'installation se termine avec la mise à jour vers la dernière version ainsi que le changement de mot de passe *root*. Le serveur est alors fonctionnel et administrable via l'interface web.
+
 
 #### Configuration post installation
 
-Depuis le client qui a servi pour IPCop précédemment, connecter vous à l'interface http://172.16.1.253:909 et activer puis configurer immédiatement le serveur DHCP.
+Depuis le client qui a servi pour `IPCop` précédemment, connectez-vous à l'interface `http://172.16.1.253:909` et activer puis configurer immédiatement le serveur `DHCP`.
 
-Par la suite importer les clés de registres, installer les autres modules,... Administration classique d'un serveur SE3, cela ne devrait plus avoir de secret pour vous! ;-)
+Par la suite importer les clés de registres, installer les autres modules… Administration classique d'un serveur `SE3`… cela ne devrait plus avoir de secret pour vous ! ;-)
 
 
 #### Cas particuliers d'installation
@@ -459,11 +468,11 @@ _--> Partie non révisée. <--_
 
 * Installation sur 2 disques durs :
 
-Il est possible de tester une installation sur 2 disques durs virtuels. J'ai fait un essai avec la version 3.1.2 de VirtualBox sans aucun problème notable. Pour le descriptif de la marche à suivre, vous pouvez lire l'article que j'ai écrit sur le site SambaEdu3 de l'académie de Versailles.
+Il est possible de tester une installation sur 2 disques durs virtuels. J'ai fait un essai avec la version 3.1.2 de `VirtualBox` sans aucun problème notable. Pour le descriptif de la marche à suivre, vous pouvez lire l'article que j'ai écrit sur le site `SambaEdu3` de l'académie de Versailles.
 
 * Installation sur 3 disques durs :
 
-Il est possible de tester une installation sur 3 disques durs virtuels mais sans utiliser l'installateur Digloo. Les essais d'une telle installation ont été faite avec la version 4 de VirtualBox sans aucun problème.
+Il est possible de tester une installation sur 3 disques durs virtuels mais sans utiliser l'installateur `Digloo`. Les essais d'une telle installation ont été faite avec la version 4 de `VirtualBox` sans aucun problème.
 
 Pour mener à bien mes essais, j'ai suivi les indications qui se trouvent au paragraphe 2.2.1 page 14 de la documentation disponible sur www.samba-edu.ac-versailles.fr.
 
@@ -479,39 +488,44 @@ DD3 : 1 partition avec /home
 
 **Remarque :** pour des disques réels, cela dépend des capacités disponibles. Cependant, pour le disque dur 1, les recommandations sont de 2 Go pour le swap, 10 Go pour la partition /, 28 Go pour /var et le reste pour la partition /home/admin, ce qui permet d'être à l'aise pour le compte admin, sans gêner la place disponible pour les autres comptes. Ces répartitions du disque 1 ont été calculées pour un disque dur de 160 Go. 
 
+
 ### Étape 3 : Installation des clients virtuels
 
-#### Paramètres réseau des VMs
+#### Paramètres réseau des `VMs`
 
-* Dans la console VirtualBox, sélectionner Préférences > Onglet 'Réseau' :
+* Dans la console `VirtualBox`, sélectionner Préférences > Onglet 'Réseau' :
 
 ```sh
 Carte 1 | Mode d'accès réseau : Réseau interne | Nom : intnet | Mode Promiscuité : Autoriser les VMs
 ```
 
-#### Client Windows 7
+#### Client `Windows 7`
 
-Rien de particulier à dire, vous avez sans doute l'expérience d'une installation de Windows, le déroulement est identique. Prévoir 40 go minimum d'espace disque pour avoir la place d'y installer quelques logiciels.
+Rien de particulier à dire, vous avez sans doute l'expérience d'une installation de `Windows`, le déroulement est identique. Prévoir 40 go minimum d'espace disque pour avoir la place d'y installer quelques logiciels.
 
-#### Client Windows 10
+
+#### Client `Windows 10`
+
+_--> Coming soon <--_
+
+
+#### Client `Linux`
 
 _--> Coming soon <--_
 
-#### Client Linux
-
-_--> Coming soon <--_
 
 ## Virtualisation d'un réseau avec une autre passerelle
 
-### SLIS 4
+### `SLIS 4`
 
 _--> Coming soon <--_
 
-### AMON
+### `AMON`
 
 _--> Coming soon <--_
 
 ## Disques durs virtuels prêts à l'usage
 
 _--> Coming soon <--_
+
 
