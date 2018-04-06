@@ -18,15 +18,15 @@
     * [Récupération de tout le nécessaire](#récupération-de-tout-le-nécessaire)
     * [Création du fichier `Setup_se3.data`](#création-du-fichier-setup_se3data)
     * [Création de la machine virtuelle](#création-de-la-machine-virtuelle)
-    * [Installation d'un système debian basique](#installation-dun-système-debian-basique)
+    * [Installation d'un système `Debian` basique](#installation-dun-système-debian-basique)
     * [Installation des paquets `SE3`](#installation-des-paquets-se3)
     * [Configuration post-installation](#configuration-post-installation)
     * [Cas particuliers d'installation](#cas-particuliers-dinstallation)
   * [Étape 3 : Installation des clients virtuels](#Étape-3--installation-des-clients-virtuels)
-    * [Paramètres réseau des VMs](#paramètres-réseau-des-vms)
-    * [Client Windows 7](#client-windows-7)
-    * [Client Windows 10](#client-windows-10)
-    * [Client Linux](#client-linux)
+    * [Paramètres réseau des `VMs`](#paramètres-réseau-des-vms)
+    * [Client `Windows 7`](#client-windows-7)
+    * [Client `Windows 10`](#client-windows-10)
+    * [Client `Linux`](#client-linux)
 * [Virtualisation d'un réseau avec une autre passerelle](#virtualisation-dun-réseau-avec-une-autre-passerelle)
   * [SLIS 4](#slis-4)
   * [AMON](#amon)
@@ -54,6 +54,8 @@ ___
 >_En fonction des capacités de la machine hôte il pourra être difficile d'avoir accès à tous les systèmes virtuels en même temps de façon confortable. Une bonne quantité de mémoire vive et disposer d'un disque dur dédié aux images virtuelles des systèmes est un plus. ;-)_
 
 >_La procédure proposée par la suite implique une configuration avec une `IP` distribuée par un serveur `DHCP` à la carte réseau côté `WAN` du serveur `IP-Cop`. Si l'environnement est différent il sera nécessaire d'adapter la configuration RED à l'installation d'`IP-Cop`._
+
+___
 
 
 ## Installation de `VirtualBox`
@@ -107,11 +109,11 @@ Voici à quoi ressemble la fenêtre de `VirtualBox`, elle contient déjà ici qu
 
 ### Réglages après l'installation
 
-Les seuls paramètres que j'ai modifié sont les chemins de stockage des fichiers correspondants aux machines virtuelles. Pour cela, dans la barre des menus de la console, vous cliquez sur Fichier puis sur Paramètres.
+Les seuls paramètres que j'ai modifié sont les chemins de stockage des fichiers correspondants aux machines virtuelles. Pour cela, dans la barre des menus de la console, vous cliquez sur *Fichier* puis sur *Paramètres*.
 
 Vous pouvez alors indiquer où vous souhaitez enregistrer les fichiers pour les dossiers par défaut des machines dans l'onglet Général.
 
-Si vous souhaitez utiliser des périphériques `USB` sur les systèmes virtuels, il est intéressant d'installer également [le pack d'extension](https://download.virtualbox.org/virtualbox/5.2.8/Oracle_VM_VirtualBox_Extension_Pack-5.2.8.vbox-extpack). Téléchargez-le puis, dans l'interface de gestion de VirtualBox, l'entrée `Fichiers/paramètres/extension` vous permettra de l'ajouter.
+Si vous souhaitez utiliser des périphériques `USB` sur les systèmes virtuels, il est intéressant d'installer également [le pack d'extension](https://download.virtualbox.org/virtualbox/5.2.8/Oracle_VM_VirtualBox_Extension_Pack-5.2.8.vbox-extpack). Téléchargez-le puis, dans l'interface de gestion de `VirtualBox`, l'entrée `Fichiers/paramètres/extension` vous permettra de l'ajouter. Par la suite, l'interface de `VirtualBox` devrait gérer les mises à jour du `pack d'extension`.
 
 
 ## Installation des machines virtuelles
@@ -126,7 +128,7 @@ Si vous souhaitez utiliser des périphériques `USB` sur les systèmes virtuels,
 
 #### Création de la machine virtuelle
 
-Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton 'Nouveau' avec les paramètres suivants : 
+Via l'interface de `VirtualBox`, créer une nouvelle machine virtuelle en cliquant sur le bouton *Nouveau* avec les paramètres suivants : 
 
 ```sh
 * Nom : IPCop | Type : Linux | Version : Other Linux (32-bit)
@@ -134,25 +136,26 @@ Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton 
 * Créer un disque dur virtuel maintenant | VDI | Taille fixe | 1 Go
 ```
 
-Sur la machine virtuelle nouvellement créée, clic croit et 'Configuration' pour paramétrer les préférences de la VM :
+Sur la machine virtuelle nouvellement créée, clic-droit et *Configuration* pour paramétrer les préférences de la `VM` :
 
-* Onglet 'Stockage' :
+* Onglet *Stockage* :
 
 ```sh
 Insérer l'iso d'IPCop dans le lecteur optique virtuel
 ```
 
-* Onglet 'Réseau' :
+* Onglet *Réseau* :
 
 ```sh
 * Carte 1 | Mode d'accès réseau : Accès par pont | Mode Promiscuité : Tout autoriser
 * Carte 2 | Mode d'accès réseau : Réseau interne | Nom : intnet (ou à votre convenance) | Mode Promiscuité : Autoriser les VMs
 ```
 
+
 #### Installation
 
-Double cliquer sur la machine virtuelle pour la démarrer, à l'écran 'boot :', appuyer simplement sur entrée pour lancer l'installation et saisir les paramètres suivants :
->_Navigation avec la touche Tab et sélection des listes de choix avec Espace ;-)_
+Double-cliquer sur la machine virtuelle pour la démarrer, à l'écran `boot :`, appuyer simplement sur la touche `Entrée` pour lancer l'installation et saisir les paramètres suivants :
+>_Navigation avec la touche `Tab` et sélection des listes de choix avec la touche `Espace` ;-)_
 
 ```sh
 * Langue : French | Valider écran suivant par Ok | Clavier : fr | Fuseau horaire : Europe/Paris | Date - Heure : Contrôler et valider par Ok
@@ -166,9 +169,9 @@ Le système charge des fichiers puis arrive sur l'écran du disque dur d'install
 * Sélectionner Disque Dur comme type d'installation
 ```
 
-Les derniers fichiers sont copiés, à l'écran 'Restaurer', sélectionner Passer pour arriver à l'écran de fin d'installation. Passer en sélectionnant 'Félicitations!'.
+Les derniers fichiers sont copiés, à l'écran *Restaurer*, sélectionner *Passer* pour arriver à l'écran de fin d'installation. Passer en sélectionnant *Félicitations!*.
 
-La configuration du système commence, saisir les paramètres suivants en validant par 'Ok' :
+La configuration du système commence, saisir les paramètres suivants en validant par *Ok* :
 
 ```sh
 * Nom d'hôte : ipcop 
@@ -176,59 +179,60 @@ La configuration du système commence, saisir les paramètres suivants en valida
 * interface RED : DHCP
 ```
 
-À l'écran 'Affectation des cartes', il est nécessaire d'affecter la carte 1 (eth0) en "Accès par pont" au réseau RED (côté WAN) et la carte 2 (eth1) en "Réseau interne" au réseau GREEN (côté LAN). Pour cela mettre en surbrillance la carte et choisir l'option "'Sélectionner'" avec Tab. Dans le menu choisir RED ou GREEN en fonction du cas puis "'Assigner'". Une fois fini, valider par "'Continuer'"
+À l'écran *Affectation des cartes*, il est nécessaire d'affecter la carte 1 (`eth0`) en "Accès par pont" au réseau `RED` (côté `WAN`) et la carte 2 (`eth1`) en "Réseau interne" au réseau `GREEN` (côté `LAN`). Pour cela mettre en surbrillance la carte et choisir l'option *Sélectionner* avec la touche `Tab`. Dans le menu choisir `RED` ou `GREEN` en fonction du cas puis *Assigner*. Une fois fini, valider par *Continuer*.
 
->_Normalement à cette étape, la première carte du menu est eth0 et la seconde eth1, si vous avez un doute vérifiez les adresses MAC. Les paramètres réseau de la VM sont accessibles depuis l'icône en bas de la fenêtre de virtualisation ou depuis le fenêtre principale de VirtualBox._
+>_Normalement à cette étape, la première carte du menu est `eth0` et la seconde `eth1`, si vous avez un doute vérifiez les adresses `MAC`. Les paramètres réseau de la `VM` sont accessibles depuis l'icône en bas de la fenêtre de virtualisation ou depuis le fenêtre principale de `VirtualBox`._
 
 Pour les écrans suivants, saisir les paramètres ci-dessous :
 
-* Interface GREEN :
+* Interface `GREEN` :
 
 ```sh
 * Adresse IP : 172.16.1.254
 * Masque du réseau : 255.255.255.0
 ```
 
-* Interface RED :
+* Interface `RED` :
 
 ```sh
 * Nom d'hôte DHCP : ipcop
 ```
 
-* Configuration du DNS et de la passerelle :
+* Configuration du `DNS` et de la passerelle :
 
 ```sh
 Passer cette étape
 ```
 
-> _(sauf si vous n'utilisez pas de DHCP sur le réseau physique)_
+> _(sauf si vous n'utilisez pas de `DHCP` sur le réseau physique)_
 
-* Configuration du serveur DHCP :
+* Configuration du serveur `DHCP` :
 
 ```sh
 Passer cette étape
 ```
 
-> _On se servira du SE3 comme DHCP par la suite, en attendant il suffira de déclarer manuellement les paramètres réseau sur les autres VMs_
+> _On se servira du `SE3` comme `DHCP` par la suite, en attendant il suffira de déclarer manuellement les paramètres réseau sur les autres `VMs`_
 
-Il reste à définir les différents mots de passe pour 'root', 'admin' et la clé de cryptage.
+Il reste à définir les différents mots de passe pour le compte *root*, 'admin' et la clé de cryptage.
 
 > _6 caractères minimum sont requis, dans le cadre de serveurs de test 'admin!' pour chaque compte peut convenir pour se simplifier la vie, évidemment sur des serveurs en production c'est une bien mauvaise idée. ;-)_
 
-Valider l'écran de fin via "'Félicitations!'". Le serveur IPCop redémarre et est presque prêt à être utilisé, il ne reste que quelques paramétrages à réaliser via son interface web. 
+Valider l'écran de fin via *Félicitations!*. Le serveur `IPCop` redémarre et est presque prêt à être utilisé, il ne reste que quelques paramétrages à réaliser via son interface web. 
+
 
 #### Paramétrage post installation
 
-Pour cela il va nous falloir un client sur le réseau LAN virtuel :
+Pour cela il va nous falloir un client sur le réseau `LAN` virtuel :
 
->_Il est possible d'accéder à l'interface depuis le côté WAN, se référer à la doc (EN) ou prendre un peu d'avance en installant un client qui servira par la suite._
+>_Il est possible d'accéder à l'interface depuis le côté `WAN`, se référer à la doc (EN) ou prendre un peu d'avance en installant un client qui servira par la suite._
 
 ```sh
-* choisir l'OS qui vous plaît et l'installer sur une VM avec pour la configuration réseau : 'Mode d'accès réseau : Réseau interne' | Nom : intnet | Mode Promiscuité : Autoriser les VMs
+* choisir l'OS qui vous plaît et l'installer sur une `VM` avec pour la configuration réseau : 'Mode d'accès réseau : Réseau interne' | Nom : intnet | Mode Promiscuité : Autoriser les VMs
 * Paramétrer la connexion réseau en manuel une fois l'OS installé
 ```
 
-Accéder à l'interface d'administration d'IPCop via l'url https://172.16.1.254:8443, accepter le certificat et saisir le login 'admin' et mot de passe pour arriver sur cette page :
+Accéder à l'interface d'administration d'`IPCop` via l'url `https://172.16.1.254:8443`, accepter le certificat et saisir le login *admin* et mot de passe pour arriver sur cette page :
 
 ![virtu_03_interface_ipcop](images/virtu_03_interface_ipcop.png)
 
@@ -246,6 +250,7 @@ Depuis le menu **Services**, sélectionner **Serveur mandataire (proxy)** et sai
 
 La passerelle/proxy est prête ! 
 
+
 ### Étape 2 : Installation du `SE3`
 
 #### Récupération de tout le nécessaire
@@ -253,9 +258,10 @@ La passerelle/proxy est prête !
 * [ISO Debian 7.11.0 i386](http://cdimage.debian.org/cdimage/archive/7.11.0/i386/iso-cd/debian-7.11.0-i386-netinst.iso)
 * [ISO Debian 7.11.0 amd64](http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso)
 
+
 #### Création du fichier `Setup_se3.data`
 
-Compléter le formulaire [Créer un fichier setup_se3.data](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy) avec les paramètres suivants 
+Compléter le formulaire [Créer un fichier setup_se3.data](http://dimaker.tice.ac-caen.fr/dise3xp/se3conf-xp.php?dist=wheezy) avec les paramètres suivants :
 
 >_Conserver bien l'adresse URL du fichier de sortie que l'on ira chercher avec un wget par la suite_
 
@@ -306,9 +312,10 @@ Paramètres de samba :
 
 Ou pour les moins courageux, télécharger celui-ci [Setup se3.zip](http://wiki.dane.ac-versailles.fr/index.php?title=Fichier:Setup_se3.zip), qu'il faudra copier sur le serveur via une clé USB. 
 
+
 #### Création de la machine virtuelle
 
-Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton 'Nouveau' avec les paramètres suivants :
+Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton *Nouveau* avec les paramètres suivants :
 
 ```sh
 * Nom : SE3 | Type : Linux | Version : Debian (32-bit)
@@ -316,21 +323,22 @@ Sur VirtualBox, créer une nouvelle machine virtuelle en cliquant sur le bouton 
 * Créer un disque dur virtuel maintenant | VDI | Taille fixe | 80 Go
 ```
 
-Paramétrer les préférences de la VM :
+Paramétrer les préférences de la `VM` :
 
-* Onglet 'Stockage' :
+* Onglet *Stockage* :
 
 ```sh
 Insérer l'iso de debian dans le lecteur optique virtuel
 ```
 
-* Onglet 'Réseau' :
+* Onglet *Réseau* :
 
 ```sh
 Carte 1 | Mode d'accès réseau : Réseau interne | Nom : intnet | Mode Promiscuité : Autoriser les VMs
 ```
 
-#### Installation d'un système debian basique
+
+#### Installation d'un système `Debian` basique
 
 Double cliquer sur la machine virtuelle pour la démarrer, puis sélectionner Install avec la touche Entrée :
 
