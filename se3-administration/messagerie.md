@@ -2,6 +2,7 @@
 
 * [Des infos à recueillir](#des-infos-à-recueillir)
 * [Configuration via l'interface `web`](#configuration-via-linterface-web)
+* [Cas de certains FAI refusant les envois de mails par root](#cas-de-certains-fai-refusant-les-envois-de-mails-par-root)
 * [Vérification](#vérification)
 
 ## Des infos à recueillir
@@ -33,7 +34,27 @@ Avec les informations réunies (voir ci-dessus), vous complétez les champs de c
 
 Vous validez et vous devriez recevoir un message de confirmation de la part du `se3`.
 
+## Cas de certains FAI refusant les envois de mails par root
 
+Chez certains FAI (dont k-net.fr), il n'est pas possible d'envoyer un mail depuis **root**. Il faut donc créer un `alias` dans ssmtp: root sera appelé par son adresse mail. On va devoir créer une **adresse mail chez le FAI**. C'est cette adresse qui sera associée à root et qui permettra l'envoi de mail.
+
+```
+nano /etc/ssmtp/revaliases
+```
+
+On indique dans le fichier:
+
+```
+root: monadresse@mail.fr
+```
+
+Chez K-net.fr, j'ai du utiliser le protocole *STARTTLS* et indiquer le mot de passe associé à l'adresse mail.
+
+Par conséquent, le mdp apparait en clair dans le fichier /etc/ssmtp/ssmtp.conf. Il faut donc impérativement changer les droits de ce fichier si un accès bash est laissé aux utilisateurs.
+
+```
+chmod 660 /etc/ssmtp/ssmtp.conf
+```
 ## Vérification
 
 Le test d’envoi de message de l’interface web devrait fonctionner : dans la page diagnostic, vous cliquez sur le bouclier vert correspondant à la ligne "Configuration de l'expédition des mails" et un menu contextuel permettra d'envoyer un message de test.
