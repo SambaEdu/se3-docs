@@ -12,7 +12,7 @@
 
 Depuis le 5 avril 2018, un nouveau xml est disponible pour Libre Office en version testing.
 
-Depuis la version 3.4.5, il n'est plus nécessaire de déinstaller les versions antérieures. Si vous possédiez une version intérieure, vous devriez faire le ménage avant.
+Depuis la version 3.4.5, il n'est plus nécessaire de déinstaller les versions antérieures. Si vous possédiez une version antérieure à la version 3.4.5, vous devriez faire le ménage avant.
 
 Par défaut, les fichiers docx, xlsx... ne sont pas associés à libre office. Pour l'activer, il faut modifier le xml, en remplacant :
 ```
