@@ -13,7 +13,8 @@ Depuis le 5 avril 2018, un nouveau xml est disponible pour Libre Office en versi
 Depuis la version 3.4.5, il n'est plus nécessaire de déinstaller les versions antérieures. Si vous possédiez une version intérieure, vous devriez faire le ménage avant.
 
 Par défaut, les fichiers docx, xlsx... ne sont pas associés à libre office. Pour l'activer, il faut modifier le xml, en remplacant :
-```<!-- installation sans association de fichiers -->
+```
+		<!-- installation sans association de fichiers -->
 		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x86.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=0 REGISTER_DOCX=0 REGISTER_DOC=0 REGISTER_DOCM=0 REGISTER_DOT=0 REGISTER_DOTX=0 REGISTER_DOTM=0 REGISTER_RTF=0 SELECT_EXCEL=0 REGISTER_XLS=0 REGISTER_XLSX=0 REGISTER_XLSM=0 REGISTER_XLSB=0 REGISTER_XLAM=0 REGISTER_XLT=0 REGISTER_XLTX=0 REGISTER_XLTM=0 SELECT_POWERPOINT=0 REGISTER_PPS=0 REGISTER_PPSX=0 REGISTER_PPSM=0 REGISTER_PPAM=0 REGISTER_PPT=0 REGISTER_PPTX=0 REGISTER_PPTM=0 REGISTER_POT=0 REGISTER_POTX=0 REGISTER_POTM=0" architecture="x86"/>
 		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x64.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=0 REGISTER_DOCX=0 REGISTER_DOC=0 REGISTER_DOCM=0 REGISTER_DOT=0 REGISTER_DOTX=0 REGISTER_DOTM=0 REGISTER_RTF=0 SELECT_EXCEL=0 REGISTER_XLS=0 REGISTER_XLSX=0 REGISTER_XLSM=0 REGISTER_XLSB=0 REGISTER_XLAM=0 REGISTER_XLT=0 REGISTER_XLTX=0 REGISTER_XLTM=0 SELECT_POWERPOINT=0 REGISTER_PPS=0 REGISTER_PPSX=0 REGISTER_PPSM=0 REGISTER_PPAM=0 REGISTER_PPT=0 REGISTER_PPTX=0 REGISTER_PPTM=0 REGISTER_POT=0 REGISTER_POTX=0 REGISTER_POTM=0" architecture="x64"/>
 
@@ -23,7 +24,8 @@ Par défaut, les fichiers docx, xlsx... ne sont pas associés à libre office. P
 		desactive -->
 ```
 par :
-```<!-- installation sans association de fichiers
+```
+		<!-- installation sans association de fichiers
 		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x86.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=0 REGISTER_DOCX=0 REGISTER_DOC=0 REGISTER_DOCM=0 REGISTER_DOT=0 REGISTER_DOTX=0 REGISTER_DOTM=0 REGISTER_RTF=0 SELECT_EXCEL=0 REGISTER_XLS=0 REGISTER_XLSX=0 REGISTER_XLSM=0 REGISTER_XLSB=0 REGISTER_XLAM=0 REGISTER_XLT=0 REGISTER_XLTX=0 REGISTER_XLTM=0 SELECT_POWERPOINT=0 REGISTER_PPS=0 REGISTER_PPSX=0 REGISTER_PPSM=0 REGISTER_PPAM=0 REGISTER_PPT=0 REGISTER_PPTX=0 REGISTER_PPTM=0 REGISTER_POT=0 REGISTER_POTX=0 REGISTER_POTM=0" architecture="x86"/>
 		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x64.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=0 REGISTER_DOCX=0 REGISTER_DOC=0 REGISTER_DOCM=0 REGISTER_DOT=0 REGISTER_DOTX=0 REGISTER_DOTM=0 REGISTER_RTF=0 SELECT_EXCEL=0 REGISTER_XLS=0 REGISTER_XLSX=0 REGISTER_XLSM=0 REGISTER_XLSB=0 REGISTER_XLAM=0 REGISTER_XLT=0 REGISTER_XLTX=0 REGISTER_XLTM=0 SELECT_POWERPOINT=0 REGISTER_PPS=0 REGISTER_PPSX=0 REGISTER_PPSM=0 REGISTER_PPAM=0 REGISTER_PPT=0 REGISTER_PPTX=0 REGISTER_PPTM=0 REGISTER_POT=0 REGISTER_POTX=0 REGISTER_POTM=0" architecture="x64"/>
 		desactive -->
