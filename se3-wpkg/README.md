@@ -1,14 +1,14 @@
 # Documentation wpkg
 
 * [Informations sur les applications](#informations-sur-les-applications)
-	* [Libre Office](#libre-office-6.0)
+	* [Libre Office](#libre-office)
 	* [Java](#java)
 * [Liens utiles](#liens-utiles)
 
 
 ## Informations sur les applications
 
-### Libre Office 6.0
+### Libre Office
 
 Depuis le 5 avril 2018, un nouveau xml est disponible pour Libre Office en version testing.
 
