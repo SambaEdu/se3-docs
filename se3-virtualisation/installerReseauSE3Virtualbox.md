@@ -27,6 +27,7 @@
     * [Client `Windows 7`](#client-windows-7)
     * [Client `Windows 10`](#client-windows-10)
     * [Client `Linux`](#client-linux)
+        * [Installation des `Additions invités`](#installation-des-additions-invités)
 * [Virtualisation d'un réseau avec une autre passerelle](#virtualisation-dun-réseau-avec-une-autre-passerelle)
   * [`SLIS 4`](#slis-4)
   * [`AMON`](#amon)
