@@ -513,11 +513,30 @@ _--> Coming soon <--_
 
 Là aussi, rien de particulier à dire : de nombreux tutoriels vous indiqueront les différentes étapes d'instalation d'un système `GNU/Linux`. Prévoir environ 10 Go d'espace disque.
 
+
 ##### Installation des `Additions invités`
 
-Selon l'usage de votre `client-linux`, il peut être pratique d'installer les `Additions invités`. Vous trouverez ci-dessous comment les mettre en place pour un système `Debian/Stretch`.
+Selon l'usage de votre `client-linux`, il peut être pratique d'installer les `Additions invités` : cela vous permettra, par exemple, d'échanger des fichiers entre la machine virtuelle et la machine hôte via un répertoire partagé ou bien d'utiliser la fonction copier/coller entre les deux machines.
 
+Vous trouverez ci-dessous comment les mettre en place pour un système `Debian/Stretch`.
 
+* insérer le CD des additions invité (ne pas lancer le script proposé)
+![inserer_CD_addinvit](images/inserer_CD_addinvit.png)
+* préparer la machine virtuelle
+Dans un terminal en `root` de la machine virtuelle, mettez à jour le système, installez les paquets build-essential et module-assistant et préparez l'installation des modules dans le noyau à l'aide des commandes suivantes :
+```sh
+apt-get update && apt-get upgrade
+apt-get install build-essential module-assistant
+m-a prepare
+```
+* lancer le script de mise en place des Additions invité
+```sh
+sh /media/cdrom/VBoxLinuxAdditions.run
+```
+* redémarrer la machine virtuelle
+```sh
+reboot
+```
 
 ## Virtualisation d'un réseau avec une autre passerelle
 
