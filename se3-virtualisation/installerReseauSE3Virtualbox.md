@@ -512,7 +512,7 @@ _--> Coming soon <--_
 
 #### Client `Linux`
 
-Là aussi, rien de particulier à dire : de nombreux tutoriels vous indiqueront les différentes étapes d'instalation d'un système `GNU/Linux`. Prévoir environ 10 Go d'espace disque.
+Là aussi, rien de particulier à dire : de nombreux tutoriels vous indiqueront les différentes étapes d'installation d'un système `GNU/Linux`. Prévoir environ 10 Go d'espace disque.
 
 
 ##### Installation des `Additions invités`
