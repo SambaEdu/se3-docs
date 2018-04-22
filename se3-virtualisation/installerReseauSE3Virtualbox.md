@@ -511,7 +511,12 @@ _--> Coming soon <--_
 
 #### Client `Linux`
 
-_--> Coming soon <--_
+Là aussi, rien de particulier à dire : de nombreux tutoriels vous indiqueront les différentes étapes d'instalation d'un système `GNU/Linux`. Prévoir environ 10 Go d'espace disque.
+
+##### Installation des `Additions invités`
+
+Selon l'usage de votre `client-linux`, il peut être pratique d'installer les `Additions invités`. Vous trouverez ci-dessous comment les mettre en place pour un système `Debian/Stretch`.
+
 
 
 ## Virtualisation d'un réseau avec une autre passerelle
