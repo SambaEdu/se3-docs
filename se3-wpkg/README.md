@@ -34,7 +34,7 @@ rd /S /Q "C:\Users\adminse3\AppData\Local\sun"
 
 ### Libre Office
 
-Depuis le 5 avril 2018, un nouveau xml est disponible pour Libre Office en version testing.
+Depuis le 5 avril 2018, un nouveau xml est disponible pour Libre Office en version testing. Il ne sera plus fonctionnel pour windows XP, puisque la version 6.0 requiert windows 7 ou supérieur.
 
 Depuis la version 3.4.5, il n'est plus nécessaire de déinstaller les versions antérieures. Si vous possédiez une version antérieure à la version 3.4.5, vous devriez faire le ménage avant.
 
