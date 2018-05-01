@@ -59,7 +59,11 @@ On arrive alors dans la partie avancée. On a plus qu'à aller dans la partie so
 
 ## Modification du menu IPXE
 
- Le menu est consitué d'une page php appelée boot-base.php. L'arborescence est la suivante
+ Le menu est consitué d'une page php appelée boot-base.php. Différentes variables sont stockées dans php/params.php (comme par exemple un login/mdp supplémentaire pour accéder au menu avancé). 
+ Chaque fichier menu va appeler une page php. J'ai essayé de ranger les fichiers dans des répertoires de façon cohénrente.
+ Plusieurs fichiers dans le paquet original ne servent plus à rien (seul boot-base.php est utile à la racine de ipxe, donc la majorité des fichiers php sont inutiles)
+
+L'arborescence est la suivante
  ```
  /var/www/se3/ipxe
 ├── auth.php
