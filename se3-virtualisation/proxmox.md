@@ -387,6 +387,23 @@ L'opération sera à peu près identique pour les sauvegardes complètes. On cli
 Pour la restauration, on se placera sur l'espace de stockage dédié aux sauvegardes, puis on cliquera sur la sauvegarde en faisant `restaurer`. 
 ![27](images/27.png)
 
+Après une restauration de machine, on constate qu'il n'est plus possible de faire un snapshot. La machine est par défaut mise au format raw, il devient alors nécéssaire de la convertir au format qcow2.
+
+Ici, on va convertir la machine restaurée
+
+```
+qemu-img convert -p -O qcow2 /var/lib/vz/images/200/vm-200-disk-1.raw /var/lib/vz/images/200/vm-200-disk-1.qcow2
+```
+On doit aussi modifier le fichier de configuration de la machine pour indiquer que le nouveau fichier.qcow2 doit être utilisé.
+
+```
+ nano /etc/pve/nodes/pve1/qemu-server/200.conf
+```
+on remplace "sata0: local:200/vm-200-disk-1.raw,size=550G" par "sata0: local:200/vm-200-disk-1.qcow2,size=550G"
+
+Normalement, la fonctionnalité snapshot devrait être rétablie.
+
+
 ## Ajout d'un périphérique usb dans une machine virtuelle
 On insère le périphérique USB dans le serveur (et non la machine qui accède à l'interface web).
 On peut vérifier que le périphérique est bien reconnu en allant sur la console du serveur et en tapant
