@@ -508,6 +508,11 @@ Si la VM est un poste Windows, il faudra changer le modèle de carte et prendre 
 Si la VM est sous Linux, il faudra probablement supprimer le fichier `/etc/udev/rules.d/70-persistent-net.rules`.
 Ce fichier sera régéneré au redémarrage avec la nouvelle adresse mac et eth0 devrait de nouveau apparaitre.
 
+
+**Blue screen of death Windows XP
+
+Il faut vérifier si les périphériques sont bien conformes au poste original (disque IDE, Sata, scsi), si le processeur est bien en 32 bits  avec le bon nombre de processeurs/coeurs (choisir processeur kvm32).
+
 **image non restaurable**
 
 Il faut alors augmenter la capacité du disque virtuel
