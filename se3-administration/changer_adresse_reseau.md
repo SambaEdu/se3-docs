@@ -44,7 +44,7 @@ La vérification est simple : dans chaque parc de machines, ouvrir une session s
 
 Pour retrouver la possibilité d'installer des `clients-linux`, il suffit, dans le module `Serveur FTP` de l'interface web du `se3`, de supprimer le mécanisme et de valider : les nouveaux paramètres seront pris en compte pour les nouveaux `clients-linux`.
 
-Pour les `clients-linux` déjà installés, il y a la possibilité de les ré-installer, ce qui va assez vite. Cependant, il est possible de modifier quelques fichiers de chaque clients ayant l'ancienne `IP` du `se3`. Un script a été mis au point par Louis-Maurice De Souza. Il faudra l'adapter à votre situation.
+Pour les `clients-linux` déjà installés, il y a la possibilité de les ré-installer, ce qui va assez vite. Cependant, il est possible de modifier quelques fichiers de chaque clients ayant l'ancienne `IP` du `se3`. [Un script](ch_ip_linux.sh) a été mis au point par Louis-Maurice De Souza. Il faudra l'adapter à votre situation.
 
 
 ## Problèmes éventuels
