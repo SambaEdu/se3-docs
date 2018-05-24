@@ -4,6 +4,7 @@
 * [Position du problème](#position-du-problème)
 * [Étapes du changement](#Étapes-du-changement)
 * [Vérifications](#vérifications)
+* [Cas des `clients-linux`](#cas-des-clients-linux)
 * [Problèmes éventuels](#problèmes-éventuels)
 
 
@@ -37,6 +38,13 @@ Le principe consiste à exporter les données de l'annuaire dans un fichier au f
 ## Vérifications
 
 La vérification est simple : dans chaque parc de machines, ouvrir une session sur une des machines de ce parc. Tout doit fonctionner.
+
+
+## Cas des `clients-linux`
+
+Pour retrouver la possibilité d'installer des `clients-linux`, il suffit, dans le module `Serveur FTP` de l'interface web du `se3`, de supprimer le mécanisme et de valider : les nouveaux paramètres seront pris en compte pour les nouveaux `clients-linux`.
+
+Pour les `clients-linux` déjà installés, il y a la possibilité de les ré-installer, ce qui va assez vite. Cependant, il est possible de modifier quelques fichiers de chaque clients ayant l'ancienne `IP` du `se3`. Un script a été mis au point par Louis-Maurice De Souza. Il faudra l'adapter à votre situation.
 
 
 ## Problèmes éventuels
