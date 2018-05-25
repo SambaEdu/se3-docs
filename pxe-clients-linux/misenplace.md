@@ -154,7 +154,7 @@ Vous pouvez aussi choisir **une installation manuelle** : il faudra alors répon
 
 ### Mise à jour
 
-Si une nouvelle version du paquet `pxe-client-linux` est proposée, il suffira de cocher la case qui permet de supprimer le dispositif et de le retélécharger puis de valider (voir ci-dessus la copie d'écran).
+Si une nouvelle version du paquet `pxe-client-linux` est proposée, il suffira de cocher la case qui permet de supprimer le dispositif et de le retélécharger puis de valider.
 ![module tftp téléchargement](images/mise_a_jour_dispositif.png)
 
 De même, si les archives netboot `Ubuntu` ou `Debian` ont changé, mettez à jour le mécanisme.
