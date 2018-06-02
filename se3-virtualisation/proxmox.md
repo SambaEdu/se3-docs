@@ -40,17 +40,17 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
 
 ## Présentation
 
-Proxmox 5 (version actuelle 5.1) est un puissant système libre (le support est néanmoins payant) de virtualisation basé sur Debian et qui utilise l'hyperviseur KVM (pour de la virtualisation complète), ou des containeurs lxc Il permet à la façon de virtualbox (mais cette fois pour un usage pro) de créer des  snapshots de machine, des sauvegardes complètes et beaucoup d'autres fonctionnalités. 
+Proxmox 5 (version actuelle 5.2) est un puissant système libre (le support est néanmoins payant) de virtualisation basé sur Debian et qui utilise l'hyperviseur KVM (pour de la virtualisation complète), ou des containeurs lxc Il permet à la façon de virtualbox (mais cette fois pour un usage pro) de créer des  snapshots de machine, des sauvegardes complètes et beaucoup d'autres fonctionnalités. 
 
 Le serveur et les vms peuvent se gérer à partir d'une **interface web**, et une gestion possible des comptes utilisateurs va permettre de laisser à des tiers un accès avec plus ou moins de droits sur une machine (comme le serveur bcdi par exemple).  
 
 L'installation pourra se faire avec les paquets proxmox, mais il sera bien plus pratique d'utiliser l'iso toute faite sur le site officiel de proxmox:
 
-https://www.proxmox.com/en/downloads/item/proxmox-ve-5-1-iso-installer-3rd-iso-release
+https://www.proxmox.com/en/downloads/item/proxmox-ve-5-2-iso-installer
 
 Virtualiser un serveur va avoir plusieurs avantages:
-Le premier sera de pouvoir installer plusieurs serveurs sur un même machine physique.
-Le deuxième sera de pouvoir faire des sauvegardes/restauration de machines très simplement.
+Le premier sera de pouvoir installer plusieurs serveurs sur un même machine physique. On utilise donc pleinement les capacités physiques de son serveur.
+Le deuxième sera de pouvoir faire des sauvegardes/restauration complètes ou partielles de machines. On pourra donc facilement revenir en arrière en cas de problème, ou déplacer une machine virtuelle d'un serveur physique vers un autre.
 
 ## Matériel
 
