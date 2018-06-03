@@ -6,7 +6,7 @@ Si on ne dispose pas d'un NAS, on peut utiliser un vieux serveur qui sera relié
 
 On dispose ici d'un disque de petite contenance sda pour installer le système (distrib debian serveur).On a aussi deux disques sdb et sdc identiquesde capacité importante.
 
-On va créer un raid1 (mirroring) logiciel entre sdb et sdc. Ce raid sera monté ensuite dans le système. Les disques sont des disques sata, aucune carte raid n'est nécessaire puisqu'il s'agit d'un raid logiciel et donc géré par Débian.
+On va créer un **raid1** (mirroring) logiciel entre sdb et sdc. Ce raid sera monté ensuite dans le système. Les disques sont des disques sata, *aucune carte raid n'est nécessaire* puisqu'il s'agit d'un raid logiciel et donc géré par Débian.
 
 Il n'est pas du tout obligatoire de faire un raid logiciel (utiliser un raid rajoute une probabilité de problème logiciel). On pourra suivre le mode opératoire en zappant la partie raid et en remplaçant /dev/md0 par /dev/sdb1 (si disque sdb1)
 
@@ -52,6 +52,7 @@ address 172.20.0.6
 netmask 255.255.0.0
 gateway 172.20.0.1
 ```
+On redémarrera le serveur pour que toute la config soit bien prise en compte.
 
 # Création du raid1 logiciel
 * On installe le paquet mdadm
@@ -63,7 +64,7 @@ apt-get install mdadm
 mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1
 ```
 
-Le raid est maintenant créé sous le device md127.
+Le raid est maintenant créé sous le device md0.
 ```
 mdadm --examine --scan --verbose >> /etc/mdadm/mdadm.conf
 update-initramfs -u -k all
@@ -131,14 +132,27 @@ On ajoute dans le fichier (en remplaçant IP_client1 par l'ip du poste autorisé
 ```
 /home/partage-nfs IP_client1(rw,no_subtree_check,sync,no_root_squash) IP_client2(rw,no_subtree_check,sync,no_root_squash)
 ```
+
 On relance le service
 ```
 service nfs-kernel-server restart nfs
 ```
 
-Remarque: On peut aussi créer deux  sous répertoires dans /home/partage-nfs: un backuppc pour faire les sauvegardes backuppc, puis un autre pour les exports de vm ou les sauvegardes par script.
+Remarque: On peut aussi créer plusieurs sous répertoires dans /home/partage-nfs: 
+/home/partage-nfs/backuppc/  pour faire les sauvegardes backuppc.
+/home/partage-nfs/partimag/  pour faire les sauvegardes Clonezilla
+/home/partage-nfs/sauvese3/  pour faire les sauvegardes par script
+/home/partage-nfs/proxmox/  pour faire les sauvegardes de VM.
 
 Dans ce cas, on mettra dans le fichier/etc/export une ligne personnalisée pour chaque partage.
+
+```
+/home/partage-nfs/backuppc IP_se3(rw,no_subtree_check,sync,no_root_squash)
+/home/partage-nfs/partimag 172.20.0.0/255.255.0.0(rw,no_subtree_check,sync,no_root_squash)
+/home/partage-nfs/sauvese3 IP_se3(rw,no_subtree_check,sync,no_root_squash)
+/home/partage-nfs/proxmox/ IP_node1(rw,no_subtree_check,sync,no_root_squash) IP_node2(rw,no_subtree_check,sync,no_root_squash)
+```
+
 
 # Montage du partage nfs sur le se3 ou noeud proxmox
 
