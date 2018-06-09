@@ -14,13 +14,13 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
      * [Reglage du proxy](#reglage-du-proxy)
  * [Quelques points à modifier pour la gestion du serveur](#quelques-points-à-modifier-pour-la-gestion-du-serveur)
      * [Configuration de l'envoi de mail par le serveur](#configuration-de-lenvoi-de-mail-par-le-serveur)
-     * [Modification des sources](#Modification-des-sources)
+     * [Modification des sources](#modification-des-sources)
 * [Interface web de gestion](#interface-web-de-gestion)
      * [Accès à l'interface](#accès-à-linterface)
      * [Présentation de l'interface](#présentation-de-linterface)
      * [Contenu des disques](#contenu-des-disques)
 * [Ajout de disques durs internes pour stocker les vm ou les sauvegardes](#ajout-de-disques-durs-internes-pour-stocker-les-vm-ou-les-sauvegardes)
-* [Création d'un partage nfs pour sauvegarder les VMS](#creation-d-un-partage-nfs-pour-sauvegarder-les-vms)
+* [Création de partage nfs pour sauvegarder les VMS](#creation-de-partage-nfs-pour-sauvegarder-les-vms)
 * [Ajout de livecd iso pour booter une vm](#ajout-de-livecd-iso-pour-booter-une-vm)
 * [Création de machine virtuelle](#création-de-machine-virtuelle)
      * [Configuration de l'ID de la VM](#configuration-de-lid-de-la-vm)
@@ -37,7 +37,7 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
      * [Création de l'image clonezilla](#création-de-limage-clonezilla)
      * [Restauration de l'image clonezilla sur une VM](#restauration-de-limage-clonezilla-sur-une-vm)
      * [Problèmes possibles](#problèmes-possibles)
- * [Mise à niveau de proxmox](#mise-a-niveau-de-proxmox)
+ * [Mise à niveau de Proxmox](#mise-a-niveau-de-proxmox)
      
  
 
@@ -306,7 +306,7 @@ On choisi également le type de contenu que l'on souhaite y mettre:
 
 La version 5.2 de proxmox permet maintenant de monter des partages samba pour y stocker des fichiers.
 
-## Création d'un partage nfs pour sauvegarder les VMS
+## Création de partage nfs pour sauvegarder les VMS
 On pourra utiliser un nas, ou installer simplement un partage NFS sur une machine dédiée.
 https://github.com/SambaEdu/se3-docs/blob/master/se3-sauvegarde/sav-nfs-raid1.md
 
@@ -529,7 +529,7 @@ Il faut alors augmenter la capacité du disque virtuel
 
 Si le mode SATA était activé, il faut alors essayé un autre type de connexion (scsi).
 
-## Mise à niveau de proxmox
+## Mise à niveau de Proxmox
 Comme indiqué précédement, il est déconseillé par proxmox de faire les mises àjour à partir du dépot "pve-no-subscription" car toutes les maj n'ont pas été testées/vérifiées à 100% .
 Néanmoins, si promox subit une mise à niveau (passage de la version 5.1 vers la 5.2), alors on peut faire la mise à niveau car les paquets sont présents dans la nouvelle iso (et donc pour les entreprises).
 
