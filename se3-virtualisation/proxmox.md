@@ -20,6 +20,7 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
      * [Présentation de l'interface](#présentation-de-linterface)
      * [Contenu des disques](#contenu-des-disques)
 * [Ajout de disques durs internes pour stocker les vm ou les sauvegardes](#ajout-de-disques-durs-internes-pour-stocker-les-vm-ou-les-sauvegardes)
+* [Création d'un partage nfs pour sauvegarder les VMS](#creation-d-un-partage-nfs-pour-sauvegarder-les-vms)
 * [Ajout de livecd iso pour booter une vm](#ajout-de-livecd-iso-pour-booter-une-vm)
 * [Création de machine virtuelle](#création-de-machine-virtuelle)
      * [Configuration de l'ID de la VM](#configuration-de-lid-de-la-vm)
@@ -36,7 +37,9 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
      * [Création de l'image clonezilla](#création-de-limage-clonezilla)
      * [Restauration de l'image clonezilla sur une VM](#restauration-de-limage-clonezilla-sur-une-vm)
      * [Problèmes possibles](#problèmes-possibles)
+ * [Mise à niveau de proxmox](#mise-a-niveau-de-proxmox)
      
+ 
 
 ## Présentation
 
@@ -301,8 +304,11 @@ On peut faire `datacenter>stockage>ajouter> répertoire`. On y écrit le répert
 
 On choisi également le type de contenu que l'on souhaite y mettre:
 
-Remarque: Il n'est à priori pas possible d'ajouter un partage samba dans les espaces de stockage. On peut néanmoins coutourner cela en montant un partage samba dans un répertoire du serveur, et en indiquant ce répertoire dans l'ajout de répertoires locaux.
-Il faudra installer sur le serveur le paquet `cifs-utils` sur le serveur.
+La version 5.2 de proxmox permet maintenant de monter des partages samba pour y stocker des fichiers.
+
+## Création d'un partage nfs pour sauvegarder les VMS
+On pourra utiliser un nas, ou installer simplement un partage NFS sur une machine dédiée.
+https://github.com/SambaEdu/se3-docs/blob/master/se3-sauvegarde/sav-nfs-raid1.md
 
 
 ## Ajout de livecd iso pour booter une vm 
@@ -320,6 +326,8 @@ Ces iso peuvent être des netinstall debian, livecd clonezilla, disques d'instal
 ![15](images/15.png)
 
 Les VM sont repérées par leur numéro (ici 100). On donnera le nom souhaité pour plus de clareté.
+
+**ATTENTION:** Si on possède plusieurs serveurs Proxmox indépendants ,on pensera bien à donner une ID cohérente avec le serveur (100;101;... pour PVE1;200;201;202 pour PVE2,etc.). En effet, si on place les sauvegardes complètes de VM sur un partage réseau (samba,nfs...), cela poserait problème si deux machines différentes avaient la même ID. Ainsi, pas de risque de conflit d'ID.
 
 ### **Configuration du cd-rom.**
 
@@ -521,6 +529,32 @@ Il faut alors augmenter la capacité du disque virtuel
 
 Si le mode SATA était activé, il faut alors essayé un autre type de connexion (scsi).
 
+## Mise à niveau de proxmox
+Comme indiqué précédement, il est déconseillé par proxmox de faire les mises àjour à partir du dépot "pve-no-subscription" car toutes les maj n'ont pas été testées/vérifiées à 100% .
+Néanmoins, si promox subit une mise à niveau (passage de la version 5.1 vers la 5.2), alors on peut faire la mise à niveau car les paquets sont présents dans la nouvelle iso (et donc pour les entreprises).
 
+Par sécurité, on éteindra les VMS pour la mise à jour de PVE. Une sauvegarde complete des machines peut aussi être un gage de sécurité.
 
+On ouvre donc le fichier /etc/apt/sources.list.d/pve-enterprise.list
+On commente la ligne relative au dépot entreprise et on ajoute le dépot alternatif.
+```
+#deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise
+deb http://download.proxmox.com/debian/pve stretch pve-no-subscription
+```
 
+On lance ensuite une mise à jour de la liste des paquets, puis la mise à jour.
+```
+pveupdate
+pveupgrade
+```
+Il faudra redémarrer le serveur pour que le changement soit effectif.
+
+Ne pas oublier de modifier le fichier /etc/apt/sources.list.d/pve-enterprise.list et de recommenter la ligne pve-no-subscription
+```
+#deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise
+#deb http://download.proxmox.com/debian/pve stretch pve-no-subscription
+```
+puis on actualise la liste des paquets
+```
+pveupdate
+```
