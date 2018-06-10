@@ -33,6 +33,7 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
      * [Sauvegarde et restauration de machines virtuelles](#sauvegarde-et-restauration-de-machines-virtuelles)
 * [Créer un compte utilisateur](#créer-un-compte-utilisateur)
 * [Ajout d'un périphérique usb dans une machine virtuelle](#ajout-dun-périphérique-usb-dans-une-machine-virtuelle)
+* [Ajout d'un disque dur interne dans le serveur à destination d'une VM](#ajout-dun-disque-dur-interne-dans-le-serveur-a-destination-dune-vm)
 * [Migration d'un serveur physique existant vers une VM](#migration-dun-serveur-physique-existant-vers-une-vm)
      * [Création de l'image clonezilla](#création-de-limage-clonezilla)
      * [Restauration de l'image clonezilla sur une VM](#restauration-de-limage-clonezilla-sur-une-vm)
@@ -411,12 +412,12 @@ on remplace "sata0: local:200/vm-200-disk-1.raw,size=550G" par "sata0: local:200
 
 Normalement, la fonctionnalité snapshot devrait être rétablie.
 
-## Ajout d'un disque dur interne dans le serveur à destination d'une VM.
+## Ajout d'un disque dur interne dans le serveur à destination d'une VM
 (D'après https://pve.proxmox.com/wiki/Physical_disk_to_kvm) Si on ajoute un disque dur sata (sdc) dans le serveur et que l'on souhaite que la partition sdc1 apparaisse dans la VM 103 , alors il suffit de passer en ligne de commande sur le serveur  et de taper:
 ```
 qm set 103 -scsi1 /dev/sdc1
 ```
-On peut choisir -sata0 (avec sata de 0 à 5), -iscsi0 (de 0 à 3) ou -ide
+On peut choisir -sata0 (avec sata de 0 à 5), -iscsi0 (de 0 à 3) ou -ide0
 
 
 ## Ajout d'un périphérique usb dans une machine virtuelle
