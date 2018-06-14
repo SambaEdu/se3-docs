@@ -499,6 +499,8 @@ On entrera les infos nécéssaires.
 
 On valide.
 
+![41](images/41.png)
+
 Le serveur est donc relié à l'annuaire du se3. **Pour l'instant aucun compte ne peut se connecter puisqu'il faut indiquer à Proxmox qu'un utilisateur doit être créé.
 
 Pour cela, on reste dans: **DATACENTER>permissions>Ajouter>Utilisateur**
@@ -511,11 +513,15 @@ Pour cela, on reste dans: **DATACENTER>permissions>Ajouter>Utilisateur**
 
 Le reste n'est pas obligatoire.
 
+![42](images/42.png)
+
 **Il ne reste plus qu'à donner des droits à cet utilisateur pour une VM/groupe de VM.
 
 On clique sur **DATACENTER>IDdelaVM**  puis **Permissions >Ajouter>Permission d'utilisateur>** 
 
 On choisi l'utilisateur créé dans la liste (ex hugov@se3) et on lui indique les droits associés.
+
+![43](images/43.png)
 
 On peut maintenant se connecter avec le compte indiqué et avoir accès aux machines déléguées.
 
