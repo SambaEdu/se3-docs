@@ -478,6 +478,44 @@ On peut voir ici que l'utilisateur documentaliste ne perçoit que la VM concern�
 
 --> Il doit être possible de créer un rôle ayant seulement quelques privilèges comme allumer/éteindre la VM, faire des sauvegardes/snapshots et les restaurer. A voir donc.
 
+## Authentification avec l'annuaire du se3
+On peut choisir de connecter le serveur proxmox à l'annuaire du se3. Cela permettra à un utilisateur de gérer une vm particulière ou un groupe de VM.
+
+Pour cela on ira dans
+DATACENTER>Authentification puis l'onglet Ajouter>serveur ldap
+
+On entrera les infos nécéssaires.
+
+**realm:** ldap-se3 (enfin ce qu'on veut!)
+
+**BASE Domain Name:** ou=People,ou=lyc-prevert-longjumeau,ou=ac-versailles,ou=education,o=gouv,c=fr (à adapter à votre établissement évidemment. Le Dn se retrouve dans l'interface se3)
+
+**USER ATTRIBUTE:** uid (ainsi la connexion se fera avec le login du se3)
+
+**Server:** ip du se3 (ex 172.20.0.2)
+
+**port:** 389
+
+On valide.
+
+Le serveur est donc relié à l'annuaire du se3. **Pour l'instant aucun compte ne peut se connecter puisqu'il faut indiquer à Proxmox qu'un utilisateur doit être créé.
+
+Pour cela, on reste dans: **DATACENTER>permissions>Ajouter>Utilisateur**
+
+**Utilisateur:** admin (login de l'utilisateur)
+
+**Realm:** On choisir ce qu'on avait ajouté avant (ldap-se3)
+
+**Groupe:** Si vous avez créé un groupe particulier avant (avec des droits comme VMUSER ou VMadmin)
+
+Le reste n'est pas obligatoire.
+
+**Il ne reste plus qu'à donner des droits à cet utilisateur pour une VM/groupe de VM.
+
+On clique sur **DATACENTER>IDdelaVM**  puis **Permissions >Ajouter>Permission d'utilisateur>** 
+
+On choisi l'utilisateur créé dans la liste (ex hugov@se3) et on lui indique les droits associés.
+
 
 ## Migration d'un serveur physique existant vers une VM
 
