@@ -32,6 +32,7 @@ Cet article est avant tout un pense-bête personnel des différentes opérations
      * [Activation de l'affichage](#activation-de-laffichage)
      * [Sauvegarde et restauration de machines virtuelles](#sauvegarde-et-restauration-de-machines-virtuelles)
 * [Créer un compte utilisateur](#créer-un-compte-utilisateur)
+* [Authentification avec l'annuaire du se3](#authentification-avec-lannuaire-du-se3)
 * [Ajout d'un périphérique usb dans une machine virtuelle](#ajout-dun-périphérique-usb-dans-une-machine-virtuelle)
 * [Ajout d'un disque dur interne dans le serveur à destination d'une VM](#ajout-dun-disque-dur-interne-dans-le-serveur-a-destination-dune-vm)
 * [Migration d'un serveur physique existant vers une VM](#migration-dun-serveur-physique-existant-vers-une-vm)
@@ -516,6 +517,7 @@ On clique sur **DATACENTER>IDdelaVM**  puis **Permissions >Ajouter>Permission d'
 
 On choisi l'utilisateur créé dans la liste (ex hugov@se3) et on lui indique les droits associés.
 
+On peut maintenant se connecter avec le compte indiqué et avoir accès aux machines déléguées.
 
 ## Migration d'un serveur physique existant vers une VM
 
