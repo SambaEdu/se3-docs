@@ -24,7 +24,7 @@
 * [Les logs pour détecter un problème](logs_detecter_probleme.md#les-logs-pour-détecter-un-problème)
 * [Le cas des classes nomades](classes_nomades.md#le-cas-des-classes-nomades)
 * [Un mot sur les imprimantes](imprimantes.md#un-mot-sur-les-imprimantes)
-* [Clients Linux et wifi](linux-et-wifi.md##clients-linux-et-wifi)
+* [Clients Linux et wifi](linux-et-wifi.md#clients-linux-et-wifi)
 * [Intégration manuelle d'un `client-linux`](impatients.md#intégration-manuelle-dun-client-linux)
 * [Les options des scripts d'intégration](options_scripts.md#les-options-des-scripts-dintégration)
 * [Désinstallation/réinstallation du paquet `se3-clients-linux`](desinstall_reinstall_paquet.md#désinstallationréinstallation-du-paquet-se3-clients-linux)
