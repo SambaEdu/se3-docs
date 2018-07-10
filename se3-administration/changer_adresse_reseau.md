@@ -34,6 +34,14 @@ Le principe consiste à exporter les données de l'annuaire dans un fichier au f
 
 - modifier les `IP` des machines en `IP fixes` : serveur antivirus, NAS pédagogique, imprimantes, bornes Wi-Fi…
 
+- modifier le fichier `/etc/apt/apt-conf` pour remplacer l'`IP` de l'`Amon` si nécessaire.
+
+- ré-installer le paquet `sambaedu-client-windows` à l'aide des commandes suivantes :
+```sh
+apt-get update
+apt-get install --reinstall sambaedu-client-windows
+```
+
 
 ## Vérifications
 
