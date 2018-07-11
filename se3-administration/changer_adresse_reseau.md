@@ -29,6 +29,8 @@ Nous vous proposons ici les principales étapes à suivre pour mener à bien cet
 
 - modifier, si besoin, le proxy Firefox et la page de démarrage Firefox personnalisée.
 
+- modifier le fichier `/etc/wgetrc` pour indiquer l'adresse du nouveau proxy pour `http`, `https` et `ftp`.
+
 - supprimer les anciennes réservations d'adresses IP et renseigner les nouvelles. Pour cela, on pourra s'aider des possibilités de l'interface web du se3 : http://wwdeb.crdp.ac-caen.fr/mediase3/index.php/Le_module_DHCP#Modifier_le_plan_d.27adressage_des_machines_clientes  
 Le principe consiste à exporter les données de l'annuaire dans un fichier au format csv avant de les envoyer dans cette page qui se charge de faire un remplacement automatique des adresses.
 
