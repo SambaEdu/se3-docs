@@ -132,12 +132,14 @@ sdb 100 Go
 sdc 500 Go
 
 ![01](images/01.png)
+**Installation classique sur un disque**
 
 On choisit d'installer proxmox sur le premier disque sda.  Les autres disques serviront à stocker des sauvegardes de machines (les snapshots sont placés dans le même espace de stockage que les machines), des fichiers iso de livecd pour les machines,etc...
 
-Pour virtualiser un serveur comme le `se3`, il sera clairement conseillé de mettre plusieurs disques identiques et d'utiliser un système zfs avec du cache ( aller voir dans `options`) pour de meilleurs performances.
+**Installation sur plusieurs disques en raid avec zfs**
+Pour virtualiser un serveur comme le `se3`, il sera clairement conseillé de mettre plusieurs disques serveurs,sas,ssd identiques et d'utiliser un système zfs avec du cache ( aller voir dans `options`) pour de meilleurs performances.
 
-Dans le cas d'un raid 10 (voir plus bas), on pourra mettre au moins 4 disques serveurs, ainsi qu'un ssd pro pour le cache. Dans les options on choisira zfs raid10, on séléctionnera les 4 disques, mais on indiquera bien que le ssd ne doit pas être utilisé au départ. La mise du ssd en cache se fera plus tard.
+Dans le cas d'un raid 10 (voir plus bas), on pourra mettre au moins 4 disques serveurs, ainsi qu'un ssd pro pour le cache. Dans les options on choisira zfs raid10, on séléctionnera les 4 disques, mais on indiquera bien que **le ssd ne doit pas être utilisé au départ**. La mise du ssd en cache se fera plus tard.
 
 Les machines virtuelles pourront évidemment être en d'autres formats (xfs,ext4,ntfs...)
 
