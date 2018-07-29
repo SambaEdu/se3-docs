@@ -118,10 +118,8 @@ Inconvénients :
 
 - la redondance consomme la moitié de la capacité
 
-Dans le cas d'un serveur Sambaedu, la config en miroir est la meilleure. En revanche pour un serveur de sauvegarde le raidz2 est la meilleure solution.
+Dans le cas d'un serveur Sambaedu, la config en miroir raid10 est la meilleure. En revanche pour un serveur de sauvegarde le raidz2 est la meilleure solution.
 
-### cache
-ZFS permet d'avoir un cache en écriture (log) et en lecture (cache). Un petit SSD de 128 go est suffisant. Il peut être ajouté à chaud à tout moment.  Prendre un disque "pro" ou une carte PCIE
 
 ## Installation de base du serveur
 
@@ -138,6 +136,8 @@ sdc 500 Go
 On choisit d'installer proxmox sur le premier disque sda.  Les autres disques serviront à stocker des sauvegardes de machines (les snapshots sont placés dans le même espace de stockage que les machines), des fichiers iso de livecd pour les machines,etc...
 
 Pour virtualiser un serveur comme le `se3`, il sera clairement conseillé de mettre plusieurs disques identiques et d'utiliser un système zfs avec du cache ( aller voir dans `options`) pour de meilleurs performances.
+
+Dans le cas d'un raid 10 (voir plus bas), on pourra mettre au moins 4 disques serveurs, ainsi qu'un ssd pro pour le cache. Dans les options on choisira zfs raid10, on séléctionnera les 4 disques, mais on indiquera bien que le ssd ne doit pas être utilisé au départ. La mise du ssd en cache se fera plus tard.
 
 Les machines virtuelles pourront évidemment être en d'autres formats (xfs,ext4,ntfs...)
 
@@ -208,6 +208,62 @@ https://pve.proxmox.com/wiki/Package_Repositories
 
 Le site indique que les mises à jour ne sont pas sures à 100% e que ceci ne doit être fait qu'avec un serveur de test.
 Si on est un peu frileux, on peut commenter le dépot `proxmox` et ne laisser que les mises à jour `Débian`. Ceci évitera d'avoir un message d'erreur envoyé par le serveur.
+
+
+### cache
+ZFS permet d'avoir un cache en écriture (log) et en lecture (cache). Un petit SSD de 128 go est suffisant. Il peut être ajouté à chaud à tout moment.  Prendre un disque "pro" ou une carte PCIE
+
+On regardera l'état du pool créé par proxmox en faisant
+
+```
+zpool status
+
+  pool: rpool
+ state: ONLINE
+  scan: none requested
+config:
+
+        NAME                                            STATE     READ WRITE CKSUM
+        rpool                                           ONLINE       0     0     0
+          mirror-0                                      ONLINE       0     0     0
+            sda2                                        ONLINE       0     0     0
+            sdb2                                        ONLINE       0     0     0
+          mirror-1                                      ONLINE       0     0     0
+            ata-WDC_WD2005FBYZ-01YCBB2_WD-WMC6N0L7Y41V  ONLINE       0     0     0
+            ata-WDC_WD2005FBYZ-01YCBB2_WD-WMC6N0L1M5WL  ONLINE       0     0     0
+        
+errors: No known data errors
+```
+On voit que le pool de stockage s'appelle *rpool* .
+Si on a ajouté un ssd /dev/sde, puis créé une partition ext4 dessus, il ne reste plus qu'à faire
+
+```
+zpool add -f rpool cache /dev/sde1
+```
+Normalement, la commande zpool status doit donner ceci
+
+```
+zpool status
+  pool: rpool
+ state: ONLINE
+  scan: none requested
+config:
+
+        NAME                                            STATE     READ WRITE CKSUM
+        rpool                                           ONLINE       0     0     0
+          mirror-0                                      ONLINE       0     0     0
+            sda2                                        ONLINE       0     0     0
+            sdb2                                        ONLINE       0     0     0
+          mirror-1                                      ONLINE       0     0     0
+            ata-WDC_WD2005FBYZ-01YCBB2_WD-WMC6N0L7Y41V  ONLINE       0     0     0
+            ata-WDC_WD2005FBYZ-01YCBB2_WD-WMC6N0L1M5WL  ONLINE       0     0     0
+        cache
+          sde1                                          ONLINE       0     0     0
+
+errors: No known data errors
+```
+**Remarque. En ajoutant un disque dur USB, il y a eu modification de l'ordre des disques puisque le ssd n'était plus /dev/sde.
+Il faut donc plutôt ajouter le cache en utilisant l'UUID de la partition ( à voir comment faire).
 
 ## Interface web de gestion
 ### Accès à l'interface
@@ -571,7 +627,7 @@ Si la VM est sous Linux, il faudra probablement supprimer le fichier `/etc/udev/
 Ce fichier sera régéneré au redémarrage avec la nouvelle adresse mac et eth0 devrait de nouveau apparaitre.
 
 
-**Blue screen of death Windows XP
+**Blue screen of death Windows XP**
 
 Il faut vérifier si les périphériques sont bien conformes au poste original (disque IDE, Sata, scsi), si le processeur est bien en 32 bits  avec le bon nombre de processeurs/coeurs (choisir processeur kvm32).
 
@@ -583,8 +639,17 @@ Il faut alors augmenter la capacité du disque virtuel
 
 Si le mode SATA était activé, il faut alors essayé un autre type de connexion (scsi).
 
+**Le disque dur de la VM est en lecture seule**
+Après la restauration de l'image clonezilla de mon se3, la partition racine était en lecture seule alors que l'image avait été vérifiée lors de la création. Il faut alors faire une vérification  avec `fsck` des disques.
+
+On forcera la vérification au reboot (avant le montage des disques).
+```
+shutdown -r -F now
+```
+Le disque devrait retrouver le mode read/write.
+
 ## Mise à niveau de Proxmox
-Comme indiqué précédement, il est déconseillé par proxmox de faire les mises àjour à partir du dépot "pve-no-subscription" car toutes les maj n'ont pas été testées/vérifiées à 100% .
+Comme indiqué précédement, il est déconseillé par proxmox (mais plusieurs collègues utilisent en prod le dépot sans le moindre problème) de faire les mises àjour à partir du dépot "pve-no-subscription" car toutes les maj n'ont pas été testées/vérifiées à 100% .
 Néanmoins, si promox subit une mise à niveau (passage de la version 5.1 vers la 5.2), alors on peut faire la mise à niveau car les paquets sont présents dans la nouvelle iso (et donc pour les entreprises).
 
 Par sécurité, on éteindra les VMS pour la mise à jour de PVE. Une sauvegarde complete des machines peut aussi être un gage de sécurité.
