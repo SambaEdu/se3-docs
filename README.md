@@ -80,6 +80,7 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 * Une brêve documentation pour [l'utilisation d'une session `screen`](dev-clients-linux/screen.md#utilisation-dune-session-screen)
 * Un petit memo concernant [reprepro](reprepro/memo.md#petit-memo-sur-reprepro)
 * Un petit memo prometteur pour [Ansible](dev-clients-linux/labs/ansible/tuto-ansible.md#petit-tutoriel-sur-ansible)
+* Intégration d'[un serveur Jupyterhub](se3-env/memo.md) utilisant le serveur LDAP de Se3  
 
 
 ## Autres documentations sur le projet `se3`
