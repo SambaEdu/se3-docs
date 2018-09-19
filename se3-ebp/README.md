@@ -3,7 +3,6 @@ Utilisation du PGI client-serveur EBP dans un environnement sambaedu 3/4
 
 **Ce tutoriel est à destination des professeurs ressources/administrateurs des réseaux pédagogiques pour la mise en place du serveur permettant l'utilisation en mode client/serveur.**
 
-*Article en cours de rédaction, donc non terminé.
 
 * [Présentation](#présentation)
 * [Mise en place du serveur Linux SQL](#mise-en-place-du-serveur-linux-sql)
