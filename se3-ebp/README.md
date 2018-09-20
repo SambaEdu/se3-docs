@@ -22,7 +22,7 @@ Utilisation du PGI client-serveur EBP dans un environnement sambaedu 3/4
      * [Utilisation de phpmyadmin](#utilisation-de-phpmyadmin)
 * [sauvegardes hebdomadaires des bases mysql](#sauvegardes-hebdomadaires-des-bases-mysql)
 ## Présentation
-EBP est un logiciel type PGI. Il peut être utilisé de façon `collaborative` en `mode client-serveur` avec la mise en place d'un serveur dédié. Un élève pourra donc travailler sur n'importe quel poste de l'établissement doté du client EBP.
+EBP est un logiciel propriétaire et payant de type PGI. Il peut être utilisé de façon `collaborative` en `mode client-serveur` avec la mise en place d'un serveur dédié. Un élève pourra donc travailler sur n'importe quel poste de l'établissement doté du client EBP.
 
 L'utilisation en établissement scolaire sous `SambaEdu` est parfaitement fonctionnelle et **pratique** grâce à ses lecteurs réseaux partagés sur lesquels seront placés les raccourcis vers les bases.
 
@@ -30,7 +30,7 @@ Ce document s'appuie sur le travail de Cristophe cessac (Christophe.cessac@ac-or
 
 IL ne sera **pas nécéssaire** d'utiliser un `Windows serveur` voir de créer `un autre domaine`,d'acheter plusieurs NAS qui ne permettent qu'à un petit nombre d'utilisateurs simultanés de travailler).
 
-**Principe**: On installera sur `un serveur dédié` une ditribution  `open-source` Linux Server (Débian ou Ubuntu) avec un moteur mysql. Ce serveur sera placé dans le réseau pédagogique au même titre que le `se3` et utilisera donc le **domaine existant.**
+**Principe**: On installera sur `un serveur dédié` une distribution  `open-source` Linux Server (Débian ou Ubuntu) avec un moteur MYSQL. Ce serveur sera placé dans le réseau pédagogique au même titre que le `se3` et utilisera donc le **domaine existant.**
 
 Il faudra créer ensuite au moins un compte utilisateur/administrateur de bases mysql. C'est ce compte qui sera utilisé par les professeurs pour uploader/dupliquer/supprimer les bases que les élèves vont utiliser.
 
@@ -41,12 +41,13 @@ L'upload de bases EBP se fera avec le client EBP. La suppression elle, pourra se
 ## Mise en place du serveur Linux SQL
 
 ### Quelques recommandations pour le serveur
-Les bases MySQL prennent beaucoup de place physique sur le serveur. Il faut donc prévoir un serveur muni d'un espace de stockage important. De même, les disques sont beaucoup solicités, on évitera les disques durs pour NAS. Des disques durs pour serveurs sont à favoriser.
+Les bases MySQL prennent beaucoup de place physique sur le serveur. Il faut donc prévoir un serveur muni d'un espace de stockage important. De même, les disques sont beaucoup solicités, on évitera les disques durs pour NAS. Des disques durs pour serveurs sont à favoriser (WD gold par exemple).
 On pourra prévoir de mettre des disques identiques en raid 10 (mode miroir) ou des disques ssd pro. 
-Dans notre lycée, le serveur possède 12 Go de RAM, ainsi que 4 disques serveurs de 1To chacun, ainsi qu'un SSD PRO servant de cache.
-On pourra aussi virtualiser le serveur avec Proxmox 5, ce qui permettra de faire facilement des sauvegardes/restaurations du serveur. L'utilisation de Proxmox est vraiment très simple.
+Dans notre lycée, le serveur possède 12 Go de RAM, ainsi que 4 disques serveurs de 1To chacun en raidz10, ainsi qu'un SSD PRO servant de cache.
+On pourra aussi virtualiser le serveur avec Proxmox 5, ce qui permettra de faire facilement des sauvegardes/restaurations complète du serveur ou des instantannés (snapshots). L'utilisation de Proxmox est **raiment très simple**. La mise en place du raidz10 est gérée par proxmox.
 
 Plus d'infos ici: https://github.com/SambaEdu/se3-docs/blob/master/se3-virtualisation/proxmox.md
+
 
 De même l'achat d'un disque du externe de capacité importante, ou l'utilisation d'un partage réseau permettra de sauvegarder les bases mysql en cas de panne du serveur ou de réinstallation (voir plus bas)
 
@@ -60,7 +61,7 @@ https://cdimage.debian.org/mirror/cdimage/archive/8.10.0/amd64/iso-cd/debian-8.1
 
 REMARQUE: La version **9** de Debian (stretch) a pour moteur mysql `Mariadb`. Il faut tester la compatibilité des bases  avec cette version. *(A venir)
 
-On gravera le fichier iso téléchargé sur un cd. Il suffira de booter sur le cd et de se laisser guider. Une installation par clef usb est également possible. L'iso doit être placée sur la clef à l'aide d'un logiciel comme **unetbootin** .
+On gravera le fichier iso téléchargé sur un cd. De nombreux outils permettent de faire cela, notamment sous windows (on fait un clic droit sur le fichier iso et on choisit "graver l'image".  Il suffira de booter sur le cd et de se laisser guider. Une installation par clef usb est également possible. L'iso doit être placée sur la clef à l'aide d'un logiciel comme **unetbootin** .
 
 -On choisir la mode d'installation **install** et non graphical install.
 ![01](images/install1.png)
