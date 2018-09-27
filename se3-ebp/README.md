@@ -34,7 +34,7 @@ IL ne sera **pas nécéssaire** d'utiliser un `Windows serveur` voir de créer `
 
 Il faudra créer ensuite au moins un compte utilisateur/administrateur de bases mysql. C'est ce compte qui sera utilisé par les professeurs pour uploader/dupliquer/supprimer les bases que les élèves vont utiliser.
 
-Les clients EBP sous  Windows se connecteront au serveur au moyen de raccourcis. Plusieurs élèves pourront ainsi travailler sur une même base de donnée et gérer chacun leur tâche de façon collaborative.
+Les clients EBP sous  Windows se connecteront au serveur au moyen de raccourcis. Plusieurs élèves pourront ainsi travailler sur une même base de données et gérer chacun leur tâche de façon collaborative.
 
 L'upload de bases EBP se fera avec le client EBP. La suppression elle, pourra se faire avec des outils graphiques sous Windows/linux, rendant la gestion par un professeur non initié à Linux **très simple**.
 
@@ -44,7 +44,8 @@ L'upload de bases EBP se fera avec le client EBP. La suppression elle, pourra se
 Les bases MySQL prennent beaucoup de place physique sur le serveur. Il faut donc prévoir un serveur muni d'un espace de stockage important. De même, les disques sont beaucoup solicités, on évitera les disques durs pour NAS. Des disques durs pour serveurs sont à favoriser (WD gold par exemple).
 On pourra prévoir de mettre des disques identiques en raid 10 (mode miroir) ou des disques ssd pro. 
 Dans notre lycée, le serveur possède 12 Go de RAM, ainsi que 4 disques serveurs de 1To chacun en raidz10, ainsi qu'un SSD PRO servant de cache.
-On pourra aussi virtualiser le serveur avec Proxmox 5, ce qui permettra de faire facilement des sauvegardes/restaurations complète du serveur ou des instantannés (snapshots). L'utilisation de Proxmox est **raiment très simple**. La mise en place du raidz10 est gérée par proxmox.
+
+On pourra surtout **virtualiser le serveur avec Proxmox 5**, ce qui permettra de faire facilement des sauvegardes/restaurations complètes du serveur ou des instantannés (snapshots). L'utilisation de Proxmox est **vraiment très simple**. La mise en place du raidz10 est gérée automatiquement par proxmox.Les performances sont très bonnes avec une telle configuration.
 
 Plus d'infos ici: https://github.com/SambaEdu/se3-docs/blob/master/se3-virtualisation/proxmox.md
 
