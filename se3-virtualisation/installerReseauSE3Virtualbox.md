@@ -320,7 +320,7 @@ Ou pour les moins courageux, télécharger celui-ci [Setup se3.zip](http://wiki.
 Sur `VirtualBox`, créer une nouvelle machine virtuelle en cliquant sur le bouton *Nouveau* avec les paramètres suivants :
 
 ```sh
-* Nom : SE3 | Type : Linux | Version : Debian (32-bit)
+* Nom : SE3 | Type : Linux | Version : Debian (32-bit pour l'iso i386 ou 64-bit pour l'iso amd64)
 * Ram : 2048 Mo
 * Créer un disque dur virtuel maintenant | VDI | Taille fixe | 80 Go
 ```
