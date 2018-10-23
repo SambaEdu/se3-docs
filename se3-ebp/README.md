@@ -11,6 +11,7 @@ Utilisation du PGI client-serveur EBP dans un environnement sambaedu 3/4
      * [Installation du moteur SQL](#installation-du-moteur-sql)
      * [Sécurisation du serveur MySQL](#sécurisation-du-serveur-mysql)
      * [Création d'un utilisateur pouvant lire et écrire dans les bases de données](#création-dun-utilisateur-pouvant-lire-et-écrire-dans-les-bases-de-données)
+     * [Augmentation du nombre de connexions simultannées](#augmentation-du-nombre-de-connexions-simultannées)
 * [Installation des clients EBP](#installation-des-clients-ebp)
 * [activation du logiciel](#activation-du-logiciel)
 * [Upload d'une base mysql avec le client sur le serveur](#upload-dune-base-mysql-avec-le-client-sur-le-serveur)
@@ -173,6 +174,22 @@ service mysql restart
 ```
 On peut tenter un accès depuis un ordinateur quelconque avec mysql-workbench ou phpmyadmin.
 
+### Augmentation du nombre de connexions simultannées
+Par défaut le nombre de connexions mysql est limité à 100. A priori la consultation d'une base de données provoque de multiples connexions à cause des différents modules impliqués. Il faut donc augmenter ce nombre de connexions pour éviter que les utilisateurs se retrouvent avec un message du genre "Too many connexions".
+
+```
+nano /etc/mysql/my.cnf
+```
+
+On ira jusqu'à la ligne :
+```
+#max_connections        = 100
+```
+Et décommente la ligne, puis on change par un nombre supérieur.
+
+```
+max_connections        = 1000
+```
 
 ## Installation des clients EBP
 
