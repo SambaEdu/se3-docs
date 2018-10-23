@@ -190,7 +190,10 @@ Et décommente la ligne, puis on change par un nombre supérieur.
 ```
 max_connections        = 1000
 ```
-
+On relance le service mysql.
+```
+service mysql restart
+```
 ## Installation des clients EBP
 
 Choisir le mode **Installation réseau**.
