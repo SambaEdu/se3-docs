@@ -356,6 +356,53 @@ Sur la capture d'écran, on peut voir à gauche la présence d'une base restaur�
 Pour supprimer cette base, il suffira de cliquer dessus, puis d'aller dans "Opérations" puis "Supprimer la base de données".
 ![14](images/phpmyadmin3.png)
 
+#### Limitations d'accès à phpmyadmin pour quelques postes
+
+Phpmyadmin peut être utilisé par quelqu'un qui chercherait le mot de passe mysql, il est donc préférable de limiter cet accès à quelques postes du réseau pédagogique, comme les postes profs, ou les ordinateurs de la salle des professeurs.
+
+Pour cela, on va éditer le fichier de configuration apache de phpmyadmin
+
+```
+nano /etc/apache2/conf-available/phpmyadmin.conf
+```
+
+On ajoute dans la première partie les limitations désirées:
+
+```
+<Directory /usr/share/phpmyadmin>
+    Options FollowSymLinks
+    DirectoryIndex index.php
+
+Order Allow,Deny
+#Accès au localhost
+Allow from 127.0.0.1
+#accès aux ordinateurs de la salle des professeurs 172.20.71.X
+Allow from 172.20.71.0/24
+Allow from 172.20.72.0/24
+#accès aux ordinateurs professeurs des salles concernées
+Allow from 172.20.1.98
+Allow from 172.20.2.98
+Allow from 172.20.3.98
+Allow from 172.20.4.98
+Allow from 172.20.5.98
+Allow from 172.20.6.98
+Allow from 172.20.7.98
+Allow from 172.20.8.98
+Allow from 172.20.146.98
+
+    <IfModule mod_php5.c>
+        <IfModule mod_mime.c>
+            AddType application/x-httpd-php .php
+        </IfModule>
+```
+
+On relance le service apache2
+
+```
+service apache2 restart
+```
+
+Normalement le service ne sera accessible que pour les ip concernées, les autres postes verront s'afficher un message du genre "acces denied".
 
 
 
