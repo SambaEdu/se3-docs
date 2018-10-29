@@ -195,6 +195,8 @@ On relance le service mysql.
 service mysql restart
 ```
 ## Installation des clients EBP
+### Installation manuelle.
+On lance chaque fichier executable l'un après l'autre. A chaque fois il faudra choisir le mode d'utilisation.
 
 Choisir le mode **Installation réseau**.
 ![24](images/client1.png)
@@ -202,6 +204,89 @@ Choisir le mode **Installation réseau**.
 Séléctionner ensuite le mode **client** seulement. 
 ![25](images/client2.png)
 
+### Installation automatique des clients EBP sur des parcs de machine.
+Un serveur Sambaedu3/4 possède le modle d'installation automatique de logiciels WPKG.
+Pour mettre en place l'instalaltion automatique, il faudra faire quelques opérations préliminaires:
+
+
+On va placer les fichiers d'installation dans la liste des packages. On pourra se connecter en admin, puis aller dans le lecteur Y:\unattended\install\packages. On va créer un répertoire EBP et placer dedans les différents fichiers d'installation ainsi que le fichier license.xml récuperé sur un poste lors d l'activation manuelle (voir la partie **Activation du logiciel**))
+On téléchargera le fichier **ebp.xml** sur un poste du réseau en utilisant l'adresse suivante: https://raw.githubusercontent.com/SambaEdu/se3-docs/master/se3-ebp/ebp.xml 'ne pas faire de copier/coller du cadre présent après. Il faudra modifier ce fichier avec un vrai éditeur de texte sous windows comme *Notepad++*, ou sous Linux avec *Kate ou Gedit*.
+Les modifications à apporter figurent dans le fichier xml.
+
+```
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<packages>
+<package id="ebp8" name="EBP8" revision="2016.5" reboot="false" priority="10" >
+  
+  <!--XML à adapter selon la version d'EBP:
+  Tous les fichiers d'installation sont à placer dans /var/se3/unattended/install/packages/EBP 
+  Il faut installer une fois chaque module sur un poste , procéder à l'activation manuelle ou automatique pour récupérer après le fichier c:\ProgramData\EBP\license.xml et le placer avec les autres fichiers d'installation.
+  
+  A chaque module installé on reperera le nom du répertoire créé dans C:\ProgramData, par exemple, lancer le fichier EBPOL_2016_LigneOL_Gestion_8_1_2_2749.exe a engendré la création du répertoire {75A98830-8AE3-4C16-9C3A-A0D3275CBCF6} qui va permettre la désinstallation du module
+  Il faudra donc adapter le xml avec le bon nom du répertoire ou la désinstallation ne fonctionnera pas.
+    
+  -->
+  
+
+        <variable name="EBPPackage" value="%Z%\packages\EBP" architecture="x86"/>
+        <variable name="EBPPackage" value="%Z%\packages\EBP" architecture="x64"/>
+        <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+        <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+        <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+        <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x64"/>
+        <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+        <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+        <variable name="ALLUSERS_BUREAU" value="%ALLUSERSPROFILE%\Bureau" os="5\.\d\.\d{4}"/>
+        <variable name="ALLUSERS_BUREAU" value="%PUBLIC%\Desktop" os="6\.\d\.\d{4}"/>
+
+        <check type="logical" condition="and">
+        <check type="file" condition="exists" path="%ProgramFiles%\EBP\Invoicing8.1FRFR40\EBP.Invoicing.Application.exe"/>
+    </check>
+<install include="remove" />
+
+<!--Installation de la gestion-->
+<install cmd='"%EBPPackage%\EBPOL_2016_LigneOL_Gestion_8_1_2_2749.exe"  /s      NETWORK=TRUE      PERSONALIZED=TRUE   WEBCHECKED=FALSE'/>
+<!-- remove du module gestion  -->
+<remove cmd='%ComSpec% /C if exist "%AllUsersProfile%\Application Data\{75A98830-8AE3-4C16-9C3A-A0D3275CBCF6}\setup.exe" "%AllUsersProfile%\Application Data\{75A98830-8AE3-4C16-9C3A-A0D3275CBCF6}\setup.exe" /S' />
+
+
+<!--Installation du module Immo-->
+<install cmd='"%EBPPackage%\EBPOL_2016_LigneOL_Immos_8_0_4_1283.exe"  /s      NETWORK=TRUE      PERSONALIZED=TRUE   WEBCHECKED=FALSE'/>
+<!-- remove du module Immo -->
+<remove cmd='%ComSpec% /C if exist "%AllUsersProfile%\Application Data\{CDA63203-244F-4100-BBD5-6D34949A94DD}\setup.exe" "%AllUsersProfile%\Application Data\{CDA63203-244F-4100-BBD5-6D34949A94DD}\setup.exe" /S' />
+
+
+<!--Installation du module Paye-->
+<install cmd='"%EBPPackage%\EBPOL_2016_LigneOL_Paye_8_1_6_5205.exe"  /s      NETWORK=TRUE      PERSONALIZED=TRUE   WEBCHECKED=FALSE'/>
+<!-- remove du module Paye -->
+<remove cmd='%ComSpec% /C if exist "%AllUsersProfile%\Application Data\{4E290B5D-F448-4815-9CEB-34F937C2C5D8}\setup.exe" "%AllUsersProfile%\Application Data\{4E290B5D-F448-4815-9CEB-34F937C2C5D8}\setup.exe" /S' />
+
+<!--Installation du module Etats financiers-->
+<install cmd='"%EBPPackage%\EBPOL_2016_PRO_EtatsFiEntreprises_9_0_7_1635.exe"  /s      NETWORK=TRUE      PERSONALIZED=TRUE   WEBCHECKED=FALSE'/>
+<!-- remove du module Etats financiers -->
+<remove cmd='%ComSpec% /C if exist "%AllUsersProfile%\Application Data\{4B73CA52-47C3-427F-8F81-6CD1E8129A31}\setup.exe" "%AllUsersProfile%\Application Data\{4B73CA52-47C3-427F-8F81-6CD1E8129A31}\setup.exe" /S' />
+
+<!--Installation du module Compta-->
+<install cmd='"%EBPPackage%\EBPOL_2016_LigneOL_Compta_8_0_5_5317.exe"  /s      NETWORK=TRUE      PERSONALIZED=TRUE   WEBCHECKED=FALSE'/>
+<!-- remove du module Compta -->
+<remove cmd='%ComSpec% /C if exist "%AllUsersProfile%\Application Data\{2AAC220F-7297-4753-B22B-13885223416C}\setup.exe" "%AllUsersProfile%\Application Data\{2AAC220F-7297-4753-B22B-13885223416C}\setup.exe" /S' />
+
+<!--Installation du module CRM-->
+<install cmd='"%EBPPackage%\EBPOL_2016_LigneOL_CRM_8_0_0_922.exe"  /s      NETWORK=TRUE      PERSONALIZED=TRUE   WEBCHECKED=FALSE'/>
+<!-- remove de  module CRM -->
+<remove cmd='%ComSpec% /C if exist "%AllUsersProfile%\Application Data\{0C44771D-16B6-4EE9-A5F9-5184D9B20189}\setup.exe" "%AllUsersProfile%\Application Data\{0C44771D-16B6-4EE9-A5F9-5184D9B20189}\setup.exe" /S' />
+
+<!--Copie du fichier de licence pour activation-->
+<install cmd='%ComSpec% /C copy /Y %EBPPackage%\license.xml %ProgramData%\EBP\license.xml '/>
+
+<!-- Suppression de l'outils EBP de mise à jour automatique -->
+<remove cmd='%ComSpec% /C if exist "%AllUsersProfile%\Application Data\{2F49A967-6C61-4A19-ABB6-2FC56D268174}\setup.exe" "%AllUsersProfile%\Application Data\{2F49A967-6C61-4A19-ABB6-2FC56D268174}\setup.exe" /S' />
+
+
+</package>
+</packages>
+```
+Il ne restera plus qu'à cocher EBP8 sur les parcs de machines pour que l'installation se fasse de façon silentieuse. 
 
 ## activation du logiciel
 
