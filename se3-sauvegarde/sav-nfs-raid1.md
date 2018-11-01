@@ -1,4 +1,4 @@
-Installation d'un partage nfs pour effectuer des sauvegardes **backuppc** , **par scripts** ou de **VM proxmox**.
+# Installation d'un partage nfs pour effectuer des sauvegardes **backuppc** , **par scripts** ou de **VM proxmox**.
 
 On ne le dira jamais assez, il est indispensable de faire des sauvagardes de ses données. L'idéal étant que les sauvegardes ne soient **pas dans le même espace physique que les serveurs** (en cas d'incendie, d'inondation,etc).
 
@@ -23,7 +23,7 @@ Il n'est pas du tout obligatoire de faire un raid logiciel (utiliser un raid raj
 
 
 
-# installation de la debian server 
+## installation de la debian server 
 * On boot avec un livecd netinstall debian stretch (https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.iso)
 * On choisit le mode avancé (pas graphical install qui est inutile pour un serveur).
 * On choisi le nom, mots de passe root et utilisateurs.
@@ -54,7 +54,7 @@ gateway 172.20.0.1
 ```
 On redémarrera le serveur pour que toute la config soit bien prise en compte.
 
-# Création du raid1 logiciel
+## Création du raid1 logiciel
 * On installe le paquet mdadm
 ```
 apt-get install mdadm
@@ -78,7 +78,7 @@ Il faut maintenant le formater .
 mkfs.ext4 /dev/md0
 ```
 
-# Montage du raid
+## Montage du raid
 ```
 mkdir /home/partage-nfs
 
@@ -107,7 +107,7 @@ sdc      8:32   0 100,6G  0 disk
 sr0     11:0    1  1024M  0 rom
 ```
 
-# Création du partage nfs
+## Création du partage nfs
 
 Il faut ajouter les sources non-free dans les paquets
 
@@ -154,9 +154,9 @@ Dans ce cas, on mettra dans le fichier/etc/export une ligne personnalisée pour 
 ```
 
 
-# Montage du partage nfs sur le se3 ou noeud proxmox
+## Montage du partage nfs sur le se3 ou noeud proxmox
 
-## Montage du partage nfs pour backuppc
+### Montage du partage nfs pour backuppc
 Sur le se3, on fera le montage de façon manuelle pour voir si le partage fonctionne.
 ```
 mount -t nfs 172.20.0.6:/home/partage-nfs /var/lib/backuppc/
@@ -181,7 +181,7 @@ On doit remettre les bons droits à backuppc
 chown -R backuppc:backuppc /var/lib/backuppc
 chmod -R 775 /var/lib/backuppc
 ```
-## utilisation du partage nfs pour Proxmox
+### utilisation du partage nfs pour Proxmox
 On ira dans l'interface proxmox. Ajout stokage > NFS>
 ID: partage-nfs (ou ce que vous voulez!)
 serveur: ip du partage nfs
