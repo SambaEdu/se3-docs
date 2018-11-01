@@ -13,6 +13,8 @@ Utilisation du PGI client-serveur EBP dans un environnement sambaedu 3/4
      * [Création d'un utilisateur pouvant lire et écrire dans les bases de données](#création-dun-utilisateur-pouvant-lire-et-écrire-dans-les-bases-de-données)
      * [Augmentation du nombre de connexions simultannées](#augmentation-du-nombre-de-connexions-simultannées)
 * [Installation des clients EBP](#installation-des-clients-ebp)
+      * [Installation manuelle.](#installation-manuelle)
+      * [Installation automatique des clients EBP sur des parcs de machine par WPKG](installation-automatique-des-clients-ebp-sur-des-parcs-de-machine-par-wpkg)
 * [activation du logiciel](#activation-du-logiciel)
 * [Upload d'une base mysql avec le client sur le serveur](#upload-dune-base-mysql-avec-le-client-sur-le-serveur)
 * [Création et gestion des raccourcis](#création-et-gestion-des-raccourcis) 
@@ -204,12 +206,14 @@ Choisir le mode **Installation réseau**.
 Séléctionner ensuite le mode **client** seulement. 
 ![25](images/client2.png)
 
-### Installation automatique des clients EBP sur des parcs de machine.
+### Installation automatique des clients EBP sur des parcs de machine par WPKG.
 Un serveur Sambaedu3/4 possède le modle d'installation automatique de logiciels WPKG.
 Pour mettre en place l'instalaltion automatique, il faudra faire quelques opérations préliminaires:
 
 
 On va placer les fichiers d'installation dans la liste des packages. On pourra se connecter en admin, puis aller dans le lecteur Y:\unattended\install\packages. On va créer un répertoire EBP et placer dedans les différents fichiers d'installation ainsi que le fichier license.xml récuperé sur un poste lors d l'activation manuelle (voir la partie **Activation du logiciel**))
+
+
 On téléchargera le fichier **ebp.xml** sur un poste du réseau en utilisant l'adresse suivante: https://raw.githubusercontent.com/SambaEdu/se3-docs/master/se3-ebp/ebp.xml 'ne pas faire de copier/coller du cadre présent après. Il faudra modifier ce fichier avec un vrai éditeur de texte sous windows comme *Notepad++*, ou sous Linux avec *Kate ou Gedit*.
 Les modifications à apporter figurent dans le fichier xml.
 
@@ -286,7 +290,7 @@ Les modifications à apporter figurent dans le fichier xml.
 </package>
 </packages>
 ```
-Il ne restera plus qu'à cocher EBP8 sur les parcs de machines pour que l'installation se fasse de façon silentieuse. 
+Il ne restera plus qu'à ajouter le fichier xml modifié dans l'interface du SE3/4 puis cocher EBP8 sur les parcs de machines pour que l'installation se fasse de façon silentieuse. 
 
 ## activation du logiciel
 
@@ -492,35 +496,53 @@ Normalement le service ne sera accessible que pour les ip concernées, les autre
 
 
 
-## sauvegardes hebdomadaires des bases mysql
+## sauvegardes hebdomadaires des bases mysql.
+
+Il est indispensable de mettre au point une sauvegarde des bases MYSQL en cas de crash disque, ou de serveur défaillant.
+Pour cela, on va lancer un script qui fera un export/compression des bases mysql sur un support externe.
+
 On va créer un répertoire savmysql à la racine du disque.
 ```
 mkdir /savmysql
 ```
-Ce répertoire va servir de point de montage d'un disque dur externe, interne, partage samba, nas...
+Ce répertoire va servir de point de montage d'un disque dur externe, interne, partage samba,ntfs sur nas/serveur de sauvegarde...
+Ainsi, lorsqu'on écrira dans le répertoire /savmysql, les données seront écrites sur le support de sauvegarde.
 
-On peut créer un script contenant ces lignes. Ce script appelé savmysql est placé dans /root et doit être executable
-```cd /root
-touch savmysql.sh
-chmod u+x /root/savmysql.sh
-```
+On pourra aller voir cet article pour mettre en place un tel serveur de sauvegarde: 
+https://github.com/SambaEdu/se3-docs/blob/master/se3-sauvegarde/sav-nfs-raid1.md
 
-Dans l'exemple décrit en dessous, un partage réseau est monté dans le répertoire savmysql. Le login/mdp du partage est placé dans un fichier credential.
 
-Montage d'un partage samba
+On peut créer un script contenant ces lignes. Ce script appelé savmysql est placé dans /root et doit être executable.
+
+
+**Montage d'un partage samba
 ```
 mount -t cifs //172.20.0.11/savmysql /savmysql 
 ```
-Login et mdp seront demandés pour accéder au partage.
+*Login et mdp seront demandés pour accéder au partage.
+
+On peut supprimer l'interactivité du montage en ajoutant:
+```
+mount -t cifs mount -t cifs -o username=utilisateur,password=motdepasse //172.20.0.11/savmysql /savmysql 
+```
 
 On peut évidemment remplacer le partage samba par un disque due externe USB (par exemple /dev/sdg1)
 ```
 mount -t auto /dev/sdg1 /savmysql
 ```
-On pourra également utiliser un partage NFS. Un grand nombre de tutoriels expliquent comment mettre cela en place.
+On pourra également utiliser un partage NFS, avec une restriction d'ip pour que seul le serveur mysql puisse accéder au serveur de sauvegarde.
+
 
 
 **Contenu du script de sauvegarde**
+
+On peut créer un script contenant ces lignes. Ce script appelé savmysql est placé dans /root et doit être executable.
+```
+cd /root
+touch savmysql.sh
+chmod u+x /root/savmysql.sh
+```
+
 on édite le fichier
 ```
 nano /root/savmysql.sh
@@ -547,13 +569,15 @@ On ajoute en bas du fichier:
 0 4 * * 0 /root/savmysql
 ```
 Maintenant, le script est lancé tous les dimanches à 4h00 du matin. Vous disposez donc d'une sauvegarde complète hebdomadaire.
-Il faudra de temps en temps en supprimer quelques unes ou le disque sera saturé (même si la compression est ici très eficace).
+Il faudra de temps en temps en supprimer quelques unes ou le disque sera saturé (même si la compression est ici très efficace).
+
+En cas d'installation d'un nouveau serveur, il suffit de refaire une installation avec les mêmes paramêtres (nom netbios,ip, montage du point de sauvegarde sur /savmysql.
 
 Les bases, une fois décompressées (unzip nomdufichier.zip) pourront être restaurées avec cette commande.
 
 ```
 mysql --user=adminmysql --password=mysql123 < fichier_source.sql
 ```
-L'opération sera très longue, mais efficace. Vu la taille des sauvegardes, il faut mieux faire cette restauration en ligne de commande (CLI) plutôt qu'avec des outils graphiques. (risques d'erreurs/plantages plus importants).
+L'opération sera TRES longue (plus de 24 heures avec les bases du lycée lors du changement de serveur), mais efficace. Vu la taille des sauvegardes (plusieurs centaines de Go), il faut mieux faire cette restauration en ligne de commande (CLI) plutôt qu'avec des outils graphiques. (risques d'erreurs/plantages plus importants).
 
 
