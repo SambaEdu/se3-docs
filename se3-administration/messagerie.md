@@ -4,6 +4,7 @@
 * [Configuration via l'interface `web`](#configuration-via-linterface-web)
 * [Cas de certains FAI refusant les envois de mails par root](#cas-de-certains-fai-refusant-les-envois-de-mails-par-root)
 * [Vérification](#vérification)
+* [Envoi de mails à deux adresses](#envoi-de-mail-à-deux-adresses)
 
 ## Des infos à recueillir
 
@@ -66,3 +67,15 @@ Pour recevoir un mail immédiatement à une adresse donnée, on pourra aussi lan
 echo "test" | mail mon@dresse.tld
 ```
 
+## Envoi de mails à deux adresses
+Le se3 peut envoyer un mail à deux adresses. Pour cela il faut éditer le fichier de configuration en ligne de commande sur le serveur.
+```
+nano /etc/ssmtp/ssmtp.conf 
+```
+On ajoute alors une deuxième après la premièer indiquant la deuxième adresse mail de root.
+
+```
+root=addresse1@mail.com
+root=addresse2@mail.com
+```
+**ATTENTION**: Il ne faut plus aller dans la partie "configuration de mails" de l'interface, la moindre validation (même sans changement) écrase le fichie de configuration, il faut alors de nouveau faire l'opération.
