@@ -126,6 +126,8 @@ Dans le cas d'un serveur Sambaedu, la config en miroir raid10 est la meilleure. 
 
 L'installation est **très** simple: très peu de choses sont demandées. On regrêtera cependant le peu de choix concernant le partionnement du serveur.
 
+Avant de procéder à l'installation, il est IMPERATIF de vérifier que l'option VT-Technologie est activée. Dans le cas contraire, il ne sera pas possible de démarrer des machines en 64 bits.
+
 Dans l'installation présentée ici, il y a trois disques dur:
 
 sda 500 Go
