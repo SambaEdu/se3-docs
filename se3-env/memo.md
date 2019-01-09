@@ -4,32 +4,7 @@
 
 - Installation de l'authenticator **jupyterhub-ldap-authenticator**  ([doc ici](https://github.com/hansohn/jupyterhub-ldap-authenticator))
 
-- Le filtrage par groupe n'est pas compatible avec la version du LDAP de SE3. Patchez pour le désactiver (sauf si cette [pull request](https://github.com/hansohn/jupyterhub-ldap-authenticator/pull/1) a été acceptée et que l'option `LDAPAuthenticator.filter_by_group` est disponible). 
-
-  La méthode est la suivante :
-
-  - Trouvez la localisation du fichier `ldapauthenticator.py` (par exemple en utilisant la commande `pip show jupyterhub-ldap-authenticator`, dans mon cas il se trouve là : `/etc/miniconda3/lib/python3.6/site-packages/ldapauthenticator`)
-
-  - Ajoutez le paramètre `filter_by_group` en début de fichier, parmi les autres déclarations d'arguments : 
-
-    ```python
-        filter_by_group = Bool(
-            default_value=True,
-            config=True,
-            help="""
-            Boolean specifying if the group membership filtering is enabled or not.
-            """
-        )
-    ```
-
-  - Dans la fonction principale du fichier (*authenticate*), identifiez le morceau du code utilisé pour vérifier l'appartenance à un group ldap, et ajoutez-y la vérification du paramètre nouvellement ajouté :
-
-    ```python
-     # is authenticating user a member of permitted_groups
-    allowed_memberships = 	list(set(auth_user_memberships).intersection(permitted_groups))
-    if bool(allowed_memberships) or not self.filter_by_group:
-    	self.log.debug("User '%s' found in the following allowed ldap groups %s. Proceeding with authentication.",username, allowed_memberships)
-    ```
+- UPDATE : Le filtrage par groupe est maintenant compatible avec la version du LDAP de SE3. 
 
 - Modifiez le fichier de configuration de Jupyterhub pour y ajouter les paramètres du **jupyterhub-ldap-authenticator** :
 
@@ -45,7 +20,7 @@
   c.LDAPAuthenticator.bind_user_password = "motdepasse"
   c.LDAPAuthenticator.user_search_base = "dc=9730235T,dc=ac-guyane,dc=fr"
   c.LDAPAuthenticator.user_search_filter = "(&(objectClass=person)(uid={username}))"
-  c.LDAPAuthenticator.filter_by_group = False 
+  c.LDAPAuthenticator.allowed_groups = None 
   c.LDAPAuthenticator.user_membership_attribute = 'uid'
   c.LDAPAuthenticator.create_user_home_dir = True
   c.LDAPAuthenticator.create_user_home_dir_cmd = ["mkhomedir_helper"]
