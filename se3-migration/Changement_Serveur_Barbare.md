@@ -26,6 +26,7 @@ sdb      8:16   0     1T  0 disk
 └─sdb1   8:17   0  1024G  0 part /home
 sdc      8:32   0     1T  0 disk 
 └─sdc1   8:33   0  1024G  0 part /var/se3
+```
 
 Première chose, récupérer un LiveCD de Debian Wheezy (la même version que le Se3 en prod) [http://cdimage.debian.org/mirror/cdimage/archive/7.11.0-live/amd64/iso-hybrid/debian-live-7.11.0-amd64-gnome-desktop.iso](URL)
 
