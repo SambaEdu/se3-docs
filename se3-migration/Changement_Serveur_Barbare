@@ -58,10 +58,10 @@ Créer un fichier d'exclusion `/root/exclure` contenant :
 /lost+found
 ```
 Récupérer les données des home :
-rsync -av --del root@IP_SE3_EN_PROD:/home/ /:mnt/home (c'est long)
+rsync -av --del root@IP_SE3_EN_PROD:/home/ /mnt/home (c'est long)
 
 Récupérer les données de /var/se3 :
-rsync -av --del root@IP_SE3_EN_PROD:/var/se3/ /:mnt/varse3 (c'est long)
+rsync -av --del root@IP_SE3_EN_PROD:/var/se3/ /mnt/varse3 (c'est long)
 
 Récupérer le système
 rsync -av --del --exclude-from=/root/exclure root@IP_SE3_EN_PROD:/ /mnt/racine
