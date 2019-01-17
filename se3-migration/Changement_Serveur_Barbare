@@ -19,30 +19,13 @@ sdb      8:16   0   2,7T  0 disk
 ```
 
 Sur le serveur migré :
-<<<<<<< HEAD
 ```
-sda      8:0    0 465,8G  0 disk 
-└─sda1   8:3    0  93,1G  0 part /
-sdb      8:16   0   2,7T  0 disk 
-└─sdb1   8:18   0   1,4T  0 part /home
-sdc      8:16   0   2,7T  0 disk 
-└─sdc1   8:18   0   1,4T  0 part /var/se3
-```
-||||||| merged common ancestors
-sda      8:0    0 465,8G  0 disk 
-└─sda1   8:3    0  93,1G  0 part /
-sdb      8:16   0   2,7T  0 disk 
-└─sdb1   8:18   0   1,4T  0 part /home
-sdc      8:16   0   2,7T  0 disk 
-└─sdc1   8:18   0   1,4T  0 part /var/se3
-=======
 sda      8:0    0    32G  0 disk 
 └─sda1   8:1    0    32G  0 part /
 sdb      8:16   0     1T  0 disk 
 └─sdb1   8:17   0  1024G  0 part /home
 sdc      8:32   0     1T  0 disk 
 └─sdc1   8:33   0  1024G  0 part /var/se3
->>>>>>> 350bad020fe2abd89178b5c847ccd825c94bad9d
 
 Première chose, récupérer un LiveCD de Debian Wheezy (la même version que le Se3 en prod) [http://cdimage.debian.org/mirror/cdimage/archive/7.11.0-live/amd64/iso-hybrid/debian-live-7.11.0-amd64-gnome-desktop.iso](URL)
 
@@ -86,22 +69,10 @@ Créer un fichier d'exclusion `/root/exclure` contenant :
 ```
 
 Récupérer les données des home :
-<<<<<<< HEAD
 
 `rsync -av --del root@IP_SE3_EN_PROD:/home/ /mnt/home` (c'est long : aller bouffer ou prendre un café.)
-||||||| merged common ancestors
-rsync -av --del root@IP_SE3_EN_PROD:/home/ /:mnt/home (c'est long)
-=======
-rsync -av --del root@IP_SE3_EN_PROD:/home/ /mnt/home (c'est long)
->>>>>>> 350bad020fe2abd89178b5c847ccd825c94bad9d
 
 Récupérer les données de /var/se3 :
-<<<<<<< HEAD
-||||||| merged common ancestors
-rsync -av --del root@IP_SE3_EN_PROD:/var/se3/ /:mnt/varse3 (c'est long)
-=======
-rsync -av --del root@IP_SE3_EN_PROD:/var/se3/ /mnt/varse3 (c'est long)
->>>>>>> 350bad020fe2abd89178b5c847ccd825c94bad9d
 
 `rsync -av --del root@IP_SE3_EN_PROD:/var/se3/ /mnt/varse3` (c'est long : aller bouffer ou prendre un café.)
 
