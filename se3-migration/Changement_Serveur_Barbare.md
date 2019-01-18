@@ -82,11 +82,14 @@ Récupérer le système :
 
 `rsync -av --del --exclude-from=/root/exclure root@IP_SE3_EN_PROD:/ /mnt/racine`
 
-Créer dans /mnt/racine/ les répertoires manquants listés dans /root/exclure
-`mkdir /mnt/racine/home`
+Créer dans /mnt/racine/ les répertoires manquants listés dans `/root/exclure`
+```
+mkdir /mnt/racine/home
+```
 ... etc.
 
 Modifier le fstab
+
 Ouvrir une seconde console pour afficher les UUID des disques avec `blkid`
 
 Modifier le fichier `/mnt/racine/etc/fstab` en conséquence
