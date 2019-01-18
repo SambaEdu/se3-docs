@@ -61,6 +61,7 @@ Créer un fichier d'exclusion `/root/exclure` contenant :
 /home
 /var/se3
 /var/lib/backuppc
+/sauvese3
 /proc
 /sys
 /dev
