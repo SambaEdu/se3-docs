@@ -1,8 +1,6 @@
 # Changement de serveur "à la barbare"
 
-[en cours de rédaction]
-
-Voici le descriptif d'une méthode barbare pour migrer un Se3 d'un serveur physique à un autre.
+Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) pour migrer un Se3 d'un serveur physique à un autre.
 
 Cette méthode a été utilisée pour migrer un serveur SambaÉdu3 d'un serveur physique vers une machine virtuelle sous Proxmox, avec réorganisation des disques et partitions, mais sans réinstallation du système.
 
