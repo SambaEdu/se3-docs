@@ -31,9 +31,10 @@ Première chose, récupérer un LiveCD de Debian Wheezy (la même version que le
 Créer la VM sous Proxmox, avec les 3 disques sda, sdb et sdc
 
 Booter sur le LiveCD
+
 Passer le clavier en fr
-Désactiver la mise en veille
-(pour info, utilisateur : `user`, mot de passe : `live`)
+
+Désactiver la mise en veille (pour info, utilisateur : `user`, mot de passe : `live`)
 
 Ouvrir une console root
 
@@ -116,7 +117,6 @@ Chrooter :
 chroot /mnt/racine
 ```
 
-
 Mettre à jour Grub :
 ```
 update-grub
@@ -142,8 +142,28 @@ umount /mnt/racine/var/se3
 umount /mnt/racine
 ```
 
-Débrancher ou éteindre le serveur physique
+Débrancher (la prise réseau) ou éteindre le serveur physique. Attention : les deux serveurs ont le même nom, la même adresse IP, etc.
 
 Redémarrer la VM contenant le nouveau serveur
 
 Boire une bonne petite bière bien fraîche.
+
+[Edit]
+Pour le moment, le seul effet de bord constaté a été la difficulté de démarrer le service freeradius (authentification wifi du paquet se3-radius). Problème de propriétaire (sans doute parce que le groupe ssl-cert n'existe pas sur le livecd, rsync a utilisé mysql à la place).
+
+Constat :
+```
+# ls -alh /etc/ssl/private/ssl-cert-snakeoil.key 
+-rw-r----- 1 root mysql 1,7K nov.  13  2017 /etc/ssl/private/ssl-cert-snakeoil.key
+
+# ls -alh /etc/ssl/ | grep mysql
+drwx--x---   2 root mysql 4,0K nov.  13  2017 private
+```
+
+Résolution :
+```
+chown root:ssl-cert /etc/ssl/private
+chown root:ssl-cert /etc/ssl/private/ssl-cert-snakeoil.key 
+service freeradius start
+```
+
