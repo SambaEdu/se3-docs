@@ -15,6 +15,7 @@ sdb      8:16   0   2,7T  0 disk
 ├─sdb1   8:17   0   1,4T  0 part /home
 └─sdb2   8:18   0   1,4T  0 part /var/se3
 ```
+Note : `/var/lib/backuppc` et `/sauvese3/` sont montés sur des NAS externes.
 
 Sur le serveur migré :
 ```
