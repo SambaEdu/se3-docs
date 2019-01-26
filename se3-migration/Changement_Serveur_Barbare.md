@@ -1,8 +1,6 @@
 # Changement de serveur "à la barbare"
 
-[en cours de rédaction]
-
-Voici le descriptif d'une méthode barbare pour migrer un Se3 d'un serveur physique à un autre.
+Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) pour migrer un Se3 d'un serveur physique à un autre.
 
 Cette méthode a été utilisée pour migrer un serveur SambaÉdu3 d'un serveur physique vers une machine virtuelle sous Proxmox, avec réorganisation des disques et partitions, mais sans réinstallation du système.
 
@@ -17,6 +15,7 @@ sdb      8:16   0   2,7T  0 disk
 ├─sdb1   8:17   0   1,4T  0 part /home
 └─sdb2   8:18   0   1,4T  0 part /var/se3
 ```
+Note : `/var/lib/backuppc` et `/sauvese3/` sont montés sur des NAS externes.
 
 Sur le serveur migré :
 ```
@@ -33,9 +32,10 @@ Première chose, récupérer un LiveCD de Debian Wheezy (la même version que le
 Créer la VM sous Proxmox, avec les 3 disques sda, sdb et sdc
 
 Booter sur le LiveCD
+
 Passer le clavier en fr
-Désactiver la mise en veille
-(pour info, utilisateur : `user`, mot de passe : `live`)
+
+Désactiver la mise en veille (pour info, utilisateur : `user`, mot de passe : `live`)
 
 Ouvrir une console root
 
@@ -61,6 +61,7 @@ Créer un fichier d'exclusion `/root/exclure` contenant :
 /home
 /var/se3
 /var/lib/backuppc
+/sauvese3
 /proc
 /sys
 /dev
@@ -81,11 +82,14 @@ Récupérer le système :
 
 `rsync -av --del --exclude-from=/root/exclure root@IP_SE3_EN_PROD:/ /mnt/racine`
 
-Créer dans /mnt/racine/ les répertoires manquants listés dans /root/exclure
-`mkdir /mnt/racine/home`
+Créer dans /mnt/racine/ les répertoires manquants listés dans `/root/exclure`
+```
+mkdir /mnt/racine/home
+```
 ... etc.
 
 Modifier le fstab
+
 Ouvrir une seconde console pour afficher les UUID des disques avec `blkid`
 
 Modifier le fichier `/mnt/racine/etc/fstab` en conséquence
@@ -114,7 +118,6 @@ Chrooter :
 chroot /mnt/racine
 ```
 
-
 Mettre à jour Grub :
 ```
 update-grub
@@ -140,8 +143,28 @@ umount /mnt/racine/var/se3
 umount /mnt/racine
 ```
 
-Débrancher ou éteindre le serveur physique
+Débrancher (la prise réseau) ou éteindre le serveur physique. Attention : les deux serveurs ont le même nom, la même adresse IP, etc.
 
 Redémarrer la VM contenant le nouveau serveur
 
 Boire une bonne petite bière bien fraîche.
+
+[Edit]
+Pour le moment, le seul effet de bord constaté a été la difficulté de démarrer le service freeradius (authentification wifi du paquet se3-radius). Problème de propriétaire (sans doute parce que le groupe ssl-cert n'existe pas sur le livecd, rsync a utilisé mysql à la place).
+
+Constat :
+```
+# ls -alh /etc/ssl/private/ssl-cert-snakeoil.key 
+-rw-r----- 1 root mysql 1,7K nov.  13  2017 /etc/ssl/private/ssl-cert-snakeoil.key
+
+# ls -alh /etc/ssl/ | grep mysql
+drwx--x---   2 root mysql 4,0K nov.  13  2017 private
+```
+
+Résolution :
+```
+chown root:ssl-cert /etc/ssl/private
+chown root:ssl-cert /etc/ssl/private/ssl-cert-snakeoil.key 
+service freeradius start
+```
+
