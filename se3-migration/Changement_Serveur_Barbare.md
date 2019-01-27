@@ -97,6 +97,8 @@ mkdir /mnt/racine/media
 mkdir /mnt/racine/lost+found
 ```
 
+## Finaliser
+
 * Modifier le fstab
 
     * Ouvrir une seconde console pour afficher les UUID des disques avec `blkid`
@@ -151,6 +153,8 @@ umount /mnt/racine/home
 umount /mnt/racine/var/se3
 umount /mnt/racine
 ```
+
+## (Re)Démarrage
 
 * Débrancher (la prise réseau) ou éteindre le serveur physique. Attention : les deux serveurs ont le même nom, la même adresse IP, etc.
 
