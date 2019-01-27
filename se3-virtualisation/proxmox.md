@@ -46,19 +46,20 @@ Mise en place de la virtualisation de nouveaux serveurs et/ou serveurs existants
 
 ## Présentation
 
-Proxmox 5 (version actuelle 5.2) est un puissant système libre (le support est néanmoins payant) de virtualisation basé sur Debian et qui utilise l'hyperviseur KVM (pour de la virtualisation complète), ou des containeurs lxc Il permet à la façon de virtualbox (mais cette fois pour un usage pro) de créer des  snapshots de machine, des sauvegardes complètes et beaucoup d'autres fonctionnalités. 
+Proxmox 5 (version actuelle 5.3) est un puissant système libre (le support est néanmoins payant) de virtualisation basé sur Debian et qui utilise l'hyperviseur KVM (pour de la virtualisation complète), ou des containeurs lxc Il permet à la façon de virtualbox (mais cette fois pour un usage pro) de créer des  snapshots de machine, des sauvegardes complètes et beaucoup d'autres fonctionnalités. 
 
 Le serveur et les vms peuvent se gérer à partir d'une **interface web**, et une gestion possible des comptes utilisateurs va permettre de laisser à des tiers un accès avec plus ou moins de droits sur une machine (comme le serveur bcdi par exemple).  
 
 L'installation pourra se faire avec les paquets proxmox, mais il sera bien plus pratique d'utiliser l'iso toute faite sur le site officiel de proxmox:
 
-https://www.proxmox.com/en/downloads/item/proxmox-ve-5-2-iso-installer
+https://www.proxmox.com/en/downloads/item/proxmox-ve-5-3-iso-installer
 
 Virtualiser un serveur va avoir plusieurs avantages:
 Le premier sera de pouvoir installer plusieurs serveurs sur un même machine physique. On utilise donc pleinement les capacités physiques de son serveur.
 Le deuxième sera de pouvoir faire des sauvegardes/restauration complètes ou partielles de machines. On pourra donc facilement revenir en arrière en cas de problème, ou déplacer une machine virtuelle d'un serveur physique vers un autre.
 
 ## Matériel
+Pour utiliser la virtualisation avec Proxmox, le serveur devra posseder quelques caracteristiques physiques, comme la présence de mémoire en quantité importante. Promox n'utilise qu'environ 1 à 3 % des ressources. Un minimum de 12 Go de RAM est à envisager.
 
 ### Controleurs disques
 
@@ -621,6 +622,12 @@ https://github.com/SambaEdu/se3-docs/blob/master/se3-sauvegarde/clonerse3.md
 
 De nombreux périphériques vont être détectés au démarrage, ce qui est normal.Voilà, le serveur physique est maintenant virtualisé.
 Il sera judicieux de faire aussitôt une sauvegarde complète, ainsi qu'un snpashot de ce serveur.
+
+### **migration d'un serveur existant vers un nouveau serveur**.
+Cette methode présente l'avantage de ne pas devoir éteindre le se3. La mise en place de la virtualisation va donc se faire sans coupure de service.
+
+Principe: on installe proxmox sur un nouveau serveur. On créé une vm démarrée avec un livecd wheezy, puis on va faire un rsync des partitions du se3 vers le nouveau serveur. Après quelques opérations courantes comme la mise en place du grub via un chroot, le nouveau serveur est près à partir. 
+https://github.com/SambaEdu/se3-docs/blob/master/se3-migration/Changement_Serveur_Barbare.md
 
 ### **Problèmes possibles**
 
