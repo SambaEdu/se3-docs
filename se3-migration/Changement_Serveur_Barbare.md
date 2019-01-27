@@ -4,6 +4,8 @@ Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) p
 
 Cette méthode a été utilisée pour migrer un serveur SambaÉdu3 d'un serveur physique vers une machine virtuelle sous Proxmox, avec réorganisation des disques et partitions, mais sans réinstallation du système.
 
+Elle est largement inspirée de la méthode décrite ici : https://wiki.debian-fr.xyz/Restauration_ou_Reconstruction_de_sa_Debian_-_Racine_et_Home_s%C3%A9par%C3%A9s
+
 * Sur le serveur de départ :
 ```
 sda      8:0    0 465,8G  0 disk 
