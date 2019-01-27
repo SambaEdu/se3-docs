@@ -4,8 +4,7 @@ Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) p
 
 Cette méthode a été utilisée pour migrer un serveur SambaÉdu3 d'un serveur physique vers une machine virtuelle sous Proxmox, avec réorganisation des disques et partitions, mais sans réinstallation du système.
 
-Sur le serveur de départ :
-
+* Sur le serveur de départ :
 ```
 sda      8:0    0 465,8G  0 disk 
 ├─sda1   8:1    0  18,6G  0 part [SWAP]
@@ -15,9 +14,8 @@ sdb      8:16   0   2,7T  0 disk
 ├─sdb1   8:17   0   1,4T  0 part /home
 └─sdb2   8:18   0   1,4T  0 part /var/se3
 ```
-Note : `/var/lib/backuppc` et `/sauvese3/` sont montés sur des NAS externes.
 
-Sur le serveur migré :
+* Sur le serveur migré :
 ```
 sda      8:0    0    32G  0 disk 
 └─sda1   8:1    0    32G  0 part /
@@ -27,26 +25,29 @@ sdc      8:32   0     1T  0 disk
 └─sdc1   8:33   0  1024G  0 part /var/se3
 ```
 
+Note : dans les deux cas, `/var/lib/backuppc` et `/sauvese3/` sont montés sur des NAS externes depuis le `fstab`.
+
+## Préparer la machine cible
 Première chose, récupérer un LiveCD de Debian Wheezy (la même version que le Se3 en prod) [http://cdimage.debian.org/mirror/cdimage/archive/7.11.0-live/amd64/iso-hybrid/debian-live-7.11.0-amd64-gnome-desktop.iso](URL)
 
-Créer la VM sous Proxmox, avec les 3 disques sda, sdb et sdc
+* Créer la VM sous Proxmox, avec les 3 disques sda, sdb et sdc
 
-Booter sur le LiveCD
+* Booter sur le LiveCD
 
-Passer le clavier en fr
+* Passer le clavier en fr
 
-Désactiver la mise en veille (pour info, utilisateur : `user`, mot de passe : `live`)
+* Désactiver la mise en veille (pour info, utilisateur : `user`, mot de passe : `live`)
 
-Ouvrir une console root
+* Ouvrir une console root
 
-Formater les disques
+* Formater les disques
 ```
 mkfs.ext4 /dev/sda
 mkfs.xfs /dev/sdb
 mkfs.xfs /dev/sdc
 ```
 
-Monter les disques
+* Monter les disques
 ```
 mkdir /mnt/racine
 mkdir /mnt/home
@@ -56,7 +57,7 @@ mount /dev/sdb1 /mnt/home
 mount /dev/sdc1 /mnt/varse3
 ```
 
-Créer un fichier d'exclusion `/root/exclure` contenant :
+* Créer un fichier d'exclusion `/root/exclure` contenant :
 ```
 /home
 /var/se3
@@ -69,71 +70,79 @@ Créer un fichier d'exclusion `/root/exclure` contenant :
 /media
 /lost+found
 ```
+## Récupérer les données
+* Récupérer les données des home :
 
-Récupérer les données des home :
+`rsync -av --del root@IP_SE3_EN_PROD:/home/ /mnt/home` (c'est trèèès long : on pourra lancer cette commande une première fois bien en amont de la migration, et la relancer une dernière fois juste avant la migration.)
 
-`rsync -av --del root@IP_SE3_EN_PROD:/home/ /mnt/home` (c'est long : aller bouffer ou prendre un café.)
+* Récupérer les données de /var/se3 :
 
-Récupérer les données de /var/se3 :
+`rsync -av --del root@IP_SE3_EN_PROD:/var/se3/ /mnt/varse3` (c'est trèèès long : on pourra lancer cette commande une première fois bien en amont de la migration, et la relancer une dernière fois juste avant la migration.)
 
-`rsync -av --del root@IP_SE3_EN_PROD:/var/se3/ /mnt/varse3` (c'est long : aller bouffer ou prendre un café.)
-
-Récupérer le système :
+* Récupérer le système :
 
 `rsync -av --del --exclude-from=/root/exclure root@IP_SE3_EN_PROD:/ /mnt/racine`
 
-Créer dans /mnt/racine/ les répertoires manquants listés dans `/root/exclure`
+* Créer dans /mnt/racine/ les répertoires manquants listés dans `/root/exclure`
 ```
 mkdir /mnt/racine/home
+mkdir /mnt/racine/var/se3
+mkdir /mnt/racine/var/lib/backuppc
+mkdir /mnt/racine/sauvese3
+mkdir /mnt/racine/proc
+mkdir /mnt/racine/sys
+mkdir /mnt/racine/dev
+mkdir /mnt/racine/mnt
+mkdir /mnt/racine/media
+mkdir /mnt/racine/lost+found
 ```
-... etc.
 
-Modifier le fstab
+* Modifier le fstab
 
-Ouvrir une seconde console pour afficher les UUID des disques avec `blkid`
+    * Ouvrir une seconde console pour afficher les UUID des disques avec `blkid`
 
-Modifier le fichier `/mnt/racine/etc/fstab` en conséquence
+    * Modifier le fichier `/mnt/racine/etc/fstab` en conséquence
 
-Démonter home et varse3
+* Démonter home et varse3
 ```
 umount /mnt/home
 umount /mnt/varse3
 ```
 
-Monter home et varse3 à la bone place
+* Monter home et varse3 à la bone place
 ```
 mount /dev/sdb1 /mnt/racine/home
 mount /dev/sdc1 /mnt/racine/var/se3
 ```
 
-Monter le bazar pour chrooter :
+* Monter le bazar pour chrooter :
 ```
 mount --bind /dev /mnt/racine/dev
 mount --bind /sys /mnt/racine/sys
 mount -t proc /proc /mnt/racine/proc
 ```
 
-Chrooter :
+* Chrooter :
 ```
 chroot /mnt/racine
 ```
 
-Mettre à jour Grub :
+* Mettre à jour Grub :
 ```
 update-grub
 ```
 
-Installer Grub sur sda
+* Installer Grub sur sda
 ```
 grub-install /dev/sda
 ```
 
-Quitter le chroot :
+* Quitter le chroot :
 ```
 exit
 ```
 
-Démonter tout proprement :
+* Démonter tout proprement :
 ```
 umount /mnt/racine/proc
 umount /mnt/racine/sys
@@ -143,14 +152,14 @@ umount /mnt/racine/var/se3
 umount /mnt/racine
 ```
 
-Débrancher (la prise réseau) ou éteindre le serveur physique. Attention : les deux serveurs ont le même nom, la même adresse IP, etc.
+* Débrancher (la prise réseau) ou éteindre le serveur physique. Attention : les deux serveurs ont le même nom, la même adresse IP, etc.
 
-Redémarrer la VM contenant le nouveau serveur
+* Redémarrer la VM contenant le nouveau serveur
 
-Boire une bonne petite bière bien fraîche.
+* Boire une bonne petite bière bien fraîche.
 
-[Edit]
-Pour le moment, le seul effet de bord constaté a été la difficulté de démarrer le service freeradius (authentification wifi du paquet se3-radius). Problème de propriétaire (sans doute parce que le groupe ssl-cert n'existe pas sur le livecd, rsync a utilisé mysql à la place).
+## Problèmes rencontrés
+Pour le moment, le seul effet de bord constaté a été la difficulté de démarrer le service freeradius (authentification wifi du paquet se3-radius). Problème de propriétaire sur un dossier et un fichier (sans doute parce que le groupe ssl-cert n'existe pas sur le livecd, rsync a utilisé mysql à la place).
 
 Constat :
 ```
