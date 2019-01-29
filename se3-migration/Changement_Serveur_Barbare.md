@@ -1,6 +1,6 @@
 # Changement de serveur "à la barbare"
 
-(https://www.qwant.com/?q=linux%20barbarian&t=images&o=0:e705806cd05e3a9669760508b6c10cab&size=all&license=all&freshness=all&color=all&imagetype=all&source=web)
+[Logo](https://www.qwant.com/?q=linux%20barbarian&t=images&o=0:e705806cd05e3a9669760508b6c10cab&size=all&license=all&freshness=all&color=all&imagetype=all&source=web "Logo")
 
 Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) pour migrer un Se3 d'un serveur physique à un autre.
 
