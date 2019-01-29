@@ -1,7 +1,5 @@
 # Changement de serveur "à la barbare"
 
-[Logo](https://www.qwant.com/?q=linux%20barbarian&t=images&o=0:e705806cd05e3a9669760508b6c10cab&size=all&license=all&freshness=all&color=all&imagetype=all&source=web "Logo")
-
 Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) pour migrer un Se3 d'un serveur physique à un autre.
 
 Cette méthode a été utilisée pour migrer un serveur SambaÉdu3 d'un serveur physique vers une machine virtuelle sous Proxmox, avec réorganisation des disques et partitions, mais sans réinstallation du système.
