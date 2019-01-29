@@ -2,6 +2,8 @@
 
 Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) pour migrer un Se3 d'un serveur physique à un autre.
 
+![Oh ! Un barbare :-)](images/barbare.png)
+
 Cette méthode a été utilisée pour migrer un serveur SambaÉdu3 d'un serveur physique vers une machine virtuelle sous Proxmox, avec réorganisation des disques et partitions, mais sans réinstallation du système.
 
 Elle est largement inspirée de la méthode décrite ici : https://wiki.debian-fr.xyz/Restauration_ou_Reconstruction_de_sa_Debian_-_Racine_et_Home_s%C3%A9par%C3%A9s
