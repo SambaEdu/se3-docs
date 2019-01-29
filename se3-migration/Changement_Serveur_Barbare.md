@@ -2,7 +2,7 @@
 
 Voici le descriptif d'une méthode barbare (mais parfaitement fonctionnelle !) pour migrer un Se3 d'un serveur physique à un autre.
 
-![Oh ! Un barbare :-)](images/barbare.png)
+![Oh ! Un barbare :-)](../images/barbare.png)
 
 Cette méthode a été utilisée pour migrer un serveur SambaÉdu3 d'un serveur physique vers une machine virtuelle sous Proxmox, avec réorganisation des disques et partitions, mais sans réinstallation du système.
 
