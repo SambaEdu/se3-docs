@@ -65,7 +65,18 @@ https://www.debian.org/CD/netinst/
 Sauf serveur très vieux ou particulier, on choisira la version amd64:
 https://cdimage.debian.org/mirror/cdimage/archive/8.10.0/amd64/iso-cd/debian-8.10.0-amd64-netinst.iso
 
-REMARQUE: La version **9** de Debian (stretch) a pour moteur mysql `Mariadb`. Il faut tester la compatibilité des bases  avec cette version. *(A venir)
+REMARQUE: La version **9** de Debian (stretch) a pour moteur mysql `Mariadb`. 
+
+**Note du 7 février:
+
+
+*Les premiers tests  montrent qu'une mise à jour de Debian 8 vers 9 se passe correctement. Les bases installées semblent s'ouvrir. De nouvelles bases s'uploadent aussi bien qu'avant. Quelques fichiers de configuration seront à modifier ainsi que quelques commandes à faire sur le serveur pour utiliser phpmyadmin.
+Un retour de mes collègues utilisant EBP permettra de valider la migration. Le protocle de migration sera indiqué ici.
+
+*Je testerai bientôt l'installation initiale de debian 9 et la gestion des bases.
+
+
+
 
 On gravera le fichier iso téléchargé sur un cd. De nombreux outils permettent de faire cela, notamment sous windows (on fait un clic droit sur le fichier iso et on choisit "graver l'image".  Il suffira de booter sur le cd et de se laisser guider. Une installation par clef usb est également possible. L'iso doit être placée sur la clef à l'aide d'un logiciel comme **unetbootin** .
 
