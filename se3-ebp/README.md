@@ -3,7 +3,8 @@ Utilisation du PGI client-serveur EBP dans un environnement sambaedu 3/4
 
 **Ce tutoriel est à destination des professeurs ressources/administrateurs des réseaux pédagogiques pour la mise en place du serveur permettant l'utilisation en mode client/serveur.**
 
-(Marc Bansse: Version du 17 novembre 2018)
+(Marc Bansse: Version du 7 février 2019: tests en cours sur la migration Debian 8->9 )
+
 
 * [Présentation](#présentation)
 * [Mise en place du serveur Linux SQL](#mise-en-place-du-serveur-linux-sql)
@@ -27,9 +28,9 @@ Utilisation du PGI client-serveur EBP dans un environnement sambaedu 3/4
 * [sauvegardes hebdomadaires des bases mysql](#sauvegardes-hebdomadaires-des-bases-mysql)
 
 ## Présentation
-EBP est un logiciel propriétaire et payant de type PGI. Il peut être utilisé de façon `collaborative` en `mode client-serveur` avec la mise en place d'un serveur dédié. Un élève pourra donc travailler sur n'importe quel poste de l'établissement doté du client EBP.
+EBP est un logiciel propriétaire et payant de type PGI. Il peut être utilisé de façon `collaborative` en `mode client-serveur` avec la mise en place d'un serveur dédié. Un élève pourra donc travailler sur n'importe quel poste de l'établissement doté du client EBP. 
 
-L'utilisation en établissement scolaire sous `SambaEdu` est parfaitement fonctionnelle et **pratique** grâce à ses lecteurs réseaux partagés sur lesquels seront placés les raccourcis vers les bases, ainsi que **l'installation automatique des clients EBP**.
+L'utilisation en établissement scolaire sous `SambaEdu` est parfaitement fonctionnelle et **pratique** grâce à ses lecteurs réseaux partagés sur lesquels seront placés les raccourcis vers les bases, ainsi que **l'installation automatique des clients EBP**. On obtient donc une véritable utilisation d'entreprise.
 
 Ce document s'appuie sur le travail de Cristophe cessac (Christophe.cessac@ac-orleans-tours.fr), avec l'aide  de mes collègues Madjid Hamoumraoui (Madjid.Hamoumraoui@ac-versailles.fr),Bersoullé Edith (Edith-Clau.Lemasson@ac-versailles.fr) professeurs au lycée Jacques Prévert de Longjumeau.
 
