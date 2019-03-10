@@ -8,6 +8,7 @@
 * [Cas des `clients-linux`](#cas-des-clients-linux)
 * [Problèmes éventuels](#problèmes-éventuels)
 
+**Attention :** une nouvelle version de ce tutoriel est disponible sur le nouveau site de la documentation qui se met en place petit à petit : https://doc.sambaedu.org/changer-adresse/co/guideWeb.html
 
 ## Position du problème
 
