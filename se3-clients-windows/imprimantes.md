@@ -122,7 +122,7 @@ Sélectionner le parc, puis l'imprimante à intégrer.
 
 ### 2ème étape : Préparer la console `MMC`
 
-Pour l'ensemble des étapes qui suivent, il est obligatoire de faire partie du **même parc que l'imprimante**, et sur lequel on aura ouvert la session `admin`. Si on a fait l'étape précédente sur la meme session il est conseillé de fermer la session et d'en rouvrir une en `admin` afin que le parc reconnaisse ses imprimantes nouvellement créés (peut être qu'un relancer connexion peut aussi suffire).
+Pour l'ensemble des étapes qui suivent, il est obligatoire de faire partie du **même parc que l'imprimante**, et sur lequel on aura ouvert la session `admin`. Si on a fait l'étape précédente sur la meme session il est conseillé de fermer la session et d'en rouvrir une en `admin` afin que le parc reconnaisse ses imprimantes nouvellement créés (Un "relance connexion" + F5 dans la consoloe MMC suffit).
 
 
 #### Ouvrir la console `MMC`
