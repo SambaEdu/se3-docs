@@ -1,11 +1,19 @@
 # se3-docs
 
+**Attention**
 Ce dépôt contient la documentation de certains composants de
-la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
+la solution `SambaÉdu` 3. Le projet est désormais dans sa version 4 et le code hébergé sur `Gitlab`. Par conséquent, certains éléments qui suivent risquent d'être obsolètes.
 
-* [Pour contribuer au projet](#pour-contribuer-au-projet)
-* [Pour gérer un serveur `se3`](#pour-gérer-un-serveur-se3)
-    * [Installer un `se3`](#installer-un-se3)
+
+Voir [Le Gitlab du projet SambaÉdu 4](https://gitlab.sambaedu.org/sambaedu/se4)
+
+
+
+Sommaire : 
+
+* [Pour contribuer au projet](https://doc.sambaedu.org/pub/contribuer_sambaedu/co/guideWeb.html)
+* [Pour gérer un serveur se3](#pour-gérer-un-serveur-se3)
+    * [Installer un `se3` (obsolète - installez plutot un Se4)](#installer-un-se3)
     * [Administrer un `se3`](#administrer-un-se3)
     * [Migrer un `se3`](#migrer-un-se3)
     * [Sauvegarder et restaurer un `se3`](#sauvegarder-et-restaurer-un-se3)
@@ -29,7 +37,9 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 ## Pour gérer un serveur `se3`
 
 ### Installer un `se3`
+Compte tenu que Se3 n'est plus développé ni mis à jour, il est conseillé d'opter pour [l'installation de Se4](https://doc.sambaedu.org/installation_se4/#$0)
 
+**Les procédures suivantes sont donc données à titres d'information car obsolètes**
 * Documentation pour une [installation manuelle](se3-installation/installationmanuelle.md#installation-manuelle-dun-se3) d'un `se3`
 * Documentation pour une [installation automatique](se3-installation/incorporerpreseed.md#installation-automatique-dun-se3) d'un `se3`
 * Documentation pour installer [un réseau virtuel `se3`](se3-virtualisation/installerReseauSE3Virtualbox.md#installer-un-réseau-se3-avec-virtualbox) avec `VirtualBox`
@@ -44,7 +54,6 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ### Migrer un `se3`
 
-* Procédure pour migrer [de se3/lenny à se3/wheezy](se3-migration/LennyToWheezy.md#migration-de-se3lenny-vers-se3wheezy)
 * Procédure pour migrer [de se3/squeeze à se3/wheezy](se3-migration/SqueezeToWheezy.md#migration-de-se3squeeze-vers-se3wheezy)
 
 
@@ -70,14 +79,13 @@ la solution `SambaÉdu3` dont le code est hébergé sur `Github`.
 
 ## Gestion des `clients-windows`
 
-* Prérequis [avant intégration d'un client-windows](se3-clients-windows/clients-windows.md#prérequis-pour-lintégration-de-clients-windows)
-* Intégration des [windows10](se3-clients-windows/windows10.md#int%C3%A9gration-des-clients-windows10)
+* Intégration des [windows10](https://www.sambaedu.org/A-propos-de-Windows-10)
 * Gestion des imprimantes : [utiliser une console `MMC`](se3-clients-windows/imprimantes.md#gestion-des-imprimantes-pour-les-clients-windows)
 
 
 ## Utilitaires et veille technologique
 
-* Une brêve documentation pour [l'utilisation d'une session `screen`](dev-clients-linux/screen.md#utilisation-dune-session-screen)
+* Une brève documentation pour [l'utilisation d'une session `screen`](dev-clients-linux/screen.md#utilisation-dune-session-screen)
 * Un petit memo concernant [reprepro](reprepro/memo.md#petit-memo-sur-reprepro)
 * Un petit memo prometteur pour [Ansible](dev-clients-linux/labs/ansible/tuto-ansible.md#petit-tutoriel-sur-ansible)
 * Intégration d'[un serveur Jupyterhub](se3-env/memo.md) utilisant le serveur LDAP de Se3  
